@@ -1,5 +1,6 @@
-function getToken (QUERY = false, columnName = "assay", facetValues = "rnaSeq"){
-  if(!QUERY){
+function getToken (searchBool = false, columnName, facetValues){
+  let QUERY;
+  if(!searchBool){
     QUERY = {
       concreteType: "org.sagebionetworks.repo.model.table.QueryBundleRequest",
       entityId: "syn11346063", 
@@ -8,7 +9,7 @@ function getToken (QUERY = false, columnName = "assay", facetValues = "rnaSeq"){
         includeEntityEtag:true, 
         isConsistent:true, 
         offset:0, 
-        limit:25
+        limit:1000
       }, 
       partMask:53
     };
@@ -27,7 +28,7 @@ function getToken (QUERY = false, columnName = "assay", facetValues = "rnaSeq"){
         includeEntityEtag:true, 
         isConsistent:true, 
         offset:0, 
-        limit:25
+        limit:1000
       }, 
       partMask:53
     };
@@ -44,10 +45,3 @@ function getToken (QUERY = false, columnName = "assay", facetValues = "rnaSeq"){
 }
 
 export default getToken;
-
-//export default getToken().then(response => response.json()).then(
-    //(result) => {
-      //return result.token;
-    //}
-  //);
-
