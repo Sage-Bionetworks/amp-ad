@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import study from './Study.js';
 import studyData from './StudyData.js';
-import mockStudyData from './MockStudyData.js';
+//import mockStudyData from './MockStudyData.js';
 
 class App extends Component {
   state = {
@@ -14,12 +14,11 @@ class App extends Component {
 
   componentDidMount(){
     console.log(study);
-    mockStudyData.then( data => console.log(data) );
-    studyData.then( data => console.log(data) );
-    mockStudyData.then( data => {
-      console.log(data);
-      const reader = data.body.getReader();
-      reader.read().then(({ done, value }) => {
+    studyData.then( response  => (response))
+      .then( data => {
+        console.log(data.body);
+        const reader = data.body.getReader();
+        reader.read().then(({ done, value }) => {
         console.log(value); 
       });
     });

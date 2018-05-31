@@ -1,6 +1,6 @@
 import dataPromise from './Token.js';
 
-function getStudyData (TOKEN){
+function getStudyData (TOKEN, limit = Number.MAX_VALUE){
   return fetch('https://repo-prod-227-0.prod.sagebase.org/repo/v1/entity/syn11346063/table/query/async/get/' + TOKEN, {
     method: 'GET',
     headers: {
@@ -8,19 +8,14 @@ function getStudyData (TOKEN){
       'Content-Type': 'application/json'
     }
   })
+  .then( response => { 
+    if (response.status !== 201 && --limit){
+      return getStudyData(TOKEN); 
+    }
+    return response;
+  });
 }
 
-let studyData = dataPromise.then( data => getStudyData(data)
-  .then( response => {
-    const statusCode = response.status;
-    const data = response.json();
-    //console.log(statusCode);
-    return Promise.all([statusCode, data]);
-  })
-  .then( (res, data) => {
-    //console.log(res, data);
-    return res;
-  })
-);
+let studyData = dataPromise.then( data => getStudyData(data, 10) );
 
-export default studyData.then( (response) => response );
+export default studyData;
