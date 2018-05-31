@@ -5,19 +5,27 @@ import getToken from './Token.js';
 
 class App extends Component {
   state = {
+    studyTemplate: {},
     studyData: {},
+    speciesSelection: [ "Human", "Drosophila melanogaster", "Mouse" ], 
+    tissueSelection: [ "parahippocampal gyrus" ],
+    studyDataShow: 0,
     assaysCount: 0,
     studiesCount: 0,
     tissuesCount: 0,
-    analyseseCount: 0
+    analyseseCount: 0,
+    token: 0,
+    columnNameSelection: '',
+    facetValues: ''
   }
 
-  setUpQueryToken = () => {
+  setUpQueryToken = (searchBool, columnName, facetValue ) => {
     return getToken(true, "assay", "rnaSeq")
     .then(response => response.json())
     .then(result => {
-      console.log(result.token);
-      return result.token; 
+      this.setState({
+        token: result.token
+      });
     });
   }
 
@@ -33,14 +41,12 @@ class App extends Component {
 
   getStudyTemplate = () => {
     this.setState({
-      study: study
+      studyTemplate: study
     }); 
   }
 
-  //packageStudyData 
-
   componentDidMount(){
-    this.setUpQueryToken().then( token => { this.getStudyData(token) });
+    this.setUpQueryToken().then( token => { this.getStudyData(this.state.token) });
     this.getStudyTemplate();
   }
   
