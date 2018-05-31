@@ -47,11 +47,6 @@ class App extends Component {
     }); 
   }
 
-  componentDidMount(){
-    this.setUpQueryToken().then( token => { this.getStudyData(this.state.token) });
-    this.getStudyTemplate();
-  }
-
   generateSelectionDropdown = (STATE) => {
     let options = STATE.map( (element, index) => {
       return (
@@ -59,6 +54,11 @@ class App extends Component {
       ); 
     });
     return <select>{options}</select>;
+  }
+
+  componentDidMount(){
+    this.setUpQueryToken().then( token => { this.getStudyData(this.state.token) });
+    this.getStudyTemplate();
   }
   
   render(){
