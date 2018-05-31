@@ -16,7 +16,9 @@ class App extends Component {
     analyseseCount: 0,
     token: 0,
     columnNameSelection: '',
-    facetValues: ''
+    facetValues: {
+      assaysByStudy: []
+    }
   }
 
   setUpQueryToken = (searchBool, columnName, facetValue ) => {
@@ -49,10 +51,24 @@ class App extends Component {
     this.setUpQueryToken().then( token => { this.getStudyData(this.state.token) });
     this.getStudyTemplate();
   }
+
+  generateSelectionDropdown = (STATE) => {
+    let options = STATE.map( (element, index) => {
+      return (
+        <option key={index} value={element}>{element}</option>
+      ); 
+    });
+    return <select>{options}</select>;
+  }
   
   render(){
     return (
-      <div></div>
+      <div>
+        <form>
+          {this.generateSelectionDropdown(this.state.speciesSelection)} 
+          {this.generateSelectionDropdown(this.state.tissueSelection)}
+        </form>
+      </div>
     );
   }
 }
