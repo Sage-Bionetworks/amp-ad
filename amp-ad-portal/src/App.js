@@ -1,27 +1,47 @@
 import React, { Component } from 'react';
-import './App.css';
 import study from './Study.js';
-import studyData from './StudyData.js';
-//import mockStudyData from './MockStudyData.js';
+import getStudyData from './StudyData.js';
+import getToken from './Token.js';
 
 class App extends Component {
   state = {
+    studyData: {},
     assaysCount: 0,
     studiesCount: 0,
     tissuesCount: 0,
     analyseseCount: 0
   }
 
-  componentDidMount(){
-    console.log(study);
-    studyData.then( response  => (response))
-      .then( data => {
-        console.log(data.body);
-        const reader = data.body.getReader();
-        reader.read().then(({ done, value }) => {
-        console.log(value); 
-      });
+  setUpQueryToken = () => {
+    return getToken(true, "assay", "rnaSeq")
+    .then(response => response.json())
+    .then(result => {
+      console.log(result.token);
+      return result.token; 
     });
+  }
+
+  getStudyData = (TOKEN, LIMIT) => {
+    return getStudyData(TOKEN).then( 
+      response => { 
+        this.setState({
+          studyData: response.queryResult.queryResults
+        })
+      }
+    );
+  }
+
+  getStudyTemplate = () => {
+    this.setState({
+      study: study
+    }); 
+  }
+
+  //packageStudyData 
+
+  componentDidMount(){
+    this.setUpQueryToken().then( token => { this.getStudyData(token) });
+    this.getStudyTemplate();
   }
   
   render(){
