@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import lodash from 'lodash';
 import _ from 'lodash';
 
 import study from './Study.js';
@@ -13,11 +12,6 @@ class App extends Component {
     speciesSelection: [ "Human", "Drosophila melanogaster", "Mouse" ], 
     tissueSelection: [ "parahippocampal gyrus" ],
     pageData: {
-      totalStudyDataShown: 0,
-      assaysCount: 0,
-      studiesCount: 0,
-      tissuesCount: 0,
-      analyseseCount: 0
     },
     tokens: {
       allStudies: '0',
@@ -45,7 +39,6 @@ class App extends Component {
   }
 
   runStudyDataQuery = (TOKEN, LIMIT) => {
-    console.log(TOKEN);
     return getStudyData(TOKEN).then( 
       response => { 
         //if( response !== undefined ){
@@ -58,9 +51,45 @@ class App extends Component {
     );
   }
 
+  // function to return the total number of datas with the same key
+  // function takes one parameter the name of the key 
+  // // look for the key in the object 
+  // // in the object with the key return facetValues.length
+  returnCount = (key) => {
+    this.state.studyData.facets.forEach( (element, index) => {
+      if ( element.columnName === key ){
+        let stateObject = {...this.state.pageData};
+        stateObject[key] = element.facetValues.length;
+        this.setState({
+          pageData: stateObject
+        });
+      }  
+    })
+  }
+
   componentDidMount(){
     this.setStudyTemplate();
-    this.setUpQueryToken().then(token => { this.runStudyDataQuery(this.state.tokens.allStudies) });
+    this.setUpQueryToken().then(token => { 
+      this.runStudyDataQuery(this.state.tokens.allStudies)
+        .then(run => {
+          this.returnCount('assay')
+          this.returnCount('tissue')
+          this.returnCount('analysisType')
+          this.returnCount('cellType')
+          this.returnCount('consortium')
+          this.returnCount('grant')
+          this.returnCount('isConsortiumAnalysis')
+          this.returnCount('isModelSystem')
+          this.returnCount('species')
+          this.returnCount('dataType')
+          this.returnCount('dataSubtype')
+          this.returnCount('assayTarget')
+          this.returnCount('organ')
+          this.returnCount('celltype')
+          this.returnCount('isMultiSpecimen')
+          this.returnCount('fileFormat')
+        })
+    });
   }
 
   generateSelectionDropdown = (STATE) => {
