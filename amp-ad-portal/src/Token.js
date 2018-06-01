@@ -1,4 +1,4 @@
-function getToken (searchBool = false, columnName, facetValues){
+function getToken (searchBool = false, columnName = "assays", facetValues = [], queryString = "SELECT * FROM syn11346063" ){
   let QUERY;
   if(!searchBool){
     QUERY = {
@@ -9,7 +9,7 @@ function getToken (searchBool = false, columnName, facetValues){
         includeEntityEtag:true, 
         isConsistent:true, 
         offset:0, 
-        limit:1000
+        limit:100
       }, 
       partMask:53
     };
@@ -19,16 +19,16 @@ function getToken (searchBool = false, columnName, facetValues){
       concreteType: "org.sagebionetworks.repo.model.table.QueryBundleRequest",
       entityId: "syn11346063", 
       query: {
-        sql: "SELECT * FROM syn11346063", 
+        sql: queryString, 
         selectedFacets:[{
           concreteType: "org.sagebionetworks.repo.model.table.FacetColumnValuesRequest", 
           columnName: columnName, 
-          facetValues: [facetValues]
+          facetValues: facetValues
         }], 
         includeEntityEtag:true, 
         isConsistent:true, 
         offset:0, 
-        limit:1000
+        limit:25
       }, 
       partMask:53
     };

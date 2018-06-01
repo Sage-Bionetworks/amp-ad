@@ -8,6 +8,7 @@ function getStudyData (TOKEN, limit = Number.MAX_VALUE){
   })
   .then( response => { 
     if (response.status !== 201 && --limit){
+      //return setTimeout( function(){getStudyData(TOKEN)}, 400 ); 
       return getStudyData(TOKEN); 
     }
     return response.json();

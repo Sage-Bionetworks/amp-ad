@@ -1,50 +1,66 @@
 import React, { Component } from 'react';
+import lodash from 'lodash';
+import _ from 'lodash';
+
 import study from './Study.js';
 import getStudyData from './StudyData.js';
 import getToken from './Token.js';
 
 class App extends Component {
   state = {
-    studyTemplate: {},
     studyData: {},
+    studyTemplate: {},
     speciesSelection: [ "Human", "Drosophila melanogaster", "Mouse" ], 
     tissueSelection: [ "parahippocampal gyrus" ],
-    studyDataShow: 0,
-    assaysCount: 0,
-    studiesCount: 0,
-    tissuesCount: 0,
-    analyseseCount: 0,
-    token: 0,
+    pageData: {
+      totalStudyDataShown: 0,
+      assaysCount: 0,
+      studiesCount: 0,
+      tissuesCount: 0,
+      analyseseCount: 0
+    },
+    tokens: {
+      allStudies: '0',
+    },
     columnNameSelection: '',
     facetValues: {
       assaysByStudy: []
     }
   }
 
-  setUpQueryToken = (searchBool, columnName, facetValue ) => {
-    return getToken(true, "assay", "rnaSeq")
+  setUpQueryToken = (searchBool, columnName, facetValue, queryString) => {
+    return getToken(searchBool, columnName, facetValue, queryString)
     .then(response => response.json())
     .then(result => {
-      this.setState({
-        token: result.token
-      });
+      let dataStateObject = {...this.state.tokens};
+      dataStateObject.allStudies = result.token;
+      this.setState({ tokens: dataStateObject });
     });
   }
 
-  getStudyData = (TOKEN, LIMIT) => {
+  setStudyTemplate = () => {
+    this.setState({
+      studyTemplate: study
+    }); 
+  }
+
+  runStudyDataQuery = (TOKEN, LIMIT) => {
+    console.log(TOKEN);
     return getStudyData(TOKEN).then( 
       response => { 
-        this.setState({
-          studyData: response.queryResult.queryResults
-        })
+        //if( response !== undefined ){
+          console.log(response);
+          this.setState({
+            studyData: response
+          })
+        //}
       }
     );
   }
 
-  getStudyTemplate = () => {
-    this.setState({
-      studyTemplate: study
-    }); 
+  componentDidMount(){
+    this.setStudyTemplate();
+    this.setUpQueryToken().then(token => { this.runStudyDataQuery(this.state.tokens.allStudies) });
   }
 
   generateSelectionDropdown = (STATE) => {
@@ -56,12 +72,10 @@ class App extends Component {
     return <select>{options}</select>;
   }
 
-  componentDidMount(){
-    this.setUpQueryToken().then( token => { this.getStudyData(this.state.token) });
-    this.getStudyTemplate();
-  }
-  
   render(){
+    if(this.state.studyData.rows !== undefined){
+      console.log(this.state.studyData.rows[0]); 
+    };
     return (
       <div>
         <form>
