@@ -11,15 +11,11 @@ class App extends Component {
     studyTemplate: {},
     speciesSelection: [ "Human", "Drosophila melanogaster", "Mouse" ], 
     tissueSelection: [ "parahippocampal gyrus" ],
-    pageData: {
-    },
+    pageData: {},
     tokens: {
       allStudies: '0',
     },
-    columnNameSelection: '',
-    facetValues: {
-      assaysByStudy: []
-    }
+    columnNameSelection: ''
   }
 
   setUpQueryToken = (searchBool, columnName, facetValue, queryString) => {
@@ -51,20 +47,26 @@ class App extends Component {
     );
   }
 
-  // function to return the total number of datas with the same key
-  // function takes one parameter the name of the key 
-  // // look for the key in the object 
-  // // in the object with the key return facetValues.length
-  returnCount = (key) => {
+  setData = (key) => {
     this.state.studyData.facets.forEach( (element, index) => {
       if ( element.columnName === key ){
-        let stateObject = {...this.state.pageData};
-        stateObject[key] = element.facetValues.length;
-        this.setState({
-          pageData: stateObject
-        });
+        let stateObject = { ...this.state.pageData };
+        let stateObjectToAdd = { count: element.facetValues.length, facetValues: {...element.facetValues} };
+        console.log(stateObject);
+        this.setState( prevState => ({
+          ...prevState,
+          pageData: { ...prevState.pageData, [key]: {...stateObjectToAdd} }  
+        }));
       }  
     })
+  }
+
+  getCountForSpecies = (species, tissue) => {
+    
+  }
+
+  getCountForPageDataSubset = (subset = "assay", value = "rnaSeq") => {
+    
   }
 
   componentDidMount(){
@@ -72,22 +74,22 @@ class App extends Component {
     this.setUpQueryToken().then(token => { 
       this.runStudyDataQuery(this.state.tokens.allStudies)
         .then(run => {
-          this.returnCount('assay')
-          this.returnCount('tissue')
-          this.returnCount('analysisType')
-          this.returnCount('cellType')
-          this.returnCount('consortium')
-          this.returnCount('grant')
-          this.returnCount('isConsortiumAnalysis')
-          this.returnCount('isModelSystem')
-          this.returnCount('species')
-          this.returnCount('dataType')
-          this.returnCount('dataSubtype')
-          this.returnCount('assayTarget')
-          this.returnCount('organ')
-          this.returnCount('celltype')
-          this.returnCount('isMultiSpecimen')
-          this.returnCount('fileFormat')
+          this.setData('assay')
+          this.setData('tissue')
+          this.setData('analysisType')
+          this.setData('cellType')
+          this.setData('consortium')
+          this.setData('grant')
+          this.setData('isConsortiumAnalysis')
+          this.setData('isModelSystem')
+          this.setData('species')
+          this.setData('dataType')
+          this.setData('dataSubtype')
+          this.setData('assayTarget')
+          this.setData('organ')
+          this.setData('celltype')
+          this.setData('isMultiSpecimen')
+          this.setData('fileFormat')
         })
     });
   }
