@@ -1,5 +1,5 @@
 function getStudyData (TOKEN, limit = Number.MAX_VALUE){
-  return fetch('https://repo-prod-227-0.prod.sagebase.org/repo/v1/entity/syn11346063/table/query/async/get/' + TOKEN, {
+  return fetch('https://repo-prod.prod.sagebase.org/repo/v1/entity/syn11346063/table/query/async/get/' + TOKEN, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',

@@ -5,12 +5,15 @@ import study from './Study.js';
 import getStudyData from './StudyData.js';
 import getToken from './Token.js';
 
+import Header from './Header.js';
+import Welcome from './Welcome.js';
+
 class App extends Component {
   state = {
     studyData: {},
     studyTemplate: {},
-    speciesSelection: [ "Human", "Drosophila melanogaster", "Mouse" ], 
-    tissueSelection: [ "parahippocampal gyrus" ],
+    speciesSelection: [], 
+    tissueSelection: [],
     pageData: {},
     tokens: {
       allStudies: '0',
@@ -37,22 +40,19 @@ class App extends Component {
   runStudyDataQuery = (TOKEN, LIMIT) => {
     return getStudyData(TOKEN).then( 
       response => { 
-        //if( response !== undefined ){
-          console.log(response);
+        if( response !== undefined ){
           this.setState({
             studyData: response
           })
-        //}
+        }
       }
     );
   }
 
-  setData = (key) => {
+  setFacetPageData = (key) => {
     this.state.studyData.facets.forEach( (element, index) => {
       if ( element.columnName === key ){
-        let stateObject = { ...this.state.pageData };
         let stateObjectToAdd = { count: element.facetValues.length, facetValues: {...element.facetValues} };
-        console.log(stateObject);
         this.setState( prevState => ({
           ...prevState,
           pageData: { ...prevState.pageData, [key]: {...stateObjectToAdd} }  
@@ -74,45 +74,75 @@ class App extends Component {
     this.setUpQueryToken().then(token => { 
       this.runStudyDataQuery(this.state.tokens.allStudies)
         .then(run => {
-          this.setData('assay')
-          this.setData('tissue')
-          this.setData('analysisType')
-          this.setData('cellType')
-          this.setData('consortium')
-          this.setData('grant')
-          this.setData('isConsortiumAnalysis')
-          this.setData('isModelSystem')
-          this.setData('species')
-          this.setData('dataType')
-          this.setData('dataSubtype')
-          this.setData('assayTarget')
-          this.setData('organ')
-          this.setData('celltype')
-          this.setData('isMultiSpecimen')
-          this.setData('fileFormat')
+          this.setFacetPageData('assay')
+          this.setFacetPageData('tissue')
+          this.setFacetPageData('analysisType')
+          this.setFacetPageData('cellType')
+          this.setFacetPageData('consortium')
+          this.setFacetPageData('grant')
+          this.setFacetPageData('isConsortiumAnalysis')
+          this.setFacetPageData('isModelSystem')
+          this.setFacetPageData('species')
+          this.setFacetPageData('dataType')
+          this.setFacetPageData('dataSubtype')
+          this.setFacetPageData('assayTarget')
+          this.setFacetPageData('organ')
+          this.setFacetPageData('celltype')
+          this.setFacetPageData('isMultiSpecimen')
+          this.setFacetPageData('fileFormat')
+          //console.log(this.state.pageData);
+          //console.log(this.state.studyData);
+          //console.log(this.state.studyData.queryResult.queryResults.rows[0]); 
+          this.setSpeciesSelection();
         })
     });
   }
 
-  generateSelectionDropdown = (STATE) => {
-    let options = STATE.map( (element, index) => {
-      return (
-        <option key={index} value={element}>{element}</option>
-      ); 
-    });
-    return <select>{options}</select>;
+  setSpeciesSelection = () => {
+    let speciesArray = this.convertObjectValsToArray(this.state.pageData.species.facetValues);
+    speciesArray.unshift("All Species");
+    console.log(speciesArray);
+    this.handleChanges("speciesSelection", speciesArray);
+  }
+  
+  handleChanges = (KEY, NEWSTATE) => {
+    this.setState({
+      [KEY]: NEWSTATE
+    })  
   }
 
+  generateSelectionDropdown = (STATE) => {
+    if(STATE !== undefined){
+      let options = STATE.map( (element, index) => {
+        return (
+          <option key={index} value={element}>{element}</option>
+        ); 
+      });
+      return <select>{options}</select>;
+    }
+  }
+
+  convertObjectValsToArray = (OBJECT) => {
+    let mappedArray = []
+    _.mapKeys(OBJECT, (value, key) => { 
+      if(value["value"].length !== 41){ mappedArray.push(value["value"]) }
+      return value["value"] 
+    });
+    return mappedArray;
+  }
+
+  pushValuesToState = (ARRAY) => {}
+
   render(){
-    if(this.state.studyData.rows !== undefined){
-      console.log(this.state.studyData.rows[0]); 
-    };
     return (
-      <div>
-        <form>
-          {this.generateSelectionDropdown(this.state.speciesSelection)} 
-          {this.generateSelectionDropdown(this.state.tissueSelection)}
-        </form>
+      <div className="row amp-ad">
+        <div className="col-xs-12">
+          <Header />
+          <Welcome />
+          <form>
+            {this.generateSelectionDropdown(this.state.speciesSelection)} 
+          </form>
+        </div>
       </div>
     );
   }
