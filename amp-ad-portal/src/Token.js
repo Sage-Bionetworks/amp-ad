@@ -42,6 +42,7 @@ function getToken (searchBool = false, columnName = "assays", facetValues = [], 
     },
     body: JSON.stringify(QUERY)}
   )
+
 }
 
 export default getToken;

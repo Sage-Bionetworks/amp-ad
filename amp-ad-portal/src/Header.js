@@ -10,9 +10,9 @@ const Header = () => {
           </div>
           <div className="col-xs-8">
             <ul className="nav row end-xs">
-              <li className="nav-item"><a href="">link 1</a></li>
-              <li className="nav-item"><a href="">link 2</a></li>
-              <li className="nav-item"><a href="">link 3</a></li>
+              <li className="nav-item"><a href="">Home</a></li>
+              <li className="nav-item"><a href="">Tools</a></li>
+              <li className="nav-item"><a href="">About</a></li>
             </ul>
           </div>
         </div>

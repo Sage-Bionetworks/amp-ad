@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import study from './Study.js';
 import getStudyData from './StudyData.js';
+import defaultData from './DefaultData.js';
 import getToken from './Token.js';
 
 import Header from './Header.js';
@@ -10,11 +11,11 @@ import Welcome from './Welcome.js';
 
 class App extends Component {
   state = {
-    studyData: {},
+    pageData: study,
+    studyData: defaultData,
     studyTemplate: {},
     speciesSelection: [], 
     tissueSelection: [],
-    pageData: {},
     tokens: {
       allStudies: '0',
     },
@@ -29,12 +30,6 @@ class App extends Component {
       dataStateObject.allStudies = result.token;
       this.setState({ tokens: dataStateObject });
     });
-  }
-
-  setStudyTemplate = () => {
-    this.setState({
-      studyTemplate: study
-    }); 
   }
 
   runStudyDataQuery = (TOKEN, LIMIT) => {
@@ -52,13 +47,23 @@ class App extends Component {
   setFacetPageData = (key) => {
     this.state.studyData.facets.forEach( (element, index) => {
       if ( element.columnName === key ){
-        let stateObjectToAdd = { count: element.facetValues.length, facetValues: {...element.facetValues} };
+        let stateObjectToAdd = { 
+          count: element.facetValues.length, 
+          facetValues: {...element.facetValues} 
+        };
         this.setState( prevState => ({
           ...prevState,
           pageData: { ...prevState.pageData, [key]: {...stateObjectToAdd} }  
         }));
       }  
     })
+  }
+
+  setAllPageDataPoints = () => {
+    let pageDataPoints = ['assay', 'tissue', 'analysisType', 'cellType','consortium','grant','isConsortiumAnalysis','isModelSystem','species','dataType','dataSubtype','assayTarget','organ','celltype','isMultiSpecimen','fileFormat' ];
+    pageDataPoints.forEach( (element, index) => {
+      this.setFacetPageData(element);  
+    });
   }
 
   getCountForSpecies = (species, tissue) => {
@@ -70,36 +75,23 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.setStudyTemplate();
+    this.setAllPageDataPoints();
     this.setUpQueryToken().then(token => { 
+      this.setSpeciesSelection();
       this.runStudyDataQuery(this.state.tokens.allStudies)
         .then(run => {
-          this.setFacetPageData('assay')
-          this.setFacetPageData('tissue')
-          this.setFacetPageData('analysisType')
-          this.setFacetPageData('cellType')
-          this.setFacetPageData('consortium')
-          this.setFacetPageData('grant')
-          this.setFacetPageData('isConsortiumAnalysis')
-          this.setFacetPageData('isModelSystem')
-          this.setFacetPageData('species')
-          this.setFacetPageData('dataType')
-          this.setFacetPageData('dataSubtype')
-          this.setFacetPageData('assayTarget')
-          this.setFacetPageData('organ')
-          this.setFacetPageData('celltype')
-          this.setFacetPageData('isMultiSpecimen')
-          this.setFacetPageData('fileFormat')
-          //console.log(this.state.pageData);
-          //console.log(this.state.studyData);
           //console.log(this.state.studyData.queryResult.queryResults.rows[0]); 
-          this.setSpeciesSelection();
         })
     });
   }
 
+  getTotalAssays = () => {
+    
+  }
+
   setSpeciesSelection = () => {
-    let speciesArray = this.convertObjectValsToArray(this.state.pageData.species.facetValues);
+    let speciesObject = this.state.pageData.species.facetValues; 
+    let speciesArray = this.convertObjectValsToArray(speciesObject);
     speciesArray.unshift("All Species");
     console.log(speciesArray);
     this.handleChanges("speciesSelection", speciesArray);
@@ -139,9 +131,26 @@ class App extends Component {
         <div className="col-xs-12">
           <Header />
           <Welcome />
-          <form>
-            {this.generateSelectionDropdown(this.state.speciesSelection)} 
-          </form>
+          <section className="pie-charts-welcome row">
+            <div className="col-xs-12">
+              <div className="row center-xs">
+                <div className="assays pie-chart-welcome col-xs-12 col-sm-4">
+                  <h1 className="count">{this.state.pageData.assay.count} Assays</h1>
+                </div>
+                <div className="tissues pie-chart-welcome col-xs-12 col-sm-4">
+                  <h1 className="count">{this.state.pageData.tissue.count} Tissues</h1>
+                </div>
+                <div className="analyses pie-chart-welcome col-xs-12 col-sm-4">
+                  <h1 className="count">{this.state.pageData.analysisType.count} Analyses</h1>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section className="Searchbar">
+            <form>
+              {this.generateSelectionDropdown(this.state.speciesSelection)} 
+            </form>
+          </section>
         </div>
       </div>
     );
