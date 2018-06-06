@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = () => {
   return (
-    <section className="row header">
+    <section className="row header middle-xs">
       <div className="col-xs-12">
         <div className="row between-xs">
           <div className="col-xs-4">

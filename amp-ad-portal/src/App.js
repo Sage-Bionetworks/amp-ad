@@ -15,6 +15,7 @@ import getToken from './Token.js';
 import PiesBelowHeader from './PiesBelowHeader.js';
 import Header from './Header.js';
 import Welcome from './Welcome.js';
+import SearchBar from './SearchBar.js';
 
 class App extends Component {
   state = {
@@ -206,11 +207,10 @@ class App extends Component {
 						ratAnalysisTypeCount={this.getCountForSpecies(this.state.ratData, 'analysisType')}
 						flyAnalysisTypeCount={this.getCountForSpecies(this.state.drosophilamelanogasterData, 'analysisType')}
 					/>
-          <section className="Searchbar">
-            <form>
-              {this.generateSelectionDropdown(this.state.speciesSelection)} 
-            </form>
-          </section>
+
+					<SearchBar generateDropdown={this.generateSelectionDropdown(this.state.speciesSelection)} />
+
+					<section className="data row center-xs"></section>
         </div>
       </div>
     );
