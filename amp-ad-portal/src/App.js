@@ -20,10 +20,10 @@ class App extends Component {
   state = {
     pageData: study,
     studyData: defaultData,
-		drosophilamelanogasterAssayData: defaultFlyData,
-		humanAssayData: defaultHumanData,
-		mouseAssayData: defaultMouseData,
-		ratAssayData: defaultRatData,
+		drosophilamelanogasterData: defaultFlyData,
+		humanData: defaultHumanData,
+		mouseData: defaultMouseData,
+		ratData: defaultRatData,
     studyTemplate: {},
     speciesSelection: [], 
     tissueSelection: [],
@@ -61,7 +61,7 @@ class App extends Component {
 			columnName = columnName.charAt(0).toUpperCase() + columnName.substr(1);
 			species = species.charAt(0).toLowerCase() + species.substr(1);
 			species = species.replace(/\s/g, '');
-      return this.runStudyDataQuery(this.state.tokens[tokenName], 10, species+columnName+'Data')
+      return this.runStudyDataQuery(this.state.tokens[tokenName], 10, species+'Data')
     });
   }
 
@@ -91,45 +91,60 @@ class App extends Component {
 		return total + num;
 	}
 
+	//getCountForSpecies = (speciesStateName, columnName) => {
+		//let totalCounts = [];
+		//speciesStateName.facets.forEach( (element) => {
+			//if(element.columnName === columnName){
+				//element.facetValues.forEach( (element) => {
+					//totalCounts.push(element.count);
+				//})	
+			//}	
+		//});
+		//totalCounts = totalCounts.reduce(this.getSum); 	
+		//return totalCounts;
+	//}
 	getCountForSpecies = (speciesStateName, columnName) => {
 		let totalCounts = [];
-		speciesStateName.facets.forEach( (element, index) => {
+		speciesStateName.facets.forEach( (element) => {
 			if(element.columnName === columnName){
-				element.facetValues.forEach( (element, index) => {
-					totalCounts.push(element.count);
-				})	
-			}	
-		});
+				totalCounts.push( element.facetValues.length ) 
+			}
+		})
 		totalCounts = totalCounts.reduce(this.getSum); 	
-		console.log(totalCounts);
 		return totalCounts;
 	}
 
 	getSetAllAssayCounts = () => {
-		this.getCountForSpecies(this.state.studyData, 'assay');
-		this.getCountForSpecies(this.state.mouseAssayData, 'assay');
-		this.getCountForSpecies(this.state.humanAssayData, 'assay');
-		this.getCountForSpecies(this.state.ratAssayData, 'assay');
-		this.getCountForSpecies(this.state.drosophilamelanogasterAssayData, 'assay');
+		console.log( this.state.studyData );
+		console.log(
+		this.getCountForSpecies(this.state.studyData, 'assay'),
+		this.getCountForSpecies(this.state.mouseData, 'assay'),
+		this.getCountForSpecies(this.state.humanData, 'assay'),
+		this.getCountForSpecies(this.state.ratData, 'assay'),
+		this.getCountForSpecies(this.state.drosophilamelanogasterData, 'assay')
+		)
+		console.log(
+		this.getCountForSpecies(this.state.studyData, 'tissue'),
+		this.getCountForSpecies(this.state.mouseData, 'tissue'),
+		this.getCountForSpecies(this.state.humanData, 'tissue'),
+		this.getCountForSpecies(this.state.ratData, 'tissue'),
+		this.getCountForSpecies(this.state.drosophilamelanogasterData, 'tissue')
+		);
 	}
 
-  getCountForPageDataSubset = (subset = "assay", value = "rnaSeq") => {}
-
   componentDidMount(){
-    this.setAllPageDataPoints();
-		this.setSpeciesSelection();
-		this.getSetAllAssayCounts();
+		this.setAllPageDataPoints();
+
 		this.getSpeciesStudiesMetaData('Human', 'assay', 'humanAssayToken')
 		this.getSpeciesStudiesMetaData('Mouse', 'assay', 'mouseAssayToken')
 		this.getSpeciesStudiesMetaData('Rat', 'assay', 'ratAssayToken')
 		this.getSpeciesStudiesMetaData('Drosophila melanogaster', 'assay', 'flyAssayToken')
+
     this.setUpQueryToken().then(token => { 
+			this.setSpeciesSelection();
+			this.getSetAllAssayCounts();
       this.runStudyDataQuery(this.state.tokens.allStudies, 100, "studyData")
     });
-  }
-
-  getTotalAssays = () => {
-    
   }
 
   setSpeciesSelection = () => {
@@ -165,21 +180,31 @@ class App extends Component {
     return mappedArray;
   }
 
-  pushValuesToState = (ARRAY) => {}
-
   render(){
     return (
       <div className="row amp-ad">
         <div className="col-xs-12">
           <Header />
           <Welcome />
-          <PiesBelowHeader 
+					<PiesBelowHeader 
 						pageData={this.state.pageData} 
 						allSpeciesAssayCount={this.getCountForSpecies(this.state.studyData, 'assay')}
-						mouseAssayCount={this.getCountForSpecies(this.state.mouseAssayData, 'assay')}
-						humanAssayCount={this.getCountForSpecies(this.state.humanAssayData, 'assay')}
-						ratAssayCount={this.getCountForSpecies(this.state.ratAssayData, 'assay')}
-						flyAssayCount={this.getCountForSpecies(this.state.drosophilamelanogasterAssayData, 'assay')}
+						mouseAssayCount={this.getCountForSpecies(this.state.mouseData, 'assay')}
+						humanAssayCount={this.getCountForSpecies(this.state.humanData, 'assay')}
+						ratAssayCount={this.getCountForSpecies(this.state.ratData, 'assay')}
+						flyAssayCount={this.getCountForSpecies(this.state.drosophilamelanogasterData, 'assay')}
+
+						allSpeciesTissueCount={this.getCountForSpecies(this.state.studyData, 'tissue')}
+						mouseTissueCount={this.getCountForSpecies(this.state.mouseData, 'tissue')}
+						humanTissueCount={this.getCountForSpecies(this.state.humanData, 'tissue')}
+						ratTissueCount={this.getCountForSpecies(this.state.ratData, 'tissue')}
+						flyTissueCount={this.getCountForSpecies(this.state.drosophilamelanogasterData, 'tissue')}
+
+						allSpeciesAnalysisTypeCount={this.getCountForSpecies(this.state.studyData, 'analysisType')}
+						mouseAnalysisTypeCount={this.getCountForSpecies(this.state.mouseData, 'analysisType')}
+						humanAnalysisTypeCount={this.getCountForSpecies(this.state.humanData, 'analysisType')}
+						ratAnalysisTypeCount={this.getCountForSpecies(this.state.ratData, 'analysisType')}
+						flyAnalysisTypeCount={this.getCountForSpecies(this.state.drosophilamelanogasterData, 'analysisType')}
 					/>
           <section className="Searchbar">
             <form>
