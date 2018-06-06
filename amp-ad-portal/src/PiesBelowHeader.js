@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PieChart from "react-svg-piechart"
+import PropTypes from 'prop-types'
 
 class PiesBelowHeader extends Component{
   render(){
@@ -66,6 +67,14 @@ class PiesBelowHeader extends Component{
       </section>
     );
   };
+}
+
+PiesBelowHeader.propTypes = {
+	allSpeciesAssayCount: PropTypes.number.isRequired,
+	humanAssayCount: PropTypes.number.isRequired,
+	mouseAssayCount: PropTypes.number.isRequired,
+	ratAssayCount: PropTypes.number.isRequired,
+	flyAssayCount: PropTypes.number.isRequired
 }
 
 export default PiesBelowHeader;
