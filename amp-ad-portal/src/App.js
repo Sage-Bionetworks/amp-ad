@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-import study from './Study.js';
-import getStudyData from './StudyData.js';
-import defaultData from './DefaultData.js';
+// non component js
+import study from './defaultData/Study.js';
+import defaultData from './defaultData/DefaultData.js';
+import defaultMouseData from './defaultData/DefaultMouseData.js';
+import defaultRatData from './defaultData/DefaultRatData.js';
+import defaultHumanData from './defaultData/DefaultHumanData.js';
+import defaultFlyData from './defaultData/DefaultFlyData.js';
+import getStudyData from './GetStudyData.js';
 import getToken from './Token.js';
 
+// component js
+import PiesBelowHeader from './PiesBelowHeader.js';
 import Header from './Header.js';
 import Welcome from './Welcome.js';
 
@@ -13,6 +20,10 @@ class App extends Component {
   state = {
     pageData: study,
     studyData: defaultData,
+		drosophilamelanogasterAssayData: defaultFlyData,
+		humanAssayData: defaultHumanData,
+		mouseAssayData: defaultMouseData,
+		ratAssayData: defaultRatData,
     studyTemplate: {},
     speciesSelection: [], 
     tissueSelection: [],
@@ -22,26 +33,36 @@ class App extends Component {
     columnNameSelection: ''
   }
 
-  setUpQueryToken = (searchBool, columnName, facetValue, queryString) => {
+  setUpQueryToken = (searchBool, columnName, facetValue, queryString, tokenName = "allStudies") => {
     return getToken(searchBool, columnName, facetValue, queryString)
     .then(response => response.json())
     .then(result => {
-      let dataStateObject = {...this.state.tokens};
-      dataStateObject.allStudies = result.token;
-      this.setState({ tokens: dataStateObject });
+      let dataStateObject = {...this.state.tokens}
+      dataStateObject[tokenName] = result.token
+      this.setState({ tokens: dataStateObject })
     });
   }
 
-  runStudyDataQuery = (TOKEN, LIMIT) => {
+  runStudyDataQuery = (TOKEN, LIMIT, dataStateEndPoint) => {
     return getStudyData(TOKEN).then( 
       response => { 
         if( response !== undefined ){
           this.setState({
-            studyData: response
+            [dataStateEndPoint]: response
           })
         }
       }
     );
+  }
+
+  getSpeciesStudiesMetaData = (species, columnName, tokenName) => {
+    return this.setUpQueryToken(true, columnName, [species], "SELECT * FROM syn11346063", tokenName)
+    .then( data => {
+			columnName = columnName.charAt(0).toUpperCase() + columnName.substr(1);
+			species = species.charAt(0).toLowerCase() + species.substr(1);
+			species = species.replace(/\s/g, '');
+      return this.runStudyDataQuery(this.state.tokens[tokenName], 10, species+columnName+'Data')
+    });
   }
 
   setFacetPageData = (key) => {
@@ -66,22 +87,44 @@ class App extends Component {
     });
   }
 
-  getCountForSpecies = (species, tissue) => {
-    
-  }
+	getSum = (total, num) => {
+		return total + num;
+	}
 
-  getCountForPageDataSubset = (subset = "assay", value = "rnaSeq") => {
-    
-  }
+	getCountForSpecies = (speciesStateName, columnName) => {
+		let totalCounts = [];
+		speciesStateName.facets.forEach( (element, index) => {
+			if(element.columnName === columnName){
+				element.facetValues.forEach( (element, index) => {
+					totalCounts.push(element.count);
+				})	
+			}	
+		});
+		totalCounts = totalCounts.reduce(this.getSum); 	
+		console.log(totalCounts);
+		return totalCounts;
+	}
+
+	getSetAllAssayCounts = () => {
+		this.getCountForSpecies(this.state.studyData, 'assay');
+		this.getCountForSpecies(this.state.mouseAssayData, 'assay');
+		this.getCountForSpecies(this.state.humanAssayData, 'assay');
+		this.getCountForSpecies(this.state.ratAssayData, 'assay');
+		this.getCountForSpecies(this.state.drosophilamelanogasterAssayData, 'assay');
+	}
+
+  getCountForPageDataSubset = (subset = "assay", value = "rnaSeq") => {}
 
   componentDidMount(){
     this.setAllPageDataPoints();
+		this.setSpeciesSelection();
+		this.getSetAllAssayCounts();
+		this.getSpeciesStudiesMetaData('Human', 'assay', 'humanAssayToken')
+		this.getSpeciesStudiesMetaData('Mouse', 'assay', 'mouseAssayToken')
+		this.getSpeciesStudiesMetaData('Rat', 'assay', 'ratAssayToken')
+		this.getSpeciesStudiesMetaData('Drosophila melanogaster', 'assay', 'flyAssayToken')
     this.setUpQueryToken().then(token => { 
-      this.setSpeciesSelection();
-      this.runStudyDataQuery(this.state.tokens.allStudies)
-        .then(run => {
-          //console.log(this.state.studyData.queryResult.queryResults.rows[0]); 
-        })
+      this.runStudyDataQuery(this.state.tokens.allStudies, 100, "studyData")
     });
   }
 
@@ -93,7 +136,6 @@ class App extends Component {
     let speciesObject = this.state.pageData.species.facetValues; 
     let speciesArray = this.convertObjectValsToArray(speciesObject);
     speciesArray.unshift("All Species");
-    console.log(speciesArray);
     this.handleChanges("speciesSelection", speciesArray);
   }
   
@@ -131,21 +173,14 @@ class App extends Component {
         <div className="col-xs-12">
           <Header />
           <Welcome />
-          <section className="pie-charts-welcome row">
-            <div className="col-xs-12">
-              <div className="row center-xs">
-                <div className="assays pie-chart-welcome col-xs-12 col-sm-4">
-                  <h1 className="count">{this.state.pageData.assay.count} Assays</h1>
-                </div>
-                <div className="tissues pie-chart-welcome col-xs-12 col-sm-4">
-                  <h1 className="count">{this.state.pageData.tissue.count} Tissues</h1>
-                </div>
-                <div className="analyses pie-chart-welcome col-xs-12 col-sm-4">
-                  <h1 className="count">{this.state.pageData.analysisType.count} Analyses</h1>
-                </div>
-              </div>
-            </div>
-          </section>
+          <PiesBelowHeader 
+						pageData={this.state.pageData} 
+						allSpeciesAssayCount={this.getCountForSpecies(this.state.studyData, 'assay')}
+						mouseAssayCount={this.getCountForSpecies(this.state.mouseAssayData, 'assay')}
+						humanAssayCount={this.getCountForSpecies(this.state.humanAssayData, 'assay')}
+						ratAssayCount={this.getCountForSpecies(this.state.ratAssayData, 'assay')}
+						flyAssayCount={this.getCountForSpecies(this.state.drosophilamelanogasterAssayData, 'assay')}
+					/>
           <section className="Searchbar">
             <form>
               {this.generateSelectionDropdown(this.state.speciesSelection)} 

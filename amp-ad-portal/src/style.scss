@@ -1,5 +1,25 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css);
 
+$green: #89C889;
+$pink: #F683B9;
+$blue: #77AFD4;
+$salmon: #FCA79A;
+$purple: #907FBA;
+$mustard: #FCCB6F;
+
+@mixin circle($size){
+  width: $size;
+  height: $size;
+  position: relative;
+  -webkit-border-radius: $size / 2 + 0px;
+  -moz-border-radius: $size / 2 + 0px;
+  border-radius: $size / 2 + 0px;
+}
+
+div.row.amp-ad {
+  max-width: 100%;
+}
+
 .nav {
   li.nav-item {
     list-style: none;

@@ -18,29 +18,37 @@ function getToken (searchBool = false, columnName = "assays", facetValues = [], 
     QUERY = {
       concreteType: "org.sagebionetworks.repo.model.table.QueryBundleRequest",
       entityId: "syn11346063", 
+      partMask: 53,
       query: {
-        sql: queryString, 
-        selectedFacets:[{
-          concreteType: "org.sagebionetworks.repo.model.table.FacetColumnValuesRequest", 
-          columnName: columnName, 
-          facetValues: facetValues
-        }], 
         includeEntityEtag:true, 
         isConsistent:true, 
         offset:0, 
-        limit:25
-      }, 
-      partMask:53
+        limit:25,
+				selectedFacets: [
+					{
+						columnName: "consortium",
+						concreteType: "org.sagebionetworks.repo.model.table.FacetColumnValuesRequest",
+						facetValues:[]
+					},
+					{
+						columnName: "species",
+						concreteType: "org.sagebionetworks.repo.model.table.FacetColumnValuesRequest",
+						facetValues:facetValues
+					},
+				],
+        sql: queryString 
+      } 
     };
   }
 
-  return fetch('https://repo-prod-227-0.prod.sagebase.org/repo/v1/entity/syn11346063/table/query/async/start', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(QUERY)}
+  return fetch('https://repo-prod.prod.sagebase.org/repo/v1/entity/syn11346063/table/query/async/start', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(QUERY)
+    }
   )
 
 }
