@@ -4,15 +4,8 @@ import _ from 'lodash';
 
 // non component js
 import study from './defaultData/Study.js';
-import defaultData from './defaultData/DefaultData.js';
-import defaultMouseData from './defaultData/DefaultMouseData.js';
-import defaultRatData from './defaultData/DefaultRatData.js';
-import defaultHumanData from './defaultData/DefaultHumanData.js';
-import defaultFlyData from './defaultData/DefaultFlyData.js';
 
 // component js
-import getStudyData from './GetStudyData.js';
-import getToken from './Token.js';
 import PiesBelowHeader from './PiesBelowHeader.js';
 import Header from './Header.js';
 import Welcome from './Welcome.js';
@@ -21,54 +14,14 @@ import SearchBar from './SearchBar.js';
 class App extends Component {
   state = {
     pageData: study,
-    allSpeciesData: defaultData,
-		drosophilamelanogasterData: defaultFlyData,
-		humanData: defaultHumanData,
-		mouseData: defaultMouseData,
-		ratData: defaultRatData,
     studyTemplate: {},
     speciesSelection: [], 
     tissueSelection: [],
-    tokens: {
-      allSpecies: '0',
-    },
     columnNameSelection: 'All species'
   }
 
-  setUpQueryToken = (searchBool, columnName, facetValue, queryString, tokenName = "allSpecies") => {
-    return getToken(searchBool, columnName, facetValue, queryString)
-    .then(response => response.json())
-    .then(result => {
-      let dataStateObject = {...this.state.tokens}
-      dataStateObject[tokenName] = result.token
-      this.setState({ tokens: dataStateObject })
-    });
-  }
-
-  runStudyDataQuery = (TOKEN, LIMIT, dataStateEndPoint) => {
-    return getStudyData(TOKEN).then( 
-      response => { 
-        if( response !== undefined ){
-          this.setState({
-            [dataStateEndPoint]: response
-          })
-        }
-      }
-    );
-  }
-
-  getSpeciesStudiesMetaData = (species, columnName, tokenName) => {
-    return this.setUpQueryToken(true, columnName, [species], "SELECT * FROM syn11346063", tokenName)
-    .then( data => {
-			columnName = columnName.charAt(0).toUpperCase() + columnName.substr(1);
-			species = species.charAt(0).toLowerCase() + species.substr(1);
-			species = species.replace(/\s/g, '');
-      return this.runStudyDataQuery(this.state.tokens[tokenName], 10, species+'Data')
-    });
-  }
-
   setFacetPageData = (key) => {
-    this.state.allSpeciesData.facets.forEach( (element, index) => {
+    this.props.allSpeciesData.facets.forEach( (element, index) => {
       if ( element.columnName === key ){
         let stateObjectToAdd = { 
           count: element.facetValues.length, 
@@ -106,17 +59,6 @@ class App extends Component {
 		return totalCounts;
 	}
 
-  getDataFromSynapse = () => {
-		this.getSpeciesStudiesMetaData('Human', 'assay', 'humanToken')
-		this.getSpeciesStudiesMetaData('Mouse', 'assay', 'mouseToken')
-		this.getSpeciesStudiesMetaData('Rat', 'assay', 'ratToken')
-		this.getSpeciesStudiesMetaData('Drosophila melanogaster', 'assay', 'flyToken')
-    this.setUpQueryToken().then(token => { 
-      this.runStudyDataQuery(this.state.tokens.allSpecies, 1, "allSpeciesData")
-    });
-  }
-
-
   setSpeciesSelection = () => {
     let speciesObject = this.state.pageData.species.facetValues; 
     let speciesArray = this.convertObjectValsToArray(speciesObject);
@@ -151,7 +93,6 @@ class App extends Component {
   }
 
   componentDidMount(){
-    console.log(defaultData);
 		this.setAllPageDataPoints();
   }
 
@@ -164,23 +105,23 @@ class App extends Component {
 					<SearchBar generateDropdown={this.generateSelectionDropdown(this.state.speciesSelection)} />
 					<PiesBelowHeader 
 						pageData={this.state.pageData} 
-						allSpeciesAssayCount={this.getCountForSpecies(this.state.allSpeciesData, 'assay')}
-						mouseAssayCount={this.getCountForSpecies(this.state.mouseData, 'assay')}
-						humanAssayCount={this.getCountForSpecies(this.state.humanData, 'assay')}
-						ratAssayCount={this.getCountForSpecies(this.state.ratData, 'assay')}
-						flyAssayCount={this.getCountForSpecies(this.state.drosophilamelanogasterData, 'assay')}
+						allSpeciesAssayCount={this.getCountForSpecies(this.props.allSpeciesData, 'assay')}
+						mouseAssayCount={this.getCountForSpecies(this.props.mouseData, 'assay')}
+						humanAssayCount={this.getCountForSpecies(this.props.humanData, 'assay')}
+						ratAssayCount={this.getCountForSpecies(this.props.ratData, 'assay')}
+						flyAssayCount={this.getCountForSpecies(this.props.flyData, 'assay')}
 
-						allSpeciesTissueCount={this.getCountForSpecies(this.state.allSpeciesData, 'tissue')}
-						mouseTissueCount={this.getCountForSpecies(this.state.mouseData, 'tissue')}
-						humanTissueCount={this.getCountForSpecies(this.state.humanData, 'tissue')}
-						ratTissueCount={this.getCountForSpecies(this.state.ratData, 'tissue')}
-						flyTissueCount={this.getCountForSpecies(this.state.drosophilamelanogasterData, 'tissue')}
+						allSpeciesTissueCount={this.getCountForSpecies(this.props.allSpeciesData, 'tissue')}
+						mouseTissueCount={this.getCountForSpecies(this.props.mouseData, 'tissue')}
+						humanTissueCount={this.getCountForSpecies(this.props.humanData, 'tissue')}
+						ratTissueCount={this.getCountForSpecies(this.props.ratData, 'tissue')}
+						flyTissueCount={this.getCountForSpecies(this.props.flyData, 'tissue')}
 
-						allSpeciesAnalysisTypeCount={this.getCountForSpecies(this.state.allSpeciesData, 'analysisType')}
-						mouseAnalysisTypeCount={this.getCountForSpecies(this.state.mouseData, 'analysisType')}
-						humanAnalysisTypeCount={this.getCountForSpecies(this.state.humanData, 'analysisType')}
-						ratAnalysisTypeCount={this.getCountForSpecies(this.state.ratData, 'analysisType')}
-						flyAnalysisTypeCount={this.getCountForSpecies(this.state.drosophilamelanogasterData, 'analysisType')}
+						allSpeciesAnalysisTypeCount={this.getCountForSpecies(this.props.allSpeciesData, 'analysisType')}
+						mouseAnalysisTypeCount={this.getCountForSpecies(this.props.mouseData, 'analysisType')}
+						humanAnalysisTypeCount={this.getCountForSpecies(this.props.humanData, 'analysisType')}
+						ratAnalysisTypeCount={this.getCountForSpecies(this.props.ratData, 'analysisType')}
+						flyAnalysisTypeCount={this.getCountForSpecies(this.props.flyData, 'analysisType')}
 					/>
         
           <section className="popular-data-requests row center-xs">
