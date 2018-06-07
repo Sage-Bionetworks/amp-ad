@@ -1,4 +1,4 @@
-function getToken (searchBool = false, columnName = "assays", facetValues = [], queryString = "SELECT * FROM syn11346063" ){
+function getToken (searchBool = false, columnName = "assay", facetValues = [], queryString = "SELECT * FROM syn11346063" ){
   let QUERY;
   if(!searchBool){
     QUERY = {

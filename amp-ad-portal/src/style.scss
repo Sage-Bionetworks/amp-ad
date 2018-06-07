@@ -39,8 +39,14 @@ div.row.amp-ad {
   }
 }
 
+section {
+  padding: 25px 50px;
+}
+
 section.header {
 	padding: 25px;
+  max-width: 1100px;
+  margin: 0px auto;
 }
 
 section.welcome {
@@ -48,12 +54,13 @@ section.welcome {
 		color: white;
 		text-align: left;
 	}
-	padding: 100px;
 	background: linear-gradient(to right, $blue, #487B9F);
 }
 
 section.pie-charts-welcome {
-	padding: 50px;
+  .pie-chart-welcome {
+    max-width: 200px;
+  }
 }
 
 section.searchbar {
@@ -64,6 +71,9 @@ section.searchbar {
 	}
 }
 
-.pie-chart-welcome {
-  max-width: 200px;
+section.popular-data-requests {
+  .popular-col {
+    padding: 0px;
+  }
 }
+

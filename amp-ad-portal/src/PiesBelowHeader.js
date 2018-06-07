@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 class PiesBelowHeader extends Component{
   render(){
     return (
-      <section className="pie-charts-welcome row">
-        <div className="col-xs-12">
+      <section className="pie-charts-welcome row center-xs">
+        <div className="col-xs-12 col-sm-10">
           <div className="row center-xs">
             <div className="assays pie-chart-welcome col-xs-12 col-sm-4">
 							<PieChart 

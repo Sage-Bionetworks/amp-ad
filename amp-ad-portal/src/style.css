@@ -15,18 +15,22 @@ div.row.amp-ad {
   list-style: none;
   margin: 0px 10px; }
 
+section {
+  padding: 25px 50px; }
+
 section.header {
-  padding: 25px; }
+  padding: 25px;
+  max-width: 1100px;
+  margin: 0px auto; }
 
 section.welcome {
-  padding: 100px;
   background: linear-gradient(to right, #77AFD4, #487B9F); }
   section.welcome .welcome-message {
     color: white;
     text-align: left; }
 
-section.pie-charts-welcome {
-  padding: 50px; }
+section.pie-charts-welcome .pie-chart-welcome {
+  max-width: 200px; }
 
 section.searchbar {
   background-color: #F5F5F5;
@@ -34,7 +38,7 @@ section.searchbar {
   section.searchbar form p {
     display: inline-block; }
 
-.pie-chart-welcome {
-  max-width: 200px; }
+section.popular-data-requests .popular-col {
+  padding: 0px; }
 
 /*# sourceMappingURL=style.css.map */
