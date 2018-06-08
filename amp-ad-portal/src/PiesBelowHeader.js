@@ -16,6 +16,7 @@ class PiesBelowHeader extends Component{
           </div>
         ); 
       }
+      return ''
     })  
     return <div className="row"><div className="col-xs-12">{list}</div></div>
   }
