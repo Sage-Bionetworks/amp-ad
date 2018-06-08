@@ -16,8 +16,9 @@ class App extends Component {
     pageData: study,
     studyTemplate: {},
     speciesSelection: [], 
-    tissueSelection: [],
-    columnNameSelection: 'All species'
+    diseasesSelection: [],
+    speciesDropdownSelection: 'All species',
+    diseasesDropdownSelection: ''
   }
 
   setFacetPageData = (key) => {
@@ -31,7 +32,7 @@ class App extends Component {
           ...prevState,
           pageData: { ...prevState.pageData, [key]: {...stateObjectToAdd} }  
         }), () => {
-          this.setSpeciesSelection();
+          this.setSelection(this.state.pageData.species, "speciesSelection", "All Species");
         })
       }  
     })
@@ -48,9 +49,9 @@ class App extends Component {
 		return total + num;
 	}
 
-	getCountForSpecies = (speciesStateName, columnName) => {
+	getColumnCountForSpecies = (speciesPropName, columnName) => {
 		let totalCounts = [];
-		speciesStateName.facets.forEach( (element) => {
+		speciesPropName.facets.forEach( (element) => {
 			if(element.columnName === columnName){
 				totalCounts.push( element.facetValues.length ) 
 			}
@@ -59,28 +60,26 @@ class App extends Component {
 		return totalCounts;
 	}
 
-  setSpeciesSelection = () => {
-    let speciesObject = this.state.pageData.species.facetValues; 
-    let speciesArray = this.convertObjectValsToArray(speciesObject);
-    speciesArray.unshift("All Species");
-    this.handleChanges("speciesSelection", speciesArray);
+  setSelection = (STATE, stateKey, prependValue) => {
+    let selectionObject = STATE.facetValues; 
+    let selectionArray = this.convertObjectValsToArray(selectionObject);
+    if(prependValue){
+      selectionArray.unshift(prependValue);
+    }
+    this.handleChanges(stateKey, selectionArray);
+  }
+
+  handleChangeEvent = (event) => {
+    let key = event.target.name;
+    this.setState({
+      [key]: event.target.value 
+    })
   }
   
   handleChanges = (KEY, NEWSTATE) => {
     this.setState({
       [KEY]: NEWSTATE
     })  
-  }
-
-  generateSelectionDropdown = (STATE) => {
-    if(STATE !== undefined){
-      let options = STATE.map( (element, index) => {
-        return (
-          <option key={index} value={element}>{element}</option>
-        ); 
-      });
-      return <select>{options}</select>;
-    }
   }
 
   convertObjectValsToArray = (OBJECT) => {
@@ -92,8 +91,26 @@ class App extends Component {
     return mappedArray;
   }
 
+  getColumnNameDataTypeAndCount = (columnName, pathToDataObject) => {
+    let mappedArray = []
+    if(pathToDataObject[columnName] !== undefined){
+      _.mapKeys(pathToDataObject[columnName].facetValues, (object) => {
+        let flatData = { 
+          count: object.count, 
+          value: object.value
+        }
+        return mappedArray.push(flatData);
+      })
+    }
+    return mappedArray;
+  }
+
   componentDidMount(){
 		this.setAllPageDataPoints();
+  }
+
+  componentDidUpdate(){
+    console.log(this.state.pageData)
   }
 
   render(){
@@ -102,26 +119,26 @@ class App extends Component {
         <div className="col-xs-12 main">
           <Header />
           <Welcome />
-					<SearchBar generateDropdown={this.generateSelectionDropdown(this.state.speciesSelection)} />
+					<SearchBar 
+            dropdownSelection={this.state.speciesDropdownSelection}
+            handleChange={this.handleChangeEvent}
+            speciesSelection={this.state.speciesSelection} 
+          />
 					<PiesBelowHeader 
+            getColumnCountForSpecies={this.getColumnCountForSpecies}
+            getColumnNameTypeAndCount={this.getColumnNameDataTypeAndCount}
 						pageData={this.state.pageData} 
-						allSpeciesAssayCount={this.getCountForSpecies(this.props.allSpeciesData, 'assay')}
-						mouseAssayCount={this.getCountForSpecies(this.props.mouseData, 'assay')}
-						humanAssayCount={this.getCountForSpecies(this.props.humanData, 'assay')}
-						ratAssayCount={this.getCountForSpecies(this.props.ratData, 'assay')}
-						flyAssayCount={this.getCountForSpecies(this.props.flyData, 'assay')}
+						allSpeciesAssayCount={this.getColumnCountForSpecies(this.props.allSpeciesData, 'assay')}
+						mouseAssayCount={this.getColumnCountForSpecies(this.props.mouseData, 'assay')}
+						humanAssayCount={this.getColumnCountForSpecies(this.props.humanData, 'assay')}
+						ratAssayCount={this.getColumnCountForSpecies(this.props.ratData, 'assay')}
+						flyAssayCount={this.getColumnCountForSpecies(this.props.flyData, 'assay')}
 
-						allSpeciesTissueCount={this.getCountForSpecies(this.props.allSpeciesData, 'tissue')}
-						mouseTissueCount={this.getCountForSpecies(this.props.mouseData, 'tissue')}
-						humanTissueCount={this.getCountForSpecies(this.props.humanData, 'tissue')}
-						ratTissueCount={this.getCountForSpecies(this.props.ratData, 'tissue')}
-						flyTissueCount={this.getCountForSpecies(this.props.flyData, 'tissue')}
-
-						allSpeciesAnalysisTypeCount={this.getCountForSpecies(this.props.allSpeciesData, 'analysisType')}
-						mouseAnalysisTypeCount={this.getCountForSpecies(this.props.mouseData, 'analysisType')}
-						humanAnalysisTypeCount={this.getCountForSpecies(this.props.humanData, 'analysisType')}
-						ratAnalysisTypeCount={this.getCountForSpecies(this.props.ratData, 'analysisType')}
-						flyAnalysisTypeCount={this.getCountForSpecies(this.props.flyData, 'analysisType')}
+						allSpeciesTissueCount={this.getColumnCountForSpecies(this.props.allSpeciesData, 'tissue')}
+						mouseTissueCount={this.getColumnCountForSpecies(this.props.mouseData, 'tissue')}
+						humanTissueCount={this.getColumnCountForSpecies(this.props.humanData, 'tissue')}
+						ratTissueCount={this.getColumnCountForSpecies(this.props.ratData, 'tissue')}
+						flyTissueCount={this.getColumnCountForSpecies(this.props.flyData, 'tissue')}
 					/>
         
           <section className="popular-data-requests row center-xs">

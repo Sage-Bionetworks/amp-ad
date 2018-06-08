@@ -1,8 +1,4 @@
 let study = {
-  flyAssayCount: 0,
-  humanAssayCount: 0,
-  mouseAssayCount: 0,
-  ratAssayCount: 0,
   assay: {count: 0, facetValues: {}},
   tissue: {count: 0, facetValues:{}},
   analysisType: {count: 0, facetValues: {}},
