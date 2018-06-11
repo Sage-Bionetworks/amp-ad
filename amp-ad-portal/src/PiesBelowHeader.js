@@ -11,7 +11,7 @@ class PiesBelowHeader extends Component{
     let list = listArray.map( (element, index) => {
       if(index > 0){
         return (
-          <div className="row">
+          <div className="row" key={index}>
             <p>{element.value} ({element.count})</p>
           </div>
         ); 
@@ -38,10 +38,11 @@ class PiesBelowHeader extends Component{
                 </div>
                 <PieChart 
                   data={
-                    [{title: "human", value: this.props.humanAssayCount, color: "#89C889"},
-                    {title: "mouse", value: this.props.mouseAssayCount, color: "#FCCB6F"},
-                    {title: "fly", value: this.props.flyAssayCount, color: "#907FBA"},
-                    {title: "rat", value: this.props.ratAssayCount, color: "#77AFD4"}]
+                    [{title: "human", value: this.props.getColumnCountForSpecies(this.props.humanData, 'assay'), color: "#89C889"},
+                    {title: "mouse", value: this.props.getColumnCountForSpecies(this.props.mouseData, 'assay'), color: "#FCCB6F"},
+                    {title: "fly", value: this.props.getColumnCountForSpecies(this.props.flyData, 'assay'), color: "#907FBA"},
+
+                    {title: "rat", value: this.props.getColumnCountForSpecies(this.props.ratData, 'assay'), color: "#77AFD4"}]
                   }
                   expandOnHover={false}
                   expandSize={0}
@@ -64,10 +65,10 @@ class PiesBelowHeader extends Component{
                 </div>
                 <PieChart 
                   data={
-                    [{title: "human", value: this.props.humanTissueCount, color: "#89C889"},
-                    {title: "mouse", value: this.props.mouseTissueCount, color: "#FCCB6F"},
-                    {title: "fly", value: this.props.flyTissueCount, color: "#907FBA"},
-                    {title: "rat", value: this.props.ratTissueCount, color: "#77AFD4"}]
+                    [{title: "human", value: this.props.getColumnCountForSpecies(this.props.humanData, 'tissue'), color: "#89C889"},
+                    {title: "mouse", value: this.props.getColumnCountForSpecies(this.props.mouseData, 'tissue'), color: "#FCCB6F"},
+                    {title: "fly", value: this.props.getColumnCountForSpecies(this.props.flyData, 'tissue'), color: "#907FBA"},
+                    {title: "rat", value: this.props.getColumnCountForSpecies(this.props.ratData, 'tissue'), color: "#77AFD4"}]
                   }
                   expandOnHover={false}
                   expandSize={0}

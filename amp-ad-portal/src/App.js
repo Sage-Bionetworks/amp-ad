@@ -128,17 +128,10 @@ class App extends Component {
             getColumnCountForSpecies={this.getColumnCountForSpecies}
             getColumnNameTypeAndCount={this.getColumnNameDataTypeAndCount}
 						pageData={this.state.pageData} 
-						allSpeciesAssayCount={this.getColumnCountForSpecies(this.props.allSpeciesData, 'assay')}
-						mouseAssayCount={this.getColumnCountForSpecies(this.props.mouseData, 'assay')}
-						humanAssayCount={this.getColumnCountForSpecies(this.props.humanData, 'assay')}
-						ratAssayCount={this.getColumnCountForSpecies(this.props.ratData, 'assay')}
-						flyAssayCount={this.getColumnCountForSpecies(this.props.flyData, 'assay')}
-
-						allSpeciesTissueCount={this.getColumnCountForSpecies(this.props.allSpeciesData, 'tissue')}
-						mouseTissueCount={this.getColumnCountForSpecies(this.props.mouseData, 'tissue')}
-						humanTissueCount={this.getColumnCountForSpecies(this.props.humanData, 'tissue')}
-						ratTissueCount={this.getColumnCountForSpecies(this.props.ratData, 'tissue')}
-						flyTissueCount={this.getColumnCountForSpecies(this.props.flyData, 'tissue')}
+            ratData={this.props.ratData}
+            humanData={this.props.humanData}
+            mouseData={this.props.mouseData}
+            flyData={this.props.flyData}
 					/>
         
           <section className="popular-data-requests row center-xs">
