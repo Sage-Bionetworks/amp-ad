@@ -13,6 +13,10 @@ import SearchBar from './SearchBar.js';
 
 class App extends Component {
   state = {
+    buttonState: {
+      allAssays: false,
+      allTissues: false,
+    },
     pageData: study,
     studyTemplate: {},
     speciesSelection: [], 
@@ -22,7 +26,15 @@ class App extends Component {
   }
 
   setFacetPageData = (key) => {
-    this.props.allSpeciesData.facets.forEach( (element, index) => {
+    let propKey = this.state.speciesDropdownSelection.toLowerCase() + 'Data'
+    if(this.state.speciesDropdownSelection.toLowerCase() === 'all species'){
+      propKey = 'allSpeciesData'
+    }
+    if(this.state.speciesDropdownSelection === 'Drosophila melanogaster'){
+      propKey = 'flyData'
+    }
+    console.log(propKey);
+    this.props[propKey].facets.forEach( (element, index) => {
       if ( element.columnName === key ){
         let stateObjectToAdd = { 
           count: element.facetValues.length, 
@@ -73,6 +85,8 @@ class App extends Component {
     let key = event.target.name;
     this.setState({
       [key]: event.target.value 
+    }, ()=> {
+      this.setAllPageDataPoints();
     })
   }
   
@@ -110,7 +124,7 @@ class App extends Component {
   }
 
   componentDidUpdate(){
-    console.log(this.state.pageData)
+    //console.log(this.state.pageData)
   }
 
   render(){
@@ -125,6 +139,8 @@ class App extends Component {
             speciesSelection={this.state.speciesSelection} 
           />
 					<PiesBelowHeader 
+            speciesSelection={this.state.speciesDropdownSelection}
+            getSum={this.getSum}
             getColumnCountForSpecies={this.getColumnCountForSpecies}
             getColumnNameTypeAndCount={this.getColumnNameDataTypeAndCount}
 						pageData={this.state.pageData} 

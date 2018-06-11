@@ -5,6 +5,10 @@ body, h1, h2, h3, h4, h5, li, ul, p, a {
 	font-family: 'Lato', sans-serif; 
 }
 
+p {
+  font-size: 12px;
+}
+
 a {
 	color: black;
 	text-decoration: none;
@@ -15,6 +19,7 @@ $pink: #F683B9;
 $blue: #77AFD4;
 $salmon: #FCA79A;
 $purple: #907FBA;
+$lightPurple: #B4C6F9;
 $mustard: #FCCB6F;
 $gray: #F5F5F5;
 
@@ -29,7 +34,7 @@ $gray: #F5F5F5;
 
 .btn {
   color: white;
-  background-color: $blue;
+  background-color: $lightPurple;
   border: none;
   border-radius: 24px;
   width: 192px;
@@ -73,6 +78,14 @@ section.pie-charts-welcome {
   }
   .pie-container {
     position: relative;
+  }
+  .pie-counts-list {
+    height: 200px;
+    overflow: hidden;
+    padding: 0px 10px;
+  }
+  p.pie-list-item {
+    text-align: left;
   }
   .chart-center-stat {
     top: 28.25%;
