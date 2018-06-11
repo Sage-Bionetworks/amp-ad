@@ -83,6 +83,12 @@ section.pie-charts-welcome {
     height: 200px;
     overflow: hidden;
     padding: 0px 10px;
+    transition: all 1s ease;
+  }
+  .pie-counts-list[data-value="true"]{
+    overflow: visible;
+    height: 1000px;
+    transition: all 1s ease;
   }
   p.pie-list-item {
     text-align: left;

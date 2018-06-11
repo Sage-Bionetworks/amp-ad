@@ -14,8 +14,8 @@ import SearchBar from './SearchBar.js';
 class App extends Component {
   state = {
     buttonState: {
-      allAssays: false,
-      allTissues: false,
+      assayButtonAll: false,
+      tissueButtonAll: false
     },
     pageData: study,
     studyTemplate: {},
@@ -33,7 +33,6 @@ class App extends Component {
     if(this.state.speciesDropdownSelection === 'Drosophila melanogaster'){
       propKey = 'flyData'
     }
-    console.log(propKey);
     this.props[propKey].facets.forEach( (element, index) => {
       if ( element.columnName === key ){
         let stateObjectToAdd = { 
@@ -89,11 +88,24 @@ class App extends Component {
       this.setAllPageDataPoints();
     })
   }
-  
+
   handleChanges = (KEY, NEWSTATE) => {
     this.setState({
       [KEY]: NEWSTATE
     })  
+  }
+
+  toggleSeeAll = (event) => {
+    let key = event.target.name;
+    let value = event.target.dataset.value === "false" ? true : false; 
+    console.log(event.target.dataset.value);
+    this.setState( prevState => ({
+      ...prevState,
+      buttonState: {
+        ...prevState.buttonState, 
+        [key]: value
+      }
+    })) 
   }
 
   convertObjectValsToArray = (OBJECT) => {
@@ -125,6 +137,7 @@ class App extends Component {
 
   componentDidUpdate(){
     //console.log(this.state.pageData)
+    //console.log(this.props.humanData)
   }
 
   render(){
@@ -139,6 +152,8 @@ class App extends Component {
             speciesSelection={this.state.speciesSelection} 
           />
 					<PiesBelowHeader 
+            toggleSeeAll={this.toggleSeeAll}
+            buttonState={this.state.buttonState}
             speciesSelection={this.state.speciesDropdownSelection}
             getSum={this.getSum}
             getColumnCountForSpecies={this.getColumnCountForSpecies}

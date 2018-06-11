@@ -66,11 +66,11 @@ class PiesBelowHeader extends Component{
     let pieData = this.buildPieData('this.props.speciesSelection', this.getCountsList(dataType));
     return (
       <div className="{dataType} pie-chart-welcome col-xs-12 col-sm-5">
-        <div className="pie-container">
-          <h1 className="count">{this.props.speciesSelection.toUpperCase() === 'ALL SPECIES' ? this.props.pageData[dataType].count : 111 }  Assays</h1>
+        <div className="pie-container" >
+          <h1 className="count">{this.props.pageData[dataType].count} {dataType}</h1>
           <div className="chart-center-stat">
             <h1 alt="count of samples">
-              {this.printTotalCounts(this.getCountsList("{dataType}"))}
+              {this.printTotalCounts(this.getCountsList(dataType))}
             </h1>
             <p>Samples</p>
           </div>
@@ -85,10 +85,15 @@ class PiesBelowHeader extends Component{
             viewBoxSize={50}
           />
         </div>
-        <div className="pie-counts-list">
+        <div className="pie-counts-list" data-value={this.props.buttonState[dataType+"ButtonAll"]} >
           {this.printCountsList(this.getCountsList(dataType))}
         </div>
-        <button className="btn">See all {dataType}</button>
+        <button className="pie-counts-button btn" 
+          name={dataType+"ButtonAll"} 
+          data-value={this.props.buttonState[dataType+"ButtonAll"]} 
+          onClick={this.props.toggleSeeAll}>
+            {this.props.buttonState[dataType+"ButtonAll"] === false ? "See all " + dataType + 's' : "Hide all " + dataType + 's'}
+        </button>
       </div>
     )
   }
@@ -101,70 +106,8 @@ class PiesBelowHeader extends Component{
       <section className="pie-charts-welcome row center-xs">
         <div className="col-xs-12 col-sm-10">
           <div className="row center-xs">
-
             {this.buildPieSection(this.props.speciesSelection, 'assay')}
-
-            <div className="assays pie-chart-welcome col-xs-12 col-sm-5">
-              <div className="pie-container">
-                <h1 className="count">{this.props.pageData.assay.count} Assays</h1>
-                <div className="chart-center-stat">
-                  <h1 alt="count of samples">
-                    {this.printTotalCounts(this.getCountsList("assay"))}
-                  </h1>
-                  <p>Samples</p>
-                </div>
-                <PieChart 
-                  data={
-                    [{title: "human", value: this.props.getColumnCountForSpecies(this.props.humanData, 'assay'), color: "#89C889"},
-                    {title: "mouse", value: this.props.getColumnCountForSpecies(this.props.mouseData, 'assay'), color: "#FCCB6F"},
-                    {title: "fly", value: this.props.getColumnCountForSpecies(this.props.flyData, 'assay'), color: "#907FBA"},
-                    {title: "rat", value: this.props.getColumnCountForSpecies(this.props.ratData, 'assay'), color: "#77AFD4"}]
-                  }
-                  expandOnHover={false}
-                  expandSize={0}
-                  shrinkOnTouchEnd={false}
-                  strokeColor="#fff"
-                  strokeLinejoin="round"
-                  strokeWidth={0}
-                  viewBoxSize={50}
-                />
-              </div>
-              <div className="pie-counts-list">
-                {this.printCountsList(this.getCountsList("assay"))}
-              </div>
-              <button className="btn">See all assays</button>
-            </div>
-
-
-
-            <div className="tissues pie-chart-welcome col-xs-12 col-sm-5">
-              <div className="pie-container">
-                <h1 className="count">{this.props.pageData.tissue.count} Tissues</h1>
-                <div className="chart-center-stat">
-                  <h1 alt="count of samples">
-                    {this.printTotalCounts(this.getCountsList("tissue"))}
-                  </h1>
-                  <p>Samples</p>
-                </div>
-                <PieChart 
-                  data={
-                    [{title: "human", value: this.props.getColumnCountForSpecies(this.props.humanData, 'tissue'), color: "#89C889"},
-                    {title: "mouse", value: this.props.getColumnCountForSpecies(this.props.mouseData, 'tissue'), color: "#FCCB6F"},
-                    {title: "fly", value: this.props.getColumnCountForSpecies(this.props.flyData, 'tissue'), color: "#907FBA"},
-                    {title: "rat", value: this.props.getColumnCountForSpecies(this.props.ratData, 'tissue'), color: "#77AFD4"}]
-                  }
-                  expandOnHover={false}
-                  expandSize={0}
-                  shrinkOnTouchEnd={false}
-                  strokeColor="#fff"
-                  strokeLinejoin="round"
-                  strokeWidth={0}
-                  viewBoxSize={50}
-                />
-              </div>
-              <div className="pie-counts-list">{this.printCountsList(this.getCountsList('tissue'))}</div>
-              <button className="btn">See all tissues</button>
-            </div>
+            {this.buildPieSection(this.props.speciesSelection, 'tissue')}
           </div>
         </div>
       </section>
