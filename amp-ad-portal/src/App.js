@@ -1,15 +1,16 @@
 // packages
 import React, { Component } from 'react';
 import _ from 'lodash';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 // non component js
 import study from './defaultData/Study.js';
 
 // component js
-import PiesBelowHeader from './PiesBelowHeader.js';
 import Header from './Header.js';
-import Welcome from './Welcome.js';
-import SearchBar from './SearchBar.js';
+import Home from './Home.js';
+import Tools from './Tools.js';
+import About from './About.js';
 
 class App extends Component {
   state = {
@@ -131,6 +132,25 @@ class App extends Component {
     return mappedArray;
   }
 
+	homeMarkup = () => {
+		return (
+			<Home 
+				speciesDropdownSelection={this.state.speciesDropdownSelection}
+				handleChangeEvent={this.handleChangeEvent}
+				speciesSelection={this.state.speciesSelection}
+				toggleSeeAll={this.toggleSeeAll}
+				buttonState={this.state.buttonState}
+				getSum={this.getSum}
+				getColumnCountForSpecies={this.getColumnCountForSpecies}
+				getColumnNameDataTypeAndCount={this.getColumnNameDataTypeAndCount}
+				pageData={this.state.pageData}
+				ratData={this.props.ratData}
+				mouseData={this.props.flyData}
+				flyData={this.props.flyData}
+			/>
+		)
+	}
+
   componentDidMount(){
 		this.setAllPageDataPoints();
   }
@@ -142,64 +162,22 @@ class App extends Component {
 
   render(){
     return (
+			<Router>
       <div className="row amp-ad">
         <div className="col-xs-12 main">
-          <Header />
-          <Welcome />
-					<SearchBar 
-            dropdownSelection={this.state.speciesDropdownSelection}
-            handleChange={this.handleChangeEvent}
-            speciesSelection={this.state.speciesSelection} 
-          />
-					<PiesBelowHeader 
-            toggleSeeAll={this.toggleSeeAll}
-            buttonState={this.state.buttonState}
-            speciesSelection={this.state.speciesDropdownSelection}
-            getSum={this.getSum}
-            getColumnCountForSpecies={this.getColumnCountForSpecies}
-            getColumnNameTypeAndCount={this.getColumnNameDataTypeAndCount}
-						pageData={this.state.pageData} 
-            ratData={this.props.ratData}
-            humanData={this.props.humanData}
-            mouseData={this.props.mouseData}
-            flyData={this.props.flyData}
-					/>
-        
-          <section className="popular-data-requests row center-xs">
-            <div className="col-xs-12 col-sm-10">
-              <div className="row">
-                <h2>Popular Data Requests</h2>
-              </div>
-              <div className="row most-popular-data center-xs around-xs">
-                <div className="col-sm-4 popular-col">
-                  <img src={require('./images/dna.svg')} 
-                      className="svg-large-icon"/>
-                  <h5>Most Popular Assays</h5>
-                </div>
-                <div className="col-sm-4 popular-col">
-                  <img src={require('./images/differential-expressions.svg')} 
-                      className="svg-large-icon"/>
-                  <h5>Most Popular Tissues</h5>
-                </div>
-              </div>
-            </div>
-          </section>
-
-
-					<section className="analyses row">
-            <div className="col-xs-12">
-              <div className="row between-xs">
-                <div className="col-xs-12 col-sm-6"><h2>Analyses</h2></div>
-                <div className="col-xs-12 col-sm-2"><a href="/">See All Analyses</a></div>
-              </div>
-
-              <div className="row"></div>
-            </div> 
-          </section>
-        </div>
-      </div>
+					<Header />
+				</div>
+					<div className="content">
+						<Route exact path="/" component={this.homeMarkup}/>
+						<Route path="/Tools" component={Tools}/>
+						<Route path="/About" component={About}/>
+					</div>
+				<footer></footer>
+			</div>
+			</Router>
     );
   }
 }
+
 
 export default App;

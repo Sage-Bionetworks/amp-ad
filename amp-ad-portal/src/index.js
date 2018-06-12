@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import './index.css';
 import './style.css';
 import App from './App';
@@ -24,12 +25,14 @@ import defaulRatData from './defaultData/DefaultRatData.js'
 //})
 
 // for testing use the local data 
-ReactDOM.render(<App 
-  humanData = {defaultHumanData}
-  mouseData = {defaultMouseData}
-  ratData = {defaulRatData}
-  flyData = {defaultFlyData}
-  allSpeciesData = {defaultData}
-  />, document.getElementById('root'));
+ReactDOM.render(
+		<App 
+			humanData = {defaultHumanData}
+			mouseData = {defaultMouseData}
+			ratData = {defaulRatData}
+			flyData = {defaultFlyData}
+			allSpeciesData = {defaultData}
+		/>
+	, document.getElementById('root'));
 
 registerServiceWorker();

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -6,13 +7,15 @@ const Header = () => {
       <div className="col-xs-12">
         <div className="row between-xs">
           <div className="col-xs-4">
-            <img className="logo-header" src={require('./images/amp-ad-logo.svg')} alt="amp_ad_logo" />
+            <Link to="/">
+							<img className="logo-header" src={require('./images/amp-ad-logo.svg')} alt="amp_ad_logo" />
+						</Link>
           </div>
           <div className="col-xs-8">
             <ul className="nav row end-xs">
-              <li className="nav-item"><a href="">Home</a></li>
-              <li className="nav-item"><a href="">Tools</a></li>
-              <li className="nav-item"><a href="">About</a></li>
+              <li><Link to="/" className="nav-item">Home</Link></li>
+              <li><Link to="/tools" className="nav-item">Tools</Link></li>
+              <li><Link to="/about" className="nav-item">About</Link></li>
             </ul>
           </div>
         </div>
