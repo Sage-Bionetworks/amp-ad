@@ -14,13 +14,25 @@ class SearchBar extends Component {
 
   render(){
     return (
-      <section className="searchbar row center-xs">
-        <div className="col-xs-12 col-sm-10">
+      <section className="searchbar">
           <form className="searchbar-form">
-            <p className="dropdown-description">View data sets and analyses by {this.generateSelectionDropdown(this.props.speciesSelection)} </p>
-            <a className="search-box" value="search" type="text">Search</a>
+            <div className="row between-xs">
+              <div className="col-xs-12 col-sm-3">
+                <h2 className="dropdown-description">View data by</h2> 
+              </div>
+              <div className="col-xs-12 col-sm-3">
+                {this.generateSelectionDropdown(this.props.speciesSelection)}
+              </div>
+              <div className="col-xs-12 col-sm-3">
+                <img src={require('./images/search.svg')} alt="search magnifying glass icon" className="svg-small-icon" /> 
+                <a className="search-box" value="search" type="text">Search</a>
+              </div>
+              <div className="col-xs-12 col-sm-3">
+                <img src={require('./images/filter.svg')} alt="coffee filter icon" className="svg-small-icon" /> 
+                <a className="search-box" value="filter" type="text">Filter</a>
+              </div>
+             </div>
           </form>
-        </div>
       </section>
     ) 
   }
