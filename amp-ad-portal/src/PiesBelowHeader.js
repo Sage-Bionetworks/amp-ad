@@ -96,7 +96,7 @@ class PiesBelowHeader extends Component{
           name={dataType+"ButtonAll"} 
           data-value={this.props.buttonState[dataType+"ButtonAll"]} 
           onClick={this.props.toggleSeeAll}>
-            {this.props.buttonState[dataType+"ButtonAll"] === false ? "See all " + dataType + 's' : "Hide all " + dataType + 's'}
+            {this.props.buttonState[dataType+"ButtonAll"] === false ? "See all " + dataType + 's' : "Show less " + dataType + 's'}
         </button>
       </div>
     )

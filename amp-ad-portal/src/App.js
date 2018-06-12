@@ -187,7 +187,14 @@ class App extends Component {
 
 
 					<section className="analyses row">
-            <div></div> 
+            <div className="col-xs-12">
+              <div className="row between-xs">
+                <div className="col-xs-12 col-sm-6"><h2>Analyses</h2></div>
+                <div className="col-xs-12 col-sm-2"><a href="/">See All Analyses</a></div>
+              </div>
+
+              <div className="row"></div>
+            </div> 
           </section>
         </div>
       </div>
