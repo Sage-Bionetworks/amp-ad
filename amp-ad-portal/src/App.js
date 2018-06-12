@@ -1,18 +1,23 @@
 // packages
 import React, { Component } from 'react';
 import _ from 'lodash';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 // non component js
 import study from './defaultData/Study.js';
 
 // component js
-import PiesBelowHeader from './PiesBelowHeader.js';
 import Header from './Header.js';
-import Welcome from './Welcome.js';
-import SearchBar from './SearchBar.js';
+import Home from './Home.js';
+import Tools from './Tools.js';
+import About from './About.js';
 
 class App extends Component {
   state = {
+    buttonState: {
+      assayButtonAll: false,
+      tissueButtonAll: false
+    },
     pageData: study,
     studyTemplate: {},
     speciesSelection: [], 
@@ -22,7 +27,14 @@ class App extends Component {
   }
 
   setFacetPageData = (key) => {
-    this.props.allSpeciesData.facets.forEach( (element, index) => {
+    let propKey = this.state.speciesDropdownSelection.toLowerCase() + 'Data'
+    if(this.state.speciesDropdownSelection.toLowerCase() === 'all species'){
+      propKey = 'allSpeciesData'
+    }
+    if(this.state.speciesDropdownSelection === 'Drosophila melanogaster'){
+      propKey = 'flyData'
+    }
+    this.props[propKey].facets.forEach( (element, index) => {
       if ( element.columnName === key ){
         let stateObjectToAdd = { 
           count: element.facetValues.length, 
@@ -73,13 +85,28 @@ class App extends Component {
     let key = event.target.name;
     this.setState({
       [key]: event.target.value 
+    }, ()=> {
+      this.setAllPageDataPoints();
     })
   }
-  
+
   handleChanges = (KEY, NEWSTATE) => {
     this.setState({
       [KEY]: NEWSTATE
     })  
+  }
+
+  toggleSeeAll = (event) => {
+    let key = event.target.name;
+    let value = event.target.dataset.value === "false" ? true : false; 
+    console.log(event.target.dataset.value);
+    this.setState( prevState => ({
+      ...prevState,
+      buttonState: {
+        ...prevState.buttonState, 
+        [key]: value
+      }
+    })) 
   }
 
   convertObjectValsToArray = (OBJECT) => {
@@ -105,65 +132,52 @@ class App extends Component {
     return mappedArray;
   }
 
+	homeMarkup = () => {
+		return (
+			<Home 
+				speciesDropdownSelection={this.state.speciesDropdownSelection}
+				handleChangeEvent={this.handleChangeEvent}
+				speciesSelection={this.state.speciesSelection}
+				toggleSeeAll={this.toggleSeeAll}
+				buttonState={this.state.buttonState}
+				getSum={this.getSum}
+				getColumnCountForSpecies={this.getColumnCountForSpecies}
+				getColumnNameDataTypeAndCount={this.getColumnNameDataTypeAndCount}
+				pageData={this.state.pageData}
+				ratData={this.props.ratData}
+				mouseData={this.props.flyData}
+				flyData={this.props.flyData}
+			/>
+		)
+	}
+
   componentDidMount(){
 		this.setAllPageDataPoints();
   }
 
   componentDidUpdate(){
-    console.log(this.state.pageData)
+    //console.log(this.state.pageData)
+    //console.log(this.props.humanData)
   }
 
   render(){
     return (
+			<Router>
       <div className="row amp-ad">
         <div className="col-xs-12 main">
-          <Header />
-          <Welcome />
-					<SearchBar 
-            dropdownSelection={this.state.speciesDropdownSelection}
-            handleChange={this.handleChangeEvent}
-            speciesSelection={this.state.speciesSelection} 
-          />
-					<PiesBelowHeader 
-            getColumnCountForSpecies={this.getColumnCountForSpecies}
-            getColumnNameTypeAndCount={this.getColumnNameDataTypeAndCount}
-						pageData={this.state.pageData} 
-						allSpeciesAssayCount={this.getColumnCountForSpecies(this.props.allSpeciesData, 'assay')}
-						mouseAssayCount={this.getColumnCountForSpecies(this.props.mouseData, 'assay')}
-						humanAssayCount={this.getColumnCountForSpecies(this.props.humanData, 'assay')}
-						ratAssayCount={this.getColumnCountForSpecies(this.props.ratData, 'assay')}
-						flyAssayCount={this.getColumnCountForSpecies(this.props.flyData, 'assay')}
-
-						allSpeciesTissueCount={this.getColumnCountForSpecies(this.props.allSpeciesData, 'tissue')}
-						mouseTissueCount={this.getColumnCountForSpecies(this.props.mouseData, 'tissue')}
-						humanTissueCount={this.getColumnCountForSpecies(this.props.humanData, 'tissue')}
-						ratTissueCount={this.getColumnCountForSpecies(this.props.ratData, 'tissue')}
-						flyTissueCount={this.getColumnCountForSpecies(this.props.flyData, 'tissue')}
-					/>
-        
-          <section className="popular-data-requests row center-xs">
-            <div className="col-xs-12 col-sm-10">
-              <div className="row">
-                <h2>Popular Data Requests</h2>
-              </div>
-              <div className="row most-popular-data start-xs">
-                <div className="col-sm-3 popular-col">
-                  <h5>Most Popular Assays</h5>
-                </div>
-                <div className="col-sm-3 popular-col">
-                  <h5>Most Popular Tissues</h5>
-                </div>
-              </div>
-            </div>
-          </section>
-
-					<section className="analyses row">
-            <div></div> 
-          </section>
-        </div>
-      </div>
+					<Header />
+				</div>
+					<div className="content">
+						<Route exact path="/" component={this.homeMarkup}/>
+						<Route path="/Tools" component={Tools}/>
+						<Route path="/About" component={About}/>
+					</div>
+				<footer></footer>
+			</div>
+			</Router>
     );
   }
 }
+
 
 export default App;
