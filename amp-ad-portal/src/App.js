@@ -170,16 +170,21 @@ class App extends Component {
               <div className="row">
                 <h2>Popular Data Requests</h2>
               </div>
-              <div className="row most-popular-data start-xs">
-                <div className="col-sm-3 popular-col">
+              <div className="row most-popular-data center-xs around-xs">
+                <div className="col-sm-4 popular-col">
+                  <img src={require('./images/dna.svg')} 
+                      className="svg-large-icon"/>
                   <h5>Most Popular Assays</h5>
                 </div>
-                <div className="col-sm-3 popular-col">
+                <div className="col-sm-4 popular-col">
+                  <img src={require('./images/differential-expressions.svg')} 
+                      className="svg-large-icon"/>
                   <h5>Most Popular Tissues</h5>
                 </div>
               </div>
             </div>
           </section>
+
 
 					<section className="analyses row">
             <div></div> 

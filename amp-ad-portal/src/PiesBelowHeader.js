@@ -2,6 +2,20 @@ import React, { Component } from 'react'
 import PieChart from "react-svg-piechart"
 import PropTypes from 'prop-types'
 
+let colors = [
+  '#89C889',
+  '#F683B9',
+  '#77AFD4',
+  '#fca79a',
+  '#907FBA',
+  '#B4C6F9',
+  '#FCCB6F',
+  '#F5F5F5',
+  '#EC7379',
+  '#3CAB9F',
+  '#5D69AC'
+];
+
 class PiesBelowHeader extends Component{
   getCountsList = columnName => {
     return this.props.getColumnNameTypeAndCount(columnName, this.props.pageData)
@@ -24,8 +38,11 @@ class PiesBelowHeader extends Component{
     let list = listArray.map( (element, index) => {
       if(index > 0){
         return (
-          <div className="pie-list row" key={index}>
-            <p className="pie-list-item">{element.value} ({element.count})</p>
+          <div className="pie-list row middle-xs" key={index}>
+            <div className="pie-circle col-xs" 
+              style={{'backgroundColor': colors[index%colors.length]}}
+            ></div>
+            <p className="pie-list-item col-xs">{element.value} ({element.count})</p>
           </div>
         ); 
       }
@@ -35,19 +52,6 @@ class PiesBelowHeader extends Component{
   }
 
   buildPieData = (species = 'All Species', facetsList ) => {
-    let colors = [
-      '#89C889',
-      '#F683B9',
-      '#77AFD4',
-      '#fca79a',
-      '#907FBA',
-      '#B4C6F9',
-      '#FCCB6F',
-      '#F5F5F5',
-      '#EC7379',
-      '#3CAB9F',
-      '#5D69AC'
-    ];
     if(species === 'All Species'){
       return (
         [{title: "human", value: this.props.getColumnCountForSpecies(this.props.humanData, 'assay'), color: "#89C889"},

@@ -12,7 +12,7 @@ import defaultHumanData from './defaultData/DefaultHumanData.js'
 import defaultMouseData from './defaultData/DefaultMouseData.js'
 import defaulRatData from './defaultData/DefaultRatData.js'
 
-// for production fetch the data
+ //for production fetch the data
 //runAllQueries().then( data => {
   //ReactDOM.render(<App 
     //humanData = {data.humanData}
