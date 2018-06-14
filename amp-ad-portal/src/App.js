@@ -4,13 +4,15 @@ import _ from 'lodash';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 // non component js
-import study from './defaultData/Study.js';
+import study from './defaultData/Study';
 
 // component js
-import Header from './Header.js';
-import Home from './Home.js';
-import Tools from './Tools.js';
-import About from './About.js';
+import Header from './Header';
+import Home from './Home';
+import Tools from './Tools';
+import About from './About';
+import AboutStudies from './AboutStudies';
+import AboutDataUseRequirements from './AboutDataUseRequirements';
 
 class App extends Component {
   state = {
@@ -99,7 +101,6 @@ class App extends Component {
   toggleSeeAll = (event) => {
     let key = event.target.name;
     let value = event.target.dataset.value === "false" ? true : false; 
-    console.log(event.target.dataset.value);
     this.setState( prevState => ({
       ...prevState,
       buttonState: {
@@ -135,6 +136,7 @@ class App extends Component {
 	homeMarkup = () => {
 		return (
 			<Home 
+        wikiNewsData={this.props.wikiNewsData}
 				speciesDropdownSelection={this.state.speciesDropdownSelection}
 				handleChangeEvent={this.handleChangeEvent}
 				speciesSelection={this.state.speciesSelection}
@@ -156,22 +158,21 @@ class App extends Component {
   }
 
   componentDidUpdate(){
-    //console.log(this.state.pageData)
-    //console.log(this.props.humanData)
+		//console.log(this.props.allSpeciesData);
   }
 
   render(){
     return (
 			<Router>
       <div className="row amp-ad">
+				<Header />
         <div className="col-xs-12 main">
-					<Header />
+					<Route exact path="/" component={this.homeMarkup}/>
+					<Route path="/Tools" component={Tools}/>
+					<Route path="/About" component={About}/>
+					<Route path="/Studies" component={AboutStudies}/>
+					<Route path="/DataUseRequirements" component={AboutDataUseRequirements}/>
 				</div>
-					<div className="content">
-						<Route exact path="/" component={this.homeMarkup}/>
-						<Route path="/Tools" component={Tools}/>
-						<Route path="/About" component={About}/>
-					</div>
 				<footer></footer>
 			</div>
 			</Router>

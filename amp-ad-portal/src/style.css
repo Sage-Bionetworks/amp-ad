@@ -3,6 +3,16 @@
 body, h1, h2, h3, h4, h5, li, ul, p, a {
   font-family: 'Lato', sans-serif; }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden; }
+
+h1 {
+  font-size: 30px; }
+
+h3 {
+  font-weight: 300; }
+
 p {
   font-size: 12px; }
 
@@ -10,16 +20,32 @@ a {
   color: black;
   text-decoration: none; }
 
+li {
+  list-style: none; }
+
 button:focus, input:focus, select:focus {
   outline: none; }
 
 button:hover, select:hover {
   cursor: pointer; }
 
+.Dropdown-control {
+  width: 200px;
+  height: 37px; }
+
 .btn {
   color: black;
   font-size: 20px;
   background-color: #B4C6F9;
+  border: none;
+  border-radius: 24px;
+  width: 192px;
+  height: 48px; }
+
+.btn-light {
+  color: black;
+  font-size: 20px;
+  background-color: #F5F5F5;
   border: none;
   border-radius: 24px;
   width: 192px;
@@ -39,16 +65,40 @@ div.row.amp-ad {
 section {
   padding: 25px 50px; }
 
-section.header {
-  padding: 25px;
-  max-width: 1100px;
+.content {
   margin: 0px auto; }
 
+header.header {
+  padding: 25px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0px auto; }
+
+footer {
+  background-color: #5A498D;
+  height: 56px;
+  width: 100%; }
+
 section.welcome {
-  background: linear-gradient(to right, #77AFD4, #487B9F); }
+  background: linear-gradient(to right, #5A498D, #4C57A2);
+  padding: 0px; }
   section.welcome .welcome-message {
+    padding: 0px 0px 0px 100px;
     color: white;
     text-align: left; }
+    section.welcome .welcome-message h1 {
+      margin: 0px; }
+  section.welcome .welcome-data {
+    background-color: #5D69AB;
+    padding: 60px 70px;
+    right: -120px;
+    position: relative; }
+    section.welcome .welcome-data ul {
+      text-align: left; }
+    section.welcome .welcome-data li {
+      color: white;
+      font-size: 18px;
+      margin: 15px 0px; }
 
 section.pie-charts-welcome {
   background-color: #F5F5F5;
@@ -70,7 +120,7 @@ section.pie-charts-welcome {
   section.pie-charts-welcome .pie-container {
     position: relative; }
   section.pie-charts-welcome .pie-counts-list {
-    max-height: 200px;
+    max-height: 75px;
     overflow: hidden;
     padding: 0px 10px;
     transition: all 1s ease; }
@@ -111,8 +161,14 @@ section.searchbar {
   padding: 20px; }
   section.searchbar h2 {
     margin: 0px; }
-  section.searchbar form p {
-    display: inline-block; }
+  section.searchbar form {
+    margin: 0px auto;
+    width: 100%; }
+    section.searchbar form p {
+      display: inline-block; }
+  section.searchbar .search-icon-box {
+    justify-content: flex-end;
+    display: flex; }
 
 section.popular-data-requests .popular-col {
   padding: 0px; }
@@ -137,6 +193,8 @@ section.popular-data-requests .popular-col {
     font-size: 18px;
     font-weight: 400; }
 
+section.analyses .content {
+  margin: 0px auto; }
 section.analyses .box {
   max-width: 270px;
   height: 448px; }
@@ -149,14 +207,33 @@ section.analyses h2 {
   margin: 0px; }
 
 section.programs .box {
-  max-width: 210px;
+  max-width: 211px;
   height: 448px;
-  margin: 0px; }
+  margin: 10px 0px; }
   section.programs .box .box-text-image p {
     font-size: 14px;
     font-weight: 400; }
 section.programs .box-text-image {
   margin-top: 30px;
   max-width: 230px; }
+
+section.what-new .what-new-data div p:first-child {
+  display: none; }
+section.what-new .what-new-data div ul:nth-child(2) {
+  display: none; }
+section.what-new .what-new-data div p:nth-child(2) {
+  display: none; }
+section.what-new .what-new-data div h3:nth-child(3) {
+  display: none; }
+section.what-new .what-new-data div h2:nth-child(4) {
+  display: none; }
+
+.about h2 {
+  color: white; }
+
+section.child-page-hero {
+  background: linear-gradient(to right, #5A498D, #4C57A2); }
+  section.child-page-hero p {
+    color: white; }
 
 /*# sourceMappingURL=style.css.map */

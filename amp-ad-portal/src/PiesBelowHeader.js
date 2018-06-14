@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PieChart from "react-svg-piechart"
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 
 let colors = [
   '#89C889',
@@ -69,7 +69,7 @@ class PiesBelowHeader extends Component{
   buildPieSection = (speciesDropdownSelection, dataType) => {
     let pieData = this.buildPieData('this.props.speciesSelection', this.getCountsList(dataType));
     return (
-      <div className="{dataType} pie-chart-welcome col-xs-12 col-sm-5">
+      <div className="pie-chart-welcome col-xs-12 col-sm-5">
         <div className="pie-container" >
           <h1 className="count">{this.props.pageData[dataType].count} {dataType}</h1>
           <div className="chart-center-stat">
@@ -108,8 +108,8 @@ class PiesBelowHeader extends Component{
   render(){
     return (
       <section className="pie-charts-welcome row center-xs">
-        <div className="col-xs-12 col-sm-10">
-          <div className="row center-xs">
+        <div className="col-xs-12 col-sm-7">
+          <div className="row around-xs center-xs">
             {this.buildPieSection(this.props.speciesSelection, 'assay')}
             {this.buildPieSection(this.props.speciesSelection, 'tissue')}
           </div>
@@ -119,7 +119,7 @@ class PiesBelowHeader extends Component{
   };
 }
 
-PiesBelowHeader.propTypes = {
-}
+//PiesBelowHeader.propTypes = {
+//}
 
 export default PiesBelowHeader;
