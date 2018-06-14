@@ -4,8 +4,11 @@
 $green: #89C889;
 $pink: #F683B9;
 $blue: #77AFD4;
+$bluePlum: #5D69AB;
+$bluePurple: #4C57A2;
 $salmon: #FCA79A;
 $purple: #907FBA;
+$darkPurple: #5A498D; 
 $lightPurple: #B4C6F9;
 $mustard: #FCCB6F;
 $gray: #F5F5F5;
@@ -23,6 +26,14 @@ body, h1, h2, h3, h4, h5, li, ul, p, a {
 	font-family: 'Lato', sans-serif; 
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+h1 { font-size: 30px; }
+h3 { font-weight: 300; }
+
 p {
   font-size: 12px;
 }
@@ -32,13 +43,28 @@ a {
 	text-decoration: none;
 }
 
+li {
+	list-style: none;	
+}
+
 button:focus, input:focus, select:focus { outline:none; }
 button:hover, select:hover { cursor: pointer }
+
 
 .btn {
   color: black;
   font-size: 20px;
   background-color: $lightPurple;
+  border: none;
+  border-radius: 24px;
+  width: 192px;
+  height: 48px;
+}
+
+.btn-light {
+  color: black;
+  font-size: 20px;
+  background-color: $gray;
   border: none;
   border-radius: 24px;
   width: 192px;
@@ -55,24 +81,86 @@ div.row.amp-ad {
     list-style: none;
     margin: 0px 10px;
   }
+	a.nav-item.dropdown {
+		//height: 20px;
+		//width: 200px;
+		//display: block;
+		//position: relative;
+		//right: 90px;
+		//z-index: 100000;
+	}
+}
+
+.title-row {
+  padding: 20px 0px;
 }
 
 section {
   padding: 25px 50px;
 }
 
-section.header {
+.main {
+}
+
+.content {
+	margin: 0px auto;
+}
+
+header.header {
 	padding: 25px;
-  max-width: 1100px;
-  margin: 0px auto;
+	max-width: 1100px;
+	width: 100%;
+	margin: 0px auto;
+	.Dropdown-control {
+		height: 37px;
+		padding-top: 0px;
+		padding-right: 34px;
+		text-align: left;
+		border: none;
+	}
+	.Dropdown-control:hover {
+		box-shadow: none;
+	}
+	.Dropdown-menu {
+		width: 250px;
+		right: 10px;
+	}
+	.Dropdown-arrow {
+		top: 7px;
+	}
+}
+
+footer {
+  background-color: $darkPurple;
+  height: 56px;
+  width: 100%;
 }
 
 section.welcome {
+	background: linear-gradient(to right, $darkPurple, $bluePurple);
+	padding: 0px;
 	.welcome-message {
+		padding: 0px 0px 0px 100px;
 		color: white;
 		text-align: left;
+		h1 {
+			margin: 0px;
+		}
 	}
-	background: linear-gradient(to right, $blue, #487B9F);
+	.welcome-data {
+		background-color: $bluePlum;
+    padding: 60px 70px;
+		right: -120px;
+		position: relative;
+		ul {
+			text-align: left;
+		}
+		li {
+			color: white;
+			font-size: 18px;
+			margin: 15px 0px;
+		}
+	}
 }
 
 section.pie-charts-welcome {
@@ -94,7 +182,7 @@ section.pie-charts-welcome {
     position: relative;
   }
   .pie-counts-list {
-    max-height: 200px;
+    max-height: 75px;
     overflow: hidden;
     padding: 0px 10px;
     transition: all 1s ease;
@@ -133,9 +221,20 @@ section.pie-charts-welcome {
 
 section.searchbar {
 	background-color: $gray;
+	h2 {
+		margin: 0px;
+	}
 	padding: 20px;
-	form p {
-		display: inline-block;
+	form { 
+		margin: 0px auto;
+    width: 100%;
+    p {
+		  display: inline-block;
+	  }
+  }
+	.search-icon-box {
+		justify-content: flex-end;
+    display: flex;
 	}
 }
 
@@ -151,9 +250,78 @@ section.popular-data-requests {
   }
 }
 
+.box {
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-shadow: 0px 0px 8px 2px rgba(199,197,197,1);
+  -moz-box-shadow: 0px 0px 8px 2px rgba(199,197,197,1);
+  box-shadow: 0px 0px 8px 2px rgba(199,197,197,1);
+  margin: 10px;
+  h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  p {
+    font-size: 18px;
+    font-weight: 400;
+  }
+}
+
 section.analyses {
+	.content { 
+		margin: 0px auto;
+	}
+  .box {
+    max-width: 270px;
+    height: 448px;
+  }
+  .box-text-image {
+    margin-top: 30px;
+    max-width: 230px;
+  }
+  button {
+    justify-content: flex-end;
+  }
   h2 {
     margin: 0px;
   }
+}
 
+section.programs {
+  .box {
+    max-width: 211px;
+    height: 448px;
+    margin: 10px 0px;
+    .box-text-image p {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+  .box-text-image {
+    margin-top: 30px;
+    max-width: 230px;
+  }
+}
+
+section.what-new {
+	.what-new-data div {
+		p:first-child { display: none }		
+		ul:nth-child(2) {display: none }
+		p:nth-child(2) {display: none }
+		h3:nth-child(3) {display: none }
+		h2:nth-child(4) {display: none }
+	}
+}
+
+//// about page
+.about {
+	h2 { color: white; } 
+}
+section.child-page-hero {
+	p { color: white; }
+	background: linear-gradient( to right, $darkPurple, $bluePurple );
 }

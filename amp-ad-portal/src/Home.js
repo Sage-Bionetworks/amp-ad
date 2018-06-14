@@ -1,7 +1,12 @@
-import React from 'react';
-import Welcome from './Welcome.js';
-import SearchBar from './SearchBar.js';
-import PiesBelowHeader from './PiesBelowHeader.js';
+import React from 'react'
+import Welcome from './Welcome'
+import SearchBar from './SearchBar'
+import PiesBelowHeader from './PiesBelowHeader'
+import Programs from './Programs'
+import Analyses from './Analyses'
+import PopularDataRequests from './PopularDataRequests'
+
+const ReactMarkdown = require('react-markdown')
 
 const Home = props => {
   return (
@@ -26,38 +31,25 @@ const Home = props => {
         flyData={props.flyData}
       />
 
-      <section className="popular-data-requests row center-xs">
-        <div className="col-xs-12 col-sm-10">
-          <div className="row">
-            <h2>Popular Data Requests</h2>
-          </div>
-          <div className="row most-popular-data center-xs around-xs">
-            <div className="col-sm-4 popular-col">
-              <img src={require('./images/dna.svg')} 
-                  alt="dna double helix"
-                  className="svg-large-icon"/>
-              <h5>Most Popular Assays</h5>
-            </div>
-            <div className="col-sm-4 popular-col">
-              <img src={require('./images/differential-expressions.svg')} 
-                  alt="two dna double helix and arrows going from one to the other in a circular pattern"
-                  className="svg-large-icon"/>
-              <h5>Most Popular Tissues</h5>
-            </div>
-          </div>
-        </div>
+      <PopularDataRequests />
+      <Analyses />
+      <Programs />
+
+      <section className="what-new">
+				<div className="content col-xs-12 col-sm-8">
+					<div className="row title-row">
+						<div className="col-xs-12"><h2>What's New</h2></div>
+					</div>
+					<div className="row">
+						<div className="col-xs-12 what-new-data">
+							<ReactMarkdown 
+								source={props.wikiNewsData} 
+							/>
+						</div>
+					</div>
+				</div>
       </section>
 
-      <section className="analyses row">
-        <div className="col-xs-12">
-          <div className="row between-xs">
-            <div className="col-xs-12 col-sm-6"><h2>Analyses</h2></div>
-            <div className="col-xs-12 col-sm-2"><a href="/">See All Analyses</a></div>
-          </div>
-
-          <div className="row"></div>
-        </div> 
-      </section>
     </div>
   )
 }
