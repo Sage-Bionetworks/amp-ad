@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PieChart from "react-svg-piechart"
 //import PropTypes from 'prop-types'
 
-let colors = [
+let colorsAssays = [
   '#89C889',
   '#F683B9',
   '#77AFD4',
@@ -14,6 +14,59 @@ let colors = [
   '#EC7379',
   '#3CAB9F',
   '#5D69AC'
+];
+
+let colorsTissues = [
+ '#94C9EB',
+ '#93ABE8',
+ '#5BB0B5',
+ '#109488',
+ '#05635B',
+ '#C5EDF0',
+'#42C7BB',
+ '#47337D',
+'#3C4A63',
+ '#3F833F',
+ '#B2A5D1',
+ '#6279A1',
+ '#6DB56D',
+ '#407BA0',
+ '#3F5EAB',
+ '#C0EBC0',
+ '#77AFD4',
+ '#7692D9',
+ '#5BB0B5',
+ '#10847A',
+'#C7D6FF',
+ '#A6DDE0',
+'#24AB9F',
+ '#47337D',
+ '#24334F',
+ '#A9EBE5',
+ '#907FBA',
+ '#4A5E81',
+ '#58A158',
+ '#2B688F',
+ '#ABBEE0',
+ '#A7DBA7',
+ '#5B95BA',
+ '#5171C0',
+'#2F8E94',
+ '#BCE0F7',
+'#B1C6FA',
+ '#7EC8CC',
+ '#109488',
+ '#332069',
+ '#E1F4F5',
+ '#63DBD0',
+ '#5A478F',
+ '#3C4A63',
+ '#58A158',
+ '#D5CFE3',
+ '#849BC4',
+ '#87C987',
+'#407BA0',
+ '#5171C0'
 ];
 
 class PiesBelowHeader extends Component{
@@ -34,7 +87,11 @@ class PiesBelowHeader extends Component{
     return <div>{counts}</div>;
   }
 
-  printCountsList = listArray => {
+  printCountsList = (listArray, dataType) => {
+    let colors;
+    if( dataType === 'tissue' ){
+      colors = colorsTissues
+    }else { colors = colorsAssays }
     let list = listArray.map( (element, index) => {
       if(index > 0){
         return (
@@ -51,7 +108,12 @@ class PiesBelowHeader extends Component{
     return <div className="row"><div className="col-xs-12">{list}</div></div>
   }
 
-  buildPieData = (species = 'All Species', facetsList ) => {
+  buildPieData = (species = 'All Species', facetsList, dataType ) => {
+    let colors;
+    if( dataType === 'tissue' ){
+      colors = colorsTissues
+    }else { colors = colorsAssays }
+
     if(species === 'All Species'){
       return (
         [{title: "human", value: this.props.getColumnCountForSpecies(this.props.humanData, 'assay'), color: "#89C889"},
@@ -67,7 +129,7 @@ class PiesBelowHeader extends Component{
   } 
 
   buildPieSection = (speciesDropdownSelection, dataType) => {
-    let pieData = this.buildPieData('this.props.speciesSelection', this.getCountsList(dataType));
+    let pieData = this.buildPieData('this.props.speciesSelection', this.getCountsList(dataType), dataType);
     return (
       <div className="pie-chart-welcome col-xs-12 col-sm-5">
         <div className="pie-container" >
@@ -90,7 +152,7 @@ class PiesBelowHeader extends Component{
           />
         </div>
         <div className="pie-counts-list" data-value={this.props.buttonState[dataType+"ButtonAll"]} >
-          {this.printCountsList(this.getCountsList(dataType))}
+          {this.printCountsList(this.getCountsList(dataType), dataType)}
         </div>
         <button className="pie-counts-button btn" 
           name={dataType+"ButtonAll"} 
