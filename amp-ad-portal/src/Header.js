@@ -6,7 +6,7 @@ import 'react-dropdown/style.css'
 
 const options = [
 		{ label: <Link name="option1" to="/About" className="nav-item dropdown">About</Link>, value: 'one' },
-		{ label: <Link name="option2" to="/DataUseRequirements" className="nav-item dropdown">Data Use Requirements</Link>, value: 'two' },
+		{ label: <Link name="option2" to="/DataUseRequirements" className="nav-item dropdown">Data Use</Link>, value: 'two' },
 		{ label: <Link name="option3" to="/Studies" className="nav-item dropdown">Studies</Link>, value: 'three' }
 	]
 
