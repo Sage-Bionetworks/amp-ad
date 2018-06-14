@@ -17,9 +17,9 @@ $gray: #F5F5F5;
   width: $size;
   height: $size;
   position: relative;
-  -webkit-border-radius: $size / 2 + 0px;
-  -moz-border-radius: $size / 2 + 0px;
-  border-radius: $size / 2 + 0px;
+  -webkit-border-radius: $size / 2 ;
+  -moz-border-radius: $size / 2 ;
+  border-radius: $size / 2 ;
 }
 
 body, h1, h2, h3, h4, h5, li, ul, p, a {
@@ -198,18 +198,20 @@ section.pie-charts-welcome {
     margin: 5px 0px;
   }
   .chart-center-stat {
-    top: 28.25%;
-    left: 16.25%;
+    max-height: 190px;
+    max-width: 190px;
+    top: 7rem;
+    left: 3rem;
     background: white;
-    @include circle(190px);
-    height: 57.5%;
-    width: 67.5%;
+    border-radius: 50%;
     display: flex;
     flex-direction: column;
     position: absolute;
     align-items: center;
     align-content: center; 
     justify-content: center;
+    width: 15vw;
+    height: 15vw;
     p, h1 {
       display: block;
       text-align: center;
