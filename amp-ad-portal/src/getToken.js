@@ -1,11 +1,12 @@
-function getToken (searchBool = false, columnName = "assay", facetValues = [], queryString = "SELECT * FROM syn11346063" ){
+function getToken (columnName = "assay", facetValues = [], tableID = "syn11346063", authenticationToken ){
+  //console.log(facetValues);
   let QUERY;
-  if(!searchBool){
+  if(!facetValues.length > 0){
     QUERY = {
       concreteType: "org.sagebionetworks.repo.model.table.QueryBundleRequest",
-      entityId: "syn11346063", 
+      entityId: tableID, 
       query: {
-        sql: "SELECT * FROM syn11346063", 
+        sql: "SELECT * FROM " + tableID, 
         includeEntityEtag:true, 
         isConsistent:true, 
         offset:0, 
@@ -13,37 +14,37 @@ function getToken (searchBool = false, columnName = "assay", facetValues = [], q
       }, 
       partMask:53
     };
-  }
-  else{
+  }else {
     QUERY = {
       concreteType: "org.sagebionetworks.repo.model.table.QueryBundleRequest",
-      entityId: "syn11346063", 
+      entityId: tableID, 
       partMask: 53,
       query: {
         includeEntityEtag:true, 
         isConsistent:true, 
         offset:0, 
         limit:25,
-				selectedFacets: [
-					{
-						columnName: "consortium",
-						concreteType: "org.sagebionetworks.repo.model.table.FacetColumnValuesRequest",
-						facetValues:[]
-					},
-					{
-						columnName: "species",
-						concreteType: "org.sagebionetworks.repo.model.table.FacetColumnValuesRequest",
-						facetValues:facetValues
-					},
-				],
-        sql: queryString 
+        selectedFacets: [
+          {
+            columnName: "consortium",
+            concreteType: "org.sagebionetworks.repo.model.table.FacetColumnValuesRequest",
+            facetValues:[]
+          },
+          {
+            columnName: "species",
+            concreteType: "org.sagebionetworks.repo.model.table.FacetColumnValuesRequest",
+            facetValues:facetValues
+          },
+        ],
+        sql: "SELECT * FROM " + tableID 
       } 
     };
   }
 
-  return fetch('https://repo-prod.prod.sagebase.org/repo/v1/entity/syn11346063/table/query/async/start', {
+  return fetch('https://repo-prod.prod.sagebase.org/repo/v1/entity/'+ tableID + '/table/query/async/start', {
       method: 'POST',
       headers: {
+        'Access-Control-Request-Headers': authenticationToken,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },

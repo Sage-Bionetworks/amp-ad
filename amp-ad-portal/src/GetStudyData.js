@@ -1,30 +1,32 @@
-function handleErrors(response) {
+const handleErrors = response => {
 	if (!response.ok) {
-		throw Error(response.statusText);
+		throw new Error("Bad Request");
 	}
 	return response;
 }
 
-function getStudyData (TOKEN, limit = Number.MAX_VALUE){
-  return fetch('https://repo-prod.prod.sagebase.org/repo/v1/entity/syn11346063/table/query/async/get/' + TOKEN, {
+function getStudyData (TOKEN = '', AUTHENTICATION = '', TABLEID = 'syn11346063', limit = Number.MAX_VALUE){
+  return fetch('https://repo-prod.prod.sagebase.org/repo/v1/entity/' + TABLEID + '/table/query/async/get/' + TOKEN, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'sessionToken': AUTHENTICATION
     }
   })
 	.then(handleErrors)
   .then( response => { 
 		if(response.status !== 201 && --limit){
-			//setTimeout( () => { 
 				return getStudyData(TOKEN) 
-			//}, 1000 );
 		}
 		if(response.status === 201){
 			return response.json()
 		}
   })
-	.then( data => { return data } );
+	.then( data => { return data } )
+  .catch((error) => {
+    console.log(error)
+  })
 }
 
 export default getStudyData;

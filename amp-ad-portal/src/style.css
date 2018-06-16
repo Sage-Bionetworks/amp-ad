@@ -140,12 +140,15 @@ section.pie-charts-welcome {
     transition: all 1s ease; }
   section.pie-charts-welcome p.pie-list-item {
     text-align: left;
-    margin: 5px 0px; }
+    margin: 5px 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px; }
+  section.pie-charts-welcome .pie-circles-container {
+    position: relative; }
   section.pie-charts-welcome .chart-center-stat {
     max-height: 190px;
     max-width: 190px;
-    top: 7rem;
-    left: 3rem;
     background: white;
     border-radius: 50%;
     display: flex;
@@ -155,7 +158,12 @@ section.pie-charts-welcome {
     align-content: center;
     justify-content: center;
     width: 15vw;
-    height: 15vw; }
+    height: 15vw;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0; }
     section.pie-charts-welcome .chart-center-stat p, section.pie-charts-welcome .chart-center-stat h1 {
       display: block;
       text-align: center;
@@ -176,6 +184,23 @@ section.searchbar {
     justify-content: flex-end;
     display: flex; }
 
+section.popular-data-requests .pop-assay {
+  max-width: 170px;
+  margin: 0px auto;
+  text-align: left; }
+section.popular-data-requests .pop-circle {
+  display: inline-block;
+  margin: 0px 5px;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  max-width: 5px;
+  padding: 5px; }
+  section.popular-data-requests .pop-circle:nth-child(1) {
+    background-color: #77AFD4; }
 section.popular-data-requests .popular-col {
   padding: 0px; }
   section.popular-data-requests .popular-col img {

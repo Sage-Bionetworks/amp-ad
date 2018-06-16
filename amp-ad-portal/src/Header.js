@@ -10,11 +10,7 @@ const options = [
 		{ label: <Link name="option3" to="/Studies" className="nav-item dropdown">Studies</Link>, value: 'three' }
 	]
 
-const defaultOption = options[0]
-
-const menuClickHandler = event => {
-	console.log(event.label.props.to)
-}
+//const defaultOption = options[0]
 
 const RouterDropDown = withRouter(({ history }) => (
 	<Dropdown 
@@ -24,7 +20,7 @@ const RouterDropDown = withRouter(({ history }) => (
 				history.push(event.label.props.to)
 			}
 		}
-		value={defaultOption} 
+		value="About" 
 		placeholder="About" 
 	/>
 ))

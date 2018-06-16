@@ -2,76 +2,102 @@ import React, { Component } from 'react'
 import PieChart from "react-svg-piechart"
 //import PropTypes from 'prop-types'
 
-let colorsAssays = [
-  '#89C889',
-  '#F683B9',
-  '#77AFD4',
-  '#fca79a',
-  '#907FBA',
-  '#B4C6F9',
-  '#FCCB6F',
-  '#F5F5F5',
-  '#EC7379',
-  '#3CAB9F',
-  '#5D69AC'
-];
-
 let colorsTissues = [
- '#94C9EB',
- '#93ABE8',
- '#5BB0B5',
- '#109488',
- '#05635B',
- '#C5EDF0',
-'#42C7BB',
- '#47337D',
-'#3C4A63',
- '#3F833F',
- '#B2A5D1',
- '#6279A1',
- '#6DB56D',
- '#407BA0',
- '#3F5EAB',
- '#C0EBC0',
- '#77AFD4',
- '#7692D9',
- '#5BB0B5',
- '#10847A',
-'#C7D6FF',
- '#A6DDE0',
-'#24AB9F',
- '#47337D',
- '#24334F',
- '#A9EBE5',
- '#907FBA',
- '#4A5E81',
- '#58A158',
- '#2B688F',
- '#ABBEE0',
- '#A7DBA7',
- '#5B95BA',
- '#5171C0',
-'#2F8E94',
- '#BCE0F7',
-'#B1C6FA',
- '#7EC8CC',
- '#109488',
- '#332069',
- '#E1F4F5',
- '#63DBD0',
- '#5A478F',
- '#3C4A63',
- '#58A158',
- '#D5CFE3',
- '#849BC4',
- '#87C987',
-'#407BA0',
- '#5171C0'
+  '#F27277',
+  '#EB8231',
+  '#FAD591',
+  '#B22D6B',
+  '#F47E6C',
+  '#FAD591',
+  '#CC3F45',
+  '#F89C55',
+  '#FF9CA0',
+  '#DE9A1F',
+  '#BD422F',
+  '#F7A6CC',
+  '#9C141A',
+  '#F683B9',
+  '#FACFAF',
+  '#FCA79A',
+  '#C94281',
+  '#C25D10',
+  '#FFE2AD',
+  '#B2242A',
+  '#F7E2DF',
+  '#D46D1E',
+  '#CF8C15',
+  '#FFC5BD',
+  '#DA614F',
+  '#F7C6DD',
+  '#F5B33C',
+  '#F5B584',
+  '#E566A1',
+  '#E0585D',
+  '#FCCB6F'
+  ];
+let colorsAssays = [
+  '#94C9EB',
+  '#93ABE8',
+  '#5BB0B5',
+  '#109488',
+  '#05635B',
+  '#C5EDF0',
+  '#42C7BB',
+  '#47337D',
+  '#3C4A63',
+  '#3F833F',
+  '#B2A5D1',
+  '#6279A1',
+  '#6DB56D',
+  '#407BA0',
+  '#3F5EAB',
+  '#C0EBC0',
+  '#77AFD4',
+  '#7692D9',
+  '#5BB0B5',
+  '#10847A',
+  '#C7D6FF',
+  '#A6DDE0',
+  '#24AB9F',
+  '#47337D',
+  '#24334F',
+  '#A9EBE5',
+  '#907FBA',
+  '#4A5E81',
+  '#58A158',
+  '#2B688F',
+  '#ABBEE0',
+  '#A7DBA7',
+  '#5B95BA',
+  '#5171C0',
+  '#2F8E94',
+  '#BCE0F7',
+  '#B1C6FA',
+  '#7EC8CC',
+  '#109488',
+  '#332069',
+  '#E1F4F5',
+  '#63DBD0',
+  '#5A478F',
+  '#3C4A63',
+  '#58A158',
+  '#D5CFE3',
+  '#849BC4',
+  '#87C987',
+  '#407BA0',
+  '#5171C0'
 ];
 
 class PiesBelowHeader extends Component{
   getCountsList = columnName => {
-    return this.props.getColumnNameTypeAndCount(columnName, this.props.pageData)
+    let countsList = this.props.getColumnNameTypeAndCount(columnName, this.props.pageData) 
+    //console.log(countsList);
+    countsList
+      .sort( (a, b) => {
+        return a.count - b.count;
+      })
+      .reverse()
+    return countsList
   }
 
   printTotalCounts = listArray => {
@@ -99,7 +125,7 @@ class PiesBelowHeader extends Component{
             <div className="pie-circle col-xs" 
               style={{'backgroundColor': colors[index%colors.length]}}
             ></div>
-            <p className="pie-list-item col-xs">{element.value} ({element.count})</p>
+            <p className="pie-list-item col-xs">{element.value} ({element.count} biosamples)</p>
           </div>
         ); 
       }
@@ -134,22 +160,24 @@ class PiesBelowHeader extends Component{
       <div className="pie-chart-welcome col-xs-12 col-sm-5">
         <div className="pie-container" >
           <h1 className="count">{this.props.pageData[dataType].count} {dataType}</h1>
-          <div className="chart-center-stat">
-            <h1 alt="count of samples">
-              {this.printTotalCounts(this.getCountsList(dataType))}
-            </h1>
-            <p>Samples</p>
+          <div className="pie-circles-container">
+            <div className="chart-center-stat">
+              <h1 alt="count of samples">
+                {this.printTotalCounts(this.getCountsList(dataType))}
+              </h1>
+              <p>Biosamples</p>
+            </div>
+            <PieChart 
+              data={pieData}
+              expandOnHover={false}
+              expandSize={0}
+              shrinkOnTouchEnd={false}
+              strokeColor="#fff"
+              strokeLinejoin="round"
+              strokeWidth={0}
+              viewBoxSize={50}
+            />
           </div>
-          <PieChart 
-            data={pieData}
-            expandOnHover={false}
-            expandSize={0}
-            shrinkOnTouchEnd={false}
-            strokeColor="#fff"
-            strokeLinejoin="round"
-            strokeWidth={0}
-            viewBoxSize={50}
-          />
         </div>
         <div className="pie-counts-list" data-value={this.props.buttonState[dataType+"ButtonAll"]} >
           {this.printCountsList(this.getCountsList(dataType), dataType)}

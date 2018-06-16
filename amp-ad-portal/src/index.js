@@ -17,6 +17,7 @@ import runAllQueries from './queryForData';
 //for production fetch the data
 runAllQueries().then( data => {
 	ReactDOM.render(<App 
+    testData = {data}
 		humanData = {data.humanData}
 		mouseData = {data.mouseData}
 		ratData = {data.ratData}

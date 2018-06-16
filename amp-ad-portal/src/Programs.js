@@ -12,7 +12,7 @@ const Programs = props => {
         <div className="row around-xs center-xs middle-xs">
             <div className="programs box col-sm-3">
               <div className="box-text-image">
-                <img src={require('./images/dna.svg')} alt="dna double helix" className="svg-large-icon"/>
+                <img src={require('./images/consortium.svg')} alt="consortium molecule" className="svg-large-icon"/>
                 <h4>AMP-AD</h4>
                 <p>Understand the variation associated with disease or other molecular data.</p>
               </div>
@@ -21,7 +21,7 @@ const Programs = props => {
 
           <div className="programs box col-sm-3">
             <div className="box-text-image">
-                <img src={require('./images/dna.svg')} alt="dna double helix" className="svg-large-icon"/>
+                <img src={require('./images/brain-heart.svg')} alt="an illustration of brain overlapping a heart" className="svg-large-icon"/>
               <h4>AMP-AD</h4>
               <p>Understand the variation associated with disease or other molecular data.</p>
             </div>
@@ -30,7 +30,7 @@ const Programs = props => {
 
           <div className="programs box col-sm-3">
             <div className="box-text-image">
-                <img src={require('./images/dna.svg')} alt="dna double helix" className="svg-large-icon"/>
+                <img src={require('./images/mouse.svg')} alt="illustration of mouse" className="svg-large-icon"/>
               <h4>AMP-AD</h4>
               <p>Understand the variation associated with disease or other molecular data.</p>
             </div>

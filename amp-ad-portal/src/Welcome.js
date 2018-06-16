@@ -11,12 +11,12 @@ const Welcome = () => {
       </div>
       <div className="col-xs-12 col-sm-3 welcome-data">
         <ul>
-          <li>data1</li>
-          <li>data2</li>
-          <li>data3</li>
-          <li>data4</li>
-          <li>data5</li>
-          <li>data6</li>
+          <li>Individuals</li>
+          <li>Overall Biosamples</li>
+          <li>Analyses</li>
+          <li>Contributors</li>
+          <li>Institutions</li>
+          <li>Nominated Targets</li>
         </ul>
       </div>
     </section>

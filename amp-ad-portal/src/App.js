@@ -123,11 +123,13 @@ class App extends Component {
     let mappedArray = []
     if(pathToDataObject[columnName] !== undefined){
       _.mapKeys(pathToDataObject[columnName].facetValues, (object) => {
-        let flatData = { 
-          count: object.count, 
-          value: object.value
+        if( object.value !== 'org.sagebionetworks.UNDEFINED_NULL_NOTSET' ){
+          let flatData = { 
+            count: object.count, 
+            value: object.value
+          }
+          return mappedArray.push(flatData);
         }
-        return mappedArray.push(flatData);
       })
     }
     return mappedArray;
@@ -158,7 +160,7 @@ class App extends Component {
   }
 
   componentDidUpdate(){
-		//console.log(this.props.allSpeciesData);
+    //console.log(this.props.allSpeciesData);
   }
 
   render(){
