@@ -5,8 +5,21 @@ const handleErrors = response => {
 	return response;
 }
 
-function getStudyData (TOKEN = '', AUTHENTICATION = '', TABLEID = 'syn11346063', limit = Number.MAX_VALUE){
-  return fetch('https://repo-prod.prod.sagebase.org/repo/v1/entity/' + TABLEID + '/table/query/async/get/' + TOKEN, {
+const DelayPromise = (delay) => {  
+  //return a function that accepts a single variable
+    return function(data) {
+    //this function returns a promise.
+    return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        //a promise that is resolved after "delay" milliseconds with the data provided
+        resolve(data);
+      }, delay);
+    });
+  }
+}
+
+const getStudyData = async (TOKEN = '', AUTHENTICATION = '', TABLEID = 'syn11346063', limit = Number.MAX_VALUE) => {
+  return await fetch('https://repo-prod.prod.sagebase.org/repo/v1/entity/' + TABLEID + '/table/query/async/get/' + TOKEN, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -15,18 +28,21 @@ function getStudyData (TOKEN = '', AUTHENTICATION = '', TABLEID = 'syn11346063',
     }
   })
 	.then(handleErrors)
+  .then(DelayPromise(1000))
   .then( response => { 
-		if(response.status !== 201 && --limit){
-				return getStudyData(TOKEN) 
-		}
-		if(response.status === 201){
-			return response.json()
-		}
+    if(response.status !== 201 && --limit){
+      return getStudyData(TOKEN) 
+    }
+    if(response.status === 201){
+      return response.json()
+    }
   })
-	.then( data => { return data } )
+  .then( data => { return data } )
   .catch((error) => {
     console.log(error)
   })
 }
+
+
 
 export default getStudyData;

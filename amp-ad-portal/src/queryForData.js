@@ -3,7 +3,7 @@ import getStudyData from './getStudyData'
 import getWikiData from './getWikiData'
 
 import * as SynapseClient  from './synapse/SynapseClient'
-//import * as SynapseConstants from './synapse/SynapseConstants'
+import * as SynapseConstants from './synapse/SynapseConstants'
 
 let allData = {
   tokens: {},
@@ -30,6 +30,21 @@ const addSpaceToHash = string => {
 	return string;
 }
 
+let request = {
+  entityId: "syn12532715",
+  query: {
+            sql: "SELECT * FROM syn12532715",
+            includeEntityEtag: true,
+            isConsistent: true,
+            offset: 0,
+            limit: 100
+          },
+  partMask: SynapseConstants.BUNDLE_MASK_QUERY_RESULTS
+    | SynapseConstants.BUNDLE_MASK_QUERY_COLUMN_MODELS
+    | SynapseConstants.BUNDLE_MASK_QUERY_SELECT_COLUMNS
+    | SynapseConstants.BUNDLE_MASK_QUERY_FACETS
+};
+
 const runAllQueries = () => {
   return SynapseClient.login('mikeybkats', 'guinness').then( tokenResponse => { 
    console.log(tokenResponse);
@@ -45,6 +60,14 @@ const runAllQueries = () => {
       
       //getSpeciesStudiesMetaData('All', '', 'allSpeciesDiseaseToken', tokenResponse.sessionToken, 'syn12532715' ).then( response => { 
         //allData.test = response 
+      //})
+      //
+      //SynapseClient.getQueryTableResults(request, tokenResponse.sessionToken)
+      //.then(response => {
+        //// query results are available
+        //console.log(response);
+      //}).catch(function (error) {
+        //// handle Error (possibly a HTTPError)
       //})
     ])
   })
