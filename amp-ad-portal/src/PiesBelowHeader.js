@@ -91,7 +91,6 @@ let colorsAssays = [
 class PiesBelowHeader extends Component{
   getCountsList = columnName => {
     let countsList = this.props.getColumnNameTypeAndCount(columnName, this.props.pageData) 
-    //console.log(countsList);
     countsList
       .sort( (a, b) => {
         return a.count - b.count;
@@ -119,7 +118,7 @@ class PiesBelowHeader extends Component{
       colors = colorsTissues
     }else { colors = colorsAssays }
     let list = listArray.map( (element, index) => {
-      if(index > 0){
+      if(index > 0 && index < 4){
         return (
           <div className="pie-list row middle-xs" key={index}>
             <div className="pie-circle col-xs" 
@@ -154,42 +153,56 @@ class PiesBelowHeader extends Component{
     )
   } 
 
+  buildLinkToLocation = (event) => {
+    event.preventDefault();
+    let targetLocation  
+    if(event.target.name.includes('Human')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkh1bWFuIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==', '_blank') } 
+    if(event.target.name.includes('Drosophila melanogaster')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkRyb3NvcGhpbGEgbWVsYW5vZ2FzdGVyIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==', '_blank') }
+    if(event.target.name.includes('Mouse')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIk1vdXNlIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==', '_blank') }
+    if(event.target.name.includes('Rat')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIlJhdCJdfV0sICJpbmNsdWRlRW50aXR5RXRhZyI6dHJ1ZSwgImlzQ29uc2lzdGVudCI6dHJ1ZSwgIm9mZnNldCI6MCwgImxpbWl0IjoyNX0=', '_blank') }
+    if(event.target.name.includes('All')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbXX1dLCAiaW5jbHVkZUVudGl0eUV0YWciOnRydWUsICJpc0NvbnNpc3RlbnQiOnRydWUsICJvZmZzZXQiOjAsICJsaW1pdCI6MjV9', '_blank') }
+  }
+
   buildPieSection = (speciesDropdownSelection, dataType) => {
     let pieData = this.buildPieData('this.props.speciesSelection', this.getCountsList(dataType), dataType);
-    return (
-      <div className="pie-chart-welcome col-xs-12 col-sm-5">
-        <div className="pie-container" >
-          <h1 className="count">{this.props.pageData[dataType].count} {dataType}</h1>
-          <div className="pie-circles-container">
-            <div className="chart-center-stat">
-              <h1 alt="count of samples">
-                {this.printTotalCounts(this.getCountsList(dataType))}
-              </h1>
-              <p>Biosamples</p>
+    if(pieData.length > 0){
+      return (
+        <div className="pie-chart-welcome col-xs-12 col-sm-6">
+          <div className="pie-container" >
+            <h1 className="count">{this.props.pageData[dataType].count} {dataType}</h1>
+            <div className="pie-circles-container">
+              <div className="chart-center-stat">
+                <h1 alt="count of samples">
+                  {this.printTotalCounts(this.getCountsList(dataType))}
+                </h1>
+                <p>Biosamples</p>
+              </div>
+              <PieChart 
+                data={pieData}
+                expandOnHover={false}
+                expandSize={0}
+                shrinkOnTouchEnd={false}
+                strokeColor="#fff"
+                strokeLinejoin="round"
+                strokeWidth={0}
+                viewBoxSize={50}
+              />
             </div>
-            <PieChart 
-              data={pieData}
-              expandOnHover={false}
-              expandSize={0}
-              shrinkOnTouchEnd={false}
-              strokeColor="#fff"
-              strokeLinejoin="round"
-              strokeWidth={0}
-              viewBoxSize={50}
-            />
           </div>
+          <div className="pie-counts-list" data-value={this.props.buttonState[dataType+"ButtonAll"]} >
+            {this.printCountsList(this.getCountsList(dataType), dataType)}
+          </div>
+          <button className="pie-counts-button btn" 
+            name={this.props.speciesSelection} 
+            data-value={this.props.buttonState[dataType+"ButtonAll"]} 
+            onClick={this.buildLinkToLocation}
+          >
+              {this.props.speciesSelection === "All species" ? "See all " + dataType + 's' : "See " + this.props.speciesSelection + ' ' + dataType + 's'}
+          </button>
         </div>
-        <div className="pie-counts-list" data-value={this.props.buttonState[dataType+"ButtonAll"]} >
-          {this.printCountsList(this.getCountsList(dataType), dataType)}
-        </div>
-        <button className="pie-counts-button btn" 
-          name={dataType+"ButtonAll"} 
-          data-value={this.props.buttonState[dataType+"ButtonAll"]} 
-          onClick={this.props.toggleSeeAll}>
-            {this.props.buttonState[dataType+"ButtonAll"] === false ? "See all " + dataType + 's' : "Show less " + dataType + 's'}
-        </button>
-      </div>
-    )
+      )
+    }
+    else return ''
   }
 
   componentDidUpdate(){
@@ -198,7 +211,7 @@ class PiesBelowHeader extends Component{
   render(){
     return (
       <section className="pie-charts-welcome row center-xs">
-        <div className="col-xs-12 col-sm-7">
+        <div className="col-xs-12 col-sm-8">
           <div className="row around-xs center-xs">
             {this.buildPieSection(this.props.speciesSelection, 'assay')}
             {this.buildPieSection(this.props.speciesSelection, 'tissue')}

@@ -19,12 +19,13 @@ const DelayPromise = (delay) => {
 }
 
 const getStudyData = async (TOKEN = '', AUTHENTICATION = '', TABLEID = 'syn11346063', limit = Number.MAX_VALUE) => {
+  //console.log(TOKEN, AUTHENTICATION, TABLEID); 
   return await fetch('https://repo-prod.prod.sagebase.org/repo/v1/entity/' + TABLEID + '/table/query/async/get/' + TOKEN, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'sessionToken': AUTHENTICATION
+      'Access-Control-Request-Headers': AUTHENTICATION
     }
   })
 	.then(handleErrors)

@@ -18,7 +18,7 @@ import runAllQueries from './queryForData';
 runAllQueries().then( data => {
   //console.log(data)
   ReactDOM.render(<App 
-    testData = {data}
+    testData = {data.test}
     humanData = {data.humanData}
     mouseData = {data.mouseData}
     ratData = {data.ratData}

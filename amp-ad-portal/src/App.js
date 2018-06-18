@@ -160,7 +160,7 @@ class App extends Component {
   }
 
   componentDidUpdate(){
-    //console.log(this.props.allSpeciesData);
+    //console.log(this.props.humanData);
   }
 
   render(){

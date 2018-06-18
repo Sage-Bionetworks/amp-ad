@@ -47,28 +47,23 @@ let request = {
 
 const runAllQueries = () => {
   return SynapseClient.login('mikeybkats', 'guinness').then( tokenResponse => { 
-   console.log(tokenResponse);
+   //console.log(tokenResponse);
     return Promise.all([
-			getWikiData('409840', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiNewsData = addSpaceToHash(tokenResponse.markdown)}),
-			getWikiData('409849', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiProgramData = addSpaceToHash(tokenResponse.markdown)}),
-			getWikiData('409848', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiContributorsData = addSpaceToHash(tokenResponse.markdown)}),
+      getWikiData('409840', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiNewsData = addSpaceToHash(tokenResponse.markdown)}),
+      getWikiData('409849', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiProgramData = addSpaceToHash(tokenResponse.markdown)}),
+      getWikiData('409848', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiContributorsData = addSpaceToHash(tokenResponse.markdown)}),
       getAllSpeciesMetaData().then( response => { allData.allSpeciesData = response }),
       getSpeciesStudiesMetaData('Human', 'assay', 'humanToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.humanData = tokenResponse }),
       getSpeciesStudiesMetaData('Mouse', 'assay', 'mouseToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.mouseData = tokenResponse }),
       getSpeciesStudiesMetaData('Rat', 'assay', 'ratToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.ratData = tokenResponse }),
       getSpeciesStudiesMetaData('Drosophila melanogaster', 'assay', 'flyToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.flyData = tokenResponse }),
       
-      //getSpeciesStudiesMetaData('All', '', 'allSpeciesDiseaseToken', tokenResponse.sessionToken, 'syn12532715' ).then( response => { 
-        //allData.test = response 
-      //})
-      //
-      //SynapseClient.getQueryTableResults(request, tokenResponse.sessionToken)
-      //.then(response => {
-        //// query results are available
-        //console.log(response);
-      //}).catch(function (error) {
-        //// handle Error (possibly a HTTPError)
-      //})
+      SynapseClient.getQueryTableResults(request, tokenResponse.sessionToken)
+      .then( response => {
+        allData.test = response 
+      }).catch(function (error) {
+        console.log(error)
+      })
     ])
   })
   .then( run => { 
@@ -77,13 +72,13 @@ const runAllQueries = () => {
 }
 
 const getAllSpeciesMetaData = () => {
-  return setUpQueryToken().then( token => { 
+  return setUpQueryToken().then( () => { 
     return runStudyDataQuery(allData.tokens.allSpecies, 1)
   })
 }
   
 const getSpeciesStudiesMetaData = (columnName, species, queryTokenName = 'default', AUTHENTICATION, TABLEID) => {
-  return setUpQueryToken(columnName, [species], TABLEID, queryTokenName)
+  return setUpQueryToken(columnName, [species], TABLEID, queryTokenName, AUTHENTICATION)
     .then( data => {
       //columnName = columnName.charAt(0).toUpperCase() + columnName.substr(1);
       //species = species.charAt(0).toLowerCase() + species.substr(1);
@@ -95,9 +90,15 @@ const getSpeciesStudiesMetaData = (columnName, species, queryTokenName = 'defaul
 }
 
 const setUpQueryToken = (columnName, facetValue, TABLEID, tokenName = "allSpecies") => {
-  return getToken(columnName, facetValue, TABLEID)
+  let speciesSearchBool;
+  if(tokenName !== "allSpecies"){
+    speciesSearchBool = true;
+  }
+  //console.log(speciesSearchBool, columnName, facetValue, TABLEID, tokenName)
+  return getToken(speciesSearchBool, facetValue, columnName,  TABLEID)
   .then(response => response.json())
   .then(result => {
+    //console.log(result);
     let dataStateObject = {...allData.tokens}
     dataStateObject[tokenName] = result.token
     allData.tokens = dataStateObject;
@@ -105,8 +106,8 @@ const setUpQueryToken = (columnName, facetValue, TABLEID, tokenName = "allSpecie
   });
 }
 
-const runStudyDataQuery = (speciesToken, authenticationToken, tableID, limit) => {
-  return getStudyData(speciesToken).then( 
+const runStudyDataQuery = (speciesToken, authenticationToken, tableID) => {
+  return getStudyData(speciesToken, authenticationToken, tableID).then( 
     response => { 
       if( response !== undefined ){
         return response

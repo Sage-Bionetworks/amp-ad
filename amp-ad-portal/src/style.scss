@@ -50,7 +50,6 @@ li {
 button:focus, input:focus, select:focus { outline:none; }
 button:hover, select:hover { cursor: pointer }
 
-
 .btn {
   color: black;
   font-size: 20px;
@@ -59,6 +58,11 @@ button:hover, select:hover { cursor: pointer }
   border-radius: 24px;
   width: 192px;
   height: 48px;
+  transition: all .3s ease-in-out;
+}
+.btn:hover {
+  background-color: darken($lightPurple, 25%);
+  color: white;
 }
 
 .btn-light {
@@ -67,8 +71,14 @@ button:hover, select:hover { cursor: pointer }
   background-color: $gray;
   border: none;
   border-radius: 24px;
-  width: 192px;
+  width: fit-content;
   height: 48px;
+  padding: 0px 20px;
+  transition: all .3s ease-in-out;
+}
+.btn-light:hover {
+  background-color: darken($gray, 30%);
+  color: white; 
 }
 
 div.row.amp-ad {
@@ -161,6 +171,9 @@ section.welcome {
 			margin: 15px 0px;
 		}
 	}
+  .btn-light {
+    margin-top: 10px;
+  }
 }
 
 section.pie-charts-welcome {
@@ -182,7 +195,7 @@ section.pie-charts-welcome {
     position: relative;
   }
   .pie-counts-list {
-    max-height: 75px;
+    height: 100px;
     overflow: hidden;
     padding: 0px 10px;
     transition: all 1s ease;
@@ -227,6 +240,11 @@ section.pie-charts-welcome {
       width: 100%;
       margin: 0px;
     }
+  }
+  .pie-counts-button {
+    width: fit-content;
+    padding: 0px 20px;
+    line-height: 18px;
   }
 }
 
