@@ -5,7 +5,7 @@ import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 
 const options = [
-		{ label: <Link name="option1" to="/About" className="nav-item dropdown">About</Link>, value: 'one' },
+		{ label: <Link name="option1" to="/About" className="nav-item dropdown active">About</Link>, value: 'one' },
 		{ label: <Link name="option2" to="/DataUseRequirements" className="nav-item dropdown">Data Use</Link>, value: 'two' },
 		{ label: <Link name="option3" to="/Studies" className="nav-item dropdown">Studies</Link>, value: 'three' }
 	]
@@ -35,7 +35,7 @@ const Header = () => {
           </div>
           <div className="col-xs-8">
             <ul className="nav row end-xs">
-              <li><Link to="/" className="nav-item">Home</Link></li>
+              <li><Link to="/" className="nav-item active">Home</Link></li>
               <li><Link to="/tools" className="nav-item">Tools</Link></li>
 							<li>
 								<RouterDropDown />	

@@ -8,6 +8,7 @@ $bluePlum: #5D69AB;
 $bluePurple: #4C57A2;
 $salmon: #FCA79A;
 $purple: #907FBA;
+$textPurple: #5A478F;
 $darkPurple: #5A498D; 
 $lightPurple: #B4C6F9;
 $mustard: #FCCB6F;
@@ -46,6 +47,21 @@ a {
 li {
 	list-style: none;	
 }
+
+.thin-large {
+	font-size: 30px;
+	font-weight: 100;
+	letter-spacing: 2px;
+}
+
+.pie-list-item, .pop-list-item {
+  font-size: 18px;
+  font-weight: 400;
+  color: #5A478F;
+  text-decoration: underline;
+}
+
+
 
 button:focus, input:focus, select:focus { outline:none; }
 button:hover, select:hover { cursor: pointer }
@@ -91,14 +107,10 @@ div.row.amp-ad {
     list-style: none;
     margin: 0px 10px;
   }
-	a.nav-item.dropdown {
-		//height: 20px;
-		//width: 200px;
-		//display: block;
-		//position: relative;
-		//right: 90px;
-		//z-index: 100000;
-	}
+	a.nav-item.dropdown {}
+  a.nav-item.active {
+    font-weight: bold;
+  }
 }
 
 .title-row {
@@ -159,11 +171,13 @@ section.welcome {
 	}
 	.welcome-data {
 		background-color: $bluePlum;
-    padding: 60px 70px;
+    padding: 60px 30px;
 		right: -120px;
 		position: relative;
+		padding-right: 30%;
 		ul {
 			text-align: left;
+			width: 300px;
 		}
 		li {
 			color: white;
@@ -182,8 +196,8 @@ section.pie-charts-welcome {
   .pie-circle {
     display: inline-block;
     margin: 0px 5px;
-    @include circle(10px);
-    max-width: 5px;
+    @include circle(13px);
+    max-width: 13px;
     padding: 5px;
   }
 
@@ -193,12 +207,16 @@ section.pie-charts-welcome {
   }
   .pie-container {
     position: relative;
+    margin-bottom: 20px;
   }
   .pie-counts-list {
-    height: 100px;
-    overflow: hidden;
+    height: 130px;
+    //overflow: hidden;
     padding: 0px 10px;
-    transition: all 1s ease;
+    //transition: all 1s ease;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
   .pie-counts-list[data-value="true"]{
     overflow: visible;
@@ -209,9 +227,9 @@ section.pie-charts-welcome {
   p.pie-list-item {
     text-align: left;
     margin: 5px 0px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 200px;
+    //text-overflow: ellipsis;
+    //white-space: nowrap;
+    //max-width: 200px;
   }
   .pie-circles-container{
     position: relative;
@@ -245,6 +263,7 @@ section.pie-charts-welcome {
     width: fit-content;
     padding: 0px 20px;
     line-height: 18px;
+    margin-top: 20px;
   }
 }
 
@@ -269,9 +288,17 @@ section.searchbar {
 
 section.popular-data-requests {
   .pop-assay {
-    max-width: 170px; 
+    //max-width: 170px; 
     margin: 0px auto;
     text-align: left;
+	}
+	.pop-assay-title {
+		h5 {
+			font-size: 20px;
+			font-weight: bold;
+			text-align: center;
+			width: 100%;
+		}
   }
   .pop-circle {
     display: inline-block;
@@ -368,4 +395,13 @@ section.what-new {
 section.child-page-hero {
 	p { color: white; }
 	background: linear-gradient( to right, $darkPurple, $bluePurple );
+}
+
+section.contribute-your-data {
+  box-shadow: 0 -5px 10px -5px #9996;
+  margin: 0px -15px;
+	.content-block {
+		text-align: left;
+		padding: 0px 0px 0px 100px;
+	}
 }

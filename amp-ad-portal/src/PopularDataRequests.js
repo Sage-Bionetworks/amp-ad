@@ -14,9 +14,9 @@ const PopularDataRequests = props => {
             <img src={require('./images/magnifying-glass.svg')} 
                 alt="dna double helix"
                 className="svg-large-icon"/>
-            <div className="row">
-              <div className="col-xs-12">
-                <div className="pop-assay row middle-xs">
+            <div className="row center-xs">
+              <div className="col-xs-12 col-sm-10">
+                <div className="pop-assay-title row middle-xs">
                   <h5>Most Popular Assays</h5>
                 </div>
                 <div className="pop-assay row center-xs middle-xs around-xs">
@@ -40,9 +40,9 @@ const PopularDataRequests = props => {
                 alt="two dna double helix and arrows going from one to the other in a circular pattern"
                 className="svg-large-icon"/>
 
-            <div className="row">
-              <div className="col-xs-12">
-                <div className="pop-assay row center-xs middle-xs">
+            <div className="row center-xs">
+              <div className="col-xs-12 col-sm-10">
+                <div className="pop-assay-title row middle-xs">
                   <h5>Most Popular Tissues</h5>
                 </div>
                 <div className="pop-assay row center-xs middle-xs">

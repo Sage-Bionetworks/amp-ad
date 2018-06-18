@@ -11,12 +11,12 @@ const Welcome = () => {
       </div>
       <div className="col-xs-12 col-sm-3 welcome-data">
         <ul>
-          <li>Individuals</li>
-          <li>Overall Biosamples</li>
-          <li>Analyses</li>
-          <li>Contributors</li>
-          <li>Institutions</li>
-          <li>Nominated Targets</li>
+          <li><span className="thin-large">50,000</span> Individuals</li>
+          <li><span className="thin-large">70,000</span> Overall Biosamples</li>
+          <li><span className="thin-large">50</span> Analyses</li>
+          <li><span className="thin-large">50</span> Contributors</li>
+          <li><span className="thin-large">50</span> Institutions</li>
+          <li><span className="thin-large">50</span> Nominated Targets</li>
         </ul>
       </div>
     </section>

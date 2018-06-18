@@ -4,7 +4,7 @@ const Programs = props => {
   return (
     <section className="programs row">
       <div className="content col-xs-12 col-sm-8">
-        <div className="row between-xs title-row">
+        <div className="row between-xs middle-xs title-row">
           <div className="col-xs-6 col-sm-6"><h2>Programs</h2></div>
           <div className="col-xs-3 col-sm-2"><a href="/">See All Programs</a></div>
         </div>
