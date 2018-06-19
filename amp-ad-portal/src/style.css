@@ -23,6 +23,9 @@ a {
 li {
   list-style: none; }
 
+select {
+  font-size: 18px; }
+
 .thin-large {
   font-size: 30px;
   font-weight: 100;
@@ -109,8 +112,12 @@ header.header {
 
 footer {
   background-color: #5A498D;
+  color: white;
   height: 56px;
   width: 100%; }
+  footer a {
+    color: white;
+    margin: 10px; }
 
 section.welcome {
   background: linear-gradient(to right, #5A498D, #4C57A2);
@@ -295,7 +302,15 @@ section.what-new .what-new-data div h3:nth-child(3) {
 section.what-new .what-new-data div h2:nth-child(4) {
   display: none; }
 
-.about h2 {
+section.contribute-your-data {
+  box-shadow: 0 -5px 10px -5px #9996;
+  margin: 0px -15px;
+  padding: 55px 0px; }
+  section.contribute-your-data .content-block {
+    text-align: left;
+    padding: 0px 0px 0px 100px; }
+
+.child-page-hero h2 {
   color: white; }
 
 section.child-page-hero {
@@ -303,11 +318,13 @@ section.child-page-hero {
   section.child-page-hero p {
     color: white; }
 
-section.contribute-your-data {
-  box-shadow: 0 -5px 10px -5px #9996;
-  margin: 0px -15px; }
-  section.contribute-your-data .content-block {
-    text-align: left;
-    padding: 0px 0px 0px 100px; }
+section.about-section-content .about-col {
+  text-align: left; }
+
+.programs-col br {
+  content: " ";
+  display: none; }
+.programs-col ul {
+  columns: 100px 3; }
 
 /*# sourceMappingURL=style.css.map */

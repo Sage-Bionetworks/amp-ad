@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "markdown-it-synapse": "^1.0.21",
+    "markdown-it": "^8.4.1",
+    "markdown-it-synapse": "^1.0.22",
+    "markdown-to-jsx": "^6.6.7",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",

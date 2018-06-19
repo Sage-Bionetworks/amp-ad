@@ -1,4 +1,5 @@
 import React from 'react';
+const ReactMarkdown = require('react-markdown')
 
 const AboutDataUseRequirements = props => {
   return (
@@ -8,6 +9,11 @@ const AboutDataUseRequirements = props => {
           <div className="col-xs-12 col-sm-8 content">
             <h2>Data Use Requirements</h2>
             <p>content goes here</p>
+          </div>
+        </section>
+        <section className="row about-section-content center-xs">
+          <div className="about-col col-xs-12 col-sm-8">
+            <ReactMarkdown source={props.dataUseRequirements} />
           </div>
         </section>
       </div>

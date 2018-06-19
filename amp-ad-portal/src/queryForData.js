@@ -15,7 +15,8 @@ let allData = {
   ratData: {},
   wikiNewsData: {},
   wikiProgramsData: {},
-	wikiContributorsData: {}
+	wikiContributorsData: {},
+	wikiDataUseData: {}
 };
 
 const addSpaceToHash = string => {
@@ -52,6 +53,7 @@ const runAllQueries = () => {
       getWikiData('409840', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiNewsData = addSpaceToHash(tokenResponse.markdown)}),
       getWikiData('409849', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiProgramData = addSpaceToHash(tokenResponse.markdown)}),
       getWikiData('409848', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiContributorsData = addSpaceToHash(tokenResponse.markdown)}),
+      getWikiData('409843', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiDataUseData = addSpaceToHash(tokenResponse.markdown)}),
       getAllSpeciesMetaData().then( response => { allData.allSpeciesData = response }),
       getSpeciesStudiesMetaData('Human', 'assay', 'humanToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.humanData = tokenResponse }),
       getSpeciesStudiesMetaData('Mouse', 'assay', 'mouseToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.mouseData = tokenResponse }),

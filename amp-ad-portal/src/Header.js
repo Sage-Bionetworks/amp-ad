@@ -5,9 +5,9 @@ import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 
 const options = [
-		{ label: <Link name="option1" to="/About" className="nav-item dropdown active">About</Link>, value: 'one' },
-		{ label: <Link name="option2" to="/DataUseRequirements" className="nav-item dropdown">Data Use</Link>, value: 'two' },
-		{ label: <Link name="option3" to="/Studies" className="nav-item dropdown">Studies</Link>, value: 'three' }
+		{ label: <Link name="Programs" to="/Programs" className="nav-item dropdown">Programs</Link>, value: 'one' },
+		{ label: <Link name="Data Use" to="/DataUseRequirements" className="nav-item dropdown">Data Use</Link>, value: 'two' },
+		{ label: <Link name="Studies" to="/Studies" className="nav-item dropdown">Studies</Link>, value: 'three' }
 	]
 
 //const defaultOption = options[0]
@@ -20,7 +20,6 @@ const RouterDropDown = withRouter(({ history }) => (
 				history.push(event.label.props.to)
 			}
 		}
-		value="About" 
 		placeholder="About" 
 	/>
 ))

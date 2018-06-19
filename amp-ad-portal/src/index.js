@@ -16,7 +16,7 @@ import runAllQueries from './queryForData';
 
 //for production fetch the data
 runAllQueries().then( data => {
-  //console.log(data)
+	//console.log(data.wikiContributorsData)
   ReactDOM.render(<App 
     testData = {data.test}
     humanData = {data.humanData}
@@ -27,6 +27,7 @@ runAllQueries().then( data => {
     wikiNewsData = {data.wikiNewsData}
     wikiProgramData = {data.wikiProgramData}
     wikiContributorsData = {data.wikiContributorsData}
+		wikiDataUseData = {data.wikiDataUseData}
     />, document.getElementById('root'));
 })
 

@@ -48,6 +48,10 @@ li {
 	list-style: none;	
 }
 
+select {
+	font-size: 18px;
+}
+
 .thin-large {
 	font-size: 30px;
 	font-weight: 100;
@@ -154,8 +158,13 @@ header.header {
 
 footer {
   background-color: $darkPurple;
+	color: white;
   height: 56px;
   width: 100%;
+	a {
+		color: white;
+		margin: 10px;
+	}
 }
 
 section.welcome {
@@ -387,21 +396,38 @@ section.what-new {
 		h2:nth-child(4) {display: none }
 	}
 }
-
-//// about page
-.about {
-	h2 { color: white; } 
-}
-section.child-page-hero {
-	p { color: white; }
-	background: linear-gradient( to right, $darkPurple, $bluePurple );
-}
-
 section.contribute-your-data {
   box-shadow: 0 -5px 10px -5px #9996;
   margin: 0px -15px;
+	padding: 55px 0px;
 	.content-block {
 		text-align: left;
 		padding: 0px 0px 0px 100px;
 	}
 }
+
+.child-page-hero {
+	h2 { color: white; } 
+}
+//// about page
+section.child-page-hero {
+	p { color: white; }
+	background: linear-gradient( to right, $darkPurple, $bluePurple );
+}
+
+section.about-section-content {
+	.about-col {
+		text-align: left;
+	}
+}
+
+.programs-col { 
+	br {
+		content: " ";
+		display: none;
+	}
+	ul {
+	columns: 100px 3;
+	}
+}
+
