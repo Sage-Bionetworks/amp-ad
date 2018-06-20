@@ -320,11 +320,32 @@ section.child-page-hero {
 
 section.about-section-content .about-col {
   text-align: left; }
-
-.programs-col br {
-  content: " ";
-  display: none; }
-.programs-col ul {
-  columns: 100px 3; }
+  section.about-section-content .about-col h2:nth-child(2) {
+    font-weight: 300;
+    font-size: 16px; }
+  section.about-section-content .about-col h2:nth-child(3) {
+    display: none; }
+  section.about-section-content .about-col p:nth-child(4) {
+    display: none; }
+  section.about-section-content .about-col ul:nth-child(5) {
+    display: none; }
+  section.about-section-content .about-col h2:nth-child(7) {
+    display: none; }
+  section.about-section-content .about-col p:nth-child(8) {
+    display: none; }
+  section.about-section-content .about-col h2:nth-child(9) {
+    display: none; }
+section.about-section-content .programs-col {
+  text-align: left; }
+  section.about-section-content .programs-col br {
+    content: " ";
+    display: none; }
+  section.about-section-content .programs-col ul {
+    columns: 100px 3; }
+  section.about-section-content .programs-col .program {
+    padding: 20px 0px; }
+  section.about-section-content .programs-col .grant-abstract {
+    height: 0px;
+    overflow: hidden; }
 
 /*# sourceMappingURL=style.css.map */

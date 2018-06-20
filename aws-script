@@ -1,0 +1,3 @@
+aws --profile it s3 ls --recursive s3://ampad-test......
+
+

@@ -48,7 +48,6 @@ let request = {
 
 const runAllQueries = () => {
   return SynapseClient.login('mikeybkats', 'guinness').then( tokenResponse => { 
-   //console.log(tokenResponse);
     return Promise.all([
       getWikiData('409840', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiNewsData = addSpaceToHash(tokenResponse.markdown)}),
       getWikiData('409849', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiProgramData = addSpaceToHash(tokenResponse.markdown)}),
@@ -59,7 +58,6 @@ const runAllQueries = () => {
       getSpeciesStudiesMetaData('Mouse', 'assay', 'mouseToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.mouseData = tokenResponse }),
       getSpeciesStudiesMetaData('Rat', 'assay', 'ratToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.ratData = tokenResponse }),
       getSpeciesStudiesMetaData('Drosophila melanogaster', 'assay', 'flyToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.flyData = tokenResponse }),
-      
       SynapseClient.getQueryTableResults(request, tokenResponse.sessionToken)
       .then( response => {
         allData.test = response 

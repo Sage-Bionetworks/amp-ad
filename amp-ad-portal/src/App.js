@@ -176,7 +176,7 @@ class App extends Component {
 	ReturnAboutDataUse = props => {
 		return (
 			<AboutDataUseRequirements 
-				dataUseRequirements={this.props.wikiDataUseData}
+				//dataUseRequirements={this.props.wikiDataUseData}
 				{...props}
 			/>
 		)	

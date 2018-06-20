@@ -1,5 +1,4 @@
 import React from 'react'
-//import Markdown from 'markdown-to-jsx'
 
 const md = require('markdown-it')({
 	html:         true,        // Enable HTML tags in source
@@ -13,37 +12,22 @@ const md = require('markdown-it')({
 });
 
 const ReactMarkdown = require('react-markdown')
-
-//const ReturnSynapseMd = markdown => {
-	//md.use(require('markdown-it-synapse'))
-	//return md.render( markdown, 'unique-id' )
-//}
-
 const formatMarkdown = markdown => {
 	markdown = markdown.replace(new RegExp("\\*\\*Grant Abstract\\*\\*:", 'g'), "**Grant Abstract**")
 	markdown = md.render(markdown)
 	markdown = markdown.replace('!Team, Study and Grant Information', '')
 	markdown = markdown.replace('${toc}', '')
 	markdown = markdown.replace(new RegExp('AMP-AD: ', 'g'), '')
-	markdown = markdown.replace(new RegExp('<h3>', 'g'), "<div class='program'><h3>")
-	markdown = markdown.replace(new RegExp('---', 'g'), '</p></div></div>')
-	markdown = markdown.replace(new RegExp('Grant Abstract', 'g'), "</ul><div class='grant-abstract'><h4>Grant Abstract</h4><p>")
+	markdown = markdown.replace(new RegExp('<h3>', 'g'), "<div class='program col-sm-10'><h3>")
+	markdown = markdown.replace(new RegExp('<hr />', 'g'), "</div><hr />")
+	markdown = markdown.replace(new RegExp('</li>(\r\n|\r|\n)</ul>', 'g'), "</div>")
+	markdown = markdown.replace(new RegExp('---', 'g'), '</p></div>')
+	markdown = markdown.replace(new RegExp('Grant Abstract', 'g'), "</ul><button class='btn-light'>Read Abstract</button><div class='grant-abstract'><h4>Grant Abstract</h4><p>")
 	markdown = markdown.replace(new RegExp("\\{row\\}", 'g'), "")
 	markdown = markdown.replace(new RegExp("\\{column\\}", 'g'), "")
 	markdown = markdown.replace(new RegExp("\\{column width=3\\}", 'g'), "")
-	console.log(markdown)
-	//markdown = markdown.replace(new RegExp("<br />", 'g'), '')
-	//let count = 0;
-	//for(let index = 0; index < markdown.length; index++){
-		//if( markdown[index] === '<' && markdown[index+1] === '/' && markdown[index+2] === 'd' && count === 0 ){
-      //markdown = markdown.slice( 0, index) + ` ` + markdown.slice(index + 6, markdown.length)
-			//count++	
-		//}			
-		//if(count > 0 ){
-			//break
-		//}
-	//}
-	return markdown;
+	//markdown = markdown.replace(new RegExp("<br />", 'g'), "")
+	return markdown
 }
 
 const About = props => {
@@ -57,8 +41,10 @@ const About = props => {
           </div>
         </section>
         <section className="row about-section-content center-xs">
-          <div className="about-col programs-col col-xs-12 col-sm-8">
+          <div className="about-col col-xs-12 col-sm-8">
             <ReactMarkdown source={props.programData} />
+					</div>
+          <div className="programs-col col-xs-12 col-sm-8">
 						<ReactMarkdown source={formatMarkdown(props.contributorData)} escapeHtml={false}/>
           </div>
         </section>

@@ -1,0 +1,19 @@
+let defaultWikiProgramData = `## [AMP-AD Target Discovery and Preclinical Validation Project](https://www.nia.nih.gov/alzheimers/amp-ad-target-discovery-and-preclinical-validation-project)
+The Accelerating Medicines Partnership-Alzheimer’s Disease Target Discovery and Preclinical Validation Project is a component of the AMP-AD program, an [NIA](https://www.nia.nih.gov)-led precompetitive, public private partnership, managed by the [FNIH](http://www.fnih.org).  The central goal of the Project is to shorten the time between the discovery of potential drug targets and the development of new drugs for Alzheimer’s disease treatment and prevention, by integrating the analyses of large-scale molecular data from human brain samples with network modeling approaches and experimental validation. The project brings together 6 multi-institutional, multidisciplinary academic teams, 4 industry partners and 4 non-profit organizations.  The academic teams, supported by NIA grants are applying cutting-edge systems and network biology approaches to integrate multidimensional human “omic” data (genomic, epigenomic, RNAseq, proteomic) from more than 2,000 human brains at all stages of the disease with clinical and pathological data to: 1) discover novel therapeutic targets for Alzheimer’s disease, 2) gain a systems-level understanding of the gene, protein, and metabolic networks within which these novel targets operate, 3) evaluate their druggability in multiple model organisms
+---
+## [M^2^OVE-AD Consortium](https://www.nih.gov/news-events/news-releases/decoding-molecular-ties-between-vascular-disease-alzheimers)
+ The Molecular Mechanisms of the Vascular Etiology of Alzheimer’s Disease (M²OVE-AD) Consortium is a result of a [collaboration](http://grants.nih.gov/grants/guide/rfa-files/RFA-AG-15-010.html) between the [NIA](https://www.nia.nih.gov) and [NINDS](http://www.ninds.nih.gov). The participating, multi-institutional, cross-disciplinary research teams will be generating various “omics” data (post and ante-mortem) from brain tissue and peripheral fluids collected through several natural history and population studies and use network biology approaches to integrate these data with data on neuroimaging, vascular physiology and cognitive measures. Predictions about molecular mechanisms will be explored in various animal models (AD models and models of vascular/metabolic risk factors).   
+The goals of this initiative are to:
+* Enable rapid and broad sharing of data
+* Generate a deeper understanding of the phenotypes of risk and the molecular mechanisms linking vascular risk factors, cerebrovascular disease and AD         
+* Discover new disease-relevant therapeutic targets for prevention
+* Identify molecular signatures that can be non-invasively measured and used for patient stratification.
+---
+## [MODEL-AD Program](https://model-ad.org)
+The Translational Center for Model Development and Evaluation for Late Onset AD (MODEL-AD) is an interdisciplinary effort among Indiana University, Jackson Laboratory and Sage Bionetworks funded through NIA’s initiative [RFA AG16-014](https://grants.nih.gov/grants/guide/rfa-files/RFA-AG-16-014.html). The Center seeks to generate and characterize new animal models of AD, assess their relevance to human disease and develop translatable biomarkers. In addition the Center will create a pipeline for rigorous preclinical efficacy testing to accelerate the process by which candidate therapeutics can be advanced to human trials. One of the central goals of this new translational infrastructure program is to bridge the preclinical to clinical development gap by making data, analytical results and research models available rapidly and broadly for use in therapy development for AD.
+ &nbsp;
+&nbsp;
+&nbsp;
+---`
+
+export default defaultWikiProgramData
