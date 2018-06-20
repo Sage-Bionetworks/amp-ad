@@ -23,6 +23,20 @@ a {
 li {
   list-style: none; }
 
+select {
+  font-size: 18px; }
+
+.thin-large {
+  font-size: 30px;
+  font-weight: 100;
+  letter-spacing: 2px; }
+
+.pie-list-item, .pop-list-item {
+  font-size: 18px;
+  font-weight: 400;
+  color: #5A478F;
+  text-decoration: underline; }
+
 button:focus, input:focus, select:focus {
   outline: none; }
 
@@ -36,7 +50,12 @@ button:hover, select:hover {
   border: none;
   border-radius: 24px;
   width: 192px;
-  height: 48px; }
+  height: 48px;
+  transition: all .3s ease-in-out; }
+
+.btn:hover {
+  background-color: #3e6cf0;
+  color: white; }
 
 .btn-light {
   color: black;
@@ -44,8 +63,14 @@ button:hover, select:hover {
   background-color: #F5F5F5;
   border: none;
   border-radius: 24px;
-  width: 192px;
-  height: 48px; }
+  width: fit-content;
+  height: 48px;
+  padding: 0px 20px;
+  transition: all .3s ease-in-out; }
+
+.btn-light:hover {
+  background-color: darkgray;
+  color: white; }
 
 div.row.amp-ad {
   max-width: 100%;
@@ -54,6 +79,8 @@ div.row.amp-ad {
 .nav li {
   list-style: none;
   margin: 0px 10px; }
+.nav a.nav-item.active {
+  font-weight: bold; }
 
 .title-row {
   padding: 20px 0px; }
@@ -85,8 +112,12 @@ header.header {
 
 footer {
   background-color: #5A498D;
+  color: white;
   height: 56px;
   width: 100%; }
+  footer a {
+    color: white;
+    margin: 10px; }
 
 section.welcome {
   background: linear-gradient(to right, #5A498D, #4C57A2);
@@ -99,15 +130,19 @@ section.welcome {
       margin: 0px; }
   section.welcome .welcome-data {
     background-color: #5D69AB;
-    padding: 60px 70px;
+    padding: 60px 30px;
     right: -120px;
-    position: relative; }
+    position: relative;
+    padding-right: 30%; }
     section.welcome .welcome-data ul {
-      text-align: left; }
+      text-align: left;
+      width: 300px; }
     section.welcome .welcome-data li {
       color: white;
       font-size: 18px;
       margin: 15px 0px; }
+  section.welcome .btn-light {
+    margin-top: 10px; }
 
 section.pie-charts-welcome {
   background-color: #F5F5F5;
@@ -115,24 +150,26 @@ section.pie-charts-welcome {
   section.pie-charts-welcome .pie-circle {
     display: inline-block;
     margin: 0px 5px;
-    width: 10px;
-    height: 10px;
+    width: 13px;
+    height: 13px;
     position: relative;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    max-width: 5px;
+    -webkit-border-radius: 6.5px;
+    -moz-border-radius: 6.5px;
+    border-radius: 6.5px;
+    max-width: 13px;
     padding: 5px; }
   section.pie-charts-welcome .pie-chart-welcome {
     position: relative;
     max-width: 310px; }
   section.pie-charts-welcome .pie-container {
-    position: relative; }
+    position: relative;
+    margin-bottom: 20px; }
   section.pie-charts-welcome .pie-counts-list {
-    max-height: 75px;
-    overflow: hidden;
+    height: 130px;
     padding: 0px 10px;
-    transition: all 1s ease; }
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
   section.pie-charts-welcome .pie-counts-list[data-value="true"] {
     overflow: visible;
     height: fit-content;
@@ -141,11 +178,11 @@ section.pie-charts-welcome {
   section.pie-charts-welcome p.pie-list-item {
     text-align: left;
     margin: 5px 0px; }
+  section.pie-charts-welcome .pie-circles-container {
+    position: relative; }
   section.pie-charts-welcome .chart-center-stat {
     max-height: 190px;
     max-width: 190px;
-    top: 7rem;
-    left: 3rem;
     background: white;
     border-radius: 50%;
     display: flex;
@@ -155,12 +192,22 @@ section.pie-charts-welcome {
     align-content: center;
     justify-content: center;
     width: 15vw;
-    height: 15vw; }
+    height: 15vw;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0; }
     section.pie-charts-welcome .chart-center-stat p, section.pie-charts-welcome .chart-center-stat h1 {
       display: block;
       text-align: center;
       width: 100%;
       margin: 0px; }
+  section.pie-charts-welcome .pie-counts-button {
+    width: fit-content;
+    padding: 0px 20px;
+    line-height: 18px;
+    margin-top: 20px; }
 
 section.searchbar {
   background-color: #F5F5F5;
@@ -176,6 +223,27 @@ section.searchbar {
     justify-content: flex-end;
     display: flex; }
 
+section.popular-data-requests .pop-assay {
+  margin: 0px auto;
+  text-align: left; }
+section.popular-data-requests .pop-assay-title h5 {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%; }
+section.popular-data-requests .pop-circle {
+  display: inline-block;
+  margin: 0px 5px;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  max-width: 5px;
+  padding: 5px; }
+  section.popular-data-requests .pop-circle:nth-child(1) {
+    background-color: #77AFD4; }
 section.popular-data-requests .popular-col {
   padding: 0px; }
   section.popular-data-requests .popular-col img {
@@ -234,12 +302,50 @@ section.what-new .what-new-data div h3:nth-child(3) {
 section.what-new .what-new-data div h2:nth-child(4) {
   display: none; }
 
-.about h2 {
+section.contribute-your-data {
+  box-shadow: 0 -5px 10px -5px #9996;
+  margin: 0px -15px;
+  padding: 55px 0px; }
+  section.contribute-your-data .content-block {
+    text-align: left;
+    padding: 0px 0px 0px 100px; }
+
+.child-page-hero h2 {
   color: white; }
 
 section.child-page-hero {
   background: linear-gradient(to right, #5A498D, #4C57A2); }
   section.child-page-hero p {
     color: white; }
+
+section.about-section-content .about-col {
+  text-align: left; }
+  section.about-section-content .about-col h2:nth-child(2) {
+    font-weight: 300;
+    font-size: 16px; }
+  section.about-section-content .about-col h2:nth-child(3) {
+    display: none; }
+  section.about-section-content .about-col p:nth-child(4) {
+    display: none; }
+  section.about-section-content .about-col ul:nth-child(5) {
+    display: none; }
+  section.about-section-content .about-col h2:nth-child(7) {
+    display: none; }
+  section.about-section-content .about-col p:nth-child(8) {
+    display: none; }
+  section.about-section-content .about-col h2:nth-child(9) {
+    display: none; }
+section.about-section-content .programs-col {
+  text-align: left; }
+  section.about-section-content .programs-col br {
+    content: " ";
+    display: none; }
+  section.about-section-content .programs-col ul {
+    columns: 100px 3; }
+  section.about-section-content .programs-col .program {
+    padding: 20px 0px; }
+  section.about-section-content .programs-col .grant-abstract {
+    height: 0px;
+    overflow: hidden; }
 
 /*# sourceMappingURL=style.css.map */

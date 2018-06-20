@@ -2,23 +2,101 @@ import React, { Component } from 'react'
 import PieChart from "react-svg-piechart"
 //import PropTypes from 'prop-types'
 
-let colors = [
-  '#89C889',
+let colorsTissues = [
+  '#F27277',
+  '#EB8231',
+  '#FAD591',
+  '#B22D6B',
+  '#F47E6C',
+  '#FAD591',
+  '#CC3F45',
+  '#F89C55',
+  '#FF9CA0',
+  '#DE9A1F',
+  '#BD422F',
+  '#F7A6CC',
+  '#9C141A',
   '#F683B9',
+  '#FACFAF',
+  '#FCA79A',
+  '#C94281',
+  '#C25D10',
+  '#FFE2AD',
+  '#B2242A',
+  '#F7E2DF',
+  '#D46D1E',
+  '#CF8C15',
+  '#FFC5BD',
+  '#DA614F',
+  '#F7C6DD',
+  '#F5B33C',
+  '#F5B584',
+  '#E566A1',
+  '#E0585D',
+  '#FCCB6F'
+  ];
+let colorsAssays = [
+  '#94C9EB',
+  '#93ABE8',
+  '#5BB0B5',
+  '#109488',
+  '#05635B',
+  '#C5EDF0',
+  '#42C7BB',
+  '#47337D',
+  '#3C4A63',
+  '#3F833F',
+  '#B2A5D1',
+  '#6279A1',
+  '#6DB56D',
+  '#407BA0',
+  '#3F5EAB',
+  '#C0EBC0',
   '#77AFD4',
-  '#fca79a',
+  '#7692D9',
+  '#5BB0B5',
+  '#10847A',
+  '#C7D6FF',
+  '#A6DDE0',
+  '#24AB9F',
+  '#47337D',
+  '#24334F',
+  '#A9EBE5',
   '#907FBA',
-  '#B4C6F9',
-  '#FCCB6F',
-  '#F5F5F5',
-  '#EC7379',
-  '#3CAB9F',
-  '#5D69AC'
+  '#4A5E81',
+  '#58A158',
+  '#2B688F',
+  '#ABBEE0',
+  '#A7DBA7',
+  '#5B95BA',
+  '#5171C0',
+  '#2F8E94',
+  '#BCE0F7',
+  '#B1C6FA',
+  '#7EC8CC',
+  '#109488',
+  '#332069',
+  '#E1F4F5',
+  '#63DBD0',
+  '#5A478F',
+  '#3C4A63',
+  '#58A158',
+  '#D5CFE3',
+  '#849BC4',
+  '#87C987',
+  '#407BA0',
+  '#5171C0'
 ];
 
 class PiesBelowHeader extends Component{
   getCountsList = columnName => {
-    return this.props.getColumnNameTypeAndCount(columnName, this.props.pageData)
+    let countsList = this.props.getColumnNameTypeAndCount(columnName, this.props.pageData) 
+    countsList
+      .sort( (a, b) => {
+        return a.count - b.count;
+      })
+      .reverse()
+    return countsList
   }
 
   printTotalCounts = listArray => {
@@ -34,15 +112,19 @@ class PiesBelowHeader extends Component{
     return <div>{counts}</div>;
   }
 
-  printCountsList = listArray => {
+  printCountsList = (listArray, dataType) => {
+    let colors;
+    if( dataType === 'tissue' ){
+      colors = colorsTissues
+    }else { colors = colorsAssays }
     let list = listArray.map( (element, index) => {
-      if(index > 0){
+      if(index > 0 && index < 4){
         return (
           <div className="pie-list row middle-xs" key={index}>
             <div className="pie-circle col-xs" 
               style={{'backgroundColor': colors[index%colors.length]}}
             ></div>
-            <p className="pie-list-item col-xs">{element.value} ({element.count})</p>
+            <p className="pie-list-item col-xs">{element.value} ({element.count} biosamples)</p>
           </div>
         ); 
       }
@@ -51,7 +133,12 @@ class PiesBelowHeader extends Component{
     return <div className="row"><div className="col-xs-12">{list}</div></div>
   }
 
-  buildPieData = (species = 'All Species', facetsList ) => {
+  buildPieData = (species = 'All Species', facetsList, dataType ) => {
+    let colors;
+    if( dataType === 'tissue' ){
+      colors = colorsTissues
+    }else { colors = colorsAssays }
+
     if(species === 'All Species'){
       return (
         [{title: "human", value: this.props.getColumnCountForSpecies(this.props.humanData, 'assay'), color: "#89C889"},
@@ -66,40 +153,55 @@ class PiesBelowHeader extends Component{
     )
   } 
 
+  buildLinkToLocation = (event) => {
+    event.preventDefault();
+    if(event.target.name.includes('Human')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkh1bWFuIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==', '_blank') } 
+    if(event.target.name.includes('Drosophila melanogaster')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkRyb3NvcGhpbGEgbWVsYW5vZ2FzdGVyIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==', '_blank') }
+    if(event.target.name.includes('Mouse')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIk1vdXNlIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==', '_blank') }
+    if(event.target.name.includes('Rat')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIlJhdCJdfV0sICJpbmNsdWRlRW50aXR5RXRhZyI6dHJ1ZSwgImlzQ29uc2lzdGVudCI6dHJ1ZSwgIm9mZnNldCI6MCwgImxpbWl0IjoyNX0=', '_blank') }
+    if(event.target.name.includes('All')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbXX1dLCAiaW5jbHVkZUVudGl0eUV0YWciOnRydWUsICJpc0NvbnNpc3RlbnQiOnRydWUsICJvZmZzZXQiOjAsICJsaW1pdCI6MjV9', '_blank') }
+  }
+
   buildPieSection = (speciesDropdownSelection, dataType) => {
-    let pieData = this.buildPieData('this.props.speciesSelection', this.getCountsList(dataType));
-    return (
-      <div className="pie-chart-welcome col-xs-12 col-sm-5">
-        <div className="pie-container" >
-          <h1 className="count">{this.props.pageData[dataType].count} {dataType}</h1>
-          <div className="chart-center-stat">
-            <h1 alt="count of samples">
-              {this.printTotalCounts(this.getCountsList(dataType))}
-            </h1>
-            <p>Samples</p>
+    let pieData = this.buildPieData('this.props.speciesSelection', this.getCountsList(dataType), dataType);
+    if(pieData.length > 0){
+      return (
+        <div className="pie-chart-welcome col-xs-12 col-sm-6">
+          <div className="pie-container" >
+            <h1 className="count">{this.props.pageData[dataType].count} {dataType}</h1>
+            <div className="pie-circles-container">
+              <div className="chart-center-stat">
+                <h1 alt="count of samples">
+                  {this.printTotalCounts(this.getCountsList(dataType))}
+                </h1>
+                <p>Biosamples</p>
+              </div>
+              <PieChart 
+                data={pieData}
+                expandOnHover={false}
+                expandSize={0}
+                shrinkOnTouchEnd={false}
+                strokeColor="#fff"
+                strokeLinejoin="round"
+                strokeWidth={0}
+                viewBoxSize={50}
+              />
+            </div>
           </div>
-          <PieChart 
-            data={pieData}
-            expandOnHover={false}
-            expandSize={0}
-            shrinkOnTouchEnd={false}
-            strokeColor="#fff"
-            strokeLinejoin="round"
-            strokeWidth={0}
-            viewBoxSize={50}
-          />
+          <div className="pie-counts-list" data-value={this.props.buttonState[dataType+"ButtonAll"]} >
+            {this.printCountsList(this.getCountsList(dataType), dataType)}
+          </div>
+          <button className="pie-counts-button btn" 
+            name={this.props.speciesSelection} 
+            data-value={this.props.buttonState[dataType+"ButtonAll"]} 
+            onClick={this.buildLinkToLocation}
+          >
+              {this.props.speciesSelection === "All species" ? "See all " + dataType + 's' : "See " + this.props.speciesSelection + ' ' + dataType + 's'}
+          </button>
         </div>
-        <div className="pie-counts-list" data-value={this.props.buttonState[dataType+"ButtonAll"]} >
-          {this.printCountsList(this.getCountsList(dataType))}
-        </div>
-        <button className="pie-counts-button btn" 
-          name={dataType+"ButtonAll"} 
-          data-value={this.props.buttonState[dataType+"ButtonAll"]} 
-          onClick={this.props.toggleSeeAll}>
-            {this.props.buttonState[dataType+"ButtonAll"] === false ? "See all " + dataType + 's' : "Show less " + dataType + 's'}
-        </button>
-      </div>
-    )
+      )
+    }
+    else return ''
   }
 
   componentDidUpdate(){
@@ -108,7 +210,7 @@ class PiesBelowHeader extends Component{
   render(){
     return (
       <section className="pie-charts-welcome row center-xs">
-        <div className="col-xs-12 col-sm-7">
+        <div className="col-xs-12 col-sm-8">
           <div className="row around-xs center-xs">
             {this.buildPieSection(this.props.speciesSelection, 'assay')}
             {this.buildPieSection(this.props.speciesSelection, 'tissue')}

@@ -13,10 +13,14 @@ import runAllQueries from './queryForData';
 //import defaultMouseData from './defaultData/DefaultMouseData.js'
 //import defaultRatData from './defaultData/DefaultRatData.js'
 //import defaultWikiData from './defaultData/DefaultWikiData.js'
+//import defaultWikiProgramData from './defaultData/DefaultWikiProgramData'
+//import defaultWikiContributorsData from './defaultData/DefaultWikiContributorsData'
 
 //for production fetch the data
 runAllQueries().then( data => {
+	console.log(data.wikiContributorsData)
 	ReactDOM.render(<App 
+		testData = {data.test}
 		humanData = {data.humanData}
 		mouseData = {data.mouseData}
 		ratData = {data.ratData}
@@ -25,20 +29,23 @@ runAllQueries().then( data => {
 		wikiNewsData = {data.wikiNewsData}
 		wikiProgramData = {data.wikiProgramData}
 		wikiContributorsData = {data.wikiContributorsData}
+		wikiDataUseData = {data.wikiDataUseData}
 		/>, document.getElementById('root'));
 })
 
 // for testing use the local data 
 //ReactDOM.render(
-    //<App 
-      //humanData = {defaultHumanData}
-      //mouseData = {defaultMouseData}
-      //ratData = {defaultRatData}
-      //flyData = {defaultFlyData}
-      //allSpeciesData = {defaultData}
-      //wikiData = { defaultWikiData }
-    ///>
-  //, document.getElementById('root')
+		//<App 
+			//humanData = {defaultHumanData}
+			//mouseData = {defaultMouseData}
+			//ratData = {defaultRatData}
+			//flyData = {defaultFlyData}
+			//allSpeciesData = {defaultData}
+			//wikiData = { String(defaultWikiData) }
+			//wikiProgramData = { String(defaultWikiProgramData) }
+			//wikiContributorsData = { String(defaultWikiContributorsData) }
+		///>
+	//, document.getElementById('root')
 //);
 
 registerServiceWorker();

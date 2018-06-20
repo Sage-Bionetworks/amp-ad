@@ -10,6 +10,10 @@ const AboutDataUseRequirements = props => {
             <p>content goes here</p>
           </div>
         </section>
+        <section className="row about-section-content center-xs">
+          <div className="about-col col-xs-12 col-sm-8">
+          </div>
+        </section>
       </div>
     </div>
   )

@@ -28,6 +28,14 @@ class App extends Component {
     diseasesDropdownSelection: ''
   }
 
+  componentDidMount(){
+		this.setAllPageDataPoints();
+  }
+
+  componentDidUpdate(){
+		//console.log(this.props.humanData);
+  }
+
   setFacetPageData = (key) => {
     let propKey = this.state.speciesDropdownSelection.toLowerCase() + 'Data'
     if(this.state.speciesDropdownSelection.toLowerCase() === 'all species'){
@@ -123,11 +131,13 @@ class App extends Component {
     let mappedArray = []
     if(pathToDataObject[columnName] !== undefined){
       _.mapKeys(pathToDataObject[columnName].facetValues, (object) => {
-        let flatData = { 
-          count: object.count, 
-          value: object.value
+        if( object.value !== 'org.sagebionetworks.UNDEFINED_NULL_NOTSET' ){
+          let flatData = { 
+            count: object.count, 
+            value: object.value
+          }
+          return mappedArray.push(flatData);
         }
-        return mappedArray.push(flatData);
       })
     }
     return mappedArray;
@@ -153,13 +163,24 @@ class App extends Component {
 		)
 	}
 
-  componentDidMount(){
-		this.setAllPageDataPoints();
-  }
+	ReturnAboutPrograms = (props) => {
+		return (
+			<About 
+				programData={this.props.wikiProgramData}
+				contributorData={this.props.wikiContributorsData}
+				{...props}
+			/>
+		)	
+	}
 
-  componentDidUpdate(){
-		//console.log(this.props.allSpeciesData);
-  }
+	ReturnAboutDataUse = props => {
+		return (
+			<AboutDataUseRequirements 
+				//dataUseRequirements={this.props.wikiDataUseData}
+				{...props}
+			/>
+		)	
+	}
 
   render(){
     return (
@@ -169,16 +190,25 @@ class App extends Component {
         <div className="col-xs-12 main">
 					<Route exact path="/" component={this.homeMarkup}/>
 					<Route path="/Tools" component={Tools}/>
-					<Route path="/About" component={About}/>
-					<Route path="/Studies" component={AboutStudies}/>
-					<Route path="/DataUseRequirements" component={AboutDataUseRequirements}/>
+						<Route path="/Programs" component={this.ReturnAboutPrograms}/>
+						<Route path="/Studies" component={AboutStudies}/>
+						<Route path="/DataUseRequirements" component={this.ReturnAboutDataUse}/>
 				</div>
-				<footer></footer>
+				<footer className="row center-xs middle-xs">
+					<div className="col-xs-12 col-sm-1">
+						<a href="/">Forum</a>
+					</div>
+					<div className="col-xs-12 col-sm-1">
+						<a href="/">Help</a>
+					</div>
+					<div className="col-xs-12 col-sm-2">
+						<a href="/">Terms & Privacy</a>
+					</div>
+				</footer>
 			</div>
 			</Router>
     );
   }
 }
-
 
 export default App;

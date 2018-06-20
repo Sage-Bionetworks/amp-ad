@@ -119,7 +119,6 @@ var getQueryTableResults = exports.getQueryTableResults = function getQueryTable
 */
 var login = exports.login = function login(username, password) {
   var endpoint = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'https://repo-prod.prod.sagebase.org';
-
   return doPost('/auth/v1/login', { username: username, password: password }, undefined, endpoint);
 };
 
