@@ -104,6 +104,7 @@ button:hover, select:hover { cursor: pointer }
 div.row.amp-ad {
   max-width: 100%;
 	margin: 0px;
+  min-height: 100%;
 }
 
 .nav {
@@ -161,6 +162,7 @@ footer {
 	color: white;
   height: 56px;
   width: 100%;
+  margin: 0px !important;
 	a {
 		color: white;
 		margin: 10px;
@@ -415,49 +417,127 @@ section.child-page-hero {
 	background: linear-gradient( to right, $darkPurple, $bluePurple );
 }
 
-section.about-section-content {
-	.about-col {
-		text-align: left;
-		h2:nth-child(2){
-			font-weight: 300;
-			font-size: 16px;
-		}
-		h2:nth-child(3){
-			display: none;
-		}
-		p:nth-child(4){
-			display: none;
-		}
-		ul:nth-child(5){
-			display:none;
-		}
-		h2:nth-child(7){
-			display:none;
-		}
-		p:nth-child(8){
-			display: none;
-		}
-		h2:nth-child(9){
-			display:none;
-		}
+.about {
+  section {
+	  text-align: left;
+  }
+	p {
+		font-size: 16px;
 	}
+}
 
-	.programs-col { 
-		text-align: left;
-		br {
-			content: " ";
-			display: none;
-		}
-		ul {
-		columns: 100px 3;
-		}
-		.program {
-			padding: 20px 0px;
-		}
-		.grant-abstract {
-			height: 0px;
-			overflow: hidden;
-		}
+.select-publications {
+  margin-bottom: 20px;
+}
+
+section.about-section-content {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  text-align: left;
+  .expand-section {
+    height: fit-content;
+    margin-bottom: inherit;
+  }
+  .expand-section.hide {
+    height: 0px;
+    margin-bottom: -10px;
+  }
+  input[type=checkbox]{
+    visibility: hidden;
+  }
+	.expand-icon {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    top: -60px;
+		background-repeat: no-repeat;
+		background-position: center;
+    &.plus {
+      background-image: url(./images/plus-icon.svg);
+    }
+    &.minus {
+      background-image: url(./images/minus-icon.svg);
+    }
 	}
+  .expand-icon:hover {
+    cursor: pointer;
+  }
+	.content {
+		overflow-y: hidden;
+		transition: max-height 1s ease-out;
+		max-height: 1500px;
+    height: auto;
+	}
+	.content.hide {
+		max-height: 0px;
+	}
+	
+	.program-row {
+		border-bottom: 1px solid #BDBDBD; 
+		padding-bottom: 30px;
+	}
+}
+
+section.about-section-content.select-publications {
+  .content {
+    overflow-y: hidden;
+    transition: max-height .3s ease-out;
+    max-height: 300px;
+    height: auto;
+  }
+  .content.hide {
+    max-height: 0px;
+  }
+  .about-col {
+    .row.heading-section {
+      padding-left: 4px; 
+      padding-right: 4px; 
+    }
+  }
+  .publications-row {
+    h4 {
+      color: $gray;
+      font-size: 16px;
+      font-weight: 300;
+    }
+    h2 {
+      font-size: 18px;
+      font-weight: 300;
+    }
+    a h2 {
+      color: $darkPurple;
+      text-decoration: underline;
+      font-weight: 400;
+    }
+  }
+}
+
+section.select-publications {
+  box-shadow: 0 10px 5px -5px #9996;
+  padding-bottom: 40px;
+  margin-left: -12px;
+  margin-right: -12px;
+}
+
+section.about-m2ove-intro-section {
+  text-align: left;
+  margin-left: -12px;
+  margin-right: -12px;
+  box-shadow: -1px -5px 5px -4px #9996;
+  padding-bottom: 40px;
+  margin-top:10px;
+  li { 
+    list-style: disc;
+  }
+  li:first-child{
+    margin-left: -20px;
+    list-style: none;
+    font-weight: bold;
+  }
+}
+
+section.about-resilience-intro-section {
+  box-shadow: -1px -5px 5px -4px #9996;
+  margin-top:10px;
 }
 

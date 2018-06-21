@@ -7,12 +7,12 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import study from './defaultData/Study';
 
 // component js
-import Header from './Header';
-import Home from './Home';
-import Tools from './Tools';
-import About from './About';
-import AboutStudies from './AboutStudies';
-import AboutDataUseRequirements from './AboutDataUseRequirements';
+import Header from './Header'
+import Home from './Home'
+import Tools from './Tools'
+import AboutPrograms from './AboutPrograms'
+import AboutStudies from './AboutStudies'
+import AboutDataUseRequirements from './AboutDataUseRequirements'
 
 class App extends Component {
   state = {
@@ -163,11 +163,14 @@ class App extends Component {
 		)
 	}
 
+
 	ReturnAboutPrograms = (props) => {
 		return (
-			<About 
+			<AboutPrograms 
 				programData={this.props.wikiProgramData}
 				contributorData={this.props.wikiContributorsData}
+				handleChangeEvent={this.handleChangeEvent}
+				parentState={this.state}
 				{...props}
 			/>
 		)	

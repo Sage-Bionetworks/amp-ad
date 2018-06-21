@@ -18,19 +18,18 @@ import runAllQueries from './queryForData';
 
 //for production fetch the data
 runAllQueries().then( data => {
-	console.log(data.wikiContributorsData)
-	ReactDOM.render(<App 
-		testData = {data.test}
-		humanData = {data.humanData}
-		mouseData = {data.mouseData}
-		ratData = {data.ratData}
-		flyData = {data.flyData}
-		allSpeciesData = {data.allSpeciesData}
-		wikiNewsData = {data.wikiNewsData}
-		wikiProgramData = {data.wikiProgramData}
-		wikiContributorsData = {data.wikiContributorsData}
-		wikiDataUseData = {data.wikiDataUseData}
-		/>, document.getElementById('root'));
+  ReactDOM.render(<App 
+    testData = {data.test}
+    humanData = {data.humanData}
+    mouseData = {data.mouseData}
+    ratData = {data.ratData}
+    flyData = {data.flyData}
+    allSpeciesData = {data.allSpeciesData}
+    wikiNewsData = {data.wikiNewsData}
+    wikiProgramData = {data.wikiProgramData}
+    wikiContributorsData = {data.wikiContributorsData}
+    wikiDataUseData = {data.wikiDataUseData}
+    />, document.getElementById('root'));
 })
 
 // for testing use the local data 

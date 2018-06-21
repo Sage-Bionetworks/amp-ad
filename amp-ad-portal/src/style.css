@@ -74,7 +74,8 @@ button:hover, select:hover {
 
 div.row.amp-ad {
   max-width: 100%;
-  margin: 0px; }
+  margin: 0px;
+  min-height: 100%; }
 
 .nav li {
   list-style: none;
@@ -114,7 +115,8 @@ footer {
   background-color: #5A498D;
   color: white;
   height: 56px;
-  width: 100%; }
+  width: 100%;
+  margin: 0px !important; }
   footer a {
     color: white;
     margin: 10px; }
@@ -318,34 +320,94 @@ section.child-page-hero {
   section.child-page-hero p {
     color: white; }
 
-section.about-section-content .about-col {
+.about section {
   text-align: left; }
-  section.about-section-content .about-col h2:nth-child(2) {
-    font-weight: 300;
-    font-size: 16px; }
-  section.about-section-content .about-col h2:nth-child(3) {
-    display: none; }
-  section.about-section-content .about-col p:nth-child(4) {
-    display: none; }
-  section.about-section-content .about-col ul:nth-child(5) {
-    display: none; }
-  section.about-section-content .about-col h2:nth-child(7) {
-    display: none; }
-  section.about-section-content .about-col p:nth-child(8) {
-    display: none; }
-  section.about-section-content .about-col h2:nth-child(9) {
-    display: none; }
-section.about-section-content .programs-col {
+.about p {
+  font-size: 16px; }
+
+.select-publications {
+  margin-bottom: 20px; }
+
+section.about-section-content {
+  padding-top: 0px;
+  padding-bottom: 0px;
   text-align: left; }
-  section.about-section-content .programs-col br {
-    content: " ";
-    display: none; }
-  section.about-section-content .programs-col ul {
-    columns: 100px 3; }
-  section.about-section-content .programs-col .program {
-    padding: 20px 0px; }
-  section.about-section-content .programs-col .grant-abstract {
+  section.about-section-content .expand-section {
+    height: fit-content;
+    margin-bottom: inherit; }
+  section.about-section-content .expand-section.hide {
     height: 0px;
-    overflow: hidden; }
+    margin-bottom: -10px; }
+  section.about-section-content input[type=checkbox] {
+    visibility: hidden; }
+  section.about-section-content .expand-icon {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    top: -60px;
+    background-repeat: no-repeat;
+    background-position: center; }
+    section.about-section-content .expand-icon.plus {
+      background-image: url(./images/plus-icon.svg); }
+    section.about-section-content .expand-icon.minus {
+      background-image: url(./images/minus-icon.svg); }
+  section.about-section-content .expand-icon:hover {
+    cursor: pointer; }
+  section.about-section-content .content {
+    overflow-y: hidden;
+    transition: max-height 1s ease-out;
+    max-height: 1500px;
+    height: auto; }
+  section.about-section-content .content.hide {
+    max-height: 0px; }
+  section.about-section-content .program-row {
+    border-bottom: 1px solid #BDBDBD;
+    padding-bottom: 30px; }
+
+section.about-section-content.select-publications .content {
+  overflow-y: hidden;
+  transition: max-height .3s ease-out;
+  max-height: 300px;
+  height: auto; }
+section.about-section-content.select-publications .content.hide {
+  max-height: 0px; }
+section.about-section-content.select-publications .about-col .row.heading-section {
+  padding-left: 4px;
+  padding-right: 4px; }
+section.about-section-content.select-publications .publications-row h4 {
+  color: #F5F5F5;
+  font-size: 16px;
+  font-weight: 300; }
+section.about-section-content.select-publications .publications-row h2 {
+  font-size: 18px;
+  font-weight: 300; }
+section.about-section-content.select-publications .publications-row a h2 {
+  color: #5A498D;
+  text-decoration: underline;
+  font-weight: 400; }
+
+section.select-publications {
+  box-shadow: 0 10px 5px -5px #9996;
+  padding-bottom: 40px;
+  margin-left: -12px;
+  margin-right: -12px; }
+
+section.about-m2ove-intro-section {
+  text-align: left;
+  margin-left: -12px;
+  margin-right: -12px;
+  box-shadow: -1px -5px 5px -4px #9996;
+  padding-bottom: 40px;
+  margin-top: 10px; }
+  section.about-m2ove-intro-section li {
+    list-style: disc; }
+  section.about-m2ove-intro-section li:first-child {
+    margin-left: -20px;
+    list-style: none;
+    font-weight: bold; }
+
+section.about-resilience-intro-section {
+  box-shadow: -1px -5px 5px -4px #9996;
+  margin-top: 10px; }
 
 /*# sourceMappingURL=style.css.map */
