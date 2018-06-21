@@ -32,9 +32,9 @@ const addSpaceToHash = string => {
 }
 
 let request = {
-  entityId: "syn12532715",
+  entityId: "syn12532774",
   query: {
-            sql: "SELECT * FROM syn12532715",
+            sql: "SELECT * FROM syn12532774 WHERE ((\"diagnosis\" = 'Alzheimer''s Disease'))",
             includeEntityEtag: true,
             isConsistent: true,
             offset: 0,
@@ -58,9 +58,11 @@ const runAllQueries = () => {
       getSpeciesStudiesMetaData('Mouse', 'assay', 'mouseToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.mouseData = tokenResponse }),
       getSpeciesStudiesMetaData('Rat', 'assay', 'ratToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.ratData = tokenResponse }),
       getSpeciesStudiesMetaData('Drosophila melanogaster', 'assay', 'flyToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.flyData = tokenResponse }),
+
       SynapseClient.getQueryTableResults(request, tokenResponse.sessionToken)
       .then( response => {
         allData.test = response 
+        console.log(response)
       }).catch(function (error) {
         console.log(error)
       })
