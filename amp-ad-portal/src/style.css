@@ -318,34 +318,59 @@ section.child-page-hero {
   section.child-page-hero p {
     color: white; }
 
-section.about-section-content .about-col {
+section.about-intro-section {
   text-align: left; }
-  section.about-section-content .about-col h2:nth-child(2) {
-    font-weight: 300;
+  section.about-intro-section p {
     font-size: 16px; }
-  section.about-section-content .about-col h2:nth-child(3) {
-    display: none; }
-  section.about-section-content .about-col p:nth-child(4) {
-    display: none; }
-  section.about-section-content .about-col ul:nth-child(5) {
-    display: none; }
-  section.about-section-content .about-col h2:nth-child(7) {
-    display: none; }
-  section.about-section-content .about-col p:nth-child(8) {
-    display: none; }
-  section.about-section-content .about-col h2:nth-child(9) {
-    display: none; }
-section.about-section-content .programs-col {
+
+.about {
+  height: 2000px; }
+
+.select-publications {
+  margin-bottom: 20px; }
+
+section.about-section-content {
+  padding-top: 0px;
+  padding-bottom: 0px;
   text-align: left; }
-  section.about-section-content .programs-col br {
-    content: " ";
-    display: none; }
-  section.about-section-content .programs-col ul {
-    columns: 100px 3; }
-  section.about-section-content .programs-col .program {
-    padding: 20px 0px; }
-  section.about-section-content .programs-col .grant-abstract {
+  section.about-section-content .expand-section {
+    height: fit-content;
+    margin-bottom: inherit; }
+  section.about-section-content .expand-section.hide {
     height: 0px;
-    overflow: hidden; }
+    margin-bottom: -10px; }
+  section.about-section-content input[type=checkbox] {
+    visibility: hidden; }
+  section.about-section-content .expand-icon {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    top: -60px;
+    background-repeat: no-repeat;
+    background-position: center; }
+    section.about-section-content .expand-icon.plus {
+      background-image: url(./images/plus-icon.svg); }
+    section.about-section-content .expand-icon.minus {
+      background-image: url(./images/minus-icon.svg); }
+  section.about-section-content .expand-icon:hover {
+    cursor: pointer; }
+  section.about-section-content .content {
+    overflow-y: hidden;
+    transition: max-height 1s ease-out;
+    max-height: 1500px;
+    height: auto; }
+  section.about-section-content .content.hide {
+    max-height: 0px; }
+  section.about-section-content .program-row {
+    border-bottom: 1px solid #BDBDBD;
+    padding-bottom: 30px; }
+
+section.about-section-content.select-publications .content {
+  overflow-y: hidden;
+  transition: max-height .3s ease-out;
+  max-height: 300px;
+  height: auto; }
+section.about-section-content.select-publications .content.hide {
+  max-height: 0px; }
 
 /*# sourceMappingURL=style.css.map */
