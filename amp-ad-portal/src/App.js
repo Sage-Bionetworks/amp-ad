@@ -105,6 +105,16 @@ class App extends Component {
     this.handleChanges(stateKey, selectionArray);
   }
 
+  handleReactDropdownEvent = (event) => {
+    console.log(event)
+    let key = event.value[0]
+    this.setState({
+      [key]: event.label 
+    }, ()=> {
+      this.setAllPageDataPoints();
+    })
+  }
+
   handleChangeEvent = (event) => {
     let key = event.target.name;
     this.setState({
@@ -165,10 +175,9 @@ class App extends Component {
 				speciesDropdownSelection={this.state.speciesDropdownSelection}
 
         diagnosesSelectionOptions={this.state.diagnosesSelectionOptions}
-        diagnosesDropdownSelection={this.state.diagnoseDropdownSelection}
+        diagnosesDropdownSelection={this.state.diagnosesDropdownSelection}
 
         wikiNewsData={this.props.wikiNewsData}
-				handleChangeEvent={this.handleChangeEvent}
 				toggleSeeAll={this.toggleSeeAll}
 				buttonState={this.state.buttonState}
 				getSum={this.getSum}
@@ -178,6 +187,9 @@ class App extends Component {
 				ratData={this.props.ratData}
 				mouseData={this.props.flyData}
 				flyData={this.props.flyData}
+				
+        handleChangeEvent={this.handleChangeEvent}
+        handleReactDropdownEvent={this.handleReactDropdownEvent}
 			/>
 		)
 	}

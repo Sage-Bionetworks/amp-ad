@@ -1,14 +1,26 @@
 import React, { Component } from "react"
+import Dropdown from 'react-dropdown'
 
 class SearchBar extends Component {
- generateSelectionDropdown = (props, name) => {
+ generateSelectionDropdown = (props, name, dropdownValue) => {
+   const options = [];
     if(props !== undefined){
-      let options = props.map( (element, index) => {
-        return (
-          <option key={index} value={element}>{element}</option>
-        ); 
+      props.forEach( (element, index) => {
+        options.push({ 
+          label: element, 
+          value: [name, element],
+          className: "dropdown-element"
+        })
       });
-      return <select name={name} value={this.props[name]} onChange={this.props.handleChange}>{options}</select>;
+      if(options[0] !== undefined){
+        console.log(dropdownValue)
+        return <Dropdown 
+          options={options} 
+          placeholder={options[0].value[1]} 
+          onChange={this.props.handleReactDropdownEvent} 
+          value={dropdownValue}
+        />
+      }else return <div></div>
     }
   }
 
@@ -21,10 +33,10 @@ class SearchBar extends Component {
                 <h2 className="dropdown-description">View data by</h2> 
               </div>
               <div className="col-xs-3 col-sm-3">
-                {this.generateSelectionDropdown(this.props.speciesSelectionOptions, "speciesDropdownSelection")}
+                {this.generateSelectionDropdown(this.props.speciesSelectionOptions, "speciesDropdownSelection", this.props.speciesSelection)}
               </div>
               <div className="col-xs-3 col-sm-3">
-                {this.generateSelectionDropdown(this.props.diagnoseseSelectionOptions, "diagnosesDropdownSelection")}
+                {this.generateSelectionDropdown(this.props.diagnosesSelectionOptions, "diagnosesDropdownSelection", this.props.diagnosesSelection)}
 							</div>
               <div className="col-xs-3 col-sm-1 search-icon-box">
                 <img src={require('./images/search.svg')} alt="search magnifying glass icon" className="svg-small-icon" /> 

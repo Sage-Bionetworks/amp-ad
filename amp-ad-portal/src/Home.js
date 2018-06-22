@@ -14,11 +14,13 @@ const Home = props => {
      <Welcome />
       <SearchBar 
         setDiagnosisMenu={this.setDiagnosisMenu}
-        dropdownSelection={props.speciesDropdownSelection}
+        speciesSelection={props.speciesDropdownSelection}
         diagnosesSelection={props.diagnosesDropdownSelection}
+        diagnosesSelectionOptions={props.diagnosesSelectionOptions}
+
         handleChange={props.handleChangeEvent}
+        handleReactDropdownEvent={props.handleReactDropdownEvent}
         speciesSelectionOptions={props.speciesSelectionOptions} 
-        diagnoseseSelectionOptions={props.diagnosesSelectionOptions}
       />
       <PiesBelowHeader 
         toggleSeeAll={props.toggleSeeAll}

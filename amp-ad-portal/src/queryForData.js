@@ -6,50 +6,7 @@ import _ from 'lodash'
 import * as SynapseClient  from './synapse/SynapseClient'
 import * as SynapseConstants from './synapse/SynapseConstants'
 
-let allData = {
-  speciesList: [],
-  mouseData: {
-    diagnosesList: [],
-    diagnoses: {},
-    tissue: {},
-    assay: {},
-    species: {}
-  },
-  ratData: {
-    diagnosesList: [],
-    diagnoses: {},
-    tissue: {},
-    assay: {},
-    species: {}
-  },
-  flyData: {
-    diagnosesList: [],
-    diagnoses: {},
-    tissue: {},
-    assay: {},
-    species: {}
-  },
-  humanData: {
-    diagnosesList: [],
-    diagnoses: {},
-    tissues: {},
-    assay: {},
-    species: {}
-  },
-  allspeciesData: {
-    species: {},
-    diagnosesList: [],
-    diagnoses: {},
-    tissue: {},
-    assay: {}
-  },
-  tokens: {},
-  test: {},
-  wikiNewsData: {},
-  wikiProgramsData: {},
-	wikiContributorsData: {},
-	wikiDataUseData: {}
-};
+import allData from './defaultData/AllData'
 
 const addSpaceToHash = string => {
   for( var index = 0; index < string.length; index++){
@@ -85,6 +42,13 @@ const buildRequest = (table, query) => {
      //obj[item[keyField]] = item
      //return obj
    //}, {})
+//
+      //let studiesObject = arrayToObject(studies, "value") 
+      //studiesObject = _.mapKeys(studiesObject, (value, key) => {
+        //key = key.replace(/\s/g, '') 
+        //key = key.replace(/'/g, '')
+        //return key
+      //})
 
 const mapStudies = (species, tokenResponse) => {
   let query = "SELECT * FROM syn11346063 WHERE ((\"species\" = '" + species +"'))";
@@ -96,12 +60,6 @@ const mapStudies = (species, tokenResponse) => {
       let speciesFacets = response.facets[4].facetValues
       let assays = response.facets[9].facetValues 
       let tissues = response.facets[12].facetValues 
-      //let studiesObject = arrayToObject(studies, "value") 
-      //studiesObject = _.mapKeys(studiesObject, (value, key) => {
-        //key = key.replace(/\s/g, '') 
-        //key = key.replace(/'/g, '')
-        //return key
-      //})
       if( species === 'allspecies' ){
         let speciesList = _.map(speciesFacets, "value")
         speciesList.map( (element) => {
@@ -109,6 +67,7 @@ const mapStudies = (species, tokenResponse) => {
             element = "Fruit Fly"
           }
         })
+        speciesList.splice(0,1)
         speciesList.splice(0,0, 'All species')
         allData.speciesList = speciesList
       }
