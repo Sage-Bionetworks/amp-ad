@@ -22,21 +22,67 @@ class App extends Component {
     },
     pageData: study,
     studyTemplate: {},
-    speciesSelection: [], 
-    diseasesSelection: [],
+    diagnosesSelectionOptions: [],
     speciesDropdownSelection: 'All species',
-    diseasesDropdownSelection: ''
+    diagnosesDropdownSelection: 'All diagnoses'
   }
 
   componentDidMount(){
 		this.setAllPageDataPoints();
+    this.setDiagnosesMenu();
   }
 
   componentDidUpdate(){
 		//console.log(this.props.humanData);
   }
 
+  setDiagnosesMenu = () => {
+    let selection = this.state.speciesDropdownSelection
+    if(selection === "All species"){ selection = 'allSpecies' }
+    if(selection === "Drosophila melanogaster"){ selection = 'fly' }
+    selection = selection + "Data"
+    let diagnoses = this.props[selection].diagnosesList
+    console.log(diagnoses)
+    this.setState({
+      diagnosesSelectionOptions: diagnoses
+    }) 
+  }
+
+  setSubFacet = (key, speciesKey, subPropKeyArray) => {
+    console.log(key, speciesKey)
+    //console.log(this.props[propKey])
+    subPropKeyArray.forEach( (element, index) => {
+      let stateObjectToAdd = { 
+        [element]: this.props[speciesKey][element] 
+      }
+      console.log(stateObjectToAdd)
+      //this.setState( prevState => ({
+        //...prevState,
+        //pageData: { ...prevState.pageData, [key]: {...stateObjectToAdd} }  
+      //}), () => {
+        //this.setSelection(this.state.pageData.species, "speciesSelection", "All Species")
+        //this.setSelection(this.state.pageData.diseases, "diseasesSelection", "All Diseases")
+      //})
+    })
+    //this.props[propKey][subPropKey].forEach( (element, index) => {
+      //if ( element.columnName === key ){
+        //let stateObjectToAdd = { 
+          //count: element.facetValues.length, 
+          //facetValues: {...element.facetValues} 
+        //};
+        //this.setState( prevState => ({
+          //...prevState,
+          //pageData: { ...prevState.pageData, [key]: {...stateObjectToAdd} }  
+        //}), () => {
+          //this.setSelection(this.state.pageData.species, "speciesSelection", "All Species")
+          //this.setSelection(this.state.pageData.diseases, "diseasesSelection", "All Diseases")
+        //})
+      //}  
+    //})
+  }
+
   setFacetPageData = (key) => {
+    console.log(this.props)
     let propKey = this.state.speciesDropdownSelection.toLowerCase() + 'Data'
     if(this.state.speciesDropdownSelection.toLowerCase() === 'all species'){
       propKey = 'allSpeciesData'
@@ -44,24 +90,11 @@ class App extends Component {
     if(this.state.speciesDropdownSelection === 'Drosophila melanogaster'){
       propKey = 'flyData'
     }
-    this.props[propKey].facets.forEach( (element, index) => {
-      if ( element.columnName === key ){
-        let stateObjectToAdd = { 
-          count: element.facetValues.length, 
-          facetValues: {...element.facetValues} 
-        };
-        this.setState( prevState => ({
-          ...prevState,
-          pageData: { ...prevState.pageData, [key]: {...stateObjectToAdd} }  
-        }), () => {
-          this.setSelection(this.state.pageData.species, "speciesSelection", "All Species");
-        })
-      }  
-    })
+    this.setSubFacet(key, propKey, ["assays", "tissues", "diagnoses", "species"])
   }
 
   setAllPageDataPoints = () => {
-    let pageDataPoints = ['assay', 'tissue', 'analysisType', 'cellType','consortium','grant','isConsortiumAnalysis','isModelSystem','species','dataType','dataSubtype','assayTarget','organ','celltype','isMultiSpecimen','fileFormat' ];
+    let pageDataPoints = ['assay', 'tissue', 'diagnoses', 'species' ];
     pageDataPoints.forEach( (element, index) => {
       this.setFacetPageData(element);  
     });
@@ -83,6 +116,7 @@ class App extends Component {
 	}
 
   setSelection = (STATE, stateKey, prependValue) => {
+    console.log(STATE)
     let selectionObject = STATE.facetValues; 
     let selectionArray = this.convertObjectValsToArray(selectionObject);
     if(prependValue){
@@ -146,10 +180,15 @@ class App extends Component {
 	homeMarkup = () => {
 		return (
 			<Home 
-        wikiNewsData={this.props.wikiNewsData}
+        setDiagnosesMenu={this.setDiagnosesMenu}
+				speciesSelectionOptions={this.props.speciesSelection}
 				speciesDropdownSelection={this.state.speciesDropdownSelection}
+
+        diagnosesSelectionOptions={this.state.diagnosesSelectionOptions}
+        diagnosesDropdownSelection={this.state.diagnoseDropdownSelection}
+
+        wikiNewsData={this.props.wikiNewsData}
 				handleChangeEvent={this.handleChangeEvent}
-				speciesSelection={this.state.speciesSelection}
 				toggleSeeAll={this.toggleSeeAll}
 				buttonState={this.state.buttonState}
 				getSum={this.getSum}
@@ -162,7 +201,6 @@ class App extends Component {
 			/>
 		)
 	}
-
 
 	ReturnAboutPrograms = (props) => {
 		return (

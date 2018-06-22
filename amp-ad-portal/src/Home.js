@@ -8,27 +8,37 @@ import PopularDataRequests from './PopularDataRequests'
 
 const ReactMarkdown = require('react-markdown')
 
+const ReturnPiesBelowHeader = props => {
+  return (
+    <PiesBelowHeader 
+      toggleSeeAll={props.toggleSeeAll}
+      buttonState={props.buttonState}
+      speciesSelection={props.speciesDropdownSelection}
+      getSum={props.getSum}
+      getColumnCountForSpecies={props.getColumnCountForSpecies}
+      getColumnNameTypeAndCount={props.getColumnNameDataTypeAndCount}
+      pageData={props.pageData} 
+      ratData={props.ratData}
+      humanData={props.humanData}
+      mouseData={props.mouseData}
+      flyData={props.flyData}
+    />
+  )
+}
+
 const Home = props => {
   return (
     <div> 
      <Welcome />
       <SearchBar 
+        setDiagnosisMenu={this.setDiagnosisMenu}
         dropdownSelection={props.speciesDropdownSelection}
+        diagnosesSelection={props.diagnosesDropdownSelection}
+
         handleChange={props.handleChangeEvent}
-        speciesSelection={props.speciesSelection} 
-      />
-      <PiesBelowHeader 
-        toggleSeeAll={props.toggleSeeAll}
-        buttonState={props.buttonState}
-        speciesSelection={props.speciesDropdownSelection}
-        getSum={props.getSum}
-        getColumnCountForSpecies={props.getColumnCountForSpecies}
-        getColumnNameTypeAndCount={props.getColumnNameDataTypeAndCount}
-        pageData={props.pageData} 
-        ratData={props.ratData}
-        humanData={props.humanData}
-        mouseData={props.mouseData}
-        flyData={props.flyData}
+
+        speciesSelectionOptions={props.speciesSelectionOptions} 
+        diagnoseseSelectionOptions={props.diagnosesSelectionOptions}
       />
 
       <PopularDataRequests />
