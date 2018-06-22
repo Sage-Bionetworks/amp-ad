@@ -10,38 +10,38 @@ let allData = {
   speciesList: [],
   mouseData: {
     diagnosesList: [],
-    diagnosis: {},
-    tissues: {},
-    assays: {},
+    diagnoses: {},
+    tissue: {},
+    assay: {},
     species: {}
   },
   ratData: {
     diagnosesList: [],
-    diagnosis: {},
-    tissues: {},
-    assays: {},
+    diagnoses: {},
+    tissue: {},
+    assay: {},
     species: {}
   },
   flyData: {
     diagnosesList: [],
-    diagnosis: {},
-    tissues: {},
-    assays: {},
+    diagnoses: {},
+    tissue: {},
+    assay: {},
     species: {}
   },
   humanData: {
     diagnosesList: [],
-    diagnosis: {},
+    diagnoses: {},
     tissues: {},
-    assays: {},
+    assay: {},
     species: {}
   },
   allspeciesData: {
     species: {},
     diagnosesList: [],
-    diagnosis: {},
-    tissues: {},
-    assays: {}
+    diagnoses: {},
+    tissue: {},
+    assay: {}
   },
   tokens: {},
   test: {},
@@ -104,14 +104,20 @@ const mapStudies = (species, tokenResponse) => {
       //})
       if( species === 'allspecies' ){
         let speciesList = _.map(speciesFacets, "value")
+        speciesList.map( (element) => {
+          if(element === "Drosophila melanogaster"){
+            element = "Fruit Fly"
+          }
+        })
+        speciesList.splice(0,0, 'All species')
         allData.speciesList = speciesList
       }
       if( species === "Drosophila melanogaster"){
         species = 'fly'
       }
       allData[species.toLowerCase()+"Data"].species = speciesFacets      
-      allData[species.toLowerCase()+"Data"].assays = assays      
-      allData[species.toLowerCase()+"Data"].tissues = tissues      
+      allData[species.toLowerCase()+"Data"].assay = assays      
+      allData[species.toLowerCase()+"Data"].tissue = tissues      
     }).catch(function (error) {
       console.log(error)
     })
@@ -128,18 +134,11 @@ const mapAllDiseases = (species, tokenResponse) => {
       if( species === "Drosophila melanogaster"){
         species = 'fly'
       }
-      //let diseasesObject = arrayToObject(diseases, "value") 
-      //diseasesObject = _.mapKeys(diseasesObject, (value, key) => {
-        //key = key.replace(/\s/g, '') 
-        //key = key.replace(/'/g, '')
-        //return key
-      //})
       allData[species.toLowerCase()+"Data"].diagnoses = diagnoses      
       let diagnosesList = _.map(diagnoses, 'value')
       diagnosesList.splice(0,1)
       diagnosesList.splice(0,0,'All Diagnoses')
       allData[species.toLowerCase()+"Data"].diagnosesList = diagnosesList
-    //console.log(allData.humanTestData);
     }).catch(function (error) {
       console.log(error)
     })
