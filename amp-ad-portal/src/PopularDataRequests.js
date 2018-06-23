@@ -21,15 +21,25 @@ const PopularDataRequests = props => {
                 </div>
                 <div className="pop-assay row center-xs middle-xs around-xs">
                   <div className="pop-circle col-xs"></div>
-                  <p className="pop-list-item col-xs">rnaSEQ: Human</p>
+                  <p className="pop-list-item col-xs"><a href="https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkh1bWFuIl19LHsiY29uY3JldGVUeXBlIjoib3JnLnNhZ2ViaW9uZXR3b3Jrcy5yZXBvLm1vZGVsLnRhYmxlLkZhY2V0Q29sdW1uVmFsdWVzUmVxdWVzdCIsICJjb2x1bW5OYW1lIjoiYXNzYXkiLCAiZmFjZXRWYWx1ZXMiOlsicm5hU2VxIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==" >
+                    rnaSEQ: Human</a>
+                  </p>
                 </div>
                 <div className="pop-assay row middle-xs around-xs">
                   <div className="pop-circle col-xs"></div>
-                  <p className="pop-list-item col-xs">LC-MSMS: Human</p>
+                  <p className="pop-list-item col-xs">
+                    <a href="https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkh1bWFuIl19LHsiY29uY3JldGVUeXBlIjoib3JnLnNhZ2ViaW9uZXR3b3Jrcy5yZXBvLm1vZGVsLnRhYmxlLkZhY2V0Q29sdW1uVmFsdWVzUmVxdWVzdCIsICJjb2x1bW5OYW1lIjoiYXNzYXkiLCAiZmFjZXRWYWx1ZXMiOlsiTEMtTVNNUyJdfV0sICJpbmNsdWRlRW50aXR5RXRhZyI6dHJ1ZSwgImlzQ29uc2lzdGVudCI6dHJ1ZSwgIm9mZnNldCI6MCwgImxpbWl0IjoyNX0=">
+                      LC-MSMS: Human
+                    </a>
+                  </p>
                 </div>
                 <div className="pop-assay row middle-xs around-xs">
                   <div className="pop-circle col-xs"></div>
-                  <p className="pop-list-item col-xs">rnaSEQ: Mouse</p>
+                  <p className="pop-list-item col-xs">
+                    <a href="https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJhc3NheSIsICJmYWNldFZhbHVlcyI6WyJybmFTZXEiXX0seyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIk1vdXNlIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==">
+                      rnaSEQ: Mouse
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -47,15 +57,27 @@ const PopularDataRequests = props => {
                 </div>
                 <div className="pop-assay row center-xs middle-xs">
                   <div className="pop-circle col-xs"></div>
-                  <p className="pop-list-item col-xs">Temporal cortex: Human</p>
+                  <p className="pop-list-item col-xs">
+                    <a href="https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkh1bWFuIl19LHsiY29uY3JldGVUeXBlIjoib3JnLnNhZ2ViaW9uZXR3b3Jrcy5yZXBvLm1vZGVsLnRhYmxlLkZhY2V0Q29sdW1uVmFsdWVzUmVxdWVzdCIsICJjb2x1bW5OYW1lIjoiYXNzYXkiLCAiZmFjZXRWYWx1ZXMiOltdfV0sICJpbmNsdWRlRW50aXR5RXRhZyI6dHJ1ZSwgImlzQ29uc2lzdGVudCI6dHJ1ZSwgIm9mZnNldCI6MCwgImxpbWl0IjoyNX0=">
+                      Temporal cortex: Human
+                    </a>
+                  </p>
                 </div>
                 <div className="pop-assay row middle-xs">
                   <div className="pop-circle col-xs"></div>
-                  <p className="pop-list-item col-xs">Prefrontal cortex: Human</p>
+                  <p className="pop-list-item col-xs">
+                    <a href="https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkh1bWFuIl19LHsiY29uY3JldGVUeXBlIjoib3JnLnNhZ2ViaW9uZXR3b3Jrcy5yZXBvLm1vZGVsLnRhYmxlLkZhY2V0Q29sdW1uVmFsdWVzUmVxdWVzdCIsICJjb2x1bW5OYW1lIjoiYXNzYXkiLCAiZmFjZXRWYWx1ZXMiOltdfSx7ImNvbmNyZXRlVHlwZSI6Im9yZy5zYWdlYmlvbmV0d29ya3MucmVwby5tb2RlbC50YWJsZS5GYWNldENvbHVtblZhbHVlc1JlcXVlc3QiLCAiY29sdW1uTmFtZSI6InRpc3N1ZSIsICJmYWNldFZhbHVlcyI6WyJwcmVmcm9udGFsIGNvcnRleCJdfV0sICJpbmNsdWRlRW50aXR5RXRhZyI6dHJ1ZSwgImlzQ29uc2lzdGVudCI6dHJ1ZSwgIm9mZnNldCI6MCwgImxpbWl0IjoyNX0=">
+                      Prefrontal cortex: Human
+                    </a>
+                  </p>
                 </div>
                 <div className="pop-assay row middle-xs">
                   <div className="pop-circle col-xs"></div>
-                  <p className="pop-list-item col-xs">Cerebellum: Human</p>
+                  <p className="pop-list-item col-xs">
+										<a href="https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkh1bWFuIl19LHsiY29uY3JldGVUeXBlIjoib3JnLnNhZ2ViaW9uZXR3b3Jrcy5yZXBvLm1vZGVsLnRhYmxlLkZhY2V0Q29sdW1uVmFsdWVzUmVxdWVzdCIsICJjb2x1bW5OYW1lIjoiYXNzYXkiLCAiZmFjZXRWYWx1ZXMiOltdfSx7ImNvbmNyZXRlVHlwZSI6Im9yZy5zYWdlYmlvbmV0d29ya3MucmVwby5tb2RlbC50YWJsZS5GYWNldENvbHVtblZhbHVlc1JlcXVlc3QiLCAiY29sdW1uTmFtZSI6InRpc3N1ZSIsICJmYWNldFZhbHVlcyI6WyJjZXJlYmVsbHVtIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==">
+											Cerebellum: Human
+										</a>	
+									</p>
                 </div>
               </div>
             </div>

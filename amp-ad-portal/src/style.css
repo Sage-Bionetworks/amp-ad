@@ -232,6 +232,8 @@ section.searchbar {
     line-height: 40px;
     padding-left: 20px;
     font-size: 18px; }
+  section.searchbar .search-icon-box {
+    display: none; }
   section.searchbar h2 {
     margin: 0px; }
   section.searchbar form {
