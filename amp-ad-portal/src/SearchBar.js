@@ -13,7 +13,6 @@ class SearchBar extends Component {
         })
       });
       if(options[0] !== undefined){
-        console.log(dropdownValue)
         return <Dropdown 
           options={options} 
           placeholder={options[0].value[1]} 

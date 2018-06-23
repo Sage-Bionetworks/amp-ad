@@ -15,16 +15,17 @@ const Home = props => {
       <SearchBar 
         setDiagnosisMenu={this.setDiagnosisMenu}
         speciesSelection={props.speciesDropdownSelection}
+        speciesSelectionOptions={props.speciesSelectionOptions} 
         diagnosesSelection={props.diagnosesDropdownSelection}
         diagnosesSelectionOptions={props.diagnosesSelectionOptions}
 
         handleChange={props.handleChangeEvent}
         handleReactDropdownEvent={props.handleReactDropdownEvent}
-        speciesSelectionOptions={props.speciesSelectionOptions} 
       />
       <PiesBelowHeader 
         toggleSeeAll={props.toggleSeeAll}
         buttonState={props.buttonState}
+        diagnosesSelection={props.diagnosesDropdownSelection}
         speciesSelection={props.speciesDropdownSelection}
         getSum={props.getSum}
         getColumnCountForSpecies={props.getColumnCountForSpecies}

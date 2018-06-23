@@ -89,6 +89,7 @@ const mapAllDiseases = (species, tokenResponse) => {
   }
   return SynapseClient.getQueryTableResults(buildRequest("syn12532774", query), tokenResponse.sessionToken)
   .then( response => {
+      console.log(response)
       let diagnoses = response.facets[0].facetValues 
       if( species === "Drosophila melanogaster"){
         species = 'fly'
@@ -98,6 +99,8 @@ const mapAllDiseases = (species, tokenResponse) => {
       diagnosesList.splice(0,1)
       diagnosesList.splice(0,0,'All Diagnoses')
       allData[species.toLowerCase()+"Data"].diagnosesList = diagnosesList
+      allData[species.toLowerCase()+"Data"].diagnosesAssay = response.facets[5].facetValues 
+      allData[species.toLowerCase()+"Data"].diagnosesTissue = response.facets[3].facetValues 
     }).catch(function (error) {
       console.log(error)
     })

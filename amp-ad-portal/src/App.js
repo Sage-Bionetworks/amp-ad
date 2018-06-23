@@ -58,7 +58,6 @@ class App extends Component {
     }
     this.setSubFacet(key, propKey)
   }
-
   setSubFacet = (key, speciesKey) => {
     let stateObjectToAdd = { 
       count: this.props[speciesKey][key].length,
@@ -74,7 +73,7 @@ class App extends Component {
   }
 
   setAllPageDataPoints = () => {
-    let pageDataPoints = ['assay', 'tissue', 'diagnoses', 'species' ];
+    let pageDataPoints = ['assay', 'tissue', 'diagnoses', 'species', 'diagnosesAssay', 'diagnosesTissue' ];
     pageDataPoints.forEach( (element, index) => {
       this.setFacetPageData(element)  
       this.setDiagnosesMenu()
@@ -106,7 +105,7 @@ class App extends Component {
   }
 
   handleReactDropdownEvent = (event) => {
-    console.log(event)
+    //console.log(event)
     let key = event.value[0]
     this.setState({
       [key]: event.label 
@@ -153,6 +152,7 @@ class App extends Component {
 
   getColumnNameDataTypeAndCount = (columnName, pathToDataObject) => {
     let mappedArray = []
+    //console.log(columnName, pathToDataObject)
     if(pathToDataObject[columnName] !== undefined){
       _.mapKeys(pathToDataObject[columnName].facetValues, (object) => {
         if( object.value !== 'org.sagebionetworks.UNDEFINED_NULL_NOTSET' ){

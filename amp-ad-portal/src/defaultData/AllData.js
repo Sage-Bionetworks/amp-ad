@@ -5,6 +5,8 @@ let allData = {
     diagnoses: {},
     tissue: {},
     assay: {},
+    diagnosesAssay: {},
+    diagnosesTissue: {},
     species: {}
   },
   ratData: {
@@ -12,6 +14,8 @@ let allData = {
     diagnoses: {},
     tissue: {},
     assay: {},
+    diagnosesAssay: {},
+    diagnosesTissue: {},
     species: {}
   },
   flyData: {
@@ -19,6 +23,8 @@ let allData = {
     diagnoses: {},
     tissue: {},
     assay: {},
+    diagnosesAssay: {},
+    diagnosesTissue: {},
     species: {}
   },
   humanData: {
@@ -26,6 +32,8 @@ let allData = {
     diagnoses: {},
     tissues: {},
     assay: {},
+    diagnosesAssay: {},
+    diagnosesTissue: {},
     species: {}
   },
   allspeciesData: {
@@ -33,6 +41,8 @@ let allData = {
     diagnosesList: [],
     diagnoses: {},
     tissue: {},
+    diagnosesAssay: {},
+    diagnosesTissue: {},
     assay: {}
   },
   tokens: {},
