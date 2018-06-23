@@ -1,34 +1,41 @@
 import React, { Component } from "react"
+import Dropdown from 'react-dropdown'
 
 class SearchBar extends Component {
- generateSelectionDropdown = props => {
+ generateSelectionDropdown = (props, name, dropdownValue) => {
+   const options = [];
     if(props !== undefined){
-      let options = props.map( (element, index) => {
-        return (
-          <option key={index} value={element}>{element}</option>
-        ); 
+      props.forEach( (element, index) => {
+        options.push({ 
+          label: element, 
+          value: [name, element],
+          className: "dropdown-element"
+        })
       });
-      return <select name="speciesDropdownSelection" value={this.props.dropdownSelection} onChange={this.props.handleChange}>{options}</select>;
+      if(options[0] !== undefined){
+        return <Dropdown 
+          options={options} 
+          placeholder={options[0].value[1]} 
+          onChange={this.props.handleReactDropdownEvent} 
+          value={dropdownValue}
+        />
+      }else return <div></div>
     }
   }
 
   render(){
     return (
       <section className="row searchbar">
-          <form className="searchbar-form col-sm-10 col-md-8">
+          <form className="searchbar-form col-sm-10 col-md-10">
             <div className="row between-xs">
               <div className="col-xs-3 col-sm-2">
                 <h2 className="dropdown-description">View data by</h2> 
               </div>
-              <div className="col-xs-3 col-sm-4">
-                {this.generateSelectionDropdown(this.props.speciesSelection)}
+              <div className="col-xs-3 col-sm-3">
+                {this.generateSelectionDropdown(this.props.speciesSelectionOptions, "speciesDropdownSelection", this.props.speciesSelection)}
               </div>
-              <div className="col-xs-3 col-sm-2">
-								<select>
-									<option>diagnosis 1</option>
-									<option>diagnosis 2</option>
-									<option>diagnosis 3</option>
-								</select>
+              <div className="col-xs-3 col-sm-3">
+                {this.generateSelectionDropdown(this.props.diagnosesSelectionOptions, "diagnosesDropdownSelection", this.props.diagnosesSelection)}
 							</div>
               <div className="col-xs-3 col-sm-1 search-icon-box">
                 <img src={require('./images/search.svg')} alt="search magnifying glass icon" className="svg-small-icon" /> 

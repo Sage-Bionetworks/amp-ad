@@ -1,23 +1,12 @@
 import getToken from './getToken'
 import getStudyData from './getStudyData'
 import getWikiData from './getWikiData'
+import _ from 'lodash'
 
 import * as SynapseClient  from './synapse/SynapseClient'
 import * as SynapseConstants from './synapse/SynapseConstants'
 
-let allData = {
-  tokens: {},
-  test: {},
-  allSpeciesData: {},
-  flyData: {},
-  humanData: {},
-  mouseData: {},
-  ratData: {},
-  wikiNewsData: {},
-  wikiProgramsData: {},
-	wikiContributorsData: {},
-	wikiDataUseData: {}
-};
+import allData from './defaultData/AllData'
 
 const addSpaceToHash = string => {
   for( var index = 0; index < string.length; index++){
@@ -31,20 +20,91 @@ const addSpaceToHash = string => {
 	return string;
 }
 
-let request = {
-  entityId: "syn12532774",
-  query: {
-            sql: "SELECT * FROM syn12532774 WHERE ((\"diagnosis\" = 'Alzheimer''s Disease'))",
-            includeEntityEtag: true,
-            isConsistent: true,
-            offset: 0,
-            limit: 100
-          },
-  partMask: SynapseConstants.BUNDLE_MASK_QUERY_RESULTS
-    | SynapseConstants.BUNDLE_MASK_QUERY_COLUMN_MODELS
-    | SynapseConstants.BUNDLE_MASK_QUERY_SELECT_COLUMNS
-    | SynapseConstants.BUNDLE_MASK_QUERY_FACETS
-};
+const buildRequest = (table, query) => {
+  return ({
+    entityId: table,
+    query: {
+      sql: query,
+      includeEntityEtag: true,
+      isConsistent: true,
+      offset: 0,
+      limit: 100
+    },
+    partMask: SynapseConstants.BUNDLE_MASK_QUERY_RESULTS
+      | SynapseConstants.BUNDLE_MASK_QUERY_COLUMN_MODELS
+      | SynapseConstants.BUNDLE_MASK_QUERY_SELECT_COLUMNS
+      | SynapseConstants.BUNDLE_MASK_QUERY_FACETS
+  })
+}
+
+//const arrayToObject = (array, keyField) =>
+   //array.reduce((obj, item) => {
+     //obj[item[keyField]] = item
+     //return obj
+   //}, {})
+//
+      //let studiesObject = arrayToObject(studies, "value") 
+      //studiesObject = _.mapKeys(studiesObject, (value, key) => {
+        //key = key.replace(/\s/g, '') 
+        //key = key.replace(/'/g, '')
+        //return key
+      //})
+
+const mapStudies = (species, tokenResponse) => {
+  let query = "SELECT * FROM syn11346063 WHERE ((\"species\" = '" + species +"'))";
+  if( species === 'allspecies' ){
+    query = "SELECT * FROM syn11346063"
+  }
+  return SynapseClient.getQueryTableResults(buildRequest("syn11346063", query), tokenResponse.sessionToken)
+  .then( response => {
+      let speciesFacets = response.facets[4].facetValues
+      let assays = response.facets[9].facetValues 
+      let tissues = response.facets[12].facetValues 
+      if( species === 'allspecies' ){
+        let speciesList = _.map(speciesFacets, "value")
+        speciesList.map( (element) => {
+          if(element === "Drosophila melanogaster"){
+            element = "Fruit Fly"
+          }
+        })
+        speciesList.splice(0,1)
+        speciesList.splice(0,0, 'All species')
+        allData.speciesList = speciesList
+      }
+      if( species === "Drosophila melanogaster"){
+        species = 'fly'
+      }
+      allData[species.toLowerCase()+"Data"].species = speciesFacets      
+      allData[species.toLowerCase()+"Data"].assay = assays      
+      allData[species.toLowerCase()+"Data"].tissue = tissues      
+    }).catch(function (error) {
+      console.log(error)
+    })
+}
+
+const mapAllDiseases = (species, tokenResponse) => {
+  let query = "SELECT * FROM syn12532774 WHERE ((\"species\" = '" + species +"'))";
+  if( species === 'allspecies' ){
+    query = "SELECT * FROM syn12532774"
+  }
+  return SynapseClient.getQueryTableResults(buildRequest("syn12532774", query), tokenResponse.sessionToken)
+  .then( response => {
+      console.log(response)
+      let diagnoses = response.facets[0].facetValues 
+      if( species === "Drosophila melanogaster"){
+        species = 'fly'
+      }
+      allData[species.toLowerCase()+"Data"].diagnoses = diagnoses      
+      let diagnosesList = _.map(diagnoses, 'value')
+      diagnosesList.splice(0,1)
+      diagnosesList.splice(0,0,'All Diagnoses')
+      allData[species.toLowerCase()+"Data"].diagnosesList = diagnosesList
+      allData[species.toLowerCase()+"Data"].diagnosesAssay = response.facets[5].facetValues 
+      allData[species.toLowerCase()+"Data"].diagnosesTissue = response.facets[3].facetValues 
+    }).catch(function (error) {
+      console.log(error)
+    })
+}
 
 const runAllQueries = () => {
   return SynapseClient.login('mikeybkats', 'guinness').then( tokenResponse => { 
@@ -53,19 +113,17 @@ const runAllQueries = () => {
       getWikiData('409849', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiProgramData = addSpaceToHash(tokenResponse.markdown)}),
       getWikiData('409848', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiContributorsData = addSpaceToHash(tokenResponse.markdown)}),
       getWikiData('409843', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiDataUseData = addSpaceToHash(tokenResponse.markdown)}),
-      getAllSpeciesMetaData().then( response => { allData.allSpeciesData = response }),
-      getSpeciesStudiesMetaData('Human', 'assay', 'humanToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.humanData = tokenResponse }),
-      getSpeciesStudiesMetaData('Mouse', 'assay', 'mouseToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.mouseData = tokenResponse }),
-      getSpeciesStudiesMetaData('Rat', 'assay', 'ratToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.ratData = tokenResponse }),
-      getSpeciesStudiesMetaData('Drosophila melanogaster', 'assay', 'flyToken', tokenResponse.sessionToken, 'syn11346063').then( tokenResponse => { allData.flyData = tokenResponse }),
 
-      SynapseClient.getQueryTableResults(request, tokenResponse.sessionToken)
-      .then( response => {
-        allData.test = response 
-        console.log(response)
-      }).catch(function (error) {
-        console.log(error)
-      })
+      mapAllDiseases("Human", tokenResponse),
+      mapStudies("Human", tokenResponse),
+      mapAllDiseases("Rat", tokenResponse),
+      mapStudies("Rat", tokenResponse),
+      mapAllDiseases("Mouse", tokenResponse),
+      mapStudies("Mouse", tokenResponse),
+      mapAllDiseases("Drosophila melanogaster", tokenResponse),
+      mapStudies("Drosophila melanogaster", tokenResponse),
+      mapAllDiseases("allspecies", tokenResponse),
+      mapStudies("allspecies", tokenResponse),
     ])
   })
   .then( run => { 

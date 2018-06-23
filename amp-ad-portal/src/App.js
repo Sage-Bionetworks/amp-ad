@@ -22,18 +22,30 @@ class App extends Component {
     },
     pageData: study,
     studyTemplate: {},
-    speciesSelection: [], 
-    diseasesSelection: [],
+    diagnosesSelectionOptions: [],
     speciesDropdownSelection: 'All species',
-    diseasesDropdownSelection: ''
+    diagnosesDropdownSelection: 'All diagnoses'
   }
 
   componentDidMount(){
 		this.setAllPageDataPoints();
+    this.setDiagnosesMenu();
   }
 
   componentDidUpdate(){
 		//console.log(this.props.humanData);
+  }
+
+  setDiagnosesMenu = () => {
+    let selection = this.state.speciesDropdownSelection
+    if(selection === "All species"){ selection = 'allSpecies' }
+    if(selection === "Drosophila melanogaster" || selection === "Fruit Fly"){ selection = 'fly' }
+    if(selection !== 'allSpecies'){ selection = selection.toLowerCase() }
+    selection = selection + "Data"
+    let diagnoses = this.props[selection].diagnosesList
+    this.setState({
+      diagnosesSelectionOptions: diagnoses
+    }) 
   }
 
   setFacetPageData = (key) => {
@@ -41,29 +53,30 @@ class App extends Component {
     if(this.state.speciesDropdownSelection.toLowerCase() === 'all species'){
       propKey = 'allSpeciesData'
     }
-    if(this.state.speciesDropdownSelection === 'Drosophila melanogaster'){
+    if(this.state.speciesDropdownSelection === 'Drosophila melanogaster' || this.state.speciesDropdownSelection === "Fruit Fly"){
       propKey = 'flyData'
     }
-    this.props[propKey].facets.forEach( (element, index) => {
-      if ( element.columnName === key ){
-        let stateObjectToAdd = { 
-          count: element.facetValues.length, 
-          facetValues: {...element.facetValues} 
-        };
-        this.setState( prevState => ({
-          ...prevState,
-          pageData: { ...prevState.pageData, [key]: {...stateObjectToAdd} }  
-        }), () => {
-          this.setSelection(this.state.pageData.species, "speciesSelection", "All Species");
-        })
-      }  
+    this.setSubFacet(key, propKey)
+  }
+  setSubFacet = (key, speciesKey) => {
+    let stateObjectToAdd = { 
+      count: this.props[speciesKey][key].length,
+      facetValues: {...this.props[speciesKey][key]} 
+    }
+    this.setState( prevState => ({
+      ...prevState,
+      pageData: { ...prevState.pageData, [key]: {...stateObjectToAdd} }  
+    }), () => {
+      //this.setSelection(this.state.pageData.species, "speciesSelection", "All Species")
+      //this.setSelection(this.state.pageData.diseases, "diseasesSelection", "All Diseases")
     })
   }
 
   setAllPageDataPoints = () => {
-    let pageDataPoints = ['assay', 'tissue', 'analysisType', 'cellType','consortium','grant','isConsortiumAnalysis','isModelSystem','species','dataType','dataSubtype','assayTarget','organ','celltype','isMultiSpecimen','fileFormat' ];
+    let pageDataPoints = ['assay', 'tissue', 'diagnoses', 'species', 'diagnosesAssay', 'diagnosesTissue' ];
     pageDataPoints.forEach( (element, index) => {
-      this.setFacetPageData(element);  
+      this.setFacetPageData(element)  
+      this.setDiagnosesMenu()
     });
   }
 
@@ -89,6 +102,16 @@ class App extends Component {
       selectionArray.unshift(prependValue);
     }
     this.handleChanges(stateKey, selectionArray);
+  }
+
+  handleReactDropdownEvent = (event) => {
+    //console.log(event)
+    let key = event.value[0]
+    this.setState({
+      [key]: event.label 
+    }, ()=> {
+      this.setAllPageDataPoints();
+    })
   }
 
   handleChangeEvent = (event) => {
@@ -129,6 +152,7 @@ class App extends Component {
 
   getColumnNameDataTypeAndCount = (columnName, pathToDataObject) => {
     let mappedArray = []
+    //console.log(columnName, pathToDataObject)
     if(pathToDataObject[columnName] !== undefined){
       _.mapKeys(pathToDataObject[columnName].facetValues, (object) => {
         if( object.value !== 'org.sagebionetworks.UNDEFINED_NULL_NOTSET' ){
@@ -146,10 +170,14 @@ class App extends Component {
 	homeMarkup = () => {
 		return (
 			<Home 
-        wikiNewsData={this.props.wikiNewsData}
+        setDiagnosesMenu={this.setDiagnosesMenu}
+				speciesSelectionOptions={this.props.speciesSelection}
 				speciesDropdownSelection={this.state.speciesDropdownSelection}
-				handleChangeEvent={this.handleChangeEvent}
-				speciesSelection={this.state.speciesSelection}
+
+        diagnosesSelectionOptions={this.state.diagnosesSelectionOptions}
+        diagnosesDropdownSelection={this.state.diagnosesDropdownSelection}
+
+        wikiNewsData={this.props.wikiNewsData}
 				toggleSeeAll={this.toggleSeeAll}
 				buttonState={this.state.buttonState}
 				getSum={this.getSum}
@@ -159,10 +187,12 @@ class App extends Component {
 				ratData={this.props.ratData}
 				mouseData={this.props.flyData}
 				flyData={this.props.flyData}
+				
+        handleChangeEvent={this.handleChangeEvent}
+        handleReactDropdownEvent={this.handleReactDropdownEvent}
 			/>
 		)
 	}
-
 
 	ReturnAboutPrograms = (props) => {
 		return (

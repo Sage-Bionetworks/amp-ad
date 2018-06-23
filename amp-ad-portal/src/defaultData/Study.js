@@ -1,4 +1,5 @@
 let study = {
+  diseases: {count:0, facetValues: {}},
   assay: {count: 0, facetValues: {}},
   tissue: {count: 0, facetValues:{}},
   analysisType: {count: 0, facetValues: {}},

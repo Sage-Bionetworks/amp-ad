@@ -13,13 +13,19 @@ const Home = props => {
     <div> 
      <Welcome />
       <SearchBar 
-        dropdownSelection={props.speciesDropdownSelection}
+        setDiagnosisMenu={this.setDiagnosisMenu}
+        speciesSelection={props.speciesDropdownSelection}
+        speciesSelectionOptions={props.speciesSelectionOptions} 
+        diagnosesSelection={props.diagnosesDropdownSelection}
+        diagnosesSelectionOptions={props.diagnosesSelectionOptions}
+
         handleChange={props.handleChangeEvent}
-        speciesSelection={props.speciesSelection} 
+        handleReactDropdownEvent={props.handleReactDropdownEvent}
       />
       <PiesBelowHeader 
         toggleSeeAll={props.toggleSeeAll}
         buttonState={props.buttonState}
+        diagnosesSelection={props.diagnosesDropdownSelection}
         speciesSelection={props.speciesDropdownSelection}
         getSum={props.getSum}
         getColumnCountForSpecies={props.getColumnCountForSpecies}
@@ -30,7 +36,6 @@ const Home = props => {
         mouseData={props.mouseData}
         flyData={props.flyData}
       />
-
       <PopularDataRequests />
       <Analyses />
       <Programs />
