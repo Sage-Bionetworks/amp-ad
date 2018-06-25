@@ -235,6 +235,9 @@ class App extends Component {
 						<a href="/">Forum</a>
 					</div>
 					<div className="col-xs-12 col-sm-1">
+						<a href="/">Contact</a>
+					</div>
+					<div className="col-xs-12 col-sm-1">
 						<a href="/">Help</a>
 					</div>
 					<div className="col-xs-12 col-sm-2">

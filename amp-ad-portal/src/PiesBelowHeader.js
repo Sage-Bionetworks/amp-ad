@@ -101,10 +101,9 @@ class PiesBelowHeader extends Component{
 
   printTotalCounts = listArray => {
     let counts = [];
+		console.log(listArray)
     listArray.forEach( (element, index) => {
-      if(index > 0){
-        counts.push(element.count); 
-      }
+			counts.push(element.count); 
     }) 
     if( counts.length > 0 ){ 
       counts = counts.reduce(this.props.getSum);
