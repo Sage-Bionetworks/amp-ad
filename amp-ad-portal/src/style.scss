@@ -406,6 +406,7 @@ section.programs {
 			width: 142px;
 		}
     min-width: 215px;
+    max-width: 215px;
     height: 448px;
     margin: 10px 5px;
     .box-text-image p {
@@ -447,7 +448,7 @@ section.what-new {
 		h2:nth-child(20) {display: none }
 		h3:nth-child(21) {display: none }
 		ul:nth-child(22) {display: none }
-		blockquote {
+		p strong {
 			font-size: 18px;
 		}
 	}

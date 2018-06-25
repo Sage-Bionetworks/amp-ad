@@ -305,6 +305,7 @@ section.analyses h2 {
 
 section.programs .box {
   min-width: 215px;
+  max-width: 215px;
   height: 448px;
   margin: 10px 5px; }
   section.programs .box .btn {
@@ -356,7 +357,7 @@ section.what-new .what-new-data div h3:nth-child(21) {
   display: none; }
 section.what-new .what-new-data div ul:nth-child(22) {
   display: none; }
-section.what-new .what-new-data div blockquote {
+section.what-new .what-new-data div p strong {
   font-size: 18px; }
 
 section.contribute-your-data {
