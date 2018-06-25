@@ -101,10 +101,9 @@ class PiesBelowHeader extends Component{
 
   printTotalCounts = listArray => {
     let counts = [];
+		console.log(listArray)
     listArray.forEach( (element, index) => {
-      if(index > 0){
-        counts.push(element.count); 
-      }
+			counts.push(element.count); 
     }) 
     if( counts.length > 0 ){ 
       counts = counts.reduce(this.props.getSum);
@@ -114,17 +113,14 @@ class PiesBelowHeader extends Component{
 
   printCountsList = (listArray, dataType) => {
     let colors;
-    console.log(dataType)
-    if( dataType === 'tissue' || dataType === 'diagnosesTissue' ){ colors = colorsTissues }
+    if( dataType === 'tissue' || dataType === 'diagnosesTissue' ){ colors = colorsTissues } 
     else { colors = colorsAssays }
 
     let list = listArray.map( (element, index) => {
-      if(index > 0 && index < 4){
+      if(index >= 0 && index < 3){
         return (
           <div className="pie-list row middle-xs" key={index}>
-            <div className="pie-circle col-xs" 
-              style={{'backgroundColor': colors[index%colors.length]}}
-            ></div>
+            <div className="pie-circle col-xs" style={{'backgroundColor': colors[index%colors.length]}}></div>
             <p className="pie-list-item col-xs">{element.value} ({element.count} biosamples)</p>
           </div>
         ); 
@@ -136,18 +132,9 @@ class PiesBelowHeader extends Component{
 
   buildPieData = (species = 'All Species', facetsList, dataType ) => {
     let colors;
-    console.log(dataType)
     if( dataType === 'tissue' || dataType === 'diagnosesTissue'){ colors = colorsTissues }
     else { colors = colorsAssays }
-
-    if(species === 'All Species'){
-      return (
-        [{title: "human", value: this.props.getColumnCountForSpecies(this.props.humanData, 'assay'), color: "#89C889"},
-        {title: "mouse", value: this.props.getColumnCountForSpecies(this.props.mouseData, 'assay'), color: "#FCCB6F"},
-        {title: "fly", value: this.props.getColumnCountForSpecies(this.props.flyData, 'assay'), color: "#907FBA"},
-        {title: "rat", value: this.props.getColumnCountForSpecies(this.props.ratData, 'assay'), color: "#77AFD4"}]
-      )
-    } else return (
+    return (
       facetsList.map( (element, index) => {
         return {title: element.value, value: element.count, color: colors[index%colors.length]}
       })
@@ -156,11 +143,12 @@ class PiesBelowHeader extends Component{
 
   buildLinkToLocation = (event) => {
     event.preventDefault();
-    if(event.target.name.includes('Human')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkh1bWFuIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==', '_blank') } 
-    if(event.target.name.includes('Drosophila melanogaster')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkRyb3NvcGhpbGEgbWVsYW5vZ2FzdGVyIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==', '_blank') }
-    if(event.target.name.includes('Mouse')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIk1vdXNlIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==', '_blank') }
-    if(event.target.name.includes('Rat')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIlJhdCJdfV0sICJpbmNsdWRlRW50aXR5RXRhZyI6dHJ1ZSwgImlzQ29uc2lzdGVudCI6dHJ1ZSwgIm9mZnNldCI6MCwgImxpbWl0IjoyNX0=', '_blank') }
-    if(event.target.name.includes('All')){ window.open('https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbXX1dLCAiaW5jbHVkZUVudGl0eUV0YWciOnRydWUsICJpc0NvbnNpc3RlbnQiOnRydWUsICJvZmZzZXQiOjAsICJsaW1pdCI6MjV9', '_blank') }
+    if(event.target.name.includes('Human')){ window.open('https://www.synapse.org/#!Synapse:syn12532774/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjEyNTMyNzc0IiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkh1bWFuIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==', '_blank') } 
+    if(event.target.name.includes('Human Cell')){ window.open('https://www.synapse.org/#!Synapse:syn12532774/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjEyNTMyNzc0IiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkh1bWFuIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==', '_blank') } 
+    if(event.target.name.includes('Fruit')){ window.open('https://www.synapse.org/#!Synapse:syn12532774/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjEyNTMyNzc0IiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkZydWl0IGZseSJdfV0sICJpbmNsdWRlRW50aXR5RXRhZyI6dHJ1ZSwgImlzQ29uc2lzdGVudCI6dHJ1ZSwgIm9mZnNldCI6MCwgImxpbWl0IjoyNX0=', '_blank') }
+    if(event.target.name.includes('Mouse')){ window.open('https://www.synapse.org/#!Synapse:syn12532774/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjEyNTMyNzc0IiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIk1vdXNlIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==', '_blank') }
+    if(event.target.name.includes('Rat')){ window.open('', '_blank') }
+    if(event.target.name.includes('All')){ window.open('https://www.synapse.org/#!Synapse:syn12532774/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjEyNTMyNzc0IiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbXX1dLCAiaW5jbHVkZUVudGl0eUV0YWciOnRydWUsICJpc0NvbnNpc3RlbnQiOnRydWUsICJvZmZzZXQiOjAsICJsaW1pdCI6MjV9', '_blank') }
   }
 
   buildPieSection = (speciesDropdownSelection, dataType, label) => {
@@ -169,7 +157,6 @@ class PiesBelowHeader extends Component{
     //}
     let pieData = this.buildPieData('this.props.speciesSelection', this.getCountsList(dataType), dataType);
     if(pieData.length > 0){
-      console.log(dataType, pieData)
       return (
         <div className="pie-chart-welcome col-xs-12 col-sm-6">
           <div className="pie-container" >
@@ -201,7 +188,7 @@ class PiesBelowHeader extends Component{
             data-value={this.props.buttonState[dataType+"ButtonAll"]} 
             onClick={this.buildLinkToLocation}
           >
-              {this.props.speciesSelection === "All species" ? "See all " + label + 's' : "See " + this.props.speciesSelection + ' ' + label + 's'}
+              {this.props.speciesSelection === "All species" ? "See all " + label + 's' : "See all " + this.props.speciesSelection + ' ' + label + 's'}
           </button>
         </div>
       )
@@ -212,7 +199,6 @@ class PiesBelowHeader extends Component{
   componentDidUpdate(){
   }
 
-  //this.props.diagnosesSelection === 'All Diagnoses' ? 'tissue' : 'diagnosesTissue', 'tissue')}
   render(){
     return (
       <section className="pie-charts-welcome row center-xs">
@@ -226,8 +212,5 @@ class PiesBelowHeader extends Component{
     );
   };
 }
-
-//PiesBelowHeader.propTypes = {
-//}
 
 export default PiesBelowHeader;

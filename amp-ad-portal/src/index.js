@@ -18,11 +18,12 @@ import runAllQueries from './queryForData';
 
 //for production fetch the data
 runAllQueries().then( data => {
-  console.log(data)
+  //console.log(data)
   ReactDOM.render(<App 
     speciesSelection = {data.speciesList}
     allSpeciesData = {data.allspeciesData}
     humanData = {data.humanData}
+    humancelllineData = {data.humancelllineData}
     flyData = {data.flyData}
     mouseData = {data.mouseData}
     ratData = {data.ratData}

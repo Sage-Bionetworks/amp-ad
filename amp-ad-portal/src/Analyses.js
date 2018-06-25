@@ -3,7 +3,7 @@ import React from 'react'
 const Analyses = props => {
   return (
     <section className="analyses row">
-      <div className="content col-xs-12 col-sm-8">
+      <div className="content col-xs-12 col-sm-9">
         <div className="row between-xs title-row">
           <div className="col-xs-6 col-sm-6"><h2>Analyses</h2></div>
           <div className="col-xs-3 col-sm-2"><a href="/">See All Analyses</a></div>

@@ -39,8 +39,9 @@ class App extends Component {
   setDiagnosesMenu = () => {
     let selection = this.state.speciesDropdownSelection
     if(selection === "All species"){ selection = 'allSpecies' }
-    if(selection === "Drosophila melanogaster" || selection === "Fruit Fly"){ selection = 'fly' }
+    if(selection === "Drosophila melanogaster" || selection === "Fruit fly"){ selection = 'fly' }
     if(selection !== 'allSpecies'){ selection = selection.toLowerCase() }
+    selection = selection.replace(/\s/g, '')
     selection = selection + "Data"
     let diagnoses = this.props[selection].diagnosesList
     this.setState({
@@ -49,16 +50,17 @@ class App extends Component {
   }
 
   setFacetPageData = (key) => {
-    let propKey = this.state.speciesDropdownSelection.toLowerCase() + 'Data'
+    let propKey = this.state.speciesDropdownSelection.toLowerCase().replace(/\s/g, '' ) + 'Data'
     if(this.state.speciesDropdownSelection.toLowerCase() === 'all species'){
       propKey = 'allSpeciesData'
     }
-    if(this.state.speciesDropdownSelection === 'Drosophila melanogaster' || this.state.speciesDropdownSelection === "Fruit Fly"){
+    if(this.state.speciesDropdownSelection === 'Drosophila melanogaster' || this.state.speciesDropdownSelection === "Fruit fly"){
       propKey = 'flyData'
     }
     this.setSubFacet(key, propKey)
   }
   setSubFacet = (key, speciesKey) => {
+    //console.log(speciesKey)
     let stateObjectToAdd = { 
       count: this.props[speciesKey][key].length,
       facetValues: {...this.props[speciesKey][key]} 
@@ -155,13 +157,14 @@ class App extends Component {
     //console.log(columnName, pathToDataObject)
     if(pathToDataObject[columnName] !== undefined){
       _.mapKeys(pathToDataObject[columnName].facetValues, (object) => {
-        if( object.value !== 'org.sagebionetworks.UNDEFINED_NULL_NOTSET' ){
+        if( object.value === 'org.sagebionetworks.UNDEFINED_NULL_NOTSET' ){
+          object.value = "not set"  
+        }
           let flatData = { 
             count: object.count, 
             value: object.value
           }
           return mappedArray.push(flatData);
-        }
       })
     }
     return mappedArray;
@@ -230,6 +233,9 @@ class App extends Component {
 				<footer className="row center-xs middle-xs">
 					<div className="col-xs-12 col-sm-1">
 						<a href="/">Forum</a>
+					</div>
+					<div className="col-xs-12 col-sm-1">
+						<a href="/">Contact</a>
 					</div>
 					<div className="col-xs-12 col-sm-1">
 						<a href="/">Help</a>
