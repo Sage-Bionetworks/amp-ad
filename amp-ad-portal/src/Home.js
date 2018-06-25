@@ -63,7 +63,7 @@ const Home = props => {
             </div>
             <div className="content-block col-xs-12 col-sm-8">
               <h2>Contribute Your Data</h2>
-              <p>Aliquam commodo arcu diam, in pharetra erat faucibus id. Donec vel pulvinar dui, nec pharetra ligula. Nunc volutpat, diam vel rutrum luctus, nisi metus maximus diam, dignissim tincidunt elit urna vitae purus. </p>
+              <p>We encourage the research community to contribute data, analysis results, code and other resources that contributes to the AMP-AD Knowledge Portal research goals. Contact the Knowledge Portal admin team through the Discussion forum for further instructions.</p>
               <button className="btn">Learn More</button>
             </div>
           </div>

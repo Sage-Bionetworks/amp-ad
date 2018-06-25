@@ -3,10 +3,10 @@ import React from 'react';
 const Welcome = () => {
   return (
     <section className="row welcome center-xs middle-xs">
-      <div className="col-xs-12 col-sm-6 welcome-message">
+      <div className="col-xs-12 col-sm-8 col-md-7 welcome-message">
         <h1>Welcome to the AMP-AD Knowledge Portal</h1>
-        <h3>This portal shares data and analyses across a variety of human studies, animal and cellular model systems. There are 12,000 types of data (human, drosophila, mouse, celluar) and 900 types of anaylses within the Alzheimer’s Portal.</h3>
-        <p>Help guide your interpretation of AMP AD and analysis</p>
+        <h3>This portal shares data, analysis, and tools, relevant to the study of Alzheimer’s disease, contributed by grants funded through the AMP-AD, M²OVE-AD, MODEL-AD, and Resilience-AD Consortia. These are interconnected National Institue of Aging funded programs aiming to accelerate novel target and biomarker discovery and to identify mechanisms of disease risk and resilience.</h3>
+        <h3>Use the Wall of Targets interactive results explorer to view information about Alzheimer’s targets nominated by AMP-AD Knowledge Portal investigators.</h3>
 				<button className="btn-light">Explore Wall of Targets</button>
       </div>
       <div className="col-xs-12 col-sm-3 welcome-data">

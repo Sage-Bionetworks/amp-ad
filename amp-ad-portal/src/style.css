@@ -28,7 +28,8 @@ select {
 
 .Dropdown-control {
   border: none;
-  box-shadow: 0px 1px 5px 0px #c7c5c5; }
+  box-shadow: 0px 1px 5px 0px #c7c5c5;
+  max-height: fit-content; }
 
 .Dropdown-arrow {
   border-color: #5A498D transparent transparent !important;
@@ -303,16 +304,26 @@ section.analyses h2 {
   margin: 0px; }
 
 section.programs .box {
-  max-width: 211px;
+  min-width: 215px;
   height: 448px;
-  margin: 10px 0px; }
+  margin: 10px 5px; }
+  section.programs .box .btn {
+    width: 142px; }
   section.programs .box .box-text-image p {
     font-size: 14px;
     font-weight: 400; }
+  section.programs .box p {
+    text-align: left;
+    padding: 0px 10px; }
 section.programs .box-text-image {
   margin-top: 30px;
   max-width: 230px; }
 
+section.what-new .title-row {
+  line-height: 10px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding: 0px; }
 section.what-new .what-new-data div p:first-child {
   display: none; }
 section.what-new .what-new-data div ul:nth-child(2) {
@@ -323,6 +334,30 @@ section.what-new .what-new-data div h3:nth-child(3) {
   display: none; }
 section.what-new .what-new-data div h2:nth-child(4) {
   display: none; }
+section.what-new .what-new-data div h3:nth-child(5) {
+  display: none; }
+section.what-new .what-new-data div p:nth-child(6) {
+  display: none; }
+section.what-new .what-new-data div h3:nth-child(7) {
+  display: none; }
+section.what-new .what-new-data div hr:nth-child(15) {
+  display: none; }
+section.what-new .what-new-data div h3:nth-child(16) {
+  display: none; }
+section.what-new .what-new-data div p:nth-child(17) {
+  display: none; }
+section.what-new .what-new-data div hr:nth-child(18) {
+  display: none; }
+section.what-new .what-new-data div h3:nth-child(19) {
+  display: none; }
+section.what-new .what-new-data div h2:nth-child(20) {
+  display: none; }
+section.what-new .what-new-data div h3:nth-child(21) {
+  display: none; }
+section.what-new .what-new-data div ul:nth-child(22) {
+  display: none; }
+section.what-new .what-new-data div blockquote {
+  font-size: 18px; }
 
 section.contribute-your-data {
   box-shadow: 0 -5px 10px -5px #9996;

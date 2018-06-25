@@ -60,7 +60,7 @@ class App extends Component {
     this.setSubFacet(key, propKey)
   }
   setSubFacet = (key, speciesKey) => {
-    console.log(speciesKey)
+    //console.log(speciesKey)
     let stateObjectToAdd = { 
       count: this.props[speciesKey][key].length,
       facetValues: {...this.props[speciesKey][key]} 
@@ -157,13 +157,14 @@ class App extends Component {
     //console.log(columnName, pathToDataObject)
     if(pathToDataObject[columnName] !== undefined){
       _.mapKeys(pathToDataObject[columnName].facetValues, (object) => {
-        if( object.value !== 'org.sagebionetworks.UNDEFINED_NULL_NOTSET' ){
+        if( object.value === 'org.sagebionetworks.UNDEFINED_NULL_NOTSET' ){
+          object.value = "not set"  
+        }
           let flatData = { 
             count: object.count, 
             value: object.value
           }
           return mappedArray.push(flatData);
-        }
       })
     }
     return mappedArray;

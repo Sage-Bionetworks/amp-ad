@@ -55,6 +55,7 @@ select {
 .Dropdown-control {
   border: none;
   box-shadow: 0px 1px 5px 0px #c7c5c5;
+  max-height: fit-content;
 }
 
 .Dropdown-arrow {
@@ -401,13 +402,20 @@ section.analyses {
 
 section.programs {
   .box {
-    max-width: 211px;
+		.btn{
+			width: 142px;
+		}
+    min-width: 215px;
     height: 448px;
-    margin: 10px 0px;
+    margin: 10px 5px;
     .box-text-image p {
       font-size: 14px;
       font-weight: 400;
     }
+		p {
+			text-align: left;
+			padding: 0px 10px;
+		}
   }
   .box-text-image {
     margin-top: 30px;
@@ -416,12 +424,32 @@ section.programs {
 }
 
 section.what-new {
+	.title-row {
+		line-height: 10px;
+		margin-bottom: 0px;
+		margin-top: 0px;
+		padding: 0px;
+	}
 	.what-new-data div {
 		p:first-child { display: none }		
 		ul:nth-child(2) {display: none }
 		p:nth-child(2) {display: none }
 		h3:nth-child(3) {display: none }
 		h2:nth-child(4) {display: none }
+		h3:nth-child(5) {display: none }
+		p:nth-child(6) {display: none }
+		h3:nth-child(7) {display: none }
+		hr:nth-child(15) {display: none }
+		h3:nth-child(16) {display: none }
+		p:nth-child(17) {display: none }
+		hr:nth-child(18) {display: none }
+		h3:nth-child(19) {display: none }
+		h2:nth-child(20) {display: none }
+		h3:nth-child(21) {display: none }
+		ul:nth-child(22) {display: none }
+		blockquote {
+			font-size: 18px;
+		}
 	}
 }
 section.contribute-your-data {

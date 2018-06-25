@@ -18,7 +18,7 @@ import runAllQueries from './queryForData';
 
 //for production fetch the data
 runAllQueries().then( data => {
-  console.log(data)
+  //console.log(data)
   ReactDOM.render(<App 
     speciesSelection = {data.speciesList}
     allSpeciesData = {data.allspeciesData}

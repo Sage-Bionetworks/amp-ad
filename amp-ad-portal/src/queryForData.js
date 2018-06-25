@@ -57,7 +57,9 @@ const mapStudies = (species, table, tokenResponse) => {
   }
   return SynapseClient.getQueryTableResults(buildRequest(table, query), tokenResponse.sessionToken)
   .then( response => {
-      //console.log(response)
+      if(species !== 'allspecies'){
+        allData.speciesList.push(species)
+      }else { allData.speciesList.push("All species")}
       let speciesFacets = response.facets[7].facetValues
       let assays = response.facets[5].facetValues 
       let tissues = response.facets[3].facetValues 
@@ -72,14 +74,13 @@ const mapStudies = (species, table, tokenResponse) => {
 
         speciesList.splice(0,1)
         speciesList.splice(0,0, 'All species')
-        allData.speciesList = speciesList
+        //allData.speciesList = speciesList
       }
       if( species === "Drosophila melanogaster" || species === "Fruit fly"){
         species = 'fly'
       }
       species = species.replace(/\s/g, '')
       species = species.toLowerCase() 
-      //console.log(species)
       allData[species+"Data"].species = speciesFacets      
       allData[species+"Data"].assay = assays      
       allData[species+"Data"].tissue = tissues      
@@ -173,8 +174,6 @@ const mapDiagnoses = (species, diagnosis, facet, tokenResponse) => {
 	}
   return SynapseClient.getQueryTableResults(buildRequest("syn12532774", query), tokenResponse.sessionToken)
   .then( response => {
-      //console.log(response)
-      //console.log(species, diagnosis, facet, tokenResponse)
       let facetIndex
       if(facet === "tissue"){ facetIndex = 3 }
       if(facet === "assay"){ facetIndex = 5 }
@@ -214,7 +213,6 @@ const mapAllDiseases = (species, table, tokenResponse) => {
       let diagnosesList = _.map(diagnoses, 'value')
       diagnosesList.splice(0,1)
       diagnosesList.splice(0,0,'All Diagnoses')
-      //console.log(species)
       allData[species.toLowerCase()+"Data"].diagnosesList = diagnosesList
       allData[species.toLowerCase()+"Data"].diagnosesAssay = response.facets[5].facetValues 
       allData[species.toLowerCase()+"Data"].diagnosesTissue = response.facets[3].facetValues 
@@ -231,8 +229,9 @@ const runAllQueries = () => {
       getWikiData('409848', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiContributorsData = addSpaceToHash(tokenResponse.markdown)}),
       getWikiData('409843', 15, tokenResponse.sessionToken).then( tokenResponse => { allData.wikiDataUseData = addSpaceToHash(tokenResponse.markdown)}),
 
+      mapAllDiseases("allspecies","syn12532774", tokenResponse),
+      mapStudies("allspecies","syn12532774", tokenResponse),
       mapAllDiseases("Human", "syn12532774", tokenResponse),
-
       mapStudies("Human","syn12532774", tokenResponse),
       mapAllDiseases("Human Cell Line", "syn12532774", tokenResponse),
       mapStudies("Human Cell Line","syn12532774", tokenResponse),
@@ -242,8 +241,6 @@ const runAllQueries = () => {
       mapStudies("Fruit fly","syn12532774", tokenResponse),
       mapAllDiseases("Rat", "syn11346063", tokenResponse),
       mapStudies("Rat","syn11346063", tokenResponse),
-      mapAllDiseases("allspecies","syn12532774", tokenResponse),
-      mapStudies("allspecies","syn12532774", tokenResponse),
 //const mapDiagnosis = (species, diagnosis, facet, tokenResponse) => {
 			//mapDiagnoses("Human", "Alzheimer''s Disease", "assay", tokenResponse)
 			
@@ -270,7 +267,6 @@ const getSpeciesStudiesMetaData = (columnName, species, queryTokenName = 'defaul
       //species = species.charAt(0).toLowerCase() + species.substr(1);
       //species = species.replace(/\s/g, '');
       let dataResponse = runStudyDataQuery(allData.tokens[queryTokenName], AUTHENTICATION, TABLEID, 10)
-      //console.log(dataResponse)
       return dataResponse
     });
 }
@@ -280,15 +276,12 @@ const setUpQueryToken = (columnName, facetValue, TABLEID, tokenName = "allSpecie
   if(tokenName !== "allSpecies"){
     speciesSearchBool = true;
   }
-  //console.log(speciesSearchBool, columnName, facetValue, TABLEID, tokenName)
   return getToken(speciesSearchBool, facetValue, columnName,  TABLEID)
   .then(response => response.json())
   .then(result => {
-    //console.log(result);
     let dataStateObject = {...allData.tokens}
     dataStateObject[tokenName] = result.token
     allData.tokens = dataStateObject;
-    //console.log(allData.tokens)
   });
 }
 
