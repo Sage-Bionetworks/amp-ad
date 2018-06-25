@@ -39,8 +39,9 @@ class App extends Component {
   setDiagnosesMenu = () => {
     let selection = this.state.speciesDropdownSelection
     if(selection === "All species"){ selection = 'allSpecies' }
-    if(selection === "Drosophila melanogaster" || selection === "Fruit Fly"){ selection = 'fly' }
+    if(selection === "Drosophila melanogaster" || selection === "Fruit fly"){ selection = 'fly' }
     if(selection !== 'allSpecies'){ selection = selection.toLowerCase() }
+    selection = selection.replace(/\s/g, '')
     selection = selection + "Data"
     let diagnoses = this.props[selection].diagnosesList
     this.setState({
@@ -49,16 +50,17 @@ class App extends Component {
   }
 
   setFacetPageData = (key) => {
-    let propKey = this.state.speciesDropdownSelection.toLowerCase() + 'Data'
+    let propKey = this.state.speciesDropdownSelection.toLowerCase().replace(/\s/g, '' ) + 'Data'
     if(this.state.speciesDropdownSelection.toLowerCase() === 'all species'){
       propKey = 'allSpeciesData'
     }
-    if(this.state.speciesDropdownSelection === 'Drosophila melanogaster' || this.state.speciesDropdownSelection === "Fruit Fly"){
+    if(this.state.speciesDropdownSelection === 'Drosophila melanogaster' || this.state.speciesDropdownSelection === "Fruit fly"){
       propKey = 'flyData'
     }
     this.setSubFacet(key, propKey)
   }
   setSubFacet = (key, speciesKey) => {
+    console.log(speciesKey)
     let stateObjectToAdd = { 
       count: this.props[speciesKey][key].length,
       facetValues: {...this.props[speciesKey][key]} 

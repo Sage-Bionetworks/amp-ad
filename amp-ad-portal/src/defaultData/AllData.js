@@ -27,7 +27,25 @@ let allData = {
     diagnosesTissue: {},
     species: {}
   },
+  fruitflyData: {
+    diagnosesList: [],
+    diagnoses: {},
+    tissue: {},
+    assay: {},
+    diagnosesAssay: {},
+    diagnosesTissue: {},
+    species: {}
+  },
   humanData: {
+    diagnosesList: [],
+    diagnoses: {},
+    tissues: {},
+    assay: {},
+    diagnosesAssay: {},
+    diagnosesTissue: {},
+    species: {}
+  },
+  humancelllineData: {
     diagnosesList: [],
     diagnoses: {},
     tissues: {},

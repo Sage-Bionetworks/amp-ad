@@ -3,11 +3,16 @@ import Dropdown from 'react-dropdown'
 
 class SearchBar extends Component {
  generateSelectionDropdown = (props, name, dropdownValue) => {
+   let labelName
    const options = [];
     if(props !== undefined){
       props.forEach( (element, index) => {
+        labelName = element
+        if( labelName === "Drosophila melanogaster" ){
+         labelName = "Fruit Fly"  
+        }
         options.push({ 
-          label: element, 
+          label: labelName, 
           value: [name, element],
           className: "dropdown-element"
         })

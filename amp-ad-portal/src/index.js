@@ -23,6 +23,7 @@ runAllQueries().then( data => {
     speciesSelection = {data.speciesList}
     allSpeciesData = {data.allspeciesData}
     humanData = {data.humanData}
+    humancelllineData = {data.humancelllineData}
     flyData = {data.flyData}
     mouseData = {data.mouseData}
     ratData = {data.ratData}

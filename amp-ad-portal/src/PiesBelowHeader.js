@@ -114,7 +114,6 @@ class PiesBelowHeader extends Component{
 
   printCountsList = (listArray, dataType) => {
     let colors;
-    console.log(dataType)
     if( dataType === 'tissue' || dataType === 'diagnosesTissue' ){ colors = colorsTissues }
     else { colors = colorsAssays }
 
@@ -136,7 +135,6 @@ class PiesBelowHeader extends Component{
 
   buildPieData = (species = 'All Species', facetsList, dataType ) => {
     let colors;
-    console.log(dataType)
     if( dataType === 'tissue' || dataType === 'diagnosesTissue'){ colors = colorsTissues }
     else { colors = colorsAssays }
 
@@ -169,7 +167,6 @@ class PiesBelowHeader extends Component{
     //}
     let pieData = this.buildPieData('this.props.speciesSelection', this.getCountsList(dataType), dataType);
     if(pieData.length > 0){
-      console.log(dataType, pieData)
       return (
         <div className="pie-chart-welcome col-xs-12 col-sm-6">
           <div className="pie-container" >
@@ -201,7 +198,7 @@ class PiesBelowHeader extends Component{
             data-value={this.props.buttonState[dataType+"ButtonAll"]} 
             onClick={this.buildLinkToLocation}
           >
-              {this.props.speciesSelection === "All species" ? "See all " + label + 's' : "See " + this.props.speciesSelection + ' ' + label + 's'}
+              {this.props.speciesSelection === "All species" ? "See all " + label + 's' : "See all " + this.props.speciesSelection + ' ' + label + 's'}
           </button>
         </div>
       )
@@ -212,7 +209,6 @@ class PiesBelowHeader extends Component{
   componentDidUpdate(){
   }
 
-  //this.props.diagnosesSelection === 'All Diagnoses' ? 'tissue' : 'diagnosesTissue', 'tissue')}
   render(){
     return (
       <section className="pie-charts-welcome row center-xs">
@@ -226,8 +222,5 @@ class PiesBelowHeader extends Component{
     );
   };
 }
-
-//PiesBelowHeader.propTypes = {
-//}
 
 export default PiesBelowHeader;
