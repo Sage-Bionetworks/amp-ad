@@ -23,7 +23,7 @@ $gray: #F5F5F5;
   border-radius: $size / 2 ;
 }
 
-body, h1, h2, h3, h4, h5, li, ul, p, a {
+body, button, h1, h2, h3, h4, h5, li, ul, p, a {
 	font-family: 'Lato', sans-serif; 
 }
 
@@ -82,13 +82,13 @@ button:focus, input:focus, select:focus { outline:none; }
 button:hover, select:hover { cursor: pointer }
 
 .btn {
-  color: black;
+  color: #1A1C29;
   font-size: 20px;
   background-color: $lightPurple;
   border: none;
   border-radius: 24px;
   width: 192px;
-  height: 48px;
+  height: 52px;
   transition: all .3s ease-in-out;
 }
 .btn:hover {
@@ -97,7 +97,7 @@ button:hover, select:hover { cursor: pointer }
 }
 
 .btn-light {
-  color: black;
+  color: #1A1C29;
   font-size: 20px;
   background-color: $gray;
   border: none;
@@ -131,6 +131,10 @@ div.row.amp-ad {
 
 .title-row {
   padding: 20px 0px;
+  a {
+    color: $darkPurple;
+    text-decoration: underline;
+  }
 }
 
 section {
@@ -309,6 +313,7 @@ section.searchbar {
 	background-color: $gray;
 	h2 {
 		margin: 0px;
+    line-height: 56px;
 	}
 	padding: 20px;
 	form { 
@@ -320,7 +325,11 @@ section.searchbar {
   }
 	.search-icon-box {
 		justify-content: flex-end;
+    align-items: center;
     display: flex;
+    img {
+      margin: 0px 10px;
+    }
 	}
 }
 
@@ -431,7 +440,31 @@ section.what-new {
 		margin-top: 0px;
 		padding: 0px;
 	}
-	.what-new-data div {
+  .what-new-data-icon {
+    &.vertical-line {
+      border-left: 1px dotted #D3D5DB;
+      height: 150px;
+      max-width: 25px;
+      margin-left: 30px;
+    }
+    img {
+      margin-left: -20px;
+      background: white;
+      padding: 5px;
+      &.lightbulb {
+        margin-left: -24px;
+      }
+    }
+  }
+  .what-new-data { 
+    padding-top: 6px;
+    h5 {
+      padding-top: 0px;
+      margin-top: 0px;
+      color: #D3D5DB;
+    }
+  }
+  .what-new-data div {
 		p:first-child { display: none }		
 		ul:nth-child(2) {display: none }
 		p:nth-child(2) {display: none }

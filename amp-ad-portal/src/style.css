@@ -1,6 +1,6 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css);
 @import url("https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700");
-body, h1, h2, h3, h4, h5, li, ul, p, a {
+body, button, h1, h2, h3, h4, h5, li, ul, p, a {
   font-family: 'Lato', sans-serif; }
 
 html, body {
@@ -53,13 +53,13 @@ button:hover, select:hover {
   cursor: pointer; }
 
 .btn {
-  color: black;
+  color: #1A1C29;
   font-size: 20px;
   background-color: #B4C6F9;
   border: none;
   border-radius: 24px;
   width: 192px;
-  height: 48px;
+  height: 52px;
   transition: all .3s ease-in-out; }
 
 .btn:hover {
@@ -67,7 +67,7 @@ button:hover, select:hover {
   color: white; }
 
 .btn-light {
-  color: black;
+  color: #1A1C29;
   font-size: 20px;
   background-color: #F5F5F5;
   border: none;
@@ -94,6 +94,9 @@ div.row.amp-ad {
 
 .title-row {
   padding: 20px 0px; }
+  .title-row a {
+    color: #5A498D;
+    text-decoration: underline; }
 
 section {
   padding: 25px 50px; }
@@ -236,7 +239,8 @@ section.searchbar {
   section.searchbar .search-icon-box {
     display: none; }
   section.searchbar h2 {
-    margin: 0px; }
+    margin: 0px;
+    line-height: 56px; }
   section.searchbar form {
     margin: 0px auto;
     width: 100%; }
@@ -244,7 +248,10 @@ section.searchbar {
       display: inline-block; }
   section.searchbar .search-icon-box {
     justify-content: flex-end;
+    align-items: center;
     display: flex; }
+    section.searchbar .search-icon-box img {
+      margin: 0px 10px; }
 
 section.popular-data-requests .pop-assay {
   margin: 0px auto;
@@ -325,6 +332,23 @@ section.what-new .title-row {
   margin-bottom: 0px;
   margin-top: 0px;
   padding: 0px; }
+section.what-new .what-new-data-icon.vertical-line {
+  border-left: 1px dotted #D3D5DB;
+  height: 150px;
+  max-width: 25px;
+  margin-left: 30px; }
+section.what-new .what-new-data-icon img {
+  margin-left: -20px;
+  background: white;
+  padding: 5px; }
+  section.what-new .what-new-data-icon img.lightbulb {
+    margin-left: -24px; }
+section.what-new .what-new-data {
+  padding-top: 6px; }
+  section.what-new .what-new-data h5 {
+    padding-top: 0px;
+    margin-top: 0px;
+    color: #D3D5DB; }
 section.what-new .what-new-data div p:first-child {
   display: none; }
 section.what-new .what-new-data div ul:nth-child(2) {
