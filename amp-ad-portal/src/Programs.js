@@ -16,7 +16,9 @@ const Programs = props => {
                 <h4>AMP-AD</h4>
                 <p>Reduce time to discovery of drugs and potential drug targets for AD treatment and prevention through analyses, network modeling,  and experimental validation of large-scale molecular data from human brain samples.</p>
               </div>
-              <button className="btn">View</button>
+              <button className="btn"
+								onClick={ (event) => {event.preventDefault(); window.open('https://www.synapse.org/#!Synapse:syn2580853/wiki/409849', '_blank')}}
+							>View</button>
             </div>
 
           <div className="programs box col-sm-3">
@@ -25,7 +27,9 @@ const Programs = props => {
               <h4>M2OVE-AD Consortium</h4>
               <p>Generate a deeper understanding of the phenotypes of risk and the molecular mechanisms linking vascular risk factors, cerebrovascular disease and AD.</p>
             </div>
-            <button className="btn">View</button>
+						<button className="btn"
+							onClick={ (event) => {event.preventDefault(); window.open('https://www.synapse.org/#!Synapse:syn2580853/wiki/409849', '_blank')}}
+						>View</button>
           </div>
 
           <div className="programs box col-sm-3">
@@ -34,7 +38,9 @@ const Programs = props => {
               <h4>Model AD Program</h4>
               <p>Bridge the preclinical to clinical development gap by developing AD animal models and a process for rigorous preclinical efficacy testing of biomarkers.</p>
             </div>
-            <button className="btn">View</button>
+						<button className="btn"
+							onClick={ (event) => {event.preventDefault(); window.open('https://www.synapse.org/#!Synapse:syn2580853/wiki/409849', '_blank')}}
+						>View</button>
           </div>
 
           <div className="programs box col-sm-3">
@@ -43,7 +49,9 @@ const Programs = props => {
               <h4>Resilience-AD Program</h4>
               <p>Understand the mechanisms by which gene-environment interactions lead to cognitive resilience in the presence of high risk for disease.</p>
             </div>
-            <button className="btn">View</button>
+						<button className="btn"
+							onClick={ (event) => {event.preventDefault(); window.open('https://www.synapse.org/#!Synapse:syn2580853/wiki/409849', '_blank')}}
+						>View</button>
           </div>
         </div>
       </div> 
