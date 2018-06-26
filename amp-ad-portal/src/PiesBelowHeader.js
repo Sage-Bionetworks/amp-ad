@@ -124,7 +124,7 @@ class PiesBelowHeader extends Component {
 
     let list = listArray.map((element, index) => {
       if (index >= 0 && index < 3) {
-        console.log(element);
+        //console.log(element);
         return (
           <div className="pie-list row middle-xs" key={index}>
             <div
@@ -230,7 +230,7 @@ class PiesBelowHeader extends Component {
             <div className="pie-circles-container">
               <div className="chart-center-stat">
                 <h1 alt="count of samples">
-                  {this.printTotalCounts(this.getCountsList(dataType))}
+                  {this.props.pageData.biosamplesCount}
                 </h1>
                 <p>Biosamples</p>
               </div>

@@ -7,13 +7,14 @@ import * as SynapseClient from "./synapse/SynapseClient";
 import * as SynapseConstants from "./synapse/SynapseConstants";
 
 import allData from "./defaultData/AllData";
+import allData2 from "./defaultData/AllData2";
 
 const addSpaceToHash = string => {
   for (var index = 0; index < string.length; index++) {
     if (
       string[index] === "#" &&
       string[index + 1] !== "#" &&
-      string[index - 1] !== "#"
+      string[index - 1] !== "g"
     ) {
       continue;
     }
@@ -47,19 +48,6 @@ const buildRequest = (table, query) => {
   };
 };
 
-//const arrayToObject = (array, keyField) =>
-//array.reduce((obj, item) => {
-//obj[item[keyField]] = item
-//return obj
-//}, {})
-//
-//let studiesObject = arrayToObject(studies, "value")
-//studiesObject = _.mapKeys(studiesObject, (value, key) => {
-//key = key.replace(/\s/g, '')
-//key = key.replace(/'/g, '')
-//return key
-//})
-
 const mapStudies = (species, table, tokenResponse) => {
   let query =
     "SELECT * FROM " + table + ' WHERE (("species" = \'' + species + "'))";
@@ -71,7 +59,7 @@ const mapStudies = (species, table, tokenResponse) => {
     tokenResponse.sessionToken
   )
     .then(response => {
-      //console.log(query);
+      //console.log(response);
       if (species !== "allspecies") {
         allData.speciesList.push(species);
       } else {
@@ -128,8 +116,30 @@ const convertNameForApp = species => {
   return species;
 };
 
+const getBioSampleCount = (species, table, tokenResponse) => {
+  //SELECT count(DISTINCT "specimenID") FROM syn12532774 where ("species" = 'Human')
+  let query;
+  if (species === "allspecies") {
+    query = 'SELECT count(DISTINCT "specimenID") FROM ' + table;
+  } else {
+    query =
+      'SELECT count(DISTINCT "specimenID") FROM ' +
+      table +
+      ' WHERE ( ( "species" = \'' +
+      species +
+      "') )";
+  }
+  console.log(query);
+  return SynapseClient.getQueryTableResults(
+    buildRequest(table, query),
+    tokenResponse.sessionToken
+  ).then(response => {
+    allData[convertNameForApp(species)].biosamplesCount =
+      response.queryResult.queryResults.rows[0].values[0];
+  });
+};
+
 const setBase64Link = (dataType, species, table) => {
-  //{"sql":"SELECT * FROM syn11346063 WHERE ( ( \"species\" = 'Human' ) AND ( \"assay\" = 'polymeraseChainReaction' ) )", "includeEntityEtag":true, "isConsistent":true, "offset":0, "limit":25}
   allData[convertNameForApp(species)][dataType].forEach(element => {
     let sqlQuery;
     if (species === "allspecies") {
@@ -161,69 +171,6 @@ const setBase64Link = (dataType, species, table) => {
     element.table = table;
     element.base64Link = btoa(base64Link);
   });
-};
-
-let allData2 = {
-  allspeciesData: {
-    tissue: {
-      all: {},
-      diagnoses: []
-    },
-    assay: {
-      all: {},
-      diagnoses: []
-    }
-  },
-  humanData: {
-    tissue: {
-      all: {},
-      diagnoses: []
-    },
-    assay: {
-      all: {},
-      diagnoses: []
-    }
-  },
-  humancelllineData: {
-    tissue: {
-      all: {},
-      diagnoses: []
-    },
-    assay: {
-      all: {},
-      diagnoses: []
-    }
-  },
-  flyData: {
-    tissue: {
-      all: {},
-      diagnoses: []
-    },
-    assay: {
-      all: {},
-      diagnoses: []
-    }
-  },
-  ratData: {
-    tissue: {
-      all: {},
-      diagnoses: []
-    },
-    assay: {
-      all: {},
-      diagnoses: []
-    }
-  },
-  mouseData: {
-    tissue: {
-      all: {},
-      diagnoses: []
-    },
-    assay: {
-      all: {},
-      diagnoses: []
-    }
-  }
 };
 
 const mapAllDiagnoses = tokenResponse => {
@@ -320,43 +267,35 @@ const runAllQueries = () => {
   return SynapseClient.login("mikeybkats", "guinness")
     .then(tokenResponse => {
       return Promise.all([
-        getWikiData("409840", 15, tokenResponse.sessionToken).then(
-          tokenResponse => {
-            allData.wikiNewsData = addSpaceToHash(tokenResponse.markdown);
-          }
-        ),
-        getWikiData("409849", 15, tokenResponse.sessionToken).then(
-          tokenResponse => {
-            allData.wikiProgramData = addSpaceToHash(tokenResponse.markdown);
-          }
-        ),
-        getWikiData("409848", 15, tokenResponse.sessionToken).then(
-          tokenResponse => {
-            allData.wikiContributorsData = addSpaceToHash(
-              tokenResponse.markdown
-            );
-          }
-        ),
-        getWikiData("409843", 15, tokenResponse.sessionToken).then(
-          tokenResponse => {
-            allData.wikiDataUseData = addSpaceToHash(tokenResponse.markdown);
-          }
-        ),
+        //getWikiData("409843", 15, tokenResponse.sessionToken).then(
+        //tokenResponse => {
+        //allData.wikiDataUseData = addSpaceToHash(tokenResponse.markdown);
+        //}
+        //),
 
         mapAllDiseases("allspecies", "syn12532774", tokenResponse),
         mapStudies("allspecies", "syn12532774", tokenResponse),
+        getBioSampleCount("allspecies", "syn12532774", tokenResponse),
+
         mapAllDiseases("Human", "syn12532774", tokenResponse),
         mapStudies("Human", "syn12532774", tokenResponse),
+        getBioSampleCount("Human", "syn12532774", tokenResponse),
+
         mapAllDiseases("Human Cell Line", "syn12532774", tokenResponse),
         mapStudies("Human Cell Line", "syn12532774", tokenResponse),
+        getBioSampleCount("Human Cell Line", "syn12532774", tokenResponse),
+
         mapAllDiseases("Mouse", "syn12532774", tokenResponse),
         mapStudies("Mouse", "syn12532774", tokenResponse),
+        getBioSampleCount("Mouse", "syn12532774", tokenResponse),
+
         mapAllDiseases("Fruit fly", "syn12532774", tokenResponse),
         mapStudies("Fruit fly", "syn12532774", tokenResponse),
+        getBioSampleCount("Fruit fly", "syn12532774", tokenResponse),
+
         mapAllDiseases("Rat", "syn11346063", tokenResponse),
-        mapStudies("Rat", "syn11346063", tokenResponse)
-        //const mapDiagnosis = (species, diagnosis, facet, tokenResponse) => {
-        //mapDiagnoses("Human", "Alzheimer''s Disease", "assay", tokenResponse)
+        mapStudies("Rat", "syn11346063", tokenResponse),
+        getBioSampleCount("Rat", "syn11346063", tokenResponse)
       ]);
       //.then( (fulfillment) => {
       //return mapAllDiagnoses(tokenResponse)

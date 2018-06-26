@@ -70,22 +70,19 @@ class App extends Component {
     }
     this.setSubFacet(key, propKey);
   };
+
   setSubFacet = (key, speciesKey) => {
-    //console.log(speciesKey)
-    let stateObjectToAdd = {
-      count: this.props[speciesKey][key].length,
-      facetValues: { ...this.props[speciesKey][key] }
-    };
-    this.setState(
-      prevState => ({
-        ...prevState,
-        pageData: { ...prevState.pageData, [key]: { ...stateObjectToAdd } }
-      }),
-      () => {
-        //this.setSelection(this.state.pageData.species, "speciesSelection", "All Species")
-        //this.setSelection(this.state.pageData.diseases, "diseasesSelection", "All Diseases")
-      }
-    );
+    let stateObjectToAdd;
+    if (typeof this.props[speciesKey][key] === "object") {
+      stateObjectToAdd = {
+        count: this.props[speciesKey][key].length,
+        facetValues: { ...this.props[speciesKey][key] }
+      };
+    } else stateObjectToAdd = this.props[speciesKey][key];
+    this.setState(prevState => ({
+      ...prevState,
+      pageData: { ...prevState.pageData, [key]: stateObjectToAdd }
+    }));
   };
 
   setAllPageDataPoints = () => {
@@ -94,6 +91,7 @@ class App extends Component {
       "tissue",
       "diagnoses",
       "species",
+      "biosamplesCount",
       "diagnosesAssay",
       "diagnosesTissue"
     ];
