@@ -94,6 +94,9 @@ div.row.amp-ad {
 
 .title-row {
   padding: 20px 0px; }
+  .title-row a {
+    color: #5A498D;
+    text-decoration: underline; }
 
 section {
   padding: 25px 50px; }
@@ -236,7 +239,8 @@ section.searchbar {
   section.searchbar .search-icon-box {
     display: none; }
   section.searchbar h2 {
-    margin: 0px; }
+    margin: 0px;
+    line-height: 56px; }
   section.searchbar form {
     margin: 0px auto;
     width: 100%; }
@@ -244,7 +248,10 @@ section.searchbar {
       display: inline-block; }
   section.searchbar .search-icon-box {
     justify-content: flex-end;
+    align-items: center;
     display: flex; }
+    section.searchbar .search-icon-box img {
+      margin: 0px 10px; }
 
 section.popular-data-requests .pop-assay {
   margin: 0px auto;

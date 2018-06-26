@@ -131,6 +131,10 @@ div.row.amp-ad {
 
 .title-row {
   padding: 20px 0px;
+  a {
+    color: $darkPurple;
+    text-decoration: underline;
+  }
 }
 
 section {
@@ -309,6 +313,7 @@ section.searchbar {
 	background-color: $gray;
 	h2 {
 		margin: 0px;
+    line-height: 56px;
 	}
 	padding: 20px;
 	form { 
@@ -320,7 +325,11 @@ section.searchbar {
   }
 	.search-icon-box {
 		justify-content: flex-end;
+    align-items: center;
     display: flex;
+    img {
+      margin: 0px 10px;
+    }
 	}
 }
 
