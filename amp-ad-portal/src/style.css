@@ -44,7 +44,8 @@ select {
   font-size: 18px;
   font-weight: 400;
   color: #5A478F;
-  text-decoration: underline; }
+  text-decoration: underline;
+  text-align: left; }
 
 button:focus, input:focus, select:focus {
   outline: none; }
