@@ -120,7 +120,7 @@ var getQueryTableResultsFromJobId = (exports.getQueryTableResultsFromJobId = fun
       // is this the job status?
       if (resp.jobState && resp.jobState !== "FAILED") {
         // still processing, wait for a second and try again
-        return delay(1500).then(function() {
+        return delay(3500).then(function() {
           return getQueryTableResultsFromJobId(
             entityId,
             jobId,

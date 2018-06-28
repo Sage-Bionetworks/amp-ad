@@ -297,9 +297,9 @@ const runAllQueries = () => {
         mapStudies("Rat", "syn11346063", tokenResponse),
         getBioSampleCount("Rat", "syn11346063", tokenResponse)
       ]);
-      //.then( (fulfillment) => {
-      //return mapAllDiagnoses(tokenResponse)
-      //})
+      //.then(fulfillment => {
+      //return mapAllDiagnoses(tokenResponse);
+      //});
     })
     .then(data => {
       return allData;
