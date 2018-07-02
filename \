@@ -6,30 +6,25 @@ const filterBySpecies = (dataObject, species) => {
   return selection
 }
 
-const filterCounts = (filteredRows, species, filterBy) => {
-  const flattennedRows = filteredRows.map((element) => {
-    let index
-    if (filterBy === "assay") {
-      index = 1
-    }
-    if (filterBy === "tissue") {
-      index = 2
-    }
-    if (filterBy === "diagnoses") {
-      index = 3
-    }
-    return {
-      species,
-      name: element.values[index],
-      count: parseInt(element.values[5], 10),
-    }
-  })
-  return flattennedRows
-}
+const filterCounts = (filteredRows, species, dataType, diagnoses = null) => filteredRows.map((element) => {
+  let index
+  if (dataType === "assay") {
+    index = 1
+  }
+  if(diagnoses === null){
+    diagnosesIndex = 3
+  }
+  return {
+    species,
+    diagnoses: element.values[diagnosesIndex]
+    name: element.values[index],
+    count: parseInt(element.values[5], 10),
+  }
+})
 
 const onlyUnique = (value, index, self) => self.indexOf(value) === index
 
-const reduceCounts = (countsListArray, reduceByKey) => {
+const reduceCounts = (countsListArray) => {
   // create list of unique value and count objects
   const namesList = countsListArray.map(element => element.name)
   const uniqueNames = namesList.filter(onlyUnique)

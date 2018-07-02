@@ -14,10 +14,10 @@ const rawData = fetch("https://americandurablegoods.com/AllData.json")
 fetch("http://localhost:3030/response2.json")
   .then(responseRaw => responseRaw.json())
   .then((response) => {
+    console.log(response)
     const humanData = gatherCounts(response, "Human", "assay")
-    const humanCellData = gatherCounts(response, "Human Cell Line", "assay")
-    const allSpecies = gatherCounts(response, "", "assay")
-    console.log(allSpecies)
+    const humanDataTissue = gatherCounts(response, "Human", "diagnoses")
+    console.log(humanData, humanDataTissue)
   })
   .catch(error => console.log("Request has failed: ", error))
 
