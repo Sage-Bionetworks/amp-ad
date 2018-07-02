@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import _ from "lodash"
+import PropTypes from "prop-types"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 
 // non component js
@@ -13,11 +14,14 @@ import AboutPrograms from "./AboutPrograms"
 import AboutStudies from "./AboutStudies"
 import AboutDataUseRequirements from "./AboutDataUseRequirements"
 
+// scripts
+import { shrinkHeader } from "./view/domScripts"
+
 class App extends Component {
   state = {
-    buttonState: {
-      assayButtonAll: false,
-      tissueButtonAll: false,
+    filters: {
+      assay: false,
+      tissue: false,
     },
     pageData: study,
     studyTemplate: {},
@@ -28,63 +32,14 @@ class App extends Component {
 
   componentDidMount() {
     this.setAllPageDataPoints()
-    this.setDiagnosesMenu()
-    this.shrinkHeader()
+    this.setDiagnosesMenu(this.props, this.state)
+    shrinkHeader()
   }
 
-  componentDidUpdate() {
-    // console.log(this.props.humanData);
-  }
+  componentDidUpdate() {}
 
-  shrinkHeader = () => {
-    window.addEventListener(
-      "scroll",
-      _.debounce(() => {
-        // lodash debounce method.
-        const supportPageOffset = window.pageXOffset !== undefined
-        const isCSS1Compat = (document.compatMode || "") === "CSS1Compat"
-        const scroll = {
-          x: supportPageOffset
-            ? window.pageXOffset
-            : isCSS1Compat
-              ? document.documentElement.scrollLeft
-              : document.body.scrollLeft,
-          y: supportPageOffset
-            ? window.pageYOffset
-            : isCSS1Compat
-              ? document.documentElement.scrollTop
-              : document.body.scrollTop,
-        }
-
-        if (scroll.y > 50) {
-          console.log(scroll.y)
-          // 3000px (arbitrary - put whatever point you need there.)
-          const element = document.querySelector("header") // target element to change attribute
-          element.setAttribute(
-            "class",
-            "row between-xs header center-xs middle-xs squish",
-          ) // change the attribute.
-
-          const main = document.querySelector("div.main")
-          main.classList.add("squish")
-        }
-        if (scroll.y < 50) {
-          console.log(scroll.y)
-          // 3000px (arbitrary - put whatever point you need there.)
-          const element = document.querySelector("header") // target element to change attribute
-          element.setAttribute(
-            "class",
-            "row between-xs header center-xs middle-xs",
-          ) // change the attribute.
-          const main = document.querySelector("div.main")
-          main.classList.remove("squish")
-        }
-      }, 50),
-    ) // ms
-  };
-
-  setDiagnosesMenu = () => {
-    let selection = this.state.speciesDropdownSelection
+  setDiagnosesMenu = (props, state) => {
+    let selection = state.speciesDropdownSelection
     if (selection === "All species") {
       selection = "allSpecies"
     }
@@ -96,36 +51,36 @@ class App extends Component {
     }
     selection = selection.replace(/\s/g, "")
     selection += "Data"
-    const diagnoses = this.props[selection].diagnosesList
+    const diagnoses = props[selection].diagnosesList
     this.setState({
       diagnosesSelectionOptions: diagnoses,
     })
   };
 
-  setFacetPageData = (key) => {
-    let propKey = `${this.state.speciesDropdownSelection
+  setFacetPageData = (key, state) => {
+    let propKey = `${state.speciesDropdownSelection
       .toLowerCase()
       .replace(/\s/g, "")}Data`
-    if (this.state.speciesDropdownSelection.toLowerCase() === "all species") {
+    if (state.speciesDropdownSelection.toLowerCase() === "all species") {
       propKey = "allSpeciesData"
     }
     if (
-      this.state.speciesDropdownSelection === "Drosophila melanogaster"
-      || this.state.speciesDropdownSelection === "Fruit fly"
+      state.speciesDropdownSelection === "Drosophila melanogaster"
+      || state.speciesDropdownSelection === "Fruit fly"
     ) {
       propKey = "flyData"
     }
-    this.setSubFacet(key, propKey)
+    this.setSubFacet(key, propKey, this.props)
   };
 
-  setSubFacet = (key, speciesKey) => {
+  setSubFacet = (key, speciesKey, props) => {
     let stateObjectToAdd
-    if (typeof this.props[speciesKey][key] === "object") {
+    if (typeof props[speciesKey][key] === "object") {
       stateObjectToAdd = {
-        count: this.props[speciesKey][key].length,
-        facetValues: { ...this.props[speciesKey][key] },
+        count: props[speciesKey][key].length,
+        facetValues: { ...props[speciesKey][key] },
       }
-    } else stateObjectToAdd = this.props[speciesKey][key]
+    } else stateObjectToAdd = props[speciesKey][key]
     this.setState(prevState => ({
       ...prevState,
       pageData: { ...prevState.pageData, [key]: stateObjectToAdd },
@@ -142,9 +97,9 @@ class App extends Component {
       "diagnosesAssay",
       "diagnosesTissue",
     ]
-    pageDataPoints.forEach((element, index) => {
-      this.setFacetPageData(element)
-      this.setDiagnosesMenu()
+    pageDataPoints.forEach((element) => {
+      this.setFacetPageData(element, this.state)
+      this.setDiagnosesMenu(this.props, this.state)
     })
   };
 
@@ -170,17 +125,40 @@ class App extends Component {
     this.handleChanges(stateKey, selectionArray)
   };
 
-  handleReactDropdownEvent = (event) => {
-    // console.log(event)
-    const key = event.value[0]
-    this.setState(
-      {
-        [key]: event.label,
-      },
-      () => {
-        this.setAllPageDataPoints()
-      },
-    )
+  getColumnNameDataTypeAndCount = (columnName, pathToDataObject) => {
+    const mappedArray = []
+    if (pathToDataObject[columnName] !== undefined) {
+      _.mapKeys(pathToDataObject[columnName].facetValues, (obj) => {
+        const flatData = {
+          count: obj.count,
+          value:
+            obj.value === "org.sagebionetworks.UNDEFINED_NULL_NOTSET"
+              ? "not set"
+              : obj.value,
+          base64Link: obj.base64Link,
+          table: obj.table,
+        }
+        return mappedArray.push(flatData)
+      })
+    }
+    return mappedArray
+  };
+
+  convertObjectValsToArray = (OBJECT) => {
+    const mappedArray = []
+    _.mapKeys(OBJECT, (value) => {
+      if (value.value.length !== 41) {
+        mappedArray.push(value.value)
+      }
+      return value.value
+    })
+    return mappedArray
+  };
+
+  handleChanges = (KEY, NEWSTATE) => {
+    this.setState({
+      [KEY]: NEWSTATE,
+    })
   };
 
   handleChangeEvent = (event) => {
@@ -195,12 +173,6 @@ class App extends Component {
     )
   };
 
-  handleChanges = (KEY, NEWSTATE) => {
-    this.setState({
-      [KEY]: NEWSTATE,
-    })
-  };
-
   toggleSeeAll = (event) => {
     const key = event.target.name
     const value = event.target.dataset.value === "false"
@@ -213,35 +185,16 @@ class App extends Component {
     }))
   };
 
-  convertObjectValsToArray = (OBJECT) => {
-    const mappedArray = []
-    _.mapKeys(OBJECT, (value, key) => {
-      if (value.value.length !== 41) {
-        mappedArray.push(value.value)
-      }
-      return value.value
-    })
-    return mappedArray
-  };
-
-  getColumnNameDataTypeAndCount = (columnName, pathToDataObject) => {
-    const mappedArray = []
-    // console.log(columnName, pathToDataObject)
-    if (pathToDataObject[columnName] !== undefined) {
-      _.mapKeys(pathToDataObject[columnName].facetValues, (object) => {
-        if (object.value === "org.sagebionetworks.UNDEFINED_NULL_NOTSET") {
-          object.value = "not set"
-        }
-        const flatData = {
-          count: object.count,
-          value: object.value,
-          base64Link: object.base64Link,
-          table: object.table,
-        }
-        return mappedArray.push(flatData)
-      })
-    }
-    return mappedArray
+  handleReactDropdownEvent = (event) => {
+    const key = event.value[0]
+    this.setState(
+      {
+        [key]: event.label,
+      },
+      () => {
+        this.setAllPageDataPoints()
+      },
+    )
   };
 
   homeMarkup = () => (
@@ -251,16 +204,12 @@ class App extends Component {
       speciesDropdownSelection={this.state.speciesDropdownSelection}
       diagnosesSelectionOptions={this.state.diagnosesSelectionOptions}
       diagnosesDropdownSelection={this.state.diagnosesDropdownSelection}
-      wikiNewsData={this.props.wikiNewsData}
       toggleSeeAll={this.toggleSeeAll}
-      buttonState={this.state.buttonState}
+      // buttonState={this.state.buttonState}
       getSum={this.getSum}
       getColumnCountForSpecies={this.getColumnCountForSpecies}
       getColumnNameDataTypeAndCount={this.getColumnNameDataTypeAndCount}
       pageData={this.state.pageData}
-      ratData={this.props.ratData}
-      mouseData={this.props.flyData}
-      flyData={this.props.flyData}
       handleChangeEvent={this.handleChangeEvent}
       handleReactDropdownEvent={this.handleReactDropdownEvent}
     />
@@ -268,8 +217,8 @@ class App extends Component {
 
   ReturnAboutPrograms = props => (
     <AboutPrograms
-      programData={this.props.wikiProgramData}
-      contributorData={this.props.wikiContributorsData}
+      // programData={this.props.wikiProgramData}
+      // contributorData={this.props.wikiContributorsData}
       handleChangeEvent={this.handleChangeEvent}
       parentState={this.state}
       {...props}
@@ -324,6 +273,16 @@ Terms & Privacy
       </Router>
     )
   }
+}
+
+App.propTypes = {
+  allSpeciesData: PropTypes.object.isRequired,
+  humanData: PropTypes.object.isRequired,
+  ratData: PropTypes.object.isRequired,
+  mouseData: PropTypes.object.isRequired,
+  humancelllineData: PropTypes.object.isRequired,
+  flyData: PropTypes.object.isRequired,
+  speciesSelection: PropTypes.array.isRequired,
 }
 
 export default App

@@ -253,7 +253,7 @@ section.pie-charts-welcome {
   padding-top: 0px;
   h1{
     font-weight: 300;
-    font-size: 24px;
+    font-size: 42px;
   }
   .pie-circle {
     display: inline-block;
@@ -270,6 +270,9 @@ section.pie-charts-welcome {
   .pie-container {
     position: relative;
     margin-bottom: 20px;
+    h1.count {
+      margin: 10px;
+    }
   }
   .pie-counts-list {
     height: 130px;
@@ -319,6 +322,9 @@ section.pie-charts-welcome {
       text-align: center;
       width: 100%;
       margin: 0px;
+    }
+    p {
+      font-size: 18px;
     }
   }
   .pie-counts-button {
@@ -574,10 +580,10 @@ section.about-section-content {
 		background-repeat: no-repeat;
 		background-position: center;
     &.plus {
-      background-image: url(./images/plus-icon.svg);
+      background-image: url(../images/plus-icon.svg);
     }
     &.minus {
-      background-image: url(./images/minus-icon.svg);
+      background-image: url(../images/minus-icon.svg);
     }
 	}
   .expand-icon:hover {

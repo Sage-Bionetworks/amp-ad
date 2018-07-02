@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import PieChart from "react-svg-piechart";
-//import PropTypes from 'prop-types'
+import React, { Component } from "react"
+import PieChart from "react-svg-piechart"
+import PropTypes from "prop-types"
 
-let colorsTissues = [
+const colorsTissues = [
   "#F27277",
   "#EB8231",
   "#FAD591",
@@ -33,9 +33,9 @@ let colorsTissues = [
   "#F5B584",
   "#E566A1",
   "#E0585D",
-  "#FCCB6F"
-];
-let colorsAssays = [
+  "#FCCB6F",
+]
+const colorsAssays = [
   "#94C9EB",
   "#93ABE8",
   "#5BB0B5",
@@ -85,154 +85,168 @@ let colorsAssays = [
   "#849BC4",
   "#87C987",
   "#407BA0",
-  "#5171C0"
-];
+  "#5171C0",
+]
 
 class PiesBelowHeader extends Component {
-  getCountsList = columnName => {
-    let countsList = this.props.getColumnNameTypeAndCount(
+  componentDidUpdate() {}
+
+  getCountsList = (columnName) => {
+    const countsList = this.props.getColumnNameTypeAndCount(
       columnName,
-      this.props.pageData
-    );
-    countsList
-      .sort((a, b) => {
-        return a.count - b.count;
-      })
-      .reverse();
-    return countsList;
+      this.props.pageData,
+    )
+    countsList.sort((a, b) => a.count - b.count).reverse()
+    return countsList
   };
 
-  printTotalCounts = listArray => {
-    let counts = [];
-    //console.log(listArray)
+  printTotalCounts = (listArray) => {
+    let counts = []
+    // console.log(listArray)
     listArray.forEach((element, index) => {
-      counts.push(element.count);
-    });
+      counts.push(element.count)
+    })
     if (counts.length > 0) {
-      counts = counts.reduce(this.props.getSum);
+      counts = counts.reduce(this.props.getSum)
     }
-    return <div>{counts}</div>;
+    return (
+      <div>
+        {counts}
+      </div>
+    )
+  };
+
+  getPieLink = (element) => {
+    const pieLink = `https://www.synapse.org/#!Synapse:${
+      element.table
+    }/tables/query/${element.base64Link}`
+    return pieLink
   };
 
   printCountsList = (listArray, dataType) => {
-    let colors;
+    let colors
     if (dataType === "tissue" || dataType === "diagnosesTissue") {
-      colors = colorsTissues;
+      colors = colorsTissues
     } else {
-      colors = colorsAssays;
+      colors = colorsAssays
     }
 
-    let list = listArray.map((element, index) => {
+    const list = listArray.map((element, index) => {
       if (index >= 0 && index < 3) {
-        //console.log(element);
+        // console.log(element);
         return (
-          <div className="pie-list row middle-xs" key={index}>
+          <div className="pie-list row middle-xs" key={element.value}>
             <div
               className="pie-circle col-xs"
               style={{ backgroundColor: colors[index % colors.length] }}
             />
             <a
-              href={
-                "https://www.synapse.org/#!Synapse:" +
-                element.table +
-                "/tables/query/" +
-                element.base64Link
-              }
+              href={this.getPieLink(element)}
               target="_blank"
+              rel="noopener noreferrer"
               className="pie-list-item col-xs"
             >
-              {element.value} ({element.count} biosamples)
+              {element.value}
+              {" "}
+(
+              {element.count}
+              {" "}
+biosamples)
             </a>
           </div>
-        );
+        )
       }
-      return "";
-    });
+      return ""
+    })
     return (
       <div className="row">
-        <div className="col-xs-12">{list}</div>
+        <div className="col-xs-12">
+          {list}
+        </div>
       </div>
-    );
+    )
   };
 
   buildPieData = (species = "All Species", facetsList, dataType) => {
-    let colors;
+    let colors
     if (dataType === "tissue" || dataType === "diagnosesTissue") {
-      colors = colorsTissues;
+      colors = colorsTissues
     } else {
-      colors = colorsAssays;
+      colors = colorsAssays
     }
-    return facetsList.map((element, index) => {
-      return {
-        title: element.value,
-        value: element.count,
-        color: colors[index % colors.length]
-      };
-    });
+    return facetsList.map((element, index) => ({
+      title: element.value,
+      value: element.count,
+      color: colors[index % colors.length],
+    }))
   };
 
-  buildLinkToLocation = event => {
-    event.preventDefault();
+  buildLinkToLocation = (event) => {
+    event.preventDefault()
     if (event.target.name.includes("Human")) {
       window.open(
         "https://www.synapse.org/#!Synapse:syn12532774/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjEyNTMyNzc0IiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkh1bWFuIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==",
-        "_blank"
-      );
+        "_blank",
+      )
     }
     if (event.target.name.includes("Human Cell")) {
       window.open(
         "https://www.synapse.org/#!Synapse:syn12532774/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjEyNTMyNzc0IiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkh1bWFuIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==",
-        "_blank"
-      );
+        "_blank",
+      )
     }
     if (event.target.name.includes("Fruit")) {
       window.open(
         "https://www.synapse.org/#!Synapse:syn12532774/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjEyNTMyNzc0IiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIkZydWl0IGZseSJdfV0sICJpbmNsdWRlRW50aXR5RXRhZyI6dHJ1ZSwgImlzQ29uc2lzdGVudCI6dHJ1ZSwgIm9mZnNldCI6MCwgImxpbWl0IjoyNX0=",
-        "_blank"
-      );
+        "_blank",
+      )
     }
     if (event.target.name.includes("Mouse")) {
       window.open(
         "https://www.synapse.org/#!Synapse:syn12532774/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjEyNTMyNzc0IiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIk1vdXNlIl19XSwgImluY2x1ZGVFbnRpdHlFdGFnIjp0cnVlLCAiaXNDb25zaXN0ZW50Ijp0cnVlLCAib2Zmc2V0IjowLCAibGltaXQiOjI1fQ==",
-        "_blank"
-      );
+        "_blank",
+      )
     }
     if (event.target.name.includes("Rat")) {
       window.open(
         "https://www.synapse.org/#!Synapse:syn11346063/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjExMzQ2MDYzIiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbIlJhdCJdfV0sICJpbmNsdWRlRW50aXR5RXRhZyI6dHJ1ZSwgImlzQ29uc2lzdGVudCI6dHJ1ZSwgIm9mZnNldCI6MCwgImxpbWl0IjoyNX0=",
-        "_blank"
-      );
+        "_blank",
+      )
     }
     if (event.target.name.includes("All")) {
       window.open(
         "https://www.synapse.org/#!Synapse:syn12532774/tables/query/eyJzcWwiOiJTRUxFQ1QgKiBGUk9NIHN5bjEyNTMyNzc0IiwgInNlbGVjdGVkRmFjZXRzIjpbeyJjb25jcmV0ZVR5cGUiOiJvcmcuc2FnZWJpb25ldHdvcmtzLnJlcG8ubW9kZWwudGFibGUuRmFjZXRDb2x1bW5WYWx1ZXNSZXF1ZXN0IiwgImNvbHVtbk5hbWUiOiJzcGVjaWVzIiwgImZhY2V0VmFsdWVzIjpbXX1dLCAiaW5jbHVkZUVudGl0eUV0YWciOnRydWUsICJpc0NvbnNpc3RlbnQiOnRydWUsICJvZmZzZXQiOjAsICJsaW1pdCI6MjV9",
-        "_blank"
-      );
+        "_blank",
+      )
     }
   };
 
   buildPieSection = (speciesDropdownSelection, dataType, label) => {
-    //if(dataType === 'diagnosesTissue' || dataType === 'diagnosesAssay'){
+    // if(dataType === 'diagnosesTissue' || dataType === 'diagnosesAssay'){
 
-    //}
-    let pieData = this.buildPieData(
+    // }
+    const pieData = this.buildPieData(
       "this.props.speciesSelection",
       this.getCountsList(dataType),
-      dataType
-    );
+      dataType,
+    )
     if (pieData.length > 0) {
       return (
         <div className="pie-chart-welcome col-xs-12 col-sm-6">
           <div className="pie-container">
             <h1 className="count">
-              {this.props.pageData[dataType].count} {label}
+              {this.props.pageData[dataType].count}
+              {" "}
+              {label}
             </h1>
             <div className="pie-circles-container">
               <div className="chart-center-stat">
                 <h1 alt="count of samples">
                   {this.props.pageData.biosamplesCount}
                 </h1>
-                <p>Biosamples</p>
+                <p>
+Biosamples
+                </p>
               </div>
               <PieChart
                 data={pieData}
@@ -246,28 +260,24 @@ class PiesBelowHeader extends Component {
               />
             </div>
           </div>
-          <div
-            className="pie-counts-list"
-            data-value={this.props.buttonState[dataType + "ButtonAll"]}
-          >
+          <div className="pie-counts-list">
             {this.printCountsList(this.getCountsList(dataType), dataType)}
           </div>
           <button
+            type="button"
             className="pie-counts-button btn"
             name={this.props.speciesSelection}
-            data-value={this.props.buttonState[dataType + "ButtonAll"]}
             onClick={this.buildLinkToLocation}
           >
             {this.props.speciesSelection === "All species"
-              ? "See all " + label + "s"
-              : "See all " + this.props.speciesSelection + " " + label + "s"}
+              ? `See all ${label}s`
+              : `See all ${this.props.speciesSelection} ${label}s`}
           </button>
         </div>
-      );
-    } else return "";
+      )
+    }
+    return ""
   };
-
-  componentDidUpdate() {}
 
   render() {
     return (
@@ -277,18 +287,23 @@ class PiesBelowHeader extends Component {
             {this.buildPieSection(
               this.props.speciesSelection,
               "assay",
-              "Assay"
+              "Assay",
             )}
             {this.buildPieSection(
               this.props.speciesSelection,
               "tissue",
-              "Tissue"
+              "Tissue",
             )}
           </div>
         </div>
       </section>
-    );
+    )
   }
 }
 
-export default PiesBelowHeader;
+PiesBelowHeader.propTypes = {
+  getColumnNameTypeAndCount: PropTypes.func.isRequired,
+  speciesSelection: PropTypes.string.isRequired,
+}
+
+export default PiesBelowHeader

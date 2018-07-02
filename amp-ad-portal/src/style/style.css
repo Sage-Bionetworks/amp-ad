@@ -190,7 +190,7 @@ section.pie-charts-welcome {
   padding-top: 0px; }
   section.pie-charts-welcome h1 {
     font-weight: 300;
-    font-size: 24px; }
+    font-size: 42px; }
   section.pie-charts-welcome .pie-circle {
     display: inline-block;
     margin: 0px 5px;
@@ -208,6 +208,8 @@ section.pie-charts-welcome {
   section.pie-charts-welcome .pie-container {
     position: relative;
     margin-bottom: 20px; }
+    section.pie-charts-welcome .pie-container h1.count {
+      margin: 10px; }
   section.pie-charts-welcome .pie-counts-list {
     height: 130px;
     padding: 0px 10px;
@@ -247,6 +249,8 @@ section.pie-charts-welcome {
       text-align: center;
       width: 100%;
       margin: 0px; }
+    section.pie-charts-welcome .chart-center-stat p {
+      font-size: 18px; }
   section.pie-charts-welcome .pie-counts-button {
     width: fit-content;
     padding: 0px 20px;
@@ -456,9 +460,9 @@ section.about-section-content {
     background-repeat: no-repeat;
     background-position: center; }
     section.about-section-content .expand-icon.plus {
-      background-image: url(./images/plus-icon.svg); }
+      background-image: url(../images/plus-icon.svg); }
     section.about-section-content .expand-icon.minus {
-      background-image: url(./images/minus-icon.svg); }
+      background-image: url(../images/minus-icon.svg); }
   section.about-section-content .expand-icon:hover {
     cursor: pointer; }
   section.about-section-content .content {
