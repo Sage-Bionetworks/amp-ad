@@ -16,6 +16,8 @@ module.exports = {
     ],
     "jsx-a11y/heading-has-content": 0,
     "prefer-destructuring": 0,
+    "arrow-body-style": 0,
+    "spaced-comment": 0,
     "react/destructuring-assignment": [0, "always"]
   },
   env: {

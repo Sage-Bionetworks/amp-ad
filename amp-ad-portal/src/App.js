@@ -5,6 +5,15 @@ import { BrowserRouter as Router, Route } from "react-router-dom"
 
 // non component js
 import study from "./defaultData/Study"
+import {
+  gatherCounts,
+  reduceCountsByKey,
+  filterByKey,
+  filterByValue,
+  filterBySpecies,
+  keysToValues,
+  printNames,
+} from "./controller/PrepRawSynapseData"
 
 // component js
 import Header from "./Header"
@@ -38,20 +47,35 @@ class App extends Component {
 
   componentDidUpdate() {}
 
+  getSpeciesDropdownOptions = (rawData) => {
+    const speciesDropdownOptions = []
+    const speciesObj = rawData.facets.filter(
+      row => row.columnName === "species",
+    )
+    speciesObj[0].facetValues.forEach((element) => {
+      speciesDropdownOptions.push(element.value)
+    })
+    speciesDropdownOptions[0] = "All species"
+    return speciesDropdownOptions
+  };
+
   setDiagnosesMenu = (props, state) => {
     let selection = state.speciesDropdownSelection
     if (selection === "All species") {
-      selection = "allSpecies"
+      selection = null
     }
-    if (selection === "Drosophila melanogaster" || selection === "Fruit fly") {
-      selection = "fly"
-    }
-    if (selection !== "allSpecies") {
-      selection = selection.toLowerCase()
-    }
-    selection = selection.replace(/\s/g, "")
-    selection += "Data"
-    const diagnoses = props[selection].diagnosesList
+    const diagnosesRows = filterByValue(
+      filterByKey(this.props.appData, "diagnoses"),
+      [selection],
+    )
+    const diagnosesRaw = keysToValues(diagnosesRows)
+
+    const diagnoses = printNames(
+      reduceCountsByKey(diagnosesRaw, "diagnoses"),
+      "diagnoses",
+    )
+    console.log(diagnoses)
+
     this.setState({
       diagnosesSelectionOptions: diagnoses,
     })
@@ -74,6 +98,7 @@ class App extends Component {
   };
 
   setSubFacet = (key, speciesKey, props) => {
+    //console.log(key, speciesKey)
     let stateObjectToAdd
     if (typeof props[speciesKey][key] === "object") {
       stateObjectToAdd = {
@@ -200,7 +225,9 @@ class App extends Component {
   homeMarkup = () => (
     <Home
       setDiagnosesMenu={this.setDiagnosesMenu}
-      speciesSelectionOptions={this.props.speciesSelection}
+      speciesSelectionOptions={this.getSpeciesDropdownOptions(
+        this.props.appData,
+      )}
       speciesDropdownSelection={this.state.speciesDropdownSelection}
       diagnosesSelectionOptions={this.state.diagnosesSelectionOptions}
       diagnosesDropdownSelection={this.state.diagnosesDropdownSelection}
@@ -283,6 +310,7 @@ App.propTypes = {
   humancelllineData: PropTypes.object.isRequired,
   flyData: PropTypes.object.isRequired,
   speciesSelection: PropTypes.array.isRequired,
+  appData: PropTypes.object.isRequired,
 }
 
 export default App
