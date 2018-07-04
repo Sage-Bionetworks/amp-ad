@@ -92,12 +92,16 @@ class PiesBelowHeader extends Component {
   componentDidUpdate() {}
 
   getCountsList = (columnName) => {
-    const countsList = this.props.getColumnNameTypeAndCount(
-      columnName,
-      this.props.pageData,
-    )
+    const countsList = this.props.pageData[columnName].facetValues
     countsList.sort((a, b) => a.count - b.count).reverse()
     return countsList
+  };
+
+  getPieLink = (element) => {
+    const pieLink = `https://www.synapse.org/#!Synapse:${
+      element.table
+    }/tables/query/${element.base64Link}`
+    return pieLink
   };
 
   printTotalCounts = (listArray) => {
@@ -116,13 +120,6 @@ class PiesBelowHeader extends Component {
     )
   };
 
-  getPieLink = (element) => {
-    const pieLink = `https://www.synapse.org/#!Synapse:${
-      element.table
-    }/tables/query/${element.base64Link}`
-    return pieLink
-  };
-
   printCountsList = (listArray, dataType) => {
     let colors
     if (dataType === "tissue" || dataType === "diagnosesTissue") {
@@ -135,7 +132,7 @@ class PiesBelowHeader extends Component {
       if (index >= 0 && index < 3) {
         // console.log(element);
         return (
-          <div className="pie-list row middle-xs" key={element.value}>
+          <div className="pie-list row middle-xs" key={element[dataType]}>
             <div
               className="pie-circle col-xs"
               style={{ backgroundColor: colors[index % colors.length] }}
@@ -146,7 +143,7 @@ class PiesBelowHeader extends Component {
               rel="noopener noreferrer"
               className="pie-list-item col-xs"
             >
-              {element.value}
+              {element[dataType]}
               {" "}
 (
               {element.count}
@@ -175,7 +172,7 @@ biosamples)
       colors = colorsAssays
     }
     return facetsList.map((element, index) => ({
-      title: element.value,
+      title: element[dataType],
       value: element.count,
       color: colors[index % colors.length],
     }))
@@ -302,7 +299,6 @@ Biosamples
 }
 
 PiesBelowHeader.propTypes = {
-  getColumnNameTypeAndCount: PropTypes.func.isRequired,
   speciesSelection: PropTypes.string.isRequired,
 }
 

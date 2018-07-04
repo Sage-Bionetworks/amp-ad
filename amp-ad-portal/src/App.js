@@ -11,9 +11,14 @@ import {
   filterByKey,
   filterByValue,
   filterBySpecies,
+  setBase64Link,
   keysToValues,
   printNames,
+  filterRowsByKeyAndValue,
+  countBioSamples,
 } from "./controller/PrepRawSynapseData"
+
+import { getBioSampleCount } from "./queries/queryForData"
 
 // component js
 import Header from "./Header"
@@ -45,7 +50,17 @@ class App extends Component {
     shrinkHeader()
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    console.log(
+      this.dropdownFilter(
+        this.state.speciesDropdownSelection,
+        this.state.diagnosesDropdownSelection,
+        this.props.appData,
+        this.state,
+        "assay",
+      ),
+    )
+  }
 
   getSpeciesDropdownOptions = (rawData) => {
     const speciesDropdownOptions = []
@@ -74,42 +89,101 @@ class App extends Component {
       reduceCountsByKey(diagnosesRaw, "diagnoses"),
       "diagnoses",
     )
-    console.log(diagnoses)
 
     this.setState({
       diagnosesSelectionOptions: diagnoses,
     })
   };
 
-  setFacetPageData = (key, state) => {
-    let propKey = `${state.speciesDropdownSelection
-      .toLowerCase()
-      .replace(/\s/g, "")}Data`
-    if (state.speciesDropdownSelection.toLowerCase() === "all species") {
-      propKey = "allSpeciesData"
+  dropdownFilter = (
+    species,
+    diagnoses,
+    dataObject,
+    state = this.state,
+    dataType,
+  ) => {
+    let speciesFilterKey
+    if (species === "All species") {
+      speciesFilterKey = [
+        null,
+        "Rat",
+        "Human",
+        "Mouse",
+        "Human Cell Line",
+        "Fruit Fly",
+      ]
+    } else {
+      speciesFilterKey = [species]
     }
-    if (
-      state.speciesDropdownSelection === "Drosophila melanogaster"
-      || state.speciesDropdownSelection === "Fruit fly"
-    ) {
-      propKey = "flyData"
+
+    const speciesFiltered = filterRowsByKeyAndValue(
+      keysToValues(dataObject.queryResult.queryResults.rows),
+      speciesFilterKey,
+      "species",
+    )
+
+    let diagnosesFilterKey
+    if (diagnoses === "All diagnoses") {
+      diagnosesFilterKey = state.diagnosesSelectionOptions
+    } else {
+      diagnosesFilterKey = [diagnoses]
     }
-    this.setSubFacet(key, propKey, this.props)
+
+    return reduceCountsByKey(
+      setBase64Link(
+        filterRowsByKeyAndValue(
+          speciesFiltered,
+          diagnosesFilterKey,
+          "diagnoses",
+        ),
+      ),
+      dataType,
+    )
   };
 
-  setSubFacet = (key, speciesKey, props) => {
-    //console.log(key, speciesKey)
-    let stateObjectToAdd
-    if (typeof props[speciesKey][key] === "object") {
-      stateObjectToAdd = {
-        count: props[speciesKey][key].length,
-        facetValues: { ...props[speciesKey][key] },
-      }
-    } else stateObjectToAdd = props[speciesKey][key]
+  setFlattenedData = (pageKey, speciesKey, dataObject) => {
+    // pageKey example "assay"
+    // speciesKey example "Human" or "All species"
+    // dataObject raw synapse data
+    let filterKey
+    if (speciesKey === "All species") {
+      filterKey = [
+        null,
+        "Rat",
+        "Human",
+        "Mouse",
+        "Human Cell Line",
+        "Fruit Fly",
+      ]
+    } else {
+      filterKey = [speciesKey]
+    }
+
+    const flattennedRows = reduceCountsByKey(
+      filterRowsByKeyAndValue(
+        setBase64Link(keysToValues(dataObject.queryResult.queryResults.rows)),
+        filterKey,
+        "species",
+      ),
+      pageKey,
+    )
+
+    const stateObjectToAdd = {
+      count: flattennedRows.length,
+      facetValues: [...flattennedRows],
+    }
     this.setState(prevState => ({
       ...prevState,
-      pageData: { ...prevState.pageData, [key]: stateObjectToAdd },
+      pageData: { ...prevState.pageData, [pageKey]: stateObjectToAdd },
     }))
+  };
+
+  setQueriesForBioSamples = (state, props) => {
+    return getBioSampleCount(
+      state.speciesDropdownSelection,
+      "syn12532774",
+      props.tokenResponse,
+    )
   };
 
   setAllPageDataPoints = () => {
@@ -118,13 +192,20 @@ class App extends Component {
       "tissue",
       "diagnoses",
       "species",
-      "biosamplesCount",
+      //"biosamplesCount",
       "diagnosesAssay",
       "diagnosesTissue",
     ]
     pageDataPoints.forEach((element) => {
-      this.setFacetPageData(element, this.state)
+      this.setFlattenedData(
+        element,
+        this.state.speciesDropdownSelection,
+        this.props.appData,
+      )
+      //this.setFacetPageData(element, this.state)
       this.setDiagnosesMenu(this.props, this.state)
+
+      // runQueriesForBioSamples
     })
   };
 
@@ -148,25 +229,6 @@ class App extends Component {
       selectionArray.unshift(prependValue)
     }
     this.handleChanges(stateKey, selectionArray)
-  };
-
-  getColumnNameDataTypeAndCount = (columnName, pathToDataObject) => {
-    const mappedArray = []
-    if (pathToDataObject[columnName] !== undefined) {
-      _.mapKeys(pathToDataObject[columnName].facetValues, (obj) => {
-        const flatData = {
-          count: obj.count,
-          value:
-            obj.value === "org.sagebionetworks.UNDEFINED_NULL_NOTSET"
-              ? "not set"
-              : obj.value,
-          base64Link: obj.base64Link,
-          table: obj.table,
-        }
-        return mappedArray.push(flatData)
-      })
-    }
-    return mappedArray
   };
 
   convertObjectValsToArray = (OBJECT) => {
@@ -235,7 +297,6 @@ class App extends Component {
       // buttonState={this.state.buttonState}
       getSum={this.getSum}
       getColumnCountForSpecies={this.getColumnCountForSpecies}
-      getColumnNameDataTypeAndCount={this.getColumnNameDataTypeAndCount}
       pageData={this.state.pageData}
       handleChangeEvent={this.handleChangeEvent}
       handleReactDropdownEvent={this.handleReactDropdownEvent}

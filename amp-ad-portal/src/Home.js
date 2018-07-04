@@ -31,7 +31,6 @@ const Home = props => (
       speciesSelection={props.speciesDropdownSelection}
       getSum={props.getSum}
       getColumnCountForSpecies={props.getColumnCountForSpecies}
-      getColumnNameTypeAndCount={props.getColumnNameDataTypeAndCount}
       pageData={props.pageData}
     />
     <PopularDataRequests />
@@ -150,7 +149,6 @@ Home.propTypes = {
   diagnosesDropdownSelection: PropTypes.string.isRequired,
   diagnosesSelectionOptions: PropTypes.array.isRequired,
   getColumnCountForSpecies: PropTypes.func.isRequired,
-  getColumnNameDataTypeAndCount: PropTypes.func.isRequired,
   getSum: PropTypes.func.isRequired,
   handleChangeEvent: PropTypes.func.isRequired,
   handleReactDropdownEvent: PropTypes.func.isRequired,

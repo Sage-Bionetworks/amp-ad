@@ -27,6 +27,14 @@ const filterRowsByDataType = (filteredRows, species, key) => {
   return flattennedRows
 }
 
+const filterRowsByKeyAndValue = (dataRows, valuesArray, key) => {
+  return dataRows.filter((row) => {
+    return valuesArray.some((value) => {
+      return value === row[key]
+    })
+  })
+}
+
 const filterByValue = (dataObject, keys) => {
   // keys must be an array of values
   // dataObject is raw synapse data
@@ -51,7 +59,7 @@ const keysToValues = (rows) => {
       tissue: row.values[2],
       diagnoses: row.values[3],
       specimenID: row.values[4],
-      count: parseInt(row.values[5]),
+      count: parseInt(row.values[5], 10),
     }
   })
 }
@@ -84,6 +92,8 @@ const reduceCountsByKey = (countsListArray, key) => {
   let tissue
   let diagnoses
   let specimenID
+  let base64Link
+  let table
 
   const namesAndCountsTotaled = uniqueNames.map((uniqueName) => {
     totalCount = 0
@@ -95,6 +105,8 @@ const reduceCountsByKey = (countsListArray, key) => {
         tissue = element.tissue
         diagnoses = element.diagnoses
         specimenID = element.specimenID
+        base64Link = element.base64Link
+        table = element.table
       }
     })
     return {
@@ -103,26 +115,43 @@ const reduceCountsByKey = (countsListArray, key) => {
       tissue,
       diagnoses,
       specimenID,
-      totalCount,
-      base64Link: "",
+      count: totalCount,
+      base64Link,
+      table,
     }
   })
 
   return namesAndCountsTotaled
 }
 
+const countBioSamples = (rows) => {
+  // takes in processed rows
+  // counts unique specimenID
+  const counts = {}
+  rows.forEach((row) => {
+    counts[row.specimenID] = 1 + (counts[row.specimenID] || 0)
+  })
+  return Object.keys(counts).length
+}
+
 const setBase64Link = (dataTypesArray) => {
   dataTypesArray.map((element) => {
+    //console.log(element)
     let sqlQuery
-    if (element.species === "allspecies" || element.species === "All species") {
+    if (
+      element.species === "allspecies"
+      || element.species === "All species"
+      || element.species === null
+    ) {
       sqlQuery = `SELECT * FROM syn12532774 WHERE (("assay" = '${
-        element.name
+        element.assay
       }'))`
     } else {
       sqlQuery = `SELECT * FROM syn12532774 WHERE ( ( "species" = '${
         element.species
-      }') AND ("assay" = '${element.name}'))`
+      }') AND ("assay" = '${element.assay}'))`
     }
+    //console.log(sqlQuery)
 
     let base64Link = {
       sql: sqlQuery,
@@ -133,6 +162,7 @@ const setBase64Link = (dataTypesArray) => {
     }
     base64Link = JSON.stringify(base64Link)
     element.base64Link = btoa(base64Link)
+    element.table = "syn12532774"
     return element
   })
   return dataTypesArray
@@ -158,9 +188,12 @@ export {
   gatherCounts,
   reduceCountsByKey,
   filterRowsByDataType,
+  filterRowsByKeyAndValue,
   filterByValue,
   filterBySpecies,
   filterByKey,
   keysToValues,
   printNames,
+  setBase64Link,
+  countBioSamples,
 }

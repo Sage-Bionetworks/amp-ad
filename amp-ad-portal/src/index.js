@@ -5,8 +5,15 @@ import "./style/style.css"
 import App from "./App"
 import registerServiceWorker from "./registerServiceWorker"
 
+import * as SynapseClient from "./synapse/SynapseClient"
+//import * as SynapseConstants from "./synapse/SynapseConstants"
+
 let data
 let data2
+const login = () => {
+  return SynapseClient.login("mikeybkats", "guinness")
+}
+
 const rawData = fetch("https://americandurablegoods.com/AllData.json")
   .then(rawDataResponse => rawDataResponse.json())
   .then((processedJSON) => {
@@ -21,7 +28,7 @@ const rawData2 = fetch("http://localhost:3030/response2.json")
   })
   .catch(error => console.log("Request has failed: ", error))
 
-Promise.all([rawData, rawData2]).then(() => ReactDOM.render(
+Promise.all([login(), rawData, rawData2]).then(() => ReactDOM.render(
   <App
     appData={data2}
     speciesSelection={data.speciesList}
