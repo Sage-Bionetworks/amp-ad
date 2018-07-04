@@ -9,7 +9,7 @@ import * as SynapseConstants from "../synapse/SynapseConstants"
 const getBioSampleCount = (species, table, tokenResponse) => {
   //SELECT count(DISTINCT "specimenID") FROM syn12532774 where ("species" = 'Human')
   let query
-  if (species === "allspecies") {
+  if (species === "allspecies" || species === "All species") {
     query = `SELECT count(DISTINCT "specimenID") FROM ${table}`
   } else {
     query = `SELECT count(DISTINCT "specimenID") FROM ${table} WHERE ( ( "species" = '${species}') )`

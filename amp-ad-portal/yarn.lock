@@ -8913,6 +8913,10 @@ symbol.prototype.description@^1.0.0:
   dependencies:
     has-symbols "^1.0.0"
 
+synapse-react-client@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/synapse-react-client/-/synapse-react-client-0.1.6.tgz#8e91a5b1d5a53206bec2937a8b2bfa2cda08f321"
+
 table@^4.0.1, table@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/table/-/table-4.0.3.tgz#00b5e2b602f1794b9acaf9ca908a76386a7813bc"

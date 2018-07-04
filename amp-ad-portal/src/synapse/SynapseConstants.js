@@ -1,6 +1,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true,
-})
+});
 /** QueryBundleRequest constants */
 const BUNDLE_MASK_QUERY_RESULTS = (exports.BUNDLE_MASK_QUERY_RESULTS = 1)
 const BUNDLE_MASK_QUERY_COUNT = (exports.BUNDLE_MASK_QUERY_COUNT = 2)

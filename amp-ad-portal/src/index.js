@@ -10,9 +10,11 @@ import * as SynapseClient from "./synapse/SynapseClient"
 
 let data
 let data2
-const login = () => {
-  return SynapseClient.login("mikeybkats", "guinness")
-}
+let loginKey
+const login = SynapseClient.login("mikeybkats", "guinness").then((keys) => {
+  loginKey = keys
+  return keys
+})
 
 const rawData = fetch("https://americandurablegoods.com/AllData.json")
   .then(rawDataResponse => rawDataResponse.json())
@@ -28,8 +30,9 @@ const rawData2 = fetch("http://localhost:3030/response2.json")
   })
   .catch(error => console.log("Request has failed: ", error))
 
-Promise.all([login(), rawData, rawData2]).then(() => ReactDOM.render(
+Promise.all([login, rawData, rawData2]).then(() => ReactDOM.render(
   <App
+    loginToken={loginKey}
     appData={data2}
     speciesSelection={data.speciesList}
     allSpeciesData={data.allspeciesData}

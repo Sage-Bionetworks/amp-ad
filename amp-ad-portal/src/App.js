@@ -50,17 +50,7 @@ class App extends Component {
     shrinkHeader()
   }
 
-  componentDidUpdate() {
-    console.log(
-      this.dropdownFilter(
-        this.state.speciesDropdownSelection,
-        this.state.diagnosesDropdownSelection,
-        this.props.appData,
-        this.state,
-        "assay",
-      ),
-    )
-  }
+  componentDidUpdate() {}
 
   getSpeciesDropdownOptions = (rawData) => {
     const speciesDropdownOptions = []
@@ -83,23 +73,22 @@ class App extends Component {
       filterByKey(this.props.appData, "diagnoses"),
       [selection],
     )
-    const diagnosesRaw = keysToValues(diagnosesRows)
+    let diagnosesList = keysToValues(diagnosesRows)
+    diagnosesList = reduceCountsByKey(diagnosesList, "diagnoses")
 
-    const diagnoses = printNames(
-      reduceCountsByKey(diagnosesRaw, "diagnoses"),
-      "diagnoses",
-    )
+    const diagnoses = printNames(diagnosesList, "diagnoses")
+    diagnoses.splice(0, 0, "All diagnoses")
 
     this.setState({
       diagnosesSelectionOptions: diagnoses,
     })
   };
 
-  dropdownFilter = (
+  setMainDropdownFilter = (
     species,
     diagnoses,
     dataObject,
-    state = this.state,
+    diagnosesArray,
     dataType,
   ) => {
     let speciesFilterKey
@@ -110,7 +99,7 @@ class App extends Component {
         "Human",
         "Mouse",
         "Human Cell Line",
-        "Fruit Fly",
+        "Fruit fly",
       ]
     } else {
       speciesFilterKey = [species]
@@ -121,15 +110,18 @@ class App extends Component {
       speciesFilterKey,
       "species",
     )
+    //console.log(reduceCountsByKey(speciesFiltered, "assay"))
 
     let diagnosesFilterKey
     if (diagnoses === "All diagnoses") {
-      diagnosesFilterKey = state.diagnosesSelectionOptions
+      diagnosesArray.splice(0, 0, null)
+      diagnosesFilterKey = diagnosesArray
     } else {
       diagnosesFilterKey = [diagnoses]
     }
+    //console.log(diagnosesFilterKey)
 
-    return reduceCountsByKey(
+    const filteredRows = reduceCountsByKey(
       setBase64Link(
         filterRowsByKeyAndValue(
           speciesFiltered,
@@ -139,51 +131,52 @@ class App extends Component {
       ),
       dataType,
     )
+
+    //console.log(dataType, filteredRows)
+
+    return filteredRows
   };
 
-  setFlattenedData = (pageKey, speciesKey, dataObject) => {
-    // pageKey example "assay"
-    // speciesKey example "Human" or "All species"
-    // dataObject raw synapse data
-    let filterKey
-    if (speciesKey === "All species") {
-      filterKey = [
-        null,
-        "Rat",
-        "Human",
-        "Mouse",
-        "Human Cell Line",
-        "Fruit Fly",
-      ]
-    } else {
-      filterKey = [speciesKey]
-    }
-
-    const flattennedRows = reduceCountsByKey(
-      filterRowsByKeyAndValue(
-        setBase64Link(keysToValues(dataObject.queryResult.queryResults.rows)),
-        filterKey,
-        "species",
-      ),
+  setFlattenedData = (
+    pageKey,
+    speciesKey,
+    dataObject,
+    diagnosesKey,
+    diagnosesArray,
+  ) => {
+    const chartPageData = this.setMainDropdownFilter(
+      speciesKey,
+      diagnosesKey,
+      dataObject,
+      diagnosesArray,
       pageKey,
     )
 
     const stateObjectToAdd = {
-      count: flattennedRows.length,
-      facetValues: [...flattennedRows],
+      count: chartPageData.length,
+      facetValues: [...chartPageData],
     }
+
     this.setState(prevState => ({
       ...prevState,
       pageData: { ...prevState.pageData, [pageKey]: stateObjectToAdd },
     }))
   };
 
-  setQueriesForBioSamples = (state, props) => {
+  queryForBioSamples = (state, props) => {
     return getBioSampleCount(
       state.speciesDropdownSelection,
       "syn12532774",
-      props.tokenResponse,
+      props.loginToken,
     )
+  };
+
+  setBioSampleCount = (newCount, pageKey) => {
+    const stateKey = `biosamples${pageKey}Count`
+    this.setState(prevState => ({
+      ...prevState,
+      pageData: { ...prevState.pageData, [stateKey]: newCount },
+    }))
   };
 
   setAllPageDataPoints = () => {
@@ -201,11 +194,14 @@ class App extends Component {
         element,
         this.state.speciesDropdownSelection,
         this.props.appData,
+        this.state.diagnosesDropdownSelection,
+        this.state.diagnosesSelectionOptions,
       )
       //this.setFacetPageData(element, this.state)
       this.setDiagnosesMenu(this.props, this.state)
-
-      // runQueriesForBioSamples
+      this.queryForBioSamples(this.state, this.props).then((count) => {
+        this.setBioSampleCount(parseInt(count, 10), element)
+      })
     })
   };
 
