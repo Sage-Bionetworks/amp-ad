@@ -1,21 +1,20 @@
 import React, { Component } from "react"
-import _ from "lodash"
 import PropTypes from "prop-types"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 
 // non component js
 import study from "./defaultData/Study"
 import {
-  gatherCounts,
   reduceCountsByKey,
   filterByKey,
   filterByValue,
-  filterBySpecies,
   setBase64Link,
   keysToValues,
   printNames,
   filterRowsByKeyAndValue,
-  countBioSamples,
+  //countBioSamples,
+  //gatherCounts,
+  //filterBySpecies,
 } from "./controller/PrepRawSynapseData"
 
 import { getBioSampleCount } from "./queries/queryForData"
@@ -31,6 +30,8 @@ import AboutDataUseRequirements from "./AboutDataUseRequirements"
 // scripts
 import { shrinkHeader } from "./view/domScripts"
 
+const pageDataPoints = ["assay", "tissue", "diagnoses"]
+
 class App extends Component {
   state = {
     filters: {
@@ -38,15 +39,15 @@ class App extends Component {
       tissue: false,
     },
     pageData: study,
-    studyTemplate: {},
     diagnosesSelectionOptions: [],
     speciesDropdownSelection: "All species",
     diagnosesDropdownSelection: "All diagnoses",
   };
 
   componentDidMount() {
-    this.setAllPageDataPoints()
     this.setDiagnosesMenu(this.props, this.state)
+    this.setPageDataPoints(pageDataPoints)
+    this.queryAndSetBioSampleCount()
     shrinkHeader()
   }
 
@@ -79,9 +80,7 @@ class App extends Component {
     const diagnoses = printNames(diagnosesList, "diagnoses")
     diagnoses.splice(0, 0, "All diagnoses")
 
-    this.setState({
-      diagnosesSelectionOptions: diagnoses,
-    })
+    this.handleChanges("diagnosesSelectionOptions", diagnoses)
   };
 
   setMainDropdownFilter = (
@@ -104,13 +103,13 @@ class App extends Component {
     } else {
       speciesFilterKey = [species]
     }
+    console.log(diagnosesArray)
 
     const speciesFiltered = filterRowsByKeyAndValue(
       keysToValues(dataObject.queryResult.queryResults.rows),
       speciesFilterKey,
       "species",
     )
-    //console.log(reduceCountsByKey(speciesFiltered, "assay"))
 
     let diagnosesFilterKey
     if (diagnoses === "All diagnoses") {
@@ -119,7 +118,6 @@ class App extends Component {
     } else {
       diagnosesFilterKey = [diagnoses]
     }
-    //console.log(diagnosesFilterKey)
 
     const filteredRows = reduceCountsByKey(
       setBase64Link(
@@ -132,8 +130,6 @@ class App extends Component {
       dataType,
     )
 
-    //console.log(dataType, filteredRows)
-
     return filteredRows
   };
 
@@ -144,6 +140,7 @@ class App extends Component {
     diagnosesKey,
     diagnosesArray,
   ) => {
+    console.log(diagnosesArray)
     const chartPageData = this.setMainDropdownFilter(
       speciesKey,
       diagnosesKey,
@@ -163,14 +160,6 @@ class App extends Component {
     }))
   };
 
-  queryForBioSamples = (state, props) => {
-    return getBioSampleCount(
-      state.speciesDropdownSelection,
-      "syn12532774",
-      props.loginToken,
-    )
-  };
-
   setBioSampleCount = (newCount, pageKey) => {
     const stateKey = `biosamples${pageKey}Count`
     this.setState(prevState => ({
@@ -179,17 +168,8 @@ class App extends Component {
     }))
   };
 
-  setAllPageDataPoints = () => {
-    const pageDataPoints = [
-      "assay",
-      "tissue",
-      "diagnoses",
-      "species",
-      //"biosamplesCount",
-      "diagnosesAssay",
-      "diagnosesTissue",
-    ]
-    pageDataPoints.forEach((element) => {
+  setPageDataPoints = (dataPoints) => {
+    dataPoints.forEach((element) => {
       this.setFlattenedData(
         element,
         this.state.speciesDropdownSelection,
@@ -197,11 +177,6 @@ class App extends Component {
         this.state.diagnosesDropdownSelection,
         this.state.diagnosesSelectionOptions,
       )
-      //this.setFacetPageData(element, this.state)
-      this.setDiagnosesMenu(this.props, this.state)
-      this.queryForBioSamples(this.state, this.props).then((count) => {
-        this.setBioSampleCount(parseInt(count, 10), element)
-      })
     })
   };
 
@@ -218,24 +193,20 @@ class App extends Component {
     return totalCounts
   };
 
-  setSelection = (STATE, stateKey, prependValue) => {
-    const selectionObject = STATE.facetValues
-    const selectionArray = this.convertObjectValsToArray(selectionObject)
-    if (prependValue) {
-      selectionArray.unshift(prependValue)
-    }
-    this.handleChanges(stateKey, selectionArray)
+  queryForBioSamples = (state, props) => {
+    return getBioSampleCount(
+      state.speciesDropdownSelection,
+      "syn12532774",
+      props.loginToken,
+    )
   };
 
-  convertObjectValsToArray = (OBJECT) => {
-    const mappedArray = []
-    _.mapKeys(OBJECT, (value) => {
-      if (value.value.length !== 41) {
-        mappedArray.push(value.value)
-      }
-      return value.value
+  queryAndSetBioSampleCount = () => {
+    ["assay", "tissue"].forEach((element) => {
+      this.queryForBioSamples(this.state, this.props).then((count) => {
+        this.setBioSampleCount(parseInt(count, 10), element)
+      })
     })
-    return mappedArray
   };
 
   handleChanges = (KEY, NEWSTATE) => {
@@ -251,7 +222,7 @@ class App extends Component {
         [key]: event.target.value,
       },
       () => {
-        this.setAllPageDataPoints()
+        this.setPageDataPoints(pageDataPoints)
       },
     )
   };
@@ -275,7 +246,7 @@ class App extends Component {
         [key]: event.label,
       },
       () => {
-        this.setAllPageDataPoints()
+        this.setPageDataPoints(pageDataPoints)
       },
     )
   };
@@ -360,13 +331,7 @@ Terms & Privacy
 }
 
 App.propTypes = {
-  allSpeciesData: PropTypes.object.isRequired,
-  humanData: PropTypes.object.isRequired,
-  ratData: PropTypes.object.isRequired,
-  mouseData: PropTypes.object.isRequired,
-  humancelllineData: PropTypes.object.isRequired,
-  flyData: PropTypes.object.isRequired,
-  speciesSelection: PropTypes.array.isRequired,
+  loginToken: PropTypes.object.isRequired,
   appData: PropTypes.object.isRequired,
 }
 

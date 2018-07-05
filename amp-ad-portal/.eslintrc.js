@@ -18,7 +18,9 @@ module.exports = {
     "prefer-destructuring": 0,
     "arrow-body-style": 0,
     "spaced-comment": 0,
-    "react/destructuring-assignment": [0, "always"]
+    "react/destructuring-assignment": [0, "always"],
+    "react/no-render-return-value": 0,
+    "global-require": 0
   },
   env: {
     browser: true

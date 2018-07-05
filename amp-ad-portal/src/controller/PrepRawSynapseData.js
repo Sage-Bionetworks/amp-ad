@@ -1,9 +1,19 @@
+import _ from "lodash"
+
 const filterBySpecies = (dataObject, species) => {
   // takes raw synapse json data as input
   const selection = dataObject.queryResult.queryResults.rows.filter(
     element => element.values[0] === species,
   )
   return selection
+}
+
+const convertObjectValsToArray = (OBJECT) => {
+  const mappedArray = []
+  _.mapKeys(OBJECT, (value) => {
+    return value.value
+  })
+  return mappedArray
 }
 
 const filterRowsByDataType = (filteredRows, species, key) => {
@@ -174,18 +184,7 @@ const printNames = (objectArray, key) => {
   })
 }
 
-const gatherCounts = (dataResponse, species, dataType) => {
-  //const filteredByValue = filterByValue(dataResponse)
-  //console.log(filteredByValue)
-  //const speciesArray = filterBySpecies(dataResponse, species)
-  //const speciesDataType = filterByKey(speciesArray, species, dataType)
-  // console.log(speciesDataType)
-  //const counts = setBase64Link(reduceCounts(speciesDataType))
-  //return counts
-}
-
 export {
-  gatherCounts,
   reduceCountsByKey,
   filterRowsByDataType,
   filterRowsByKeyAndValue,
@@ -196,4 +195,5 @@ export {
   printNames,
   setBase64Link,
   countBioSamples,
+  convertObjectValsToArray,
 }

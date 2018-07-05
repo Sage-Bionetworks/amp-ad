@@ -79,7 +79,7 @@ select {
 
 
 
-button:focus, input:focus, select:focus { outline:none; }
+button:focus, input:focus, select:focus, div:focus { outline:none; }
 button:hover, select:hover { cursor: pointer }
 
 .btn {
@@ -122,6 +122,9 @@ div.row.amp-ad {
 }
 
 .nav {
+  li:hover{
+    cursor: pointer;
+  }
   li {
     list-style: none;
     margin: 0px 10px;
@@ -196,11 +199,63 @@ header.header {
 	.Dropdown-arrow {
 		top: 7px;
 	}
+  li .Dropdown-root .Dropdown-control div.Dropdown-placeholder {
+    cursor: pointer;
+  }
+  .Dropdown-arrow {
+    cursor: pointer;
+  }
 }
 header.header.squish {
   padding: 0px 50px;
   img {
     max-height: 35px;
+  }
+}
+
+header { 
+  .accordion {
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    ul {
+      padding: 0px;
+      margin: 0px;
+    }
+    .accordion__title {
+      width: 100%;
+      margin: -1px 0px;
+    }
+  }
+  .accordion-title.top-level-accordion {
+    padding: 0px;
+    font-weight: 500;
+    font-size: 20px;
+    border: none;
+  }
+  .accordion__body{
+    padding: 0px;
+    width: 100%;
+    ul {
+      width: 100%;
+    }
+    li {
+      margin: 0px;
+      padding: 10px;
+    }
+  }
+  .accordion__body li:hover {
+    background-color: yellow; 
+  }
+  .accordion-body.top-level-accordion {
+    position: absolute;
+    z-index: 1000;
+    right: 300px;
+    margin-top: 15px;
+  }
+  .accordion__body {
+    background: white;
+    text-align: left;
   }
 }
 
@@ -342,6 +397,7 @@ section.searchbar {
     border-width: 8px 8px 0;
   }
   .Dropdown-control {
+    cursor: pointer;
     line-height: 40px;
     padding-left: 20px;
     font-size: 18px;

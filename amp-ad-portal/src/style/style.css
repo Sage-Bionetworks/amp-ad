@@ -47,7 +47,7 @@ select {
   text-decoration: underline;
   text-align: left; }
 
-button:focus, input:focus, select:focus {
+button:focus, input:focus, select:focus, div:focus {
   outline: none; }
 
 button:hover, select:hover {
@@ -87,6 +87,8 @@ div.row.amp-ad {
   margin: 0px;
   min-height: 100%; }
 
+.nav li:hover {
+  cursor: pointer; }
 .nav li {
   list-style: none;
   margin: 0px 10px; }
@@ -144,11 +146,49 @@ header.header {
     right: 10px; }
   header.header .Dropdown-arrow {
     top: 7px; }
+  header.header li .Dropdown-root .Dropdown-control div.Dropdown-placeholder {
+    cursor: pointer; }
+  header.header .Dropdown-arrow {
+    cursor: pointer; }
 
 header.header.squish {
   padding: 0px 50px; }
   header.header.squish img {
     max-height: 35px; }
+
+header .accordion {
+  cursor: pointer;
+  border: none;
+  background-color: white; }
+  header .accordion ul {
+    padding: 0px;
+    margin: 0px; }
+  header .accordion .accordion__title {
+    width: 100%;
+    margin: -1px 0px; }
+header .accordion-title.top-level-accordion {
+  padding: 0px;
+  font-weight: 500;
+  font-size: 20px;
+  border: none; }
+header .accordion__body {
+  padding: 0px;
+  width: 100%; }
+  header .accordion__body ul {
+    width: 100%; }
+  header .accordion__body li {
+    margin: 0px;
+    padding: 10px; }
+header .accordion__body li:hover {
+  background-color: yellow; }
+header .accordion-body.top-level-accordion {
+  position: absolute;
+  z-index: 1000;
+  right: 300px;
+  margin-top: 15px; }
+header .accordion__body {
+  background: white;
+  text-align: left; }
 
 footer {
   background-color: #5A498D;
@@ -265,6 +305,7 @@ section.searchbar {
     top: 23px;
     border-width: 8px 8px 0; }
   section.searchbar .Dropdown-control {
+    cursor: pointer;
     line-height: 40px;
     padding-left: 20px;
     font-size: 18px; }

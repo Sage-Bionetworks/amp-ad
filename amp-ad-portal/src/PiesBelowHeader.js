@@ -143,12 +143,8 @@ class PiesBelowHeader extends Component {
               rel="noopener noreferrer"
               className="pie-list-item col-xs"
             >
-              {element[dataType]}
-              {" "}
-(
-              {element.count}
-              {" "}
-biosamples)
+              {`${element[dataType]} `}
+              {`${element.count} biosamples`}
             </a>
           </div>
         )
@@ -219,9 +215,6 @@ biosamples)
   };
 
   buildPieSection = (speciesDropdownSelection, dataType, label) => {
-    // if(dataType === 'diagnosesTissue' || dataType === 'diagnosesAssay'){
-
-    // }
     const pieData = this.buildPieData(
       "this.props.speciesSelection",
       this.getCountsList(dataType),
@@ -239,7 +232,7 @@ biosamples)
             <div className="pie-circles-container">
               <div className="chart-center-stat">
                 <h1 alt="count of samples">
-                  {this.props.pageData.biosamplesCount}
+                  {this.props.pageData[`biosamples${dataType}Count`]}
                 </h1>
                 <p>
 Biosamples
