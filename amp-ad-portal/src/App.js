@@ -1,253 +1,370 @@
-// packages
-import React, { Component } from 'react';
-import _ from 'lodash';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import React, { Component } from "react"
+import PropTypes from "prop-types"
+import { BrowserRouter as Router, Route } from "react-router-dom"
 
 // non component js
-import study from './defaultData/Study';
+import study from "./defaultData/Study"
+import {
+  reduceCountsByKey,
+  filterByKey,
+  filterByValue,
+  setBase64Link,
+  keysToValues,
+  printNames,
+  filterRowsByKeyAndValue,
+  //countBioSamples,
+  //gatherCounts,
+  //filterBySpecies,
+} from "./controller/PrepRawSynapseData"
+
+import { getBioSampleCount } from "./queries/queryForData"
 
 // component js
-import Header from './Header'
-import Home from './Home'
-import Tools from './Tools'
-import AboutPrograms from './AboutPrograms'
-import AboutStudies from './AboutStudies'
-import AboutDataUseRequirements from './AboutDataUseRequirements'
+import Header from "./Header"
+import Home from "./Home"
+import Tools from "./Tools"
+import AboutPrograms from "./AboutPrograms"
+import AboutStudies from "./AboutStudies"
+import AboutDataUseRequirements from "./AboutDataUseRequirements"
+
+// scripts
+import { shrinkHeader } from "./view/domScripts"
+
+const pageDataPoints = ["assay", "tissue", "dataType", "diagnoses"]
 
 class App extends Component {
   state = {
-    buttonState: {
-      assayButtonAll: false,
-      tissueButtonAll: false
+    filters: {
+      assay: false,
+      tissue: false,
     },
     pageData: study,
-    studyTemplate: {},
     diagnosesSelectionOptions: [],
-    speciesDropdownSelection: 'All species',
-    diagnosesDropdownSelection: 'All diagnoses'
+    speciesDropdownSelection: "All species",
+    diagnosesDropdownSelection: "All diagnoses",
+  };
+
+  componentDidMount() {
+    this.setDiagnosesMenu(this.props, this.state)
+    this.setPageDataPoints(pageDataPoints)
+    this.queryAndSetBioSampleCount()
+    shrinkHeader()
   }
 
-  componentDidMount(){
-		this.setAllPageDataPoints();
-    this.setDiagnosesMenu();
-  }
+  componentDidUpdate() {}
 
-  componentDidUpdate(){
-		//console.log(this.props.humanData);
-  }
-
-  setDiagnosesMenu = () => {
-    let selection = this.state.speciesDropdownSelection
-    if(selection === "All species"){ selection = 'allSpecies' }
-    if(selection === "Drosophila melanogaster" || selection === "Fruit fly"){ selection = 'fly' }
-    if(selection !== 'allSpecies'){ selection = selection.toLowerCase() }
-    selection = selection.replace(/\s/g, '')
-    selection = selection + "Data"
-    let diagnoses = this.props[selection].diagnosesList
-    this.setState({
-      diagnosesSelectionOptions: diagnoses
-    }) 
-  }
-
-  setFacetPageData = (key) => {
-    let propKey = this.state.speciesDropdownSelection.toLowerCase().replace(/\s/g, '' ) + 'Data'
-    if(this.state.speciesDropdownSelection.toLowerCase() === 'all species'){
-      propKey = 'allSpeciesData'
+  getSpeciesDropdownOptions = (rawData) => {
+    const speciesDropdownOptions = []
+    if (rawData !== undefined) {
+      const speciesObj = rawData.facets.filter(
+        row => row.columnName === "species",
+      )
+      speciesObj[0].facetValues.forEach((element) => {
+        speciesDropdownOptions.push(element.value)
+      })
+      speciesDropdownOptions[0] = "All species"
     }
-    if(this.state.speciesDropdownSelection === 'Drosophila melanogaster' || this.state.speciesDropdownSelection === "Fruit fly"){
-      propKey = 'flyData'
+    return speciesDropdownOptions
+  };
+
+  getDiagnosesDropdownOptions = (rawData, species) => {
+    const diagnosesRows = filterByValue(filterByKey(rawData, "diagnoses"), [
+      species,
+    ])
+    let diagnosesList = reduceCountsByKey(
+      keysToValues(diagnosesRows),
+      "diagnoses",
+    )
+    diagnosesList = printNames(diagnosesList, "diagnoses")
+    return diagnosesList
+  };
+
+  setDiagnosesMenu = (props, state) => {
+    let selection = state.speciesDropdownSelection
+    if (selection === "All species") {
+      selection = null
     }
-    this.setSubFacet(key, propKey)
-  }
-  setSubFacet = (key, speciesKey) => {
-    //console.log(speciesKey)
-    let stateObjectToAdd = { 
-      count: this.props[speciesKey][key].length,
-      facetValues: {...this.props[speciesKey][key]} 
+
+    const diagnoses = this.getDiagnosesDropdownOptions(
+      this.props.appData,
+      selection,
+    )
+    diagnoses.splice(0, 0, "All diagnoses")
+
+    this.handleChanges("diagnosesSelectionOptions", diagnoses)
+  };
+
+  returnAllSpeciesArray = () => {
+    return [null, "Rat", "Human", "Mouse", "Human Cell Line", "Fruit fly"]
+  };
+
+  convertUserDiagnosesSelection = (diagnoses, diagnosesArray) => {
+    let diagnosesFilterKey
+    if (diagnoses === "All diagnoses" && diagnosesArray[0] !== null) {
+      diagnosesArray.splice(0, 0, null)
+      diagnosesFilterKey = diagnosesArray
+    } else {
+      let newDiagnoses = diagnoses
+      if (diagnoses === "All diagnoses") {
+        newDiagnoses = null
+      }
+      diagnosesFilterKey = [newDiagnoses]
     }
-    this.setState( prevState => ({
+    return diagnosesFilterKey
+  };
+
+  filterRowsAndAddBase64Link = (
+    speciesDataFiltered,
+    diagnosesFilterKey,
+    dataType,
+  ) => {
+    return reduceCountsByKey(
+      setBase64Link(
+        filterRowsByKeyAndValue(
+          speciesDataFiltered,
+          diagnosesFilterKey,
+          "diagnoses",
+        ),
+      ),
+      dataType,
+    )
+  };
+
+  setMainDropdownFilter = (
+    species,
+    diagnoses,
+    dataObject,
+    diagnosesArray,
+    dataType,
+  ) => {
+    let speciesFilterKey
+    if (species === "All species") {
+      speciesFilterKey = this.returnAllSpeciesArray()
+    } else {
+      speciesFilterKey = [species]
+    }
+
+    const speciesFiltered = filterRowsByKeyAndValue(
+      keysToValues(dataObject.queryResult.queryResults.rows),
+      speciesFilterKey,
+      "species",
+    )
+
+    const diagnosesFilterKey = this.convertUserDiagnosesSelection(
+      diagnoses,
+      diagnosesArray,
+    )
+
+    const filteredRows = this.filterRowsAndAddBase64Link(
+      speciesFiltered,
+      diagnosesFilterKey,
+      dataType,
+    )
+    return filteredRows
+  };
+
+  setFlattenedData = (
+    pageKey,
+    speciesKey,
+    dataObject,
+    diagnosesKey,
+    diagnosesArray,
+  ) => {
+    const chartPageData = this.setMainDropdownFilter(
+      speciesKey,
+      diagnosesKey,
+      dataObject,
+      diagnosesArray,
+      pageKey,
+    )
+
+    const stateObjectToAdd = {
+      count: chartPageData.length,
+      facetValues: [...chartPageData],
+    }
+
+    this.setState(prevState => ({
       ...prevState,
-      pageData: { ...prevState.pageData, [key]: {...stateObjectToAdd} }  
-    }), () => {
-      //this.setSelection(this.state.pageData.species, "speciesSelection", "All Species")
-      //this.setSelection(this.state.pageData.diseases, "diseasesSelection", "All Diseases")
+      pageData: { ...prevState.pageData, [pageKey]: stateObjectToAdd },
+    }))
+  };
+
+  setBioSampleCount = (newCount, pageKey) => {
+    const stateKey = `biosamples${pageKey}Count`
+    this.setState(prevState => ({
+      ...prevState,
+      pageData: { ...prevState.pageData, [stateKey]: newCount },
+    }))
+  };
+
+  setPageDataPoints = (dataPoints) => {
+    dataPoints.forEach((element) => {
+      this.setFlattenedData(
+        element,
+        this.state.speciesDropdownSelection,
+        this.props.appData,
+        this.state.diagnosesDropdownSelection,
+        this.state.diagnosesSelectionOptions,
+      )
     })
-  }
+  };
 
-  setAllPageDataPoints = () => {
-    let pageDataPoints = ['assay', 'tissue', 'diagnoses', 'species', 'diagnosesAssay', 'diagnosesTissue' ];
-    pageDataPoints.forEach( (element, index) => {
-      this.setFacetPageData(element)  
-      this.setDiagnosesMenu()
-    });
-  }
+  getSum = (total, num) => total + num;
 
-	getSum = (total, num) => {
-		return total + num;
-	}
-
-	getColumnCountForSpecies = (speciesPropName, columnName) => {
-		let totalCounts = [];
-		speciesPropName.facets.forEach( (element) => {
-			if(element.columnName === columnName){
-				totalCounts.push( element.facetValues.length ) 
-			}
-		})
-		totalCounts = totalCounts.reduce(this.getSum); 	
-		return totalCounts;
-	}
-
-  setSelection = (STATE, stateKey, prependValue) => {
-    let selectionObject = STATE.facetValues; 
-    let selectionArray = this.convertObjectValsToArray(selectionObject);
-    if(prependValue){
-      selectionArray.unshift(prependValue);
-    }
-    this.handleChanges(stateKey, selectionArray);
-  }
-
-  handleReactDropdownEvent = (event) => {
-    //console.log(event)
-    let key = event.value[0]
-    this.setState({
-      [key]: event.label 
-    }, ()=> {
-      this.setAllPageDataPoints();
+  getColumnCountForSpecies = (speciesPropName, columnName) => {
+    let totalCounts = []
+    speciesPropName.facets.forEach((element) => {
+      if (element.columnName === columnName) {
+        totalCounts.push(element.facetValues.length)
+      }
     })
-  }
+    totalCounts = totalCounts.reduce(this.getSum)
+    return totalCounts
+  };
 
-  handleChangeEvent = (event) => {
-    let key = event.target.name;
-    this.setState({
-      [key]: event.target.value 
-    }, ()=> {
-      this.setAllPageDataPoints();
+  queryForBioSamples = (state, props) => {
+    return getBioSampleCount(
+      state.speciesDropdownSelection,
+      "syn12532774",
+      props.loginToken,
+    )
+  };
+
+  queryAndSetBioSampleCount = () => {
+    ["dataType", "tissue"].forEach((element) => {
+      this.queryForBioSamples(this.state, this.props).then((count) => {
+        this.setBioSampleCount(parseInt(count, 10), element)
+      })
     })
-  }
+  };
 
   handleChanges = (KEY, NEWSTATE) => {
     this.setState({
-      [KEY]: NEWSTATE
-    })  
-  }
+      [KEY]: NEWSTATE,
+    })
+  };
 
   toggleSeeAll = (event) => {
-    let key = event.target.name;
-    let value = event.target.dataset.value === "false" ? true : false; 
-    this.setState( prevState => ({
+    const key = event.target.name
+    const value = event.target.dataset.value === "false"
+    this.setState(prevState => ({
       ...prevState,
       buttonState: {
-        ...prevState.buttonState, 
-        [key]: value
-      }
-    })) 
-  }
+        ...prevState.buttonState,
+        [key]: value,
+      },
+    }))
+  };
 
-  convertObjectValsToArray = (OBJECT) => {
-    let mappedArray = []
-    _.mapKeys(OBJECT, (value, key) => { 
-      if(value["value"].length !== 41){ mappedArray.push(value["value"]) }
-      return value["value"] 
-    });
-    return mappedArray;
-  }
+  handleReactDropdownEvent = (event) => {
+    const key = event.value[0]
+    this.setState(
+      {
+        [key]: event.label,
+      },
+      () => {
+        this.setDiagnosesMenu(this.props, this.state)
+        this.setPageDataPoints(pageDataPoints)
+        this.queryAndSetBioSampleCount()
+      },
+    )
+  };
 
-  getColumnNameDataTypeAndCount = (columnName, pathToDataObject) => {
-    let mappedArray = []
-    //console.log(columnName, pathToDataObject)
-    if(pathToDataObject[columnName] !== undefined){
-      _.mapKeys(pathToDataObject[columnName].facetValues, (object) => {
-        if( object.value === 'org.sagebionetworks.UNDEFINED_NULL_NOTSET' ){
-          object.value = "not set"  
-        }
-          let flatData = { 
-            count: object.count, 
-            value: object.value
-          }
-          return mappedArray.push(flatData);
-      })
-    }
-    return mappedArray;
-  }
+  handleChangeEvent = (event) => {
+    const key = event.target.name
+    this.setState(
+      {
+        [key]: event.target.value,
+      },
+      () => {
+        this.setDiagnosesMenu(this.props, this.state)
+        this.setPageDataPoints(pageDataPoints)
+        this.queryAndSetBioSampleCount()
+      },
+    )
+  };
 
-	homeMarkup = () => {
-		return (
-			<Home 
-        setDiagnosesMenu={this.setDiagnosesMenu}
-				speciesSelectionOptions={this.props.speciesSelection}
-				speciesDropdownSelection={this.state.speciesDropdownSelection}
+  homeMarkup = () => (
+    <Home
+      setDiagnosesMenu={this.setDiagnosesMenu}
+      speciesSelectionOptions={this.getSpeciesDropdownOptions(
+        this.props.appData,
+      )}
+      speciesDropdownSelection={this.state.speciesDropdownSelection}
+      diagnosesSelectionOptions={this.state.diagnosesSelectionOptions}
+      diagnosesDropdownSelection={this.state.diagnosesDropdownSelection}
+      toggleSeeAll={this.toggleSeeAll}
+      getSum={this.getSum}
+      getColumnCountForSpecies={this.getColumnCountForSpecies}
+      pageData={this.state.pageData}
+      handleChangeEvent={this.handleChangeEvent}
+      handleReactDropdownEvent={this.handleReactDropdownEvent}
+    />
+  );
 
-        diagnosesSelectionOptions={this.state.diagnosesSelectionOptions}
-        diagnosesDropdownSelection={this.state.diagnosesDropdownSelection}
+  ReturnAboutPrograms = props => (
+    <AboutPrograms
+      // programData={this.props.wikiProgramData}
+      // contributorData={this.props.wikiContributorsData}
+      handleChangeEvent={this.handleChangeEvent}
+      parentState={this.state}
+      {...props}
+    />
+  );
 
-        wikiNewsData={this.props.wikiNewsData}
-				toggleSeeAll={this.toggleSeeAll}
-				buttonState={this.state.buttonState}
-				getSum={this.getSum}
-				getColumnCountForSpecies={this.getColumnCountForSpecies}
-				getColumnNameDataTypeAndCount={this.getColumnNameDataTypeAndCount}
-				pageData={this.state.pageData}
-				ratData={this.props.ratData}
-				mouseData={this.props.flyData}
-				flyData={this.props.flyData}
-				
-        handleChangeEvent={this.handleChangeEvent}
-        handleReactDropdownEvent={this.handleReactDropdownEvent}
-			/>
-		)
-	}
+  ReturnAboutDataUse = props => (
+    <AboutDataUseRequirements
+      // dataUseRequirements={this.props.wikiDataUseData}
+      {...props}
+    />
+  );
 
-	ReturnAboutPrograms = (props) => {
-		return (
-			<AboutPrograms 
-				programData={this.props.wikiProgramData}
-				contributorData={this.props.wikiContributorsData}
-				handleChangeEvent={this.handleChangeEvent}
-				parentState={this.state}
-				{...props}
-			/>
-		)	
-	}
-
-	ReturnAboutDataUse = props => {
-		return (
-			<AboutDataUseRequirements 
-				//dataUseRequirements={this.props.wikiDataUseData}
-				{...props}
-			/>
-		)	
-	}
-
-  render(){
+  render() {
     return (
-			<Router>
-      <div className="row amp-ad">
-				<Header />
-        <div className="col-xs-12 main">
-					<Route exact path="/" component={this.homeMarkup}/>
-					<Route path="/Tools" component={Tools}/>
-						<Route path="/Programs" component={this.ReturnAboutPrograms}/>
-						<Route path="/Studies" component={AboutStudies}/>
-						<Route path="/DataUseRequirements" component={this.ReturnAboutDataUse}/>
-				</div>
-				<footer className="row center-xs middle-xs">
-					<div className="col-xs-12 col-sm-1">
-						<a href="/">Forum</a>
-					</div>
-					<div className="col-xs-12 col-sm-1">
-						<a href="/">Contact</a>
-					</div>
-					<div className="col-xs-12 col-sm-1">
-						<a href="/">Help</a>
-					</div>
-					<div className="col-xs-12 col-sm-2">
-						<a href="/">Terms & Privacy</a>
-					</div>
-				</footer>
-			</div>
-			</Router>
-    );
+      <Router>
+        <div className="row amp-ad">
+          <Header />
+          <div className="col-xs-12 main">
+            <Route exact path="/" component={this.homeMarkup} />
+            <Route path="/Tools" component={Tools} />
+            <Route path="/Programs" component={this.ReturnAboutPrograms} />
+            <Route path="/Studies" component={AboutStudies} />
+            <Route
+              path="/DataUseRequirements"
+              component={this.ReturnAboutDataUse}
+            />
+          </div>
+          <footer className="row center-xs middle-xs">
+            <div className="col-xs-12 col-sm-1">
+              <a href="/">
+Forum
+              </a>
+            </div>
+            <div className="col-xs-12 col-sm-1">
+              <a href="/">
+Contact
+              </a>
+            </div>
+            <div className="col-xs-12 col-sm-1">
+              <a href="/">
+Help
+              </a>
+            </div>
+            <div className="col-xs-12 col-sm-2">
+              <a href="/">
+Terms & Privacy
+              </a>
+            </div>
+          </footer>
+        </div>
+      </Router>
+    )
   }
 }
 
-export default App;
+App.propTypes = {
+  loginToken: PropTypes.object.isRequired,
+  appData: PropTypes.object.isRequired,
+}
+
+export default App

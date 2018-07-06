@@ -1,57 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react"
+import ReactDOM from "react-dom"
+import "./style/index.css"
+import "./style/style.css"
+import App from "./App"
+import registerServiceWorker from "./registerServiceWorker"
 
-import './index.css';
-import './style.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import runAllQueries from './queryForData';
+import * as SynapseClient from "./synapse/SynapseClient"
 
-//import defaultData from './defaultData/DefaultData.js'
-//import defaultFlyData from './defaultData/DefaultFlyData.js'
-//import defaultHumanData from './defaultData/DefaultHumanData.js'
-//import defaultMouseData from './defaultData/DefaultMouseData.js'
-//import defaultRatData from './defaultData/DefaultRatData.js'
-//import defaultWikiData from './defaultData/DefaultWikiData.js'
-//import defaultWikiProgramData from './defaultData/DefaultWikiProgramData'
-//import defaultWikiContributorsData from './defaultData/DefaultWikiContributorsData'
+let rawSynapseData
+let loginKey
 
-//for production fetch the data
-runAllQueries().then( data => {
-  //console.log(data)
-  ReactDOM.render(<App 
-    speciesSelection = {data.speciesList}
-    allSpeciesData = {data.allspeciesData}
-    humanData = {data.humanData}
-    humancelllineData = {data.humancelllineData}
-    flyData = {data.flyData}
-    mouseData = {data.mouseData}
-    ratData = {data.ratData}
-    //humanData = {data.humanData}
-    //mouseData = {data.mouseData}
-    //ratData = {data.ratData}
-    //flyData = {data.flyData}
-    //allSpeciesData = {data.allSpeciesData}
-    wikiNewsData = {data.wikiNewsData}
-    wikiProgramData = {data.wikiProgramData}
-    wikiContributorsData = {data.wikiContributorsData}
-    wikiDataUseData = {data.wikiDataUseData}
-    />, document.getElementById('root'));
+const login = SynapseClient.login("mikeybkats", "guinness").then((keys) => {
+  loginKey = keys
+  return keys
 })
 
-// for testing use the local data 
-//ReactDOM.render(
-		//<App 
-			//humanData = {defaultHumanData}
-			//mouseData = {defaultMouseData}
-			//ratData = {defaultRatData}
-			//flyData = {defaultFlyData}
-			//allSpeciesData = {defaultData}
-			//wikiData = { String(defaultWikiData) }
-			//wikiProgramData = { String(defaultWikiProgramData) }
-			//wikiContributorsData = { String(defaultWikiContributorsData) }
-		///>
-	//, document.getElementById('root')
-//);
+const getRawData = fetch("https://americandurablegoods.com/response2.json")
+  .then(responseRaw => responseRaw.json())
+  .then((response) => {
+    console.log(response)
+    rawSynapseData = response
+  })
+  .catch(error => console.log("Request has failed: ", error))
 
-registerServiceWorker();
+Promise.all([login, getRawData]).then(() => ReactDOM.render(
+  <App loginToken={loginKey} appData={rawSynapseData} />,
+  document.getElementById("root"),
+))
+
+registerServiceWorker()
