@@ -30,7 +30,7 @@ import AboutDataUseRequirements from "./AboutDataUseRequirements"
 // scripts
 import { shrinkHeader } from "./view/domScripts"
 
-const pageDataPoints = ["assay", "tissue", "diagnoses"]
+const pageDataPoints = ["assay", "tissue", "dataType", "diagnoses"]
 
 class App extends Component {
   state = {
@@ -55,14 +55,28 @@ class App extends Component {
 
   getSpeciesDropdownOptions = (rawData) => {
     const speciesDropdownOptions = []
-    const speciesObj = rawData.facets.filter(
-      row => row.columnName === "species",
-    )
-    speciesObj[0].facetValues.forEach((element) => {
-      speciesDropdownOptions.push(element.value)
-    })
-    speciesDropdownOptions[0] = "All species"
+    if (rawData !== undefined) {
+      const speciesObj = rawData.facets.filter(
+        row => row.columnName === "species",
+      )
+      speciesObj[0].facetValues.forEach((element) => {
+        speciesDropdownOptions.push(element.value)
+      })
+      speciesDropdownOptions[0] = "All species"
+    }
     return speciesDropdownOptions
+  };
+
+  getDiagnosesDropdownOptions = (rawData, species) => {
+    const diagnosesRows = filterByValue(filterByKey(rawData, "diagnoses"), [
+      species,
+    ])
+    let diagnosesList = reduceCountsByKey(
+      keysToValues(diagnosesRows),
+      "diagnoses",
+    )
+    diagnosesList = printNames(diagnosesList, "diagnoses")
+    return diagnosesList
   };
 
   setDiagnosesMenu = (props, state) => {
@@ -70,17 +84,50 @@ class App extends Component {
     if (selection === "All species") {
       selection = null
     }
-    const diagnosesRows = filterByValue(
-      filterByKey(this.props.appData, "diagnoses"),
-      [selection],
-    )
-    let diagnosesList = keysToValues(diagnosesRows)
-    diagnosesList = reduceCountsByKey(diagnosesList, "diagnoses")
 
-    const diagnoses = printNames(diagnosesList, "diagnoses")
+    const diagnoses = this.getDiagnosesDropdownOptions(
+      this.props.appData,
+      selection,
+    )
     diagnoses.splice(0, 0, "All diagnoses")
 
     this.handleChanges("diagnosesSelectionOptions", diagnoses)
+  };
+
+  returnAllSpeciesArray = () => {
+    return [null, "Rat", "Human", "Mouse", "Human Cell Line", "Fruit fly"]
+  };
+
+  convertUserDiagnosesSelection = (diagnoses, diagnosesArray) => {
+    let diagnosesFilterKey
+    if (diagnoses === "All diagnoses" && diagnosesArray[0] !== null) {
+      diagnosesArray.splice(0, 0, null)
+      diagnosesFilterKey = diagnosesArray
+    } else {
+      let newDiagnoses = diagnoses
+      if (diagnoses === "All diagnoses") {
+        newDiagnoses = null
+      }
+      diagnosesFilterKey = [newDiagnoses]
+    }
+    return diagnosesFilterKey
+  };
+
+  filterRowsAndAddBase64Link = (
+    speciesDataFiltered,
+    diagnosesFilterKey,
+    dataType,
+  ) => {
+    return reduceCountsByKey(
+      setBase64Link(
+        filterRowsByKeyAndValue(
+          speciesDataFiltered,
+          diagnosesFilterKey,
+          "diagnoses",
+        ),
+      ),
+      dataType,
+    )
   };
 
   setMainDropdownFilter = (
@@ -92,18 +139,10 @@ class App extends Component {
   ) => {
     let speciesFilterKey
     if (species === "All species") {
-      speciesFilterKey = [
-        null,
-        "Rat",
-        "Human",
-        "Mouse",
-        "Human Cell Line",
-        "Fruit fly",
-      ]
+      speciesFilterKey = this.returnAllSpeciesArray()
     } else {
       speciesFilterKey = [species]
     }
-    console.log(diagnosesArray)
 
     const speciesFiltered = filterRowsByKeyAndValue(
       keysToValues(dataObject.queryResult.queryResults.rows),
@@ -111,25 +150,16 @@ class App extends Component {
       "species",
     )
 
-    let diagnosesFilterKey
-    if (diagnoses === "All diagnoses") {
-      diagnosesArray.splice(0, 0, null)
-      diagnosesFilterKey = diagnosesArray
-    } else {
-      diagnosesFilterKey = [diagnoses]
-    }
-
-    const filteredRows = reduceCountsByKey(
-      setBase64Link(
-        filterRowsByKeyAndValue(
-          speciesFiltered,
-          diagnosesFilterKey,
-          "diagnoses",
-        ),
-      ),
-      dataType,
+    const diagnosesFilterKey = this.convertUserDiagnosesSelection(
+      diagnoses,
+      diagnosesArray,
     )
 
+    const filteredRows = this.filterRowsAndAddBase64Link(
+      speciesFiltered,
+      diagnosesFilterKey,
+      dataType,
+    )
     return filteredRows
   };
 
@@ -140,7 +170,6 @@ class App extends Component {
     diagnosesKey,
     diagnosesArray,
   ) => {
-    console.log(diagnosesArray)
     const chartPageData = this.setMainDropdownFilter(
       speciesKey,
       diagnosesKey,
@@ -202,7 +231,7 @@ class App extends Component {
   };
 
   queryAndSetBioSampleCount = () => {
-    ["assay", "tissue"].forEach((element) => {
+    ["dataType", "tissue"].forEach((element) => {
       this.queryForBioSamples(this.state, this.props).then((count) => {
         this.setBioSampleCount(parseInt(count, 10), element)
       })
@@ -213,18 +242,6 @@ class App extends Component {
     this.setState({
       [KEY]: NEWSTATE,
     })
-  };
-
-  handleChangeEvent = (event) => {
-    const key = event.target.name
-    this.setState(
-      {
-        [key]: event.target.value,
-      },
-      () => {
-        this.setPageDataPoints(pageDataPoints)
-      },
-    )
   };
 
   toggleSeeAll = (event) => {
@@ -246,7 +263,23 @@ class App extends Component {
         [key]: event.label,
       },
       () => {
+        this.setDiagnosesMenu(this.props, this.state)
         this.setPageDataPoints(pageDataPoints)
+        this.queryAndSetBioSampleCount()
+      },
+    )
+  };
+
+  handleChangeEvent = (event) => {
+    const key = event.target.name
+    this.setState(
+      {
+        [key]: event.target.value,
+      },
+      () => {
+        this.setDiagnosesMenu(this.props, this.state)
+        this.setPageDataPoints(pageDataPoints)
+        this.queryAndSetBioSampleCount()
       },
     )
   };
@@ -261,7 +294,6 @@ class App extends Component {
       diagnosesSelectionOptions={this.state.diagnosesSelectionOptions}
       diagnosesDropdownSelection={this.state.diagnosesDropdownSelection}
       toggleSeeAll={this.toggleSeeAll}
-      // buttonState={this.state.buttonState}
       getSum={this.getSum}
       getColumnCountForSpecies={this.getColumnCountForSpecies}
       pageData={this.state.pageData}

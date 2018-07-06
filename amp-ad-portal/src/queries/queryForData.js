@@ -32,7 +32,7 @@ const getBioSampleCount = (species, table, tokenResponse) => {
   } else {
     query = `SELECT count(DISTINCT "specimenID") FROM ${table} WHERE ( ( "species" = '${species}') )`
   }
-  console.log(query)
+  //console.log(query)
   return SynapseClient.getQueryTableResults(
     buildRequest(table, query),
     tokenResponse.sessionToken,

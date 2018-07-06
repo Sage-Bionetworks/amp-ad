@@ -6,17 +6,15 @@ class SearchBar extends Component {
     let labelName
     const options = []
     if (props !== undefined) {
-      props.forEach((element, index) => {
+      props.forEach((element) => {
         labelName = element
-        if (labelName === "Drosophila melanogaster") {
-          labelName = "Fruit Fly"
-        }
         options.push({
           label: labelName,
           value: [name, element],
           className: "dropdown-element",
         })
       })
+      //console.log(options)
       if (options[0] !== undefined) {
         return (
           <Dropdown

@@ -1,5 +1,25 @@
 import _ from "lodash"
 
+const processIndexValue = (key) => {
+  let index
+  if (key === "species") {
+    index = 0
+  }
+  if (key === "assay") {
+    index = 1
+  }
+  if (key === "tissue") {
+    index = 2
+  }
+  if (key === "diagnoses") {
+    index = 3
+  }
+  if (key === "dataType") {
+    index = 5
+  }
+  return index
+}
+
 const filterBySpecies = (dataObject, species) => {
   // takes raw synapse json data as input
   const selection = dataObject.queryResult.queryResults.rows.filter(
@@ -18,16 +38,7 @@ const convertObjectValsToArray = (OBJECT) => {
 
 const filterRowsByDataType = (filteredRows, species, key) => {
   const flattennedRows = filteredRows.map((element) => {
-    let index
-    if (key === "assay") {
-      index = 1
-    }
-    if (key === "tissue") {
-      index = 2
-    }
-    if (key === "diagnoses") {
-      index = 3
-    }
+    const index = processIndexValue(key)
     return {
       species,
       name: element.values[index],
@@ -69,6 +80,7 @@ const keysToValues = (rows) => {
       tissue: row.values[2],
       diagnoses: row.values[3],
       specimenID: row.values[4],
+      dataType: row.values[5],
       count: parseInt(row.values[5], 10),
     }
   })
@@ -76,16 +88,7 @@ const keysToValues = (rows) => {
 
 const filterByKey = (dataObject, key) => {
   // takes in raw synapse data
-  let index
-  if (key === "assay") {
-    index = 1
-  }
-  if (key === "tissue") {
-    index = 2
-  }
-  if (key === "diagnoses") {
-    index = 3
-  }
+  const index = processIndexValue(key)
   const selection = dataObject.queryResult.queryResults.rows
   return selection.filter(row => row.values[index] !== null)
 }
@@ -99,6 +102,7 @@ const reduceCountsByKey = (countsListArray, key) => {
   let totalCount
   let species
   let assay
+  let dataType
   let tissue
   let diagnoses
   let specimenID
@@ -116,6 +120,7 @@ const reduceCountsByKey = (countsListArray, key) => {
         diagnoses = element.diagnoses
         specimenID = element.specimenID
         base64Link = element.base64Link
+        dataType = element.dataType
         table = element.table
       }
     })
@@ -123,6 +128,7 @@ const reduceCountsByKey = (countsListArray, key) => {
       species,
       assay,
       tissue,
+      dataType,
       diagnoses,
       specimenID,
       count: totalCount,

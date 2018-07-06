@@ -32,7 +32,6 @@ const shrinkHeader = () => {
         main.classList.add("squish")
       }
       if (scroll.y < 50) {
-        console.log(scroll.y)
         // 3000px (arbitrary - put whatever point you need there.)
         const element = document.querySelector("header") // target element to change attribute
         element.setAttribute(

@@ -16,7 +16,11 @@ import "react-accessible-accordion/dist/fancy-example.css"
 const aboutMenuOptions = [
   {
     label: (
-      <Link name="Programs" to="/Programs" className="nav-item dropdown">
+      <Link
+        name="What is the AMP-AD portal"
+        to="/Programs"
+        className="nav-item dropdown"
+      >
         Programs
       </Link>
     ),
@@ -25,7 +29,7 @@ const aboutMenuOptions = [
   {
     label: (
       <Link
-        name="Data Use"
+        name="People"
         to="/DataUseRequirements"
         className="nav-item dropdown"
       >
@@ -34,15 +38,317 @@ const aboutMenuOptions = [
     ),
     value: "two",
   },
-  {
-    label: (
-      <Link name="Studies" to="/Studies" className="nav-item dropdown">
-        Studies
-      </Link>
-    ),
-    value: "three",
-  },
 ]
+
+const dropdownMenuAction = (event) => {
+  event.preventDefault()
+  let active
+  if (event.target.classList.contains("active")) {
+    active = true
+  }
+
+  const activeNavItems = document.querySelectorAll("[class='nav-item active']")
+  activeNavItems.forEach((navItem) => {
+    navItem.classList.remove("active")
+  })
+
+  if (active) {
+    active = false
+    event.target.classList.remove("active")
+  }
+
+  //else {
+  //event.target.classList.add("active")
+  //}
+
+  const openDropdowns = document.querySelectorAll("[aria-selected='true']")
+
+  openDropdowns.forEach((element) => {
+    element.removeAttribute("[aria-selected='true']")
+    element.setAttribute("aria-selected", "false")
+    const openWindows = document.querySelectorAll("[aria-hidden='false']")
+    openWindows.forEach((openWindow) => {
+      openWindow.removeAttribute("[aria-hidden='false']")
+      openWindow.setAttribute("aria-hidden", "true")
+      openWindow.setAttribute(
+        "class",
+        "accordion-body top-level-accordion accordion__body--hidden",
+      )
+    })
+  })
+}
+
+const ProgramsDropdown = () => {
+  return (
+    <Accordion>
+      <AccordionItem>
+        <AccordionItemTitle className="accordion-title top-level-accordion">
+          <a href="/" className="nav-item" onClick={dropdownMenuAction}>
+            Programs
+          </a>
+        </AccordionItemTitle>
+        <AccordionItemBody className="accordion-body top-level-accordion">
+          <Accordion>
+            <AccordionItem className="accordion-row row">
+              <AccordionItemTitle>
+                <div className="accordion-sub-row row between-xs">
+                  <div className="col-xs-6">
+Program
+                  </div>
+                  <div className="col-xs-1 carrot-icon">
+>
+                  </div>
+                </div>
+              </AccordionItemTitle>
+              <AccordionItemBody>
+                <ul>
+                  <li>
+                    <Link
+                      name="Programs"
+                      to="/Programs"
+                      className="nav-item dropdown"
+                    >
+                      AMP-AD Target Discovery and Preclinical Validation
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      name="Programs"
+                      to="/Programs"
+                      className="nav-item dropdown"
+                    >
+                      M2OVE-AD Consortium
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      name="Programs"
+                      to="/Programs"
+                      className="nav-item dropdown"
+                    >
+                      Model AD Program
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      name="Programs"
+                      to="/Programs"
+                      className="nav-item dropdown"
+                    >
+                      Resilience-AD Program
+                    </Link>
+                  </li>
+                </ul>
+              </AccordionItemBody>
+            </AccordionItem>
+            <AccordionItem className="accordion-row row">
+              <AccordionItemTitle>
+                <div className="accordion-sub-row row between-xs">
+                  <div className="col-xs-6">
+Consortia Research
+                  </div>
+                  <div className="col-xs-1 carrot-icon">
+>
+                  </div>
+                </div>
+              </AccordionItemTitle>
+              <AccordionItemBody>
+                <ul>
+                  <li>
+                    <Link
+                      name="Programs"
+                      to="/Programs"
+                      className="nav-item dropdown"
+                    >
+                      AMP-AD Target Discovery and Preclinical Validation
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      name="Programs"
+                      to="/Programs"
+                      className="nav-item dropdown"
+                    >
+                      M2OVE-AD Consortium
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      name="Programs"
+                      to="/Programs"
+                      className="nav-item dropdown"
+                    >
+                      Model AD Program
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      name="Programs"
+                      to="/Programs"
+                      className="nav-item dropdown"
+                    >
+                      Resilience-AD Program
+                    </Link>
+                  </li>
+                </ul>
+              </AccordionItemBody>
+            </AccordionItem>
+          </Accordion>
+        </AccordionItemBody>
+      </AccordionItem>
+    </Accordion>
+  )
+}
+
+const ResourcesDropdown = () => {
+  return (
+    <Accordion>
+      <AccordionItem>
+        <AccordionItemTitle className="accordion-title top-level-accordion">
+          <a href="/" className="nav-item" onClick={dropdownMenuAction}>
+            Resources
+          </a>
+        </AccordionItemTitle>
+        <AccordionItemBody className="accordion-body top-level-accordion">
+          <Accordion>
+            <AccordionItem className="accordion-row row">
+              <AccordionItemTitle>
+                <div className="accordion-sub-row row between-xs">
+                  <div className="col-xs-6">
+Data
+                  </div>
+                  <div className="col-xs-1">
+>
+                  </div>
+                </div>
+              </AccordionItemTitle>
+              <AccordionItemBody>
+                <ul>
+                  <li>
+                    <Link
+                      name="Programs"
+                      to="/Programs"
+                      className="nav-item dropdown"
+                    >
+                      AMP-AD Target Discovery and Preclinical Validation
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      name="Programs"
+                      to="/Programs"
+                      className="nav-item dropdown"
+                    >
+                      M2OVE-AD Consortium
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      name="Programs"
+                      to="/Programs"
+                      className="nav-item dropdown"
+                    >
+                      Model AD Program
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      name="Programs"
+                      to="/Programs"
+                      className="nav-item dropdown"
+                    >
+                      Resilience-AD Program
+                    </Link>
+                  </li>
+                </ul>
+              </AccordionItemBody>
+            </AccordionItem>
+
+            <AccordionItem>
+              <AccordionItemTitle>
+                <div className="row between-xs">
+                  <div className="col-xs-6">
+Studies
+                  </div>
+                  <div className="col-xs-1" />
+                </div>
+              </AccordionItemTitle>
+            </AccordionItem>
+
+            <AccordionItem>
+              <AccordionItemTitle>
+                <div className="row between-xs">
+                  <div className="col-xs-6">
+Experimental Resources
+                  </div>
+                  <div className="col-xs-1" />
+                </div>
+              </AccordionItemTitle>
+            </AccordionItem>
+
+            <AccordionItem>
+              <AccordionItemTitle>
+                <div className="row between-xs">
+                  <div className="col-xs-6">
+Agora
+                  </div>
+                  <div className="col-xs-1" />
+                </div>
+              </AccordionItemTitle>
+            </AccordionItem>
+
+            <AccordionItem>
+              <AccordionItemTitle>
+                <div className="row between-xs">
+                  <div className="col-xs-6">
+Data Use Requirements
+                  </div>
+                  <div className="col-xs-1" />
+                </div>
+              </AccordionItemTitle>
+            </AccordionItem>
+          </Accordion>
+        </AccordionItemBody>
+      </AccordionItem>
+    </Accordion>
+  )
+}
+
+const AboutMenuDropdown = () => {
+  return (
+    <Accordion>
+      <AccordionItem>
+        <AccordionItemTitle className="accordion-title top-level-accordion">
+          <a href="/" className="nav-item" onClick={dropdownMenuAction}>
+            About
+          </a>
+        </AccordionItemTitle>
+        <AccordionItemBody className="accordion-body top-level-accordion">
+          <AccordionItem>
+            <AccordionItemTitle>
+              <div className="row between-xs">
+                <div className="col-xs-6">
+Studies
+                </div>
+                <div className="col-xs-1" />
+              </div>
+            </AccordionItemTitle>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemTitle>
+              <div className="row between-xs">
+                <div className="col-xs-6">
+Studies
+                </div>
+                <div className="col-xs-1" />
+              </div>
+            </AccordionItemTitle>
+          </AccordionItem>
+        </AccordionItemBody>
+      </AccordionItem>
+    </Accordion>
+  )
+}
 
 const RouterDropDown = (options, placeholder, onChangeEvent) => {
   const menu = withRouter(({ history }) => (
@@ -79,115 +385,13 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Accordion>
-              <AccordionItem>
-                <AccordionItemTitle className="accordion-title top-level-accordion">
-                  Programs
-                </AccordionItemTitle>
-                <AccordionItemBody className="accordion-body top-level-accordion">
-                  <Accordion>
-                    <AccordionItem className="row">
-                      <AccordionItemTitle>
-Program
-                      </AccordionItemTitle>
-                      <AccordionItemBody>
-                        <ul>
-                          <li>
-                            <Link
-                              name="Programs"
-                              to="/Programs"
-                              className="nav-item dropdown"
-                            >
-                              AMP-AD Target Discovery and Preclinical Validation
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              name="Programs"
-                              to="/Programs"
-                              className="nav-item dropdown"
-                            >
-                              M2OVE-AD Consortium
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              name="Programs"
-                              to="/Programs"
-                              className="nav-item dropdown"
-                            >
-                              Model AD Program
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              name="Programs"
-                              to="/Programs"
-                              className="nav-item dropdown"
-                            >
-                              Resilience-AD Program
-                            </Link>
-                          </li>
-                        </ul>
-                      </AccordionItemBody>
-                    </AccordionItem>
-                    <AccordionItem className="row">
-                      <AccordionItemTitle>
-                        Consortia Research
-                      </AccordionItemTitle>
-                      <AccordionItemBody>
-                        <ul>
-                          <li>
-                            <Link
-                              name="Programs"
-                              to="/Programs"
-                              className="nav-item dropdown"
-                            >
-                              AMP-AD Target Discovery and Preclinical Validation
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              name="Programs"
-                              to="/Programs"
-                              className="nav-item dropdown"
-                            >
-                              M2OVE-AD Consortium
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              name="Programs"
-                              to="/Programs"
-                              className="nav-item dropdown"
-                            >
-                              Model AD Program
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              name="Programs"
-                              to="/Programs"
-                              className="nav-item dropdown"
-                            >
-                              Resilience-AD Program
-                            </Link>
-                          </li>
-                        </ul>
-                      </AccordionItemBody>
-                    </AccordionItem>
-                  </Accordion>
-                </AccordionItemBody>
-              </AccordionItem>
-            </Accordion>
+            <ProgramsDropdown />
           </li>
           <li>
-            <Link to="/tools" className="nav-item">
-              Resources
-            </Link>
+            <ResourcesDropdown />
           </li>
           <li>
-            <AboutMenu />
+            <AboutMenuDropdown />
           </li>
         </ul>
       </div>
