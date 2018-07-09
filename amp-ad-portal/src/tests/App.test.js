@@ -1,21 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from '../App.js';
+import React from "react"
+import ReactDOM from "react-dom"
+import App from "../App"
 
-import defaultData from '../defaultData/DefaultData.js'
-import defaultFlyData from '../defaultData/DefaultFlyData.js'
-import defaultHumanData from '../defaultData/DefaultHumanData.js'
-import defaultMouseData from '../defaultData/DefaultMouseData.js'
-import defaulRatData from '../defaultData/DefaultRatData.js'
+import * as SynapseClient from "../synapse/SynapseClient"
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App 
-    humanData = {defaultHumanData}
-    mouseData = {defaultMouseData}
-    ratData = {defaulRatData}
-    flyData = {defaultFlyData}
-    allSpeciesData = {defaultData}
-    />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+let rawSynapseData
+let loginKey
+
+const login = SynapseClient.login("mikeybkats", "guinness").then((keys) => {
+  loginKey = keys
+  return keys
+})
+
+const getRawData = fetch("https://americandurablegoods.com/response2.json")
+  .then(responseRaw => responseRaw.json())
+  .then((response) => {
+    console.log(response)
+    rawSynapseData = response
+  })
+  .catch(error => console.log("Request has failed: ", error))
+
+it("renders without crashing", () => {
+  const div = document.createElement("div")
+  Promise.all([login, getRawData]).then(() => ReactDOM.render(
+    <App loginToken={loginKey} appData={rawSynapseData} />,
+    document.getElementById("root"),
+  ))
+  ReactDOM.unmountComponentAtNode(div)
+})

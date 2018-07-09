@@ -11,7 +11,6 @@ import {
 } from "react-accessible-accordion"
 
 import "react-accessible-accordion/dist/minimal-example.css"
-import "react-accessible-accordion/dist/fancy-example.css"
 
 const aboutMenuOptions = [
   {
@@ -61,20 +60,23 @@ const dropdownMenuAction = (event) => {
   //event.target.classList.add("active")
   //}
 
-  const openDropdowns = document.querySelectorAll("[aria-selected='true']")
+  const openWindows = document.querySelectorAll("[aria-hidden='false']")
+  openWindows.forEach((openWindow) => {
+    openWindow.removeAttribute("[aria-hidden='false']")
+    openWindow.setAttribute("aria-hidden", "true")
+    openWindow.classList.add("hidden")
+    //openWindow.setAttribute(
+    //"class",
+    //"accordion-body top-level-accordion accordion__body--hidden",
+    //)
+    openWindow.classList.add("accordion__body--hidden")
+  })
 
+  const openDropdowns = document.querySelectorAll("[aria-selected='true']")
   openDropdowns.forEach((element) => {
+    console.log(element.classList)
     element.removeAttribute("[aria-selected='true']")
     element.setAttribute("aria-selected", "false")
-    const openWindows = document.querySelectorAll("[aria-hidden='false']")
-    openWindows.forEach((openWindow) => {
-      openWindow.removeAttribute("[aria-hidden='false']")
-      openWindow.setAttribute("aria-hidden", "true")
-      openWindow.setAttribute(
-        "class",
-        "accordion-body top-level-accordion accordion__body--hidden",
-      )
-    })
   })
 }
 
@@ -84,7 +86,7 @@ const ProgramsDropdown = () => {
       <AccordionItem>
         <AccordionItemTitle className="accordion-title top-level-accordion">
           <a href="/" className="nav-item" onClick={dropdownMenuAction}>
-            Programs
+            Research
           </a>
         </AccordionItemTitle>
         <AccordionItemBody className="accordion-body top-level-accordion">
@@ -92,7 +94,7 @@ const ProgramsDropdown = () => {
             <AccordionItem className="accordion-row row">
               <AccordionItemTitle>
                 <div className="accordion-sub-row row between-xs">
-                  <div className="col-xs-6">
+                  <div className="col-xs-6 accordion-sub-title">
 Program
                   </div>
                   <div className="col-xs-1 carrot-icon">
@@ -104,8 +106,8 @@ Program
                 <ul>
                   <li>
                     <Link
-                      name="Programs"
-                      to="/Programs"
+                      name="AMP-AD"
+                      to="/Research/AMP-AD"
                       className="nav-item dropdown"
                     >
                       AMP-AD Target Discovery and Preclinical Validation
@@ -113,8 +115,8 @@ Program
                   </li>
                   <li>
                     <Link
-                      name="Programs"
-                      to="/Programs"
+                      name="M2OVE"
+                      to="/Research/M2OVE"
                       className="nav-item dropdown"
                     >
                       M2OVE-AD Consortium
@@ -122,8 +124,8 @@ Program
                   </li>
                   <li>
                     <Link
-                      name="Programs"
-                      to="/Programs"
+                      name="MODEL-AD"
+                      to="/Research/Model-AD"
                       className="nav-item dropdown"
                     >
                       Model AD Program
@@ -131,8 +133,8 @@ Program
                   </li>
                   <li>
                     <Link
-                      name="Programs"
-                      to="/Programs"
+                      name="Resilience-AD"
+                      to="/Research/Resilience-AD"
                       className="nav-item dropdown"
                     >
                       Resilience-AD Program
@@ -144,8 +146,8 @@ Program
             <AccordionItem className="accordion-row row">
               <AccordionItemTitle>
                 <div className="accordion-sub-row row between-xs">
-                  <div className="col-xs-6">
-Consortia Research
+                  <div className="col-xs-6 accordion-sub-title">
+                    Consortia Research
                   </div>
                   <div className="col-xs-1 carrot-icon">
 >
@@ -160,7 +162,7 @@ Consortia Research
                       to="/Programs"
                       className="nav-item dropdown"
                     >
-                      AMP-AD Target Discovery and Preclinical Validation
+                      Genetics
                     </Link>
                   </li>
                   <li>
@@ -169,7 +171,7 @@ Consortia Research
                       to="/Programs"
                       className="nav-item dropdown"
                     >
-                      M2OVE-AD Consortium
+                      Differential Expressions
                     </Link>
                   </li>
                   <li>
@@ -187,11 +189,31 @@ Consortia Research
                       to="/Programs"
                       className="nav-item dropdown"
                     >
-                      Resilience-AD Program
+                      Networks
                     </Link>
                   </li>
                 </ul>
               </AccordionItemBody>
+            </AccordionItem>
+            <AccordionItem>
+              <AccordionItemTitle>
+                <div className="row between-xs">
+                  <div className="col-xs-6 accordion-sub-title">
+                    Publications
+                  </div>
+                  <div className="col-xs-1" />
+                </div>
+              </AccordionItemTitle>
+            </AccordionItem>
+            <AccordionItem>
+              <AccordionItemTitle>
+                <div className="row between-xs">
+                  <div className="col-xs-6 accordion-sub-title">
+                    Eternal Researchers
+                  </div>
+                  <div className="col-xs-1" />
+                </div>
+              </AccordionItemTitle>
             </AccordionItem>
           </Accordion>
         </AccordionItemBody>
@@ -214,7 +236,7 @@ const ResourcesDropdown = () => {
             <AccordionItem className="accordion-row row">
               <AccordionItemTitle>
                 <div className="accordion-sub-row row between-xs">
-                  <div className="col-xs-6">
+                  <div className="col-xs-6 accordion-sub-title">
 Data
                   </div>
                   <div className="col-xs-1">
@@ -267,7 +289,7 @@ Data
             <AccordionItem>
               <AccordionItemTitle>
                 <div className="row between-xs">
-                  <div className="col-xs-6">
+                  <div className="col-xs-6 accordion-sub-title">
 Studies
                   </div>
                   <div className="col-xs-1" />
@@ -278,8 +300,8 @@ Studies
             <AccordionItem>
               <AccordionItemTitle>
                 <div className="row between-xs">
-                  <div className="col-xs-6">
-Experimental Resources
+                  <div className="col-xs-6 accordion-sub-title">
+                    Experimental Resources
                   </div>
                   <div className="col-xs-1" />
                 </div>
@@ -289,7 +311,7 @@ Experimental Resources
             <AccordionItem>
               <AccordionItemTitle>
                 <div className="row between-xs">
-                  <div className="col-xs-6">
+                  <div className="col-xs-6 accordion-sub-title">
 Agora
                   </div>
                   <div className="col-xs-1" />
@@ -300,8 +322,8 @@ Agora
             <AccordionItem>
               <AccordionItemTitle>
                 <div className="row between-xs">
-                  <div className="col-xs-6">
-Data Use Requirements
+                  <div className="col-xs-6 accordion-sub-title">
+                    Data Use Requirements
                   </div>
                   <div className="col-xs-1" />
                 </div>
@@ -327,8 +349,8 @@ const AboutMenuDropdown = () => {
           <AccordionItem>
             <AccordionItemTitle>
               <div className="row between-xs">
-                <div className="col-xs-6">
-Studies
+                <div className="col-xs-6 accordion-sub-title">
+                  What is the AMP-AD portal
                 </div>
                 <div className="col-xs-1" />
               </div>
@@ -337,8 +359,8 @@ Studies
           <AccordionItem>
             <AccordionItemTitle>
               <div className="row between-xs">
-                <div className="col-xs-6">
-Studies
+                <div className="col-xs-6 accordion-sub-title">
+People
                 </div>
                 <div className="col-xs-1" />
               </div>
@@ -368,7 +390,7 @@ const Header = () => {
   const AboutMenu = RouterDropDown(aboutMenuOptions, "About")
   return (
     <header className="row between-xs header center-xs middle-xs">
-      <div className="">
+      <div className="col-xs-12 col-sm-3">
         <Link to="/">
           <img
             className="logo-header"
@@ -377,7 +399,7 @@ const Header = () => {
           />
         </Link>
       </div>
-      <div className="col-xs-8 col-sm-6">
+      <div className="col-xs-12 col-md-7">
         <ul className="nav row end-xs">
           <li>
             <Link to="/" className="nav-item active">

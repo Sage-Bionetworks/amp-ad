@@ -20,12 +20,17 @@ import {
 import { getBioSampleCount } from "./queries/queryForData"
 
 // component js
+// import all components for use with react router
 import Header from "./Header"
 import Home from "./Home"
-import Tools from "./Tools"
 import AboutPrograms from "./AboutPrograms"
 import AboutStudies from "./AboutStudies"
 import AboutDataUseRequirements from "./AboutDataUseRequirements"
+
+import ProgramsAmpAd from "./components/Programs-AMP-AD"
+import ProgramsM2OVE from "./components/Programs-M2OVE"
+import ProgramsResilienceAD from "./components/Programs-ResilienceAD"
+import ProgramsModelAD from "./components/Programs-ModelAD"
 
 // scripts
 import { shrinkHeader } from "./view/domScripts"
@@ -59,6 +64,7 @@ class App extends Component {
       const speciesObj = rawData.facets.filter(
         row => row.columnName === "species",
       )
+      console.log(speciesObj)
       speciesObj[0].facetValues.forEach((element) => {
         speciesDropdownOptions.push(element.value)
       })
@@ -68,7 +74,7 @@ class App extends Component {
   };
 
   getDiagnosesDropdownOptions = (rawData, species) => {
-    const diagnosesRows = filterByValue(filterByKey(rawData, "diagnoses"), [
+    const diagnosesRows = filterByValue(filterByKey(rawData, "diagnosis"), [
       species,
     ])
     let diagnosesList = reduceCountsByKey(
@@ -198,15 +204,17 @@ class App extends Component {
   };
 
   setPageDataPoints = (dataPoints) => {
-    dataPoints.forEach((element) => {
-      this.setFlattenedData(
-        element,
-        this.state.speciesDropdownSelection,
-        this.props.appData,
-        this.state.diagnosesDropdownSelection,
-        this.state.diagnosesSelectionOptions,
-      )
-    })
+    if (this.props.appData !== undefined) {
+      dataPoints.forEach((element) => {
+        this.setFlattenedData(
+          element,
+          this.state.speciesDropdownSelection,
+          this.props.appData,
+          this.state.diagnosesDropdownSelection,
+          this.state.diagnosesSelectionOptions,
+        )
+      })
+    }
   };
 
   getSum = (total, num) => total + num;
@@ -231,7 +239,7 @@ class App extends Component {
   };
 
   queryAndSetBioSampleCount = () => {
-    ["dataType", "tissue"].forEach((element) => {
+    ["assay", "tissue"].forEach((element) => {
       this.queryForBioSamples(this.state, this.props).then((count) => {
         this.setBioSampleCount(parseInt(count, 10), element)
       })
@@ -326,9 +334,16 @@ class App extends Component {
           <Header />
           <div className="col-xs-12 main">
             <Route exact path="/" component={this.homeMarkup} />
-            <Route path="/Tools" component={Tools} />
-            <Route path="/Programs" component={this.ReturnAboutPrograms} />
-            <Route path="/Studies" component={AboutStudies} />
+
+            <Route path="/Research/AMP-AD" component={ProgramsAmpAd} />
+            <Route path="/Research/M2OVE" component={ProgramsM2OVE} />
+            <Route path="/Research/Model-AD" component={ProgramsModelAD} />
+            <Route
+              path="/Research/Resilience-AD"
+              component={ProgramsResilienceAD}
+            />
+
+            <Route path="/About/" component={AboutStudies} />
             <Route
               path="/DataUseRequirements"
               component={this.ReturnAboutDataUse}
