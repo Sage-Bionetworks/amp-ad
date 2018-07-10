@@ -327,6 +327,14 @@ class App extends Component {
     />
   );
 
+  ReturnProgramsAmpAd = props => (
+    <ProgramsAmpAd
+      token={this.props.loginToken}
+      handleChanges={this.handleChanges}
+      markdown={this.state.wikiMarkdown}
+    />
+  );
+
   render() {
     return (
       <Router>
@@ -335,7 +343,10 @@ class App extends Component {
           <div className="col-xs-12 main">
             <Route exact path="/" component={this.homeMarkup} />
 
-            <Route path="/Research/AMP-AD" component={ProgramsAmpAd} />
+            <Route
+              path="/Research/AMP-AD"
+              component={this.ReturnProgramsAmpAd}
+            />
             <Route path="/Research/M2OVE" component={ProgramsM2OVE} />
             <Route path="/Research/Model-AD" component={ProgramsModelAD} />
             <Route

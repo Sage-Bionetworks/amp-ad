@@ -1,7 +1,6 @@
 import React from "react"
-import { Link, withRouter } from "react-router-dom"
+import { Link } from "react-router-dom"
 
-import Dropdown from "react-dropdown"
 import "react-dropdown/style.css"
 import {
   Accordion,
@@ -12,52 +11,42 @@ import {
 
 import "react-accessible-accordion/dist/minimal-example.css"
 
-const aboutMenuOptions = [
-  {
-    label: (
-      <Link
-        name="What is the AMP-AD portal"
-        to="/Programs"
-        className="nav-item dropdown"
-      >
-        Programs
-      </Link>
-    ),
-    value: "one",
-  },
-  {
-    label: (
-      <Link
-        name="People"
-        to="/DataUseRequirements"
-        className="nav-item dropdown"
-      >
-        Data Use
-      </Link>
-    ),
-    value: "two",
-  },
-]
+const closeNavigation = () => {
+  const openWindows = document.querySelectorAll("[aria-hidden='false']")
+  openWindows.forEach((openWindow) => {
+    openWindow.removeAttribute("[aria-hidden='false']")
+    openWindow.setAttribute("aria-hidden", "true")
+    openWindow.classList.add("accordion__body--hidden")
+  })
+  const openDropdowns = document.querySelectorAll("[aria-selected='true']")
+  openDropdowns.forEach((element) => {
+    element.removeAttribute("[aria-selected='true']")
+    element.setAttribute("aria-selected", "false")
+  })
+
+  //const menuWall = document.querySelector(".menu-wall")
+  //menuWall.classList.add("hidden")
+}
 
 const dropdownMenuAction = (event) => {
   event.preventDefault()
-  let active
-  if (event.target.classList.contains("active")) {
-    active = true
-  }
+  //let active
+  //if (event.target.classList.contains("active")) {
+  //active = true
+  //}
 
-  const activeNavItems = document.querySelectorAll("[class='nav-item active']")
-  activeNavItems.forEach((navItem) => {
-    navItem.classList.remove("active")
-  })
+  //const menuWall = document.querySelector(".menu-wall")
+  //menuWall.classList.remove("hidden")
+  //console.log(menuWall.classList)
 
-  if (active) {
-    active = false
-    event.target.classList.remove("active")
-  }
+  //const activeNavItems = document.querySelectorAll("[class='nav-item active']")
+  //activeNavItems.forEach((navItem) => {
+  //navItem.classList.remove("active")
+  //})
 
-  //else {
-  //event.target.classList.add("active")
+  //if (active) {
+  //active = false
+  //event.target.classList.remove("active")
   //}
 
   const openWindows = document.querySelectorAll("[aria-hidden='false']")
@@ -65,10 +54,6 @@ const dropdownMenuAction = (event) => {
     openWindow.removeAttribute("[aria-hidden='false']")
     openWindow.setAttribute("aria-hidden", "true")
     openWindow.classList.add("hidden")
-    //openWindow.setAttribute(
-    //"class",
-    //"accordion-body top-level-accordion accordion__body--hidden",
-    //)
     openWindow.classList.add("accordion__body--hidden")
   })
 
@@ -109,6 +94,7 @@ Program
                       name="AMP-AD"
                       to="/Research/AMP-AD"
                       className="nav-item dropdown"
+                      onClick={closeNavigation}
                     >
                       AMP-AD Target Discovery and Preclinical Validation
                     </Link>
@@ -118,6 +104,7 @@ Program
                       name="M2OVE"
                       to="/Research/M2OVE"
                       className="nav-item dropdown"
+                      onClick={closeNavigation}
                     >
                       M2OVE-AD Consortium
                     </Link>
@@ -127,6 +114,7 @@ Program
                       name="MODEL-AD"
                       to="/Research/Model-AD"
                       className="nav-item dropdown"
+                      onClick={closeNavigation}
                     >
                       Model AD Program
                     </Link>
@@ -136,6 +124,7 @@ Program
                       name="Resilience-AD"
                       to="/Research/Resilience-AD"
                       className="nav-item dropdown"
+                      onClick={closeNavigation}
                     >
                       Resilience-AD Program
                     </Link>
@@ -161,6 +150,7 @@ Program
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
+                      onClick={closeNavigation}
                     >
                       Genetics
                     </Link>
@@ -170,6 +160,7 @@ Program
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
+                      onClick={closeNavigation}
                     >
                       Differential Expressions
                     </Link>
@@ -179,6 +170,7 @@ Program
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
+                      onClick={closeNavigation}
                     >
                       Model AD Program
                     </Link>
@@ -188,6 +180,7 @@ Program
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
+                      onClick={closeNavigation}
                     >
                       Networks
                     </Link>
@@ -251,6 +244,7 @@ Data
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
+                      onClick={closeNavigation}
                     >
                       AMP-AD Target Discovery and Preclinical Validation
                     </Link>
@@ -260,6 +254,7 @@ Data
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
+                      onClick={closeNavigation}
                     >
                       M2OVE-AD Consortium
                     </Link>
@@ -269,6 +264,7 @@ Data
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
+                      onClick={closeNavigation}
                     >
                       Model AD Program
                     </Link>
@@ -278,6 +274,7 @@ Data
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
+                      onClick={closeNavigation}
                     >
                       Resilience-AD Program
                     </Link>
@@ -372,24 +369,14 @@ People
   )
 }
 
-const RouterDropDown = (options, placeholder, onChangeEvent) => {
-  const menu = withRouter(({ history }) => (
-    <Dropdown
-      options={options}
-      onChange={(event) => {
-        console.log(event)
-        history.push(event.label.props.to)
-      }}
-      placeholder={placeholder}
-    />
-  ))
-  return menu
-}
-
 const Header = () => {
-  const AboutMenu = RouterDropDown(aboutMenuOptions, "About")
   return (
     <header className="row between-xs header center-xs middle-xs">
+      <button
+        className="menu-wall hidden"
+        onClick={closeNavigation}
+        type="button"
+      />
       <div className="col-xs-12 col-sm-3">
         <Link to="/">
           <img

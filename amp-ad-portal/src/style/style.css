@@ -87,20 +87,23 @@ div.row.amp-ad {
   margin: 0px;
   min-height: 100%; }
 
-.nav li:hover {
-  cursor: pointer; }
-.nav li {
-  list-style: none;
-  margin: 0px 20px; }
-.nav .nav-item {
-  font-size: 20px; }
-.nav .nav-item.dropdown {
-  display: inline-block;
-  padding: 0px; }
-.nav .Dropdown-control {
-  font-size: 20px; }
-.nav a.nav-item.active {
-  font-weight: bold; }
+.nav {
+  position: relative;
+  z-index: 1000; }
+  .nav li:hover {
+    cursor: pointer; }
+  .nav li {
+    list-style: none;
+    margin: 0px 20px; }
+  .nav .nav-item {
+    font-size: 20px; }
+  .nav .nav-item.dropdown {
+    display: inline-block;
+    padding: 0px; }
+  .nav .Dropdown-control {
+    font-size: 20px; }
+  .nav a.nav-item.active {
+    font-weight: bold; }
 
 .title-row {
   padding: 20px 0px; }
@@ -159,6 +162,20 @@ header.header.squish {
   header.header.squish img {
     max-height: 35px; }
 
+.hidden {
+  display: none;
+  height: 0px;
+  width: 0px; }
+
+header .menu-wall {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 900;
+  left: 0;
+  top: 0;
+  background: transparent;
+  border: none; }
 header .accordion {
   text-align: left;
   cursor: pointer;
