@@ -125,6 +125,7 @@ section {
 
 header.header {
   padding: 25px 50px;
+  max-height: 105px;
   max-width: 100vw;
   width: 100vw;
   margin: 0 auto;
@@ -219,10 +220,15 @@ header .accordion-body.top-level-accordion {
   margin-left: auto;
   min-width: 157px;
   max-width: 400px; }
+header .about-dropdown .accordion__item .accordion-body.top-level-accordion {
+  position: absolute;
+  margin: auto;
+  top: 37px;
+  right: 20px; }
 header .accordion__body {
   background: white;
   text-align: left; }
-header .accordion__item a.nav-item {
+header a.nav-item {
   padding: 14px; }
 header .accordion__title {
   background-color: #e3e3e3; }
@@ -232,13 +238,17 @@ header .accordion-sub-title {
   padding-left: 12px; }
 header .accordion-body[aria-hidden="true"] {
   display: none; }
+header .accordion__title:hover {
+  background-color: #cacaca; }
 
 footer {
   background-color: #5A498D;
   color: white;
   height: 56px;
   width: 100%;
-  margin: 0px !important; }
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  margin-top: 50px; }
   footer a {
     color: white;
     margin: 10px; }
@@ -508,13 +518,47 @@ section.contribute-your-data {
     text-align: left;
     padding: 0px 0px 0px 100px; }
 
-.child-page-hero h2 {
-  color: white; }
-
 section.child-page-hero {
   background: linear-gradient(to right, #5A498D, #4C57A2); }
+  section.child-page-hero .content {
+    max-width: 920px; }
   section.child-page-hero p {
+    font-size: 18px;
     color: white; }
+  section.child-page-hero h2 {
+    font-size: 30px;
+    color: white; }
+
+section.about-intro-section div.col-sm-9 {
+  padding: 0px;
+  max-width: 920px; }
+section.about-intro-section p {
+  font-size: 18px;
+  letter-spacing: .35px;
+  line-height: 24px; }
+section.about-intro-section h2 {
+  margin-top: 50px;
+  font-size: 20px; }
+section.about-intro-section h3 {
+  font-size: 18px;
+  font-weight: 500; }
+section.about-intro-section ul {
+  margin-left: 20px; }
+section.about-intro-section li {
+  list-style: disc;
+  letter-spacing: .35px;
+  line-height: 24px;
+  margin: 5px 0px; }
+section.about-intro-section div.projects a {
+  display: block;
+  text-decoration: underline;
+  color: #77AFD4;
+  font-size: 18px;
+  margin-top: 25px; }
+section.about-intro-section div.projects p {
+  margin: 0px;
+  margin-top: 8px;
+  line-height: 18px; }
 
 .about section {
   text-align: left; }

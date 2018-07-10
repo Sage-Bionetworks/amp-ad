@@ -346,7 +346,7 @@ const AboutMenuDropdown = () => {
           <AccordionItem>
             <AccordionItemTitle>
               <div className="row between-xs">
-                <div className="col-xs-6 accordion-sub-title">
+                <div className="col-xs-12 accordion-sub-title">
                   What is the AMP-AD portal
                 </div>
                 <div className="col-xs-1" />
@@ -399,7 +399,7 @@ const Header = () => {
           <li>
             <ResourcesDropdown />
           </li>
-          <li>
+          <li className="about-dropdown">
             <AboutMenuDropdown />
           </li>
         </ul>

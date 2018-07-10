@@ -4,11 +4,7 @@ import "./style/index.css"
 import "./style/style.css"
 import App from "./App"
 import registerServiceWorker from "./registerServiceWorker"
-import response2Data from "./defaultData/response2"
-
 import * as SynapseClient from "./synapse/SynapseClient"
-
-console.log(JSON.parse(response2Data))
 
 let rawSynapseData
 let loginKey

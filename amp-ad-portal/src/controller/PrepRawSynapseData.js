@@ -1,7 +1,6 @@
 import _ from "lodash"
 
 const getColumnNameIndex = (dataObject, key) => {
-  // returns the key index from the raw data
   let rightIndex
   dataObject.queryResult.queryResults.headers.forEach((element, index) => {
     if (element.name === key) {
@@ -28,16 +27,16 @@ const convertObjectValsToArray = (OBJECT) => {
 }
 
 //const filterRowsByDataType = (filteredRows, species, key) => {
-  //const flattennedRows = filteredRows.map((element) => {
-    //console.log(filteredRows)
-    //const index = processIndexValue(key)
-    //return {
-      //species,
-      //name: element.values[index],
-      //count: parseInt(element.values[5], 10),
-    //}
-  //})
-  //return flattennedRows
+//const flattennedRows = filteredRows.map((element) => {
+//console.log(filteredRows)
+//const index = processIndexValue(key)
+//return {
+//species,
+//name: element.values[index],
+//count: parseInt(element.values[5], 10),
+//}
+//})
+//return flattennedRows
 //}
 
 const filterRowsByKeyAndValue = (dataRows, valuesArray, key) => {
@@ -83,9 +82,9 @@ const filterByKey = (dataObject, key) => {
   if (dataObject !== undefined) {
     const index = getColumnNameIndex(dataObject, key)
     const selection = dataObject.queryResult.queryResults.rows
-    console.log(selection.filter(row => row.values[index] !== null))
     return selection.filter(row => row.values[index] !== null)
-  } return []
+  }
+  return []
 }
 
 const onlyUnique = (value, index, self) => self.indexOf(value) === index
@@ -147,7 +146,6 @@ const countBioSamples = (rows) => {
 
 const setBase64Link = (dataTypesArray) => {
   dataTypesArray.map((element) => {
-    //console.log(element)
     let sqlQuery
     if (
       element.species === "allspecies"
@@ -162,7 +160,6 @@ const setBase64Link = (dataTypesArray) => {
         element.species
       }') AND ("assay" = '${element.assay}'))`
     }
-    //console.log(sqlQuery)
 
     let base64Link = {
       sql: sqlQuery,

@@ -47,6 +47,7 @@ class App extends Component {
     diagnosesSelectionOptions: [],
     speciesDropdownSelection: "All species",
     diagnosesDropdownSelection: "All diagnoses",
+    wikiMarkdown: "",
   };
 
   componentDidMount() {
@@ -64,7 +65,6 @@ class App extends Component {
       const speciesObj = rawData.facets.filter(
         row => row.columnName === "species",
       )
-      console.log(speciesObj)
       speciesObj[0].facetValues.forEach((element) => {
         speciesDropdownOptions.push(element.value)
       })
@@ -320,15 +320,32 @@ class App extends Component {
     />
   );
 
-  ReturnAboutDataUse = props => (
-    <AboutDataUseRequirements
-      // dataUseRequirements={this.props.wikiDataUseData}
-      {...props}
+  ReturnProgramsM2OVE = () => (
+    <ProgramsM2OVE
+      token={this.props.loginToken}
+      handleChanges={this.handleChanges}
+      markdown={this.state.wikiMarkdown}
     />
   );
 
-  ReturnProgramsAmpAd = props => (
+  ReturnProgramsAmpAd = () => (
     <ProgramsAmpAd
+      token={this.props.loginToken}
+      handleChanges={this.handleChanges}
+      markdown={this.state.wikiMarkdown}
+    />
+  );
+
+  ReturnProgramsModelAD = () => (
+    <ProgramsModelAD
+      token={this.props.loginToken}
+      handleChanges={this.handleChanges}
+      markdown={this.state.wikiMarkdown}
+    />
+  );
+
+  ReturnProgramsResilienceAD = () => (
+    <ProgramsResilienceAD
       token={this.props.loginToken}
       handleChanges={this.handleChanges}
       markdown={this.state.wikiMarkdown}
@@ -347,11 +364,17 @@ class App extends Component {
               path="/Research/AMP-AD"
               component={this.ReturnProgramsAmpAd}
             />
-            <Route path="/Research/M2OVE" component={ProgramsM2OVE} />
-            <Route path="/Research/Model-AD" component={ProgramsModelAD} />
+            <Route
+              path="/Research/M2OVE"
+              component={this.ReturnProgramsM2OVE}
+            />
+            <Route
+              path="/Research/Model-AD"
+              component={this.ReturnProgramsModelAD}
+            />
             <Route
               path="/Research/Resilience-AD"
-              component={ProgramsResilienceAD}
+              component={this.ReturnProgramsResilienceAD}
             />
 
             <Route path="/About/" component={AboutStudies} />

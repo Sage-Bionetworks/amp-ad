@@ -1,295 +1,49 @@
-import React from "react"
-import ShowHideSection from "../ShowHideSection"
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 
-import getWikiData from "../queries/getWikiData"
+import { getMarkdown } from "../queries/getWikiData"
 
 const ReactMarkdown = require("react-markdown")
 
-const getMarkdown = (props) => {
-  getWikiData("581895", props.token.sessionToken).then((data) => {
-    props.handleChanges("wikiMarkdown", data.markdown)
-  })
-}
+class ProgramsAmpAd extends Component {
+  componentDidMount() {
+    getMarkdown(this.props, "581895")
+  }
 
-const DefaultCodeRenderer = ReactMarkdown.renderers.code
-
-const CodeRenderer = (props) => {
-  return (
-    <div className="lolwat">
-      <DefaultCodeRenderer {...props} />
-    </div>
-  )
-}
-
-const ProgramsAmpAd = (props) => {
-  getMarkdown(props)
-  return (
-    <div className="row about">
-      <div className="col-xs-12">
-        <section className="row child-page-hero">
-          <div className="col-xs-12 col-sm-9 content">
-            <h2>
-AMP-AD
-            </h2>
-            <p>
-              The following NIA programs and contributors have support the
-              content provided.
-            </p>
-          </div>
-        </section>
-        <ReactMarkdown
-          source={props.markdown}
-          renderers={{ code: CodeRenderer }}
-          escapeHtml={false}
-        />
-
-        <section className="row about-section-content contributors center-xs">
-          <div className="about-col col-xs-12 col-sm-9">
-            <div className="row heading-section">
-              <div className="col-xs-12">
-                <h2>
-Data Contributors
-                </h2>
-              </div>
-            </div>
-            <ShowHideSection content={dataContributors()} />
-          </div>
-          <div className="programs-col col-xs-12 col-sm-8" />
-        </section>
-      </div>
-    </div>
-  )
-}
-
-const dataContributors = () => {
-  return (
-    <div>
-      <div className="row program-row">
+  render() {
+    return (
+      <div className="row about">
         <div className="col-xs-12">
-          <div className="row">
-            <div className="col-xs-12">
-              <a href="/">
-                <h2>
-U01AG046152
-                </h2>
-              </a>
-              <a href="/">
-                <h2>
-                  Pathway discovery, validation and compound identification for
-                  Alzheimer’s disease
-                </h2>
-              </a>
+          <section className="row around-xs breadcrumbs">
+            <div className="col-xs-10">
+              <p>
+                Research &gt; AMP-AD Target Discovery and Preclinical Validation
+                Program
+              </p>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-sm-4">
-              <ul>
-                <li className="heading">
-Group Leads
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-              </ul>
+          </section>
+          <section className="row child-page-hero">
+            <div className="col-xs-12 col-sm-9 content">
+              <h2>
+                AMP-AD Target Discovery and Preclinical Validation Program
+              </h2>
+              <p>
+                Reduce time to discovery of drugs and potential drug targets for
+                AD treatment and prevention through analyses, network modeling,
+                and experimental validation of large-scale molecular data from
+                human brain samples.
+              </p>
             </div>
-            <div className="col-sm-4">
-              <ul>
-                <li className="heading">
-Institutions
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-              </ul>
-            </div>
-            <div className="col-sm-4">
-              <ul>
-                <li className="heading">
-Contributed Studies
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="row">
-            <button className="btn-light">
-Read Abstract
-            </button>
-          </div>
+          </section>
+          <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
         </div>
       </div>
+    )
+  }
+}
 
-      <div className="row program-row">
-        <div className="col-xs-12">
-          <div className="row">
-            <div className="col-xs-12">
-              <a href="/">
-                <h2>
-U01AG046152
-                </h2>
-              </a>
-              <a href="/">
-                <h2>
-                  Pathway discovery, validation and compound identification for
-                  Alzheimer’s disease
-                </h2>
-              </a>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-sm-4">
-              <ul>
-                <li className="heading">
-Group Leads
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-              </ul>
-            </div>
-            <div className="col-sm-4">
-              <ul>
-                <li className="heading">
-Institutions
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-              </ul>
-            </div>
-            <div className="col-sm-4">
-              <ul>
-                <li className="heading">
-Contributed Studies
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="row">
-            <button className="btn-light">
-Read Abstract
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="row program-row">
-        <div className="col-xs-12">
-          <div className="row">
-            <div className="col-xs-12">
-              <a href="/">
-                <h2>
-U01AG046152
-                </h2>
-              </a>
-              <a href="/">
-                <h2>
-                  Pathway discovery, validation and compound identification for
-                  Alzheimer’s disease
-                </h2>
-              </a>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-sm-4">
-              <ul>
-                <li className="heading">
-Group Leads
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-              </ul>
-            </div>
-            <div className="col-sm-4">
-              <ul>
-                <li className="heading">
-Institutions
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-              </ul>
-            </div>
-            <div className="col-sm-4">
-              <ul>
-                <li className="heading">
-Contributed Studies
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-                <li>
-list item
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="row">
-            <button className="btn-light">
-Read Abstract
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+ProgramsAmpAd.propTypes = {
+  markdown: PropTypes.string.isRequired,
 }
 
 export default ProgramsAmpAd

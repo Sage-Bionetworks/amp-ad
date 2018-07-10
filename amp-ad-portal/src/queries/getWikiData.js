@@ -24,4 +24,11 @@ function getWikiData(wikiId, token) {
     .catch(handleErrors)
 }
 
-export default getWikiData
+const getMarkdown = (props, wikiNumber) => {
+  //props.handleChanges("wikiMarkdown", "")
+  getWikiData(wikiNumber, props.token.sessionToken).then((data) => {
+    props.handleChanges("wikiMarkdown", data.markdown)
+  })
+}
+
+export { getWikiData, getMarkdown }
