@@ -26,6 +26,12 @@ li {
 select {
   font-size: 18px; }
 
+.align-right {
+  text-align: right; }
+
+.content-width {
+  max-width: fit-content; }
+
 .Dropdown-control {
   border: none;
   box-shadow: 0px 1px 5px 0px #c7c5c5;
@@ -220,7 +226,7 @@ header .accordion-body.top-level-accordion {
   margin-left: auto;
   min-width: 157px;
   max-width: 400px; }
-header .about-dropdown .accordion__item .accordion-body.top-level-accordion {
+header .about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
   position: absolute;
   margin: auto;
   top: 37px;
@@ -440,7 +446,7 @@ section.programs .box {
   min-width: 215px;
   max-width: 215px;
   height: 448px;
-  margin: 10px 5px; }
+  margin: 10px; }
   section.programs .box .btn {
     width: 142px; }
   section.programs .box .box-text-image p {
@@ -572,37 +578,44 @@ section.about-section-content {
   padding-top: 0px;
   padding-bottom: 0px;
   text-align: left; }
-  section.about-section-content .expand-section {
-    height: fit-content;
-    margin-bottom: inherit; }
-  section.about-section-content .expand-section.hide {
-    height: 0px;
-    margin-bottom: -10px; }
-  section.about-section-content input[type=checkbox] {
-    visibility: hidden; }
-  section.about-section-content .expand-icon {
-    height: 50px;
-    width: 50px;
-    position: relative;
-    top: -60px;
-    background-repeat: no-repeat;
-    background-position: center; }
-    section.about-section-content .expand-icon.plus {
-      background-image: url(../images/plus-icon.svg); }
-    section.about-section-content .expand-icon.minus {
-      background-image: url(../images/minus-icon.svg); }
-  section.about-section-content .expand-icon:hover {
-    cursor: pointer; }
-  section.about-section-content .content {
-    overflow-y: hidden;
-    transition: max-height 1s ease-out;
-    max-height: 1500px;
-    height: auto; }
-  section.about-section-content .content.hide {
-    max-height: 0px; }
   section.about-section-content .program-row {
     border-bottom: 1px solid #BDBDBD;
     padding-bottom: 30px; }
+
+.expand-section {
+  height: fit-content;
+  margin-bottom: inherit; }
+
+.expand-section.hide {
+  height: 150px;
+  margin-bottom: -10px; }
+
+input[type=checkbox] {
+  visibility: hidden; }
+
+.expand-icon {
+  height: 50px;
+  width: 50px;
+  position: relative;
+  top: 70px;
+  background-repeat: no-repeat;
+  background-position: center; }
+  .expand-icon.plus {
+    background-image: url(../images/plus-icon.svg); }
+  .expand-icon.minus {
+    background-image: url(../images/minus-icon.svg); }
+
+.expand-icon:hover {
+  cursor: pointer; }
+
+.content {
+  overflow-y: hidden;
+  transition: max-height 1s ease-out;
+  max-height: 1500px;
+  height: auto; }
+
+.content.hide {
+  max-height: 160px; }
 
 section.about-section-content.select-publications .content {
   overflow-y: hidden;
@@ -649,5 +662,8 @@ section.about-m2ove-intro-section {
 section.about-resilience-intro-section {
   box-shadow: -1px -5px 5px -4px #9996;
   margin-top: 10px; }
+
+p.researcher-bio {
+  overflow: hidden; }
 
 /*# sourceMappingURL=style.css.map */

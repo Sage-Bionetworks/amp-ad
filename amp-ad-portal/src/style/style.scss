@@ -52,6 +52,14 @@ select {
 	font-size: 18px;
 }
 
+.align-right {
+  text-align: right;
+}
+
+.content-width {
+  max-width: fit-content;
+}
+
 .Dropdown-control {
   border: none;
   box-shadow: 0px 1px 5px 0px #c7c5c5;
@@ -296,7 +304,7 @@ header {
     min-width: 157px;
     max-width: 400px;
   }
-	.about-dropdown .accordion__item .accordion-body.top-level-accordion {
+	.about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
 		position: absolute;
 		margin: auto;
 		top: 37px;
@@ -581,7 +589,7 @@ section.programs {
     min-width: 215px;
     max-width: 215px;
     height: 448px;
-    margin: 10px 5px;
+    margin: 10px;
     .box-text-image p {
       font-size: 14px;
       font-weight: 400;
@@ -736,12 +744,19 @@ section.about-section-content {
   padding-top: 0px;
   padding-bottom: 0px;
   text-align: left;
+	
+	.program-row {
+		border-bottom: 1px solid #BDBDBD; 
+		padding-bottom: 30px;
+	}
+}
+
   .expand-section {
     height: fit-content;
     margin-bottom: inherit;
   }
   .expand-section.hide {
-    height: 0px;
+    height: 150px;
     margin-bottom: -10px;
   }
   input[type=checkbox]{
@@ -751,7 +766,7 @@ section.about-section-content {
     height: 50px;
     width: 50px;
     position: relative;
-    top: -60px;
+    top: 70px;
 		background-repeat: no-repeat;
 		background-position: center;
     &.plus {
@@ -771,14 +786,8 @@ section.about-section-content {
     height: auto;
 	}
 	.content.hide {
-		max-height: 0px;
+		max-height: 160px;
 	}
-	
-	.program-row {
-		border-bottom: 1px solid #BDBDBD; 
-		padding-bottom: 30px;
-	}
-}
 
 section.about-section-content.select-publications {
   .content {
@@ -843,3 +852,7 @@ section.about-resilience-intro-section {
   margin-top:10px;
 }
 
+///// External Researchers ////////
+p.researcher-bio {
+  overflow: hidden;
+}

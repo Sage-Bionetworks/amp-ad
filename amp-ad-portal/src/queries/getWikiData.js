@@ -24,11 +24,17 @@ function getWikiData(wikiId, token) {
     .catch(handleErrors)
 }
 
-const getMarkdown = (props, wikiNumber) => {
+const getMarkdown = (props, wikiNumber, name = "wikiMarkdown") => {
   //props.handleChanges("wikiMarkdown", "")
   getWikiData(wikiNumber, props.token.sessionToken).then((data) => {
-    props.handleChanges("wikiMarkdown", data.markdown)
+    props.handleChanges(name, data.markdown)
   })
 }
 
-export { getWikiData, getMarkdown }
+const getMarkdownSegment = (props, newStateKey, stateKey) => {
+  return getWikiData(newStateKey, props.token.sessionToken).then((data) => {
+    props.handleNestedChanges(stateKey, newStateKey, data.markdown)
+  })
+}
+
+export { getWikiData, getMarkdown, getMarkdownSegment }

@@ -12,28 +12,25 @@ import {
   keysToValues,
   printNames,
   filterRowsByKeyAndValue,
-  //countBioSamples,
-  //gatherCounts,
-  //filterBySpecies,
 } from "./controller/PrepRawSynapseData"
 
 import { getBioSampleCount } from "./queries/queryForData"
 
 // component js
-// import all components for use with react router
 import Header from "./Header"
 import Home from "./Home"
 import AboutPrograms from "./AboutPrograms"
 import AboutStudies from "./AboutStudies"
-import AboutDataUseRequirements from "./AboutDataUseRequirements"
+//import AboutDataUseRequirements from "./AboutDataUseRequirements"
 
 import ProgramsAmpAd from "./components/Programs-AMP-AD"
 import ProgramsM2OVE from "./components/Programs-M2OVE"
 import ProgramsResilienceAD from "./components/Programs-ResilienceAD"
 import ProgramsModelAD from "./components/Programs-ModelAD"
+import ExternalResearchers from "./components/Research-ExternalResearchers"
 
 // scripts
-import { shrinkHeader } from "./view/domScripts"
+import { setActiveNavigation, shrinkHeader } from "./view/domScripts"
 
 const pageDataPoints = ["assay", "tissue", "dataType", "diagnoses"]
 
@@ -48,6 +45,7 @@ class App extends Component {
     speciesDropdownSelection: "All species",
     diagnosesDropdownSelection: "All diagnoses",
     wikiMarkdown: "",
+    wikiMarkdownSeg: [],
   };
 
   componentDidMount() {
@@ -55,9 +53,12 @@ class App extends Component {
     this.setPageDataPoints(pageDataPoints)
     this.queryAndSetBioSampleCount()
     shrinkHeader()
+    setActiveNavigation()
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    setActiveNavigation()
+  }
 
   getSpeciesDropdownOptions = (rawData) => {
     const speciesDropdownOptions = []
@@ -252,6 +253,15 @@ class App extends Component {
     })
   };
 
+  handleNestedChanges = (KEY, newStateKey, newState) => {
+    const property = this.state[KEY]
+    property.push({ [newStateKey]: newState })
+    this.setState(prevState => ({
+      ...prevState,
+      property,
+    }))
+  };
+
   toggleSeeAll = (event) => {
     const key = event.target.name
     const value = event.target.dataset.value === "false"
@@ -352,6 +362,17 @@ class App extends Component {
     />
   );
 
+  ReturnExternalResearchers = (props) => {
+    return (
+      <ExternalResearchers
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        handleNestedChanges={this.handleNestedChanges}
+        markdown={this.state.wikiMarkdownSeg}
+      />
+    )
+  };
+
   render() {
     return (
       <Router>
@@ -375,6 +396,10 @@ class App extends Component {
             <Route
               path="/Research/Resilience-AD"
               component={this.ReturnProgramsResilienceAD}
+            />
+            <Route
+              path="/Research/ExternalResearchers"
+              component={this.ReturnExternalResearchers}
             />
 
             <Route path="/About/" component={AboutStudies} />
