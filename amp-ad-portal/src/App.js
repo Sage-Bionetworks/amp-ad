@@ -28,6 +28,7 @@ import ProgramsM2OVE from "./components/Programs-M2OVE"
 import ProgramsResilienceAD from "./components/Programs-ResilienceAD"
 import ProgramsModelAD from "./components/Programs-ModelAD"
 import ExternalResearchers from "./components/Research-ExternalResearchers"
+import ResearchPublications from "./components/Research-Publications"
 
 // scripts
 import { setActiveNavigation, shrinkHeader } from "./view/domScripts"
@@ -46,6 +47,7 @@ class App extends Component {
     diagnosesDropdownSelection: "All diagnoses",
     wikiMarkdown: "",
     wikiMarkdownSeg: [],
+    researchPublications: [],
   };
 
   componentDidMount() {
@@ -254,6 +256,7 @@ class App extends Component {
   };
 
   handleNestedChanges = (KEY, newStateKey, newState) => {
+    console.log(KEY)
     const property = this.state[KEY]
     property.push({ [newStateKey]: newState })
     this.setState(prevState => ({
@@ -362,13 +365,24 @@ class App extends Component {
     />
   );
 
-  ReturnExternalResearchers = (props) => {
+  ReturnExternalResearchers = () => {
     return (
       <ExternalResearchers
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
         markdown={this.state.wikiMarkdownSeg}
+      />
+    )
+  };
+
+  ReturnResearchPublications = () => {
+    return (
+      <ResearchPublications
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        handleNestedChanges={this.handleNestedChanges}
+        markdown={this.state.researchPublications}
       />
     )
   };
@@ -401,6 +415,10 @@ class App extends Component {
               path="/Research/ExternalResearchers"
               component={this.ReturnExternalResearchers}
             />
+            <Route
+              path="/Research/Publications"
+              component={this.ReturnResearchPublications}
+            />
 
             <Route path="/About/" component={AboutStudies} />
             <Route
@@ -408,6 +426,7 @@ class App extends Component {
               component={this.ReturnAboutDataUse}
             />
           </div>
+
           <footer className="row center-xs middle-xs">
             <div className="col-xs-12 col-sm-1">
               <a href="/">

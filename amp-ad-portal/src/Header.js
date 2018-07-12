@@ -12,126 +12,69 @@ import {
 import "react-accessible-accordion/dist/minimal-example.css"
 import { setActiveNavigation } from "./view/domScripts"
 
-const closeNavigation = () => {
-  const openWindows = document.querySelectorAll("[aria-hidden='false']")
-  openWindows.forEach((openWindow) => {
-    //openWindow.removeAttribute("[aria-hidden='false']")
-    openWindow.setAttribute("aria-hidden", "true")
-    openWindow.classList.add("accordion__body--hidden")
-  })
-  const openDropdowns = document.querySelectorAll("[aria-selected='true']")
-  openDropdowns.forEach((element) => {
-    //element.removeAttribute("[aria-selected='true']")
-    element.setAttribute("aria-selected", "false")
-  })
-
-  //const menuWall = document.querySelector(".menu-wall")
-  //menuWall.classList.add("hidden")
-}
-
-//const eventFire = (el, etype) => {
-//if (el.fireEvent) {
-//el.fireEvent(`on${etype}`)
-//} else {
-//const evObj = document.createEvent("Events")
-//evObj.initEvent(etype, true, false)
-//el.dispatchEvent(evObj)
-//}
-//}
-
-const dropdownMenuAction = (event) => {
-  event.preventDefault()
-
-  const accordionItems = document.querySelectorAll(".top-level-accordion-item")
-
-  accordionItems.forEach((element) => {
-    if (
-      event.target.innerHTML
-      !== element.querySelector(".main-nav-item").innerHTML
-    ) {
-      //console.log(element.querySelector(".main-nav-item").innerHTML)
-      const openWindows = element.querySelectorAll("[aria-hidden='false']")
-      openWindows.forEach((openWindow) => {
-        openWindow.setAttribute("aria-hidden", "true")
-        openWindow.classList.add("accordion__body--hidden")
-      })
-      const openDropdowns = element.querySelectorAll("[aria-selected='true']")
-      openDropdowns.forEach((openDropdown) => {
-        openDropdown.setAttribute("aria-selected", "false")
-      })
-    }
-  })
-}
-
-const onClick = () => {
-  //console.log("lolwat")
-  closeNavigation()
-  //setActiveNavigation()
-}
-
 class Header extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      Research: false,
+      Resources: false,
+      About: false,
+    }
+  }
+
   componentDidUpdate() {
     setActiveNavigation()
   }
 
-  render() {
-    return (
-      <header className="row between-xs header center-xs middle-xs">
-        <button
-          className="menu-wall hidden"
-          onClick={closeNavigation}
-          type="button"
-        />
-        <div className="col-xs-12 col-sm-3">
-          <Link to="/" onClick={onClick}>
-            <img
-              className="logo-header"
-              src={require("./images/amp-ad-logo.svg")}
-              alt="amp_ad_logo"
-            />
-          </Link>
-        </div>
-        <div className="col-xs-12 col-md-7">
-          <ul className="nav row end-xs">
-            <li>
-              <Link
-                to="/"
-                className="main-nav-item nav-item active"
-                onClick={onClick}
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <ProgramsDropdown />
-            </li>
-            <li>
-              <ResourcesDropdown />
-            </li>
-            <li className="about-dropdown">
-              <AboutMenuDropdown />
-            </li>
-          </ul>
-        </div>
-      </header>
-    )
-  }
-}
+  dropdownMenuAction = (event) => {
+    event.preventDefault()
 
-const ProgramsDropdown = () => {
-  return (
+    const accordionItems = document.querySelectorAll(
+      ".top-level-accordion-item",
+    )
+
+    accordionItems.forEach((element) => {
+      if (
+        event.target.innerHTML
+        !== element.querySelector(".main-nav-item").innerHTML
+      ) {
+        this.setState({
+          [element.querySelector(".main-nav-item").innerHTML]: false,
+        })
+      } else {
+        const newState = this.state[element.querySelector(".main-nav-item").innerHTML]
+          !== true
+        this.setState(prevState => ({
+          ...prevState,
+          [element.querySelector(".main-nav-item").innerHTML]: newState,
+        }))
+      }
+    })
+  };
+
+  ResearchDropdown = () => (
     <Accordion>
       <AccordionItem className="top-level-accordion-item">
-        <AccordionItemTitle className="accordion-title top-level-accordion">
+        <AccordionItemTitle
+          className="accordion-title top-level-accordion"
+          aria-selected={this.state.Research}
+        >
           <a
             href="/"
             className="nav-item main-nav-item"
-            onClick={dropdownMenuAction}
+            onClick={this.dropdownMenuAction}
           >
             Research
           </a>
         </AccordionItemTitle>
-        <AccordionItemBody className="accordion-body top-level-accordion">
+        <AccordionItemBody
+          aria-hidden={this.state.Research !== true}
+          className={
+            this.state.Research === true
+              ? "accordion-body top-level-accordion"
+              : "accordion-body top-level-accordion accordion__body--hidden"
+          }
+        >
           <Accordion>
             <AccordionItem className="accordion-row row">
               <AccordionItemTitle>
@@ -140,7 +83,7 @@ const ProgramsDropdown = () => {
 Programs
                   </div>
                   <div className="col-xs-1 carrot-icon">
->
+&gt;
                   </div>
                 </div>
               </AccordionItemTitle>
@@ -151,7 +94,6 @@ Programs
                       name="AMP-AD"
                       to="/Research/AMP-AD"
                       className="nav-item dropdown"
-                      onClick={onClick}
                     >
                       AMP-AD Target Discovery and Preclinical Validation
                     </Link>
@@ -161,7 +103,6 @@ Programs
                       name="M2OVE"
                       to="/Research/M2OVE"
                       className="nav-item dropdown"
-                      onClick={onClick}
                     >
                       M2OVE-AD Consortium
                     </Link>
@@ -171,7 +112,6 @@ Programs
                       name="MODEL-AD"
                       to="/Research/Model-AD"
                       className="nav-item dropdown"
-                      onClick={onClick}
                     >
                       Model AD Program
                     </Link>
@@ -181,7 +121,6 @@ Programs
                       name="Resilience-AD"
                       to="/Research/Resilience-AD"
                       className="nav-item dropdown"
-                      onClick={onClick}
                     >
                       Resilience-AD Program
                     </Link>
@@ -196,7 +135,7 @@ Programs
                     Consortia Research
                   </div>
                   <div className="col-xs-1 carrot-icon">
->
+&gt;
                   </div>
                 </div>
               </AccordionItemTitle>
@@ -207,7 +146,6 @@ Programs
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
-                      onClick={onClick}
                     >
                       Genetics
                     </Link>
@@ -217,7 +155,6 @@ Programs
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
-                      onClick={onClick}
                     >
                       Differential Expressions
                     </Link>
@@ -227,7 +164,6 @@ Programs
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
-                      onClick={onClick}
                     >
                       Model AD Program
                     </Link>
@@ -237,7 +173,6 @@ Programs
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
-                      onClick={onClick}
                     >
                       Networks
                     </Link>
@@ -249,7 +184,12 @@ Programs
               <AccordionItemTitle>
                 <div className="row between-xs">
                   <div className="col-xs-6 accordion-sub-title">
-                    Publications
+                    <Link
+                      name="external researchers"
+                      to="/Research/Publications"
+                    >
+                      Publications
+                    </Link>
                   </div>
                   <div className="col-xs-1" />
                 </div>
@@ -262,7 +202,6 @@ Programs
                     <Link
                       name="external researchers"
                       to="/Research/ExternalResearchers"
-                      onClick={onClick}
                     >
                       External Researchers
                     </Link>
@@ -275,23 +214,31 @@ Programs
         </AccordionItemBody>
       </AccordionItem>
     </Accordion>
-  )
-}
+  );
 
-const ResourcesDropdown = () => {
-  return (
+  ResourcesDropdown = () => (
     <Accordion>
       <AccordionItem className="top-level-accordion-item">
-        <AccordionItemTitle className="accordion-title top-level-accordion">
+        <AccordionItemTitle
+          className="accordion-title top-level-accordion"
+          aria-selected={this.state.Resources}
+        >
           <a
             href="/"
             className="nav-item main-nav-item"
-            onClick={dropdownMenuAction}
+            onClick={this.dropdownMenuAction}
           >
             Resources
           </a>
         </AccordionItemTitle>
-        <AccordionItemBody className="accordion-body top-level-accordion">
+        <AccordionItemBody
+          aria-hidden={this.state.Resources !== true}
+          className={
+            this.state.Resources === true
+              ? "accordion-body top-level-accordion"
+              : "accordion-body top-level-accordion accordion__body--hidden"
+          }
+        >
           <Accordion>
             <AccordionItem className="accordion-row row">
               <AccordionItemTitle>
@@ -300,7 +247,7 @@ const ResourcesDropdown = () => {
 Data
                   </div>
                   <div className="col-xs-1">
->
+&gt;
                   </div>
                 </div>
               </AccordionItemTitle>
@@ -311,7 +258,6 @@ Data
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
-                      onClick={onClick}
                     >
                       AMP-AD Target Discovery and Preclinical Validation
                     </Link>
@@ -321,7 +267,6 @@ Data
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
-                      onClick={onClick}
                     >
                       M2OVE-AD Consortium
                     </Link>
@@ -331,7 +276,6 @@ Data
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
-                      onClick={onClick}
                     >
                       Model AD Program
                     </Link>
@@ -341,7 +285,6 @@ Data
                       name="Programs"
                       to="/Programs"
                       className="nav-item dropdown"
-                      onClick={onClick}
                     >
                       Resilience-AD Program
                     </Link>
@@ -397,23 +340,31 @@ Agora
         </AccordionItemBody>
       </AccordionItem>
     </Accordion>
-  )
-}
+  );
 
-const AboutMenuDropdown = () => {
-  return (
+  AboutMenuDropdown = () => (
     <Accordion>
       <AccordionItem className="top-level-accordion-item">
-        <AccordionItemTitle className="accordion-title top-level-accordion">
+        <AccordionItemTitle
+          className="accordion-title top-level-accordion"
+          aria-selected={this.state.About}
+        >
           <a
             href="/"
             className="nav-item main-nav-item"
-            onClick={dropdownMenuAction}
+            onClick={this.dropdownMenuAction}
           >
             About
           </a>
         </AccordionItemTitle>
-        <AccordionItemBody className="accordion-body top-level-accordion">
+        <AccordionItemBody
+          aria-hidden={this.state.About !== true}
+          className={
+            this.state.About === true
+              ? "accordion-body top-level-accordion"
+              : "accordion-body top-level-accordion accordion__body--hidden"
+          }
+        >
           <AccordionItem>
             <AccordionItemTitle>
               <div className="row between-xs">
@@ -437,7 +388,42 @@ People
         </AccordionItemBody>
       </AccordionItem>
     </Accordion>
-  )
+  );
+
+  render() {
+    return (
+      <header className="row between-xs header center-xs middle-xs">
+        <button className="menu-wall hidden" type="button" />
+        <div className="col-xs-12 col-sm-3">
+          <Link to="/">
+            <img
+              className="logo-header"
+              src={require("./images/amp-ad-logo.svg")}
+              alt="amp_ad_logo"
+            />
+          </Link>
+        </div>
+        <div className="col-xs-12 col-md-7">
+          <ul className="nav row end-xs">
+            <li>
+              <Link to="/" className="main-nav-item nav-item active">
+                Home
+              </Link>
+            </li>
+            <li>
+              {this.ResearchDropdown()}
+            </li>
+            <li>
+              {this.ResourcesDropdown()}
+            </li>
+            <li className="about-dropdown">
+              {this.AboutMenuDropdown()}
+            </li>
+          </ul>
+        </div>
+      </header>
+    )
+  }
 }
 
 export default Header
