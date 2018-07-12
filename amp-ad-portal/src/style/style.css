@@ -668,5 +668,11 @@ p.researcher-bio {
 
 .researchers-content .expand-section {
   margin-bottom: 60px; }
+.researchers-content .expand-section.hide {
+  max-height: 178px; }
+.researchers-content .content.hide {
+  max-height: 178px; }
+.researchers-content .div {
+  max-width: 920px; }
 
 /*# sourceMappingURL=style.css.map */

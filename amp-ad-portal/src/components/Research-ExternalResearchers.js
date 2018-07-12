@@ -2,28 +2,14 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 
 import { getMarkdownSegment } from "../queries/getWikiData"
+import { buildSection } from "../model/HandleMarkdown"
 
 import ShowHideSection from "../ShowHideSection"
 
-const ReactMarkdown = require("react-markdown")
-
 class ExternalResearchers extends Component {
   componentDidMount() {
-    getMarkdownSegment(this.props, "581946", "wikiMarkdownSeg")
+    getMarkdownSegment(this.props, "581946", "externalResearchers")
   }
-
-  buildSection = (index, key) => {
-    return (
-      <ReactMarkdown
-        source={
-          this.props.markdown[index] !== undefined
-            ? this.props.markdown[index][key]
-            : ""
-        }
-        escapeHtml={false}
-      />
-    )
-  };
 
   render() {
     return (
@@ -41,14 +27,14 @@ Content...
           </section>
           <section className="row center-xs researchers-content">
             <div className="col-xs-12 col-sm-9">
-              <ShowHideSection content={this.buildSection(0, 581946)} />
-              <ShowHideSection content={this.buildSection(0, 581946)} />
-              <ShowHideSection content={this.buildSection(0, 581946)} />
-              <ShowHideSection content={this.buildSection(0, 581946)} />
-              <ShowHideSection content={this.buildSection(0, 581946)} />
-              <ShowHideSection content={this.buildSection(0, 581946)} />
-              <ShowHideSection content={this.buildSection(0, 581946)} />
-              <ShowHideSection content={this.buildSection(0, 581946)} />
+              <ShowHideSection content={buildSection(0, 581946, this.props)} />
+              <ShowHideSection content={buildSection(0, 581946, this.props)} />
+              <ShowHideSection content={buildSection(0, 581946, this.props)} />
+              <ShowHideSection content={buildSection(0, 581946, this.props)} />
+              <ShowHideSection content={buildSection(0, 581946, this.props)} />
+              <ShowHideSection content={buildSection(0, 581946, this.props)} />
+              <ShowHideSection content={buildSection(0, 581946, this.props)} />
+              <ShowHideSection content={buildSection(0, 581946, this.props)} />
             </div>
           </section>
         </div>

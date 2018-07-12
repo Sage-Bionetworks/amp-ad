@@ -19,16 +19,28 @@ import { getBioSampleCount } from "./queries/queryForData"
 // component js
 import Header from "./Header"
 import Home from "./Home"
-import AboutPrograms from "./AboutPrograms"
-import AboutStudies from "./AboutStudies"
-//import AboutDataUseRequirements from "./AboutDataUseRequirements"
 
+// research pages
 import ProgramsAmpAd from "./components/Programs-AMP-AD"
 import ProgramsM2OVE from "./components/Programs-M2OVE"
 import ProgramsResilienceAD from "./components/Programs-ResilienceAD"
 import ProgramsModelAD from "./components/Programs-ModelAD"
 import ExternalResearchers from "./components/Research-ExternalResearchers"
 import ResearchPublications from "./components/Research-Publications"
+import ConsortiaDifferential from "./components/Consortia-DifferentialEx"
+import ConsortiaGenetics from "./components/Consortia-Genetics"
+import ConsortiaNetworks from "./components/Consortia-Networks"
+
+// resources pages
+import ResourcesData from "./components/Resources-Data"
+import ResourcesAgora from "./components/Resources-Agora"
+import ResourcesDataUse from "./components/Resources-DataUse"
+import ResourcesExperimentalResources from "./components/Resources-Experimental-Resources"
+import ResourcesStudies from "./components/Resources-Studies"
+
+// about pages
+import AboutAmpAd from "./components/About-WhatIsAmpAd"
+import AboutPeople from "./components/About-People"
 
 // scripts
 import { setActiveNavigation, shrinkHeader } from "./view/domScripts"
@@ -46,7 +58,7 @@ class App extends Component {
     speciesDropdownSelection: "All species",
     diagnosesDropdownSelection: "All diagnoses",
     wikiMarkdown: "",
-    wikiMarkdownSeg: [],
+    externalResearchers: [],
     researchPublications: [],
   };
 
@@ -323,16 +335,6 @@ class App extends Component {
     />
   );
 
-  ReturnAboutPrograms = props => (
-    <AboutPrograms
-      // programData={this.props.wikiProgramData}
-      // contributorData={this.props.wikiContributorsData}
-      handleChangeEvent={this.handleChangeEvent}
-      parentState={this.state}
-      {...props}
-    />
-  );
-
   ReturnProgramsM2OVE = () => (
     <ProgramsM2OVE
       token={this.props.loginToken}
@@ -371,7 +373,7 @@ class App extends Component {
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.wikiMarkdownSeg}
+        markdown={this.state.externalResearchers}
       />
     )
   };
@@ -379,6 +381,116 @@ class App extends Component {
   ReturnResearchPublications = () => {
     return (
       <ResearchPublications
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        handleNestedChanges={this.handleNestedChanges}
+        markdown={this.state.researchPublications}
+      />
+    )
+  };
+
+  ReturnResourcesData = () => {
+    return (
+      <ResourcesData
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        handleNestedChanges={this.handleNestedChanges}
+        markdown={this.state.researchPublications}
+      />
+    )
+  };
+
+  ReturnResourcesAgora = () => {
+    return (
+      <ResourcesAgora
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        handleNestedChanges={this.handleNestedChanges}
+        markdown={this.state.researchPublications}
+      />
+    )
+  };
+
+  ReturnResourcesDataUse = () => {
+    return (
+      <ResourcesDataUse
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        handleNestedChanges={this.handleNestedChanges}
+        markdown={this.state.researchPublications}
+      />
+    )
+  };
+
+  ReturnResourcesExperimentalResources = () => {
+    return (
+      <ResourcesExperimentalResources
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        handleNestedChanges={this.handleNestedChanges}
+        markdown={this.state.researchPublications}
+      />
+    )
+  };
+
+  ReturnResourcesStudies = () => {
+    return (
+      <ResourcesStudies
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        handleNestedChanges={this.handleNestedChanges}
+        markdown={this.state.researchPublications}
+      />
+    )
+  };
+
+  ReturnConsortiaDifferential = () => {
+    return (
+      <ConsortiaDifferential
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        handleNestedChanges={this.handleNestedChanges}
+        markdown={this.state.researchPublications}
+      />
+    )
+  };
+
+  ReturnConsortiaGenetics = () => {
+    return (
+      <ConsortiaGenetics
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        handleNestedChanges={this.handleNestedChanges}
+        markdown={this.state.researchPublications}
+      />
+    )
+  };
+
+  ReturnConsortiaNetworks = () => {
+    return (
+      <ConsortiaNetworks
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        handleNestedChanges={this.handleNestedChanges}
+        markdown={this.state.researchPublications}
+      />
+    )
+  };
+
+  ReturnAboutAmpAd = () => {
+    return (
+      <AboutAmpAd
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        handleNestedChanges={this.handleNestedChanges}
+        markdown={this.state.researchPublications}
+      />
+    )
+  };
+
+  ReturnAboutPeople = () => {
+    return (
+      <AboutPeople
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -419,12 +531,42 @@ class App extends Component {
               path="/Research/Publications"
               component={this.ReturnResearchPublications}
             />
-
-            <Route path="/About/" component={AboutStudies} />
             <Route
-              path="/DataUseRequirements"
-              component={this.ReturnAboutDataUse}
+              path="/Research/DifferentialExpressions"
+              component={this.ReturnConsortiaDifferential}
             />
+            <Route
+              path="/Research/Genetics"
+              component={this.ReturnConsortiaGenetics}
+            />
+            <Route
+              path="/Research/Networks"
+              component={this.ReturnConsortiaNetworks}
+            />
+
+            <Route
+              path="/Resources/Data"
+              component={this.ReturnResourcesData}
+            />
+            <Route
+              path="/Resources/Agora"
+              component={this.ReturnResourcesAgora}
+            />
+            <Route
+              path="/Resources/DataUseRequirements"
+              component={this.ReturnResourcesDataUse}
+            />
+            <Route
+              path="/Resources/ExperimentalResources"
+              component={this.ReturnResourcesExperimentalResources}
+            />
+            <Route
+              path="/Resources/Studies"
+              component={this.ReturnResourcesStudies}
+            />
+
+            <Route path="/About/AMP-AD" component={this.ReturnAboutAmpAd} />
+            <Route path="/About/People" component={this.ReturnAboutPeople} />
           </div>
 
           <footer className="row center-xs middle-xs">
