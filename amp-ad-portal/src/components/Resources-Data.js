@@ -3,7 +3,7 @@ import React, { Component } from "react"
 import { getMarkdownSegment } from "../queries/getWikiData"
 import { buildSection } from "../model/HandleMarkdown"
 
-class DataUse extends Component {
+class DataResources extends Component {
   componentDidMount() {
     getMarkdownSegment(this.props, "581933", "researchPublications")
   }
@@ -15,7 +15,7 @@ class DataUse extends Component {
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
               <h2>
-Data Use Requirements
+Data
               </h2>
               <p>
 Content...
@@ -31,4 +31,4 @@ Content...
   }
 }
 
-export default DataUse
+export default DataResources

@@ -143,8 +143,8 @@ Programs
                 <ul>
                   <li>
                     <Link
-                      name="Programs"
-                      to="/Programs"
+                      name="Genetics"
+                      to="/Research/Genetics"
                       className="nav-item dropdown"
                     >
                       Genetics
@@ -152,8 +152,8 @@ Programs
                   </li>
                   <li>
                     <Link
-                      name="Programs"
-                      to="/Programs"
+                      name="Differential Expressions"
+                      to="/Research/DifferentialExpressions"
                       className="nav-item dropdown"
                     >
                       Differential Expressions
@@ -161,17 +161,8 @@ Programs
                   </li>
                   <li>
                     <Link
-                      name="Programs"
-                      to="/Programs"
-                      className="nav-item dropdown"
-                    >
-                      Model AD Program
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      name="Programs"
-                      to="/Programs"
+                      name="Networks"
+                      to="/Research/Networks"
                       className="nav-item dropdown"
                     >
                       Networks
@@ -242,64 +233,12 @@ Programs
           <Accordion>
             <AccordionItem className="accordion-row row">
               <AccordionItemTitle>
-                <div className="accordion-sub-row row between-xs">
-                  <div className="col-xs-6 accordion-sub-title">
-Data
-                  </div>
-                  <div className="col-xs-1">
-&gt;
-                  </div>
-                </div>
-              </AccordionItemTitle>
-              <AccordionItemBody>
-                <ul>
-                  <li>
-                    <Link
-                      name="Programs"
-                      to="/Programs"
-                      className="nav-item dropdown"
-                    >
-                      AMP-AD Target Discovery and Preclinical Validation
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      name="Programs"
-                      to="/Programs"
-                      className="nav-item dropdown"
-                    >
-                      M2OVE-AD Consortium
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      name="Programs"
-                      to="/Programs"
-                      className="nav-item dropdown"
-                    >
-                      Model AD Program
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      name="Programs"
-                      to="/Programs"
-                      className="nav-item dropdown"
-                    >
-                      Resilience-AD Program
-                    </Link>
-                  </li>
-                </ul>
-              </AccordionItemBody>
-            </AccordionItem>
-
-            <AccordionItem>
-              <AccordionItemTitle>
                 <div className="row between-xs">
                   <div className="col-xs-6 accordion-sub-title">
-Studies
+                    <Link name="external researchers" to="/Resources/Data">
+                      Data
+                    </Link>
                   </div>
-                  <div className="col-xs-1" />
                 </div>
               </AccordionItemTitle>
             </AccordionItem>
@@ -308,9 +247,10 @@ Studies
               <AccordionItemTitle>
                 <div className="row between-xs">
                   <div className="col-xs-6 accordion-sub-title">
-                    Experimental Resources
+                    <Link name="external researchers" to="/Resources/Studies">
+                      Studies
+                    </Link>
                   </div>
-                  <div className="col-xs-1" />
                 </div>
               </AccordionItemTitle>
             </AccordionItem>
@@ -319,9 +259,13 @@ Studies
               <AccordionItemTitle>
                 <div className="row between-xs">
                   <div className="col-xs-6 accordion-sub-title">
-Agora
+                    <Link
+                      name="external researchers"
+                      to="/Resources/ExperimentalResources"
+                    >
+                      Experimental Resources
+                    </Link>
                   </div>
-                  <div className="col-xs-1" />
                 </div>
               </AccordionItemTitle>
             </AccordionItem>
@@ -330,9 +274,25 @@ Agora
               <AccordionItemTitle>
                 <div className="row between-xs">
                   <div className="col-xs-6 accordion-sub-title">
-                    Data Use Requirements
+                    <Link name="external researchers" to="/Resources/Agora">
+                      Agora
+                    </Link>
                   </div>
-                  <div className="col-xs-1" />
+                </div>
+              </AccordionItemTitle>
+            </AccordionItem>
+
+            <AccordionItem>
+              <AccordionItemTitle>
+                <div className="row between-xs">
+                  <div className="col-xs-6 accordion-sub-title">
+                    <Link
+                      name="external researchers"
+                      to="/Resources/DataUseRequirements"
+                    >
+                      Data Use Requirements
+                    </Link>
+                  </div>
                 </div>
               </AccordionItemTitle>
             </AccordionItem>
@@ -369,7 +329,13 @@ Agora
             <AccordionItemTitle>
               <div className="row between-xs">
                 <div className="col-xs-12 accordion-sub-title">
-                  What is the AMP-AD portal
+                  <Link
+                    name="AMP-AD"
+                    to="/About/AMP-AD"
+                    className="nav-item dropdown"
+                  >
+                    What is the AMP-AD portal
+                  </Link>
                 </div>
                 <div className="col-xs-1" />
               </div>
@@ -379,7 +345,13 @@ Agora
             <AccordionItemTitle>
               <div className="row between-xs">
                 <div className="col-xs-6 accordion-sub-title">
-People
+                  <Link
+                    name="AMP-AD"
+                    to="/About/People"
+                    className="nav-item dropdown"
+                  >
+                    People
+                  </Link>
                 </div>
                 <div className="col-xs-1" />
               </div>

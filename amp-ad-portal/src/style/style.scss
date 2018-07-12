@@ -861,4 +861,13 @@ p.researcher-bio {
   .expand-section {
     margin-bottom: 60px;
   }
+  .expand-section.hide {
+    max-height: 178px;
+  }
+  .content.hide {
+    max-height: 178px;
+  }
+  .div {
+    max-width: 920px;
+  }
 }

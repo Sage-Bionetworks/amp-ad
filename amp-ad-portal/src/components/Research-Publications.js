@@ -27,7 +27,7 @@ Publications
           </section>
           <section className="row center-xs researchers-content">
             <div className="col-xs-12 col-sm-9">
-              {buildSection(0, "581933", this.props)}
+              {buildSection(0, 581933, this.props)}
             </div>
           </section>
         </div>
