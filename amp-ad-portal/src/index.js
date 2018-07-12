@@ -4,7 +4,6 @@ import "./style/index.css"
 import "./style/style.css"
 import App from "./App"
 import registerServiceWorker from "./registerServiceWorker"
-
 import * as SynapseClient from "./synapse/SynapseClient"
 
 let rawSynapseData

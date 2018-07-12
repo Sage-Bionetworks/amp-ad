@@ -1,8 +1,3 @@
-//import _ from "lodash"
-//import getToken from "./getToken"
-//import getStudyData from "./getStudyData"
-//import getWikiData from "./getWikiData"
-
 import * as SynapseClient from "../synapse/SynapseClient"
 import * as SynapseConstants from "../synapse/SynapseConstants"
 
@@ -36,9 +31,11 @@ const getBioSampleCount = (species, table, tokenResponse) => {
   return SynapseClient.getQueryTableResults(
     buildRequest(table, query),
     tokenResponse.sessionToken,
-  ).then((response) => {
-    return response.queryResult.queryResults.rows[0].values[0]
-  })
+  )
+    .then((response) => {
+      return response.queryResult.queryResults.rows[0].values[0]
+    })
+    .catch(error => console.log(error))
 }
 
 //const mapStudies = (species, table, tokenResponse) => {

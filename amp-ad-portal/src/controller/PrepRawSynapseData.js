@@ -1,23 +1,13 @@
 import _ from "lodash"
 
-const processIndexValue = (key) => {
-  let index
-  if (key === "species") {
-    index = 0
-  }
-  if (key === "assay") {
-    index = 1
-  }
-  if (key === "tissue") {
-    index = 2
-  }
-  if (key === "diagnoses") {
-    index = 3
-  }
-  if (key === "dataType") {
-    index = 5
-  }
-  return index
+const getColumnNameIndex = (dataObject, key) => {
+  let rightIndex
+  dataObject.queryResult.queryResults.headers.forEach((element, index) => {
+    if (element.name === key) {
+      rightIndex = index
+    }
+  })
+  return rightIndex
 }
 
 const filterBySpecies = (dataObject, species) => {
@@ -36,17 +26,18 @@ const convertObjectValsToArray = (OBJECT) => {
   return mappedArray
 }
 
-const filterRowsByDataType = (filteredRows, species, key) => {
-  const flattennedRows = filteredRows.map((element) => {
-    const index = processIndexValue(key)
-    return {
-      species,
-      name: element.values[index],
-      count: parseInt(element.values[5], 10),
-    }
-  })
-  return flattennedRows
-}
+//const filterRowsByDataType = (filteredRows, species, key) => {
+//const flattennedRows = filteredRows.map((element) => {
+//console.log(filteredRows)
+//const index = processIndexValue(key)
+//return {
+//species,
+//name: element.values[index],
+//count: parseInt(element.values[5], 10),
+//}
+//})
+//return flattennedRows
+//}
 
 const filterRowsByKeyAndValue = (dataRows, valuesArray, key) => {
   return dataRows.filter((row) => {
@@ -88,9 +79,12 @@ const keysToValues = (rows) => {
 
 const filterByKey = (dataObject, key) => {
   // takes in raw synapse data
-  const index = processIndexValue(key)
-  const selection = dataObject.queryResult.queryResults.rows
-  return selection.filter(row => row.values[index] !== null)
+  if (dataObject !== undefined) {
+    const index = getColumnNameIndex(dataObject, key)
+    const selection = dataObject.queryResult.queryResults.rows
+    return selection.filter(row => row.values[index] !== null)
+  }
+  return []
 }
 
 const onlyUnique = (value, index, self) => self.indexOf(value) === index
@@ -152,7 +146,6 @@ const countBioSamples = (rows) => {
 
 const setBase64Link = (dataTypesArray) => {
   dataTypesArray.map((element) => {
-    //console.log(element)
     let sqlQuery
     if (
       element.species === "allspecies"
@@ -167,7 +160,6 @@ const setBase64Link = (dataTypesArray) => {
         element.species
       }') AND ("assay" = '${element.assay}'))`
     }
-    //console.log(sqlQuery)
 
     let base64Link = {
       sql: sqlQuery,
@@ -191,8 +183,8 @@ const printNames = (objectArray, key) => {
 }
 
 export {
+  getColumnNameIndex,
   reduceCountsByKey,
-  filterRowsByDataType,
   filterRowsByKeyAndValue,
   filterByValue,
   filterBySpecies,

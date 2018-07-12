@@ -12,9 +12,6 @@ import {
   keysToValues,
   printNames,
   filterRowsByKeyAndValue,
-  //countBioSamples,
-  //gatherCounts,
-  //filterBySpecies,
 } from "./controller/PrepRawSynapseData"
 
 import { getBioSampleCount } from "./queries/queryForData"
@@ -22,13 +19,19 @@ import { getBioSampleCount } from "./queries/queryForData"
 // component js
 import Header from "./Header"
 import Home from "./Home"
-import Tools from "./Tools"
 import AboutPrograms from "./AboutPrograms"
 import AboutStudies from "./AboutStudies"
-import AboutDataUseRequirements from "./AboutDataUseRequirements"
+//import AboutDataUseRequirements from "./AboutDataUseRequirements"
+
+import ProgramsAmpAd from "./components/Programs-AMP-AD"
+import ProgramsM2OVE from "./components/Programs-M2OVE"
+import ProgramsResilienceAD from "./components/Programs-ResilienceAD"
+import ProgramsModelAD from "./components/Programs-ModelAD"
+import ExternalResearchers from "./components/Research-ExternalResearchers"
+import ResearchPublications from "./components/Research-Publications"
 
 // scripts
-import { shrinkHeader } from "./view/domScripts"
+import { setActiveNavigation, shrinkHeader } from "./view/domScripts"
 
 const pageDataPoints = ["assay", "tissue", "dataType", "diagnoses"]
 
@@ -42,6 +45,9 @@ class App extends Component {
     diagnosesSelectionOptions: [],
     speciesDropdownSelection: "All species",
     diagnosesDropdownSelection: "All diagnoses",
+    wikiMarkdown: "",
+    wikiMarkdownSeg: [],
+    researchPublications: [],
   };
 
   componentDidMount() {
@@ -49,9 +55,12 @@ class App extends Component {
     this.setPageDataPoints(pageDataPoints)
     this.queryAndSetBioSampleCount()
     shrinkHeader()
+    setActiveNavigation()
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    setActiveNavigation()
+  }
 
   getSpeciesDropdownOptions = (rawData) => {
     const speciesDropdownOptions = []
@@ -68,7 +77,7 @@ class App extends Component {
   };
 
   getDiagnosesDropdownOptions = (rawData, species) => {
-    const diagnosesRows = filterByValue(filterByKey(rawData, "diagnoses"), [
+    const diagnosesRows = filterByValue(filterByKey(rawData, "diagnosis"), [
       species,
     ])
     let diagnosesList = reduceCountsByKey(
@@ -198,15 +207,17 @@ class App extends Component {
   };
 
   setPageDataPoints = (dataPoints) => {
-    dataPoints.forEach((element) => {
-      this.setFlattenedData(
-        element,
-        this.state.speciesDropdownSelection,
-        this.props.appData,
-        this.state.diagnosesDropdownSelection,
-        this.state.diagnosesSelectionOptions,
-      )
-    })
+    if (this.props.appData !== undefined) {
+      dataPoints.forEach((element) => {
+        this.setFlattenedData(
+          element,
+          this.state.speciesDropdownSelection,
+          this.props.appData,
+          this.state.diagnosesDropdownSelection,
+          this.state.diagnosesSelectionOptions,
+        )
+      })
+    }
   };
 
   getSum = (total, num) => total + num;
@@ -231,7 +242,7 @@ class App extends Component {
   };
 
   queryAndSetBioSampleCount = () => {
-    ["dataType", "tissue"].forEach((element) => {
+    ["assay", "tissue"].forEach((element) => {
       this.queryForBioSamples(this.state, this.props).then((count) => {
         this.setBioSampleCount(parseInt(count, 10), element)
       })
@@ -242,6 +253,16 @@ class App extends Component {
     this.setState({
       [KEY]: NEWSTATE,
     })
+  };
+
+  handleNestedChanges = (KEY, newStateKey, newState) => {
+    console.log(KEY)
+    const property = this.state[KEY]
+    property.push({ [newStateKey]: newState })
+    this.setState(prevState => ({
+      ...prevState,
+      property,
+    }))
   };
 
   toggleSeeAll = (event) => {
@@ -312,12 +333,59 @@ class App extends Component {
     />
   );
 
-  ReturnAboutDataUse = props => (
-    <AboutDataUseRequirements
-      // dataUseRequirements={this.props.wikiDataUseData}
-      {...props}
+  ReturnProgramsM2OVE = () => (
+    <ProgramsM2OVE
+      token={this.props.loginToken}
+      handleChanges={this.handleChanges}
+      markdown={this.state.wikiMarkdown}
     />
   );
+
+  ReturnProgramsAmpAd = () => (
+    <ProgramsAmpAd
+      token={this.props.loginToken}
+      handleChanges={this.handleChanges}
+      markdown={this.state.wikiMarkdown}
+    />
+  );
+
+  ReturnProgramsModelAD = () => (
+    <ProgramsModelAD
+      token={this.props.loginToken}
+      handleChanges={this.handleChanges}
+      markdown={this.state.wikiMarkdown}
+    />
+  );
+
+  ReturnProgramsResilienceAD = () => (
+    <ProgramsResilienceAD
+      token={this.props.loginToken}
+      handleChanges={this.handleChanges}
+      markdown={this.state.wikiMarkdown}
+    />
+  );
+
+  ReturnExternalResearchers = () => {
+    return (
+      <ExternalResearchers
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        handleNestedChanges={this.handleNestedChanges}
+        markdown={this.state.wikiMarkdownSeg}
+      />
+    )
+  };
+
+  ReturnResearchPublications = () => {
+    return (
+      <ResearchPublications
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        handleNestedChanges={this.handleNestedChanges}
+        markdown={this.state.researchPublications}
+      />
+    )
+  };
 
   render() {
     return (
@@ -326,14 +394,39 @@ class App extends Component {
           <Header />
           <div className="col-xs-12 main">
             <Route exact path="/" component={this.homeMarkup} />
-            <Route path="/Tools" component={Tools} />
-            <Route path="/Programs" component={this.ReturnAboutPrograms} />
-            <Route path="/Studies" component={AboutStudies} />
+
+            <Route
+              path="/Research/AMP-AD"
+              component={this.ReturnProgramsAmpAd}
+            />
+            <Route
+              path="/Research/M2OVE"
+              component={this.ReturnProgramsM2OVE}
+            />
+            <Route
+              path="/Research/Model-AD"
+              component={this.ReturnProgramsModelAD}
+            />
+            <Route
+              path="/Research/Resilience-AD"
+              component={this.ReturnProgramsResilienceAD}
+            />
+            <Route
+              path="/Research/ExternalResearchers"
+              component={this.ReturnExternalResearchers}
+            />
+            <Route
+              path="/Research/Publications"
+              component={this.ReturnResearchPublications}
+            />
+
+            <Route path="/About/" component={AboutStudies} />
             <Route
               path="/DataUseRequirements"
               component={this.ReturnAboutDataUse}
             />
           </div>
+
           <footer className="row center-xs middle-xs">
             <div className="col-xs-12 col-sm-1">
               <a href="/">
