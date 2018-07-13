@@ -19,12 +19,21 @@ class Header extends Component {
       Research: false,
       Resources: false,
       About: false,
+      Open: false,
     }
   }
 
   componentDidUpdate() {
     setActiveNavigation()
   }
+
+  closeNavigation = () => {
+    this.setState({
+      Research: false,
+      Resources: false,
+      About: false,
+    })
+  };
 
   dropdownMenuAction = (event) => {
     event.preventDefault()
@@ -79,7 +88,7 @@ class Header extends Component {
             <AccordionItem className="accordion-row row">
               <AccordionItemTitle>
                 <div className="accordion-sub-row row between-xs">
-                  <div className="col-xs-6 accordion-sub-title">
+                  <div className="col-xs-10 accordion-sub-title">
 Programs
                   </div>
                   <div className="col-xs-1 carrot-icon">
@@ -94,6 +103,7 @@ Programs
                       name="AMP-AD"
                       to="/Research/AMP-AD"
                       className="nav-item dropdown"
+                      onClick={this.closeNavigation}
                     >
                       AMP-AD Target Discovery and Preclinical Validation
                     </Link>
@@ -103,6 +113,7 @@ Programs
                       name="M2OVE"
                       to="/Research/M2OVE"
                       className="nav-item dropdown"
+                      onClick={this.closeNavigation}
                     >
                       M2OVE-AD Consortium
                     </Link>
@@ -112,6 +123,7 @@ Programs
                       name="MODEL-AD"
                       to="/Research/Model-AD"
                       className="nav-item dropdown"
+                      onClick={this.closeNavigation}
                     >
                       Model AD Program
                     </Link>
@@ -121,6 +133,7 @@ Programs
                       name="Resilience-AD"
                       to="/Research/Resilience-AD"
                       className="nav-item dropdown"
+                      onClick={this.closeNavigation}
                     >
                       Resilience-AD Program
                     </Link>
@@ -131,7 +144,7 @@ Programs
             <AccordionItem className="accordion-row row">
               <AccordionItemTitle>
                 <div className="accordion-sub-row row between-xs">
-                  <div className="col-xs-6 accordion-sub-title">
+                  <div className="col-xs-10 accordion-sub-title">
                     Consortia Research
                   </div>
                   <div className="col-xs-1 carrot-icon">
@@ -146,6 +159,7 @@ Programs
                       name="Genetics"
                       to="/Research/Genetics"
                       className="nav-item dropdown"
+                      onClick={this.closeNavigation}
                     >
                       Genetics
                     </Link>
@@ -155,6 +169,7 @@ Programs
                       name="Differential Expressions"
                       to="/Research/DifferentialExpressions"
                       className="nav-item dropdown"
+                      onClick={this.closeNavigation}
                     >
                       Differential Expressions
                     </Link>
@@ -164,6 +179,7 @@ Programs
                       name="Networks"
                       to="/Research/Networks"
                       className="nav-item dropdown"
+                      onClick={this.closeNavigation}
                     >
                       Networks
                     </Link>
@@ -172,32 +188,32 @@ Programs
               </AccordionItemBody>
             </AccordionItem>
             <AccordionItem>
-              <AccordionItemTitle>
+              <AccordionItemTitle className="accordion__title link">
                 <div className="row between-xs">
-                  <div className="col-xs-6 accordion-sub-title">
+                  <div className="col-xs-12 accordion-sub-title">
                     <Link
                       name="external researchers"
                       to="/Research/Publications"
+                      onClick={this.closeNavigation}
                     >
                       Publications
                     </Link>
                   </div>
-                  <div className="col-xs-1" />
                 </div>
               </AccordionItemTitle>
             </AccordionItem>
             <AccordionItem>
-              <AccordionItemTitle>
+              <AccordionItemTitle className="accordion__title link">
                 <div className="row between-xs">
-                  <div className="col-xs-6 accordion-sub-title">
+                  <div className="col-xs-11 accordion-sub-title">
                     <Link
                       name="external researchers"
                       to="/Research/ExternalResearchers"
+                      onClick={this.closeNavigation}
                     >
                       External Researchers
                     </Link>
                   </div>
-                  <div className="col-xs-1" />
                 </div>
               </AccordionItemTitle>
             </AccordionItem>
@@ -232,10 +248,14 @@ Programs
         >
           <Accordion>
             <AccordionItem className="accordion-row row">
-              <AccordionItemTitle>
+              <AccordionItemTitle className="accordion__title link">
                 <div className="row between-xs">
-                  <div className="col-xs-6 accordion-sub-title">
-                    <Link name="external researchers" to="/Resources/Data">
+                  <div className="col-xs-12 accordion-sub-title">
+                    <Link
+                      name="external researchers"
+                      to="/Resources/Data"
+                      onClick={this.closeNavigation}
+                    >
                       Data
                     </Link>
                   </div>
@@ -244,10 +264,14 @@ Programs
             </AccordionItem>
 
             <AccordionItem>
-              <AccordionItemTitle>
+              <AccordionItemTitle className="accordion__title link">
                 <div className="row between-xs">
-                  <div className="col-xs-6 accordion-sub-title">
-                    <Link name="external researchers" to="/Resources/Studies">
+                  <div className="col-xs-12 accordion-sub-title">
+                    <Link
+                      name="external researchers"
+                      to="/Resources/Studies"
+                      onClick={this.closeNavigation}
+                    >
                       Studies
                     </Link>
                   </div>
@@ -256,12 +280,13 @@ Programs
             </AccordionItem>
 
             <AccordionItem>
-              <AccordionItemTitle>
+              <AccordionItemTitle className="accordion__title link">
                 <div className="row between-xs">
-                  <div className="col-xs-6 accordion-sub-title">
+                  <div className="col-xs-12 accordion-sub-title">
                     <Link
                       name="external researchers"
                       to="/Resources/ExperimentalResources"
+                      onClick={this.closeNavigation}
                     >
                       Experimental Resources
                     </Link>
@@ -271,10 +296,14 @@ Programs
             </AccordionItem>
 
             <AccordionItem>
-              <AccordionItemTitle>
+              <AccordionItemTitle className="accordion__title link">
                 <div className="row between-xs">
-                  <div className="col-xs-6 accordion-sub-title">
-                    <Link name="external researchers" to="/Resources/Agora">
+                  <div className="col-xs-12 accordion-sub-title">
+                    <Link
+                      name="external researchers"
+                      to="/Resources/Agora"
+                      onClick={this.closeNavigation}
+                    >
                       Agora
                     </Link>
                   </div>
@@ -283,12 +312,13 @@ Programs
             </AccordionItem>
 
             <AccordionItem>
-              <AccordionItemTitle>
+              <AccordionItemTitle className="accordion__title link">
                 <div className="row between-xs">
-                  <div className="col-xs-6 accordion-sub-title">
+                  <div className="col-xs-12 accordion-sub-title">
                     <Link
                       name="external researchers"
                       to="/Resources/DataUseRequirements"
+                      onClick={this.closeNavigation}
                     >
                       Data Use Requirements
                     </Link>
@@ -326,13 +356,14 @@ Programs
           }
         >
           <AccordionItem>
-            <AccordionItemTitle>
+            <AccordionItemTitle className="accordion__title link">
               <div className="row between-xs">
                 <div className="col-xs-12 accordion-sub-title">
                   <Link
                     name="AMP-AD"
                     to="/About/AMP-AD"
                     className="nav-item dropdown"
+                    onClick={this.closeNavigation}
                   >
                     What is the AMP-AD portal
                   </Link>
@@ -342,18 +373,18 @@ Programs
             </AccordionItemTitle>
           </AccordionItem>
           <AccordionItem>
-            <AccordionItemTitle>
+            <AccordionItemTitle className="accordion__title link">
               <div className="row between-xs">
-                <div className="col-xs-6 accordion-sub-title">
+                <div className="col-xs-12 accordion-sub-title">
                   <Link
                     name="AMP-AD"
                     to="/About/People"
                     className="nav-item dropdown"
+                    onClick={this.closeNavigation}
                   >
                     People
                   </Link>
                 </div>
-                <div className="col-xs-1" />
               </div>
             </AccordionItemTitle>
           </AccordionItem>
@@ -375,8 +406,8 @@ Programs
             />
           </Link>
         </div>
-        <div className="col-xs-12 col-md-7">
-          <ul className="nav row end-xs">
+        <div className="nav-buttons col-xs-12 col-sm-8 col-md-7">
+          <ul className="nav row end-sm center-xs">
             <li>
               <Link to="/" className="main-nav-item nav-item active">
                 Home

@@ -2,12 +2,12 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 
 import { getMarkdownSegment } from "../queries/getWikiData"
-import { buildSection } from "../model/HandleMarkdown"
-
-import ShowHideSection from "../ShowHideSection"
+import { printShowHideSections } from "../model/HandleMarkdown"
 
 class ExternalResearchers extends Component {
   componentDidMount() {
+    getMarkdownSegment(this.props, "581946", "externalResearchers")
+    getMarkdownSegment(this.props, "581946", "externalResearchers")
     getMarkdownSegment(this.props, "581946", "externalResearchers")
   }
 
@@ -27,14 +27,7 @@ Content...
           </section>
           <section className="row center-xs researchers-content">
             <div className="col-xs-12 col-sm-9">
-              <ShowHideSection content={buildSection(0, 581946, this.props)} />
-              <ShowHideSection content={buildSection(0, 581946, this.props)} />
-              <ShowHideSection content={buildSection(0, 581946, this.props)} />
-              <ShowHideSection content={buildSection(0, 581946, this.props)} />
-              <ShowHideSection content={buildSection(0, 581946, this.props)} />
-              <ShowHideSection content={buildSection(0, 581946, this.props)} />
-              <ShowHideSection content={buildSection(0, 581946, this.props)} />
-              <ShowHideSection content={buildSection(0, 581946, this.props)} />
+              {printShowHideSections(this.props.markdown)}
             </div>
           </section>
         </div>

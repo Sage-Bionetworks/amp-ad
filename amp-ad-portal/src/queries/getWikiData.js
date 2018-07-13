@@ -27,6 +27,7 @@ function getWikiData(wikiId, token) {
 const getMarkdown = (props, wikiNumber, name = "wikiMarkdown") => {
   //props.handleChanges("wikiMarkdown", "")
   getWikiData(wikiNumber, props.token.sessionToken).then((data) => {
+    console.log(data.markdown)
     props.handleChanges(name, data.markdown)
   })
 }

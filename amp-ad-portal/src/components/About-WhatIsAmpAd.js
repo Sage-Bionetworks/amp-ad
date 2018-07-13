@@ -1,11 +1,12 @@
 import React, { Component } from "react"
+import PropTypes from "prop-types"
+import { getMarkdown } from "../queries/getWikiData"
 
-import { getMarkdownSegment } from "../queries/getWikiData"
-import { buildSection } from "../model/HandleMarkdown"
+const ReactMarkdown = require("react-markdown")
 
 class WhatIsAmpAD extends Component {
   componentDidMount() {
-    getMarkdownSegment(this.props, "581933", "researchPublications")
+    getMarkdown(this.props, "581895")
   }
 
   render() {
@@ -22,13 +23,15 @@ Content...
               </p>
             </div>
           </section>
-          <section className="row center-xs researchers-content">
-            <div className="col-xs-12 col-sm-9" />
-          </section>
+          <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
         </div>
       </div>
     )
   }
+}
+
+WhatIsAmpAD.propTypes = {
+  markdown: PropTypes.string.isRequired,
 }
 
 export default WhatIsAmpAD

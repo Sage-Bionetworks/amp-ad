@@ -1,11 +1,12 @@
 import React, { Component } from "react"
+import PropTypes from "prop-types"
 
 import { getMarkdownSegment } from "../queries/getWikiData"
-import { buildSection } from "../model/HandleMarkdown"
+import { printSections } from "../model/HandleMarkdown"
 
 class Studies extends Component {
   componentDidMount() {
-    getMarkdownSegment(this.props, "581933", "researchPublications")
+    getMarkdownSegment(this.props, "581938", "studies")
   }
 
   render() {
@@ -23,12 +24,18 @@ Content...
             </div>
           </section>
           <section className="row center-xs researchers-content">
-            <div className="col-xs-12 col-sm-9" />
+            <div className="col-xs-12 col-sm-9">
+              {printSections(this.props.markdown, this.props)}
+            </div>
           </section>
         </div>
       </div>
     )
   }
+}
+
+Studies.propTypes = {
+  markdown: PropTypes.array.isRequired,
 }
 
 export default Studies
