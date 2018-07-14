@@ -39,14 +39,14 @@ class SearchBar extends Component {
 View data by
               </h2>
             </div>
-            <div className="col-xs-12 col-sm-3">
+            <div className="col-xs-12 col-sm-4">
               {this.generateSelectionDropdown(
                 this.props.speciesSelectionOptions,
                 "speciesDropdownSelection",
                 this.props.speciesSelection,
               )}
             </div>
-            <div className="col-xs-12 col-sm-3">
+            <div className="col-xs-12 col-sm-4">
               {this.generateSelectionDropdown(
                 this.props.diagnosesSelectionOptions,
                 "diagnosesDropdownSelection",

@@ -332,6 +332,8 @@ section.welcome {
 section.pie-charts-welcome {
   background-color: #F5F5F5;
   padding-top: 0px; }
+  section.pie-charts-welcome .wide-row {
+    width: 100%; }
   section.pie-charts-welcome h1 {
     font-weight: 300;
     font-size: 42px; }
@@ -417,7 +419,8 @@ section.searchbar {
     display: none; }
   section.searchbar h2 {
     margin: 0px;
-    line-height: 56px; }
+    line-height: 56px;
+    text-align: right; }
   section.searchbar form {
     margin: 0px auto;
     width: 100%; }

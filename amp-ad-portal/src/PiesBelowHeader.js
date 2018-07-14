@@ -89,7 +89,71 @@ const colorsAssays = [
 ]
 
 class PiesBelowHeader extends Component {
-  componentDidUpdate() {}
+  openUrl = (event, link) => {
+    event.preventDefault
+    window.open(link, "_blank")
+  };
+
+  buttonsRow = () => {
+    return (
+      <div className="row wide-row around-xs center-xs">
+        <div className="col-sm-4">
+          <button
+            type="button"
+            className="pie-counts-button btn"
+            onClick={event => this.openUrl(
+              event,
+              "https://www.synapse.org/#!Synapse:syn2580853/wiki/409853",
+            )
+            }
+          >
+            Browse by Study
+          </button>
+        </div>
+        <div className="col-sm-4">
+          <button
+            type="button"
+            className="pie-counts-button btn"
+            onClick={event => this.openUrl(
+              event,
+              "https://www.synapse.org/#!Synapse:syn2580853/wiki/493203",
+            )
+            }
+          >
+            Browse by Assay
+          </button>
+        </div>
+        <div className="col-sm-4">
+          <button
+            type="button"
+            className="pie-counts-button btn"
+            onClick={event => this.openUrl(
+              event,
+              "https://www.synapse.org/#!Synapse:syn2580853/wiki/493204",
+            )
+            }
+          >
+            Browse by Tissue
+          </button>
+        </div>
+      </div>
+    )
+  };
+
+  makeButton = (label) => {
+    return (
+      <button
+        type="button"
+        className="pie-counts-button btn"
+        name={this.props.speciesSelection}
+        onClick={this.buildLinkToLocation}
+      >
+        {this.props.speciesSelection === "All species"
+          ? `See all ${label}s`
+          : `See all ${this.props.speciesSelection} ${label}s`}
+      </button>
+    )
+  };
 
   getCountsList = (columnName) => {
     const countsList = this.props.pageData[columnName].facetValues
@@ -106,7 +170,6 @@ class PiesBelowHeader extends Component {
 
   printTotalCounts = (listArray) => {
     let counts = []
-    // console.log(listArray)
     listArray.forEach((element, index) => {
       counts.push(element.count)
     })
@@ -130,7 +193,6 @@ class PiesBelowHeader extends Component {
 
     const list = listArray.map((element, index) => {
       if (index >= 0 && index < 3) {
-        // console.log(element);
         return (
           <div className="pie-list row middle-xs" key={element[dataType]}>
             <div
@@ -253,16 +315,6 @@ Biosamples
           <div className="pie-counts-list">
             {this.printCountsList(this.getCountsList(dataType), dataType)}
           </div>
-          <button
-            type="button"
-            className="pie-counts-button btn"
-            name={this.props.speciesSelection}
-            onClick={this.buildLinkToLocation}
-          >
-            {this.props.speciesSelection === "All species"
-              ? `See all ${label}s`
-              : `See all ${this.props.speciesSelection} ${label}s`}
-          </button>
         </div>
       )
     }
@@ -286,6 +338,7 @@ Biosamples
             )}
           </div>
         </div>
+        {this.buttonsRow()}
       </section>
     )
   }

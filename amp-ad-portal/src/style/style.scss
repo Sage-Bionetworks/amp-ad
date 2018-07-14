@@ -442,6 +442,9 @@ section.welcome {
 section.pie-charts-welcome {
   background-color: $gray;
   padding-top: 0px;
+	.wide-row {
+		width: 100%;
+	}
   h1{
     font-weight: 300;
     font-size: 42px;
@@ -545,6 +548,7 @@ section.searchbar {
 	h2 {
 		margin: 0px;
     line-height: 56px;
+    text-align: right;
 	}
 	padding: 20px;
 	form { 
