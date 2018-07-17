@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import { HashRouter as Router, Route } from "react-router-dom"
 
 // non component js
 import study from "./defaultData/Study"
