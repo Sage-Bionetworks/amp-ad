@@ -14,7 +14,11 @@ const computingCloud = require("./images/computing-cloud.svg")
 
 const Home = props => (
   <div>
-    <Welcome />
+    <Welcome
+      markdown={props.welcomeHeaderMarkdown}
+      token={props.token}
+      handleChanges={props.handleChanges}
+    />
     <SearchBar
       setDiagnosisMenu={props.setDiagnosesMenu}
       speciesSelection={props.speciesDropdownSelection}

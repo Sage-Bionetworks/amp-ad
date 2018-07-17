@@ -1,12 +1,7 @@
 import React, { Component } from "react"
 
-import { getMarkdownSegment } from "../queries/getWikiData"
-import { buildSection } from "../model/HandleMarkdown"
-
 class Agora extends Component {
-  componentDidMount() {
-    getMarkdownSegment(this.props, "581933", "researchPublications")
-  }
+  componentDidMount() {}
 
   render() {
     return (

@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 
 import { getMarkdownSegment } from "../queries/getWikiData"
-import { buildSection } from "../model/HandleMarkdown"
 
 class People extends Component {
   componentDidMount() {

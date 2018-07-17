@@ -33,27 +33,27 @@ class SearchBar extends Component {
     return (
       <section className="row searchbar">
         <form className="searchbar-form col-sm-10 col-md-10">
-          <div className="row between-xs">
-            <div className="col-xs-3 col-sm-2">
+          <div className="row around-xs">
+            <div className="col-xs-12 col-sm-3">
               <h2 className="dropdown-description">
 View data by
               </h2>
             </div>
-            <div className="col-xs-3 col-sm-3">
+            <div className="col-xs-12 col-sm-4">
               {this.generateSelectionDropdown(
                 this.props.speciesSelectionOptions,
                 "speciesDropdownSelection",
                 this.props.speciesSelection,
               )}
             </div>
-            <div className="col-xs-3 col-sm-3">
+            <div className="col-xs-12 col-sm-4">
               {this.generateSelectionDropdown(
                 this.props.diagnosesSelectionOptions,
                 "diagnosesDropdownSelection",
                 this.props.diagnosesSelection,
               )}
             </div>
-            <div className="col-xs-3 col-sm-1 search-icon-box">
+            <div className="hidden col-xs-3 col-sm-1 search-icon-box">
               <img
                 src={require("./images/search.svg")}
                 alt="search magnifying glass icon"
@@ -63,7 +63,7 @@ View data by
                 Search
               </a>
             </div>
-            <div className="col-xs-3 col-sm-1 search-icon-box">
+            <div className="hidden col-xs-3 col-sm-1 search-icon-box">
               <img
                 src={require("./images/filter.svg")}
                 alt="coffee filter icon"

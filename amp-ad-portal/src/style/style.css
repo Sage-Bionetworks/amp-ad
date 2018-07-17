@@ -7,6 +7,10 @@ html, body {
   max-width: 100%;
   overflow-x: hidden; }
 
+section div.row {
+  max-width: 920px;
+  margin: 0px auto; }
+
 h1 {
   font-size: 30px; }
 
@@ -77,7 +81,7 @@ button:hover, select:hover {
   color: #1A1C29;
   font-size: 20px;
   font-weight: 600;
-  background-color: #F5F5F5;
+  background-color: #EDEDED;
   border: none;
   border-radius: 24px;
   width: fit-content;
@@ -86,7 +90,10 @@ button:hover, select:hover {
   transition: all .3s ease-in-out; }
 
 .btn-light:hover {
-  background-color: gainsboro; }
+  background-color: #f5f5f5; }
+
+.btn-light:active {
+  background-color: #E3E1E1; }
 
 div.row.amp-ad {
   max-width: 100%;
@@ -140,6 +147,9 @@ header.header {
   background: white;
   z-index: 1;
   box-shadow: 0 1px 5px 0 #808080; }
+  @media screen and (max-width: 1023px) {
+    header.header {
+      max-height: fit-content; } }
   header.header img {
     transition: all 200ms ease;
     max-height: 100px; }
@@ -170,10 +180,17 @@ header.header.squish {
     max-height: 35px; }
 
 .hidden {
-  display: none;
+  display: none !important;
   height: 0px;
   width: 0px; }
 
+@media screen and (max-width: 767px) {
+  header .nav-buttons {
+    background-color: white; } }
+header .nav-buttons nav.row {
+  padding: 0px; }
+header .nav li {
+  margin: 0px 20px; }
 header .menu-wall {
   position: absolute;
   height: 100vh;
@@ -202,6 +219,8 @@ header .accordion {
     padding: 15px 0px; }
     header .accordion .accordion__title .row {
       padding-left: 10px; }
+  header .accordion .accordion__title.link, header .accordion .about-dropdown .accordion__title {
+    padding: 0px; }
 header .accordion-title.top-level-accordion {
   padding: 0px;
   font-weight: 500;
@@ -215,7 +234,11 @@ header .accordion__body {
   header .accordion__body li {
     margin: 0px;
     padding: 10px;
-    padding-left: 40px; }
+    padding-left: 0px; }
+    header .accordion__body li a.nav-item.dropdown {
+      padding: 10px 20px;
+      width: 100%;
+      font-size: 15px; }
 header .accordion__body li:hover {
   background-color: #f4f4f4; }
 header .accordion-body.top-level-accordion {
@@ -231,6 +254,11 @@ header .about-dropdown .top-level-accordion-item .accordion-body.top-level-accor
   margin: auto;
   top: 37px;
   right: 20px; }
+@media screen and (max-width: 1105px) {
+  header .about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
+    right: 10px; }
+  header .nav li {
+    margin: 0px 10px; } }
 header .accordion__body {
   background: white;
   text-align: left; }
@@ -240,8 +268,14 @@ header .accordion__title {
   background-color: #e3e3e3; }
 header .accordion-title[aria-selected="true"] a {
   background: #e3e3e3; }
-header .accordion-sub-title {
-  padding-left: 12px; }
+header .accordion-sub-title, header .about-dropdown .accordion-sub-title .nav-item {
+  padding-left: 12px;
+  font-size: 15px;
+  width: 100%; }
+  header .accordion-sub-title a, header .accordion-sub-title a.nav-item.dropdown, header .about-dropdown .accordion-sub-title .nav-item a, header .about-dropdown .accordion-sub-title .nav-item a.nav-item.dropdown {
+    width: 100%;
+    padding: 15px 15px 15px 0px;
+    display: inline-block; }
 header .accordion-body[aria-hidden="true"] {
   display: none; }
 header .accordion__title:hover {
@@ -283,10 +317,23 @@ section.welcome {
       margin: 15px 0px; }
   section.welcome .btn-light {
     margin-top: 10px; }
+  @media screen and (max-width: 1023px) {
+    section.welcome .welcome-message {
+      padding: 50px 0px 50px 100px; }
+    section.welcome .welcome-data {
+      padding: 107px 30px;
+      right: -50px; } }
+  @media screen and (max-width: 914px) {
+    section.welcome {
+      padding-top: 60px; }
+      section.welcome .welcome-message {
+        padding: 0px; } }
 
 section.pie-charts-welcome {
   background-color: #F5F5F5;
   padding-top: 0px; }
+  section.pie-charts-welcome .wide-row {
+    width: 100%; }
   section.pie-charts-welcome h1 {
     font-weight: 300;
     font-size: 42px; }
@@ -372,7 +419,8 @@ section.searchbar {
     display: none; }
   section.searchbar h2 {
     margin: 0px;
-    line-height: 56px; }
+    line-height: 56px;
+    text-align: right; }
   section.searchbar form {
     margin: 0px auto;
     width: 100%; }
@@ -446,7 +494,7 @@ section.programs .box {
   min-width: 215px;
   max-width: 215px;
   height: 448px;
-  margin: 10px; }
+  margin: 10px 5px; }
   section.programs .box .btn {
     width: 142px; }
   section.programs .box .box-text-image p {
@@ -535,6 +583,10 @@ section.child-page-hero {
     font-size: 30px;
     color: white; }
 
+section.about-intro-section a {
+  color: #4C57A2;
+  font-size: 18px;
+  text-decoration: underline; }
 section.about-intro-section div.col-sm-9 {
   padding: 0px;
   max-width: 920px; }
@@ -674,5 +726,14 @@ p.researcher-bio {
   max-height: 178px; }
 .researchers-content .div {
   max-width: 920px; }
+
+.experimental-resource, .row.publication {
+  position: relative; }
+  .experimental-resource .border-bottom, .row.publication .border-bottom {
+    border-bottom: 1px solid black;
+    width: 100vw;
+    position: absolute;
+    top: 100%;
+    margin-left: 8px; }
 
 /*# sourceMappingURL=style.css.map */

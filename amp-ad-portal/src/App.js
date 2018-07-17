@@ -58,8 +58,12 @@ class App extends Component {
     speciesDropdownSelection: "All species",
     diagnosesDropdownSelection: "All diagnoses",
     wikiMarkdown: "",
+    welcomeHeaderMarkdown: "",
     externalResearchers: [],
     researchPublications: [],
+    studies: [],
+    differentialExpressions: [],
+    experimentalResources: [],
   };
 
   componentDidMount() {
@@ -268,7 +272,6 @@ class App extends Component {
   };
 
   handleNestedChanges = (KEY, newStateKey, newState) => {
-    console.log(KEY)
     const property = this.state[KEY]
     property.push({ [newStateKey]: newState })
     this.setState(prevState => ({
@@ -323,6 +326,9 @@ class App extends Component {
       speciesSelectionOptions={this.getSpeciesDropdownOptions(
         this.props.appData,
       )}
+      welcomeHeaderMarkdown={this.state.welcomeHeaderMarkdown}
+      token={this.props.loginToken}
+      handleChanges={this.handleChanges}
       speciesDropdownSelection={this.state.speciesDropdownSelection}
       diagnosesSelectionOptions={this.state.diagnosesSelectionOptions}
       diagnosesDropdownSelection={this.state.diagnosesDropdownSelection}
@@ -428,7 +434,7 @@ class App extends Component {
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.researchPublications}
+        markdown={this.state.experimentalResources}
       />
     )
   };
@@ -450,7 +456,7 @@ class App extends Component {
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.researchPublications}
+        markdown={this.state.differentialExpressions}
       />
     )
   };
@@ -461,7 +467,7 @@ class App extends Component {
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.researchPublications}
+        markdown={this.state.wikiMarkdown}
       />
     )
   };
@@ -472,7 +478,7 @@ class App extends Component {
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.researchPublications}
+        markdown={this.state.wikiMarkdown}
       />
     )
   };
@@ -483,7 +489,7 @@ class App extends Component {
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.researchPublications}
+        markdown={this.state.wikiMarkdown}
       />
     )
   };
