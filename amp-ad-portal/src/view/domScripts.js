@@ -4,10 +4,10 @@ const setActiveNavigation = () => {
   const navItems = document.querySelectorAll(".nav li a.main-nav-item")
   navItems.forEach((element) => {
     element.classList.remove("active")
-    if (window.location.pathname.includes(element.innerHTML)) {
+    if (window.location.href.includes(element.innerHTML)) {
       element.classList.add("active")
     }
-    if (window.location.pathname === "/" && element.innerHTML === "Home") {
+    if (window.location.hash === "#/" && element.innerHTML === "Home") {
       element.classList.add("active")
     }
   })

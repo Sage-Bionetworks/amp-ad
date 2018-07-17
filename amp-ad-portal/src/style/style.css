@@ -117,6 +117,8 @@ div.row.amp-ad {
     font-size: 20px; }
   .nav a.nav-item.active {
     font-weight: bold; }
+  .nav .top-level-accordion-item.active a.main-nav-item {
+    font-weight: bold; }
 
 .title-row {
   padding: 20px 0px; }

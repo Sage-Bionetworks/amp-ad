@@ -19,8 +19,13 @@ class Header extends Component {
       Research: false,
       Resources: false,
       About: false,
+      Home: false,
       Open: false,
     }
+  }
+
+  componentDidMount() {
+    setActiveNavigation()
   }
 
   componentDidUpdate() {
@@ -32,6 +37,7 @@ class Header extends Component {
       Research: false,
       Resources: false,
       About: false,
+      Home: false,
     })
   };
 
@@ -409,7 +415,7 @@ Programs
         <div className="nav-buttons col-xs-12 col-sm-8 col-md-7">
           <ul className="nav row end-sm center-xs">
             <li>
-              <Link to="/" className="main-nav-item nav-item active">
+              <Link to="/" className="main-nav-item nav-item home">
                 Home
               </Link>
             </li>
