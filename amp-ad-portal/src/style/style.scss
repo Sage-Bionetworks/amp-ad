@@ -185,6 +185,8 @@ section {
 	margin: 0px auto;
 }
 
+.content-row {}
+
 header.header {
   padding: 25px 50px;
 	max-height: 105px;
@@ -652,7 +654,7 @@ section.programs {
     min-width: 215px;
     max-width: 215px;
     height: 448px;
-    margin: 10px;
+    margin: 10px 5px;
     .box-text-image p {
       font-size: 14px;
       font-weight: 400;
@@ -748,6 +750,11 @@ section.child-page-hero {
 }
 
 section.about-intro-section {
+  a {
+    color: $bluePurple;
+    font-size: 18px;
+    text-decoration: underline;
+  }
 	div.col-sm-9 {
 		padding: 0px;
 		max-width: 920px;
@@ -936,7 +943,7 @@ p.researcher-bio {
 }
 
 //// experimental resources /////
-.experimental-resource {
+.experimental-resource, .row.publication {
   position: relative;
   .border-bottom {
     border-bottom: 1px solid black;

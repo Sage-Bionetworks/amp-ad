@@ -90,7 +90,7 @@ const colorsAssays = [
 
 class PiesBelowHeader extends Component {
   openUrl = (event, link) => {
-    event.preventDefault
+    event.preventDefault()
     window.open(link, "_blank")
   };
 

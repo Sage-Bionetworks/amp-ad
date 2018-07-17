@@ -494,7 +494,7 @@ section.programs .box {
   min-width: 215px;
   max-width: 215px;
   height: 448px;
-  margin: 10px; }
+  margin: 10px 5px; }
   section.programs .box .btn {
     width: 142px; }
   section.programs .box .box-text-image p {
@@ -583,6 +583,10 @@ section.child-page-hero {
     font-size: 30px;
     color: white; }
 
+section.about-intro-section a {
+  color: #4C57A2;
+  font-size: 18px;
+  text-decoration: underline; }
 section.about-intro-section div.col-sm-9 {
   padding: 0px;
   max-width: 920px; }
@@ -723,9 +727,9 @@ p.researcher-bio {
 .researchers-content .div {
   max-width: 920px; }
 
-.experimental-resource {
+.experimental-resource, .row.publication {
   position: relative; }
-  .experimental-resource .border-bottom {
+  .experimental-resource .border-bottom, .row.publication .border-bottom {
     border-bottom: 1px solid black;
     width: 100vw;
     position: absolute;
