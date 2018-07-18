@@ -445,7 +445,7 @@ class App extends Component {
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.researchPublications}
+        markdown={this.state.studies}
       />
     )
   };
