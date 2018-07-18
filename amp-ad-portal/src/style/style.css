@@ -738,4 +738,17 @@ p.researcher-bio {
     top: 100%;
     margin-left: 8px; }
 
+.researchers-content .studies-section .content.hide {
+  max-height: 146px; }
+.researchers-content .studies-section .expand-section {
+  margin-bottom: 10px; }
+  .researchers-content .studies-section .expand-section.hide {
+    max-height: 146px; }
+
+.researchers-content div.row.study-overview {
+  margin-bottom: 35px; }
+
+.studies-section .content {
+  overflow-x: hidden; }
+
 /*# sourceMappingURL=style.css.map */

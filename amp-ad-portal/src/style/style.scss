@@ -957,3 +957,32 @@ p.researcher-bio {
     margin-left: 8px;
   }
 }
+
+//.studies-section p, .studies-section ul {
+  //display: inline;
+//}
+
+.researchers-content .studies-section {
+  .content {
+    &.hide {
+      max-height: 146px;
+    }
+  }
+  .expand-section {
+    &.hide {
+      max-height: 146px;
+    }
+    margin-bottom: 10px;
+  }
+}
+
+.researchers-content {
+  div.row.study-overview {
+    margin-bottom: 35px;
+  }
+}
+
+.studies-section .content {
+  overflow-x: hidden;
+}
+

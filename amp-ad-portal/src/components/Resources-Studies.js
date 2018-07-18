@@ -19,8 +19,10 @@ class Studies extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      payload: { references: [] },
+      payloadStudy: { references: [] },
+      payloadAssay: { references: [] },
       studiesNames: [],
+      assayNames: [],
       tableData: {},
       wikiIds: [],
     }
@@ -29,45 +31,40 @@ class Studies extends Component {
   componentDidMount() {
     getTable("syn9886254", this.props.token, "SELECT * FROM syn9886254")
       .then((response) => {
-        //console.log(response)
-        const payload = this.assembleEntityHeaderPayload(response)
-        this.setState({ payload, tableData: response })
+        const payloadStudy = this.assembleEntityHeaderPayload(response, 4)
+        const payloadAssay = this.assembleEntityHeaderPayload(response, 5)
+        this.setState({ payloadStudy, tableData: response })
       })
       .then(() => {
-        if (this.state.payload.references.length > 0) {
+        if (this.state.payloadStudy.references.length > 0) {
           getEntityHeader(
             this.props.token.sessionToken,
-            this.state.payload,
+            this.state.payloadStudy,
           ).then((results) => {
             this.setState({
               studiesNames: results.results,
             })
           })
         }
+        //if (this.state.payloadAssay.references.length > 0) {
+        //getEntityHeader(
+        //this.props.token.sessionToken,
+        //this.state.payloadAssay,
+        //).then((results) => {
+        //this.setState({
+        //studiesNames: results.results,
+        //})
+        //})
+        //}
       })
       .then(() => {
         this.getWikiIdsAndMarkdown(
           this.state.tableData.queryResult.queryResults.rows,
         )
       })
-    //.then(() => {
-    //console.log("lolwat")
-    //asyncForEach(this.state.wikiIds, async (idObject) => {
-    //await waitFor(50)
-    //console.log(idObject[Object.keys()[0]].wikiPageId)
-
-    //getMarkdownSegment(
-    //this.props,
-    //idObject[Object.keys()[0]].wikiPageId,
-    //"studies",
-    //)
-    //})
-    //})
   }
 
-  componentDidUpdate() {
-    //console.log(this.state.studiesNames, this.state.tableData)
-  }
+  componentDidUpdate() {}
 
   getWikiIdsAndMarkdown = async (tableData) => {
     const wikiIdsArr = []
@@ -82,20 +79,23 @@ class Studies extends Component {
             result.ownerObjectId,
           )
           wikiIdsArr.push({ [row.values[4]]: result })
+          this.setState({
+            wikiIds: [...this.state.wikiIds, { [row.values[4]]: result }],
+          })
         },
       )
-    }).then(() => {
-      this.setState({
-        wikiIds: wikiIdsArr,
-      })
+      //}).then(() => {
+      //this.setState({
+      //wikiIds: wikiIdsArr,
+      //})
     })
   };
 
-  assembleEntityHeaderPayload = (tableResponse) => {
+  assembleEntityHeaderPayload = (tableResponse, index) => {
     const payload = { references: [] }
     tableResponse.queryResult.queryResults.rows.forEach((row) => {
       payload.references.push({
-        targetId: row.values[4],
+        targetId: row.values[index],
         targetVersionNumber: 1,
       })
     })
@@ -106,7 +106,7 @@ class Studies extends Component {
     // studiesNames has id: "synId" and name: ""
     // wikiIds
     // syn9702085: { ownerObjectId: "syn9702085", ownerObjectType: "ENTITY", wikiPageId: "425119" };
-    if (wikiIds.length > 50) {
+    if (wikiIds.length > 5) {
       return wikiIds.map((element) => {
         //console.log(element[Object.keys()[0]])
         const synElement = element[Object.keys(element)[0]]
@@ -133,13 +133,13 @@ class Studies extends Component {
             return row.values[4] === synId
           },
         )
-        console.log(objectData)
+        //console.log(objectData)
 
         return (
           <div className="row">
             <div className="col-xs-12">
               <div className="row">
-                <div className="col-xs-12">
+                <div className="col-xs-12 studies-section">
                   <h2>
                     {title}
                   </h2>
@@ -148,7 +148,7 @@ class Studies extends Component {
                   />
                 </div>
               </div>
-              <div className="row">
+              <div className="row study-overview">
                 <div className="col-sm-3">
                   <ul>
                     <li>
@@ -198,7 +198,11 @@ Data Types
 Studies
               </h2>
               <p>
-Content...
+                Researchers include members of all programs as well as external
+                contributors. Research of this program was seeded by program
+                specific research and expanded on by Consortia level research
+                involving collaborations across consortia and external research
+                performed by researchers reusing the AMP-AD portal resources.
               </p>
             </div>
           </section>
