@@ -24,6 +24,26 @@ function getWikiData(wikiId, token, synId = "syn12666371") {
     .catch(handleErrors)
 }
 
+const getWikiKey = (token, synId) => {
+  return fetch(
+    `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikikey`,
+    {
+      method: "GET",
+      headers: {
+        sessionToken: token,
+      },
+    },
+  )
+    .then((data) => {
+      return data.json()
+    })
+    .then((processedData) => {
+      //console.log(processedData)
+      return processedData
+    })
+    .catch(handleErrors)
+}
+
 const getWikiHeaderTree = (token, synId) => {
   return fetch(
     `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikiheadertree`,
@@ -44,21 +64,24 @@ const getWikiHeaderTree = (token, synId) => {
     .catch(handleErrors)
 }
 
-const getEntityHeader = (token, id) => {
+const getEntityHeader = (token, payload) => {
+  //console.log(JSON.stringify(payload))
   return fetch(
-    `https://repo-prod.prod.sagebase.org/repo/v1/entity/${id}/type`,
+    //`https://repo-prod.prod.sagebase.org/repo/v1/entity/${id}/type`,
+    "https://repo-prod.prod.sagebase.org/repo/v1/entity/header",
     {
-      method: "GET",
+      method: "POST",
       headers: {
+        "Content-Type": "application/json",
         sessionToken: token,
       },
+      body: JSON.stringify(payload),
     },
   )
     .then((data) => {
       return data.json()
     })
     .then((processedData) => {
-      console.log(processedData)
       return processedData
     })
     .catch(handleErrors)
@@ -74,8 +97,13 @@ const getMarkdown = (props, wikiNumber, name = "wikiMarkdown") => {
     .catch(handleErrors)
 }
 
-const getMarkdownSegment = (props, newStateKey, stateKey) => {
-  return getWikiData(newStateKey, props.token.sessionToken)
+const getMarkdownSegment = (
+  props,
+  newStateKey,
+  stateKey,
+  synId = "syn12666371",
+) => {
+  return getWikiData(newStateKey, props.token.sessionToken, synId)
     .then((data) => {
       props.handleNestedChanges(stateKey, newStateKey, data.markdown)
     })
@@ -107,7 +135,15 @@ const getWikiMarkdownSegments = (wikiId, stateKey, props, synId) => {
   })
 }
 
+const removeMarkdownDivWrapper = (markdown) => {
+  let markdownString = markdown
+  markdownString = markdownString.substr(10)
+  markdownString = markdownString.substr(0, markdownString.length - 12)
+  return markdownString
+}
+
 export {
+  removeMarkdownDivWrapper,
   getWikiData,
   getMarkdown,
   getMarkdownSegment,
@@ -115,4 +151,7 @@ export {
   getWikiMarkdownSegments,
   getSubPageHeaders,
   getEntityHeader,
+  getWikiKey,
+  waitFor,
+  asyncForEach,
 }

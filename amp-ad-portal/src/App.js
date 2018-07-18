@@ -59,6 +59,7 @@ class App extends Component {
     diagnosesDropdownSelection: "All diagnoses",
     wikiMarkdown: "",
     welcomeHeaderMarkdown: "",
+    welcomeHeaderMarkdownText: "",
     externalResearchers: [],
     researchPublications: [],
     studies: [],
@@ -327,6 +328,7 @@ class App extends Component {
         this.props.appData,
       )}
       welcomeHeaderMarkdown={this.state.welcomeHeaderMarkdown}
+      welcomeHeaderMarkdownText={this.state.welcomeHeaderMarkdownText}
       token={this.props.loginToken}
       handleChanges={this.handleChanges}
       speciesDropdownSelection={this.state.speciesDropdownSelection}
@@ -402,6 +404,19 @@ class App extends Component {
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
         markdown={this.state.researchPublications}
+        setDiagnosesMenu={this.setDiagnosesMenu}
+        speciesSelectionOptions={this.getSpeciesDropdownOptions(
+          this.props.appData,
+        )}
+        speciesDropdownSelection={this.state.speciesDropdownSelection}
+        diagnosesSelectionOptions={this.state.diagnosesSelectionOptions}
+        diagnosesDropdownSelection={this.state.diagnosesDropdownSelection}
+        toggleSeeAll={this.toggleSeeAll}
+        getSum={this.getSum}
+        getColumnCountForSpecies={this.getColumnCountForSpecies}
+        pageData={this.state.pageData}
+        handleChangeEvent={this.handleChangeEvent}
+        handleReactDropdownEvent={this.handleReactDropdownEvent}
       />
     )
   };
@@ -423,7 +438,7 @@ class App extends Component {
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.researchPublications}
+        markdown={this.state.wikiMarkdown}
       />
     )
   };
@@ -445,7 +460,7 @@ class App extends Component {
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.researchPublications}
+        markdown={this.state.studies}
       />
     )
   };
@@ -456,7 +471,7 @@ class App extends Component {
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.differentialExpressions}
+        markdown={this.state.wikiMarkdown}
       />
     )
   };
@@ -576,26 +591,15 @@ class App extends Component {
           </div>
 
           <footer className="row center-xs middle-xs">
-            <div className="col-xs-12 col-sm-1">
-              <a href="/">
-Forum
-              </a>
-            </div>
-            <div className="col-xs-12 col-sm-1">
-              <a href="/">
+            <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
+              Forum
+            </a>
+            <a href="mailto:ampadportal@sagebionetworks.org">
 Contact
-              </a>
-            </div>
-            <div className="col-xs-12 col-sm-1">
-              <a href="/">
-Help
-              </a>
-            </div>
-            <div className="col-xs-12 col-sm-2">
-              <a href="/">
+            </a>
+            <a href="/">
 Terms & Privacy
-              </a>
-            </div>
+            </a>
           </footer>
         </div>
       </Router>

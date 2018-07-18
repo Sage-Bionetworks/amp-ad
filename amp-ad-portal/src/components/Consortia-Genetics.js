@@ -18,16 +18,10 @@ class ConsortiaGenetics extends Component {
               <h2>
 ConsortiaGenetics
               </h2>
-              <p>
-Content...
-              </p>
+              <p />
             </div>
           </section>
-          <section className="row center-xs researchers-content">
-            <div className="col-xs-12 col-sm-9">
-              <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
-            </div>
-          </section>
+          <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
         </div>
       </div>
     )

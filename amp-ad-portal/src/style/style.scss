@@ -12,7 +12,9 @@ $textPurple: #5A478F;
 $darkPurple: #5A498D; 
 $lightPurple: #B4C6F9;
 $mustard: #FCCB6F;
+$gold: #FCCB71;
 $gray: #F5F5F5;
+$textGray: #BCC0CA;
 
 @mixin circle($size){
   width: $size;
@@ -45,12 +47,39 @@ p {
 }
 
 a {
+	color: $textPurple;
+	text-decoration: none;
+}
+
+header a {
 	color: black;
 	text-decoration: none;
 }
 
+.child-page-hero a, .welcome a {
+  color: white;
+  text-decoration: underline;
+}
+
 li {
 	list-style: none;	
+}
+
+span.jumbo {
+  font-size: 42px;
+  height: 50px;
+  color: $textGray;
+  position: absolute;
+  display: inline-block;
+  margin: auto;
+  top: 20px; left: -50px; bottom: 0; right: 0;
+}
+
+ul.jumbo-list {
+  li {
+    list-style: none;
+  }
+  position: relative;
 }
 
 select {
@@ -190,6 +219,23 @@ section {
 }
 
 .content-row {}
+
+section.beta-banner {
+  background-color: $gold;
+  text-align: center;
+  button {
+    display: inline;
+    margin-right: 25px;
+  }
+  a {
+    text-decoration: underline;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 400;
+    display: inline;
+  }
+}
 
 header.header {
   padding: 25px 50px;
@@ -395,6 +441,8 @@ footer {
 	a {
 		color: white;
 		margin: 10px;
+    display: inline-block;
+    margin: 0px 15px;
 	}
 }
 
@@ -753,7 +801,8 @@ section.child-page-hero {
 	background: linear-gradient( to right, $darkPurple, $bluePurple );
 }
 
-section.about-intro-section {
+section.about-intro-section, section.content-section {
+  text-align: left;
   a {
     color: $bluePurple;
     font-size: 18px;
@@ -762,6 +811,7 @@ section.about-intro-section {
 	div.col-sm-9 {
 		padding: 0px;
 		max-width: 920px;
+    text-align: left;
 	}
 	p {
 		font-size: 18px; 
@@ -785,6 +835,11 @@ section.about-intro-section {
     line-height: 24px;
 		margin: 5px 0px;
 	}
+  ul.jumbo-list li {
+    list-style: none;
+    position: relative;
+    padding: 20px 0px;
+  }
 	div.projects {
 		a {
 			display: block;
@@ -799,6 +854,9 @@ section.about-intro-section {
 			line-height: 18px;
 		}
 	}
+  button.btn {
+    margin-top: 20px;
+  }
 }
 
 .about {
@@ -957,3 +1015,32 @@ p.researcher-bio {
     margin-left: 8px;
   }
 }
+
+//.studies-section p, .studies-section ul {
+  //display: inline;
+//}
+
+.researchers-content .studies-section {
+  .content {
+    &.hide {
+      max-height: 146px;
+    }
+  }
+  .expand-section {
+    &.hide {
+      max-height: 146px;
+    }
+    margin-bottom: 10px;
+  }
+}
+
+.researchers-content {
+  div.row.study-overview {
+    margin-bottom: 35px;
+  }
+}
+
+.studies-section .content {
+  overflow-x: hidden;
+}
+

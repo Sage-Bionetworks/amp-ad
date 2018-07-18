@@ -305,13 +305,9 @@ Programs
               <AccordionItemTitle className="accordion__title link">
                 <div className="row between-xs">
                   <div className="col-xs-12 accordion-sub-title">
-                    <Link
-                      name="external researchers"
-                      to="/Resources/Agora"
-                      onClick={this.closeNavigation}
-                    >
-                      Agora
-                    </Link>
+                    <a href="https://agora.ampadportal.org/">
+Agora
+                    </a>
                   </div>
                 </div>
               </AccordionItemTitle>

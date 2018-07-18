@@ -1,7 +1,14 @@
 import React, { Component } from "react"
+import PropTypes from "prop-types"
+
+import { getMarkdown } from "../queries/getWikiData"
+
+const ReactMarkdown = require("react-markdown")
 
 class DataUse extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    getMarkdown(this.props, "576286")
+  }
 
   render() {
     return (
@@ -13,17 +20,22 @@ class DataUse extends Component {
 Data Use Requirements
               </h2>
               <p>
-Content...
+                Data is stored in Synapse, a collaborative research platform. To
+                access the data you&apos;ll create an account on Synapse, accept
+                the data&apos;s terms of use, and agree to acknowledge the data
+                contributors.
               </p>
             </div>
           </section>
-          <section className="row center-xs researchers-content">
-            <div className="col-xs-12 col-sm-9" />
-          </section>
+          <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
         </div>
       </div>
     )
   }
+}
+
+DataUse.propTypes = {
+  markdown: PropTypes.string.isRequired,
 }
 
 export default DataUse

@@ -25,9 +25,7 @@ class ExternalResearchers extends Component {
               <h2>
 External Researchers
               </h2>
-              <p>
-Content...
-              </p>
+              <p />
             </div>
           </section>
           <section className="row center-xs researchers-content">
