@@ -163,6 +163,19 @@ section {
 .content {
   margin: 0px auto; }
 
+section.beta-banner {
+  background-color: #FCCB71;
+  text-align: center; }
+  section.beta-banner button {
+    display: inline;
+    margin-right: 25px; }
+  section.beta-banner a {
+    text-decoration: underline; }
+  section.beta-banner h2 {
+    font-size: 18px;
+    font-weight: 400;
+    display: inline; }
+
 header.header {
   padding: 25px 50px;
   max-height: 105px;
@@ -318,7 +331,9 @@ footer {
   margin-top: 50px; }
   footer a {
     color: white;
-    margin: 10px; }
+    margin: 10px;
+    display: inline-block;
+    margin: 0px 15px; }
 
 section.welcome {
   background: linear-gradient(to right, #5A498D, #4C57A2);

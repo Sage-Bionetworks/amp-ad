@@ -7,6 +7,7 @@ import PiesBelowHeader from "./PiesBelowHeader"
 import Programs from "./Programs"
 import Analyses from "./Analyses"
 import PopularDataRequests from "./PopularDataRequests"
+import BetaHeader from "./components/Beta"
 
 const bellIcon = require("./images/plus-bell-icon.svg")
 const lightBulbIcon = require("./images/lightbulb-on.svg")
@@ -14,6 +15,7 @@ const computingCloud = require("./images/computing-cloud.svg")
 
 const Home = props => (
   <div>
+    <BetaHeader />
     <Welcome
       markdown={props.welcomeHeaderMarkdown}
       markdownText={props.welcomeHeaderMarkdownText}

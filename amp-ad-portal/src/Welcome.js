@@ -18,9 +18,11 @@ class Welcome extends Component {
     return markdownString
   };
 
-  //<button type="button" className="btn-light">
-  //Explore Wall of Targets
-  //</button>
+  openUrl = (event, link) => {
+    event.preventDefault()
+    window.open(link, "_self")
+  };
+
   render() {
     return (
       <section className="row welcome center-xs middle-xs">
@@ -29,6 +31,14 @@ class Welcome extends Component {
 Welcome to the AMP-AD Knowledge Portal
           </h1>
           <ReactMarkdown source={this.props.markdownText} escapeHtml={false} />
+          <button
+            type="button"
+            className="btn-light"
+            onClick={event => this.openUrl(event, "http://agora.ampadportal.org")
+            }
+          >
+            Explore Wall of Targets
+          </button>
         </div>
         <ReactMarkdown
           source={this.props.markdown}

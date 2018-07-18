@@ -12,6 +12,7 @@ $textPurple: #5A478F;
 $darkPurple: #5A498D; 
 $lightPurple: #B4C6F9;
 $mustard: #FCCB6F;
+$gold: #FCCB71;
 $gray: #F5F5F5;
 $textGray: #BCC0CA;
 
@@ -219,6 +220,23 @@ section {
 
 .content-row {}
 
+section.beta-banner {
+  background-color: $gold;
+  text-align: center;
+  button {
+    display: inline;
+    margin-right: 25px;
+  }
+  a {
+    text-decoration: underline;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 400;
+    display: inline;
+  }
+}
+
 header.header {
   padding: 25px 50px;
 	max-height: 105px;
@@ -423,6 +441,8 @@ footer {
 	a {
 		color: white;
 		margin: 10px;
+    display: inline-block;
+    margin: 0px 15px;
 	}
 }
 

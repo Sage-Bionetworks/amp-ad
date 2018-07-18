@@ -591,26 +591,15 @@ class App extends Component {
           </div>
 
           <footer className="row center-xs middle-xs">
-            <div className="col-xs-12 col-sm-1">
-              <a href="/">
-Forum
-              </a>
-            </div>
-            <div className="col-xs-12 col-sm-1">
-              <a href="/">
+            <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
+              Forum
+            </a>
+            <a href="mailto:ampadportal@sagebionetworks.org">
 Contact
-              </a>
-            </div>
-            <div className="col-xs-12 col-sm-1">
-              <a href="/">
-Help
-              </a>
-            </div>
-            <div className="col-xs-12 col-sm-2">
-              <a href="/">
+            </a>
+            <a href="/">
 Terms & Privacy
-              </a>
-            </div>
+            </a>
           </footer>
         </div>
       </Router>

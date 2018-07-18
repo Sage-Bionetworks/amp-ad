@@ -1,5 +1,7 @@
 import React from "react"
 
+import openUrl from "./model/OpenUrl"
+
 const Programs = (props) => {
   return (
     <section className="programs row">
@@ -37,13 +39,8 @@ AMP-AD
             </div>
             <button
               className="btn"
-              onClick={(event) => {
-                event.preventDefault()
-                window.open(
-                  "https://www.synapse.org/#!Synapse:syn2580853/wiki/409849",
-                  "_blank",
-                )
-              }}
+              type="button"
+              onClick={event => openUrl(event, "/#/Research/AMP-AD")}
             >
               View
             </button>
@@ -67,13 +64,8 @@ M2OVE-AD Consortium
             </div>
             <button
               className="btn"
-              onClick={(event) => {
-                event.preventDefault()
-                window.open(
-                  "https://www.synapse.org/#!Synapse:syn2580853/wiki/409849",
-                  "_blank",
-                )
-              }}
+              type="button"
+              onClick={event => openUrl(event, "/#/Research/M2OVE")}
             >
               View
             </button>
@@ -97,13 +89,8 @@ Model AD Program
             </div>
             <button
               className="btn"
-              onClick={(event) => {
-                event.preventDefault()
-                window.open(
-                  "https://www.synapse.org/#!Synapse:syn2580853/wiki/409849",
-                  "_blank",
-                )
-              }}
+              type="button"
+              onClick={event => openUrl(event, "/#/Research/Model-AD")}
             >
               View
             </button>
@@ -127,13 +114,8 @@ Resilience-AD Program
             </div>
             <button
               className="btn"
-              onClick={(event) => {
-                event.preventDefault()
-                window.open(
-                  "https://www.synapse.org/#!Synapse:syn2580853/wiki/409849",
-                  "_blank",
-                )
-              }}
+              type="button"
+              onClick={event => openUrl(event, "/#/Research/Resilience-AD")}
             >
               View
             </button>
