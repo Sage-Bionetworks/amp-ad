@@ -20,9 +20,9 @@ class Studies extends Component {
     super(props)
     this.state = {
       payloadStudy: { references: [] },
-      payloadAssay: { references: [] },
+      //payloadAssay: { references: [] },
       studiesNames: [],
-      assayNames: [],
+      //assayNames: [],
       tableData: {},
       wikiIds: [],
     }
@@ -32,7 +32,7 @@ class Studies extends Component {
     getTable("syn9886254", this.props.token, "SELECT * FROM syn9886254")
       .then((response) => {
         const payloadStudy = this.assembleEntityHeaderPayload(response, 4)
-        const payloadAssay = this.assembleEntityHeaderPayload(response, 5)
+        //const payloadAssay = this.assembleEntityHeaderPayload(response, 5)
         this.setState({ payloadStudy, tableData: response })
       })
       .then(() => {

@@ -1,16 +1,20 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 
-import { getMarkdownSegment } from "../queries/getWikiData"
-import { printSections } from "../model/HandleMarkdown"
+import {
+  getMarkdownSegment,
+  getWikiMarkdownSegments,
+} from "../queries/getWikiData"
+import { printSections, printShowHideSections } from "../model/HandleMarkdown"
 
 class ExperimentalResources extends Component {
   componentDidMount() {
-    getMarkdownSegment(this.props, "581965", "experimentalResources")
-    getMarkdownSegment(this.props, "581965", "experimentalResources")
-    getMarkdownSegment(this.props, "581965", "experimentalResources")
-    getMarkdownSegment(this.props, "581965", "experimentalResources")
-    getMarkdownSegment(this.props, "581965", "experimentalResources")
+    getWikiMarkdownSegments(
+      "576287",
+      "experimentalResources",
+      this.props,
+      "syn12666371",
+    )
   }
 
   render() {

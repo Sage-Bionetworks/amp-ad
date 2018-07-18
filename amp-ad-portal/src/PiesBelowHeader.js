@@ -312,15 +312,15 @@ Biosamples
               />
             </div>
           </div>
-          <div className="pie-counts-list">
-            {this.printCountsList(this.getCountsList(dataType), dataType)}
-          </div>
         </div>
       )
     }
     return ""
   };
 
+  //<div className="pie-counts-list">
+  //{this.printCountsList(this.getCountsList(dataType), dataType)}
+  //</div>
   render() {
     return (
       <section className="pie-charts-welcome row center-xs">

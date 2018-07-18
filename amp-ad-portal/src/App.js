@@ -59,6 +59,7 @@ class App extends Component {
     diagnosesDropdownSelection: "All diagnoses",
     wikiMarkdown: "",
     welcomeHeaderMarkdown: "",
+    welcomeHeaderMarkdownText: "",
     externalResearchers: [],
     researchPublications: [],
     studies: [],
@@ -327,6 +328,7 @@ class App extends Component {
         this.props.appData,
       )}
       welcomeHeaderMarkdown={this.state.welcomeHeaderMarkdown}
+      welcomeHeaderMarkdownText={this.state.welcomeHeaderMarkdownText}
       token={this.props.loginToken}
       handleChanges={this.handleChanges}
       speciesDropdownSelection={this.state.speciesDropdownSelection}
@@ -402,6 +404,19 @@ class App extends Component {
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
         markdown={this.state.researchPublications}
+        setDiagnosesMenu={this.setDiagnosesMenu}
+        speciesSelectionOptions={this.getSpeciesDropdownOptions(
+          this.props.appData,
+        )}
+        speciesDropdownSelection={this.state.speciesDropdownSelection}
+        diagnosesSelectionOptions={this.state.diagnosesSelectionOptions}
+        diagnosesDropdownSelection={this.state.diagnosesDropdownSelection}
+        toggleSeeAll={this.toggleSeeAll}
+        getSum={this.getSum}
+        getColumnCountForSpecies={this.getColumnCountForSpecies}
+        pageData={this.state.pageData}
+        handleChangeEvent={this.handleChangeEvent}
+        handleReactDropdownEvent={this.handleReactDropdownEvent}
       />
     )
   };
@@ -423,7 +438,7 @@ class App extends Component {
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.researchPublications}
+        markdown={this.state.wikiMarkdown}
       />
     )
   };
@@ -456,7 +471,7 @@ class App extends Component {
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.differentialExpressions}
+        markdown={this.state.wikiMarkdown}
       />
     )
   };

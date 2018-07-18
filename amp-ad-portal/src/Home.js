@@ -16,6 +16,7 @@ const Home = props => (
   <div>
     <Welcome
       markdown={props.welcomeHeaderMarkdown}
+      markdownText={props.welcomeHeaderMarkdownText}
       token={props.token}
       handleChanges={props.handleChanges}
     />
@@ -160,6 +161,8 @@ Home.propTypes = {
   speciesDropdownSelection: PropTypes.string.isRequired,
   speciesSelectionOptions: PropTypes.array.isRequired,
   toggleSeeAll: PropTypes.func.isRequired,
+  welcomeHeaderMarkdown: PropTypes.string.isRequired,
+  welcomeHeaderMarkdownText: PropTypes.string.isRequired,
 }
 
 export default Home

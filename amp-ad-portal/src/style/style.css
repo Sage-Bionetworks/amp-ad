@@ -21,11 +21,36 @@ p {
   font-size: 12px; }
 
 a {
+  color: #5A478F;
+  text-decoration: none; }
+
+header a {
   color: black;
   text-decoration: none; }
 
+.child-page-hero a, .welcome a {
+  color: white;
+  text-decoration: underline; }
+
 li {
   list-style: none; }
+
+span.jumbo {
+  font-size: 42px;
+  height: 50px;
+  color: #BCC0CA;
+  position: absolute;
+  display: inline-block;
+  margin: auto;
+  top: 20px;
+  left: -50px;
+  bottom: 0;
+  right: 0; }
+
+ul.jumbo-list {
+  position: relative; }
+  ul.jumbo-list li {
+    list-style: none; }
 
 select {
   font-size: 18px; }
@@ -585,40 +610,49 @@ section.child-page-hero {
     font-size: 30px;
     color: white; }
 
-section.about-intro-section a {
-  color: #4C57A2;
-  font-size: 18px;
-  text-decoration: underline; }
-section.about-intro-section div.col-sm-9 {
-  padding: 0px;
-  max-width: 920px; }
-section.about-intro-section p {
-  font-size: 18px;
-  letter-spacing: .35px;
-  line-height: 24px; }
-section.about-intro-section h2 {
-  margin-top: 50px;
-  font-size: 20px; }
-section.about-intro-section h3 {
-  font-size: 18px;
-  font-weight: 500; }
-section.about-intro-section ul {
-  margin-left: 20px; }
-section.about-intro-section li {
-  list-style: disc;
-  letter-spacing: .35px;
-  line-height: 24px;
-  margin: 5px 0px; }
-section.about-intro-section div.projects a {
-  display: block;
-  text-decoration: underline;
-  color: #77AFD4;
-  font-size: 18px;
-  margin-top: 25px; }
-section.about-intro-section div.projects p {
-  margin: 0px;
-  margin-top: 8px;
-  line-height: 18px; }
+section.about-intro-section, section.content-section {
+  text-align: left; }
+  section.about-intro-section a, section.content-section a {
+    color: #4C57A2;
+    font-size: 18px;
+    text-decoration: underline; }
+  section.about-intro-section div.col-sm-9, section.content-section div.col-sm-9 {
+    padding: 0px;
+    max-width: 920px;
+    text-align: left; }
+  section.about-intro-section p, section.content-section p {
+    font-size: 18px;
+    letter-spacing: .35px;
+    line-height: 24px; }
+  section.about-intro-section h2, section.content-section h2 {
+    margin-top: 50px;
+    font-size: 20px; }
+  section.about-intro-section h3, section.content-section h3 {
+    font-size: 18px;
+    font-weight: 500; }
+  section.about-intro-section ul, section.content-section ul {
+    margin-left: 20px; }
+  section.about-intro-section li, section.content-section li {
+    list-style: disc;
+    letter-spacing: .35px;
+    line-height: 24px;
+    margin: 5px 0px; }
+  section.about-intro-section ul.jumbo-list li, section.content-section ul.jumbo-list li {
+    list-style: none;
+    position: relative;
+    padding: 20px 0px; }
+  section.about-intro-section div.projects a, section.content-section div.projects a {
+    display: block;
+    text-decoration: underline;
+    color: #77AFD4;
+    font-size: 18px;
+    margin-top: 25px; }
+  section.about-intro-section div.projects p, section.content-section div.projects p {
+    margin: 0px;
+    margin-top: 8px;
+    line-height: 18px; }
+  section.about-intro-section button.btn, section.content-section button.btn {
+    margin-top: 20px; }
 
 .about section {
   text-align: left; }

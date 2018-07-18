@@ -1,12 +1,12 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { getMarkdown } from "../queries/getWikiData"
 
-import { getMarkdownSegment } from "../queries/getWikiData"
-import { printSections } from "../model/HandleMarkdown"
+const ReactMarkdown = require("react-markdown")
 
 class ConsortiaDifferentialEx extends Component {
   componentDidMount() {
-    getMarkdownSegment(this.props, "581928", "differentialExpressions")
+    getMarkdown(this.props, "581928")
   }
 
   render() {
@@ -18,16 +18,10 @@ class ConsortiaDifferentialEx extends Component {
               <h2>
 ConsortiaDifferentialEx
               </h2>
-              <p>
-Content...
-              </p>
+              <p />
             </div>
           </section>
-          <section className="row center-xs researchers-content">
-            <div className="col-xs-12 col-sm-9">
-              {printSections(this.props.markdown, this.props)}
-            </div>
-          </section>
+          <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
         </div>
       </div>
     )

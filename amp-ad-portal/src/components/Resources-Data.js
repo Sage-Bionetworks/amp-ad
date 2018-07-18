@@ -1,4 +1,8 @@
 import React, { Component } from "react"
+import PropTypes from "prop-types"
+
+import Pies from "../PiesBelowHeader"
+import SearchBar from "../SearchBar"
 
 class DataResources extends Component {
   componentDidMount() {}
@@ -12,18 +16,45 @@ class DataResources extends Component {
               <h2>
 Data
               </h2>
-              <p>
-Content...
-              </p>
+              <p />
             </div>
           </section>
-          <section className="row center-xs researchers-content">
-            <div className="col-xs-12 col-sm-9" />
-          </section>
+          <SearchBar
+            setDiagnosisMenu={this.props.setDiagnosesMenu}
+            speciesSelection={this.props.speciesDropdownSelection}
+            speciesSelectionOptions={this.props.speciesSelectionOptions}
+            diagnosesSelection={this.props.diagnosesDropdownSelection}
+            diagnosesSelectionOptions={this.props.diagnosesSelectionOptions}
+            handleChange={this.props.handleChangeEvent}
+            handleReactDropdownEvent={this.props.handleReactDropdownEvent}
+          />
+          <Pies
+            toggleSeeAll={this.props.toggleSeeAll}
+            buttonState={this.props.buttonState}
+            diagnosesSelection={this.props.diagnosesDropdownSelection}
+            speciesSelection={this.props.speciesDropdownSelection}
+            getSum={this.props.getSum}
+            getColumnCountForSpecies={this.props.getColumnCountForSpecies}
+            pageData={this.props.pageData}
+          />
         </div>
       </div>
     )
   }
+}
+
+DataResources.propTypes = {
+  pageData: PropTypes.object.isRequired,
+  diagnosesDropdownSelection: PropTypes.string.isRequired,
+  diagnosesSelectionOptions: PropTypes.array.isRequired,
+  getColumnCountForSpecies: PropTypes.func.isRequired,
+  getSum: PropTypes.func.isRequired,
+  handleChangeEvent: PropTypes.func.isRequired,
+  handleReactDropdownEvent: PropTypes.func.isRequired,
+  setDiagnosesMenu: PropTypes.func.isRequired,
+  speciesDropdownSelection: PropTypes.string.isRequired,
+  speciesSelectionOptions: PropTypes.array.isRequired,
+  toggleSeeAll: PropTypes.func.isRequired,
 }
 
 export default DataResources

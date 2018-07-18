@@ -135,7 +135,15 @@ const getWikiMarkdownSegments = (wikiId, stateKey, props, synId) => {
   })
 }
 
+const removeMarkdownDivWrapper = (markdown) => {
+  let markdownString = markdown
+  markdownString = markdownString.substr(10)
+  markdownString = markdownString.substr(0, markdownString.length - 12)
+  return markdownString
+}
+
 export {
+  removeMarkdownDivWrapper,
   getWikiData,
   getMarkdown,
   getMarkdownSegment,
