@@ -8,7 +8,7 @@ const BetaHeader = () => {
           BETA
         </button>
         <h2>
-          Agora is a new service. Please
+          AMP-AD portal is a new service. Please
           {" "}
           <a href="mailto:ampadportal@sagebionetworks.org">
 contact us

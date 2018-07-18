@@ -289,7 +289,7 @@ class PiesBelowHeader extends Component {
             <h1 className="count">
               {this.props.pageData[dataType].count}
               {" "}
-              {label}
+              {`${label}s`}
             </h1>
             <div className="pie-circles-container">
               <div className="chart-center-stat">

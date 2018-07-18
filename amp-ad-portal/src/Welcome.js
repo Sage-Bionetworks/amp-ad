@@ -31,14 +31,6 @@ class Welcome extends Component {
 Welcome to the AMP-AD Knowledge Portal
           </h1>
           <ReactMarkdown source={this.props.markdownText} escapeHtml={false} />
-          <button
-            type="button"
-            className="btn-light"
-            onClick={event => this.openUrl(event, "http://agora.ampadportal.org")
-            }
-          >
-            Explore Wall of Targets
-          </button>
         </div>
         <ReactMarkdown
           source={this.props.markdown}
