@@ -6,13 +6,12 @@ import SearchBar from "./SearchBar"
 import PiesBelowHeader from "./PiesBelowHeader"
 import Programs from "./Programs"
 import Analyses from "./Analyses"
-import PopularDataRequests from "./PopularDataRequests"
+//import PopularDataRequests from "./PopularDataRequests"
 import BetaHeader from "./components/Beta"
 import ContributeYourData from "./components/ContributeYourData"
 
 const bellIcon = require("./images/plus-bell-icon.svg")
 const lightBulbIcon = require("./images/lightbulb-on.svg")
-const computingCloud = require("./images/computing-cloud.svg")
 
 const Home = props => (
   <div>
@@ -33,6 +32,7 @@ const Home = props => (
       handleReactDropdownEvent={props.handleReactDropdownEvent}
     />
     <PiesBelowHeader
+      biosamplesLoading={props.biosamplesLoading}
       toggleSeeAll={props.toggleSeeAll}
       buttonState={props.buttonState}
       diagnosesSelection={props.diagnosesDropdownSelection}
@@ -41,7 +41,6 @@ const Home = props => (
       getColumnCountForSpecies={props.getColumnCountForSpecies}
       pageData={props.pageData}
     />
-    <PopularDataRequests />
     <Analyses />
     <Programs />
 
@@ -116,9 +115,19 @@ April 2018
 Data Release
             </h2>
             <p>
-              {
-                "The ROSMAP WGS data: 16 samples were identified that are either sex mismatches or discordant with previous array-based genotype data and recommended to be excluded. Samples are listed in WGS_sample_QC_info. Additional QC files can be found in the QC files.(https://www.synapse.org/#!Synapse:syn121779960 folder The MSBB study: 55 RNAseq, 8 WES, 15 WGS samples are recommended to be excluded or remapped to the correct donor. Samples are listed in MSBB_RNAseq.WES.WGS_sample_QC_info"
-              }
+              The ROSMAP WGS data: 16 samples were identified that are either
+              sex mismatches or discordant with previous array-based genotype
+              data and recommended to be excluded. Samples are listed in
+              WGS_sample_QC_info. Additional QC files can be found in the QC
+              files.
+              {" "}
+              <a href="https://www.synapse.org/#!Synapse:syn12177996">
+                https://www.synapse.org/#!Synapse:syn12177996
+              </a>
+              {" "}
+              folder The MSBB study: 55 RNAseq, 8 WES, 15 WGS samples are
+              recommended to be excluded or remapped to the correct donor.
+              Samples are listed in MSBB_RNAseq.WES.WGS_sample_QC_info"
             </p>
           </div>
         </div>

@@ -17,13 +17,12 @@ class DataUse extends Component {
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
               <h2>
-Data Use Requirements
+Data Access and Use Requirements
               </h2>
               <p>
-                Data is stored in Synapse, a collaborative research platform. To
-                access the data you&apos;ll create an account on Synapse, accept
-                the data&apos;s terms of use, and agree to acknowledge the data
-                contributors.
+                AMP-AD Knowledge Portal data and analyses are stored in Synapse,
+                a collaborative research platform. Please follow the
+                instructions below in order to gain access.
               </p>
             </div>
           </section>

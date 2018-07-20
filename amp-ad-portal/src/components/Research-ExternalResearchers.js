@@ -1,10 +1,18 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 
+import { BarLoader } from "react-spinners"
 import { getWikiMarkdownSegments } from "../queries/getWikiData"
 import { printShowHideSections } from "../model/HandleMarkdown"
 
 class ExternalResearchers extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: true,
+    }
+  }
+
   componentDidMount() {
     //getMarkdownSegment(this.props, "581946", "externalResearchers")
     //this.getSubPageHeaders("581934").then(response => console.log(response))
@@ -13,7 +21,11 @@ class ExternalResearchers extends Component {
       "externalResearchers",
       this.props,
       "syn12666371",
-    )
+    ).then(() => {
+      this.setState({
+        loading: false,
+      })
+    })
   }
 
   render() {
@@ -23,9 +35,14 @@ class ExternalResearchers extends Component {
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
               <h2>
-External Researchers
+Approved External Research Use
               </h2>
-              <p />
+              <p>
+                This page lists the research statements, names, and institutions
+                of investigators approved for access to controlled data. Open
+                access data does not require the submission of a research
+                statement, and is therefore not listed here.
+              </p>
             </div>
           </section>
           <section className="row center-xs researchers-content">
@@ -33,6 +50,9 @@ External Researchers
               {printShowHideSections(this.props.markdown)}
             </div>
           </section>
+          <div className="row center-xs">
+            <BarLoader color="#47357B" loading={this.state.loading} />
+          </div>
         </div>
       </div>
     )

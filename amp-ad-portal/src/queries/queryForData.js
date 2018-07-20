@@ -9,7 +9,7 @@ const buildRequest = (table, query) => {
       includeEntityEtag: true,
       isConsistent: true,
       offset: 0,
-      limit: 100,
+      limit: 250,
     },
     partMask:
       SynapseConstants.BUNDLE_MASK_QUERY_RESULTS
@@ -19,12 +19,31 @@ const buildRequest = (table, query) => {
   }
 }
 
-const getBioSampleCount = (species, table, tokenResponse) => {
+const escapeString = (string) => {
+  const newString = string.replace(/'/i, "''")
+  //console.log(newString)
+  return newString
+}
+
+const getBioSampleCount = (species, diagnosis = "", table, tokenResponse) => {
   //SELECT count(DISTINCT "specimenID") FROM syn12532774 where ("species" = 'Human')
+  //SELECT count(DISTINCT "specimenID") FROM syn12532774
+  //where ( ("species" = 'Human') and ("diagnosis" = 'Alzheimer''s Disease') )
   let query
-  if (species === "allspecies" || species === "All species") {
+  if (diagnosis !== "All diagnoses") {
+    query = `SELECT count(DISTINCT "specimenID") FROM ${table} where ( ("species" = '${species}') and ("diagnosis" = '${escapeString(
+      diagnosis,
+    )}') )`
+  }
+  if (diagnosis !== "All diagnoses" && species === "All species") {
+    query = `SELECT count(DISTINCT "specimenID") FROM ${table} where ( ("diagnosis" = '${escapeString(
+      diagnosis,
+    )}') )`
+  }
+  if (diagnosis === "All diagnoses" && species === "All species") {
     query = `SELECT count(DISTINCT "specimenID") FROM ${table}`
-  } else {
+  }
+  if (species !== "All species" && diagnosis === "All diagnoses") {
     query = `SELECT count(DISTINCT "specimenID") FROM ${table} WHERE ( ( "species" = '${species}') )`
   }
   //console.log(query)

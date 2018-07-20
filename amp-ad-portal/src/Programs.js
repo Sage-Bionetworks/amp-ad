@@ -12,11 +12,7 @@ const Programs = (props) => {
 Programs
             </h2>
           </div>
-          <div className="col-xs-3 col-sm-2 content-width">
-            <a className="align-right" href="/">
-              See All Programs
-            </a>
-          </div>
+          <div className="col-xs-3 col-sm-2 content-width" />
         </div>
 
         <div className="row between-xs center-xs middle-xs">

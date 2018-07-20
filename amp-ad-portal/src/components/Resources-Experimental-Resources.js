@@ -1,11 +1,8 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 
-import {
-  getMarkdownSegment,
-  getWikiMarkdownSegments,
-} from "../queries/getWikiData"
-import { printSections, printShowHideSections } from "../model/HandleMarkdown"
+import { getWikiMarkdownSegments } from "../queries/getWikiData"
+import { printSections } from "../model/HandleMarkdown"
 
 class ExperimentalResources extends Component {
   componentDidMount() {
@@ -24,10 +21,13 @@ class ExperimentalResources extends Component {
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
               <h2>
-ExperimentalResources
+Experimental Resources
               </h2>
               <p>
-Content...
+                In addition to data and analysis, AMP-AD investigators
+                contribute other experimental resources of value to the
+                community. As these become available they will be listed on this
+                page. Follow the links in the summary below for more details.
               </p>
             </div>
           </section>

@@ -51,6 +51,8 @@ ul.jumbo-list {
   position: relative; }
   ul.jumbo-list li {
     list-style: none; }
+  ul.jumbo-list a {
+    position: relative; }
 
 select {
   font-size: 18px; }
@@ -165,16 +167,23 @@ section {
 
 section.beta-banner {
   background-color: #FCCB71;
-  text-align: center; }
+  text-align: left; }
   section.beta-banner button {
-    display: inline;
+    display: inline-block;
     margin-right: 25px; }
   section.beta-banner a {
     text-decoration: underline; }
   section.beta-banner h2 {
     font-size: 18px;
     font-weight: 400;
-    display: inline; }
+    display: inline-block;
+    width: 80%; }
+  section.beta-banner .content {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    flex-basis: auto; }
 
 header.header {
   padding: 25px 50px;
@@ -378,7 +387,8 @@ section.pie-charts-welcome {
     width: 100%; }
   section.pie-charts-welcome h1 {
     font-weight: 300;
-    font-size: 42px; }
+    font-size: 42px;
+    margin: 20px; }
   section.pie-charts-welcome .pie-circle {
     display: inline-block;
     margin: 0px 5px;
@@ -690,7 +700,6 @@ section.about-section-content {
   margin-bottom: inherit; }
 
 .expand-section.hide {
-  height: 150px;
   margin-bottom: -10px; }
 
 input[type=checkbox] {
@@ -788,16 +797,33 @@ p.researcher-bio {
     margin-left: 8px; }
 
 .researchers-content .studies-section .content.hide {
-  max-height: 146px; }
+  max-height: 175px; }
 .researchers-content .studies-section .expand-section {
   margin-bottom: 10px; }
   .researchers-content .studies-section .expand-section.hide {
-    max-height: 146px; }
+    max-height: 175px; }
 
 .researchers-content div.row.study-overview {
   margin-bottom: 35px; }
 
 .studies-section .content {
   overflow-x: hidden; }
+
+.headshot-col {
+  justify-content: center;
+  align-content: center;
+  min-width: 170px;
+  min-height: 170px; }
+  .headshot-col .headshot {
+    width: 86px;
+    height: 86px;
+    position: relative;
+    -webkit-border-radius: 43px;
+    -moz-border-radius: 43px;
+    border-radius: 43px;
+    margin: 0px auto;
+    display: block;
+    background-position: center;
+    background-size: contain; }
 
 /*# sourceMappingURL=style.css.map */

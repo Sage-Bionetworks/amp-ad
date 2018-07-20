@@ -44,6 +44,37 @@ const getWikiKey = (token, synId) => {
     .catch(handleErrors)
 }
 
+const getUserProfileImage = (profileId) => {
+  return fetch(
+    `https://repo-prod.prod.sagebase.org/repo/v1/userProfile/${profileId}/image`,
+    {
+      method: "GET",
+    },
+  )
+    .then((data) => {
+      //console.log(data)
+      return data
+    })
+    .catch(handleErrors)
+}
+
+const getUserProfile = (profileId, token) => {
+  return fetch(
+    `https://repo-prod.prod.sagebase.org/repo/v1/userProfile/${profileId}`,
+    {
+      method: "GET",
+      headers: {
+        sessionToken: token,
+      },
+    },
+  )
+    .then((data) => {
+      //console.log(data)
+      return data
+    })
+    .catch(handleErrors)
+}
+
 const getWikiHeaderTree = (token, synId) => {
   return fetch(
     `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikiheadertree`,
@@ -127,7 +158,8 @@ async function asyncForEach(array, callback) {
 const waitFor = ms => new Promise(r => setTimeout(r, ms))
 
 const getWikiMarkdownSegments = (wikiId, stateKey, props, synId) => {
-  getSubPageHeaders(wikiId, props, synId).then((headers) => {
+  return getSubPageHeaders(wikiId, props, synId).then((headers) => {
+    console.log(headers)
     asyncForEach(headers, async (header) => {
       await waitFor(75)
       getMarkdownSegment(props, header.id, stateKey)
@@ -154,4 +186,5 @@ export {
   getWikiKey,
   waitFor,
   asyncForEach,
+  getUserProfileImage,
 }
