@@ -38,7 +38,6 @@ const getWikiKey = (token, synId) => {
       return data.json()
     })
     .then((processedData) => {
-      //console.log(processedData)
       return processedData
     })
     .catch(handleErrors)
@@ -52,7 +51,6 @@ const getUserProfileImage = (profileId) => {
     },
   )
     .then((data) => {
-      //console.log(data)
       return data
     })
     .catch(handleErrors)
@@ -69,15 +67,15 @@ const getUserProfile = (profileId, token) => {
     },
   )
     .then((data) => {
-      //console.log(data)
       return data
     })
     .catch(handleErrors)
 }
 
-const getWikiHeaderTree = (token, synId) => {
+const getWikiHeaderTree = (token, synId, offsetVal = 0, limit = 10) => {
+  console.log(offsetVal)
   return fetch(
-    `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikiheadertree`,
+    `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikiheadertree?offset=${offsetVal}&limit=${limit}`,
     {
       method: "GET",
       headers: {
@@ -89,14 +87,12 @@ const getWikiHeaderTree = (token, synId) => {
       return data.json()
     })
     .then((processedData) => {
-      console.log(processedData)
       return processedData
     })
     .catch(handleErrors)
 }
 
 const getEntityHeader = (token, payload) => {
-  //console.log(JSON.stringify(payload))
   return fetch(
     //`https://repo-prod.prod.sagebase.org/repo/v1/entity/${id}/type`,
     "https://repo-prod.prod.sagebase.org/repo/v1/entity/header",
@@ -122,7 +118,6 @@ const getMarkdown = (props, wikiNumber, name = "wikiMarkdown") => {
   //props.handleChanges("wikiMarkdown", "")
   getWikiData(wikiNumber, props.token.sessionToken)
     .then((data) => {
-      //console.log(data.markdown)
       props.handleChanges(name, data.markdown)
     })
     .catch(handleErrors)
@@ -141,8 +136,8 @@ const getMarkdownSegment = (
     .catch(handleErrors)
 }
 
-const getSubPageHeaders = (parentId, props, synId) => {
-  return getWikiHeaderTree(props.token.sessionToken, synId)
+const getSubPageHeaders = (parentId, props, synId, paginationValue) => {
+  return getWikiHeaderTree(props.token.sessionToken, synId, paginationValue)
     .then((results) => {
       return results.results.filter(wikiPage => wikiPage.parentId === parentId)
     })
@@ -157,14 +152,22 @@ async function asyncForEach(array, callback) {
 
 const waitFor = ms => new Promise(r => setTimeout(r, ms))
 
-const getWikiMarkdownSegments = (wikiId, stateKey, props, synId) => {
-  return getSubPageHeaders(wikiId, props, synId).then((headers) => {
-    console.log(headers)
-    asyncForEach(headers, async (header) => {
-      await waitFor(75)
-      getMarkdownSegment(props, header.id, stateKey)
-    })
-  })
+const getWikiMarkdownSegments = (
+  wikiId,
+  stateKey,
+  props,
+  synId,
+  paginationValue,
+) => {
+  return getSubPageHeaders(wikiId, props, synId, paginationValue).then(
+    (headers) => {
+      console.log(headers)
+      asyncForEach(headers, async (header) => {
+        await waitFor(75)
+        getMarkdownSegment(props, header.id, stateKey)
+      })
+    },
+  )
 }
 
 const removeMarkdownDivWrapper = (markdown) => {

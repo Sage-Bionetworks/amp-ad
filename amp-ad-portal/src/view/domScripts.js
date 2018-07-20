@@ -13,6 +13,21 @@ const setActiveNavigation = () => {
   })
 }
 
+const detectIfUserHasScrolledToBottom = () => {
+  // returns true or false
+  let bottom = false
+
+  //console.log(
+  //window.innerHeight + window.scrollY + 200 > document.body.offsetHeight,
+  //)
+  if (window.innerHeight + window.scrollY + 200 > document.body.offsetHeight) {
+    bottom = true
+    console.log(bottom)
+    return bottom
+  }
+  return bottom
+}
+
 const shrinkHeader = () => {
   window.addEventListener(
     "scroll",
@@ -58,4 +73,4 @@ const shrinkHeader = () => {
   )
 }
 
-export { setActiveNavigation, shrinkHeader }
+export { setActiveNavigation, shrinkHeader, detectIfUserHasScrolledToBottom }
