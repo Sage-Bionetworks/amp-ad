@@ -1,17 +1,30 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 
+import { BarLoader } from "react-spinners"
 import { getWikiMarkdownSegments } from "../queries/getWikiData"
 import { printSections } from "../model/HandleMarkdown"
 
 class ExperimentalResources extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: true,
+    }
+  }
+
   componentDidMount() {
     getWikiMarkdownSegments(
       "576287",
       "experimentalResources",
       this.props,
       "syn12666371",
-    )
+      10,
+    ).then(() => {
+      this.setState({
+        loading: false,
+      })
+    })
   }
 
   render() {
@@ -36,6 +49,9 @@ Experimental Resources
               {printSections(this.props.markdown, this.props)}
             </div>
           </section>
+          <div className="row center-xs">
+            <BarLoader color="#47357B" loading={this.state.loading} />
+          </div>
         </div>
       </div>
     )

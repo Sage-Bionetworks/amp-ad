@@ -157,7 +157,7 @@ const getWikiMarkdownSegments = (
   stateKey,
   props,
   synId,
-  paginationValue,
+  paginationValue = 10,
 ) => {
   return getSubPageHeaders(wikiId, props, synId, paginationValue).then(
     (headers) => {

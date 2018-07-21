@@ -7,6 +7,11 @@ html, body {
   max-width: 100%;
   overflow-x: hidden; }
 
+body.noScroll, html.noScroll {
+  overflow-y: hidden;
+  margin: 0;
+  height: 100%; }
+
 section div.row {
   max-width: 920px;
   margin: 0px auto; }
@@ -23,6 +28,22 @@ p {
 a {
   color: #5A478F;
   text-decoration: none; }
+
+table {
+  font-size: 15px;
+  border: 1px solid;
+  font-weight: lighter;
+  width: 1081px;
+  margin-bottom: 100px;
+  border-collapse: collapse;
+  max-width: 100%;
+  display: inline-block; }
+  table thead {
+    background-color: #BCC0CA; }
+  table tr {
+    padding: 10px; }
+  table th {
+    border: 0px; }
 
 header a {
   color: black;
@@ -194,7 +215,7 @@ header.header {
   position: fixed;
   left: 0px;
   background: white;
-  z-index: 1;
+  z-index: 1000;
   box-shadow: 0 1px 5px 0 #808080; }
   @media screen and (max-width: 1023px) {
     header.header {
@@ -778,13 +799,13 @@ section.about-resilience-intro-section {
 p.researcher-bio {
   overflow: hidden; }
 
-.researchers-content .expand-section {
+.researchers-content .expand-section, .content-section .expand-section {
   margin-bottom: 60px; }
-.researchers-content .expand-section.hide {
+.researchers-content .expand-section.hide, .content-section .expand-section.hide {
   max-height: 178px; }
-.researchers-content .content.hide {
+.researchers-content .content.hide, .content-section .content.hide {
   max-height: 178px; }
-.researchers-content .div {
+.researchers-content .div, .content-section .div {
   max-width: 920px; }
 
 .experimental-resource, .row.publication {
@@ -796,11 +817,11 @@ p.researcher-bio {
     top: 100%;
     margin-left: 8px; }
 
-.researchers-content .studies-section .content.hide {
+.researchers-content .studies-section .content.hide, .content-section .content.hide {
   max-height: 175px; }
-.researchers-content .studies-section .expand-section {
+.researchers-content .studies-section .expand-section, .content-section .expand-section {
   margin-bottom: 10px; }
-  .researchers-content .studies-section .expand-section.hide {
+  .researchers-content .studies-section .expand-section.hide, .content-section .expand-section.hide {
     max-height: 175px; }
 
 .researchers-content div.row.study-overview {
@@ -809,21 +830,108 @@ p.researcher-bio {
 .studies-section .content {
   overflow-x: hidden; }
 
+button.headshot-col {
+  background: transparent;
+  border: none; }
+
+button.modal-lightbox {
+  position: fixed;
+  color: white;
+  opacity: .75;
+  z-index: 800;
+  width: 100vw;
+  height: 100vh;
+  top: 300px;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
+button.modal-x {
+  background-size: cover;
+  position: fixed;
+  z-index: 1000;
+  top: 141px;
+  left: 25px;
+  width: 40px;
+  height: 40px;
+  border: none; }
+
+.profile {
+  position: fixed;
+  z-index: 950;
+  width: 100vw;
+  height: 400px;
+  margin: auto;
+  padding: 30px;
+  top: 45px;
+  left: 0;
+  background-color: white; }
+  .profile .row {
+    margin-top: 100px; }
+  .profile .profile-image-large {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    -webkit-border-radius: 75px;
+    -moz-border-radius: 75px;
+    border-radius: 75px;
+    background-size: contain;
+    background-repeat: no-repeat; }
+
+.headshot-col .background-highlight {
+  width: 94px;
+  height: 94px;
+  position: relative;
+  -webkit-border-radius: 47px;
+  -moz-border-radius: 47px;
+  border-radius: 47px;
+  background-color: white;
+  position: relative;
+  z-index: 400;
+  margin: auto;
+  top: -142px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  transition: background-color .3s; }
+
+.headshot-col:hover {
+  cursor: pointer; }
+  .headshot-col:hover .background-highlight {
+    background-color: #5A498D;
+    opacity: .5;
+    transition: background-color .3s;
+    position: relative;
+    z-index: 400;
+    margin: auto;
+    top: -142px;
+    right: 0;
+    left: 0;
+    bottom: 0; }
+
 .headshot-col {
   justify-content: center;
   align-content: center;
-  min-width: 170px;
-  min-height: 170px; }
-  .headshot-col .headshot {
-    width: 86px;
-    height: 86px;
+  postion: relative;
+  display: inline-block;
+  min-width: 181px;
+  max-height: 170px;
+  z-index: 900; }
+  .headshot-col div {
     position: relative;
-    -webkit-border-radius: 43px;
-    -moz-border-radius: 43px;
-    border-radius: 43px;
-    margin: 0px auto;
-    display: block;
-    background-position: center;
-    background-size: contain; }
+    z-index: 500; }
+    .headshot-col div .headshot {
+      width: 86px;
+      height: 86px;
+      position: relative;
+      -webkit-border-radius: 43px;
+      -moz-border-radius: 43px;
+      border-radius: 43px;
+      margin: 0px auto;
+      display: block;
+      position: relative;
+      background-position: center;
+      background-size: contain;
+      z-index: 500; }
 
 /*# sourceMappingURL=style.css.map */
