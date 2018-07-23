@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import PieChart from "react-svg-piechart"
 import PropTypes from "prop-types"
+import { BarLoader } from "react-spinners"
 
 const colorsTissues = [
   "#F27277",
@@ -89,10 +90,7 @@ const colorsAssays = [
 ]
 
 class PiesBelowHeader extends Component {
-  openUrl = (event, link) => {
-    event.preventDefault()
-    window.open(link, "_blank")
-  };
+  componentDidUpdate() {}
 
   buttonsRow = () => {
     return (
@@ -166,6 +164,11 @@ class PiesBelowHeader extends Component {
       element.table
     }/tables/query/${element.base64Link}`
     return pieLink
+  };
+
+  openUrl = (event, link) => {
+    event.preventDefault()
+    window.open(link, "_blank")
   };
 
   printTotalCounts = (listArray) => {
@@ -282,22 +285,18 @@ class PiesBelowHeader extends Component {
       this.getCountsList(dataType),
       dataType,
     )
+    console.log(dataType)
     if (pieData.length > 0) {
       return (
         <div className="pie-chart-welcome col-xs-12 col-sm-6">
           <div className="pie-container">
-            <h1 className="count">
-              {this.props.pageData[dataType].count}
-              {" "}
-              {`${label}s`}
-            </h1>
             <div className="pie-circles-container">
               <div className="chart-center-stat">
                 <h1 alt="count of samples">
-                  {this.props.pageData[`biosamples${dataType}Count`]}
+                  {this.props.pageData[dataType].count}
                 </h1>
                 <p>
-Biosamples
+                  {`${label}s`}
                 </p>
               </div>
               <PieChart
@@ -326,6 +325,22 @@ Biosamples
       <section className="pie-charts-welcome row center-xs">
         <div className="col-xs-12 col-sm-8">
           <div className="row around-xs center-xs">
+            <div className="col-xs-12" />
+            <div className="col-xs-12 col-sm-6">
+              <div className="row center-xs loading-bar">
+                <BarLoader
+                  color="#47357B"
+                  loading={this.props.biosamplesLoading}
+                />
+              </div>
+              <h1 className="count">
+                {this.props.biosamplesLoading === true
+                  ? ""
+                  : `${this.props.pageData.biosamplesassayCount} Biosamples`}
+              </h1>
+            </div>
+          </div>
+          <div className="row around-xs center-xs">
             {this.buildPieSection(
               this.props.speciesSelection,
               "assay",
@@ -346,6 +361,7 @@ Biosamples
 
 PiesBelowHeader.propTypes = {
   speciesSelection: PropTypes.string.isRequired,
+  biosamplesLoading: PropTypes.bool.isRequired,
 }
 
 export default PiesBelowHeader

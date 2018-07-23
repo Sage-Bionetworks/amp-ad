@@ -16,7 +16,10 @@ class DataResources extends Component {
               <h2>
 Data
               </h2>
-              <p />
+              <p>
+                This page shows a summary of the available data and provides
+                links to access the data, organized by study, assay, and tissue.
+              </p>
             </div>
           </section>
           <SearchBar
@@ -29,6 +32,7 @@ Data
             handleReactDropdownEvent={this.props.handleReactDropdownEvent}
           />
           <Pies
+            biosamplesLoading={this.props.biosamplesLoading}
             toggleSeeAll={this.props.toggleSeeAll}
             buttonState={this.props.buttonState}
             diagnosesSelection={this.props.diagnosesDropdownSelection}

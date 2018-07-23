@@ -16,12 +16,19 @@ class ConsortiaGenetics extends Component {
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
               <h2>
-ConsortiaGenetics
+Collaborative Genetics Projects
               </h2>
-              <p />
+              <p>
+                This page provides a summary of cross-consortia studies on
+                genetic and expression quantitative trait locus (eQTL) analyses.
+              </p>
             </div>
           </section>
-          <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+          <section className="row center-xs content-section">
+            <div className="col-xs-12 col-sm-9">
+              <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+            </div>
+          </section>
         </div>
       </div>
     )

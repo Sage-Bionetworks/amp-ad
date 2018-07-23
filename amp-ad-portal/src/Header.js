@@ -151,7 +151,7 @@ Programs
               <AccordionItemTitle>
                 <div className="accordion-sub-row row between-xs">
                   <div className="col-xs-10 accordion-sub-title">
-                    Consortia Research
+                    Collaborative Research
                   </div>
                   <div className="col-xs-1 carrot-icon">
 &gt;
@@ -177,7 +177,7 @@ Programs
                       className="nav-item dropdown"
                       onClick={this.closeNavigation}
                     >
-                      Differential Expressions
+                      Differential Expression
                     </Link>
                   </li>
                   <li>
@@ -217,7 +217,7 @@ Programs
                       to="/Research/ExternalResearchers"
                       onClick={this.closeNavigation}
                     >
-                      External Researchers
+                      Approved External Research Use
                     </Link>
                   </div>
                 </div>
@@ -305,7 +305,7 @@ Programs
               <AccordionItemTitle className="accordion__title link">
                 <div className="row between-xs">
                   <div className="col-xs-12 accordion-sub-title">
-                    <a href="https://agora.ampadportal.org/">
+                    <a href="http://agora.ampadportal.org/">
 Agora
                     </a>
                   </div>
@@ -379,7 +379,7 @@ Agora
               <div className="row between-xs">
                 <div className="col-xs-12 accordion-sub-title">
                   <Link
-                    name="AMP-AD"
+                    name="About people"
                     to="/About/People"
                     className="nav-item dropdown"
                     onClick={this.closeNavigation}

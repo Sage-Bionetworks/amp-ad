@@ -18,14 +18,6 @@ class WhatIsAmpAD extends Component {
               <h2>
 AMP-AD Knowledge Portal
               </h2>
-              <p>
-                AMP-AD is a precompetitive public private partnership led by the
-                National Institutes for Health’s (NIH) National Institute on
-                Aging (NIA) and managed by the Foundation for the NIH (FNIH).
-                AMP-AD brings together the government, industry and non-profit
-                sectors to transform the way disease-relevant therapeutic
-                targets are discovered and validated.
-              </p>
             </div>
           </section>
           <ReactMarkdown source={this.props.markdown} escapeHtml={false} />

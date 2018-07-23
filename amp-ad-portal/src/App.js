@@ -49,12 +49,25 @@ const pageDataPoints = ["assay", "tissue", "dataType", "diagnoses"]
 
 class App extends Component {
   state = {
+    biosamplesLoading: true,
     filters: {
       assay: false,
       tissue: false,
     },
     pageData: study,
-    diagnosesSelectionOptions: [],
+    diagnosesSelectionOptions: [
+      "All diagnoses",
+      "Alzheimer's Disease",
+      "Amyothropic Lateral Sclerosis",
+      "control",
+      "Mild Cognitive Impairment",
+      "other",
+      "Parkinson's Disease",
+      "Stroke Model",
+      "AD Model",
+      "Progressive Supranuclear Palsy",
+      "Microglia-like Model",
+    ],
     speciesDropdownSelection: "All species",
     diagnosesDropdownSelection: "All diagnoses",
     wikiMarkdown: "",
@@ -169,6 +182,9 @@ class App extends Component {
     } else {
       speciesFilterKey = [species]
     }
+    if (dataType === "assay") {
+      //console.log(speciesFilterKey)
+    }
 
     const speciesFiltered = filterRowsByKeyAndValue(
       keysToValues(dataObject.queryResult.queryResults.rows),
@@ -186,6 +202,9 @@ class App extends Component {
       diagnosesFilterKey,
       dataType,
     )
+    if (dataType === "assay") {
+      //console.log(filteredRows)
+    }
     return filteredRows
   };
 
@@ -209,6 +228,16 @@ class App extends Component {
       facetValues: [...chartPageData],
     }
 
+    if (pageKey === "assay") {
+      //console.log(
+      //speciesKey,
+      //diagnosesKey,
+      //diagnosesArray,
+      //pageKey,
+      //stateObjectToAdd,
+      //)
+    }
+
     this.setState(prevState => ({
       ...prevState,
       pageData: { ...prevState.pageData, [pageKey]: stateObjectToAdd },
@@ -224,6 +253,7 @@ class App extends Component {
   };
 
   setPageDataPoints = (dataPoints) => {
+    //console.log(this.state.diagnosesSelectionOptions)
     if (this.props.appData !== undefined) {
       dataPoints.forEach((element) => {
         this.setFlattenedData(
@@ -250,9 +280,10 @@ class App extends Component {
     return totalCounts
   };
 
-  queryForBioSamples = (state, props) => {
+  queryForBioSamples = async (state, props) => {
     return getBioSampleCount(
       state.speciesDropdownSelection,
+      state.diagnosesDropdownSelection,
       "syn12532774",
       props.loginToken,
     )
@@ -260,9 +291,15 @@ class App extends Component {
 
   queryAndSetBioSampleCount = () => {
     ["assay", "tissue"].forEach((element) => {
-      this.queryForBioSamples(this.state, this.props).then((count) => {
-        this.setBioSampleCount(parseInt(count, 10), element)
-      })
+      this.queryForBioSamples(this.state, this.props)
+        .then((count) => {
+          this.setBioSampleCount(parseInt(count, 10), element)
+        })
+        .then(() => {
+          this.setState({
+            biosamplesLoading: false,
+          })
+        })
     })
   };
 
@@ -297,6 +334,7 @@ class App extends Component {
     const key = event.value[0]
     this.setState(
       {
+        biosamplesLoading: true,
         [key]: event.label,
       },
       () => {
@@ -311,6 +349,7 @@ class App extends Component {
     const key = event.target.name
     this.setState(
       {
+        biosamplesLoading: true,
         [key]: event.target.value,
       },
       () => {
@@ -327,6 +366,7 @@ class App extends Component {
       speciesSelectionOptions={this.getSpeciesDropdownOptions(
         this.props.appData,
       )}
+      biosamplesLoading={this.state.biosamplesLoading}
       welcomeHeaderMarkdown={this.state.welcomeHeaderMarkdown}
       welcomeHeaderMarkdownText={this.state.welcomeHeaderMarkdownText}
       token={this.props.loginToken}
@@ -400,6 +440,7 @@ class App extends Component {
   ReturnResourcesData = () => {
     return (
       <ResourcesData
+        biosamplesLoading={this.state.biosamplesLoading}
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -514,8 +555,6 @@ class App extends Component {
       <AboutPeople
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
-        handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.researchPublications}
       />
     )
   };
@@ -597,8 +636,8 @@ class App extends Component {
             <a href="mailto:ampadportal@sagebionetworks.org">
 Contact
             </a>
-            <a href="/">
-Terms & Privacy
+            <a href="http://docs.synapse.org/articles/governance.html">
+              Terms & Privacy
             </a>
           </footer>
         </div>

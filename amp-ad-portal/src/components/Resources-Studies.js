@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { BarLoader } from "react-spinners"
 
 import { getTable } from "../queries/queryForData"
 import {
@@ -25,6 +26,7 @@ class Studies extends Component {
       //assayNames: [],
       tableData: {},
       wikiIds: [],
+      loading: true,
     }
   }
 
@@ -70,6 +72,9 @@ class Studies extends Component {
     const wikiIdsArr = []
     return asyncForEach(tableData, async (row) => {
       await waitFor(20)
+      this.setState({
+        loading: true,
+      })
       return getWikiKey(this.props.token.sessionToken, row.values[4]).then(
         (result) => {
           getMarkdownSegment(
@@ -80,14 +85,11 @@ class Studies extends Component {
           )
           wikiIdsArr.push({ [row.values[4]]: result })
           this.setState({
+            loading: false,
             wikiIds: [...this.state.wikiIds, { [row.values[4]]: result }],
           })
         },
       )
-      //}).then(() => {
-      //this.setState({
-      //wikiIds: wikiIdsArr,
-      //})
     })
   };
 
@@ -129,20 +131,15 @@ class Studies extends Component {
 
         const objectData = tableData.queryResult.queryResults.rows.filter(
           (row) => {
-            //console.log(row, synId)
             return row.values[4] === synId
           },
         )
-        //console.log(objectData)
 
         return (
           <div className="row">
             <div className="col-xs-12">
               <div className="row">
                 <div className="col-xs-12 studies-section">
-                  <h2>
-                    {title}
-                  </h2>
                   <ShowHideSection
                     content={<ReactMarkdown source={wikiMarkdownCopy} />}
                   />
@@ -198,11 +195,9 @@ Data Types
 Studies
               </h2>
               <p>
-                Researchers include members of all programs as well as external
-                contributors. Research of this program was seeded by program
-                specific research and expanded on by Consortia level research
-                involving collaborations across consortia and external research
-                performed by researchers reusing the AMP-AD portal resources.
+                This page details the research studies that have contributed
+                data to the Knowledge Portal, along with which NIH grant
+                supported the work.
               </p>
             </div>
           </section>
@@ -216,6 +211,9 @@ Studies
               )}
             </div>
           </section>
+          <div className="row center-xs">
+            <BarLoader color="#47357B" loading={this.state.loading} />
+          </div>
         </div>
       </div>
     )

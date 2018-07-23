@@ -33,8 +33,8 @@ Analyses
 Genetics
               </h4>
               <p>
-                Understand the variation associated with disease or other
-                molecular data.
+                Expression quantitative trait loci, imputed genotypes, and
+                polygenic risk scores.
               </p>
             </div>
             <button
@@ -54,11 +54,10 @@ Genetics
                 className="svg-large-icon"
               />
               <h4>
-Differential Expressions
+Differential Expression
               </h4>
               <p>
-                Understand the variation associated with disease or other
-                molecular data.
+Differential gene expression and enrichment analysis.
               </p>
             </div>
             <button
@@ -82,8 +81,7 @@ Differential Expressions
 Networks
               </h4>
               <p>
-                Understand the variation associated with disease or other
-                molecular data.
+Gene and protein co-expression analysis.
               </p>
             </div>
             <button
