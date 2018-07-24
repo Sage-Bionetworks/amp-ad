@@ -592,7 +592,7 @@ class App extends Component {
               component={this.ReturnResearchPublications}
             />
             <Route
-              path="/Research/DifferentialExpressions"
+              path="/Research/DifferentialExpression"
               component={this.ReturnConsortiaDifferential}
             />
             <Route

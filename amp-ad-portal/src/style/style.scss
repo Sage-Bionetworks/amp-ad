@@ -60,7 +60,7 @@ a {
 
 table {
   font-size: 15px;
-  border: 1px solid;
+  border: 1px solid #aeaeae;
   font-weight: lighter;
   width: 1081px;
   margin-bottom: 100px;
@@ -75,6 +75,10 @@ table {
   }
   th {
     border: 0px;
+    padding: 5px;
+  }
+  td {
+    padding: 5px;
   }
 }
 
@@ -420,7 +424,7 @@ header {
     z-index: 1000;
     margin-top: 15px;
     margin-left: auto;
-    min-width: 157px;
+    min-width: 230px;
     max-width: 400px;
   }
 	.about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
@@ -739,9 +743,15 @@ section.analyses {
 
 section.programs {
   .box {
+    position: relative;
 		.btn{
 			width: 142px;
 		}
+    h4 {
+      height: 50px;
+      margin-top: 15px;
+
+    }
     min-width: 215px;
     max-width: 215px;
     height: 448px;
@@ -754,10 +764,21 @@ section.programs {
 			text-align: left;
 			padding: 0px 10px;
 		}
+    button {
+      position: absolute;
+      margin: auto;
+      bottom: 30px;
+      left: 0;
+      right: 0;
+    }
   }
   .box-text-image {
-    margin-top: 30px;
+    margin-top: 35px;
     max-width: 230px;
+    height: 100%;
+    img { 
+      height: 80px;
+    }
   }
 }
 
@@ -953,7 +974,7 @@ section.about-section-content {
 	.content {
 		overflow-y: hidden;
 		transition: max-height 1s ease-out;
-		max-height: 1500px;
+		max-height: fit-content;
     height: auto;
 	}
 	.content.hide {
@@ -1033,10 +1054,10 @@ p.researcher-bio {
     margin-bottom: 60px;
   }
   .expand-section.hide {
-    max-height: 178px;
+    max-height: 170px;
   }
   .content.hide {
-    max-height: 178px;
+    max-height: 170px;
   }
   .div {
     max-width: 920px;
@@ -1067,7 +1088,7 @@ p.researcher-bio {
   }
   .expand-section {
     &.hide {
-      max-height: 175px;
+      max-height: 170px;
     }
     margin-bottom: 10px;
   }

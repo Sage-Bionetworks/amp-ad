@@ -24,7 +24,11 @@ Collaborative Network Analysis Projects
               </p>
             </div>
           </section>
-          <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+          <section className="row center-xs content-section">
+            <div className="col-xs-12 col-sm-9">
+              <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+            </div>
+          </section>
         </div>
       </div>
     )

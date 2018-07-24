@@ -178,8 +178,8 @@ Programs
                   </li>
                   <li>
                     <Link
-                      name="Differential Expressions"
-                      to="/Research/DifferentialExpressions"
+                      name="Differential Expression"
+                      to="/Research/DifferentialExpression"
                       className="nav-item dropdown"
                       onClick={this.closeNavigation}
                     >
@@ -223,7 +223,7 @@ Programs
                       to="/Research/ExternalResearchers"
                       onClick={this.closeNavigation}
                     >
-                      Approved External Research Use
+                      Approved External Research
                     </Link>
                   </div>
                 </div>
@@ -406,7 +406,7 @@ Agora
       <header className="row between-xs header center-xs middle-xs">
         <button className="menu-wall hidden" type="button" />
         <div className="col-xs-12 col-sm-3">
-          <Link to="/">
+          <Link to="/" onClick={this.closeNavigation}>
             <img
               className="logo-header"
               src={require("./images/amp-ad-logo.svg")}
