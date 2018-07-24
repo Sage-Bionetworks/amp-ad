@@ -17,7 +17,7 @@ class ProgramsModelAd extends Component {
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
               <h2>
-Modal AD Program
+Model AD Program
               </h2>
               <p>
                 Bridge the preclinical to clinical development gap by developing

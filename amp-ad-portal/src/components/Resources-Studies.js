@@ -60,9 +60,14 @@ class Studies extends Component {
         //}
       })
       .then(() => {
-        this.getWikiIdsAndMarkdown(
-          this.state.tableData.queryResult.queryResults.rows,
-        )
+        if (
+          this.state.tableData !== undefined
+          && this.state.tableData.queryResult !== undefined
+        ) {
+          this.getWikiIdsAndMarkdown(
+            this.state.tableData.queryResult.queryResults.rows,
+          )
+        }
       })
   }
 

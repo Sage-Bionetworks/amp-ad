@@ -17,7 +17,6 @@ const login = SynapseClient.login("mikeybkats", "guinness").then((keys) => {
 const getRawData = fetch("https://americandurablegoods.com/response2.json")
   .then(responseRaw => responseRaw.json())
   .then((response) => {
-    console.log(response)
     rawSynapseData = response
   })
   .catch(error => console.log("Request has failed: ", error))

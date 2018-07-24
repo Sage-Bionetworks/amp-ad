@@ -31,7 +31,7 @@ a {
 
 table {
   font-size: 15px;
-  border: 1px solid;
+  border: 1px solid #aeaeae;
   font-weight: lighter;
   width: 1081px;
   margin-bottom: 100px;
@@ -43,7 +43,10 @@ table {
   table tr {
     padding: 10px; }
   table th {
-    border: 0px; }
+    border: 0px;
+    padding: 5px; }
+  table td {
+    padding: 5px; }
 
 header a {
   color: black;
@@ -317,7 +320,7 @@ header .accordion-body.top-level-accordion {
   z-index: 1000;
   margin-top: 15px;
   margin-left: auto;
-  min-width: 157px;
+  min-width: 230px;
   max-width: 400px; }
 header .about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
   position: absolute;
@@ -564,21 +567,34 @@ section.analyses h2 {
   margin: 0px; }
 
 section.programs .box {
+  position: relative;
   min-width: 215px;
   max-width: 215px;
   height: 448px;
   margin: 10px 5px; }
   section.programs .box .btn {
     width: 142px; }
+  section.programs .box h4 {
+    height: 50px;
+    margin-top: 15px; }
   section.programs .box .box-text-image p {
     font-size: 14px;
     font-weight: 400; }
   section.programs .box p {
     text-align: left;
     padding: 0px 10px; }
+  section.programs .box button {
+    position: absolute;
+    margin: auto;
+    bottom: 30px;
+    left: 0;
+    right: 0; }
 section.programs .box-text-image {
-  margin-top: 30px;
-  max-width: 230px; }
+  margin-top: 35px;
+  max-width: 230px;
+  height: 100%; }
+  section.programs .box-text-image img {
+    height: 80px; }
 
 section.what-new .title-row {
   line-height: 10px;
@@ -744,7 +760,7 @@ input[type=checkbox] {
 .content {
   overflow-y: hidden;
   transition: max-height 1s ease-out;
-  max-height: 1500px;
+  max-height: fit-content;
   height: auto; }
 
 .content.hide {
@@ -802,9 +818,9 @@ p.researcher-bio {
 .researchers-content .expand-section, .content-section .expand-section {
   margin-bottom: 60px; }
 .researchers-content .expand-section.hide, .content-section .expand-section.hide {
-  max-height: 178px; }
+  max-height: 170px; }
 .researchers-content .content.hide, .content-section .content.hide {
-  max-height: 178px; }
+  max-height: 170px; }
 .researchers-content .div, .content-section .div {
   max-width: 920px; }
 
@@ -822,7 +838,7 @@ p.researcher-bio {
 .researchers-content .studies-section .expand-section, .content-section .expand-section {
   margin-bottom: 10px; }
   .researchers-content .studies-section .expand-section.hide, .content-section .expand-section.hide {
-    max-height: 175px; }
+    max-height: 170px; }
 
 .researchers-content div.row.study-overview {
   margin-bottom: 35px; }
@@ -841,7 +857,7 @@ button.modal-lightbox {
   z-index: 800;
   width: 100vw;
   height: 100vh;
-  top: 300px;
+  top: 400px;
   right: 0;
   bottom: 0;
   left: 0; }
@@ -859,15 +875,37 @@ button.modal-x {
 .profile {
   position: fixed;
   z-index: 950;
-  width: 100vw;
-  height: 400px;
-  margin: auto;
   padding: 30px;
+  padding-top: 110px;
+  width: 100vw;
+  height: fit-content;
+  min-height: 400px;
+  margin: auto;
   top: 45px;
   left: 0;
-  background-color: white; }
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center; }
+  .profile .profile-image-container {
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    display: flex; }
   .profile .row {
-    margin-top: 100px; }
+    width: 100%;
+    margin: 0px auto; }
+  .profile h3 {
+    min-width: 380px; }
+  .profile p.profile-summary {
+    max-height: 300px;
+    overflow-y: scroll; }
+  .profile ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+    /* make scrollbar transparent */ }
   .profile .profile-image-large {
     width: 150px;
     height: 150px;
@@ -875,8 +913,9 @@ button.modal-x {
     -webkit-border-radius: 75px;
     -moz-border-radius: 75px;
     border-radius: 75px;
-    background-size: contain;
-    background-repeat: no-repeat; }
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; }
 
 .headshot-col .background-highlight {
   width: 94px;
@@ -930,8 +969,9 @@ button.modal-x {
       margin: 0px auto;
       display: block;
       position: relative;
-      background-position: center;
-      background-size: contain;
-      z-index: 500; }
+      z-index: 500;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center; }
 
 /*# sourceMappingURL=style.css.map */

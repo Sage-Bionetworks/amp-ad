@@ -67,13 +67,16 @@ const getUserProfile = (profileId, token) => {
     },
   )
     .then((data) => {
-      return data
+      return data.json()
+    })
+    .then((processedData) => {
+      return processedData
     })
     .catch(handleErrors)
 }
 
 const getWikiHeaderTree = (token, synId, offsetVal = 0, limit = 10) => {
-  console.log(offsetVal)
+  //console.log(offsetVal)
   return fetch(
     `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikiheadertree?offset=${offsetVal}&limit=${limit}`,
     {
@@ -161,7 +164,7 @@ const getWikiMarkdownSegments = (
 ) => {
   return getSubPageHeaders(wikiId, props, synId, paginationValue).then(
     (headers) => {
-      console.log(headers)
+      //console.log(headers)
       asyncForEach(headers, async (header) => {
         await waitFor(75)
         getMarkdownSegment(props, header.id, stateKey)
@@ -190,4 +193,5 @@ export {
   waitFor,
   asyncForEach,
   getUserProfileImage,
+  getUserProfile,
 }

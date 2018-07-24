@@ -33,12 +33,18 @@ class Header extends Component {
   }
 
   closeNavigation = () => {
-    this.setState({
-      Research: false,
-      Resources: false,
-      About: false,
-      Home: false,
-    })
+    this.setState(
+      {
+        Research: false,
+        Resources: false,
+        About: false,
+        Home: false,
+      },
+      () => {
+        const body = document.querySelector("html")
+        body.classList.remove("noScroll")
+      },
+    )
   };
 
   dropdownMenuAction = (event) => {
@@ -172,8 +178,8 @@ Programs
                   </li>
                   <li>
                     <Link
-                      name="Differential Expressions"
-                      to="/Research/DifferentialExpressions"
+                      name="Differential Expression"
+                      to="/Research/DifferentialExpression"
                       className="nav-item dropdown"
                       onClick={this.closeNavigation}
                     >
@@ -217,7 +223,7 @@ Programs
                       to="/Research/ExternalResearchers"
                       onClick={this.closeNavigation}
                     >
-                      Approved External Research Use
+                      Approved External Research
                     </Link>
                   </div>
                 </div>
@@ -400,7 +406,7 @@ Agora
       <header className="row between-xs header center-xs middle-xs">
         <button className="menu-wall hidden" type="button" />
         <div className="col-xs-12 col-sm-3">
-          <Link to="/">
+          <Link to="/" onClick={this.closeNavigation}>
             <img
               className="logo-header"
               src={require("./images/amp-ad-logo.svg")}
@@ -411,7 +417,11 @@ Agora
         <div className="nav-buttons col-xs-12 col-sm-8 col-md-7">
           <ul className="nav row end-sm center-xs">
             <li>
-              <Link to="/" className="main-nav-item nav-item home">
+              <Link
+                to="/"
+                className="main-nav-item nav-item home"
+                onClick={this.closeNavigation}
+              >
                 Home
               </Link>
             </li>
