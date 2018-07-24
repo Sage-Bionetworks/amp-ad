@@ -1150,8 +1150,9 @@ button.modal-x {
   }
   .profile-image-large {
     @include circle(150px);
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
   }
 }
 .headshot-col .background-highlight {
@@ -1199,9 +1200,10 @@ button.modal-x {
       margin: 0px auto;
       display: block;
       position: relative;
-      background-position: center;
-      background-size: contain; 
       z-index: 500;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
     }
   }
 }

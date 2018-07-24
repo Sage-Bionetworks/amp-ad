@@ -897,8 +897,9 @@ button.modal-x {
     -webkit-border-radius: 75px;
     -moz-border-radius: 75px;
     border-radius: 75px;
-    background-size: contain;
-    background-repeat: no-repeat; }
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; }
 
 .headshot-col .background-highlight {
   width: 94px;
@@ -952,8 +953,9 @@ button.modal-x {
       margin: 0px auto;
       display: block;
       position: relative;
-      background-position: center;
-      background-size: contain;
-      z-index: 500; }
+      z-index: 500;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center; }
 
 /*# sourceMappingURL=style.css.map */
