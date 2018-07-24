@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "babel-eslint": "^8.2.5",
+    "immutability-helper": "^2.7.1",
     "lodash": "^4.17.10",
     "markdown-it": "^8.4.1",
     "markdown-it-synapse": "^1.0.22",

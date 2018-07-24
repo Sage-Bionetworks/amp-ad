@@ -62,7 +62,7 @@ const getTable = (table, tokenResponse, query) => {
   return SynapseClient.getQueryTableResults(
     request,
     tokenResponse.sessionToken,
-  )
+  ).catch(error => console.log(error))
 }
 
 export { getBioSampleCount, getTable }

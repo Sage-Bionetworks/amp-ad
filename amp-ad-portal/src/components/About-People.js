@@ -1,31 +1,24 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { BarLoader } from "react-spinners"
+import update from "immutability-helper"
 
-//import * as SynapseClient from "synapse-react-client"
-//import * as SynapseConstants from "synapse-react-client"
 import { getTable } from "../queries/queryForData"
 import {
-  //getMarkdownSegment,
   waitFor,
-  //getWikiKey,
-  //getEntityHeader,
   asyncForEach,
   getUserProfileImage,
+  getUserProfile,
 } from "../queries/getWikiData"
-//import ShowHideSection from "../ShowHideSection"
-import placeholder from "../images/placeholder_member.png"
 
+import placeholder from "../images/placeholder_member.png"
 import { getColumnNameIndex } from "../controller/PrepRawSynapseData"
 import modalX from "../images/modalX.svg"
-
-//const ReactMarkdown = require("react-markdown")
 
 class People extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      tableData: {},
       users: [],
       loading: true,
       modal: false,
@@ -34,7 +27,7 @@ class People extends Component {
   }
 
   componentDidMount() {
-    this.getData().then(() => {})
+    this.getData()
   }
 
   componentDidUpdate() {}
@@ -47,21 +40,55 @@ class People extends Component {
     )
       .then((response) => {
         const users = this.assembleUsers(response)
-        //const payloadAssay = this.assembleEntityHeaderPayload(response, 5)
-        //this.setState({ users, tableData: response })
         return users
       })
       .then((users) => {
-        this.buildProfileImagesToUsersArray(users)
+        this.buildProfileToUsersArray(users)
       })
-    //.then(() => {
-    //console.log(this.state.users)
-    //})
+  };
+
+  getProfileFromState = (profiles, selectedProfile) => {
+    return profiles.filter(profile => profile.ownerId === selectedProfile)
+  };
+
+  getProfileIndexFromState = (profiles, selectedProfile) => {
+    let matchedIndex
+    profiles.forEach((profile, index) => {
+      if (profile.ownerId === selectedProfile) {
+        matchedIndex = index
+      }
+    })
+    return matchedIndex
+  };
+
+  setUserProfile = (profile, token) => {
+    getUserProfile(profile, token).then((profileResponse) => {
+      const userIndex = this.getProfileIndexFromState(
+        this.state.users,
+        this.state.activeProfile,
+      )
+      this.state.users.forEach((user) => {
+        if (user.ownerId === profile) {
+          const newState = update(this.state, {
+            users: {
+              [userIndex]: {
+                profile: { $set: profileResponse },
+              },
+            },
+          })
+          this.setState(newState)
+        }
+      })
+    })
   };
 
   modalWindow = (modalState, profile = this.state.activeProfile) => {
     if (modalState) {
-      const activeProfile = this.getProfile(this.state.users, profile)[0]
+      const activeProfile = this.getProfileFromState(
+        this.state.users,
+        profile,
+      )[0]
+
       return (
         <div className="modal-container">
           <button
@@ -72,7 +99,7 @@ class People extends Component {
           />
           <div className="profile">
             <div className="row">
-              <div className="col-xs-4">
+              <div className="col-xs-4 profile-image-container">
                 <div
                   className="profile-image-large"
                   style={{
@@ -81,11 +108,41 @@ class People extends Component {
                 />
               </div>
               <div className="col-xs-8">
-                <h2>
-                  {activeProfile.firstName}
-                  {" "}
-                  {activeProfile.lastName}
-                </h2>
+                <div className="row">
+                  <div className="col-xs-12">
+                    <h2>
+                      {activeProfile.firstName}
+                      {" "}
+                      {activeProfile.lastName}
+                    </h2>
+                    <h3>
+                      {activeProfile.institution}
+                    </h3>
+                    <p className="profile-summary">
+                      {activeProfile.profile !== undefined
+                        ? activeProfile.profile.summary
+                        : ""}
+                    </p>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-xs-6">
+                    <h4>
+Consortia
+                    </h4>
+                    <p>
+                      {activeProfile.consortia}
+                    </p>
+                  </div>
+                  <div className="col-xs-6">
+                    <h4>
+Grant
+                    </h4>
+                    <p>
+                      {activeProfile.grant}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -98,10 +155,6 @@ class People extends Component {
       )
     }
     return ""
-  };
-
-  getProfile = (profiles, selectedProfile) => {
-    return profiles.filter(profile => profile.ownerId === selectedProfile)
   };
 
   toggleProfileModal = (event, modalState) => {
@@ -118,10 +171,18 @@ class People extends Component {
 
     if (!modalState) {
       body.classList.add("noScroll")
-      this.setState({
-        modal: true,
-        activeProfile,
-      })
+      this.setState(
+        {
+          modal: true,
+          activeProfile,
+        },
+        () => {
+          this.setUserProfile(
+            this.state.activeProfile,
+            this.props.token.sessionToken,
+          )
+        },
+      )
     }
     return ""
   };
@@ -132,11 +193,10 @@ class People extends Component {
         backgroundImage: `url(${user.userProfileImage})`,
       }
       return (
-        <div>
+        <div key={user.firstName + user.lastName + user.ownerId}>
           <button
             type="button"
             className="col-xs-12 col-sm-1 headshot-col"
-            key={user.firstName + user.lastName}
             name={user.ownerId}
             onClick={event => this.toggleProfileModal(event)}
           >
@@ -162,16 +222,14 @@ class People extends Component {
     })
   };
 
-  buildProfileImagesToUsersArray = async (userArray) => {
+  buildProfileToUsersArray = async (userArray) => {
     return asyncForEach(userArray, async (row) => {
       await waitFor(20)
       this.setState({
         loading: true,
       })
       return getUserProfileImage(row.ownerId).then((result) => {
-        console.log(result)
         if (result.redirected === true) {
-          //row.userProfileImage = result.url
           this.setState({
             loading: false,
             users: [
@@ -180,6 +238,10 @@ class People extends Component {
                 firstName: row.firstName,
                 lastName: row.lastName,
                 ownerId: row.ownerId,
+                institution: row.institution,
+                consortia: row.consortia,
+                grant: row.grant,
+                profile: {},
                 userProfileImage: result.url,
               },
             ],
@@ -193,6 +255,10 @@ class People extends Component {
                 firstName: row.firstName,
                 lastName: row.lastName,
                 ownerId: row.ownerId,
+                institution: row.institution,
+                consortia: row.consortia,
+                grant: row.grant,
+                profile: {},
                 userProfileImage: placeholder,
               },
             ],
@@ -203,16 +269,21 @@ class People extends Component {
   };
 
   assembleUsers = (tableResponse) => {
-    //console.log(tableResponse)
     const firstNameIndex = getColumnNameIndex(tableResponse, "firstName")
     const lastNameIndex = getColumnNameIndex(tableResponse, "lastName")
     const ownerIdIndex = getColumnNameIndex(tableResponse, "ownerID")
+    const institutionIndex = getColumnNameIndex(tableResponse, "institution")
+    const consortiaIndex = getColumnNameIndex(tableResponse, "consortia")
+    const grantIndex = getColumnNameIndex(tableResponse, "grant")
     const users = []
     tableResponse.queryResult.queryResults.rows.forEach((row) => {
       users.push({
         firstName: row.values[firstNameIndex],
         lastName: row.values[lastNameIndex],
         ownerId: row.values[ownerIdIndex],
+        institution: row.values[institutionIndex],
+        consortia: row.values[consortiaIndex],
+        grant: row.values[grantIndex],
         userProfileImage: "",
       })
     })
