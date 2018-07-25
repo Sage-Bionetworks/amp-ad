@@ -27,7 +27,7 @@ class Studies extends Component {
       wikiIds: [],
       loading: true,
       bottom: false,
-      page: 50,
+      page: 10,
     }
   }
 
@@ -85,19 +85,20 @@ class Studies extends Component {
       this.props.token,
       "SELECT * FROM syn9886254",
       pageCount,
-      5,
+      10,
     )
       .then((response) => {
         this.setStudiesRows(response)
         this.setStudiesPayload(response)
       })
       .then(() => {
+        console.log(this.state.studiesRows)
         if (this.state.payloadStudy.references.length > 0) {
           getEntityHeader(
             this.props.token.sessionToken,
             this.state.payloadStudy,
           ).then((results) => {
-            console.log(results)
+            //console.log(results)
             this.setStudiesNames(results)
           })
         }

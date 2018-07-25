@@ -8,8 +8,8 @@ const buildRequest = (table, query, offset = 0, limit = 250) => {
       sql: query,
       includeEntityEtag: true,
       isConsistent: true,
-      offset: `${offset}`,
-      limit: `${limit}`,
+      offset,
+      limit,
     },
     partMask:
       SynapseConstants.BUNDLE_MASK_QUERY_RESULTS
