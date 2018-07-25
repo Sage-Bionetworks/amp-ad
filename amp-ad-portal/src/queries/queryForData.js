@@ -1,15 +1,15 @@
 import * as SynapseClient from "../synapse/SynapseClient"
 import * as SynapseConstants from "../synapse/SynapseConstants"
 
-const buildRequest = (table, query) => {
+const buildRequest = (table, query, offset = 0, limit = 250) => {
   return {
     entityId: table,
     query: {
       sql: query,
       includeEntityEtag: true,
       isConsistent: true,
-      offset: 0,
-      limit: 250,
+      offset: `${offset}`,
+      limit: `${limit}`,
     },
     partMask:
       SynapseConstants.BUNDLE_MASK_QUERY_RESULTS
@@ -57,8 +57,9 @@ const getBioSampleCount = (species, diagnosis = "", table, tokenResponse) => {
     .catch(error => console.log(error))
 }
 
-const getTable = (table, tokenResponse, query) => {
-  const request = buildRequest(table, query)
+const getTable = (table, tokenResponse, query, offset, limit) => {
+  const request = buildRequest(table, query, offset, limit)
+  console.log(request)
   return SynapseClient.getQueryTableResults(
     request,
     tokenResponse.sessionToken,

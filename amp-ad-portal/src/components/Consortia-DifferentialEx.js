@@ -36,7 +36,7 @@ Collaborative Differential Expression Projects
 }
 
 ConsortiaDifferentialEx.propTypes = {
-  markdown: PropTypes.array.isRequired,
+  markdown: PropTypes.string.isRequired,
 }
 
 export default ConsortiaDifferentialEx

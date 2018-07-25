@@ -11,10 +11,9 @@ import {
   asyncForEach,
 } from "../queries/getWikiData"
 import ShowHideSection from "../ShowHideSection"
+import { detectIfUserHasScrolledToBottom } from "../view/domScripts"
 
 const ReactMarkdown = require("react-markdown")
-
-//import { getColumnNameIndex } from "../controller/PrepRawSynapseData"
 
 class Studies extends Component {
   constructor(props) {
@@ -23,19 +22,74 @@ class Studies extends Component {
       payloadStudy: { references: [] },
       //payloadAssay: { references: [] },
       studiesNames: [],
-      //assayNames: [],
+      studiesRows: [],
       tableData: {},
       wikiIds: [],
       loading: true,
+      bottom: false,
+      page: 50,
     }
   }
 
   componentDidMount() {
-    getTable("syn9886254", this.props.token, "SELECT * FROM syn9886254")
+    this.getAndSetAllTableData().then(() => {
+      const pageCount = this.state.page + 10
+
+      this.setState({
+        loading: false,
+        page: pageCount,
+      })
+
+      window.addEventListener("scroll", this.handleScroll)
+    })
+  }
+
+  componentDidUpdate() {}
+
+  setStudiesRows = (synapseData = this.state.pageData) => {
+    const studiesRows = []
+    this.state.studiesRows.forEach(row => studiesRows.push(row))
+    synapseData.queryResult.queryResults.rows.forEach(row => studiesRows.push(row))
+    this.setState({
+      studiesRows,
+    })
+  };
+
+  setStudiesPayload = (synapseTableResponse) => {
+    const payloadStudy = this.assembleEntityHeaderPayload(
+      synapseTableResponse,
+      4,
+    )
+
+    this.setState({
+      payloadStudy,
+    })
+  };
+
+  setStudiesNames = (
+    synapseEntityHeaderResponse,
+    pageNameState = this.state.studiesNames,
+  ) => {
+    const namesOfStudies = []
+    pageNameState.forEach(name => namesOfStudies.push(name))
+    synapseEntityHeaderResponse.results.forEach(result => namesOfStudies.push(result))
+
+    this.setState({
+      studiesNames: namesOfStudies,
+    })
+  };
+
+  getAndSetAllTableData = async (pageCount = 0) => {
+    return getTable(
+      "syn9886254",
+      this.props.token,
+      "SELECT * FROM syn9886254",
+      pageCount,
+      5,
+    )
       .then((response) => {
-        const payloadStudy = this.assembleEntityHeaderPayload(response, 4)
-        //const payloadAssay = this.assembleEntityHeaderPayload(response, 5)
-        this.setState({ payloadStudy, tableData: response })
+        this.setStudiesRows(response)
+        this.setStudiesPayload(response)
       })
       .then(() => {
         if (this.state.payloadStudy.references.length > 0) {
@@ -43,35 +97,15 @@ class Studies extends Component {
             this.props.token.sessionToken,
             this.state.payloadStudy,
           ).then((results) => {
-            this.setState({
-              studiesNames: results.results,
-            })
+            console.log(results)
+            this.setStudiesNames(results)
           })
         }
-        //if (this.state.payloadAssay.references.length > 0) {
-        //getEntityHeader(
-        //this.props.token.sessionToken,
-        //this.state.payloadAssay,
-        //).then((results) => {
-        //this.setState({
-        //studiesNames: results.results,
-        //})
-        //})
-        //}
       })
       .then(() => {
-        if (
-          this.state.tableData !== undefined
-          && this.state.tableData.queryResult !== undefined
-        ) {
-          this.getWikiIdsAndMarkdown(
-            this.state.tableData.queryResult.queryResults.rows,
-          )
-        }
+        this.getWikiIdsAndMarkdown(this.state.studiesRows)
       })
-  }
-
-  componentDidUpdate() {}
+  };
 
   getWikiIdsAndMarkdown = async (tableData) => {
     const wikiIdsArr = []
@@ -98,6 +132,32 @@ class Studies extends Component {
     })
   };
 
+  handleScroll = () => {
+    const bottomState = detectIfUserHasScrolledToBottom()
+    this.setState({
+      bottom: bottomState,
+    })
+    this.loadMoreMarkdownSegments()
+  };
+
+  loadMoreMarkdownSegments = (
+    atBottom = this.state.bottom,
+    loading = this.state.loading,
+  ) => {
+    if (atBottom && !loading && this.state.page < 120) {
+      this.setState({
+        loading: true,
+      })
+      const pageCount = this.state.page + 10
+      this.getAndSetAllTableData(this.state.page).then(() => {
+        this.setState({
+          page: pageCount,
+          loading: false,
+        })
+      })
+    }
+  };
+
   assembleEntityHeaderPayload = (tableResponse, index) => {
     const payload = { references: [] }
     tableResponse.queryResult.queryResults.rows.forEach((row) => {
@@ -109,7 +169,7 @@ class Studies extends Component {
     return payload
   };
 
-  buildEntries = (wikiIds, tableData, studiesNames, wikiMarkdownState) => {
+  buildEntries = (wikiIds, studiesRows, studiesNames, wikiMarkdownState) => {
     // studiesNames has id: "synId" and name: ""
     // wikiIds
     // syn9702085: { ownerObjectId: "syn9702085", ownerObjectType: "ENTITY", wikiPageId: "425119" };
@@ -134,11 +194,10 @@ class Studies extends Component {
         let title = studiesNames.filter(study => study.id === synId)
         title = title[0].name
 
-        const objectData = tableData.queryResult.queryResults.rows.filter(
-          (row) => {
-            return row.values[4] === synId
-          },
-        )
+        const objectData = studiesRows.filter((row) => {
+          return row.values[4] === synId
+        })
+        //console.log(objectData)
 
         return (
           <div className="row">
@@ -210,7 +269,7 @@ Studies
             <div className="col-xs-12 col-sm-9">
               {this.buildEntries(
                 this.state.wikiIds,
-                this.state.tableData,
+                this.state.studiesRows,
                 this.state.studiesNames,
                 this.props.markdown,
               )}

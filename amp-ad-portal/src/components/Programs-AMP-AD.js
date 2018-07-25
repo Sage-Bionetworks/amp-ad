@@ -1,18 +1,33 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 
-import { getMarkdown } from "../queries/getWikiData"
+import { getMarkdown, getWikiMarkdownSegments } from "../queries/getWikiData"
+import { printShowHideSections } from "../model/HandleMarkdown"
 
 const ReactMarkdown = require("react-markdown")
 
 class ProgramsAmpAd extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: true,
+    }
+  }
+
   componentDidMount() {
     getMarkdown(this.props, "581895")
+    getWikiMarkdownSegments(
+      "581895",
+      "programsAmpAd",
+      this.props,
+      "syn12666371",
+      false,
+    )
   }
 
   render() {
     return (
-      <div className="row about">
+      <div className="row about research-page">
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
@@ -28,6 +43,11 @@ class ProgramsAmpAd extends Component {
             </div>
           </section>
           <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+          <section className="row center-xs content-row">
+            <div className="col-xs-12 col-sm-9">
+              {printShowHideSections(this.props.markdownSegs)}
+            </div>
+          </section>
         </div>
       </div>
     )
@@ -36,6 +56,7 @@ class ProgramsAmpAd extends Component {
 
 ProgramsAmpAd.propTypes = {
   markdown: PropTypes.string.isRequired,
+  markdownSegs: PropTypes.array.isRequired,
 }
 
 export default ProgramsAmpAd

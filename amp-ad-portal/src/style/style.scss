@@ -1044,6 +1044,25 @@ section.about-resilience-intro-section {
   margin-top:10px;
 }
 
+///// Research Page //////
+.research-page {
+  .content-row {
+    h3 {
+      margin-bottom: 5px;
+    }
+    h4 {
+      margin: 0px;
+      font-weight: 300;
+    }
+    .content.hide {
+      max-height: 70px;
+    }
+  }
+  .expand-icon {
+    top: 12px;
+  }
+}
+
 ///// External Researchers ////////
 p.researcher-bio {
   overflow: hidden;

@@ -78,6 +78,10 @@ class App extends Component {
     studies: [],
     differentialExpressions: [],
     experimentalResources: [],
+    programsAmpAd: [],
+    programsM2OVE: [],
+    programsModelAd: [],
+    programsResilienceAD: [],
   };
 
   componentDidMount() {
@@ -387,7 +391,9 @@ class App extends Component {
     <ProgramsM2OVE
       token={this.props.loginToken}
       handleChanges={this.handleChanges}
+      handleNestedChanges={this.handleNestedChanges}
       markdown={this.state.wikiMarkdown}
+      markdownSegs={this.state.programsM2OVE}
     />
   );
 
@@ -395,7 +401,9 @@ class App extends Component {
     <ProgramsAmpAd
       token={this.props.loginToken}
       handleChanges={this.handleChanges}
+      handleNestedChanges={this.handleNestedChanges}
       markdown={this.state.wikiMarkdown}
+      markdownSegs={this.state.programsAmpAd}
     />
   );
 
@@ -403,7 +411,9 @@ class App extends Component {
     <ProgramsModelAD
       token={this.props.loginToken}
       handleChanges={this.handleChanges}
+      handleNestedChanges={this.handleNestedChanges}
       markdown={this.state.wikiMarkdown}
+      markdownSegs={this.state.programsModelAd}
     />
   );
 
@@ -411,7 +421,9 @@ class App extends Component {
     <ProgramsResilienceAD
       token={this.props.loginToken}
       handleChanges={this.handleChanges}
+      handleNestedChanges={this.handleNestedChanges}
       markdown={this.state.wikiMarkdown}
+      markdownSegs={this.state.programsResilienceAD}
     />
   );
 

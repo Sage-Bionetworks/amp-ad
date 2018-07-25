@@ -812,6 +812,16 @@ section.about-resilience-intro-section {
   box-shadow: -1px -5px 5px -4px #9996;
   margin-top: 10px; }
 
+.research-page .content-row h3 {
+  margin-bottom: 5px; }
+.research-page .content-row h4 {
+  margin: 0px;
+  font-weight: 300; }
+.research-page .content-row .content.hide {
+  max-height: 70px; }
+.research-page .expand-icon {
+  top: 12px; }
+
 p.researcher-bio {
   overflow: hidden; }
 
