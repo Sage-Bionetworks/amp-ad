@@ -12,7 +12,7 @@ class ExternalResearchers extends Component {
     this.state = {
       loading: true,
       bottom: false,
-      page: 20,
+      page: 40,
     }
   }
 
@@ -24,7 +24,7 @@ class ExternalResearchers extends Component {
       "externalResearchers",
       this.props,
       "syn12666371",
-      20,
+      40,
     ).then(() => {
       const pageCount = this.state.page + 10
       this.setState({
