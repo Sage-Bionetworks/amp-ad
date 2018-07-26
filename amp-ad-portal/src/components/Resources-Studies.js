@@ -293,7 +293,7 @@ class Studies extends Component {
 
         return (
           <div className="row" key={objectData[0].values[4]}>
-            <div className="col-xs-12">
+            <div className="col-xs-12 studies-col">
               <div className="row">
                 <div className="col-xs-12 researchers studies-section">
                   <ShowHideSection

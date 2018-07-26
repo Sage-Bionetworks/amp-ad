@@ -99,7 +99,7 @@ class People extends Component {
           />
           <div className="profile">
             <div className="row">
-              <div className="col-xs-4 profile-image-container">
+              <div className="col-xs-12 col-sm-4 profile-image-container">
                 <div
                   className="profile-image-large"
                   style={{
@@ -107,7 +107,7 @@ class People extends Component {
                   }}
                 />
               </div>
-              <div className="col-xs-8">
+              <div className="col-xs-12 col-sm-6">
                 <div className="row">
                   <div className="col-xs-12">
                     <h2>

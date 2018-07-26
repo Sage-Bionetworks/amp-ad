@@ -13,7 +13,6 @@ body.noScroll, html.noScroll {
   height: 100%; }
 
 section div.row {
-  max-width: 920px;
   margin: 0px auto; }
 
 h1 {
@@ -663,8 +662,6 @@ section.contribute-your-data {
 
 section.child-page-hero {
   background: linear-gradient(to right, #5A498D, #4C57A2); }
-  section.child-page-hero .content {
-    max-width: 920px; }
   section.child-page-hero p {
     font-size: 18px;
     color: white; }
@@ -680,7 +677,6 @@ section.about-intro-section, section.content-section {
     text-decoration: underline; }
   section.about-intro-section div.col-sm-9, section.content-section div.col-sm-9 {
     padding: 0px;
-    max-width: 920px;
     text-align: left; }
   section.about-intro-section p, section.content-section p {
     font-size: 18px;
@@ -818,7 +814,8 @@ section.about-resilience-intro-section {
   margin: 0px;
   font-weight: 300; }
 .research-page .content-row .content.hide {
-  max-height: 70px; }
+  max-height: 70px;
+  overflow: hidden; }
 .research-page .expand-icon {
   top: 12px; }
 
@@ -831,8 +828,6 @@ p.researcher-bio {
   max-height: 170px; }
 .researchers-content .content.hide, .content-section .content.hide {
   max-height: 170px; }
-.researchers-content .div, .content-section .div {
-  max-width: 920px; }
 .researchers-content .researcher h2, .content-section .researcher h2 {
   margin-top: 0px; }
 .researchers-content .researcher h4, .content-section .researcher h4 {
@@ -846,6 +841,8 @@ p.researcher-bio {
     position: absolute;
     top: 100%;
     margin-left: 8px; }
+  .experimental-resource .col-xs-12, .row.publication .col-xs-12 {
+    padding: 0px; }
 
 .researchers-content .studies-section .content, .content-section .content {
   padding-left: 0px; }
@@ -871,6 +868,9 @@ p.researcher-bio {
 
 .studies-section .content {
   overflow-x: hidden; }
+
+.studies-col .col-xs-12, .studies-col.col-xs-12 {
+  padding: 0px; }
 
 button.headshot-col {
   background: transparent;

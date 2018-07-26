@@ -6,7 +6,7 @@ const computingCloud = require("../images/computing-cloud.svg")
 const ContributeYourData = () => {
   return (
     <section className="contribute-your-data row center-xs">
-      <div className="col-xs-12 col-sm-10">
+      <div className="col-xs-12 col-sm-9">
         <div className="row">
           <div className="col-xs-12 col-sm-4">
             <img alt="upload icon" src={computingCloud} />

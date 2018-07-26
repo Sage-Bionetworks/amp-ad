@@ -42,7 +42,7 @@ body.noScroll, html.noScroll {
 
 
 section div.row {
-    max-width: 920px;
+    //max-width: 920px;
   margin: 0px auto;
 }
 
@@ -848,7 +848,7 @@ section.contribute-your-data {
 //// about pages
 section.child-page-hero {
 	.content {
-		max-width: 920px;
+		//max-width: 920px;
 	}
 	p {
 		font-size: 18px; 
@@ -870,7 +870,10 @@ section.about-intro-section, section.content-section {
   }
 	div.col-sm-9 {
 		padding: 0px;
-		max-width: 920px;
+    //max-width: 920px;
+    @media screen and (max-width: 1305px) {
+      //max-width: 75%;
+    }
     text-align: left;
 	}
 	p {
@@ -1056,6 +1059,7 @@ section.about-resilience-intro-section {
     }
     .content.hide {
       max-height: 70px;
+      overflow: hidden;
     }
   }
   .expand-icon {
@@ -1079,7 +1083,7 @@ p.researcher-bio {
     max-height: 170px;
   }
   .div {
-    max-width: 920px;
+    //max-width: 920px;
   }
   .researcher {
     h2 {
@@ -1100,6 +1104,9 @@ p.researcher-bio {
     position: absolute;
     top: 100%;
     margin-left: 8px;
+  }
+  .col-xs-12 {
+    padding: 0px;
   }
 }
 
@@ -1147,6 +1154,12 @@ p.researcher-bio {
 
 .studies-section .content {
   overflow-x: hidden;
+}
+
+.studies-col {
+  .col-xs-12, &.col-xs-12 {
+    padding: 0px;
+  }
 }
 
 ////// people ////// 

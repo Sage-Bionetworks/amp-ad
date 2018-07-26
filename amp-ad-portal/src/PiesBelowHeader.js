@@ -352,8 +352,8 @@ class PiesBelowHeader extends Component {
               "Tissue",
             )}
           </div>
-        </div>
         {this.buttonsRow()}
+        </div>
       </section>
     )
   }
