@@ -42,7 +42,7 @@ body.noScroll, html.noScroll {
 
 
 section div.row {
-    max-width: 920px;
+    //max-width: 920px;
   margin: 0px auto;
 }
 
@@ -814,22 +814,6 @@ section.what-new {
     }
   }
   .what-new-data div {
-		p:first-child { display: none }		
-		ul:nth-child(2) {display: none }
-		p:nth-child(2) {display: none }
-		h3:nth-child(3) {display: none }
-		h2:nth-child(4) {display: none }
-		h3:nth-child(5) {display: none }
-		p:nth-child(6) {display: none }
-		h3:nth-child(7) {display: none }
-		hr:nth-child(15) {display: none }
-		h3:nth-child(16) {display: none }
-		p:nth-child(17) {display: none }
-		hr:nth-child(18) {display: none }
-		h3:nth-child(19) {display: none }
-		h2:nth-child(20) {display: none }
-		h3:nth-child(21) {display: none }
-		ul:nth-child(22) {display: none }
 		p strong {
 			font-size: 18px;
 		}
@@ -845,10 +829,17 @@ section.contribute-your-data {
 	}
 }
 
+///////// program pages ////////////////
+.program {
+  .content-row {
+    margin-top: -50px; 
+  }
+}
+
 //// about pages
 section.child-page-hero {
 	.content {
-		max-width: 920px;
+		//max-width: 920px;
 	}
 	p {
 		font-size: 18px; 
@@ -870,7 +861,10 @@ section.about-intro-section, section.content-section {
   }
 	div.col-sm-9 {
 		padding: 0px;
-		max-width: 920px;
+    //max-width: 920px;
+    @media screen and (max-width: 1305px) {
+      //max-width: 75%;
+    }
     text-align: left;
 	}
 	p {
@@ -1044,6 +1038,26 @@ section.about-resilience-intro-section {
   margin-top:10px;
 }
 
+///// Research Page //////
+.research-page {
+  .content-row {
+    h3 {
+      margin-bottom: 5px;
+    }
+    h4 {
+      margin: 0px;
+      font-weight: 300;
+    }
+    .content.hide {
+      max-height: 70px;
+      overflow: hidden;
+    }
+  }
+  .expand-icon {
+    top: 12px;
+  }
+}
+
 ///// External Researchers ////////
 p.researcher-bio {
   overflow: hidden;
@@ -1060,7 +1074,15 @@ p.researcher-bio {
     max-height: 170px;
   }
   .div {
-    max-width: 920px;
+    //max-width: 920px;
+  }
+  .researcher {
+    h2 {
+      margin-top: 0px;
+    }
+    h4 {
+      margin-bottom: 0px;
+    }
   }
 }
 
@@ -1074,6 +1096,9 @@ p.researcher-bio {
     top: 100%;
     margin-left: 8px;
   }
+  .col-xs-12 {
+    padding: 0px;
+  }
 }
 
 //.studies-section p, .studies-section ul {
@@ -1082,15 +1107,33 @@ p.researcher-bio {
 
 .researchers-content .studies-section, .content-section {
   .content {
+    h2 {
+      margin-bottom: 0px;
+    }
+    h4 {
+      margin-bottom: 0px;
+    }
+    p {
+      margin: 0px;
+    }
+    padding-left: 0px;
+  }
+  .content {
     &.hide {
-      max-height: 175px;
+      max-height: 168px;
     }
   }
   .expand-section {
     &.hide {
-      max-height: 170px;
+      max-height: 168px;
     }
     margin-bottom: 10px;
+  }
+}
+.study-overview {
+  ul {
+    margin-top: 0px;
+    padding-left: 0px;
   }
 }
 
@@ -1102,6 +1145,12 @@ p.researcher-bio {
 
 .studies-section .content {
   overflow-x: hidden;
+}
+
+.studies-col {
+  .col-xs-12, &.col-xs-12 {
+    padding: 0px;
+  }
 }
 
 ////// people ////// 

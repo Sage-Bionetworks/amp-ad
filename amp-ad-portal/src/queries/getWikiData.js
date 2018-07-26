@@ -76,16 +76,18 @@ const getUserProfile = (profileId, token) => {
 }
 
 const getWikiHeaderTree = (token, synId, offsetVal = 0, limit = 10) => {
-  //console.log(offsetVal)
-  return fetch(
-    `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikiheadertree?offset=${offsetVal}&limit=${limit}`,
-    {
-      method: "GET",
-      headers: {
-        sessionToken: token,
-      },
+  let fetchReq = `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikiheadertree?offset=${offsetVal}&limit=${limit}`
+  if (offsetVal === false || limit === false) {
+    fetchReq = `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikiheadertree`
+    //this.getSubPageHeaders("581934").then(response => console.log(response))
+  }
+  console.log(fetchReq)
+  return fetch(fetchReq, {
+    method: "GET",
+    headers: {
+      sessionToken: token,
     },
-  )
+  })
     .then((data) => {
       return data.json()
     })
@@ -139,9 +141,15 @@ const getMarkdownSegment = (
     .catch(handleErrors)
 }
 
-const getSubPageHeaders = (parentId, props, synId, paginationValue) => {
-  return getWikiHeaderTree(props.token.sessionToken, synId, paginationValue)
+const getSubPageHeaders = (parentId, props, synId, paginationValue, limit) => {
+  return getWikiHeaderTree(
+    props.token.sessionToken,
+    synId,
+    paginationValue,
+    limit,
+  )
     .then((results) => {
+      //console.log(results)
       return results.results.filter(wikiPage => wikiPage.parentId === parentId)
     })
     .catch(handleErrors)
@@ -161,8 +169,9 @@ const getWikiMarkdownSegments = (
   props,
   synId,
   paginationValue = 10,
+  limit,
 ) => {
-  return getSubPageHeaders(wikiId, props, synId, paginationValue).then(
+  return getSubPageHeaders(wikiId, props, synId, paginationValue, limit).then(
     (headers) => {
       //console.log(headers)
       asyncForEach(headers, async (header) => {

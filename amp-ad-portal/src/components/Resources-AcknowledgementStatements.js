@@ -4,9 +4,9 @@ import { getMarkdown } from "../queries/getWikiData"
 
 const ReactMarkdown = require("react-markdown")
 
-class ConsortiaDifferentialEx extends Component {
+class AcknowledgementStatements extends Component {
   componentDidMount() {
-    getMarkdown(this.props, "581928")
+    getMarkdown(this.props, "582162")
   }
 
   render() {
@@ -16,12 +16,9 @@ class ConsortiaDifferentialEx extends Component {
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
               <h2>
-Collaborative Differential Expression Projects
+Acknowledgement Statements
               </h2>
-              <p>
-                This page provides a summary of cross-consortia RNA-seq
-                differential expression meta-analysis efforts.
-              </p>
+              <p />
             </div>
           </section>
           <section className="row center-xs content-section">
@@ -35,8 +32,8 @@ Collaborative Differential Expression Projects
   }
 }
 
-ConsortiaDifferentialEx.propTypes = {
+AcknowledgementStatements.propTypes = {
   markdown: PropTypes.string.isRequired,
 }
 
-export default ConsortiaDifferentialEx
+export default AcknowledgementStatements

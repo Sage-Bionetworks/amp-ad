@@ -13,7 +13,6 @@ body.noScroll, html.noScroll {
   height: 100%; }
 
 section div.row {
-  max-width: 920px;
   margin: 0px auto; }
 
 h1 {
@@ -618,38 +617,6 @@ section.what-new .what-new-data {
     padding-top: 0px;
     margin-top: 0px;
     color: #D3D5DB; }
-section.what-new .what-new-data div p:first-child {
-  display: none; }
-section.what-new .what-new-data div ul:nth-child(2) {
-  display: none; }
-section.what-new .what-new-data div p:nth-child(2) {
-  display: none; }
-section.what-new .what-new-data div h3:nth-child(3) {
-  display: none; }
-section.what-new .what-new-data div h2:nth-child(4) {
-  display: none; }
-section.what-new .what-new-data div h3:nth-child(5) {
-  display: none; }
-section.what-new .what-new-data div p:nth-child(6) {
-  display: none; }
-section.what-new .what-new-data div h3:nth-child(7) {
-  display: none; }
-section.what-new .what-new-data div hr:nth-child(15) {
-  display: none; }
-section.what-new .what-new-data div h3:nth-child(16) {
-  display: none; }
-section.what-new .what-new-data div p:nth-child(17) {
-  display: none; }
-section.what-new .what-new-data div hr:nth-child(18) {
-  display: none; }
-section.what-new .what-new-data div h3:nth-child(19) {
-  display: none; }
-section.what-new .what-new-data div h2:nth-child(20) {
-  display: none; }
-section.what-new .what-new-data div h3:nth-child(21) {
-  display: none; }
-section.what-new .what-new-data div ul:nth-child(22) {
-  display: none; }
 section.what-new .what-new-data div p strong {
   font-size: 18px; }
 
@@ -661,10 +628,11 @@ section.contribute-your-data {
     text-align: left;
     padding: 0px 0px 0px 100px; }
 
+.program .content-row {
+  margin-top: -50px; }
+
 section.child-page-hero {
   background: linear-gradient(to right, #5A498D, #4C57A2); }
-  section.child-page-hero .content {
-    max-width: 920px; }
   section.child-page-hero p {
     font-size: 18px;
     color: white; }
@@ -680,7 +648,6 @@ section.about-intro-section, section.content-section {
     text-decoration: underline; }
   section.about-intro-section div.col-sm-9, section.content-section div.col-sm-9 {
     padding: 0px;
-    max-width: 920px;
     text-align: left; }
   section.about-intro-section p, section.content-section p {
     font-size: 18px;
@@ -812,6 +779,17 @@ section.about-resilience-intro-section {
   box-shadow: -1px -5px 5px -4px #9996;
   margin-top: 10px; }
 
+.research-page .content-row h3 {
+  margin-bottom: 5px; }
+.research-page .content-row h4 {
+  margin: 0px;
+  font-weight: 300; }
+.research-page .content-row .content.hide {
+  max-height: 70px;
+  overflow: hidden; }
+.research-page .expand-icon {
+  top: 12px; }
+
 p.researcher-bio {
   overflow: hidden; }
 
@@ -821,8 +799,10 @@ p.researcher-bio {
   max-height: 170px; }
 .researchers-content .content.hide, .content-section .content.hide {
   max-height: 170px; }
-.researchers-content .div, .content-section .div {
-  max-width: 920px; }
+.researchers-content .researcher h2, .content-section .researcher h2 {
+  margin-top: 0px; }
+.researchers-content .researcher h4, .content-section .researcher h4 {
+  margin-bottom: 0px; }
 
 .experimental-resource, .row.publication {
   position: relative; }
@@ -832,19 +812,36 @@ p.researcher-bio {
     position: absolute;
     top: 100%;
     margin-left: 8px; }
+  .experimental-resource .col-xs-12, .row.publication .col-xs-12 {
+    padding: 0px; }
 
+.researchers-content .studies-section .content, .content-section .content {
+  padding-left: 0px; }
+  .researchers-content .studies-section .content h2, .content-section .content h2 {
+    margin-bottom: 0px; }
+  .researchers-content .studies-section .content h4, .content-section .content h4 {
+    margin-bottom: 0px; }
+  .researchers-content .studies-section .content p, .content-section .content p {
+    margin: 0px; }
 .researchers-content .studies-section .content.hide, .content-section .content.hide {
-  max-height: 175px; }
+  max-height: 168px; }
 .researchers-content .studies-section .expand-section, .content-section .expand-section {
   margin-bottom: 10px; }
   .researchers-content .studies-section .expand-section.hide, .content-section .expand-section.hide {
-    max-height: 170px; }
+    max-height: 168px; }
+
+.study-overview ul {
+  margin-top: 0px;
+  padding-left: 0px; }
 
 .researchers-content div.row.study-overview {
   margin-bottom: 35px; }
 
 .studies-section .content {
   overflow-x: hidden; }
+
+.studies-col .col-xs-12, .studies-col.col-xs-12 {
+  padding: 0px; }
 
 button.headshot-col {
   background: transparent;

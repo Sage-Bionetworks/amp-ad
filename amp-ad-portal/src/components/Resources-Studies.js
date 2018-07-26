@@ -11,67 +11,117 @@ import {
   asyncForEach,
 } from "../queries/getWikiData"
 import ShowHideSection from "../ShowHideSection"
+import { detectIfUserHasScrolledToBottom } from "../view/domScripts"
 
 const ReactMarkdown = require("react-markdown")
-
-//import { getColumnNameIndex } from "../controller/PrepRawSynapseData"
 
 class Studies extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      payloadStudy: { references: [] },
-      //payloadAssay: { references: [] },
+      //payloadStudy: { references: [] },
       studiesNames: [],
-      //assayNames: [],
-      tableData: {},
+      studiesDataTypes: [],
+      studiesRows: [],
+      uniqueStudiesRows: [],
+      //tableData: {},
       wikiIds: [],
       loading: true,
+      bottom: false,
+      page: 10,
     }
   }
 
   componentDidMount() {
-    getTable("syn9886254", this.props.token, "SELECT * FROM syn9886254")
-      .then((response) => {
-        const payloadStudy = this.assembleEntityHeaderPayload(response, 4)
-        //const payloadAssay = this.assembleEntityHeaderPayload(response, 5)
-        this.setState({ payloadStudy, tableData: response })
+    this.getAndSetAllTableData().then(() => {
+      this.setState({
+        loading: false,
       })
-      .then(() => {
-        if (this.state.payloadStudy.references.length > 0) {
-          getEntityHeader(
-            this.props.token.sessionToken,
-            this.state.payloadStudy,
-          ).then((results) => {
-            this.setState({
-              studiesNames: results.results,
-            })
-          })
-        }
-        //if (this.state.payloadAssay.references.length > 0) {
-        //getEntityHeader(
-        //this.props.token.sessionToken,
-        //this.state.payloadAssay,
-        //).then((results) => {
-        //this.setState({
-        //studiesNames: results.results,
-        //})
-        //})
-        //}
-      })
-      .then(() => {
-        if (
-          this.state.tableData !== undefined
-          && this.state.tableData.queryResult !== undefined
-        ) {
-          this.getWikiIdsAndMarkdown(
-            this.state.tableData.queryResult.queryResults.rows,
-          )
-        }
-      })
+    })
   }
 
   componentDidUpdate() {}
+
+  setStudiesRows = (synapseData = this.state.pageData) => {
+    const studiesRows = []
+    synapseData.queryResult.queryResults.rows.forEach(row => studiesRows.push(row))
+    this.setState({
+      studiesRows,
+    })
+  };
+
+  setPayload = (synapseTableResponse, stateName, payloadIndex) => {
+    console.log(synapseTableResponse)
+    const payloadStudy = this.assembleEntityHeaderPayload(
+      synapseTableResponse,
+      payloadIndex,
+    )
+    this.setState({
+      [stateName]: payloadStudy,
+    })
+  };
+
+  setPayloadResponse = (
+    synapseEntityHeaderResponse,
+    pageNameState,
+    pageNameStateKey,
+  ) => {
+    const names = []
+    pageNameState.forEach(name => names.push(name))
+    synapseEntityHeaderResponse.results.forEach(result => names.push(result))
+
+    this.setState({
+      [pageNameStateKey]: names,
+    })
+  };
+
+  getAndSetAllTableData = async (pageCount = 0) => {
+    return getTable(
+      "syn9886254",
+      this.props.token,
+      "SELECT * FROM syn9886254",
+      pageCount,
+    )
+      .then((response) => {
+        this.setStudiesRows(response)
+        this.setUniqueStudiesRows(this.state.studiesRows)
+        this.setPayload(
+          response.queryResult.queryResults.rows,
+          "studiesNames",
+          4,
+        )
+        this.setPayload(this.state.uniqueStudiesRows, "studiesDataTypes", 5)
+      })
+      .then(() => {
+        getEntityHeader(
+          this.props.token.sessionToken,
+          this.state.studiesDataTypes,
+        ).then((results) => {
+          this.setNames(results.results, "studiesNames")
+        })
+      })
+      .then(() => {
+        this.getWikiIdsAndMarkdown(this.state.uniqueStudiesRows)
+      })
+  };
+
+  setNames = (synapseHeaderResults, stateName) => {
+    const names = []
+    synapseHeaderResults.forEach((element) => {
+      names.push(element)
+    })
+    this.setState({
+      [stateName]: names,
+    })
+    return names
+  };
+
+  setUniqueStudiesRows = (studiesState) => {
+    const uniqueRows = this.makeUniqueStudiesRows(studiesState)
+    this.setState({
+      uniqueStudiesRows: uniqueRows,
+    })
+  };
 
   getWikiIdsAndMarkdown = async (tableData) => {
     const wikiIdsArr = []
@@ -98,24 +148,109 @@ class Studies extends Component {
     })
   };
 
+  uniqueArray = (a) => {
+    return a.filter((item, pos) => {
+      return a.indexOf(item) === pos
+    })
+  };
+
+  handleScroll = () => {
+    const bottomState = detectIfUserHasScrolledToBottom()
+    this.setState({
+      bottom: bottomState,
+    })
+    this.loadMoreMarkdownSegments()
+  };
+
+  loadMoreMarkdownSegments = (
+    atBottom = this.state.bottom,
+    loading = this.state.loading,
+  ) => {
+    if (atBottom && !loading && this.state.page < 120) {
+      this.setState({
+        loading: true,
+      })
+      const pageCount = this.state.page + 10
+      this.getAndSetAllTableData(this.state.page).then(() => {
+        this.setState({
+          page: pageCount,
+          loading: false,
+        })
+      })
+    }
+  };
+
   assembleEntityHeaderPayload = (tableResponse, index) => {
     const payload = { references: [] }
-    tableResponse.queryResult.queryResults.rows.forEach((row) => {
-      payload.references.push({
-        targetId: row.values[index],
-        targetVersionNumber: 1,
-      })
+    tableResponse.forEach((row) => {
+      //console.log(index, row)
+      if (typeof row.values[index] === "object") {
+        row.values[index].forEach((id) => {
+          //console.log(index, row, id)
+          if (id !== null) {
+            payload.references.push({
+              targetId: id,
+              targetVersionNumber: 1,
+            })
+          }
+        })
+      } else {
+        payload.references.push({
+          targetId: row.values[index],
+          targetVersionNumber: 1,
+        })
+      }
     })
+    //console.log(payload)
     return payload
   };
 
-  buildEntries = (wikiIds, tableData, studiesNames, wikiMarkdownState) => {
-    // studiesNames has id: "synId" and name: ""
-    // wikiIds
-    // syn9702085: { ownerObjectId: "syn9702085", ownerObjectType: "ENTITY", wikiPageId: "425119" };
-    if (wikiIds.length > 5) {
+  getNameFromID = (synId, stateObject) => {
+    let matchedRow
+    if (stateObject && stateObject.length > 0) {
+      matchedRow = stateObject.filter(element => element.id === synId)
+      if (matchedRow[0]) {
+        return matchedRow[0].name
+      }
+    }
+    return ""
+  };
+
+  makeUniqueStudiesRows = (rows) => {
+    let distinctAssayIds
+    let distinctRows
+    const outputRows = []
+    let foundIds = []
+    rows.forEach((row) => {
+      const synId = row.values[4]
+      foundIds.push(synId)
+    })
+    foundIds = this.uniqueArray(foundIds)
+
+    foundIds.forEach((foundId) => {
+      distinctRows = []
+      distinctAssayIds = []
+      rows.forEach((studyNameRow) => {
+        if (studyNameRow.values[4] === foundId) {
+          distinctRows.push(studyNameRow)
+        }
+      })
+      distinctRows.forEach((assayIdRow) => {
+        const distinctAssayId = assayIdRow.values[5]
+        distinctAssayIds.push(distinctAssayId)
+      })
+
+      distinctRows[0].values.splice(5, 1, distinctAssayIds)
+      outputRows.push(distinctRows[0])
+    })
+    return outputRows
+  };
+
+  buildEntries = (wikiIds, studiesRows, studiesNames, wikiMarkdownState) => {
+    // builds user profiles
+    console.log(studiesRows)
+    if (wikiIds.length > 0) {
       return wikiIds.map((element) => {
-        //console.log(element[Object.keys()[0]])
         const synElement = element[Object.keys(element)[0]]
         const synId = synElement.ownerObjectId
         const wikiId = synElement.wikiPageId
@@ -126,25 +261,30 @@ class Studies extends Component {
             return Object.keys(markdownObj)[0] === wikiId
           })
         }
-
         if (wikiMarkdownCopy[0] !== undefined) {
           wikiMarkdownCopy = wikiMarkdownCopy[0][parseInt(wikiId, 10)]
         }
+        if (typeof wikiMarkdownCopy === "object") {
+          wikiMarkdownCopy = ""
+        }
 
-        let title = studiesNames.filter(study => study.id === synId)
-        title = title[0].name
+        const objectData = studiesRows.filter((row) => {
+          return row.values[4] === synId
+        })
 
-        const objectData = tableData.queryResult.queryResults.rows.filter(
-          (row) => {
-            return row.values[4] === synId
-          },
-        )
+        const synIds = objectData[0].values[5].map((id) => {
+          return (
+            <li key={id}>
+              {this.getNameFromID(id, this.state.studiesNames)}
+            </li>
+          )
+        })
 
         return (
-          <div className="row">
-            <div className="col-xs-12">
+          <div className="row" key={objectData[0].values[4]}>
+            <div className="col-xs-12 studies-col">
               <div className="row">
-                <div className="col-xs-12 studies-section">
+                <div className="col-xs-12 researchers studies-section">
                   <ShowHideSection
                     content={<ReactMarkdown source={wikiMarkdownCopy} />}
                   />
@@ -157,11 +297,11 @@ class Studies extends Component {
 Individuals
                     </li>
                     <li>
-                      {objectData[0].values[10]}
+                      {objectData[0].values[8]}
                     </li>
                   </ul>
                 </div>
-                <div className="col-sm-3">
+                <div className="col-sm-4">
                   <ul>
                     <li>
 Tissues
@@ -171,14 +311,12 @@ Tissues
                     </li>
                   </ul>
                 </div>
-                <div className="col-sm-3">
+                <div className="col-sm-4">
                   <ul>
                     <li>
 Data Types
                     </li>
-                    <li>
-                      {objectData[0].values[5]}
-                    </li>
+                    {synIds}
                   </ul>
                 </div>
               </div>
@@ -210,7 +348,7 @@ Studies
             <div className="col-xs-12 col-sm-9">
               {this.buildEntries(
                 this.state.wikiIds,
-                this.state.tableData,
+                this.state.uniqueStudiesRows,
                 this.state.studiesNames,
                 this.props.markdown,
               )}

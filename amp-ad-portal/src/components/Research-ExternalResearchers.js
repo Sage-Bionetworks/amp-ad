@@ -12,19 +12,18 @@ class ExternalResearchers extends Component {
     this.state = {
       loading: true,
       bottom: false,
-      page: 40,
+      page: 45,
     }
   }
 
   componentDidMount() {
-    //getMarkdownSegment(this.props, "581946", "externalResearchers")
-    //this.getSubPageHeaders("581934").then(response => console.log(response))
     getWikiMarkdownSegments(
       "581934",
       "externalResearchers",
       this.props,
       "syn12666371",
-      40,
+      45,
+      30,
     ).then(() => {
       const pageCount = this.state.page + 10
       this.setState({
@@ -40,7 +39,7 @@ class ExternalResearchers extends Component {
     atBottom = this.state.bottom,
     loading = this.state.loading,
   ) => {
-    if (atBottom && !loading && this.state.page < 120) {
+    if (atBottom && !loading) {
       this.setState({
         loading: true,
       })
@@ -61,11 +60,13 @@ class ExternalResearchers extends Component {
   };
 
   handleScroll = () => {
-    const bottomState = detectIfUserHasScrolledToBottom()
-    this.setState({
-      bottom: bottomState,
-    })
-    this.loadMoreMarkdownSegments()
+    if (this.state.page < 200) {
+      const bottomState = detectIfUserHasScrolledToBottom()
+      this.setState({
+        bottom: bottomState,
+      })
+      this.loadMoreMarkdownSegments()
+    }
   };
 
   render() {
