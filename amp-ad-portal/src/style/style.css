@@ -837,6 +837,24 @@ p.researcher-bio {
 .researchers-content div.row.study-overview {
   margin-bottom: 35px; }
 
+.study-overview table {
+  max-width: 65%; }
+.study-overview thead, .study-overview tbody {
+  display: flex;
+  flex-direction: column; }
+.study-overview tr {
+  display: flex;
+  width: 100%; }
+.study-overview th, .study-overview td {
+  width: 33.3%;
+  padding: 0px 10px; }
+.study-overview th.data-types, .study-overview td.data-types {
+  width: 30%; }
+.study-overview th.tissues, .study-overview td.tissues {
+  width: 55%; }
+.study-overview th.individuals, .study-overview td.individuals {
+  width: 15%; }
+
 .studies-section .content {
   overflow-x: hidden; }
 

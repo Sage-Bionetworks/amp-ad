@@ -1143,6 +1143,33 @@ p.researcher-bio {
   }
 }
 
+.study-overview {
+  table {
+    max-width: 65%;
+  }
+  thead, tbody {
+    display: flex;
+    flex-direction: column;
+  }
+  tr {
+    display: flex;
+    width: 100%;
+  }
+  th, td {
+    width: 33.3%;
+    padding: 0px 10px;
+  }
+  th.data-types, td.data-types {
+    width: 30%;
+  }
+  th.tissues, td.tissues {
+    width: 55%; 
+  }
+  th.individuals, td.individuals {
+    width: 15%;
+  }
+}
+
 .studies-section .content {
   overflow-x: hidden;
 }

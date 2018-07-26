@@ -28,7 +28,6 @@ class Studies extends Component {
       wikiIds: [],
       loading: true,
       bottom: false,
-      page: 10,
     }
   }
 
@@ -75,13 +74,8 @@ class Studies extends Component {
     })
   };
 
-  getAndSetAllTableData = async (pageCount = 0) => {
-    return getTable(
-      "syn9886254",
-      this.props.token,
-      "SELECT * FROM syn9886254",
-      pageCount,
-    )
+  getAndSetAllTableData = async () => {
+    return getTable("syn9886254", this.props.token, "SELECT * FROM syn9886254")
       .then((response) => {
         this.setStudiesRows(response)
         this.setUniqueStudiesRows(this.state.studiesRows)
@@ -216,39 +210,77 @@ class Studies extends Component {
     return ""
   };
 
-  makeUniqueStudiesRows = (rows) => {
-    let distinctAssayIds
-    let distinctRows
-    const outputRows = []
+  makeUniqueSynIdsArray = (rows) => {
     let foundIds = []
+
     rows.forEach((row) => {
       const synId = row.values[4]
       foundIds.push(synId)
     })
     foundIds = this.uniqueArray(foundIds)
+    return foundIds
+  };
 
-    foundIds.forEach((foundId) => {
+  makeUniqueStudiesRows = (rows) => {
+    const outputRows = []
+    let distinctAssayIds
+    let distinctSampleTypes
+    let distinctRows
+    let distinctIndividuals
+
+    const uniqueSynIds = this.makeUniqueSynIdsArray(rows)
+
+    uniqueSynIds.forEach((Id) => {
       distinctRows = []
       distinctAssayIds = []
+      distinctSampleTypes = []
+      distinctIndividuals = []
+
       rows.forEach((studyNameRow) => {
-        if (studyNameRow.values[4] === foundId) {
+        if (studyNameRow.values[4] === Id) {
           distinctRows.push(studyNameRow)
         }
       })
-      distinctRows.forEach((assayIdRow) => {
-        const distinctAssayId = assayIdRow.values[5]
+      distinctRows.forEach((idRow) => {
+        const distinctAssayId = idRow.values[5]
+        const distinctSampleType = idRow.values[6]
+        const distinctIndividual = idRow.values[8]
         distinctAssayIds.push(distinctAssayId)
+        distinctSampleTypes.push(distinctSampleType)
+        distinctIndividuals.push(distinctIndividual)
       })
 
       distinctRows[0].values.splice(5, 1, distinctAssayIds)
+      distinctRows[0].values.splice(6, 1, distinctSampleTypes)
+      distinctRows[0].values.splice(8, 1, distinctIndividuals)
       outputRows.push(distinctRows[0])
     })
+    console.log(outputRows)
     return outputRows
+  };
+
+  buildDataTable = (row) => {
+    return row[5].map((element, index) => {
+      return (
+        <tr className="studies-table-row">
+          <td className="individuals">
+            {row[8][index]}
+          </td>
+          <td className="tissues">
+            {row[6][index]}
+          </td>
+          <td className="data-types">
+            <a href={`https://www.synapse.org/#!Synapse:${row[5][index]}`}>
+              {this.getNameFromID(row[5][index], this.state.studiesNames)}
+            </a>
+          </td>
+        </tr>
+      )
+    })
   };
 
   buildEntries = (wikiIds, studiesRows, studiesNames, wikiMarkdownState) => {
     // builds user profiles
-    console.log(studiesRows)
     if (wikiIds.length > 0) {
       return wikiIds.map((element) => {
         const synElement = element[Object.keys(element)[0]]
@@ -272,13 +304,7 @@ class Studies extends Component {
           return row.values[4] === synId
         })
 
-        const synIds = objectData[0].values[5].map((id) => {
-          return (
-            <li key={id}>
-              {this.getNameFromID(id, this.state.studiesNames)}
-            </li>
-          )
-        })
+        const table = this.buildDataTable(objectData[0].values)
 
         return (
           <div className="row" key={objectData[0].values[4]}>
@@ -290,35 +316,26 @@ class Studies extends Component {
                   />
                 </div>
               </div>
-              <div className="row study-overview">
-                <div className="col-sm-3">
-                  <ul>
-                    <li>
+
+              <div className="study-overview">
+                <table>
+                  <thead className="">
+                    <tr className="">
+                      <th className="individuals">
 Individuals
-                    </li>
-                    <li>
-                      {objectData[0].values[8]}
-                    </li>
-                  </ul>
-                </div>
-                <div className="col-sm-4">
-                  <ul>
-                    <li>
+                      </th>
+                      <th className="tissues">
 Tissues
-                    </li>
-                    <li>
-                      {objectData[0].values[6]}
-                    </li>
-                  </ul>
-                </div>
-                <div className="col-sm-4">
-                  <ul>
-                    <li>
+                      </th>
+                      <th className="data-types">
 Data Types
-                    </li>
-                    {synIds}
-                  </ul>
-                </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {table}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
