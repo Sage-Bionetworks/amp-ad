@@ -46,6 +46,10 @@ table {
     padding: 5px; }
   table td {
     padding: 5px; }
+  table a {
+    color: #5A478F;
+    text-decoration: underline;
+    font-weight: 400; }
 
 header a {
   color: black;
@@ -830,15 +834,19 @@ p.researcher-bio {
   .researchers-content .studies-section .expand-section.hide, .content-section .expand-section.hide {
     max-height: 168px; }
 
-.study-overview ul {
-  margin-top: 0px;
-  padding-left: 0px; }
-
 .researchers-content div.row.study-overview {
   margin-bottom: 35px; }
 
-.study-overview table {
-  max-width: 65%; }
+.studies-section .study-overview ul {
+  margin-top: 0px;
+  padding-left: 0px; }
+.studies-section .content {
+  margin: 0px;
+  overflow-x: hidden; }
+
+.studies-col .col-xs-12, .studies-col.col-xs-12 {
+  padding: 0px; }
+
 .study-overview thead, .study-overview tbody {
   display: flex;
   flex-direction: column; }
@@ -854,12 +862,6 @@ p.researcher-bio {
   width: 55%; }
 .study-overview th.individuals, .study-overview td.individuals {
   width: 15%; }
-
-.studies-section .content {
-  overflow-x: hidden; }
-
-.studies-col .col-xs-12, .studies-col.col-xs-12 {
-  padding: 0px; }
 
 button.headshot-col {
   background: transparent;

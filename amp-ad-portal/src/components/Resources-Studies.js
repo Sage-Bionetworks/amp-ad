@@ -15,6 +15,16 @@ import { detectIfUserHasScrolledToBottom } from "../view/domScripts"
 
 const ReactMarkdown = require("react-markdown")
 
+//const HTMLToReactParser = require("html-to-react").Parser
+
+//const htmlToReactParser = new HTMLToReactParser()
+
+//const markdownSynapse = require("markdown-it-synapse")
+//const markdownTable = require("markdown-it-synapse-table")
+//const md = require("markdown-it")()
+//.use(markdownSynapse)
+//.use(markdownTable)
+
 class Studies extends Component {
   constructor(props) {
     super(props)
@@ -50,7 +60,6 @@ class Studies extends Component {
   };
 
   setPayload = (synapseTableResponse, stateName, payloadIndex) => {
-    console.log(synapseTableResponse)
     const payloadStudy = this.assembleEntityHeaderPayload(
       synapseTableResponse,
       payloadIndex,
@@ -255,14 +264,16 @@ class Studies extends Component {
       distinctRows[0].values.splice(8, 1, distinctIndividuals)
       outputRows.push(distinctRows[0])
     })
-    console.log(outputRows)
     return outputRows
   };
 
   buildDataTable = (row) => {
     return row[5].map((element, index) => {
       return (
-        <tr className="studies-table-row">
+        <tr
+          className="studies-table-row"
+          key={row[5][index] + row[8][index] + row[6][index]}
+        >
           <td className="individuals">
             {row[8][index]}
           </td>
@@ -306,6 +317,9 @@ class Studies extends Component {
 
         const table = this.buildDataTable(objectData[0].values)
 
+        //const htmlInput = md.render(wikiMarkdownCopy, "helloDeary")
+        //const reactElement = htmlToReactParser.parse(htmlInput)
+
         return (
           <div className="row" key={objectData[0].values[4]}>
             <div className="col-xs-12 studies-col">
@@ -317,8 +331,8 @@ class Studies extends Component {
                 </div>
               </div>
 
-              <div className="study-overview">
-                <table>
+              <div className="row study-overview">
+                <table className="col-xs-12 col-sm-9">
                   <thead className="">
                     <tr className="">
                       <th className="individuals">

@@ -80,6 +80,11 @@ table {
   td {
     padding: 5px;
   }
+  a {
+    color: $textPurple;
+    text-decoration: underline;
+    font-weight: 400;
+  } 
 }
 
 header a {
@@ -1130,22 +1135,34 @@ p.researcher-bio {
     margin-bottom: 10px;
   }
 }
-.study-overview {
-  ul {
-    margin-top: 0px;
-    padding-left: 0px;
-  }
-}
-
 .researchers-content {
   div.row.study-overview {
     margin-bottom: 35px;
   }
 }
 
+.studies-section {
+  
+  .study-overview {
+    ul {
+      margin-top: 0px;
+      padding-left: 0px;
+    }
+  }
+
+
+  .content {
+    margin: 0px;
+    overflow-x: hidden;
+  }
+}
+.studies-col {
+  .col-xs-12, &.col-xs-12 {
+    padding: 0px;
+  }
+}
 .study-overview {
   table {
-    max-width: 65%;
   }
   thead, tbody {
     display: flex;
@@ -1167,16 +1184,6 @@ p.researcher-bio {
   }
   th.individuals, td.individuals {
     width: 15%;
-  }
-}
-
-.studies-section .content {
-  overflow-x: hidden;
-}
-
-.studies-col {
-  .col-xs-12, &.col-xs-12 {
-    padding: 0px;
   }
 }
 

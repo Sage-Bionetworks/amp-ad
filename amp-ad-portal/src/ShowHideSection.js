@@ -31,8 +31,8 @@ class ShowHideSection extends Component {
         <div
           className={
             this.state.isChecked === true
-              ? "col-xs-8 col-sm-10 col-md-8 content show"
-              : "col-xs-8 col-sm-10 col-md-8 content hide"
+              ? "col-xs-8 col-sm-10 col-md-9 content show"
+              : "col-xs-8 col-sm-10 col-md-9 content hide"
           }
         >
           {this.props.content}
@@ -40,8 +40,8 @@ class ShowHideSection extends Component {
         <label
           className={
             this.state.isChecked === true
-              ? "col-xs-4 col-sm-2 col-md-4 expand-icon minus"
-              : "col-xs-4 col-sm-2 col-md-4 expand-icon plus"
+              ? "col-xs-4 col-sm-2 col-md-2 expand-icon minus"
+              : "col-xs-4 col-sm-2 col-md-2 expand-icon plus"
           }
         >
           <input
