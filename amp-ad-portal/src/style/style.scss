@@ -1068,7 +1068,7 @@ p.researcher-bio {
   overflow: hidden;
 }
 
-.researchers-content .researchers, .content-section {
+.researchers-content, .content-section {
   .expand-section {
     margin-bottom: 60px;
   }
@@ -1080,6 +1080,14 @@ p.researcher-bio {
   }
   .div {
     max-width: 920px;
+  }
+  .researcher {
+    h2 {
+      margin-top: 0px;
+    }
+    h4 {
+      margin-bottom: 0px;
+    }
   }
 }
 

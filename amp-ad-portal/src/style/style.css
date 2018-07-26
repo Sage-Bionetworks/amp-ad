@@ -825,14 +825,18 @@ section.about-resilience-intro-section {
 p.researcher-bio {
   overflow: hidden; }
 
-.researchers-content .researchers .expand-section, .content-section .expand-section {
+.researchers-content .expand-section, .content-section .expand-section {
   margin-bottom: 60px; }
-.researchers-content .researchers .expand-section.hide, .content-section .expand-section.hide {
+.researchers-content .expand-section.hide, .content-section .expand-section.hide {
   max-height: 170px; }
-.researchers-content .researchers .content.hide, .content-section .content.hide {
+.researchers-content .content.hide, .content-section .content.hide {
   max-height: 170px; }
-.researchers-content .researchers .div, .content-section .div {
+.researchers-content .div, .content-section .div {
   max-width: 920px; }
+.researchers-content .researcher h2, .content-section .researcher h2 {
+  margin-top: 0px; }
+.researchers-content .researcher h4, .content-section .researcher h4 {
+  margin-bottom: 0px; }
 
 .experimental-resource, .row.publication {
   position: relative; }
