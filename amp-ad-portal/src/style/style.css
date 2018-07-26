@@ -825,13 +825,13 @@ section.about-resilience-intro-section {
 p.researcher-bio {
   overflow: hidden; }
 
-.researchers-content .expand-section, .content-section .expand-section {
+.researchers-content .researchers .expand-section, .content-section .expand-section {
   margin-bottom: 60px; }
-.researchers-content .expand-section.hide, .content-section .expand-section.hide {
+.researchers-content .researchers .expand-section.hide, .content-section .expand-section.hide {
   max-height: 170px; }
-.researchers-content .content.hide, .content-section .content.hide {
+.researchers-content .researchers .content.hide, .content-section .content.hide {
   max-height: 170px; }
-.researchers-content .div, .content-section .div {
+.researchers-content .researchers .div, .content-section .div {
   max-width: 920px; }
 
 .experimental-resource, .row.publication {
@@ -843,12 +843,24 @@ p.researcher-bio {
     top: 100%;
     margin-left: 8px; }
 
+.researchers-content .studies-section .content, .content-section .content {
+  padding-left: 0px; }
+  .researchers-content .studies-section .content h2, .content-section .content h2 {
+    margin-bottom: 0px; }
+  .researchers-content .studies-section .content h4, .content-section .content h4 {
+    margin-bottom: 0px; }
+  .researchers-content .studies-section .content p, .content-section .content p {
+    margin: 0px; }
 .researchers-content .studies-section .content.hide, .content-section .content.hide {
-  max-height: 175px; }
+  max-height: 168px; }
 .researchers-content .studies-section .expand-section, .content-section .expand-section {
   margin-bottom: 10px; }
   .researchers-content .studies-section .expand-section.hide, .content-section .expand-section.hide {
-    max-height: 170px; }
+    max-height: 168px; }
+
+.study-overview ul {
+  margin-top: 0px;
+  padding-left: 0px; }
 
 .researchers-content div.row.study-overview {
   margin-bottom: 35px; }

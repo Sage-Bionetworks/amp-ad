@@ -1068,7 +1068,7 @@ p.researcher-bio {
   overflow: hidden;
 }
 
-.researchers-content, .content-section {
+.researchers-content .researchers, .content-section {
   .expand-section {
     margin-bottom: 60px;
   }
@@ -1101,15 +1101,33 @@ p.researcher-bio {
 
 .researchers-content .studies-section, .content-section {
   .content {
+    h2 {
+      margin-bottom: 0px;
+    }
+    h4 {
+      margin-bottom: 0px;
+    }
+    p {
+      margin: 0px;
+    }
+    padding-left: 0px;
+  }
+  .content {
     &.hide {
-      max-height: 175px;
+      max-height: 168px;
     }
   }
   .expand-section {
     &.hide {
-      max-height: 170px;
+      max-height: 168px;
     }
     margin-bottom: 10px;
+  }
+}
+.study-overview {
+  ul {
+    margin-top: 0px;
+    padding-left: 0px;
   }
 }
 
