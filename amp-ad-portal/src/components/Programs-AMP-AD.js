@@ -45,6 +45,9 @@ class ProgramsAmpAd extends Component {
           <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
           <section className="row center-xs content-row">
             <div className="col-xs-12 col-sm-9">
+              <h2>
+Projects
+              </h2>
               {printShowHideSections(this.props.markdownSegs)}
             </div>
           </section>

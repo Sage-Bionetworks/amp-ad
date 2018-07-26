@@ -160,13 +160,21 @@ Grant
   toggleProfileModal = (event, modalState) => {
     const body = document.querySelector("html")
     const activeProfile = event.target.getAttribute("name")
+    console.log(activeProfile)
+    if (activeProfile === undefined || activeProfile === null) {
+      body.classList.remove("noScroll")
+      this.setState({
+        modal: false,
+      })
+      return
+    }
 
     if (modalState) {
       body.classList.remove("noScroll")
       this.setState({
         modal: false,
       })
-      return ""
+      return
     }
 
     if (!modalState) {
@@ -184,7 +192,6 @@ Grant
         },
       )
     }
-    return ""
   };
 
   buildUserThumbs = (users) => {

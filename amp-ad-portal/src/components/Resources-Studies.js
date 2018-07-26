@@ -302,7 +302,7 @@ class Studies extends Component {
                 </div>
               </div>
               <div className="row study-overview">
-                <div className="col-sm-4">
+                <div className="col-sm-3">
                   <ul>
                     <li>
 Individuals
