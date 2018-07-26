@@ -37,6 +37,7 @@ import ResourcesAgora from "./components/Resources-Agora"
 import ResourcesDataUse from "./components/Resources-DataUse"
 import ResourcesExperimentalResources from "./components/Resources-Experimental-Resources"
 import ResourcesStudies from "./components/Resources-Studies"
+import ResourcesAcknowledgements from "./components/Resources-AcknowledgementStatements"
 
 // about pages
 import AboutAmpAd from "./components/About-WhatIsAmpAd"
@@ -485,6 +486,16 @@ class App extends Component {
     )
   };
 
+  ReturnResourcesAcknowledgements = () => {
+    return (
+      <ResourcesAcknowledgements
+        token={this.props.loginToken}
+        handleChanges={this.handleChanges}
+        markdown={this.state.wikiMarkdown}
+      />
+    )
+  };
+
   ReturnResourcesDataUse = () => {
     return (
       <ResourcesDataUse
@@ -627,6 +638,10 @@ class App extends Component {
             <Route
               path="/Resources/DataUseRequirements"
               component={this.ReturnResourcesDataUse}
+            />
+            <Route
+              path="/Resources/AcknowledgementStatements"
+              component={this.ReturnResourcesAcknowledgements}
             />
             <Route
               path="/Resources/ExperimentalResources"

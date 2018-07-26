@@ -334,6 +334,22 @@ Agora
                 </div>
               </AccordionItemTitle>
             </AccordionItem>
+
+            <AccordionItem>
+              <AccordionItemTitle className="accordion__title link">
+                <div className="row between-xs">
+                  <div className="col-xs-12 accordion-sub-title">
+                    <Link
+                      name="Acknowledgement Statements"
+                      to="/Resources/AcknowledgementStatements"
+                      onClick={this.closeNavigation}
+                    >
+                      Acknowledgement Statements
+                    </Link>
+                  </div>
+                </div>
+              </AccordionItemTitle>
+            </AccordionItem>
           </Accordion>
         </AccordionItemBody>
       </AccordionItem>

@@ -37,7 +37,6 @@ class Studies extends Component {
       this.setState({
         loading: false,
       })
-      //window.addEventListener("scroll", this.handleScroll)
     })
   }
 
@@ -84,16 +83,13 @@ class Studies extends Component {
       pageCount,
     )
       .then((response) => {
-        console.log(response)
         this.setStudiesRows(response)
         this.setUniqueStudiesRows(this.state.studiesRows)
-
         this.setPayload(
           response.queryResult.queryResults.rows,
           "studiesNames",
           4,
         )
-
         this.setPayload(this.state.uniqueStudiesRows, "studiesDataTypes", 5)
       })
       .then(() => {
@@ -101,7 +97,6 @@ class Studies extends Component {
           this.props.token.sessionToken,
           this.state.studiesDataTypes,
         ).then((results) => {
-          console.log(results)
           this.setNames(results.results, "studiesNames")
         })
       })
@@ -151,40 +146,6 @@ class Studies extends Component {
         },
       )
     })
-  };
-
-  makeUniqueStudiesRows = (rows) => {
-    let distinctAssayIds
-    let distinctRows
-    const outputRows = []
-    // loop through each study
-    let foundIds = []
-    rows.forEach((row) => {
-      const synId = row.values[4]
-      foundIds.push(synId)
-    })
-    foundIds = this.uniqueArray(foundIds)
-
-    foundIds.forEach((foundId) => {
-      distinctRows = []
-      distinctAssayIds = []
-      rows.forEach((studyNameRow) => {
-        if (studyNameRow.values[4] === foundId) {
-          distinctRows.push(studyNameRow)
-        }
-      })
-
-      //console.log("distinct rows: ", distinctRows)
-      distinctRows.forEach((assayIdRow) => {
-        const distinctAssayId = assayIdRow.values[5]
-        distinctAssayIds.push(distinctAssayId)
-      })
-
-      distinctRows[0].values.splice(5, 1, distinctAssayIds)
-      outputRows.push(distinctRows[0])
-    })
-    //console.log(this.uniqueArray(foundIds))
-    return outputRows
   };
 
   uniqueArray = (a) => {
@@ -248,7 +209,6 @@ class Studies extends Component {
     let matchedRow
     if (stateObject && stateObject.length > 0) {
       matchedRow = stateObject.filter(element => element.id === synId)
-      console.log(matchedRow)
       if (matchedRow[0]) {
         return matchedRow[0].name
       }
@@ -256,10 +216,39 @@ class Studies extends Component {
     return ""
   };
 
+  makeUniqueStudiesRows = (rows) => {
+    let distinctAssayIds
+    let distinctRows
+    const outputRows = []
+    let foundIds = []
+    rows.forEach((row) => {
+      const synId = row.values[4]
+      foundIds.push(synId)
+    })
+    foundIds = this.uniqueArray(foundIds)
+
+    foundIds.forEach((foundId) => {
+      distinctRows = []
+      distinctAssayIds = []
+      rows.forEach((studyNameRow) => {
+        if (studyNameRow.values[4] === foundId) {
+          distinctRows.push(studyNameRow)
+        }
+      })
+      distinctRows.forEach((assayIdRow) => {
+        const distinctAssayId = assayIdRow.values[5]
+        distinctAssayIds.push(distinctAssayId)
+      })
+
+      distinctRows[0].values.splice(5, 1, distinctAssayIds)
+      outputRows.push(distinctRows[0])
+    })
+    return outputRows
+  };
+
   buildEntries = (wikiIds, studiesRows, studiesNames, wikiMarkdownState) => {
-    // studiesNames has id: "synId" and name: ""
-    // wikiIds
-    // syn9702085: { ownerObjectId: "syn9702085", ownerObjectType: "ENTITY", wikiPageId: "425119" };
+    // builds user profiles
+    console.log(studiesRows)
     if (wikiIds.length > 0) {
       return wikiIds.map((element) => {
         const synElement = element[Object.keys(element)[0]]

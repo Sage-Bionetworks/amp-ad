@@ -11,7 +11,7 @@ class ProgramsModelAd extends Component {
     getMarkdown(this.props, "581896")
     getWikiMarkdownSegments(
       "581896",
-      "programsAmpAd",
+      "programsModelAd",
       this.props,
       "syn12666371",
       false,
@@ -20,7 +20,7 @@ class ProgramsModelAd extends Component {
 
   render() {
     return (
-      <div className="row about research-page">
+      <div className="row about research-page program">
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
@@ -37,6 +37,9 @@ Model AD Program
           <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
           <section className="row center-xs content-row">
             <div className="col-xs-12 col-sm-9">
+              <h2>
+Projects
+              </h2>
               {printShowHideSections(this.props.markdownSegs)}
             </div>
           </section>
