@@ -962,6 +962,7 @@ section.about-section-content {
 	.expand-icon {
     height: 50px;
     width: 50px;
+    max-width: 65px;
     position: relative;
     top: 70px;
 		background-repeat: no-repeat;
@@ -1169,6 +1170,7 @@ p.researcher-bio {
 }
 .study-overview {
   table {
+    width: 86%;
   }
   thead, tbody {
     display: flex;

@@ -31,8 +31,8 @@ class ShowHideSection extends Component {
         <div
           className={
             this.state.isChecked === true
-              ? "col-xs-8 col-sm-10 col-md-9 content show"
-              : "col-xs-8 col-sm-10 col-md-9 content hide"
+              ? "col-xs-8 col-sm-10 col-md-11 content show"
+              : "col-xs-8 col-sm-10 col-md-11 content hide"
           }
         >
           {this.props.content}

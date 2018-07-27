@@ -716,6 +716,7 @@ input[type=checkbox] {
 .expand-icon {
   height: 50px;
   width: 50px;
+  max-width: 65px;
   position: relative;
   top: 70px;
   background-repeat: no-repeat;
@@ -847,6 +848,8 @@ p.researcher-bio {
 .studies-col .col-xs-12, .studies-col.col-xs-12 {
   padding: 0px; }
 
+.study-overview table {
+  width: 86%; }
 .study-overview thead, .study-overview tbody {
   display: flex;
   flex-direction: column; }

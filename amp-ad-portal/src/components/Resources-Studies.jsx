@@ -117,7 +117,7 @@ class Studies extends Component {
         })
       })
       .then(() => {
-        this.getWikiIdsAndMarkdown(this.state.studiesRows)
+        this.getWikiIdsAndMarkdown(this.state.uniqueStudiesRows)
       })
   };
 
