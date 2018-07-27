@@ -15,16 +15,6 @@ import { detectIfUserHasScrolledToBottom } from "../view/domScripts"
 
 const ReactMarkdown = require("react-markdown")
 
-//const HTMLToReactParser = require("html-to-react").Parser
-
-//const htmlToReactParser = new HTMLToReactParser()
-
-//const markdownSynapse = require("markdown-it-synapse")
-//const markdownTable = require("markdown-it-synapse-table")
-//const md = require("markdown-it")()
-//.use(markdownSynapse)
-//.use(markdownTable)
-
 class Studies extends Component {
   constructor(props) {
     super(props)
@@ -38,6 +28,7 @@ class Studies extends Component {
       wikiIds: [],
       loading: true,
       bottom: false,
+      page: 10,
     }
   }
 
@@ -60,6 +51,7 @@ class Studies extends Component {
   };
 
   setPayload = (synapseTableResponse, stateName, payloadIndex) => {
+    console.log(synapseTableResponse)
     const payloadStudy = this.assembleEntityHeaderPayload(
       synapseTableResponse,
       payloadIndex,
@@ -83,8 +75,13 @@ class Studies extends Component {
     })
   };
 
-  getAndSetAllTableData = async () => {
-    return getTable("syn9886254", this.props.token, "SELECT * FROM syn9886254")
+  getAndSetAllTableData = async (pageCount = 0) => {
+    return getTable(
+      "syn9886254",
+      this.props.token,
+      "SELECT * FROM syn9886254",
+      pageCount,
+    )
       .then((response) => {
         this.setStudiesRows(response)
         this.setUniqueStudiesRows(this.state.studiesRows)
@@ -264,23 +261,21 @@ class Studies extends Component {
       distinctRows[0].values.splice(8, 1, distinctIndividuals)
       outputRows.push(distinctRows[0])
     })
+    console.log(outputRows)
     return outputRows
   };
 
   buildDataTable = (row) => {
     return row[5].map((element, index) => {
       return (
-        <tr
-          className="studies-table-row"
-          key={row[5][index] + row[8][index] + row[6][index]}
-        >
+        <tr className="studies-table-row">
           <td className="individuals">
             {row[8][index]}
           </td>
-          <td className="tissues">
+          <td className="studies-tissues">
             {row[6][index]}
           </td>
-          <td className="data-types">
+          <td className="studies-data-types">
             <a href={`https://www.synapse.org/#!Synapse:${row[5][index]}`}>
               {this.getNameFromID(row[5][index], this.state.studiesNames)}
             </a>
@@ -317,9 +312,6 @@ class Studies extends Component {
 
         const table = this.buildDataTable(objectData[0].values)
 
-        //const htmlInput = md.render(wikiMarkdownCopy, "helloDeary")
-        //const reactElement = htmlToReactParser.parse(htmlInput)
-
         return (
           <div className="row" key={objectData[0].values[4]}>
             <div className="col-xs-12 studies-col">
@@ -331,17 +323,17 @@ class Studies extends Component {
                 </div>
               </div>
 
-              <div className="row study-overview">
-                <table className="col-xs-12 col-sm-9">
+              <div className="study-overview">
+                <table>
                   <thead className="">
                     <tr className="">
                       <th className="individuals">
 Individuals
                       </th>
-                      <th className="tissues">
+                      <th className="">
 Tissues
                       </th>
-                      <th className="data-types">
+                      <th className="">
 Data Types
                       </th>
                     </tr>
