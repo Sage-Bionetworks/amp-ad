@@ -30,7 +30,7 @@ a {
 
 table {
   font-size: 15px;
-  border: 1px solid #aeaeae;
+  background-color: #f4f4f4;
   font-weight: lighter;
   width: 1081px;
   margin-bottom: 100px;
@@ -38,14 +38,22 @@ table {
   max-width: 100%;
   display: inline-block; }
   table thead {
-    background-color: #BCC0CA; }
+    background-color: #e2e2e2; }
   table tr {
     padding: 10px; }
   table th {
+    font-weight: 400;
     border: 0px;
     padding: 5px; }
   table td {
-    padding: 5px; }
+    padding: 5px;
+    font-weight: 300;
+    font-size: 14px; }
+    table td a {
+      color: #5A478F;
+      text-decoration: underline;
+      font-weight: 300;
+      font-size: 14px; }
 
 header a {
   color: black;
@@ -642,10 +650,6 @@ section.child-page-hero {
 
 section.about-intro-section, section.content-section {
   text-align: left; }
-  section.about-intro-section a, section.content-section a {
-    color: #4C57A2;
-    font-size: 18px;
-    text-decoration: underline; }
   section.about-intro-section div.col-sm-9, section.content-section div.col-sm-9 {
     padding: 0px;
     text-align: left; }
@@ -712,6 +716,7 @@ input[type=checkbox] {
 .expand-icon {
   height: 50px;
   width: 50px;
+  max-width: 65px;
   position: relative;
   top: 70px;
   background-repeat: no-repeat;
@@ -830,18 +835,36 @@ p.researcher-bio {
   .researchers-content .studies-section .expand-section.hide, .content-section .expand-section.hide {
     max-height: 168px; }
 
-.study-overview ul {
-  margin-top: 0px;
-  padding-left: 0px; }
-
 .researchers-content div.row.study-overview {
   margin-bottom: 35px; }
 
+.studies-section .study-overview ul {
+  margin-top: 0px;
+  padding-left: 0px; }
 .studies-section .content {
+  margin: 0px;
   overflow-x: hidden; }
 
 .studies-col .col-xs-12, .studies-col.col-xs-12 {
   padding: 0px; }
+
+.study-overview table {
+  width: 86%; }
+.study-overview thead, .study-overview tbody {
+  display: flex;
+  flex-direction: column; }
+.study-overview tr {
+  display: flex;
+  width: 100%; }
+.study-overview th, .study-overview td {
+  width: 33.3%;
+  padding: 0px 10px; }
+.study-overview th.data-types, .study-overview td.data-types {
+  width: 30%; }
+.study-overview th.tissues, .study-overview td.tissues {
+  width: 55%; }
+.study-overview th.individuals, .study-overview td.individuals {
+  width: 15%; }
 
 button.headshot-col {
   background: transparent;

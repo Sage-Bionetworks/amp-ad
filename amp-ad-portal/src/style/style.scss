@@ -60,7 +60,8 @@ a {
 
 table {
   font-size: 15px;
-  border: 1px solid #aeaeae;
+  //border: 1px solid #aeaeae;
+  background-color: #f4f4f4;
   font-weight: lighter;
   width: 1081px;
   margin-bottom: 100px;
@@ -68,17 +69,27 @@ table {
   max-width: 100%;
     display: inline-block;
   thead {
-    background-color: $textGray;
+    background-color: #e2e2e2;
+    //color: $textGray;
   }
   tr {
     padding: 10px;
   }
   th {
+    font-weight: 400;
     border: 0px;
     padding: 5px;
   }
   td {
     padding: 5px;
+    font-weight: 300;
+    font-size: 14px;
+    a {
+      color: $textPurple;
+      text-decoration: underline;
+      font-weight: 300;
+      font-size: 14px;
+    } 
   }
 }
 
@@ -854,11 +865,11 @@ section.child-page-hero {
 
 section.about-intro-section, section.content-section {
   text-align: left;
-  a {
-    color: $bluePurple;
-    font-size: 18px;
-    text-decoration: underline;
-  }
+  //a {
+    //color: $bluePurple;
+    //font-size: 18px;
+    //text-decoration: underline;
+  //}
 	div.col-sm-9 {
 		padding: 0px;
     //max-width: 920px;
@@ -951,6 +962,7 @@ section.about-section-content {
 	.expand-icon {
     height: 50px;
     width: 50px;
+    max-width: 65px;
     position: relative;
     top: 70px;
 		background-repeat: no-repeat;
@@ -1130,26 +1142,56 @@ p.researcher-bio {
     margin-bottom: 10px;
   }
 }
-.study-overview {
-  ul {
-    margin-top: 0px;
-    padding-left: 0px;
-  }
-}
-
 .researchers-content {
   div.row.study-overview {
     margin-bottom: 35px;
   }
 }
 
-.studies-section .content {
-  overflow-x: hidden;
-}
+.studies-section {
+  
+  .study-overview {
+    ul {
+      margin-top: 0px;
+      padding-left: 0px;
+    }
+  }
 
+
+  .content {
+    margin: 0px;
+    overflow-x: hidden;
+  }
+}
 .studies-col {
   .col-xs-12, &.col-xs-12 {
     padding: 0px;
+  }
+}
+.study-overview {
+  table {
+    width: 86%;
+  }
+  thead, tbody {
+    display: flex;
+    flex-direction: column;
+  }
+  tr {
+    display: flex;
+    width: 100%;
+  }
+  th, td {
+    width: 33.3%;
+    padding: 0px 10px;
+  }
+  th.data-types, td.data-types {
+    width: 30%;
+  }
+  th.tissues, td.tissues {
+    width: 55%; 
+  }
+  th.individuals, td.individuals {
+    width: 15%;
   }
 }
 

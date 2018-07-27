@@ -81,7 +81,6 @@ const getWikiHeaderTree = (token, synId, offsetVal = 0, limit = 10) => {
     fetchReq = `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikiheadertree`
     //this.getSubPageHeaders("581934").then(response => console.log(response))
   }
-  console.log(fetchReq)
   return fetch(fetchReq, {
     method: "GET",
     headers: {
@@ -98,18 +97,14 @@ const getWikiHeaderTree = (token, synId, offsetVal = 0, limit = 10) => {
 }
 
 const getEntityHeader = (token, payload) => {
-  return fetch(
-    //`https://repo-prod.prod.sagebase.org/repo/v1/entity/${id}/type`,
-    "https://repo-prod.prod.sagebase.org/repo/v1/entity/header",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        sessionToken: token,
-      },
-      body: JSON.stringify(payload),
+  return fetch("https://repo-prod.prod.sagebase.org/repo/v1/entity/header", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      sessionToken: token,
     },
-  )
+    body: JSON.stringify(payload),
+  })
     .then((data) => {
       return data.json()
     })
@@ -120,7 +115,6 @@ const getEntityHeader = (token, payload) => {
 }
 
 const getMarkdown = (props, wikiNumber, name = "wikiMarkdown") => {
-  //props.handleChanges("wikiMarkdown", "")
   getWikiData(wikiNumber, props.token.sessionToken)
     .then((data) => {
       props.handleChanges(name, data.markdown)

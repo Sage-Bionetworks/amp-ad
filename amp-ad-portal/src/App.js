@@ -36,7 +36,7 @@ import ResourcesData from "./components/Resources-Data"
 import ResourcesAgora from "./components/Resources-Agora"
 import ResourcesDataUse from "./components/Resources-DataUse"
 import ResourcesExperimentalResources from "./components/Resources-Experimental-Resources"
-import ResourcesStudies from "./components/Resources-Studies"
+import ResourcesStudies from "./components/Resources-Studies.jsx"
 import ResourcesAcknowledgements from "./components/Resources-AcknowledgementStatements"
 
 // about pages

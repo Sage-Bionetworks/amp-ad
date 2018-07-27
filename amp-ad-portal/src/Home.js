@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 
 import Welcome from "./Welcome"
 import SearchBar from "./SearchBar"
-import PiesBelowHeader from "./PiesBelowHeader"
+import PiesBelowHeader from "./PiesBelowHeader.jsx"
 import Programs from "./Programs"
 import Analyses from "./Analyses"
 //import PopularDataRequests from "./PopularDataRequests"
