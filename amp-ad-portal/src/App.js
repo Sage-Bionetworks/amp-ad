@@ -317,7 +317,6 @@ class App extends Component {
   handleNestedChanges = (KEY, newStateKey, newState) => {
     const property = this.state[KEY]
     property.push({ [newStateKey]: newState })
-    console.log(property)
     this.setState(prevState => ({
       ...prevState,
       property,

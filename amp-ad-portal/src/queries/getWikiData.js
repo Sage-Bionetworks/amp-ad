@@ -25,7 +25,6 @@ function getWikiData(wikiId, token, synId = "syn12666371") {
 }
 
 const getWikiKey = (token, synId) => {
-  console.log(synId)
   return fetch(
     `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikikey`,
     {
@@ -131,7 +130,6 @@ const getMarkdownSegment = (
 ) => {
   return getWikiData(newStateKey, props.token.sessionToken, synId)
     .then((data) => {
-      console.log(data)
       props.handleNestedChanges(stateKey, newStateKey, data.markdown)
     })
     .catch(handleErrors)

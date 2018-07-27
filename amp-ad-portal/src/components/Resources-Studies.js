@@ -51,7 +51,6 @@ class Studies extends Component {
   };
 
   setPayload = (synapseTableResponse, stateName, payloadIndex) => {
-    console.log(synapseTableResponse)
     const payloadStudy = this.assembleEntityHeaderPayload(
       synapseTableResponse,
       payloadIndex,
@@ -85,12 +84,12 @@ class Studies extends Component {
       .then((response) => {
         this.setStudiesRows(response)
         this.setUniqueStudiesRows(this.state.studiesRows)
-        this.setPayload(
-          response.queryResult.queryResults.rows,
-          "studiesNames",
-          4,
-        )
-        this.setPayload(this.state.uniqueStudiesRows, "studiesDataTypes", 5)
+        //this.setPayload(
+        //response.queryResult.queryResults.rows,
+        //"studiesNames",
+        //5,
+        //)
+        this.setPayload(this.state.uniqueStudiesRows, "studiesDataTypes", 6)
       })
       .then(() => {
         getEntityHeader(
@@ -101,7 +100,7 @@ class Studies extends Component {
         })
       })
       .then(() => {
-        this.getWikiIdsAndMarkdown(this.state.uniqueStudiesRows)
+        this.getWikiIdsAndMarkdown(this.state.studiesRows)
       })
   };
 
@@ -130,7 +129,7 @@ class Studies extends Component {
       this.setState({
         loading: true,
       })
-      return getWikiKey(this.props.token.sessionToken, row.values[4]).then(
+      return getWikiKey(this.props.token.sessionToken, row.values[5]).then(
         (result) => {
           getMarkdownSegment(
             this.props,
@@ -138,10 +137,10 @@ class Studies extends Component {
             "studies",
             result.ownerObjectId,
           )
-          wikiIdsArr.push({ [row.values[4]]: result })
+          wikiIdsArr.push({ [row.values[5]]: result })
           this.setState({
             loading: false,
-            wikiIds: [...this.state.wikiIds, { [row.values[4]]: result }],
+            wikiIds: [...this.state.wikiIds, { [row.values[5]]: result }],
           })
         },
       )
@@ -183,10 +182,8 @@ class Studies extends Component {
   assembleEntityHeaderPayload = (tableResponse, index) => {
     const payload = { references: [] }
     tableResponse.forEach((row) => {
-      //console.log(index, row)
       if (typeof row.values[index] === "object") {
         row.values[index].forEach((id) => {
-          //console.log(index, row, id)
           if (id !== null) {
             payload.references.push({
               targetId: id,
@@ -201,7 +198,6 @@ class Studies extends Component {
         })
       }
     })
-    //console.log(payload)
     return payload
   };
 
@@ -220,7 +216,7 @@ class Studies extends Component {
     let foundIds = []
 
     rows.forEach((row) => {
-      const synId = row.values[4]
+      const synId = row.values[5]
       foundIds.push(synId)
     })
     foundIds = this.uniqueArray(foundIds)
@@ -243,41 +239,41 @@ class Studies extends Component {
       distinctIndividuals = []
 
       rows.forEach((studyNameRow) => {
-        if (studyNameRow.values[4] === Id) {
+        if (studyNameRow.values[5] === Id) {
           distinctRows.push(studyNameRow)
         }
       })
       distinctRows.forEach((idRow) => {
-        const distinctAssayId = idRow.values[5]
-        const distinctSampleType = idRow.values[6]
-        const distinctIndividual = idRow.values[8]
+        const distinctAssayId = idRow.values[6]
+        const distinctSampleType = idRow.values[7]
+        const distinctIndividual = idRow.values[9]
         distinctAssayIds.push(distinctAssayId)
         distinctSampleTypes.push(distinctSampleType)
         distinctIndividuals.push(distinctIndividual)
       })
 
-      distinctRows[0].values.splice(5, 1, distinctAssayIds)
-      distinctRows[0].values.splice(6, 1, distinctSampleTypes)
-      distinctRows[0].values.splice(8, 1, distinctIndividuals)
+      distinctRows[0].values.splice(6, 1, distinctAssayIds)
+      distinctRows[0].values.splice(7, 1, distinctSampleTypes)
+      distinctRows[0].values.splice(9, 1, distinctIndividuals)
       outputRows.push(distinctRows[0])
     })
-    console.log(outputRows)
     return outputRows
   };
 
   buildDataTable = (row) => {
-    return row[5].map((element, index) => {
+    return row[6].map((element, index) => {
+      const key = `table-row${index}`
       return (
-        <tr className="studies-table-row">
+        <tr className="studies-table-row" key={key}>
           <td className="individuals">
-            {row[8][index]}
+            {row[9][index]}
           </td>
           <td className="studies-tissues">
-            {row[6][index]}
+            {row[7][index]}
           </td>
           <td className="studies-data-types">
             <a href={`https://www.synapse.org/#!Synapse:${row[5][index]}`}>
-              {this.getNameFromID(row[5][index], this.state.studiesNames)}
+              {this.getNameFromID(row[6][index], this.state.studiesNames)}
             </a>
           </td>
         </tr>
@@ -288,7 +284,7 @@ class Studies extends Component {
   buildEntries = (wikiIds, studiesRows, studiesNames, wikiMarkdownState) => {
     // builds user profiles
     if (wikiIds.length > 0) {
-      return wikiIds.map((element) => {
+      return wikiIds.map((element, index) => {
         const synElement = element[Object.keys(element)[0]]
         const synId = synElement.ownerObjectId
         const wikiId = synElement.wikiPageId
@@ -307,13 +303,15 @@ class Studies extends Component {
         }
 
         const objectData = studiesRows.filter((row) => {
-          return row.values[4] === synId
+          return row.values[5] === synId
         })
 
         const table = this.buildDataTable(objectData[0].values)
 
+        const key = `table${index}`
+
         return (
-          <div className="row" key={objectData[0].values[4]}>
+          <div className="row" key={key}>
             <div className="col-xs-12 studies-col">
               <div className="row">
                 <div className="col-xs-12 researchers studies-section">
