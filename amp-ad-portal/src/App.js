@@ -150,9 +150,9 @@ class App extends Component {
     } else {
       let newDiagnoses = diagnoses
       if (diagnoses === "All diagnoses") {
-        newDiagnoses = null
+        newDiagnoses = diagnosesArray
       }
-      diagnosesFilterKey = [newDiagnoses]
+      diagnosesFilterKey = typeof newDiagnoses === "object" ? newDiagnoses : [newDiagnoses]
     }
     return diagnosesFilterKey
   };
@@ -190,6 +190,7 @@ class App extends Component {
     if (dataType === "assay") {
       //console.log(speciesFilterKey)
     }
+    console.log(speciesFilterKey)
 
     const speciesFiltered = filterRowsByKeyAndValue(
       keysToValues(dataObject.queryResult.queryResults.rows),
@@ -197,10 +198,14 @@ class App extends Component {
       "species",
     )
 
+    console.log(speciesFiltered)
+
     const diagnosesFilterKey = this.convertUserDiagnosesSelection(
       diagnoses,
       diagnosesArray,
     )
+
+    console.log(diagnosesFilterKey)
 
     const filteredRows = this.filterRowsAndAddBase64Link(
       speciesFiltered,
@@ -234,13 +239,24 @@ class App extends Component {
     }
 
     if (pageKey === "assay") {
-      //console.log(
-      //speciesKey,
-      //diagnosesKey,
-      //diagnosesArray,
-      //pageKey,
-      //stateObjectToAdd,
-      //)
+      console.log(
+        "assay",
+        speciesKey,
+        diagnosesKey,
+        diagnosesArray,
+        pageKey,
+        stateObjectToAdd,
+      )
+    }
+    if (pageKey === "tissue") {
+      console.log(
+        "tissue",
+        speciesKey,
+        diagnosesKey,
+        diagnosesArray,
+        pageKey,
+        stateObjectToAdd,
+      )
     }
 
     this.setState(prevState => ({

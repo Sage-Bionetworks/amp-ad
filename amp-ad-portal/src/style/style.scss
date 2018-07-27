@@ -409,7 +409,7 @@ header {
     font-size: 20px;
     border: none;
   }
-  .accordion__body{
+  .nav .accordion__body{
     padding: 0px;
     width: 100%;
     ul {
@@ -1149,18 +1149,20 @@ p.researcher-bio {
 }
 
 .studies-section {
-  
   .study-overview {
     ul {
       margin-top: 0px;
       padding-left: 0px;
     }
   }
-
-
   .content {
     margin: 0px;
     overflow-x: hidden;
+    .col-md-11 {
+      @media screen and (max-width: 1180px){
+        max-width: 85%;
+      }
+    }
   }
 }
 .studies-col {

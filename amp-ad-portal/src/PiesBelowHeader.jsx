@@ -285,7 +285,7 @@ class PiesBelowHeader extends Component {
       this.getCountsList(dataType),
       dataType,
     )
-    console.log(dataType)
+    //console.log(dataType)
     if (pieData.length > 0) {
       return (
         <div className="pie-chart-welcome col-xs-12 col-sm-6">
@@ -352,7 +352,7 @@ class PiesBelowHeader extends Component {
               "Tissue",
             )}
           </div>
-        {this.buttonsRow()}
+          {this.buttonsRow()}
         </div>
       </section>
     )

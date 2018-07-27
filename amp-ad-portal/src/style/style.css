@@ -306,16 +306,16 @@ header .accordion-title.top-level-accordion {
   font-weight: 500;
   font-size: 20px;
   border: none; }
-header .accordion__body {
+header .nav .accordion__body {
   padding: 0px;
   width: 100%; }
-  header .accordion__body ul {
+  header .nav .accordion__body ul {
     width: 100%; }
-  header .accordion__body li {
+  header .nav .accordion__body li {
     margin: 0px;
     padding: 10px;
     padding-left: 0px; }
-    header .accordion__body li a.nav-item.dropdown {
+    header .nav .accordion__body li a.nav-item.dropdown {
       padding: 10px 20px;
       width: 100%;
       font-size: 15px; }
@@ -844,6 +844,9 @@ p.researcher-bio {
 .studies-section .content {
   margin: 0px;
   overflow-x: hidden; }
+  @media screen and (max-width: 1180px) {
+    .studies-section .content .col-md-11 {
+      max-width: 85%; } }
 
 .studies-col .col-xs-12, .studies-col.col-xs-12 {
   padding: 0px; }

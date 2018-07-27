@@ -62,33 +62,18 @@ class People extends Component {
   };
 
   setUserProfile = (profile, token) => {
-    getUserProfile(profile, token).then((profileResponse) => {
-      const userIndex = this.getProfileIndexFromState(
-        this.state.users,
-        this.state.activeProfile,
-      )
-      this.state.users.forEach((user) => {
-        if (user.ownerId === profile) {
-          const newState = update(this.state, {
-            users: {
-              [userIndex]: {
-                profile: { $set: profileResponse },
-              },
-            },
-          })
-          this.setState(newState)
-        }
+    getUserProfile(profile.ownerId, token).then((profileResponse) => {
+      const newState = update(this.state, {
+        activeProfile: {
+          profile: { $set: profileResponse },
+        },
       })
+      this.setState(newState)
     })
   };
 
-  modalWindow = (modalState, profile = this.state.activeProfile) => {
+  modalWindow = (modalState, activeProfile = this.state.activeProfile) => {
     if (modalState) {
-      const activeProfile = this.getProfileFromState(
-        this.state.users,
-        profile,
-      )[0]
-
       return (
         <div className="modal-container">
           <button
@@ -159,9 +144,10 @@ Grant
 
   toggleProfileModal = (event, modalState) => {
     const body = document.querySelector("html")
-    const activeProfile = event.target.getAttribute("name")
-    console.log(activeProfile)
-    if (activeProfile === undefined || activeProfile === null) {
+    let activeProfile = event.target.getAttribute("name")
+    activeProfile = JSON.parse(activeProfile)
+    if (activeProfile === null) {
+      activeProfile = event.target.getAttribute("user")
       body.classList.remove("noScroll")
       this.setState({
         modal: false,
@@ -204,25 +190,28 @@ Grant
           <button
             type="button"
             className="col-xs-12 col-sm-1 headshot-col"
-            name={user.ownerId}
+            name={JSON.stringify(user)}
             onClick={event => this.toggleProfileModal(event)}
           >
-            <div name={user.ownerId}>
+            <div name={JSON.stringify(user)}>
               <div
                 style={styleConfig}
                 alt="headshot"
                 className="headshot"
-                name={user.ownerId}
+                name={JSON.stringify(user)}
               />
             </div>
-            <div className="row center-xs around-xs" name={user.ownerId}>
-              <p className="profile-name" name={user.ownerId}>
+            <div
+              className="row center-xs around-xs"
+              name={JSON.stringify(user)}
+            >
+              <p className="profile-name" name={JSON.stringify(user)}>
                 {user.firstName}
                 {" "}
                 {user.lastName}
               </p>
             </div>
-            <div name={user.ownerId} className="background-highlight" />
+            <div name={JSON.stringify(user)} className="background-highlight" />
           </button>
         </div>
       )
