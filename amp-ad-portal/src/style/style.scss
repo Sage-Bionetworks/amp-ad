@@ -800,12 +800,49 @@ section.what-new {
 		margin-top: 0px;
 		padding: 0px;
 	}
+  .type-of-release {
+    font-size: 18px;
+    margin: 0px;
+    padding: 0px;
+  }
+  .sub-title {
+    font-size: 18px;
+    font-weight: 300;
+    margin: 5px 0px;
+    color: #D3D5DB;
+    font-style: italic;
+  }
+  .bell-icon {
+    background-image: url(../images/plus-bell-icon.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 16px;
+    width: 14px;
+    position: absolute;
+    left: -7px;
+    top: -25px;
+  }
+  .lightbulb-icon {
+    background-image: url(../images/lightbulb-on.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 16px;
+    width: 14px;
+    position: absolute;
+    left: -7px;
+    top: -25px;
+  }
+
   .what-new-data-icon {
     &.vertical-line {
-      border-left: 1px dotted #D3D5DB;
-      height: 150px;
+      border-left: 2px dotted #D3D5DB;
+      height: 127px;
       max-width: 25px;
       margin-left: 30px;
+      margin-top: 35px;
+      position: relative;
     }
     img {
       margin-left: -20px;
@@ -819,16 +856,28 @@ section.what-new {
   .what-new-data { 
     padding-top: 6px;
     h5 {
+			font-size: 18px;
       padding-top: 0px;
       margin-top: 0px;
       color: #D3D5DB;
+      font-weight: 400;
+      margin-bottom: 10px;
     }
   }
-  .what-new-data div {
-		p strong {
+  .what-new-data {
+		p {
 			font-size: 18px;
 		}
 	}
+  .description {
+    margin: 0px;
+  }
+  a.read-more {
+    margin: 20px 0px;
+    display: block;
+    text-decoration: underline;
+    font-size: 18px;
+  }
 }
 section.contribute-your-data {
   box-shadow: 0 -5px 10px -5px #9996;

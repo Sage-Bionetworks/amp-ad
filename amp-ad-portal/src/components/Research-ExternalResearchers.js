@@ -60,8 +60,8 @@ class ExternalResearchers extends Component {
   };
 
   handleScroll = () => {
-    if (this.state.page < 200) {
-      const bottomState = detectIfUserHasScrolledToBottom()
+    const bottomState = detectIfUserHasScrolledToBottom()
+    if (this.state.page < 200 && bottomState) {
       this.setState({
         bottom: bottomState,
       })

@@ -83,6 +83,7 @@ class App extends Component {
     programsM2OVE: [],
     programsModelAd: [],
     programsResilienceAD: [],
+    whatsNew: [],
   };
 
   componentDidMount() {
@@ -375,7 +376,6 @@ class App extends Component {
       welcomeHeaderMarkdown={this.state.welcomeHeaderMarkdown}
       welcomeHeaderMarkdownText={this.state.welcomeHeaderMarkdownText}
       token={this.props.loginToken}
-      handleChanges={this.handleChanges}
       speciesDropdownSelection={this.state.speciesDropdownSelection}
       diagnosesSelectionOptions={this.state.diagnosesSelectionOptions}
       diagnosesDropdownSelection={this.state.diagnosesDropdownSelection}
@@ -383,8 +383,12 @@ class App extends Component {
       getSum={this.getSum}
       getColumnCountForSpecies={this.getColumnCountForSpecies}
       pageData={this.state.pageData}
+      handleChanges={this.handleChanges}
       handleChangeEvent={this.handleChangeEvent}
       handleReactDropdownEvent={this.handleReactDropdownEvent}
+      handleNestedChanges={this.handleNestedChanges}
+      whatsNewMarkdownSegs={this.state.whatsNew}
+      markdown={this.state.wikiMarkdown}
     />
   );
 
