@@ -46,7 +46,7 @@ import AboutPeople from "./components/About-People"
 // scripts
 import { setActiveNavigation, shrinkHeader } from "./view/domScripts"
 
-const pageDataPoints = ["assay", "tissue", "dataType", "diagnoses"]
+const pageDataPoints = ["assay", "tissue", "study", "dataType", "diagnoses"]
 
 class App extends Component {
   state = {
@@ -91,6 +91,7 @@ class App extends Component {
     this.queryAndSetBioSampleCount()
     shrinkHeader()
     setActiveNavigation()
+    console.log(this.props.appData)
   }
 
   componentDidUpdate() {
