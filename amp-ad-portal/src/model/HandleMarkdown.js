@@ -19,6 +19,7 @@ const buildSection = (index, key, props) => {
       }
       escapeHtml={false}
       key={makeid()}
+      className="react-markdown"
     />
   )
 }
