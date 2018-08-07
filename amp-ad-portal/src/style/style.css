@@ -857,8 +857,7 @@ p.researcher-bio {
     border-bottom: 1px solid black;
     width: 100vw;
     position: absolute;
-    top: 100%;
-    margin-left: 8px; }
+    top: 100%; }
   .experimental-resource .col-xs-12, .row.publication .col-xs-12 {
     padding: 0px; }
 
