@@ -32,9 +32,13 @@ const returnJsxFromMarkdown = (markdown) => {
   )
 }
 
-const printSections = (sectionArray, props) => {
+const printSections = (sectionArray, props, limit = 200) => {
   return sectionArray.map((section, index) => {
-    return buildSection(index, Object.keys(section)[0], props)
+    if (index < limit) {
+      return buildSection(index, Object.keys(section)[0], props)
+    }
+    const keyName = `${index}index`
+    return <div key={keyName} />
   })
 }
 
