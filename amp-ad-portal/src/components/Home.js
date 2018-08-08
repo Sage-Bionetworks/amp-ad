@@ -6,10 +6,10 @@ import SearchBar from "./SearchBar"
 import PiesBelowHeader from "./PiesBelowHeader.jsx"
 import Programs from "./Programs"
 import Analyses from "./Analyses"
-import WhatsNew from "./components/WhatsNew.jsx"
+import WhatsNew from "./WhatsNew.jsx"
 //import PopularDataRequests from "./PopularDataRequests"
-import BetaHeader from "./components/Beta"
-import ContributeYourData from "./components/ContributeYourData"
+import BetaHeader from "./Beta"
+import ContributeYourData from "./ContributeYourData"
 
 const Home = props => (
   <div>

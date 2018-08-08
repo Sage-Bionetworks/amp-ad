@@ -10,7 +10,7 @@ import {
 } from "react-accessible-accordion"
 
 import "react-accessible-accordion/dist/minimal-example.css"
-import { setActiveNavigation } from "./view/domScripts"
+import { setActiveNavigation } from "../view/domScripts"
 
 class Header extends Component {
   constructor(props) {
@@ -425,7 +425,7 @@ Agora
           <Link to="/" onClick={this.closeNavigation}>
             <img
               className="logo-header"
-              src={require("./images/amp-ad-logo.svg")}
+              src={require("../images/amp-ad-logo.svg")}
               alt="amp_ad_logo"
             />
           </Link>

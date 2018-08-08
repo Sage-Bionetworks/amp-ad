@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import ShowHideSection from "../ShowHideSection"
+import ShowHideSection from "../components/ShowHideSection"
 
 const ReactMarkdown = require("react-markdown")
 

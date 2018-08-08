@@ -1,6 +1,6 @@
 import React from "react"
 
-import openUrl from "./model/OpenUrl"
+import openUrl from "../model/OpenUrl"
 
 const Programs = (props) => {
   return (
@@ -19,7 +19,7 @@ Programs
           <div className="programs box col-sm-3">
             <div className="box-text-image">
               <img
-                src={require("./images/consortium.svg")}
+                src={require("../images/consortium.svg")}
                 alt="consortium molecule"
                 className="svg-large-icon"
               />
@@ -45,7 +45,7 @@ AMP-AD
           <div className="programs box col-sm-3">
             <div className="box-text-image">
               <img
-                src={require("./images/brain-heart.svg")}
+                src={require("../images/brain-heart.svg")}
                 alt="an illustration of brain overlapping a heart"
                 className="svg-large-icon"
               />
@@ -70,7 +70,7 @@ M2OVE-AD Consortium
           <div className="programs box col-sm-3">
             <div className="box-text-image">
               <img
-                src={require("./images/mouse.svg")}
+                src={require("../images/mouse.svg")}
                 alt="illustration of mouse"
                 className="svg-large-icon"
               />
@@ -95,7 +95,7 @@ Model AD Program
           <div className="programs box col-sm-3">
             <div className="box-text-image">
               <img
-                src={require("./images/dna.svg")}
+                src={require("../images/dna.svg")}
                 alt="dna double helix"
                 className="svg-large-icon"
               />

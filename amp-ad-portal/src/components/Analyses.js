@@ -1,5 +1,5 @@
 import React from "react"
-import openUrl from "./model/OpenUrl"
+import openUrl from "../model/OpenUrl"
 
 const Analyses = (props) => {
   return (
@@ -25,7 +25,7 @@ Analyses
           <div className="analyses box col-sm-4">
             <div className="box-text-image">
               <img
-                src={require("./images/dna.svg")}
+                src={require("../images/dna.svg")}
                 alt="dna double helix"
                 className="svg-large-icon"
               />
@@ -49,7 +49,7 @@ Genetics
           <div className="analyses box col-sm-4">
             <div className="box-text-image">
               <img
-                src={require("./images/differential-expressions.svg")}
+                src={require("../images/differential-expressions.svg")}
                 alt="dna double helix"
                 className="svg-large-icon"
               />
@@ -73,7 +73,7 @@ Differential gene expression and enrichment analysis.
           <div className="analyses box col-sm-4">
             <div className="box-text-image">
               <img
-                src={require("./images/networks.svg")}
+                src={require("../images/networks.svg")}
                 alt="dna double helix"
                 className="svg-large-icon"
               />

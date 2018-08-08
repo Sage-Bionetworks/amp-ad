@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 
-import Pies from "../PiesBelowHeader.jsx"
-import SearchBar from "../SearchBar"
+import Pies from "./PiesBelowHeader.jsx"
+import SearchBar from "./SearchBar"
 
 class DataResources extends Component {
   componentDidMount() {}
