@@ -10,7 +10,7 @@ import {
   getEntityHeader,
   asyncForEach,
 } from "../queries/getWikiData"
-import ShowHideSection from "../ShowHideSection"
+import ShowHideSection from "./ShowHideSection"
 import { detectIfUserHasScrolledToBottom } from "../view/domScripts"
 import { getColumnNameIndex } from "../controller/PrepRawSynapseData"
 

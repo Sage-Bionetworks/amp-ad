@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { HashRouter as Router, Route } from "react-router-dom"
-
 // non component js
 import study from "./defaultData/Study"
 import {
@@ -17,8 +16,8 @@ import {
 import { getBioSampleCount } from "./queries/queryForData"
 
 // component js
-import Header from "./Header"
-import Home from "./Home"
+import Header from "./components/Header"
+import Home from "./components/Home"
 
 // research pages
 import ProgramsAmpAd from "./components/Programs-AMP-AD"

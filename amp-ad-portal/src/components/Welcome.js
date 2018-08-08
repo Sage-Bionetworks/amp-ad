@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 
-import { getMarkdown } from "./queries/getWikiData"
+import { getMarkdown } from "../queries/getWikiData"
 
 const ReactMarkdown = require("react-markdown")
 

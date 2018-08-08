@@ -55,7 +55,7 @@ View data by
             </div>
             <div className="hidden col-xs-3 col-sm-1 search-icon-box">
               <img
-                src={require("./images/search.svg")}
+                src={require("../images/search.svg")}
                 alt="search magnifying glass icon"
                 className="svg-small-icon"
               />
@@ -65,7 +65,7 @@ View data by
             </div>
             <div className="hidden col-xs-3 col-sm-1 search-icon-box">
               <img
-                src={require("./images/filter.svg")}
+                src={require("../images/filter.svg")}
                 alt="coffee filter icon"
                 className="svg-small-icon"
               />
