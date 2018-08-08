@@ -91,7 +91,6 @@ class App extends Component {
     this.queryAndSetBioSampleCount()
     shrinkHeader()
     setActiveNavigation()
-    console.log(this.props.appData)
   }
 
   componentDidUpdate() {
@@ -191,7 +190,6 @@ class App extends Component {
     if (dataType === "assay") {
       //console.log(speciesFilterKey)
     }
-    console.log(speciesFilterKey)
 
     const speciesFiltered = filterRowsByKeyAndValue(
       keysToValues(dataObject.queryResult.queryResults.rows),
@@ -199,14 +197,10 @@ class App extends Component {
       "species",
     )
 
-    console.log(speciesFiltered)
-
     const diagnosesFilterKey = this.convertUserDiagnosesSelection(
       diagnoses,
       diagnosesArray,
     )
-
-    console.log(diagnosesFilterKey)
 
     const filteredRows = this.filterRowsAndAddBase64Link(
       speciesFiltered,
@@ -239,27 +233,6 @@ class App extends Component {
       facetValues: [...chartPageData],
     }
 
-    if (pageKey === "assay") {
-      console.log(
-        "assay",
-        speciesKey,
-        diagnosesKey,
-        diagnosesArray,
-        pageKey,
-        stateObjectToAdd,
-      )
-    }
-    if (pageKey === "tissue") {
-      console.log(
-        "tissue",
-        speciesKey,
-        diagnosesKey,
-        diagnosesArray,
-        pageKey,
-        stateObjectToAdd,
-      )
-    }
-
     this.setState(prevState => ({
       ...prevState,
       pageData: { ...prevState.pageData, [pageKey]: stateObjectToAdd },
@@ -275,7 +248,6 @@ class App extends Component {
   };
 
   setPageDataPoints = (dataPoints) => {
-    //console.log(this.state.diagnosesSelectionOptions)
     if (this.props.appData !== undefined) {
       dataPoints.forEach((element) => {
         this.setFlattenedData(
