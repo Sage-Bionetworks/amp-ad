@@ -608,11 +608,43 @@ section.what-new .title-row {
   margin-bottom: 0px;
   margin-top: 0px;
   padding: 0px; }
+section.what-new .type-of-release {
+  font-size: 18px;
+  margin: 0px;
+  padding: 0px; }
+section.what-new .sub-title {
+  font-size: 18px;
+  font-weight: 300;
+  margin: 5px 0px;
+  color: #D3D5DB;
+  font-style: italic; }
+section.what-new .bell-icon {
+  background-image: url(../images/plus-bell-icon.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 16px;
+  width: 14px;
+  position: absolute;
+  left: -7px;
+  top: -25px; }
+section.what-new .lightbulb-icon {
+  background-image: url(../images/lightbulb-on.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 16px;
+  width: 14px;
+  position: absolute;
+  left: -7px;
+  top: -25px; }
 section.what-new .what-new-data-icon.vertical-line {
-  border-left: 1px dotted #D3D5DB;
-  height: 150px;
+  border-left: 2px dotted #D3D5DB;
+  height: 127px;
   max-width: 25px;
-  margin-left: 30px; }
+  margin-left: 30px;
+  margin-top: 35px;
+  position: relative; }
 section.what-new .what-new-data-icon img {
   margin-left: -20px;
   background: white;
@@ -622,10 +654,20 @@ section.what-new .what-new-data-icon img {
 section.what-new .what-new-data {
   padding-top: 6px; }
   section.what-new .what-new-data h5 {
+    font-size: 18px;
     padding-top: 0px;
     margin-top: 0px;
-    color: #D3D5DB; }
-section.what-new .what-new-data div p strong {
+    color: #D3D5DB;
+    font-weight: 400;
+    margin-bottom: 10px; }
+section.what-new .what-new-data p {
+  font-size: 18px; }
+section.what-new .description {
+  margin: 0px; }
+section.what-new a.read-more {
+  margin: 20px 0px;
+  display: block;
+  text-decoration: underline;
   font-size: 18px; }
 
 section.contribute-your-data {
@@ -815,10 +857,38 @@ p.researcher-bio {
     border-bottom: 1px solid black;
     width: 100vw;
     position: absolute;
-    top: 100%;
-    margin-left: 8px; }
+    top: 100%; }
   .experimental-resource .col-xs-12, .row.publication .col-xs-12 {
     padding: 0px; }
+
+.experimental-resources .modal {
+  display: none; }
+.experimental-resources .modal.show {
+  display: block;
+  position: fixed;
+  z-index: 10000;
+  height: 100vh;
+  width: 100vw;
+  background: #00000090;
+  top: 0px;
+  left: 0px;
+  overflow-y: scroll; }
+.experimental-resources .modal-content {
+  position: relative;
+  margin: 0px auto;
+  margin: 0px auto;
+  top: 10%;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 80%; }
+.experimental-resources table {
+  display: none;
+  width: 100%; }
+.experimental-resources .modal table {
+  display: inline-table; }
+.experimental-resources .table-button {
+  margin-bottom: 20px; }
 
 .researchers-content .studies-section .content, .content-section .content {
   padding-left: 0px; }

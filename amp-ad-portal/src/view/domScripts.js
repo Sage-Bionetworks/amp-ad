@@ -16,10 +16,6 @@ const setActiveNavigation = () => {
 const detectIfUserHasScrolledToBottom = () => {
   // returns true or false
   let bottom = false
-
-  //console.log(
-  //window.innerHeight + window.scrollY + 200 > document.body.offsetHeight,
-  //)
   if (window.innerHeight + window.scrollY + 200 > document.body.offsetHeight) {
     bottom = true
     console.log(bottom)
@@ -73,4 +69,52 @@ const shrinkHeader = () => {
   )
 }
 
-export { setActiveNavigation, shrinkHeader, detectIfUserHasScrolledToBottom }
+/**
+ * Get all of an element's parent elements up the DOM tree
+ * @param  {Node}   elem     The element
+ * @param  {String} selector Selector to match against [optional]
+ * @return {Array}           The parent elements
+ */
+const getParents = (elem, selector) => {
+  // Element.matches() polyfill
+  if (!Element.prototype.matches) {
+    Element.prototype.matches = Element.prototype.matchesSelector
+      || Element.prototype.mozMatchesSelector
+      || Element.prototype.msMatchesSelector
+      || Element.prototype.oMatchesSelector
+      || Element.prototype.webkitMatchesSelector
+      || function (s) {
+        const matches = (this.document || this.ownerDocument).querySelectorAll(
+          s,
+        )
+
+        let i = matches.length
+        while (--i >= 0 && matches.item(i) !== this) {}
+        return i > -1
+      }
+  }
+
+  // Setup parents array
+  const parents = []
+
+  // Get matching parent elements
+  for (; elem && elem !== document; elem = elem.parentNode) {
+    // Add matching parents to array
+    if (selector) {
+      if (elem.matches(selector)) {
+        parents.push(elem)
+      }
+    } else {
+      parents.push(elem)
+    }
+  }
+
+  return parents
+}
+
+export {
+  getParents,
+  setActiveNavigation,
+  shrinkHeader,
+  detectIfUserHasScrolledToBottom,
+}

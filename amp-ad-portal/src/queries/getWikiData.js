@@ -143,8 +143,22 @@ const getSubPageHeaders = (parentId, props, synId, paginationValue, limit) => {
     limit,
   )
     .then((results) => {
-      //console.log(results)
-      return results.results.filter(wikiPage => wikiPage.parentId === parentId)
+      const filteredResults = results.results.filter(
+        wikiPage => wikiPage.parentId === parentId,
+      )
+      if (filteredResults.length > 0) {
+        return filteredResults
+      }
+      if (paginationValue > 350) {
+        return []
+      }
+      return getSubPageHeaders(
+        parentId,
+        props,
+        synId,
+        paginationValue + 10,
+        limit,
+      )
     })
     .catch(handleErrors)
 }
@@ -167,7 +181,7 @@ const getWikiMarkdownSegments = (
 ) => {
   return getSubPageHeaders(wikiId, props, synId, paginationValue, limit).then(
     (headers) => {
-      //console.log(headers)
+      console.log(headers)
       asyncForEach(headers, async (header) => {
         await waitFor(75)
         getMarkdownSegment(props, header.id, stateKey)

@@ -285,7 +285,7 @@ class PiesBelowHeader extends Component {
       this.getCountsList(dataType),
       dataType,
     )
-    //console.log(dataType)
+
     if (pieData.length > 0) {
       return (
         <div className="pie-chart-welcome col-xs-12 col-sm-6">
@@ -317,6 +317,19 @@ class PiesBelowHeader extends Component {
     return ""
   };
 
+  processBiosampleCount = (
+    biosamplesCount,
+    loadingBool = this.props.biosamplesLoading,
+  ) => {
+    if (loadingBool === true) {
+      return ""
+    }
+    if (biosamplesCount === undefined) {
+      return ""
+    }
+    return biosamplesCount
+  };
+
   //<div className="pie-counts-list">
   //{this.printCountsList(this.getCountsList(dataType), dataType)}
   //</div>
@@ -334,9 +347,9 @@ class PiesBelowHeader extends Component {
                 />
               </div>
               <h1 className="count">
-                {this.props.biosamplesLoading === true
-                  ? ""
-                  : `${this.props.pageData.biosamplesassayCount} Biosamples`}
+                {`${this.processBiosampleCount(
+                  this.props.pageData.biosamplesassayCount,
+                )} Biosamples`}
               </h1>
             </div>
           </div>
