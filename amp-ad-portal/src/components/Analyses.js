@@ -63,7 +63,7 @@ Differential gene expression and enrichment analysis.
             <button
               className="btn"
               type="button"
-              onClick={event => openUrl(event, "/#/Research/DifferentialExpressions")
+              onClick={event => openUrl(event, "/#/Research/DifferentialExpression")
               }
             >
               View
