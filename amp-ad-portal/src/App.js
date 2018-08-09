@@ -191,6 +191,7 @@ class App extends Component {
       //console.log(speciesFilterKey)
     }
 
+    console.log(keysToValues(dataObject.queryResult.queryResults.rows))
     const speciesFiltered = filterRowsByKeyAndValue(
       keysToValues(dataObject.queryResult.queryResults.rows),
       speciesFilterKey,

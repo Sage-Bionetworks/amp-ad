@@ -23,7 +23,8 @@ module.exports = {
     "global-require": 0
   },
   env: {
-    browser: true
+    browser: true,
+    jest: true
   },
   plugins: ["react", "jsx-a11y", "import"]
 };
