@@ -1,18 +1,55 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 
+import { SynapseComponents } from "synapse-react-client"
 import { BarLoader } from "react-spinners"
 import { getWikiMarkdownSegments } from "../queries/getWikiData"
 import { printSections } from "../model/HandleMarkdown"
 import { getParents } from "../view/domScripts"
 
+const returnSynapseMarkdown = (sessionToken) => {
+  return (
+    <div>
+      <div className="react-markdown">
+        <SynapseComponents.Markdown
+          token={sessionToken}
+          ownerId="syn12666371"
+          wikiId="582125"
+        />
+      </div>
+      <div className="react-markdown">
+        <SynapseComponents.Markdown
+          token={sessionToken}
+          ownerId="syn12666371"
+          wikiId="582124"
+        />
+      </div>
+      <div className="react-markdown">
+        <SynapseComponents.Markdown
+          token={sessionToken}
+          ownerId="syn12666371"
+          wikiId="582123"
+        />
+      </div>
+      <div className="react-markdown">
+        <SynapseComponents.Markdown
+          token={sessionToken}
+          ownerId="syn12666371"
+          wikiId="581965"
+        />
+      </div>
+    </div>
+  )
+}
+
 class ExperimentalResources extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loading: true,
+      loading: false,
       modal: false,
       modalContent: "",
+      eventListenersAdded: 0,
     }
   }
 
@@ -32,12 +69,16 @@ class ExperimentalResources extends Component {
   }
 
   componentDidUpdate() {
-    this.handleShowTable()
+    if (this.state.eventListenersAdded < 5) {
+      console.log(this.state.eventListenersAdded)
+      this.handleShowTable()
+    }
   }
 
   getTable = (event) => {
     const button = event.target
     const parents = getParents(button, ".react-markdown")
+    console.log(parents)
     const table = parents[0].querySelector("table")
     return table.outerHTML
   };
@@ -47,6 +88,7 @@ class ExperimentalResources extends Component {
   };
 
   handleChanges = (stateKey, updatedState) => {
+    //console.log(updatedState)
     this.setState({
       [stateKey]: updatedState,
     })
@@ -68,12 +110,17 @@ class ExperimentalResources extends Component {
 
   handleShowTable = () => {
     const buttonElements = document.querySelectorAll(".table-button")
-    if (buttonElements !== undefined && buttonElements !== null) {
+    console.log(buttonElements)
+    if (buttonElements[0] !== undefined && buttonElements[0] !== null) {
       buttonElements.forEach((element) => {
         element.addEventListener("click", (event) => {
           this.handleChanges("modalContent", this.getTable(event))
           this.toggleModal()
         })
+      })
+      const count = this.state.eventListenersAdded + 1
+      this.setState({
+        eventListenersAdded: count,
       })
     }
   };
@@ -110,7 +157,8 @@ Experimental Resources
           </section>
           <section className="row center-xs researchers-content">
             <div className="col-xs-12 col-sm-9">
-              {printSections(this.props.markdown, this.props)}
+              {//printSections(this.props.markdown, this.props)
+                returnSynapseMarkdown(this.props.token.sessionToken)}
             </div>
           </section>
           <div className="row center-xs">
@@ -124,6 +172,7 @@ Experimental Resources
 
 ExperimentalResources.propTypes = {
   markdown: PropTypes.array.isRequired,
+  token: PropTypes.object.isRequired,
 }
 
 export default ExperimentalResources

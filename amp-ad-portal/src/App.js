@@ -76,6 +76,16 @@ class App extends Component {
     externalResearchers: [],
     researchPublications: [],
     studies: [],
+    studiesWikiIds: [],
+    studiesRows: [],
+    studiesUniqueRows: [],
+    studiesNames: [],
+    studiesNamesPayload: {},
+    studiesDataTypesPayload: {},
+    studiesAssayIndex: 0,
+    studiesStudyIndex: 0,
+    studiesIndividualsIndex: 0,
+    studiesSampleTypeIndex: 0,
     differentialExpressions: [],
     experimentalResources: [],
     programsAmpAd: [],
@@ -191,7 +201,6 @@ class App extends Component {
       //console.log(speciesFilterKey)
     }
 
-    console.log(keysToValues(dataObject.queryResult.queryResults.rows))
     const speciesFiltered = filterRowsByKeyAndValue(
       keysToValues(dataObject.queryResult.queryResults.rows),
       speciesFilterKey,
@@ -305,6 +314,7 @@ class App extends Component {
   };
 
   handleNestedChanges = (KEY, newStateKey, newState) => {
+    //console.log(KEY, newStateKey, newState)
     const property = this.state[KEY]
     property.push({ [newStateKey]: newState })
     this.setState(prevState => ({
@@ -518,6 +528,16 @@ class App extends Component {
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
         markdown={this.state.studies}
+        wikiIds={this.state.studiesWikiIds}
+        studiesRows={this.state.studiesRows}
+        assayIndex={this.state.studiesAssayIndex}
+        studyIndex={this.state.studiesStudyIndex}
+        individualsIndex={this.state.studiesIndividualsIndex}
+        sampleTypeIndex={this.state.studiesSampleTypeIndex}
+        uniqueStudiesRows={this.state.studiesUniqueRows}
+        studiesNames={this.state.studiesNames}
+        dataTypesPayload={this.state.studiesDataTypesPayload}
+        namesPayload={this.state.studiesNamesPayload}
       />
     )
   };
