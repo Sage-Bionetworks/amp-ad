@@ -1,8 +1,16 @@
 import React from "react"
 import PropTypes from "prop-types"
+//import MarkdownIt from "markdown-it"
+//import MarkdownItSynapse from "markdown-it-synapse"
+//import HtmlToReact from "html-to-react"
 import ShowHideSection from "../components/ShowHideSection"
 
 const ReactMarkdown = require("react-markdown")
+
+//const HtmlToReactParser = HtmlToReact.Parser
+//const htmlToReactParser = new HtmlToReactParser()
+
+//const md = MarkdownIt().use(MarkdownItSynapse)
 
 const makeid = () => {
   let text = ""
@@ -10,6 +18,14 @@ const makeid = () => {
   for (let i = 0; i < 5; i++) text += possible.charAt(Math.floor(Math.random() * possible.length))
   return text
 }
+
+//<div key={makeid()}>
+//{htmlToReactParser.parse(
+//md.render(
+//props.markdown[index] !== undefined ? props.markdown[index][key] : "",
+//),
+//)}
+//</div>
 
 const buildSection = (index, key, props) => {
   return (

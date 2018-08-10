@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 import { SynapseComponents } from "synapse-react-client"
 import { BarLoader } from "react-spinners"
 import { getWikiMarkdownSegments } from "../queries/getWikiData"
-//import { printSections } from "../model/HandleMarkdown"
+import { printSections } from "../model/HandleMarkdown"
 import { getParents } from "../view/domScripts"
 
 const returnSynapseMarkdown = (sessionToken) => {
@@ -132,7 +132,6 @@ class ExperimentalResources extends Component {
     })
   };
 
-  //{printSections(this.props.markdown, this.props)}
   render() {
     return (
       <div className="row about experimental-resources">
@@ -158,7 +157,8 @@ Experimental Resources
           </section>
           <section className="row center-xs researchers-content">
             <div className="col-xs-12 col-sm-9">
-              {returnSynapseMarkdown(this.props.token.sessionToken)}
+              {//printSections(this.props.markdown, this.props)
+                returnSynapseMarkdown(this.props.token.sessionToken)}
             </div>
           </section>
           <div className="row center-xs">

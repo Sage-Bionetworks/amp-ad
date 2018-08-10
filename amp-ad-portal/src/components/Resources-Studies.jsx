@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { BarLoader } from "react-spinners"
-
 import { getTable } from "../queries/queryForData"
 import {
   getMarkdownSegment,
@@ -16,22 +15,10 @@ import { getColumnNameIndex } from "../controller/PrepRawSynapseData"
 
 const ReactMarkdown = require("react-markdown")
 
-let AssayIndex
-let StudyIndex
-let IndividualsIndex
-let SampleTypeIndex
-
 class Studies extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      //payloadStudy: { references: [] },
-      studiesNames: [],
-      studiesDataTypes: [],
-      studiesRows: [],
-      uniqueStudiesRows: [],
-      //tableData: {},
-      wikiIds: [],
       loading: true,
       bottom: false,
       page: 10,
@@ -39,11 +26,19 @@ class Studies extends Component {
   }
 
   componentDidMount() {
-    this.getAndSetAllTableData().then(() => {
+    if (!this.props.markdown.length) {
+      this.getAndSetAllTableData().then(() => {
+        this.setState({
+          loading: false,
+        })
+      })
+    }
+    if (this.props.markdown.length > 1) {
       this.setState({
         loading: false,
+        studiesRows: this.props.markdown,
       })
-    })
+    }
   }
 
   componentDidUpdate() {}
@@ -51,9 +46,10 @@ class Studies extends Component {
   setStudiesRows = (synapseData = this.state.pageData) => {
     const studiesRows = []
     synapseData.queryResult.queryResults.rows.forEach(row => studiesRows.push(row))
-    this.setState({
-      studiesRows,
-    })
+    //this.setState({
+    //studiesRows,
+    //})
+    this.props.handleChanges("studiesRows", studiesRows)
   };
 
   setPayload = (synapseTableResponse, stateName, payloadIndex) => {
@@ -61,9 +57,10 @@ class Studies extends Component {
       synapseTableResponse,
       payloadIndex,
     )
-    this.setState({
-      [stateName]: payloadStudy,
-    })
+    //this.setState({
+    //[stateName]: payloadStudy,
+    //})
+    this.props.handleChanges(stateName, payloadStudy)
   };
 
   setPayloadResponse = (
@@ -88,36 +85,43 @@ class Studies extends Component {
       pageCount,
     )
       .then((response) => {
-        AssayIndex = getColumnNameIndex(response, "Assay")
-        StudyIndex = getColumnNameIndex(response, "Study")
-        IndividualsIndex = getColumnNameIndex(
+        const AssayIndex = getColumnNameIndex(response, "Assay")
+        const StudyIndex = getColumnNameIndex(response, "Study")
+        const IndividualsIndex = getColumnNameIndex(
           response,
           "Number_of_Individuals",
         )
-        SampleTypeIndex = getColumnNameIndex(response, "Sample_Type")
+        const SampleTypeIndex = getColumnNameIndex(response, "Sample_Type")
+
+        this.props.handleChanges("studiesAssayIndex", AssayIndex)
+        this.props.handleChanges("studiesStudyIndex", StudyIndex)
+        this.props.handleChanges("studiesIndividualsIndex", IndividualsIndex)
+        this.props.handleChanges("studiesSampleTypeIndex", SampleTypeIndex)
+
         this.setStudiesRows(response)
-        this.setUniqueStudiesRows(this.state.studiesRows)
+        this.setUniqueStudiesRows(this.props.studiesRows)
         this.setPayload(
           response.queryResult.queryResults.rows,
           "studiesNames",
-          StudyIndex,
+          this.props.studyIndex,
         )
         this.setPayload(
-          this.state.uniqueStudiesRows,
+          this.props.uniqueStudiesRows,
           "studiesDataTypes",
-          AssayIndex,
+          this.props.assayIndex,
         )
       })
       .then(() => {
+        console.log(this.props.studiesDataTypes)
         getEntityHeader(
           this.props.token.sessionToken,
-          this.state.studiesDataTypes,
+          this.props.studiesDataTypes,
         ).then((results) => {
           this.setNames(results.results, "studiesNames")
         })
       })
       .then(() => {
-        this.getWikiIdsAndMarkdown(this.state.uniqueStudiesRows)
+        this.getWikiIdsAndMarkdown(this.props.uniqueStudiesRows)
       })
   };
 
@@ -134,9 +138,7 @@ class Studies extends Component {
 
   setUniqueStudiesRows = (studiesState) => {
     const uniqueRows = this.makeUniqueStudiesRows(studiesState)
-    this.setState({
-      uniqueStudiesRows: uniqueRows,
-    })
+    this.props.handleChanges("studiesUniqueRows", uniqueRows)
   };
 
   getWikiIdsAndMarkdown = async (tableData) => {
@@ -148,7 +150,7 @@ class Studies extends Component {
       })
       return getWikiKey(
         this.props.token.sessionToken,
-        row.values[StudyIndex],
+        row.values[this.props.studyIndex],
       ).then((result) => {
         getMarkdownSegment(
           this.props,
@@ -156,11 +158,11 @@ class Studies extends Component {
           "studies",
           result.ownerObjectId,
         )
-        wikiIdsArr.push({ [row.values[StudyIndex]]: result })
-        this.setState({
-          loading: false,
-          wikiIds: [...this.state.wikiIds, { [row.values[StudyIndex]]: result }],
-        })
+        this.props.handleNestedChanges(
+          "studiesWikiIds",
+          row.values[this.props.studyIndex],
+          result,
+        )
       })
     })
   };
@@ -234,7 +236,7 @@ class Studies extends Component {
     let foundIds = []
 
     rows.forEach((row) => {
-      const synId = row.values[StudyIndex]
+      const synId = row.values[this.props.studyIndex]
       foundIds.push(synId)
     })
     foundIds = this.uniqueArray(foundIds)
@@ -257,47 +259,55 @@ class Studies extends Component {
       distinctIndividuals = []
 
       rows.forEach((studyNameRow) => {
-        if (studyNameRow.values[StudyIndex] === Id) {
+        if (studyNameRow.values[this.props.studyIndex] === Id) {
           distinctRows.push(studyNameRow)
         }
       })
       distinctRows.forEach((idRow) => {
-        const distinctAssayId = idRow.values[AssayIndex]
-        const distinctSampleType = idRow.values[SampleTypeIndex]
-        const distinctIndividual = idRow.values[IndividualsIndex]
+        const distinctAssayId = idRow.values[this.props.assayIndex]
+        const distinctSampleType = idRow.values[this.props.sampleTypeIndex]
+        const distinctIndividual = idRow.values[this.props.individualsIndex]
         distinctAssayIds.push(distinctAssayId)
         distinctSampleTypes.push(distinctSampleType)
         distinctIndividuals.push(distinctIndividual)
       })
 
-      distinctRows[0].values.splice(AssayIndex, 1, distinctAssayIds)
-      distinctRows[0].values.splice(SampleTypeIndex, 1, distinctSampleTypes)
-      distinctRows[0].values.splice(IndividualsIndex, 1, distinctIndividuals)
+      distinctRows[0].values.splice(this.props.assayIndex, 1, distinctAssayIds)
+      distinctRows[0].values.splice(
+        this.props.sampleTypeIndex,
+        1,
+        distinctSampleTypes,
+      )
+      distinctRows[0].values.splice(
+        this.props.individualsIndex,
+        1,
+        distinctIndividuals,
+      )
       outputRows.push(distinctRows[0])
     })
     return outputRows
   };
 
   buildDataTable = (row) => {
-    return row[AssayIndex].map((element, index) => {
+    return row[this.props.assayIndex].map((element, index) => {
       const key = `table-row${index}`
       return (
         <tr className="studies-table-row" key={key}>
           <td className="individuals">
-            {row[IndividualsIndex][index]}
+            {row[this.props.individualsIndex][index]}
           </td>
           <td className="tissues">
-            {row[SampleTypeIndex][index]}
+            {row[this.props.sampleTypeIndex][index]}
           </td>
           <td className="data-types">
             <a
               href={`https://www.synapse.org/#!Synapse:${
-                row[AssayIndex][index]
+                row[this.props.assayIndex][index]
               }`}
             >
               {this.getNameFromID(
-                row[AssayIndex][index],
-                this.state.studiesNames,
+                row[this.props.assayIndex][index],
+                this.props.studiesNames,
               )}
             </a>
           </td>
@@ -308,6 +318,7 @@ class Studies extends Component {
 
   buildEntries = (wikiIds, studiesRows, studiesNames, wikiMarkdownState) => {
     // builds user profiles
+    //console.log(wikiIds, studiesRows, studiesNames, wikiMarkdownState)
     if (wikiIds.length > 0) {
       return wikiIds.map((element, index) => {
         const synElement = element[Object.keys(element)[0]]
@@ -328,9 +339,10 @@ class Studies extends Component {
         }
 
         const objectData = studiesRows.filter((row) => {
-          return row.values[StudyIndex] === synId
+          return row.values[this.props.studyIndex] === synId
         })
 
+        console.log(objectData)
         const table = this.buildDataTable(objectData[0].values)
 
         const key = `table${index}`
@@ -393,9 +405,9 @@ Studies
           <section className="row center-xs researchers-content">
             <div className="col-xs-12 col-sm-9">
               {this.buildEntries(
-                this.state.wikiIds,
-                this.state.uniqueStudiesRows,
-                this.state.studiesNames,
+                this.props.wikiIds,
+                this.props.uniqueStudiesRows,
+                this.props.studiesNames,
                 this.props.markdown,
               )}
             </div>
