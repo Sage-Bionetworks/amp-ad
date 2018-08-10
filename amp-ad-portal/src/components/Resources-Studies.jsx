@@ -57,6 +57,7 @@ class Studies extends Component {
       synapseTableResponse,
       payloadIndex,
     )
+    console.log(payloadStudy)
     //this.setState({
     //[stateName]: payloadStudy,
     //})
@@ -100,6 +101,9 @@ class Studies extends Component {
 
         this.setStudiesRows(response)
         this.setUniqueStudiesRows(this.props.studiesRows)
+        //this.setStudiesNames()
+        //this.setStudiesDataTypes()
+
         this.setPayload(
           response.queryResult.queryResults.rows,
           "studiesNames",
@@ -342,7 +346,7 @@ class Studies extends Component {
           return row.values[this.props.studyIndex] === synId
         })
 
-        console.log(objectData)
+        //console.log(objectData)
         const table = this.buildDataTable(objectData[0].values)
 
         const key = `table${index}`
