@@ -80,7 +80,8 @@ class App extends Component {
     studiesRows: [],
     studiesUniqueRows: [],
     studiesNames: [],
-    studiesDataTypes: [],
+    studiesNamesPayload: {},
+    studiesDataTypesPayload: {},
     studiesAssayIndex: 0,
     studiesStudyIndex: 0,
     studiesIndividualsIndex: 0,
@@ -534,8 +535,9 @@ class App extends Component {
         individualsIndex={this.state.studiesIndividualsIndex}
         sampleTypeIndex={this.state.studiesSampleTypeIndex}
         uniqueStudiesRows={this.state.studiesUniqueRows}
-        studiesDataTypes={this.state.studiesDataTypes}
         studiesNames={this.state.studiesNames}
+        dataTypesPayload={this.state.studiesDataTypesPayload}
+        namesPayload={this.state.studiesNamesPayload}
       />
     )
   };

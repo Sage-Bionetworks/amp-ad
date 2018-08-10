@@ -10,7 +10,6 @@ import {
   asyncForEach,
 } from "../queries/getWikiData"
 import ShowHideSection from "./ShowHideSection"
-import { detectIfUserHasScrolledToBottom } from "../view/domScripts"
 import { getColumnNameIndex } from "../controller/PrepRawSynapseData"
 
 const ReactMarkdown = require("react-markdown")
@@ -20,35 +19,32 @@ class Studies extends Component {
     super(props)
     this.state = {
       loading: true,
-      bottom: false,
-      page: 10,
     }
   }
 
   componentDidMount() {
     if (!this.props.markdown.length) {
       this.getAndSetAllTableData().then(() => {
-        this.setState({
-          loading: false,
-        })
+        this.setState(
+          {
+            loading: false,
+          },
+          () => {
+            console.log("lolwat")
+          },
+        )
       })
     }
     if (this.props.markdown.length > 1) {
       this.setState({
         loading: false,
-        studiesRows: this.props.markdown,
       })
     }
   }
 
-  componentDidUpdate() {}
-
   setStudiesRows = (synapseData = this.state.pageData) => {
     const studiesRows = []
     synapseData.queryResult.queryResults.rows.forEach(row => studiesRows.push(row))
-    //this.setState({
-    //studiesRows,
-    //})
     this.props.handleChanges("studiesRows", studiesRows)
   };
 
@@ -57,11 +53,7 @@ class Studies extends Component {
       synapseTableResponse,
       payloadIndex,
     )
-    console.log(payloadStudy)
-    //this.setState({
-    //[stateName]: payloadStudy,
-    //})
-    this.props.handleChanges(stateName, payloadStudy)
+    this.props.handleChanges(`${stateName}Payload`, payloadStudy)
   };
 
   setPayloadResponse = (
@@ -101,14 +93,7 @@ class Studies extends Component {
 
         this.setStudiesRows(response)
         this.setUniqueStudiesRows(this.props.studiesRows)
-        //this.setStudiesNames()
-        //this.setStudiesDataTypes()
 
-        this.setPayload(
-          response.queryResult.queryResults.rows,
-          "studiesNames",
-          this.props.studyIndex,
-        )
         this.setPayload(
           this.props.uniqueStudiesRows,
           "studiesDataTypes",
@@ -116,10 +101,9 @@ class Studies extends Component {
         )
       })
       .then(() => {
-        console.log(this.props.studiesDataTypes)
         getEntityHeader(
           this.props.token.sessionToken,
-          this.props.studiesDataTypes,
+          this.props.dataTypesPayload,
         ).then((results) => {
           this.setNames(results.results, "studiesNames")
         })
@@ -137,6 +121,7 @@ class Studies extends Component {
     this.setState({
       [stateName]: names,
     })
+    this.props.handleChanges(stateName, names)
     return names
   };
 
@@ -146,7 +131,6 @@ class Studies extends Component {
   };
 
   getWikiIdsAndMarkdown = async (tableData) => {
-    const wikiIdsArr = []
     return asyncForEach(tableData, async (row) => {
       await waitFor(20)
       this.setState({
@@ -155,52 +139,38 @@ class Studies extends Component {
       return getWikiKey(
         this.props.token.sessionToken,
         row.values[this.props.studyIndex],
-      ).then((result) => {
-        getMarkdownSegment(
-          this.props,
-          result.wikiPageId,
-          "studies",
-          result.ownerObjectId,
-        )
-        this.props.handleNestedChanges(
-          "studiesWikiIds",
-          row.values[this.props.studyIndex],
-          result,
-        )
-      })
-    })
-  };
-
-  uniqueArray = (a) => {
-    return a.filter((item, pos) => {
-      return a.indexOf(item) === pos
-    })
-  };
-
-  handleScroll = () => {
-    const bottomState = detectIfUserHasScrolledToBottom()
-    this.setState({
-      bottom: bottomState,
-    })
-    this.loadMoreMarkdownSegments()
-  };
-
-  loadMoreMarkdownSegments = (
-    atBottom = this.state.bottom,
-    loading = this.state.loading,
-  ) => {
-    if (atBottom && !loading && this.state.page < 120) {
-      this.setState({
-        loading: true,
-      })
-      const pageCount = this.state.page + 10
-      this.getAndSetAllTableData(this.state.page).then(() => {
-        this.setState({
-          page: pageCount,
-          loading: false,
+      )
+        .then((result) => {
+          getMarkdownSegment(
+            this.props,
+            result.wikiPageId,
+            "studies",
+            result.ownerObjectId,
+          )
+          this.props.handleNestedChanges(
+            "studiesWikiIds",
+            row.values[this.props.studyIndex],
+            result,
+          )
         })
-      })
+        .then(async () => {
+          await waitFor(20)
+          this.setState({
+            loading: false,
+          })
+        })
+    })
+  };
+
+  getNameFromID = (synId, stateObject) => {
+    let matchedRow
+    if (stateObject && stateObject.length > 0) {
+      matchedRow = stateObject.filter(element => element.id === synId)
+      if (matchedRow[0]) {
+        return matchedRow[0].name
+      }
     }
+    return ""
   };
 
   assembleEntityHeaderPayload = (tableResponse, index) => {
@@ -225,15 +195,10 @@ class Studies extends Component {
     return payload
   };
 
-  getNameFromID = (synId, stateObject) => {
-    let matchedRow
-    if (stateObject && stateObject.length > 0) {
-      matchedRow = stateObject.filter(element => element.id === synId)
-      if (matchedRow[0]) {
-        return matchedRow[0].name
-      }
-    }
-    return ""
+  uniqueArray = (a) => {
+    return a.filter((item, pos) => {
+      return a.indexOf(item) === pos
+    })
   };
 
   makeUniqueSynIdsArray = (rows) => {
@@ -428,6 +393,17 @@ Studies
 Studies.propTypes = {
   markdown: PropTypes.array.isRequired,
   token: PropTypes.object.isRequired,
+  handleChanges: PropTypes.func.isRequired,
+  handleNestedChanges: PropTypes.func.isRequired,
+  wikiIds: PropTypes.array.isRequired,
+  studiesRows: PropTypes.array.isRequired,
+  assayIndex: PropTypes.number.isRequired,
+  studyIndex: PropTypes.number.isRequired,
+  individualsIndex: PropTypes.number.isRequired,
+  uniqueStudiesRows: PropTypes.array.isRequired,
+  studiesNames: PropTypes.array.isRequired,
+  sampleTypeIndex: PropTypes.number.isRequired,
+  dataTypesPayload: PropTypes.object.isRequired,
 }
 
 export default Studies
