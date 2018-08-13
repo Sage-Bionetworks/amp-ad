@@ -25,14 +25,9 @@ class Studies extends Component {
   componentDidMount() {
     if (!this.props.markdown.length) {
       this.getAndSetAllTableData().then(() => {
-        this.setState(
-          {
-            loading: false,
-          },
-          () => {
-            console.log("lolwat")
-          },
-        )
+        this.setState({
+          loading: false,
+        })
       })
     }
     if (this.props.markdown.length > 1) {
