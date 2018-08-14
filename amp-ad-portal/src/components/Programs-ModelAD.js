@@ -9,13 +9,15 @@ const ReactMarkdown = require("react-markdown")
 class ProgramsModelAd extends Component {
   componentDidMount() {
     getMarkdown(this.props, "581896")
-    getWikiMarkdownSegments(
-      "581896",
-      "programsModelAd",
-      this.props,
-      "syn12666371",
-      false,
-    )
+    if (this.props.markdownSegs.length === 0) {
+      getWikiMarkdownSegments(
+        "581896",
+        "programsModelAd",
+        this.props,
+        "syn12666371",
+        false,
+      )
+    }
   }
 
   render() {
