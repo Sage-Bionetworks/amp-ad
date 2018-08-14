@@ -7,22 +7,17 @@ import { printShowHideSections } from "../model/HandleMarkdown"
 const ReactMarkdown = require("react-markdown")
 
 class ProgramsAmpAd extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      loading: true,
-    }
-  }
-
   componentDidMount() {
     getMarkdown(this.props, "581895")
-    getWikiMarkdownSegments(
-      "581895",
-      "programsAmpAd",
-      this.props,
-      "syn12666371",
-      false,
-    )
+    if (this.props.markdownSegs.length === 0) {
+      getWikiMarkdownSegments(
+        "581895",
+        "programsAmpAd",
+        this.props,
+        "syn12666371",
+        false,
+      )
+    }
   }
 
   render() {
