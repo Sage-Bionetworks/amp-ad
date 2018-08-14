@@ -298,13 +298,17 @@ People
               <p />
             </div>
           </section>
-          <section className="row center-xs researchers-content">
+          <section className="row center-xs researchers-content people middle-xs">
             {this.modalWindow(this.state.modal, this.state.activeProfile)}
             {this.buildUserThumbs(this.state.users)}
+            <div className="col-xs-12">
+              <div className="row center-xs middle-xs">
+                <div className="loading-bar">
+                  <BarLoader color="#47357B" loading={this.state.loading} />
+                </div>
+              </div>
+            </div>
           </section>
-          <div className="row center-xs">
-            <BarLoader color="#47357B" loading={this.state.loading} />
-          </div>
         </div>
       </div>
     )

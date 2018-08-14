@@ -951,6 +951,9 @@ p.researcher-bio {
 .study-overview th.individuals, .study-overview td.individuals {
   width: 15%; }
 
+section.researchers-content.people {
+  min-height: 800px; }
+
 button.headshot-col {
   background: transparent;
   border: none; }
