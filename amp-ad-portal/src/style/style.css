@@ -28,6 +28,19 @@ a {
   color: #5A478F;
   text-decoration: none; }
 
+.loading-bar {
+  min-height: 10px; }
+
+.front-page-bar {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .front-page-bar div {
+    display: flex; }
+
 table {
   font-size: 15px;
   background-color: #f4f4f4;
