@@ -376,7 +376,7 @@ Studies
               )}
             </div>
           </section>
-          <div className="row center-xs">
+          <div className="row center-xs loading-bar">
             <BarLoader color="#47357B" loading={this.state.loading} />
           </div>
         </div>
