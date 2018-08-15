@@ -58,7 +58,7 @@ a {
 }
 
 .loading-bar {
-    min-height: 10px;
+  min-height: 10px;
 }
 
 .front-page-bar {
@@ -1297,6 +1297,10 @@ p.researcher-bio {
 }
 
 ////// people ////// 
+section.researchers-content.people {
+  min-height: 800px;
+}
+
 button.headshot-col {
   background: transparent;
   border: none;
