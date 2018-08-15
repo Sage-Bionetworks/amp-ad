@@ -4,7 +4,6 @@ import PropTypes from "prop-types"
 import { SynapseComponents } from "synapse-react-client"
 import { BarLoader } from "react-spinners"
 import { getWikiMarkdownSegments } from "../queries/getWikiData"
-import { printSections } from "../model/HandleMarkdown"
 import { getParents } from "../view/domScripts"
 
 const returnSynapseMarkdown = (sessionToken) => {
@@ -54,23 +53,22 @@ class ExperimentalResources extends Component {
   }
 
   componentDidMount() {
-    getWikiMarkdownSegments(
-      "576287",
-      "experimentalResources",
-      this.props,
-      "syn12666371",
-      10,
-    ).then(() => {
-      this.setState({
-        loading: false,
-      })
-    })
+    //getWikiMarkdownSegments(
+    //"576287",
+    //"experimentalResources",
+    //this.props,
+    //"syn12666371",
+    //10,
+    //).then(() => {
+    //this.setState({
+    //loading: false,
+    //})
+    //})
     this.handleModalClose()
   }
 
   componentDidUpdate() {
     if (this.state.eventListenersAdded < 5) {
-      console.log(this.state.eventListenersAdded)
       this.handleShowTable()
     }
   }
@@ -78,7 +76,7 @@ class ExperimentalResources extends Component {
   getTable = (event) => {
     const button = event.target
     const parents = getParents(button, ".react-markdown")
-    console.log(parents)
+    //console.log(parents)
     const table = parents[0].querySelector("table")
     return table.outerHTML
   };
@@ -110,7 +108,7 @@ class ExperimentalResources extends Component {
 
   handleShowTable = () => {
     const buttonElements = document.querySelectorAll(".table-button")
-    console.log(buttonElements)
+    //console.log(buttonElements)
     if (buttonElements[0] !== undefined && buttonElements[0] !== null) {
       buttonElements.forEach((element) => {
         element.addEventListener("click", (event) => {
@@ -126,7 +124,7 @@ class ExperimentalResources extends Component {
   };
 
   handleModalClose = () => {
-    const modalWindow = document.querySelector(".modal")
+    const modalWindow = document.querySelector(".modal-x-background-circle")
     modalWindow.addEventListener("click", () => {
       this.toggleModal()
     })
@@ -136,10 +134,14 @@ class ExperimentalResources extends Component {
     return (
       <div className="row about experimental-resources">
         <div className={this.state.modal === true ? "modal show" : "modal"}>
-          <div
-            className="modal-content"
-            dangerouslySetInnerHTML={{ __html: this.state.modalContent }}
-          />
+          <div className="modal-container">
+            <div className="modal-x-background-circle">
+              <div className="modal-x" />
+            </div>
+            <div
+              dangerouslySetInnerHTML={{ __html: this.state.modalContent }}
+            />
+          </div>
         </div>
         <div className="col-xs-12">
           <section className="row child-page-hero">
@@ -157,8 +159,7 @@ Experimental Resources
           </section>
           <section className="row center-xs researchers-content">
             <div className="col-xs-12 col-sm-9">
-              {//printSections(this.props.markdown, this.props)
-                returnSynapseMarkdown(this.props.token.sessionToken)}
+              {returnSynapseMarkdown(this.props.token.sessionToken)}
             </div>
           </section>
           <div className="row center-xs">
@@ -171,7 +172,6 @@ Experimental Resources
 }
 
 ExperimentalResources.propTypes = {
-  markdown: PropTypes.array.isRequired,
   token: PropTypes.object.isRequired,
 }
 
