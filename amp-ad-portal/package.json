@@ -2,7 +2,6 @@
   "name": "amp-ad-portal",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mikeybkats.github.io/amp-ad/",
   "dependencies": {
     "babel-eslint": "^8.2.5",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
