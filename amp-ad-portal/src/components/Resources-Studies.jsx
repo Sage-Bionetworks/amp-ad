@@ -36,10 +36,10 @@ class Studies extends Component {
     }
   }
 
-  //shouldComponentUpdate(nextProps) {
-  //const synIds = this.props.markdown.length !== nextProps.wikiIds.length
-  //return synIds
-  //}
+  shouldComponentUpdate(nextProps) {
+    const synIds = this.props.markdown.length === nextProps.wikiIds.length
+    return synIds
+  }
 
   setStudiesRows = (synapseData = this.state.pageData) => {
     const studiesRows = []
@@ -310,7 +310,7 @@ class Studies extends Component {
   };
 
   buildEntries = (wikiIds, studiesRows, studiesNames, wikiMarkdownState) => {
-    if (wikiIds.length > 38) {
+    if (wikiIds.length > 0) {
       console.log(this.props.wikiIds)
       return wikiIds.map((element, index) => {
         const synElement = element[Object.keys(element)[0]]
