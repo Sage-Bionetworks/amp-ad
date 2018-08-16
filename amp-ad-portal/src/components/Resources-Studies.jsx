@@ -260,9 +260,7 @@ class Studies extends Component {
           <td className="individuals">
             {row[this.props.individualsIndex][index]}
           </td>
-          <td className="tissues">
-            {row[this.props.sampleTypeIndex][index]}
-          </td>
+          <td className="tissues">{row[this.props.sampleTypeIndex][index]}</td>
           <td className="data-types">
             <a
               href={`https://www.synapse.org/#!Synapse:${
@@ -326,20 +324,12 @@ class Studies extends Component {
                 <table>
                   <thead className="">
                     <tr className="">
-                      <th className="individuals">
-Individuals
-                      </th>
-                      <th className="tissues">
-Tissues
-                      </th>
-                      <th className="data-types">
-Data Types
-                      </th>
+                      <th className="individuals">Individuals</th>
+                      <th className="tissues">Tissues</th>
+                      <th className="data-types">Data Types</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {table}
-                  </tbody>
+                  <tbody>{table}</tbody>
                 </table>
               </div>
             </div>
@@ -356,9 +346,7 @@ Data Types
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
-              <h2>
-Studies
-              </h2>
+              <h2>Studies</h2>
               <p>
                 This page details the research studies that have contributed
                 data to the Knowledge Portal, along with which NIH grant
