@@ -199,6 +199,16 @@ button:hover, select:hover { cursor: pointer }
   background-color: #C7D6FF;
   //color: white;
 }
+.btn-lg {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  line-height: 50px;
+  text-align: center;
+  display: inline-block;
+  margin: 10px;
+}
 
 .btn-light {
   color: #1A1C29;

@@ -147,6 +147,16 @@ button:hover, select:hover {
 .btn:hover {
   background-color: #C7D6FF; }
 
+.btn-lg {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  line-height: 50px;
+  text-align: center;
+  display: inline-block;
+  margin: 10px; }
+
 .btn-light {
   color: #1A1C29;
   font-size: 20px;
