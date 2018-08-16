@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { BarLoader } from "react-spinners"
+import { SynapseComponents } from "synapse-react-client"
 import { getTable } from "../queries/queryForData"
 import {
   getMarkdownSegment,
@@ -11,8 +12,6 @@ import {
 } from "../queries/getWikiData"
 import ShowHideSection from "./ShowHideSection"
 import { getColumnNameIndex } from "../controller/PrepRawSynapseData"
-
-const ReactMarkdown = require("react-markdown")
 
 class Studies extends Component {
   constructor(props) {
@@ -35,6 +34,11 @@ class Studies extends Component {
         loading: false,
       })
     }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const synIds = this.props.markdown.length === nextProps.wikiIds.length
+    return synIds
   }
 
   setStudiesRows = (synapseData = this.state.pageData) => {
@@ -278,33 +282,49 @@ class Studies extends Component {
     })
   };
 
+  returnSynapseJSX = (markdown) => {
+    return (
+      <SynapseComponents.Markdown
+        token={this.props.token.sessionToken}
+        markdown={markdown}
+        hasSynapseResources={false}
+        errorMessageView={<div>error</div>}
+      />
+    )
+  };
+
+  getWikiMarkdownCopy = (wikiMarkdownState, wikiId) => {
+    let wikiMarkdownCopy = ""
+    if (wikiMarkdownState.length > 0) {
+      wikiMarkdownCopy = wikiMarkdownState.filter((markdownObj) => {
+        return Object.keys(markdownObj)[0] === wikiId
+      })
+    }
+    if (wikiMarkdownCopy[0] !== undefined) {
+      wikiMarkdownCopy = wikiMarkdownCopy[0][parseInt(wikiId, 10)]
+    }
+    if (typeof wikiMarkdownCopy === "object") {
+      wikiMarkdownCopy = ""
+    }
+    return wikiMarkdownCopy
+  };
+
   buildEntries = (wikiIds, studiesRows, studiesNames, wikiMarkdownState) => {
-    // builds user profiles
-    //console.log(wikiIds, studiesRows, studiesNames, wikiMarkdownState)
     if (wikiIds.length > 0) {
+      console.log(this.props.wikiIds)
       return wikiIds.map((element, index) => {
         const synElement = element[Object.keys(element)[0]]
         const synId = synElement.ownerObjectId
         const wikiId = synElement.wikiPageId
-        let wikiMarkdownCopy = ""
-
-        if (wikiMarkdownState.length > 0) {
-          wikiMarkdownCopy = wikiMarkdownState.filter((markdownObj) => {
-            return Object.keys(markdownObj)[0] === wikiId
-          })
-        }
-        if (wikiMarkdownCopy[0] !== undefined) {
-          wikiMarkdownCopy = wikiMarkdownCopy[0][parseInt(wikiId, 10)]
-        }
-        if (typeof wikiMarkdownCopy === "object") {
-          wikiMarkdownCopy = ""
-        }
+        const wikiMarkdownCopy = this.getWikiMarkdownCopy(
+          wikiMarkdownState,
+          wikiId,
+        )
 
         const objectData = studiesRows.filter((row) => {
           return row.values[this.props.studyIndex] === synId
         })
 
-        //console.log(objectData)
         const table = this.buildDataTable(objectData[0].values)
 
         const key = `table${index}`
@@ -315,7 +335,7 @@ class Studies extends Component {
               <div className="row">
                 <div className="col-xs-12 researchers studies-section">
                   <ShowHideSection
-                    content={<ReactMarkdown source={wikiMarkdownCopy} />}
+                    content={this.returnSynapseJSX(wikiMarkdownCopy)}
                   />
                 </div>
               </div>

@@ -55,9 +55,9 @@ const getBioSampleCount = (species, diagnosis = "", table, tokenResponse) => {
     .catch(error => console.log(error))
 }
 
-const login = (username, password) => {
-  return SynapseClient.login(username, password)
-}
+//const login = (username, password) => {
+//return SynapseClient.login(username, password)
+//}
 
 const json = (response) => {
   return JSON.stringify(response)
@@ -69,7 +69,6 @@ const processError = (error) => {
 
 const getTable = (table, tokenResponse, query, offset, limit) => {
   const request = buildRequest(table, query, offset, limit)
-  console.log(request)
   return SynapseClient.getQueryTableResults(
     request,
     tokenResponse.sessionToken,

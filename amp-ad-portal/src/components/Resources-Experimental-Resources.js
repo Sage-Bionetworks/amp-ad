@@ -53,17 +53,17 @@ class ExperimentalResources extends Component {
   }
 
   componentDidMount() {
-    //getWikiMarkdownSegments(
-    //"576287",
-    //"experimentalResources",
-    //this.props,
-    //"syn12666371",
-    //10,
-    //).then(() => {
-    //this.setState({
-    //loading: false,
-    //})
-    //})
+    getWikiMarkdownSegments(
+      "576287",
+      "experimentalResources",
+      this.props,
+      "syn12666371",
+      10,
+    ).then(() => {
+      this.setState({
+        loading: false,
+      })
+    })
     this.handleModalClose()
   }
 
@@ -76,7 +76,6 @@ class ExperimentalResources extends Component {
   getTable = (event) => {
     const button = event.target
     const parents = getParents(button, ".react-markdown")
-    //console.log(parents)
     const table = parents[0].querySelector("table")
     return table.outerHTML
   };
@@ -86,7 +85,6 @@ class ExperimentalResources extends Component {
   };
 
   handleChanges = (stateKey, updatedState) => {
-    //console.log(updatedState)
     this.setState({
       [stateKey]: updatedState,
     })
@@ -108,7 +106,6 @@ class ExperimentalResources extends Component {
 
   handleShowTable = () => {
     const buttonElements = document.querySelectorAll(".table-button")
-    //console.log(buttonElements)
     if (buttonElements[0] !== undefined && buttonElements[0] !== null) {
       buttonElements.forEach((element) => {
         element.addEventListener("click", (event) => {
@@ -146,9 +143,7 @@ class ExperimentalResources extends Component {
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
-              <h2>
-Experimental Resources
-              </h2>
+              <h2>Experimental Resources</h2>
               <p>
                 In addition to data and analysis, AMP-AD investigators
                 contribute other experimental resources of value to the
