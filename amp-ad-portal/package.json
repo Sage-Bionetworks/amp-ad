@@ -2,9 +2,11 @@
   "name": "amp-ad-portal",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://mikeybkats.github.io/amp-ad/",
   "dependencies": {
     "babel-eslint": "^8.2.5",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "gh-pages": "^1.2.0",
     "html-to-react": "^1.3.3",
     "immutability-helper": "^2.7.1",
     "lodash": "^4.17.10",
@@ -51,6 +53,8 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "test": "react-scripts test --env=jsdom",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   }
 }
