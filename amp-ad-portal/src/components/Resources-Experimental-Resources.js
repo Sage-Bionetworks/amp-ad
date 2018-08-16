@@ -67,11 +67,6 @@ class ExperimentalResources extends Component {
     this.handleModalClose()
   }
 
-  shouldComponentUpdate(nextProps) {
-    console.log(nextProps)
-    return true
-  }
-
   componentDidUpdate() {
     if (this.state.eventListenersAdded < 5) {
       this.handleShowTable()

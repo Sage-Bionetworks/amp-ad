@@ -56,6 +56,5 @@
     "build-storybook": "build-storybook -s public",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
-
   }
 }

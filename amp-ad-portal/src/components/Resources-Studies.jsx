@@ -311,7 +311,7 @@ class Studies extends Component {
 
   buildEntries = (wikiIds, studiesRows, studiesNames, wikiMarkdownState) => {
     if (wikiIds.length > 0) {
-      console.log(this.props.wikiIds)
+      //console.log(this.props.wikiIds)
       return wikiIds.map((element, index) => {
         const synElement = element[Object.keys(element)[0]]
         const synId = synElement.ownerObjectId
