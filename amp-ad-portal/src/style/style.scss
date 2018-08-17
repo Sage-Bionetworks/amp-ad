@@ -74,11 +74,8 @@ a {
 }
 
 table {
-  font-size: 15px;
-  //border: 1px solid #aeaeae;
-  //background-color: #f4f4f4;
+  font-size: 16px;
   font-weight: lighter;
-  //width: 1081px;
   margin-bottom: 100px;
   border-collapse: collapse;
   max-width: 100%;
@@ -105,13 +102,11 @@ table {
   td {
     padding: 15px;
     font-weight: 400;
-    font-size: 14px;
     color: #1A1C29;
     a {
       color: $textPurple;
       text-decoration: underline;
       font-weight: 400;
-      font-size: 14px;
     } 
   }
 }

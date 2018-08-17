@@ -42,7 +42,7 @@ a {
     display: flex; }
 
 table {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: lighter;
   margin-bottom: 100px;
   border-collapse: collapse;
@@ -69,13 +69,11 @@ table {
   table td {
     padding: 15px;
     font-weight: 400;
-    font-size: 14px;
     color: #1A1C29; }
     table td a {
       color: #5A478F;
       text-decoration: underline;
-      font-weight: 400;
-      font-size: 14px; }
+      font-weight: 400; }
 
 table.markdowntable {
   border-left: unset;

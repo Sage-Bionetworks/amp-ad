@@ -7,41 +7,6 @@ import { getWikiMarkdownSegments } from "../queries/getWikiData"
 import { printSections } from "../model/HandleMarkdown"
 import { getParents } from "../view/domScripts"
 
-//const returnSynapseMarkdown = (sessionToken) => {
-  //return (
-    //<div>
-      //<div className="react-markdown">
-        //<SynapseComponents.Markdown
-          //token={sessionToken}
-          //ownerId="syn12666371"
-          //wikiId="582125"
-        ///>
-      //</div>
-      //<div className="react-markdown">
-        //<SynapseComponents.Markdown
-          //token={sessionToken}
-          //ownerId="syn12666371"
-          //wikiId="582124"
-        ///>
-      //</div>
-      //<div className="react-markdown">
-        //<SynapseComponents.Markdown
-          //token={sessionToken}
-          //ownerId="syn12666371"
-          //wikiId="582123"
-        ///>
-      //</div>
-      //<div className="react-markdown">
-        //<SynapseComponents.Markdown
-          //token={sessionToken}
-          //ownerId="syn12666371"
-          //wikiId="581965"
-        ///>
-      //</div>
-    //</div>
-  //)
-//}
-
 class ExperimentalResources extends Component {
   constructor(props) {
     super(props)
@@ -104,17 +69,15 @@ class ExperimentalResources extends Component {
 
   addEventListeners = (elements) => {
     elements.forEach((element) => {
-      console.log("adding event listener to ", element)
       element.addEventListener("click", (event) => {
         this.handleChanges("modalContent", this.getTable(event))
         this.toggleModal()
       })
     })
-  }
+  };
 
   handleShowTable = () => {
     const buttonElements = document.querySelectorAll(".table-button")
-    //console.log(buttonElements)
     if (buttonElements[0] !== undefined && buttonElements[0] !== null) {
       this.addEventListeners(buttonElements)
     }
@@ -143,9 +106,7 @@ class ExperimentalResources extends Component {
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
-              <h2>
-Experimental Resources
-              </h2>
+              <h2>Experimental Resources</h2>
               <p>
                 In addition to data and analysis, AMP-AD investigators
                 contribute other experimental resources of value to the
@@ -169,7 +130,7 @@ Experimental Resources
 }
 
 ExperimentalResources.propTypes = {
-  token: PropTypes.object.isRequired,
+  markdown: PropTypes.array.isRequired,
 }
 
 export default ExperimentalResources
