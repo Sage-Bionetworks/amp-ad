@@ -7,9 +7,7 @@ const Analyses = (props) => {
       <div className="content col-xs-12 col-sm-9">
         <div className="row between-xs title-row">
           <div className="col-xs-6 col-sm-6">
-            <h2>
-Analyses
-            </h2>
+            <h2>Analyses</h2>
           </div>
           <div className="col-xs-3 col-sm-2 content-width">
             <a
@@ -22,16 +20,14 @@ Analyses
         </div>
 
         <div className="row between-xs center-xs middle-xs">
-          <div className="analyses box col-sm-4">
+          <div className="analyses box col-xs-12 col-sm-4">
             <div className="box-text-image">
               <img
                 src={require("../images/dna.svg")}
                 alt="dna double helix"
                 className="svg-large-icon"
               />
-              <h4>
-Genetics
-              </h4>
+              <h4>Genetics</h4>
               <p>
                 Expression quantitative trait loci, imputed genotypes, and
                 polygenic risk scores.
@@ -46,19 +42,15 @@ Genetics
             </button>
           </div>
 
-          <div className="analyses box col-sm-4">
+          <div className="analyses box col-xs-12 col-sm-4">
             <div className="box-text-image">
               <img
                 src={require("../images/differential-expressions.svg")}
                 alt="dna double helix"
                 className="svg-large-icon"
               />
-              <h4>
-Differential Expression
-              </h4>
-              <p>
-Differential gene expression and enrichment analysis.
-              </p>
+              <h4>Differential Expression</h4>
+              <p>Differential gene expression and enrichment analysis.</p>
             </div>
             <button
               className="btn"
@@ -70,19 +62,15 @@ Differential gene expression and enrichment analysis.
             </button>
           </div>
 
-          <div className="analyses box col-sm-4">
+          <div className="analyses box col-xs-12 col-sm-4">
             <div className="box-text-image">
               <img
                 src={require("../images/networks.svg")}
                 alt="dna double helix"
                 className="svg-large-icon"
               />
-              <h4>
-Networks
-              </h4>
-              <p>
-Gene and protein co-expression analysis.
-              </p>
+              <h4>Networks</h4>
+              <p>Gene and protein co-expression analysis.</p>
             </div>
             <button
               className="btn"
