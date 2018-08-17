@@ -46,6 +46,7 @@ section div.row {
 }
 
 h1 { font-size: 30px; }
+h2 { font-size: 24px; }
 h3 { font-weight: 300; }
 
 p {
@@ -74,11 +75,8 @@ a {
 }
 
 table {
-  font-size: 15px;
-  //border: 1px solid #aeaeae;
-  //background-color: #f4f4f4;
+  font-size: 16px;
   font-weight: lighter;
-  //width: 1081px;
   margin-bottom: 100px;
   border-collapse: collapse;
   max-width: 100%;
@@ -105,13 +103,11 @@ table {
   td {
     padding: 15px;
     font-weight: 400;
-    font-size: 14px;
     color: #1A1C29;
     a {
       color: $textPurple;
       text-decoration: underline;
       font-weight: 400;
-      font-size: 14px;
     } 
   }
 }
@@ -1208,6 +1204,30 @@ p.researcher-bio {
       margin-bottom: 0px;
     }
   }
+}
+
+///// research-publications /////
+.research-publications {
+  .row.publication {
+    h2 {
+      font-size: 24px; 
+    }
+    h4 {
+      color: #9DA3B3;
+      font-weight: 300;
+      a {
+        color: #9DA3B3;
+        font-weight: 300;
+      }
+    }
+    .border-bottom {
+      border-bottom: 1px solid #E6E6E8;
+    }
+    .col-xs-12 {
+      margin: 30px 0px;
+    }
+  }
+  .react-markdown > div:first-child { display: none; }
 }
 
 //// experimental resources /////

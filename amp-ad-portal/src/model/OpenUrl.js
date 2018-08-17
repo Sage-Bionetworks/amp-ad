@@ -1,11 +1,7 @@
 const openUrl = (event, link) => {
   event.preventDefault()
-  //const length = window.location.href.length
   const hashIndex = window.location.href.indexOf("#", 0)
   const baseUrl = window.location.href.slice(0, hashIndex - 1)
-
-  //console.log(baseUrl + link)
-  //window.open(link, "_self")
   window.location.href = baseUrl + link
 }
 
