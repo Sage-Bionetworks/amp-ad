@@ -11,7 +11,7 @@ class ResearchPublications extends Component {
 
   render() {
     return (
-      <div className="row about">
+      <div className="row about research-publications">
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
