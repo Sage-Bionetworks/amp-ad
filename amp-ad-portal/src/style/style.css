@@ -1163,4 +1163,38 @@ button.modal-x {
       background-repeat: no-repeat;
       background-position: center; }
 
+@media screen and (max-width: 480px) {
+  header.header img {
+    max-height: 50px; }
+
+  .main {
+    margin-top: 305px; }
+
+  ul.nav {
+    flex-direction: column;
+    text-align: left; }
+    ul.nav li {
+      margin: 10px; }
+
+  section.welcome .welcome-message {
+    padding: 20px; }
+
+  section.welcome .welcome-data {
+    right: 0px; }
+
+  section.welcome .welcome-data {
+    padding: 30px 0px;
+    right: 0px; }
+
+  section.pie-charts-welcome .chart-center-stat {
+    width: unset;
+    height: unset; }
+
+  section.analyses, section.programs {
+    padding: unset; }
+    section.analyses .box, section.programs .box {
+      margin: unset;
+      margin-bottom: 10px;
+      max-width: unset; } }
+
 /*# sourceMappingURL=style.css.map */
