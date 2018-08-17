@@ -76,7 +76,7 @@ a {
 table {
   font-size: 15px;
   //border: 1px solid #aeaeae;
-  background-color: #f4f4f4;
+  //background-color: #f4f4f4;
   font-weight: lighter;
   //width: 1081px;
   margin-bottom: 100px;
@@ -84,27 +84,65 @@ table {
   max-width: 100%;
     display: inline-block;
   thead {
-    background-color: #e2e2e2;
-    //color: $textGray;
+    background-color: #fff;
+    border-top: 1px solid #E6E6E8;
+    tr:first-child {background: #fff}
+    font-size: 18px;
   }
+  tr:nth-child(even) {background: #FFF}
+  tr:nth-child(odd) {background: #F5F5F5}
   tr {
     padding: 10px;
+  }
+  th, td {
+    text-align: left;
   }
   th {
     font-weight: 400;
     border: 0px;
-    padding: 5px;
+    padding: 15px 0px 15px 15px;
   }
   td {
-    padding: 5px;
-    font-weight: 300;
+    padding: 15px;
+    font-weight: 400;
     font-size: 14px;
+    color: #1A1C29;
     a {
       color: $textPurple;
       text-decoration: underline;
-      font-weight: 300;
+      font-weight: 400;
       font-size: 14px;
     } 
+  }
+}
+
+table.markdowntable {
+  border-left: unset; 
+  border-right: unset; 
+  border-bottom: unset; 
+  border-collapse: collapse; 
+  border-left: unset; 
+  margin: unset; 
+  th {
+    border-left: unset;
+    border-top: unset;
+    padding: unset;
+    font-weight: unset;
+    font-size: unset;
+  }
+  tr {
+    //all: unset;
+  }
+  td {
+    border-left: 0px solid #dddddd; 
+    border-top: 0px solid #dddddd; 
+    padding: 14px;
+  }
+  tbody:first-child tr:first-child td:first-child {
+    border-top-left-radius: 0px;
+  }
+  .btn {
+    height: 100%;
   }
 }
 
@@ -1195,6 +1233,9 @@ p.researcher-bio {
   left: 0;
   right: 0;
   bottom: 0px;
+  table {
+    box-shadow: 0px 2px 1.5px rgba(0, 0, 0, 0.35);
+  }
 }
 
 .modal-x {
@@ -1217,7 +1258,7 @@ p.researcher-bio {
   background-color: white;
   @include circle(48px);
   z-index: 1000;
-  top: 30px;
+  top: 20px;
   right: 30px;
   box-shadow: 0px 2px 1.5px rgba(0, 0, 0, 0.35);
 }
@@ -1319,7 +1360,7 @@ p.researcher-bio {
 }
 .study-overview {
   table {
-    width: 86%;
+    width: 91.66666667%;
   }
   thead, tbody {
     display: flex;
@@ -1327,7 +1368,7 @@ p.researcher-bio {
   }
   tr {
     display: flex;
-    width: 100%;
+    //width: 100%;
   }
   th, td {
     width: 33.3%;
