@@ -46,6 +46,7 @@ section div.row {
 }
 
 h1 { font-size: 30px; }
+h2 { font-size: 24px; }
 h3 { font-weight: 300; }
 
 p {
@@ -1203,6 +1204,30 @@ p.researcher-bio {
       margin-bottom: 0px;
     }
   }
+}
+
+///// research-publications /////
+.research-publications {
+  .row.publication {
+    h2 {
+      font-size: 24px; 
+    }
+    h4 {
+      color: #9DA3B3;
+      font-weight: 300;
+      a {
+        color: #9DA3B3;
+        font-weight: 300;
+      }
+    }
+    .border-bottom {
+      border-bottom: 1px solid #E6E6E8;
+    }
+    .col-xs-12 {
+      margin: 30px 0px;
+    }
+  }
+  .react-markdown > div:first-child { display: none; }
 }
 
 //// experimental resources /////

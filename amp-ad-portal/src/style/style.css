@@ -18,6 +18,9 @@ section div.row {
 h1 {
   font-size: 30px; }
 
+h2 {
+  font-size: 24px; }
+
 h3 {
   font-weight: 300; }
 
@@ -902,6 +905,21 @@ p.researcher-bio {
   margin-top: 0px; }
 .researchers-content .researcher h4, .content-section .researcher h4 {
   margin-bottom: 0px; }
+
+.research-publications .row.publication h2 {
+  font-size: 24px; }
+.research-publications .row.publication h4 {
+  color: #9DA3B3;
+  font-weight: 300; }
+  .research-publications .row.publication h4 a {
+    color: #9DA3B3;
+    font-weight: 300; }
+.research-publications .row.publication .border-bottom {
+  border-bottom: 1px solid #E6E6E8; }
+.research-publications .row.publication .col-xs-12 {
+  margin: 30px 0px; }
+.research-publications .react-markdown > div:first-child {
+  display: none; }
 
 .experimental-resource, .row.publication {
   position: relative; }
