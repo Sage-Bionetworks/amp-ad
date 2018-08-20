@@ -32,12 +32,32 @@ body, button, h1, h2, h3, h4, h5, li, ul, p, a {
 html, body {
   max-width: 100%;
   overflow-x: hidden;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+div.row.amp-ad {
+  height: 80%;
+  max-width: 100%;
+	margin: 0px;
 }
 
 body.noScroll, html.noScroll {
   overflow-y:hidden;
   margin: 0;
   height: 100%
+}
+
+.main {
+  transition: all 300ms ease;
+  margin-top: 105px;
+  min-height: 93%;
+  &.squish {
+    margin-top: 0px;
+  }
 }
 
 section div.row {
@@ -263,12 +283,6 @@ button:hover, select:hover { cursor: pointer }
   background-color: #E3E1E1;
 }
 
-div.row.amp-ad {
-  max-width: 100%;
-	margin: 0px;
-  min-height: 100%;
-}
-
 .nav {
 	position: relative;
 	z-index: 1000;
@@ -308,14 +322,6 @@ div.row.amp-ad {
 
 section {
   padding: 25px 50px;
-}
-
-.main {
-  transition: all 300ms ease;
-  margin-top: 105px;
-  &.squish {
-    margin-top: 0px;
-  }
 }
 
 .content {
@@ -550,6 +556,8 @@ footer {
   margin-left: 0px !important;
   margin-right: 0px !important;
 	margin-top: 50px;
+	padding-bottom: 56px;
+	padding-top: 30px;
 	a {
 		color: white;
 		margin: 10px;
