@@ -16,14 +16,6 @@ const login = async () => SynapseClient.login("mikeybkats", "guinness").then((ke
   return keys
 })
 
-//const getRawData = fetch("https://americandurablegoods.com/response2.json")
-//.then(responseRaw => responseRaw.json())
-//.then((response) => {
-//rawSynapseData = response
-////console.log(response)
-//})
-//.catch(error => console.log("Request has failed: ", error))
-
 const table = "syn12532774"
 const speciesQuery = `SELECT species, assay, tissue, diagnosis, specimenID, COUNT(*) FROM ${table} GROUP BY assay, tissue, species, diagnosis`
 

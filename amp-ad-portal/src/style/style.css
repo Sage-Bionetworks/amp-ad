@@ -5,12 +5,28 @@ body, button, h1, h2, h3, h4, h5, li, ul, p, a {
 
 html, body {
   max-width: 100%;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  height: 100%; }
+
+#root {
+  height: 100%; }
+
+div.row.amp-ad {
+  height: 80%;
+  max-width: 100%;
+  margin: 0px; }
 
 body.noScroll, html.noScroll {
   overflow-y: hidden;
   margin: 0;
   height: 100%; }
+
+.main {
+  transition: all 300ms ease;
+  margin-top: 105px;
+  min-height: 93%; }
+  .main.squish {
+    margin-top: 0px; }
 
 section div.row {
   margin: 0px auto; }
@@ -208,11 +224,6 @@ button:hover, select:hover {
 .btn-light:active {
   background-color: #E3E1E1; }
 
-div.row.amp-ad {
-  max-width: 100%;
-  margin: 0px;
-  min-height: 100%; }
-
 .nav {
   position: relative;
   z-index: 1000; }
@@ -241,12 +252,6 @@ div.row.amp-ad {
 
 section {
   padding: 25px 50px; }
-
-.main {
-  transition: all 300ms ease;
-  margin-top: 105px; }
-  .main.squish {
-    margin-top: 0px; }
 
 .content {
   margin: 0px auto; }
@@ -423,7 +428,9 @@ footer {
   width: 100%;
   margin-left: 0px !important;
   margin-right: 0px !important;
-  margin-top: 50px; }
+  margin-top: 50px;
+  padding-bottom: 56px;
+  padding-top: 30px; }
   footer a {
     color: white;
     margin: 10px;
@@ -1180,5 +1187,39 @@ button.modal-x {
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center; }
+
+@media screen and (max-width: 480px) {
+  header.header img {
+    max-height: 50px; }
+
+  .main {
+    margin-top: 305px; }
+
+  ul.nav {
+    flex-direction: column;
+    text-align: left; }
+    ul.nav li {
+      margin: 10px; }
+
+  section.welcome .welcome-message {
+    padding: 20px; }
+
+  section.welcome .welcome-data {
+    right: 0px; }
+
+  section.welcome .welcome-data {
+    padding: 30px 0px;
+    right: 0px; }
+
+  section.pie-charts-welcome .chart-center-stat {
+    width: unset;
+    height: unset; }
+
+  section.analyses, section.programs {
+    padding: unset; }
+    section.analyses .box, section.programs .box {
+      margin: unset;
+      margin-bottom: 10px;
+      max-width: unset; } }
 
 /*# sourceMappingURL=style.css.map */
