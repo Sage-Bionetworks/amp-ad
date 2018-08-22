@@ -11982,8 +11982,8 @@ symbol.prototype.description@^1.0.0:
     has-symbols "^1.0.0"
 
 synapse-react-client@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/synapse-react-client/-/synapse-react-client-1.1.1.tgz#32ed07805b0d97a9e94a92f5a999bb0653fac405"
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/synapse-react-client/-/synapse-react-client-1.1.2.tgz#d54c6f2d5f0961507255ed0e93fa82739366dc3f"
   dependencies:
     markdown-it "^8.4.2"
     markdown-it-br "^1.0.0"
