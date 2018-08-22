@@ -5,11 +5,7 @@ body, button, h1, h2, h3, h4, h5, li, ul, p, a {
 
 html, body {
   max-width: 100%;
-  overflow-x: hidden;
-  height: 100%; }
-
-#root {
-  height: 100%; }
+  overflow-x: hidden; }
 
 div.row.amp-ad {
   height: 80%;
@@ -31,6 +27,9 @@ body.noScroll, html.noScroll {
 section div.row {
   margin: 0px auto; }
 
+section {
+  padding: 25px 50px; }
+
 h1 {
   font-size: 30px; }
 
@@ -47,18 +46,15 @@ a {
   color: #5A478F;
   text-decoration: none; }
 
-.loading-bar {
-  min-height: 10px; }
+li {
+  list-style: none; }
 
-.front-page-bar {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; }
-  .front-page-bar div {
-    display: flex; }
+ul.jumbo-list {
+  position: relative; }
+  ul.jumbo-list li {
+    list-style: none; }
+  ul.jumbo-list a {
+    position: relative; }
 
 table {
   font-size: 16px;
@@ -120,13 +116,6 @@ header a {
   color: black;
   text-decoration: none; }
 
-.child-page-hero a, .welcome a {
-  color: white;
-  text-decoration: underline; }
-
-li {
-  list-style: none; }
-
 span.jumbo {
   font-size: 42px;
   height: 50px;
@@ -139,15 +128,29 @@ span.jumbo {
   bottom: 0;
   right: 0; }
 
-ul.jumbo-list {
-  position: relative; }
-  ul.jumbo-list li {
-    list-style: none; }
-  ul.jumbo-list a {
-    position: relative; }
-
 select {
   font-size: 18px; }
+
+@media only screen and (min-width: 48em) {
+  .col-sm-9 {
+    flex-basis: 80%;
+    max-width: 80%; } }
+.child-page-hero a, .welcome a {
+  color: white;
+  text-decoration: underline; }
+
+.loading-bar {
+  min-height: 10px; }
+
+.front-page-bar {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .front-page-bar div {
+    display: flex; }
 
 .align-right {
   text-align: right; }
@@ -249,9 +252,6 @@ button:hover, select:hover {
   .title-row a {
     color: #5A498D;
     text-decoration: underline; }
-
-section {
-  padding: 25px 50px; }
 
 .content {
   margin: 0px auto; }
