@@ -100,9 +100,7 @@ table.markdowntable {
   table.markdowntable th {
     border-left: unset;
     border-top: unset;
-    padding: unset;
-    font-weight: unset;
-    font-size: unset; }
+    padding: unset; }
   table.markdowntable td {
     border-left: 0px solid #dddddd;
     border-top: 0px solid #dddddd;
