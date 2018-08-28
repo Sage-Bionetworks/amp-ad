@@ -8,7 +8,6 @@ html, body {
   overflow-x: hidden; }
 
 div.row.amp-ad {
-  height: 80%;
   max-width: 100%;
   margin: 0px; }
 
@@ -100,9 +99,7 @@ table.markdowntable {
   table.markdowntable th {
     border-left: unset;
     border-top: unset;
-    padding: unset;
-    font-weight: unset;
-    font-size: unset; }
+    padding: unset; }
   table.markdowntable td {
     border-left: 0px solid #dddddd;
     border-top: 0px solid #dddddd;
@@ -234,7 +231,9 @@ button:hover, select:hover {
     cursor: pointer; }
   .nav li {
     list-style: none;
-    margin: 0px 20px; }
+    margin: 0px 20px;
+    position: relative;
+    display: block; }
   .nav .nav-item {
     font-size: 20px; }
   .nav .nav-item.dropdown {
@@ -245,7 +244,19 @@ button:hover, select:hover {
   .nav a.nav-item.active {
     font-weight: bold; }
   .nav .top-level-accordion-item.active a.main-nav-item {
-    font-weight: bold; }
+    font-weight: bold;
+    position: relative; }
+  .nav div.under-bar.active {
+    position: absolute;
+    background-color: #E369A1;
+    height: 5px;
+    width: 100%;
+    top: 59px;
+    left: 0; }
+  .nav div.under-bar.squish {
+    top: 35px; }
+  .nav div.side-bar {
+    background-color: #8ED1D4; }
 
 .title-row {
   padding: 20px 0px; }

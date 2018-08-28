@@ -2,12 +2,22 @@ import _ from "lodash"
 
 const setActiveNavigation = () => {
   const navItems = document.querySelectorAll(".nav li a.main-nav-item")
+  const selectedMenu = document.querySelector("div.under-bar.active")
+  const main = document.querySelector("div.main")
+  if (selectedMenu !== null && main.classList.contains("squish")) {
+    selectedMenu.classList.add("squish")
+  } else if (selectedMenu !== null) {
+    selectedMenu.classList.remove("squish")
+  }
   navItems.forEach((element) => {
     element.classList.remove("active")
+    element.parentNode.childNodes[1].classList.remove("active")
     if (window.location.href.includes(element.innerHTML)) {
+      element.parentNode.childNodes[1].classList.add("active")
       element.classList.add("active")
     }
     if (window.location.hash === "#/" && element.innerHTML === "Home") {
+      element.parentNode.childNodes[1].classList.add("active")
       element.classList.add("active")
     }
   })
@@ -54,6 +64,8 @@ const shrinkHeader = () => {
 
         const main = document.querySelector("div.main")
         main.classList.add("squish")
+        const selectedMenu = document.querySelector("div.under-bar.active")
+        selectedMenu.classList.add("squish")
       }
       if (scroll.y < 50) {
         // 3000px (arbitrary - put whatever point you need there.)
@@ -64,6 +76,9 @@ const shrinkHeader = () => {
         ) // change the attribute.
         const main = document.querySelector("div.main")
         main.classList.remove("squish")
+
+        const selectedMenu = document.querySelector("div.under-bar.active")
+        selectedMenu.classList.remove("squish")
       }
     }, 50),
   )
