@@ -2,7 +2,9 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700');
 
 $green: #89C889;
+$green2: #8ED1D4;
 $pink: #F683B9;
+$pink2: #E369A1;
 $blue: #77AFD4;
 $bluePlum: #5D69AB;
 $bluePurple: #4C57A2;
@@ -32,15 +34,15 @@ body, button, h1, h2, h3, h4, h5, li, ul, p, a {
 html, body {
   max-width: 100%;
   overflow-x: hidden;
-  height: 100%;
+  //height: 100%;
 }
 
 #root {
-  height: 100%;
+  //height: 100%;
 }
 
 div.row.amp-ad {
-  height: 80%;
+  //height: 80%;
   max-width: 100%;
 	margin: 0px;
 }
@@ -292,6 +294,8 @@ button:hover, select:hover { cursor: pointer }
   li {
     list-style: none;
     margin: 0px 20px;
+    position: relative;
+    display: block;
   }
   .nav-item{
     font-size: 20px;
@@ -308,8 +312,24 @@ button:hover, select:hover { cursor: pointer }
   }
   .top-level-accordion-item.active {
     a.main-nav-item {
-    font-weight: bold;
-  }}
+      font-weight: bold;
+      position: relative;
+    }
+  }
+  div.under-bar.active {
+    position: absolute;
+    background-color: $pink2;
+    height: 5px;
+    width: 100%;
+    top: 59px;
+    left: 0;
+  }
+  div.under-bar.squish {
+    top: 35px;
+  }
+  div.side-bar {
+    background-color: $green2;
+  }
 }
 
 .title-row {

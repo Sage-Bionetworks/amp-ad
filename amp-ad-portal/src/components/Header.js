@@ -87,6 +87,7 @@ class Header extends Component {
           >
             Research
           </a>
+          <div className="under-bar" />
         </AccordionItemTitle>
         <AccordionItemBody
           aria-hidden={this.state.Research !== true}
@@ -100,12 +101,8 @@ class Header extends Component {
             <AccordionItem className="accordion-row row">
               <AccordionItemTitle>
                 <div className="accordion-sub-row row between-xs">
-                  <div className="col-xs-10 accordion-sub-title">
-Programs
-                  </div>
-                  <div className="col-xs-1 carrot-icon">
-&gt;
-                  </div>
+                  <div className="col-xs-10 accordion-sub-title">Programs</div>
+                  <div className="col-xs-1 carrot-icon">&gt;</div>
                 </div>
               </AccordionItemTitle>
               <AccordionItemBody>
@@ -159,9 +156,7 @@ Programs
                   <div className="col-xs-10 accordion-sub-title">
                     Collaborative Research
                   </div>
-                  <div className="col-xs-1 carrot-icon">
-&gt;
-                  </div>
+                  <div className="col-xs-1 carrot-icon">&gt;</div>
                 </div>
               </AccordionItemTitle>
               <AccordionItemBody>
@@ -249,6 +244,7 @@ Programs
           >
             Resources
           </a>
+          <div className="under-bar" />
         </AccordionItemTitle>
         <AccordionItemBody
           aria-hidden={this.state.Resources !== true}
@@ -311,9 +307,7 @@ Programs
               <AccordionItemTitle className="accordion__title link">
                 <div className="row between-xs">
                   <div className="col-xs-12 accordion-sub-title">
-                    <a href="http://agora.ampadportal.org/">
-Agora
-                    </a>
+                    <a href="http://agora.ampadportal.org/">Agora</a>
                   </div>
                 </div>
               </AccordionItemTitle>
@@ -370,6 +364,7 @@ Agora
           >
             About
           </a>
+          <div className="under-bar" />
         </AccordionItemTitle>
         <AccordionItemBody
           aria-hidden={this.state.About !== true}
@@ -435,21 +430,16 @@ Agora
             <li>
               <Link
                 to="/"
-                className="main-nav-item nav-item home"
+                className="main-nav-item nav-item home active"
                 onClick={this.closeNavigation}
               >
                 Home
               </Link>
+              <div className="under-bar" />
             </li>
-            <li>
-              {this.ResearchDropdown()}
-            </li>
-            <li>
-              {this.ResourcesDropdown()}
-            </li>
-            <li className="about-dropdown">
-              {this.AboutMenuDropdown()}
-            </li>
+            <li>{this.ResearchDropdown()}</li>
+            <li>{this.ResourcesDropdown()}</li>
+            <li className="about-dropdown">{this.AboutMenuDropdown()}</li>
           </ul>
         </div>
       </header>
