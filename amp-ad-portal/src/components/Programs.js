@@ -5,7 +5,7 @@ import openUrl from "../model/OpenUrl"
 const Programs = (props) => {
   return (
     <section className="programs row">
-      <div className="content col-xs-12 col-sm-9">
+      <div className="content col-xs-12 col-sm-10">
         <div className="row between-xs middle-xs title-row">
           <div className="col-xs-6 col-sm-6">
             <h2>Programs</h2>

@@ -67,6 +67,10 @@ section div.row {
   margin: 0px auto;
 }
 
+section {
+  padding: 25px 50px;
+}
+
 h1 { font-size: 30px; }
 h2 { font-size: 24px; }
 h3 { font-weight: 300; }
@@ -80,19 +84,17 @@ a {
 	text-decoration: none;
 }
 
-.loading-bar {
-  min-height: 10px;
+li {
+	list-style: none;	
 }
 
-.front-page-bar {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  div {
-    display: flex;
+ul.jumbo-list {
+  li {
+    list-style: none;
+  }
+  position: relative;
+  a {
+    position: relative;
   }
 }
 
@@ -145,8 +147,8 @@ table.markdowntable {
     border-left: unset;
     border-top: unset;
     padding: unset;
-    font-weight: unset;
-    font-size: unset;
+    //font-weight: unset;
+    //font-size: unset;
   }
   tr {
     //all: unset;
@@ -169,15 +171,6 @@ header a {
 	text-decoration: none;
 }
 
-.child-page-hero a, .welcome a {
-  color: white;
-  text-decoration: underline;
-}
-
-li {
-	list-style: none;	
-}
-
 span.jumbo {
   font-size: 42px;
   height: 50px;
@@ -188,18 +181,36 @@ span.jumbo {
   top: 20px; left: -50px; bottom: 0; right: 0;
 }
 
-ul.jumbo-list {
-  li {
-    list-style: none;
-  }
-  position: relative;
-  a {
-    position: relative;
+select {
+	font-size: 18px;
+}
+
+@media only screen and (min-width: 48em){
+  .col-sm-9 {
+    flex-basis: 80%;
+    max-width: 80%;
   }
 }
 
-select {
-	font-size: 18px;
+.child-page-hero a, .welcome a {
+  color: white;
+  text-decoration: underline;
+}
+
+.loading-bar {
+  min-height: 10px;
+}
+
+.front-page-bar {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  div {
+    display: flex;
+  }
 }
 
 .align-right {
@@ -234,8 +245,6 @@ select {
   text-decoration: underline;
   text-align: left;
 }
-
-
 
 button:focus, input:focus, select:focus, div:focus { outline:none; }
 button:hover, select:hover { cursor: pointer }
@@ -340,15 +349,9 @@ button:hover, select:hover { cursor: pointer }
   }
 }
 
-section {
-  padding: 25px 50px;
-}
-
 .content {
 	margin: 0px auto;
 }
-
-.content-row {}
 
 section.beta-banner {
   background-color: $gold;
