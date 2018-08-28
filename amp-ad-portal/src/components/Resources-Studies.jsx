@@ -114,13 +114,15 @@ class Studies extends Component {
 
   setNames = (synapseHeaderResults, stateName) => {
     const names = []
-    synapseHeaderResults.forEach((element) => {
-      names.push(element)
-    })
-    this.setState({
-      [stateName]: names,
-    })
-    this.props.handleChanges(stateName, names)
+    if (synapseHeaderResults !== undefined) {
+      synapseHeaderResults.forEach((element) => {
+        names.push(element)
+      })
+      this.setState({
+        [stateName]: names,
+      })
+      this.props.handleChanges(stateName, names)
+    }
     return names
   };
 
