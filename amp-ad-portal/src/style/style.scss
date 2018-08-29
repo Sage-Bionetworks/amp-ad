@@ -312,11 +312,16 @@ button:hover, select:hover { cursor: pointer }
   }
 
 .nav-row {
-  padding: 3px 25px;
+  padding: 5px 25px;
 }
 .nav {
 	position: relative;
 	z-index: 1000;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
   li:hover{
     cursor: pointer;
   }
@@ -324,7 +329,7 @@ button:hover, select:hover { cursor: pointer }
     list-style: none;
     margin: 0px 20px;
     position: relative;
-    display: block;
+    display: flex;
   }
   .nav-item{
     font-size: 20px;
@@ -350,8 +355,8 @@ button:hover, select:hover { cursor: pointer }
     background-color: $pink2;
     height: 5px;
     width: 100%;
-    top: 47px;
     left: 0;
+    bottom: -8px;
   }
   div.under-bar.squish {
     //top: 35px;
@@ -375,12 +380,12 @@ button:hover, select:hover { cursor: pointer }
 
 section.beta-banner {
   padding: 5px 0px;
-  background-color: $gold;
+  background-color: $green2;
   text-align: left;
   width: 100%;
   button {
     display: inline-block;
-    margin-right: 25px;
+    margin-right: 5px;
   }
   a {
     text-decoration: underline;
@@ -417,7 +422,8 @@ header.header {
   //transition: all 300ms ease;
   img {
     transition: all 200ms ease;
-    max-height: 100px;
+    max-height: 49px;
+    margin-top: 5px;
   }
 	.Dropdown-control {
 		height: 37px;
@@ -519,6 +525,7 @@ header {
     font-size: 20px;
     border: none;
     position: relative;
+    display: flex;
   }
   .nav .accordion__body{
     padding: 0px;
@@ -544,7 +551,7 @@ header {
     position: absolute;
     display: block;
     z-index: 1000;
-    margin-top: 15px;
+    margin-top: 0px;
     margin-left: auto;
     min-width: 230px;
     max-width: 400px;

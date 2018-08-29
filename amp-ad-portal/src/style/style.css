@@ -239,18 +239,23 @@ button:hover, select:hover {
   transition: all .3s ease-in-out; }
 
 .nav-row {
-  padding: 3px 25px; }
+  padding: 5px 25px; }
 
 .nav {
   position: relative;
-  z-index: 1000; }
+  z-index: 1000;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  align-items: center; }
   .nav li:hover {
     cursor: pointer; }
   .nav li {
     list-style: none;
     margin: 0px 20px;
     position: relative;
-    display: block; }
+    display: flex; }
   .nav .nav-item {
     font-size: 20px; }
   .nav .nav-item.dropdown {
@@ -268,8 +273,8 @@ button:hover, select:hover {
     background-color: #E369A1;
     height: 5px;
     width: 100%;
-    top: 47px;
-    left: 0; }
+    left: 0;
+    bottom: -8px; }
   .nav div.side-bar {
     background-color: #8ED1D4; }
 
@@ -284,12 +289,12 @@ button:hover, select:hover {
 
 section.beta-banner {
   padding: 5px 0px;
-  background-color: #FCCB71;
+  background-color: #8ED1D4;
   text-align: left;
   width: 100%; }
   section.beta-banner button {
     display: inline-block;
-    margin-right: 25px; }
+    margin-right: 5px; }
   section.beta-banner a {
     text-decoration: underline; }
   section.beta-banner h2 {
@@ -319,7 +324,8 @@ header.header {
       max-height: fit-content; } }
   header.header img {
     transition: all 200ms ease;
-    max-height: 100px; }
+    max-height: 49px;
+    margin-top: 5px; }
   header.header .Dropdown-control {
     height: 37px;
     padding-top: 0px;
@@ -388,7 +394,8 @@ header .accordion-title.top-level-accordion {
   font-weight: 500;
   font-size: 20px;
   border: none;
-  position: relative; }
+  position: relative;
+  display: flex; }
 header .nav .accordion__body {
   padding: 0px;
   width: 100%; }
@@ -408,7 +415,7 @@ header .accordion-body.top-level-accordion {
   position: absolute;
   display: block;
   z-index: 1000;
-  margin-top: 15px;
+  margin-top: 0px;
   margin-left: auto;
   min-width: 230px;
   max-width: 400px; }
