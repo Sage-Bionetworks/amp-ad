@@ -20,8 +20,6 @@ body.noScroll, html.noScroll {
   transition: all 300ms ease;
   margin-top: 105px;
   min-height: 93%; }
-  .main.squish {
-    margin-top: 0px; }
 
 section div.row {
   margin: 0px auto; }
@@ -224,6 +222,25 @@ button:hover, select:hover {
 .btn-light:active {
   background-color: #E3E1E1; }
 
+.btn-light-small {
+  color: #1A1C29;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #EDEDED;
+  border: none;
+  text-align: center;
+  border-radius: 24px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: 65px;
+  height: 28px;
+  -webkit-transition: all .3s ease-in-out;
+  -o-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out; }
+
+.nav-row {
+  padding: 3px 25px; }
+
 .nav {
   position: relative;
   z-index: 1000; }
@@ -251,10 +268,8 @@ button:hover, select:hover {
     background-color: #E369A1;
     height: 5px;
     width: 100%;
-    top: 59px;
+    top: 47px;
     left: 0; }
-  .nav div.under-bar.squish {
-    top: 35px; }
   .nav div.side-bar {
     background-color: #8ED1D4; }
 
@@ -268,18 +283,19 @@ button:hover, select:hover {
   margin: 0px auto; }
 
 section.beta-banner {
+  padding: 5px 0px;
   background-color: #FCCB71;
-  text-align: left; }
+  text-align: left;
+  width: 100%; }
   section.beta-banner button {
     display: inline-block;
     margin-right: 25px; }
   section.beta-banner a {
     text-decoration: underline; }
   section.beta-banner h2 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
-    display: inline-block;
-    width: 80%; }
+    display: inline-block; }
   section.beta-banner .content {
     display: flex;
     flex-direction: row;
@@ -288,8 +304,8 @@ section.beta-banner {
     flex-basis: auto; }
 
 header.header {
-  padding: 25px 50px;
-  max-height: 105px;
+  max-height: 150px;
+  height: fit-content;
   max-width: 100vw;
   width: 100vw;
   margin: 0 auto;
@@ -324,11 +340,6 @@ header.header {
     cursor: pointer; }
   header.header .Dropdown-arrow {
     cursor: pointer; }
-
-header.header.squish {
-  padding: 0px 50px; }
-  header.header.squish img {
-    max-height: 35px; }
 
 .hidden {
   display: none !important;
@@ -376,7 +387,8 @@ header .accordion-title.top-level-accordion {
   padding: 0px;
   font-weight: 500;
   font-size: 20px;
-  border: none; }
+  border: none;
+  position: relative; }
 header .nav .accordion__body {
   padding: 0px;
   width: 100%; }
