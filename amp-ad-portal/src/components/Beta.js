@@ -1,19 +1,10 @@
 import React from "react"
 
-//AMP-AD portal is a new service. Please
-//{" "}
-//<a href="mailto:ampadportal@sagebionetworks.org">
-//contact us
-//</a>
-//{" "}
-//with
-//questions or feedback.
-
 const BetaHeader = () => {
   return (
     <section className="row beta-banner">
-      <div className="col-xs-12 col-sm-9 content">
-        <button className="btn-light" type="button">
+      <div className="col-xs-12 col-sm-10 content">
+        <button className="btn-light-small" type="button">
           BETA
         </button>
         <h2>

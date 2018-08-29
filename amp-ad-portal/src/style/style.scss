@@ -57,9 +57,9 @@ body.noScroll, html.noScroll {
   transition: all 300ms ease;
   margin-top: 105px;
   min-height: 93%;
-  &.squish {
-    margin-top: 0px;
-  }
+  //&.squish {
+    //margin-top: 0px;
+  //}
 }
 
 section div.row {
@@ -294,9 +294,34 @@ button:hover, select:hover { cursor: pointer }
   background-color: #E3E1E1;
 }
 
+.btn-light-small {
+    color: #1A1C29;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #EDEDED;
+    border: none;
+    text-align: center;
+    border-radius: 24px;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: 65px;
+    height: 28px;
+    -webkit-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+  }
+
+.nav-row {
+  padding: 5px 25px;
+}
 .nav {
 	position: relative;
 	z-index: 1000;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
   li:hover{
     cursor: pointer;
   }
@@ -304,7 +329,7 @@ button:hover, select:hover { cursor: pointer }
     list-style: none;
     margin: 0px 20px;
     position: relative;
-    display: block;
+    display: flex;
   }
   .nav-item{
     font-size: 20px;
@@ -330,11 +355,11 @@ button:hover, select:hover { cursor: pointer }
     background-color: $pink2;
     height: 5px;
     width: 100%;
-    top: 59px;
     left: 0;
+    bottom: -8px;
   }
   div.under-bar.squish {
-    top: 35px;
+    //top: 35px;
   }
   div.side-bar {
     background-color: $green2;
@@ -354,20 +379,21 @@ button:hover, select:hover { cursor: pointer }
 }
 
 section.beta-banner {
-  background-color: $gold;
+  padding: 5px 0px;
+  background-color: $green2;
   text-align: left;
+  width: 100%;
   button {
     display: inline-block;
-    margin-right: 25px;
+    margin-right: 5px;
   }
   a {
     text-decoration: underline;
   }
   h2 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     display: inline-block;
-    width: 80%;
   }
   .content {
     display: flex;
@@ -379,8 +405,9 @@ section.beta-banner {
 }
 
 header.header {
-  padding: 25px 50px;
-	max-height: 105px;
+  //padding: 25px 50px;
+	max-height: 150px;
+  height: fit-content;
   @media screen and (max-width: 1023px){
     max-height: fit-content;
   }
@@ -395,7 +422,8 @@ header.header {
   //transition: all 300ms ease;
   img {
     transition: all 200ms ease;
-    max-height: 100px;
+    max-height: 49px;
+    margin-top: 5px;
   }
 	.Dropdown-control {
 		height: 37px;
@@ -426,10 +454,10 @@ header.header {
   }
 }
 header.header.squish {
-  padding: 0px 50px;
-  img {
-    max-height: 35px;
-  }
+  //padding: 0px 50px;
+  //img {
+    //max-height: 35px;
+  //}
 }
 
 .hidden {
@@ -496,6 +524,8 @@ header {
     font-weight: 500;
     font-size: 20px;
     border: none;
+    position: relative;
+    display: flex;
   }
   .nav .accordion__body{
     padding: 0px;
@@ -521,7 +551,7 @@ header {
     position: absolute;
     display: block;
     z-index: 1000;
-    margin-top: 15px;
+    margin-top: 0px;
     margin-left: auto;
     min-width: 230px;
     max-width: 400px;

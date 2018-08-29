@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 
+import BetaHeader from "./Beta"
 import "react-dropdown/style.css"
 import {
   Accordion,
@@ -415,32 +416,42 @@ class Header extends Component {
   render() {
     return (
       <header className="row between-xs header center-xs middle-xs">
-        <button className="menu-wall hidden" type="button" />
-        <div className="col-xs-12 col-sm-3">
-          <Link to="/" onClick={this.closeNavigation}>
-            <img
-              className="logo-header"
-              src={require("../images/amp-ad-logo.svg")}
-              alt="amp_ad_logo"
-            />
-          </Link>
-        </div>
-        <div className="nav-buttons col-xs-12 col-sm-8 col-md-7">
-          <ul className="nav row end-sm center-xs">
-            <li>
-              <Link
-                to="/"
-                className="main-nav-item nav-item home active"
-                onClick={this.closeNavigation}
-              >
-                Home
+        <div className="col-xs-12">
+          <div className="row center-xs">
+            <BetaHeader />
+          </div>
+          <div
+            className="nav-row row between-xs center-xs"
+            style={{ backgroundColor: "#fff" }}
+          >
+            <button className="menu-wall hidden" type="button" />
+            <div className="col-xs-12 col-sm-3">
+              <Link to="/" onClick={this.closeNavigation}>
+                <img
+                  className="logo-header"
+                  src={require("../images/amp-ad-logo.svg")}
+                  alt="amp_ad_logo"
+                />
               </Link>
-              <div className="under-bar" />
-            </li>
-            <li>{this.ResearchDropdown()}</li>
-            <li>{this.ResourcesDropdown()}</li>
-            <li className="about-dropdown">{this.AboutMenuDropdown()}</li>
-          </ul>
+            </div>
+            <div className="nav-buttons col-xs-12 col-sm-8 col-md-7">
+              <ul className="nav row end-sm center-xs">
+                <li>
+                  <Link
+                    to="/"
+                    className="main-nav-item nav-item home active"
+                    onClick={this.closeNavigation}
+                  >
+                    Home
+                  </Link>
+                  <div className="under-bar" />
+                </li>
+                <li>{this.ResearchDropdown()}</li>
+                <li>{this.ResourcesDropdown()}</li>
+                <li className="about-dropdown">{this.AboutMenuDropdown()}</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </header>
     )
