@@ -54,8 +54,8 @@ body.noScroll, html.noScroll {
 }
 
 .main {
-  transition: all 300ms ease;
-  margin-top: 105px;
+  //transition: all 300ms ease;
+  //margin-top: 105px;
   min-height: 93%;
   //&.squish {
     //margin-top: 0px;
@@ -69,6 +69,10 @@ section div.row {
 
 section {
   padding: 25px 50px;
+}
+
+section.child-page-hero {
+  padding-top: 68px;
 }
 
 h1 { font-size: 30px; }
@@ -350,13 +354,26 @@ button:hover, select:hover { cursor: pointer }
       position: relative;
     }
   }
-  div.under-bar.active {
+
+  div.under-bar {
     position: absolute;
     background-color: $pink2;
     height: 5px;
     width: 100%;
     left: 0;
     bottom: -8px;
+    opacity: 0;
+    transition: all 300ms ease;
+  }
+  li:hover { 
+    div.under-bar {
+      //height: 5px;
+      opacity: 1;
+    }
+  }
+  div.under-bar.active{
+    //height: 5px;
+    opacity: 1;
   }
   div.under-bar.squish {
     //top: 35px;
@@ -406,8 +423,8 @@ section.beta-banner {
 
 header.header {
   //padding: 25px 50px;
-	max-height: 150px;
-  height: fit-content;
+	//max-height: 150px;
+  //height: fit-content;
   @media screen and (max-width: 1023px){
     max-height: fit-content;
   }
@@ -559,12 +576,12 @@ header {
 	.about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
 		position: absolute;
 		margin: auto;
-		top: 37px;
-		right: 20px;
+		//top: 37px;
+		right: 0px;
   }
   @media screen and (max-width: 1105px){
     .about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
-      right: 10px; 
+      //right: 10px; 
     }
     .nav li {
       margin: 0px 10px;
@@ -622,6 +639,7 @@ footer {
 section.welcome {
 	background: linear-gradient(to right, $darkPurple, $bluePurple);
 	padding: 0px;
+  padding-top: 105px;
 	.welcome-message {
 		padding: 0px 0px 0px 100px;
 		color: white;
