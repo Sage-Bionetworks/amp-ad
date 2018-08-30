@@ -357,18 +357,22 @@ button:hover, select:hover { cursor: pointer }
   div.under-bar {
     position: absolute;
     background-color: $pink2;
-    height: 0px;
+    height: 5px;
     width: 100%;
     left: 0;
     bottom: -8px;
+    transition: all 300ms ease;
+    opacity: 0;
   }
   li:hover { 
     div.under-bar {
-      height: 5px;
+      //height: 5px;
+      opacity: 1;
     }
   }
   div.under-bar.active{
-    height: 5px;
+    //height: 5px;
+    opacity: 1;
   }
   div.under-bar.squish {
     //top: 35px;
@@ -571,12 +575,12 @@ header {
 	.about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
 		position: absolute;
 		margin: auto;
-		top: 37px;
-		right: 20px;
+		//top: 37px;
+		right: 0px;
   }
   @media screen and (max-width: 1105px){
     .about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
-      right: 10px; 
+      //right: 10px; 
     }
     .nav li {
       margin: 0px 10px;

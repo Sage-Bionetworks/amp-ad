@@ -337,16 +337,18 @@ button:hover, select:hover {
 .nav div.under-bar {
   position: absolute;
   background-color: #E369A1;
-  height: 0px;
+  height: 5px;
   width: 100%;
   left: 0;
   bottom: -8px;
+  transition: all 300ms ease;
+  opacity: 0;
 }
 .nav li:hover div.under-bar {
-  height: 5px;
+  opacity: 1;
 }
 .nav div.under-bar.active {
-  height: 5px;
+  opacity: 1;
 }
 .nav div.side-bar {
   background-color: #8ED1D4;
@@ -533,13 +535,9 @@ header .accordion-body.top-level-accordion {
 header .about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
   position: absolute;
   margin: auto;
-  top: 37px;
-  right: 20px;
+  right: 0px;
 }
 @media screen and (max-width: 1105px) {
-  header .about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
-    right: 10px;
-  }
   header .nav li {
     margin: 0px 10px;
   }
