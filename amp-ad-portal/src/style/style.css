@@ -21,8 +21,6 @@ body.noScroll, html.noScroll {
 }
 
 .main {
-  transition: all 300ms ease;
-  margin-top: 105px;
   min-height: 93%;
 }
 
