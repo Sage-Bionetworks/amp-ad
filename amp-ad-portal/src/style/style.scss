@@ -354,6 +354,7 @@ button:hover, select:hover { cursor: pointer }
       position: relative;
     }
   }
+
   div.under-bar {
     position: absolute;
     background-color: $pink2;
@@ -361,8 +362,8 @@ button:hover, select:hover { cursor: pointer }
     width: 100%;
     left: 0;
     bottom: -8px;
-    transition: all 300ms ease;
     opacity: 0;
+    transition: all 300ms ease;
   }
   li:hover { 
     div.under-bar {

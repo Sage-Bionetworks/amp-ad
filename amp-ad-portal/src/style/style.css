@@ -341,8 +341,8 @@ button:hover, select:hover {
   width: 100%;
   left: 0;
   bottom: -8px;
-  transition: all 300ms ease;
   opacity: 0;
+  transition: all 300ms ease;
 }
 .nav li:hover div.under-bar {
   opacity: 1;
