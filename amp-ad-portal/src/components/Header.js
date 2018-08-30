@@ -74,6 +74,13 @@ class Header extends Component {
     })
   };
 
+  ReturnBetaHeader = () => {
+    if (window.location.hash === "#/") {
+      return <BetaHeader />
+    }
+    return ""
+  };
+
   ResearchDropdown = () => (
     <Accordion>
       <AccordionItem className="top-level-accordion-item">
@@ -417,9 +424,7 @@ class Header extends Component {
     return (
       <header className="row between-xs header center-xs middle-xs">
         <div className="col-xs-12">
-          <div className="row center-xs">
-            <BetaHeader />
-          </div>
+          <div className="row center-xs">{this.ReturnBetaHeader()}</div>
           <div
             className="nav-row row between-xs center-xs"
             style={{ backgroundColor: "#fff" }}
