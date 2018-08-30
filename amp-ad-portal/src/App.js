@@ -600,12 +600,7 @@ class App extends Component {
       <Router>
         <div className="row amp-ad">
           <Header handleChanges={this.handleChanges} />
-          <div
-            className="col-xs-12 main"
-            style={{
-              marginTop: window.location.hash === "#/" ? "105px" : "68px",
-            }}
-          >
+          <div className="col-xs-12 main">
             <Route exact path="/" component={this.homeMarkup} />
 
             <Route
