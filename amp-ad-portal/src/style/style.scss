@@ -71,6 +71,10 @@ section {
   padding: 25px 50px;
 }
 
+section.child-page-hero {
+  padding-top: 68px;
+}
+
 h1 { font-size: 30px; }
 h2 { font-size: 24px; }
 h3 { font-weight: 300; }
@@ -350,13 +354,21 @@ button:hover, select:hover { cursor: pointer }
       position: relative;
     }
   }
-  div.under-bar.active {
+  div.under-bar {
     position: absolute;
     background-color: $pink2;
-    height: 5px;
+    height: 0px;
     width: 100%;
     left: 0;
     bottom: -8px;
+  }
+  li:hover { 
+    div.under-bar {
+      height: 5px;
+    }
+  }
+  div.under-bar.active{
+    height: 5px;
   }
   div.under-bar.squish {
     //top: 35px;
@@ -406,8 +418,8 @@ section.beta-banner {
 
 header.header {
   //padding: 25px 50px;
-	max-height: 150px;
-  height: fit-content;
+	//max-height: 150px;
+  //height: fit-content;
   @media screen and (max-width: 1023px){
     max-height: fit-content;
   }
@@ -622,6 +634,7 @@ footer {
 section.welcome {
 	background: linear-gradient(to right, $darkPurple, $bluePurple);
 	padding: 0px;
+  padding-top: 105px;
 	.welcome-message {
 		padding: 0px 0px 0px 100px;
 		color: white;
