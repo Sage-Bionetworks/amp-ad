@@ -535,13 +535,9 @@ header .accordion-body.top-level-accordion {
 header .about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
   position: absolute;
   margin: auto;
-  top: 37px;
-  right: 20px;
+  right: 0px;
 }
 @media screen and (max-width: 1105px) {
-  header .about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
-    right: 10px;
-  }
   header .nav li {
     margin: 0px 10px;
   }
