@@ -599,8 +599,13 @@ class App extends Component {
     return (
       <Router>
         <div className="row amp-ad">
-          <Header />
-          <div className="col-xs-12 main">
+          <Header handleChanges={this.handleChanges} />
+          <div
+            className="col-xs-12 main"
+            style={{
+              marginTop: window.location.hash === "#/" ? "105px" : "68px",
+            }}
+          >
             <Route exact path="/" component={this.homeMarkup} />
 
             <Route
@@ -673,9 +678,7 @@ class App extends Component {
             <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
               Forum
             </a>
-            <a href="mailto:ampadportal@sagebionetworks.org">
-Contact
-            </a>
+            <a href="mailto:ampadportal@sagebionetworks.org">Contact</a>
             <a href="http://docs.synapse.org/articles/governance.html">
               Terms & Privacy
             </a>
