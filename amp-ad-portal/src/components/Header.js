@@ -13,6 +13,9 @@ import {
 import "react-accessible-accordion/dist/minimal-example.css"
 import { setActiveNavigation } from "../view/domScripts"
 
+const logoImage = require("../images/amp-ad-logo.svg")
+//const logoImage = require("../images/placeholder_member.png")
+
 class Header extends Component {
   constructor(props) {
     super(props)
@@ -429,7 +432,7 @@ class Header extends Component {
               <Link to="/" onClick={this.closeNavigation}>
                 <img
                   className="logo-header"
-                  src={require("../images/amp-ad-logo.svg")}
+                  src={logoImage}
                   alt="amp_ad_logo"
                 />
               </Link>
