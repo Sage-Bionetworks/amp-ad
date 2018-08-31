@@ -40,6 +40,7 @@ class Header extends Component {
         Resources: false,
         About: false,
         Home: false,
+        Open: false,
       },
       () => {
         const body = document.querySelector("html")
@@ -62,6 +63,7 @@ class Header extends Component {
       ) {
         this.setState({
           [element.querySelector(".main-nav-item").innerHTML]: false,
+          Open: true,
         })
       } else {
         const newState = this.state[element.querySelector(".main-nav-item").innerHTML]
@@ -69,6 +71,7 @@ class Header extends Component {
         this.setState(prevState => ({
           ...prevState,
           [element.querySelector(".main-nav-item").innerHTML]: newState,
+          Open: true,
         }))
       }
     })
@@ -429,7 +432,11 @@ class Header extends Component {
             className="nav-row row between-xs center-xs"
             style={{ backgroundColor: "#fff" }}
           >
-            <button className="menu-wall hidden" type="button" />
+            <button
+              className={!this.state.Open ? "menu-wall hidden" : "menu-wall"}
+              type="button"
+              onClick={this.closeNavigation}
+            />
             <div className="col-xs-12 col-sm-3">
               <Link to="/" onClick={this.closeNavigation}>
                 <img
