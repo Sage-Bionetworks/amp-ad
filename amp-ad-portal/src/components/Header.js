@@ -31,6 +31,7 @@ class Header extends Component {
 
   closeNavigation = (location) => {
     if (location !== undefined) {
+      console.log(location)
       this.props.handleChanges("hash", location)
     }
     this.setState(
@@ -505,7 +506,9 @@ class Header extends Component {
             <button
               className={!this.state.Open ? "menu-wall hidden" : "menu-wall"}
               type="button"
-              onClick={this.closeNavigation}
+              onClick={() => {
+                this.closeNavigation(this.props.hash)
+              }}
             />
             <div className="col-xs-12 col-sm-3">
               <Link
@@ -559,6 +562,7 @@ class Header extends Component {
 
 Header.propTypes = {
   handleChanges: PropTypes.func.isRequired,
+  hash: PropTypes.string.isRequired,
 }
 
 export default Header
