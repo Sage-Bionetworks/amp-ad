@@ -42,9 +42,6 @@ import ResourcesAcknowledgements from "./components/Resources-AcknowledgementSta
 import AboutAmpAd from "./components/About-WhatIsAmpAd"
 import AboutPeople from "./components/About-People"
 
-// scripts
-import { setActiveNavigation, shrinkHeader } from "./view/domScripts"
-
 const pageDataPoints = ["assay", "tissue", "study", "dataType", "diagnoses"]
 
 class App extends Component {
@@ -93,18 +90,19 @@ class App extends Component {
     programsModelAd: [],
     programsResilienceAD: [],
     whatsNew: [],
+    hash: window.location.hash,
   };
 
   componentDidMount() {
     this.setDiagnosesMenu(this.props, this.state)
     this.setPageDataPoints(pageDataPoints)
     this.queryAndSetBioSampleCount()
-    shrinkHeader()
-    setActiveNavigation()
+    //shrinkHeader()
+    //setActiveNavigation()
   }
 
   componentDidUpdate() {
-    setActiveNavigation()
+    //setActiveNavigation()
   }
 
   getSpeciesDropdownOptions = (rawData) => {
@@ -599,7 +597,7 @@ class App extends Component {
     return (
       <Router>
         <div className="row amp-ad">
-          <Header handleChanges={this.handleChanges} />
+          <Header handleChanges={this.handleChanges} hash={this.state.hash} />
           <div className="col-xs-12 main">
             <Route exact path="/" component={this.homeMarkup} />
 

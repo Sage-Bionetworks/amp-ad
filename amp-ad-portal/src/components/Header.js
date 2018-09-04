@@ -1,7 +1,7 @@
 import React, { Component } from "react"
+import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 
-import BetaHeader from "./Beta"
 import "react-dropdown/style.css"
 import {
   Accordion,
@@ -9,9 +9,9 @@ import {
   AccordionItemTitle,
   AccordionItemBody,
 } from "react-accessible-accordion"
+import BetaHeader from "./Beta"
 
 import "react-accessible-accordion/dist/minimal-example.css"
-import { setActiveNavigation } from "../view/domScripts"
 
 class Header extends Component {
   constructor(props) {
@@ -25,15 +25,15 @@ class Header extends Component {
     }
   }
 
-  componentDidMount() {
-    setActiveNavigation()
-  }
+  componentDidMount() {}
 
-  componentDidUpdate() {
-    setActiveNavigation()
-  }
+  componentDidUpdate() {}
 
-  closeNavigation = () => {
+  closeNavigation = (location) => {
+    if (location !== undefined) {
+      console.log(location)
+      this.props.handleChanges("hash", location)
+    }
     this.setState(
       {
         Research: false,
@@ -49,9 +49,7 @@ class Header extends Component {
     )
   };
 
-  dropdownMenuAction = (event) => {
-    event.preventDefault()
-
+  setOpenAccordion = (event) => {
     const accordionItems = document.querySelectorAll(
       ".top-level-accordion-item",
     )
@@ -77,6 +75,11 @@ class Header extends Component {
     })
   };
 
+  dropdownMenuAction = (event) => {
+    event.preventDefault()
+    this.setOpenAccordion(event)
+  };
+
   ReturnBetaHeader = () => {
     if (window.location.hash === "#/") {
       return <BetaHeader />
@@ -93,12 +96,22 @@ class Header extends Component {
         >
           <a
             href="/"
-            className="nav-item main-nav-item"
+            className={
+              this.props.hash.includes("Research")
+                ? "nav-item main-nav-item active"
+                : "nav-item main-nav-item"
+            }
             onClick={this.dropdownMenuAction}
           >
             Research
           </a>
-          <div className="under-bar" />
+          <div
+            className={
+              this.props.hash.includes("Research")
+                ? "under-bar active"
+                : "under-bar"
+            }
+          />
         </AccordionItemTitle>
         <AccordionItemBody
           aria-hidden={this.state.Research !== true}
@@ -123,7 +136,9 @@ class Header extends Component {
                       name="AMP-AD"
                       to="/Research/AMP-AD"
                       className="nav-item dropdown"
-                      onClick={this.closeNavigation}
+                      onClick={() => {
+                        this.closeNavigation("#/Research/AMP-AD")
+                      }}
                     >
                       AMP-AD Target Discovery and Preclinical Validation
                     </Link>
@@ -133,7 +148,9 @@ class Header extends Component {
                       name="M2OVE"
                       to="/Research/M2OVE"
                       className="nav-item dropdown"
-                      onClick={this.closeNavigation}
+                      onClick={() => {
+                        this.closeNavigation("#/Research/M2OVE")
+                      }}
                     >
                       M2OVE-AD Consortium
                     </Link>
@@ -143,7 +160,9 @@ class Header extends Component {
                       name="MODEL-AD"
                       to="/Research/Model-AD"
                       className="nav-item dropdown"
-                      onClick={this.closeNavigation}
+                      onClick={() => {
+                        this.closeNavigation("#/Research/Model-AD")
+                      }}
                     >
                       Model AD Program
                     </Link>
@@ -153,7 +172,9 @@ class Header extends Component {
                       name="Resilience-AD"
                       to="/Research/Resilience-AD"
                       className="nav-item dropdown"
-                      onClick={this.closeNavigation}
+                      onClick={() => {
+                        this.closeNavigation("#/Research/Resilience-AD")
+                      }}
                     >
                       Resilience-AD Program
                     </Link>
@@ -177,7 +198,9 @@ class Header extends Component {
                       name="Genetics"
                       to="/Research/Genetics"
                       className="nav-item dropdown"
-                      onClick={this.closeNavigation}
+                      onClick={() => {
+                        this.closeNavigation("#/Research/Genetics")
+                      }}
                     >
                       Genetics
                     </Link>
@@ -187,7 +210,11 @@ class Header extends Component {
                       name="Differential Expression"
                       to="/Research/DifferentialExpression"
                       className="nav-item dropdown"
-                      onClick={this.closeNavigation}
+                      onClick={() => {
+                        this.closeNavigation(
+                          "#/Research/DifferentialExpression",
+                        )
+                      }}
                     >
                       Differential Expression
                     </Link>
@@ -197,7 +224,9 @@ class Header extends Component {
                       name="Networks"
                       to="/Research/Networks"
                       className="nav-item dropdown"
-                      onClick={this.closeNavigation}
+                      onClick={() => {
+                        this.closeNavigation("#/Research/Networks")
+                      }}
                     >
                       Networks
                     </Link>
@@ -212,7 +241,9 @@ class Header extends Component {
                     <Link
                       name="external researchers"
                       to="/Research/Publications"
-                      onClick={this.closeNavigation}
+                      onClick={() => {
+                        this.closeNavigation("#/Research/Publications")
+                      }}
                     >
                       Publications
                     </Link>
@@ -227,7 +258,9 @@ class Header extends Component {
                     <Link
                       name="external researchers"
                       to="/Research/ExternalResearchers"
-                      onClick={this.closeNavigation}
+                      onClick={() => {
+                        this.closeNavigation("#/Research/ExternalResearchers")
+                      }}
                     >
                       Approved External Research
                     </Link>
@@ -250,12 +283,22 @@ class Header extends Component {
         >
           <a
             href="/"
-            className="nav-item main-nav-item"
+            className={
+              this.props.hash.includes("Resources")
+                ? "nav-item main-nav-item active"
+                : "nav-item main-nav-item"
+            }
             onClick={this.dropdownMenuAction}
           >
             Resources
           </a>
-          <div className="under-bar" />
+          <div
+            className={
+              this.props.hash.includes("Resources")
+                ? "under-bar active"
+                : "under-bar"
+            }
+          />
         </AccordionItemTitle>
         <AccordionItemBody
           aria-hidden={this.state.Resources !== true}
@@ -273,7 +316,9 @@ class Header extends Component {
                     <Link
                       name="external researchers"
                       to="/Resources/Data"
-                      onClick={this.closeNavigation}
+                      onClick={() => {
+                        this.closeNavigation("#/Resources/Data")
+                      }}
                     >
                       Data
                     </Link>
@@ -289,7 +334,9 @@ class Header extends Component {
                     <Link
                       name="external researchers"
                       to="/Resources/Studies"
-                      onClick={this.closeNavigation}
+                      onClick={() => {
+                        this.closeNavigation("#/Resources/Studies")
+                      }}
                     >
                       Studies
                     </Link>
@@ -305,7 +352,11 @@ class Header extends Component {
                     <Link
                       name="external researchers"
                       to="/Resources/ExperimentalResources"
-                      onClick={this.closeNavigation}
+                      onClick={() => {
+                        this.closeNavigation(
+                          "#/Resources/ExperimentalResources",
+                        )
+                      }}
                     >
                       Experimental Resources
                     </Link>
@@ -331,7 +382,9 @@ class Header extends Component {
                     <Link
                       name="external researchers"
                       to="/Resources/DataUseRequirements"
-                      onClick={this.closeNavigation}
+                      onClick={() => {
+                        this.closeNavigation("#/Resources/DataUseRequirements")
+                      }}
                     >
                       Data Use Requirements
                     </Link>
@@ -347,7 +400,11 @@ class Header extends Component {
                     <Link
                       name="Acknowledgement Statements"
                       to="/Resources/AcknowledgementStatements"
-                      onClick={this.closeNavigation}
+                      onClick={() => {
+                        this.closeNavigation(
+                          "#/Resources/AcknowledgementStatements",
+                        )
+                      }}
                     >
                       Acknowledgement Statements
                     </Link>
@@ -370,12 +427,22 @@ class Header extends Component {
         >
           <a
             href="/"
-            className="nav-item main-nav-item"
+            className={
+              this.props.hash.includes("About")
+                ? "nav-item main-nav-item active"
+                : "nav-item main-nav-item"
+            }
             onClick={this.dropdownMenuAction}
           >
             About
           </a>
-          <div className="under-bar" />
+          <div
+            className={
+              this.props.hash.includes("About")
+                ? "under-bar active"
+                : "under-bar"
+            }
+          />
         </AccordionItemTitle>
         <AccordionItemBody
           aria-hidden={this.state.About !== true}
@@ -393,7 +460,9 @@ class Header extends Component {
                     name="AMP-AD"
                     to="/About/AMP-AD"
                     className="nav-item dropdown"
-                    onClick={this.closeNavigation}
+                    onClick={() => {
+                      this.closeNavigation("#/About/AMP-AD")
+                    }}
                   >
                     What is the AMP-AD portal
                   </Link>
@@ -410,7 +479,9 @@ class Header extends Component {
                     name="About people"
                     to="/About/People"
                     className="nav-item dropdown"
-                    onClick={this.closeNavigation}
+                    onClick={() => {
+                      this.closeNavigation("#/About/People")
+                    }}
                   >
                     People
                   </Link>
@@ -435,10 +506,17 @@ class Header extends Component {
             <button
               className={!this.state.Open ? "menu-wall hidden" : "menu-wall"}
               type="button"
-              onClick={this.closeNavigation}
+              onClick={() => {
+                this.closeNavigation(this.props.hash)
+              }}
             />
             <div className="col-xs-12 col-sm-3">
-              <Link to="/" onClick={this.closeNavigation}>
+              <Link
+                to="/"
+                onClick={() => {
+                  this.closeNavigation("#/")
+                }}
+              >
                 <img
                   className="logo-header"
                   src={require("../images/amp-ad-logo.svg")}
@@ -451,12 +529,24 @@ class Header extends Component {
                 <li>
                   <Link
                     to="/"
-                    className="main-nav-item nav-item home active"
-                    onClick={this.closeNavigation}
+                    className={
+                      this.props.hash === "#/"
+                        ? "home nav-item main-nav-item active"
+                        : "home nav-item main-nav-item"
+                    }
+                    onClick={() => {
+                      this.closeNavigation("#/")
+                    }}
                   >
                     Home
                   </Link>
-                  <div className="under-bar" />
+                  <div
+                    className={
+                      this.props.hash === "#/"
+                        ? "under-bar active"
+                        : "under-bar"
+                    }
+                  />
                 </li>
                 <li>{this.ResearchDropdown()}</li>
                 <li>{this.ResourcesDropdown()}</li>
@@ -468,6 +558,11 @@ class Header extends Component {
       </header>
     )
   }
+}
+
+Header.propTypes = {
+  handleChanges: PropTypes.func.isRequired,
+  hash: PropTypes.string.isRequired,
 }
 
 export default Header
