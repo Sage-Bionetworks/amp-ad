@@ -79,7 +79,6 @@ const getWikiHeaderTree = (token, synId, offsetVal = 0, limit = 10) => {
   let fetchReq = `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikiheadertree?offset=${offsetVal}&limit=${limit}`
   if (offsetVal === false || limit === false) {
     fetchReq = `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikiheadertree`
-    //this.getSubPageHeaders("581934").then(response => console.log(response))
   }
   return fetch(fetchReq, {
     method: "GET",
@@ -181,7 +180,6 @@ const getWikiMarkdownSegments = (
 ) => {
   return getSubPageHeaders(wikiId, props, synId, paginationValue, limit).then(
     (headers) => {
-      console.log(headers)
       asyncForEach(headers, async (header) => {
         await waitFor(75)
         getMarkdownSegment(props, header.id, stateKey)

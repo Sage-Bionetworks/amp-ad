@@ -31,7 +31,6 @@ class Header extends Component {
 
   closeNavigation = (location) => {
     if (location !== undefined) {
-      console.log(location)
       this.props.handleChanges("hash", location)
     }
     this.setState(
