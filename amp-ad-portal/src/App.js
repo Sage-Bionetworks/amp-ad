@@ -90,19 +90,19 @@ class App extends Component {
     programsModelAd: [],
     programsResilienceAD: [],
     whatsNew: [],
-    hash: window.location.hash,
+    hash: "",
   };
 
   componentDidMount() {
     this.setDiagnosesMenu(this.props, this.state)
     this.setPageDataPoints(pageDataPoints)
     this.queryAndSetBioSampleCount()
-    //shrinkHeader()
-    //setActiveNavigation()
+    this.setState({
+      hash: window.location.hash,
+    })
   }
 
   componentDidUpdate() {
-    //setActiveNavigation()
   }
 
   getSpeciesDropdownOptions = (rawData) => {
