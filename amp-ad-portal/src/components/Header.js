@@ -499,7 +499,7 @@ class Header extends Component {
         <div className="col-xs-12">
           <div className="row center-xs">{this.ReturnBetaHeader()}</div>
           <div
-            className="nav-row row between-xs center-xs"
+            className="nav-row row between-xs center-xs middle-xs"
             style={{ backgroundColor: "#fff" }}
           >
             <button

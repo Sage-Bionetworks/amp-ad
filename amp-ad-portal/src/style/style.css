@@ -140,11 +140,6 @@ table.markdowntable .btn {
   height: 100%;
 }
 
-header a {
-  color: black;
-  text-decoration: none;
-}
-
 span.jumbo {
   font-size: 42px;
   height: 50px;
@@ -296,7 +291,7 @@ button:hover, select:hover {
 }
 
 .nav-row {
-  padding: 5px 0px;
+  height: 70px;
 }
 
 .nav {
@@ -329,6 +324,9 @@ button:hover, select:hover {
 .nav a.nav-item.active {
   font-weight: bold;
 }
+.nav .top-level-accordion-item {
+  height: 100%;
+}
 .nav .top-level-accordion-item.active a.main-nav-item {
   font-weight: bold;
   position: relative;
@@ -339,7 +337,7 @@ button:hover, select:hover {
   height: 5px;
   width: 100%;
   left: 0;
-  bottom: -8px;
+  bottom: 0;
   opacity: 0;
   transition: all 300ms ease;
 }
@@ -389,6 +387,16 @@ section.beta-banner .content {
   align-content: center;
   align-items: center;
   flex-basis: auto;
+}
+
+header li {
+  height: 100%;
+  flex-direction: row;
+  align-items: center;
+}
+header a {
+  color: black;
+  text-decoration: none;
 }
 
 header.header {
@@ -450,6 +458,9 @@ header.header .Dropdown-arrow {
     background-color: white;
   }
 }
+header .nav-buttons {
+  height: 100%;
+}
 header .nav-buttons nav.row {
   padding: 0px;
 }
@@ -468,6 +479,7 @@ header .accordion {
   cursor: pointer;
   border: none;
   background-color: white;
+  height: 100%;
 }
 header .accordion .accordion-row {
   margin: 0px;
@@ -498,6 +510,8 @@ header .accordion-title.top-level-accordion {
   border: none;
   position: relative;
   display: flex;
+  height: 100%;
+  align-items: center;
 }
 header .nav .accordion__body {
   padding: 0px;
@@ -543,6 +557,12 @@ header .accordion__title {
 }
 header .accordion-title[aria-selected=true] a {
   background: #e3e3e3;
+}
+header .accordion-title.top-level-accordion[aria-selected=true] {
+  background: #e3e3e3;
+}
+header .accordion-title.top-level-accordion[aria-selected=true] .under-bar {
+  opacity: 0;
 }
 header .accordion-sub-title, header .about-dropdown .accordion-sub-title .nav-item {
   padding-left: 12px;
