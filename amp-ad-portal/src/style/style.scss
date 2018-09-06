@@ -316,7 +316,7 @@ button:hover, select:hover { cursor: pointer }
   }
 
 .nav-row {
-  padding: 5px 25px;
+  padding: 5px 0px;
 }
 .nav {
 	position: relative;
@@ -331,7 +331,7 @@ button:hover, select:hover { cursor: pointer }
   }
   li {
     list-style: none;
-    margin: 0px 20px;
+    //margin: 0px 20px;
     position: relative;
     display: flex;
   }
@@ -493,7 +493,7 @@ header {
     padding: 0px;
   }
   .nav li {
-    margin: 0px 20px;
+    //margin: 0px 10px;
   }
   .accordion-body .accordion {
     //box-shadow: 0px 1px 5px 0px #666;
@@ -573,18 +573,20 @@ header {
     min-width: 230px;
     max-width: 400px;
   }
+  .about-dropdown {
+    margin-right: 15px;
+  }
 	.about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
-		position: absolute;
-		margin: auto;
-		//top: 37px;
-		right: 0px;
+		//position: absolute;
+		//margin: auto;
+		//right: 0px;
   }
   @media screen and (max-width: 1105px){
     .about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
       //right: 10px; 
     }
     .nav li {
-      margin: 0px 10px;
+      //margin: 0px 10px;
     }
   }
   .accordion__body {
@@ -592,7 +594,7 @@ header {
     text-align: left;
   }
   a.nav-item {
-    padding: 14px; 
+    padding: 14px 20px; 
   }
   .accordion__title {
     background-color: #e3e3e3;
@@ -616,6 +618,23 @@ header {
 	.accordion__title:hover {
 		background-color: darken(#e3e3e3, 10%);
 	}
+  .agora-border {
+    position: absolute;
+    border-left: 1px solid #86D1D5;
+    left: -15px;
+    height: 26px;
+    top: 50%;
+    margin-top: -13px;
+  }
+  .agora-nav-link {
+    .agora-logo {
+      margin-top: unset;
+    }
+    div.under-bar {
+      width: 140%;
+      left: -15px;
+    }
+  }
 }
 
 footer {

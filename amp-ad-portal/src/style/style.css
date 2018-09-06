@@ -296,7 +296,7 @@ button:hover, select:hover {
 }
 
 .nav-row {
-  padding: 5px 25px;
+  padding: 5px 0px;
 }
 
 .nav {
@@ -313,7 +313,6 @@ button:hover, select:hover {
 }
 .nav li {
   list-style: none;
-  margin: 0px 20px;
   position: relative;
   display: flex;
 }
@@ -454,9 +453,6 @@ header.header .Dropdown-arrow {
 header .nav-buttons nav.row {
   padding: 0px;
 }
-header .nav li {
-  margin: 0px 20px;
-}
 header .menu-wall {
   position: absolute;
   height: 100vh;
@@ -532,22 +528,15 @@ header .accordion-body.top-level-accordion {
   min-width: 230px;
   max-width: 400px;
 }
-header .about-dropdown .top-level-accordion-item .accordion-body.top-level-accordion {
-  position: absolute;
-  margin: auto;
-  right: 0px;
-}
-@media screen and (max-width: 1105px) {
-  header .nav li {
-    margin: 0px 10px;
-  }
+header .about-dropdown {
+  margin-right: 15px;
 }
 header .accordion__body {
   background: white;
   text-align: left;
 }
 header a.nav-item {
-  padding: 14px;
+  padding: 14px 20px;
 }
 header .accordion__title {
   background-color: #e3e3e3;
@@ -570,6 +559,21 @@ header .accordion-body[aria-hidden=true] {
 }
 header .accordion__title:hover {
   background-color: #cacaca;
+}
+header .agora-border {
+  position: absolute;
+  border-left: 1px solid #86D1D5;
+  left: -15px;
+  height: 26px;
+  top: 50%;
+  margin-top: -13px;
+}
+header .agora-nav-link .agora-logo {
+  margin-top: unset;
+}
+header .agora-nav-link div.under-bar {
+  width: 140%;
+  left: -15px;
 }
 
 footer {

@@ -523,7 +523,7 @@ class Header extends Component {
                 />
               </Link>
             </div>
-            <div className="nav-buttons col-xs-12 col-sm-8 col-md-7">
+            <div className="nav-buttons col-xs-12 col-sm-7 col-md-8">
               <ul className="nav row end-sm center-xs">
                 <li>
                   <Link
@@ -550,6 +550,21 @@ class Header extends Component {
                 <li>{this.ResearchDropdown()}</li>
                 <li>{this.ResourcesDropdown()}</li>
                 <li className="about-dropdown">{this.AboutMenuDropdown()}</li>
+                <li className="agora-nav-link">
+                  <div className="agora-border" />
+                  <img
+                    className="agora-logo"
+                    alt="agora branding logo"
+                    src={require("../images/agora-logo.svg")}
+                  />
+                  <a
+                    className="home nav-item main-nav-item"
+                    href="http://agora.ampadportal.org/"
+                  >
+                    Explore Results
+                  </a>
+                  <div className="under-bar" />
+                </li>
               </ul>
             </div>
           </div>
