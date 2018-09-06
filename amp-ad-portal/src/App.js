@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { HashRouter as Router, Route } from "react-router-dom"
+import ReactGA from "react-ga"
+import createHistory from "history/createBrowserHistory"
 
 // non component js
 import study from "./defaultData/Study"
@@ -47,6 +49,16 @@ const AsyncHome = asyncComponent(() => import("./components/Home"))
 const AsyncHeader = asyncComponent(() => import("./components/Header"))
 
 const pageDataPoints = ["assay", "tissue", "study", "dataType", "diagnoses"]
+
+ReactGA.initialize("UA-29804340-3")
+
+const history = createHistory()
+history.listen((location) => {
+  ReactGA.set({
+    page: location.pathname + location.hash + location.search,
+  })
+  ReactGA.pageview(location.pathname + location.hash + location.search)
+})
 
 class App extends Component {
   state = {
