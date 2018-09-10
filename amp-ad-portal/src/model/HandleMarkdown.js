@@ -1,16 +1,6 @@
 import React from "react"
-import PropTypes from "prop-types"
-//import MarkdownIt from "markdown-it"
-//import MarkdownItSynapse from "markdown-it-synapse"
-//import HtmlToReact from "html-to-react"
+import { SynapseComponents } from "synapse-react-client"
 import ShowHideSection from "../components/ShowHideSection"
-
-const ReactMarkdown = require("react-markdown")
-
-//const HtmlToReactParser = HtmlToReact.Parser
-//const htmlToReactParser = new HtmlToReactParser()
-
-//const md = MarkdownIt().use(MarkdownItSynapse)
 
 const makeid = () => {
   let text = ""
@@ -19,49 +9,40 @@ const makeid = () => {
   return text
 }
 
-//<div key={makeid()}>
-//{htmlToReactParser.parse(
-//md.render(
-//props.markdown[index] !== undefined ? props.markdown[index][key] : "",
-//),
-//)}
-//</div>
-
-const buildSection = (index, key, props) => {
+const buildSection = (index, key, markdown, token = "") => {
   return (
-    <ReactMarkdown
-      source={
-        props.markdown[index] !== undefined ? props.markdown[index][key] : ""
-      }
-      escapeHtml={false}
-      key={makeid()}
-      className="react-markdown"
+    <SynapseComponents.Markdown
+      token={token}
+      markdown={markdown[index] !== undefined ? markdown[index][key] : ""}
+      hasSynapseResources={false}
+      errorMessageView={<div>error</div>}
     />
   )
 }
 
-const returnJsxFromMarkdown = (markdown) => {
+const returnJsxFromMarkdown = (markdown, token = undefined) => {
   return (
-    <ReactMarkdown
-      source={markdown !== undefined ? markdown : ""}
-      escapeHtml={false}
+    <SynapseComponents.Markdown
+      token={token}
+      markdown={markdown !== undefined ? markdown : ""}
+      hasSynapseResources={false}
+      errorMessageView={<div>error</div>}
     />
   )
 }
 
-const printSections = (sectionArray, props, limit = 200) => {
-  return sectionArray.map((section, index) => {
+const printSections = (markdownArray, token, limit = 200) => {
+  return markdownArray.map((section, index) => {
     if (index < limit) {
-      return buildSection(index, Object.keys(section)[0], props)
+      return buildSection(index, Object.keys(section)[0], markdownArray, token)
     }
     const keyName = `${index}index`
     return <div key={keyName} />
   })
 }
 
-const printShowHideSections = (markdowns) => {
-  // takes array with multiple markdown objects { synapse#: markdown }
-  return markdowns.map((element) => {
+const printShowHideSections = (markdownArray) => {
+  return markdownArray.map((element) => {
     return (
       <ShowHideSection
         content={returnJsxFromMarkdown(element[Object.keys(element)[0]])}
@@ -69,10 +50,6 @@ const printShowHideSections = (markdowns) => {
       />
     )
   })
-}
-
-buildSection.propTypes = {
-  markdown: PropTypes.array.isRequired,
 }
 
 export {

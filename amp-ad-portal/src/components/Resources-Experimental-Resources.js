@@ -117,7 +117,7 @@ class ExperimentalResources extends Component {
           </section>
           <section className="row center-xs researchers-content">
             <div className="col-xs-12 col-sm-9">
-              {printSections(this.props.markdown, this.props)}
+              {printSections(this.props.markdown)}
             </div>
           </section>
           <div className="row center-xs">
