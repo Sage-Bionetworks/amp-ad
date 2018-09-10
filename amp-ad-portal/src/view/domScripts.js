@@ -1,28 +1,5 @@
 import _ from "lodash"
 
-const setActiveNavigation = () => {
-  const navItems = document.querySelectorAll(".nav li a.main-nav-item")
-  const selectedMenu = document.querySelector("div.under-bar.active")
-  const main = document.querySelector("div.main")
-  if (selectedMenu !== null && main.classList.contains("squish")) {
-    selectedMenu.classList.add("squish")
-  } else if (selectedMenu !== null) {
-    selectedMenu.classList.remove("squish")
-  }
-  navItems.forEach((element) => {
-    element.classList.remove("active")
-    element.parentNode.childNodes[1].classList.remove("active")
-    if (window.location.href.includes(element.innerHTML)) {
-      element.parentNode.childNodes[1].classList.add("active")
-      element.classList.add("active")
-    }
-    if (window.location.hash === "#/" && element.innerHTML === "Home") {
-      element.parentNode.childNodes[1].classList.add("active")
-      element.classList.add("active")
-    }
-  })
-}
-
 const detectIfUserHasScrolledToBottom = () => {
   // returns true or false
   let bottom = false
@@ -127,9 +104,4 @@ const getParents = (elem, selector) => {
   return parents
 }
 
-export {
-  getParents,
-  setActiveNavigation,
-  shrinkHeader,
-  detectIfUserHasScrolledToBottom,
-}
+export { getParents, shrinkHeader, detectIfUserHasScrolledToBottom }
