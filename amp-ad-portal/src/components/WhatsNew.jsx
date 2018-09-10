@@ -30,7 +30,7 @@ class WhatsNew extends Component {
             </div>
           </div>
 
-          {printSections(this.props.markdown, this.props, 3)}
+          {printSections(this.props.markdown, undefined, 3)}
         </div>
       </section>
     )
