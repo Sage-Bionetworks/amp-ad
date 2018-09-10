@@ -1370,6 +1370,10 @@ p.researcher-bio {
     max-width: 85%;
   }
 }
+.studies-section .btn-lg {
+  width: auto;
+  padding: 0px 20px;
+}
 
 .studies-col .col-xs-12, .studies-col.col-xs-12 {
   padding: 0px;
