@@ -8,12 +8,10 @@ import Programs from "./Programs"
 import Analyses from "./Analyses"
 import WhatsNew from "./WhatsNew.jsx"
 //import PopularDataRequests from "./PopularDataRequests"
-import BetaHeader from "./Beta"
 import ContributeYourData from "./ContributeYourData"
 
 const Home = props => (
   <div>
-    <BetaHeader />
     <Welcome
       markdown={props.welcomeHeaderMarkdown}
       markdownText={props.welcomeHeaderMarkdownText}

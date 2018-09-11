@@ -1,8 +1,12 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { HashRouter as Router, Route } from "react-router-dom"
+import ReactGA from "react-ga"
+import createHistory from "history/createBrowserHistory"
+
 // non component js
 import study from "./defaultData/Study"
+
 import {
   reduceCountsByKey,
   filterByKey,
@@ -15,37 +19,46 @@ import {
 
 import { getBioSampleCount } from "./queries/queryForData"
 
-// component js
-import Header from "./components/Header"
-import Home from "./components/Home"
-
-// research pages
-import ProgramsAmpAd from "./components/Programs-AMP-AD"
-import ProgramsM2OVE from "./components/Programs-M2OVE"
-import ProgramsResilienceAD from "./components/Programs-ResilienceAD"
-import ProgramsModelAD from "./components/Programs-ModelAD"
-import ExternalResearchers from "./components/Research-ExternalResearchers"
-import ResearchPublications from "./components/Research-Publications"
-import ConsortiaDifferential from "./components/Consortia-DifferentialEx"
-import ConsortiaGenetics from "./components/Consortia-Genetics"
-import ConsortiaNetworks from "./components/Consortia-Networks"
-
-// resources pages
-import ResourcesData from "./components/Resources-Data"
-import ResourcesAgora from "./components/Resources-Agora"
-import ResourcesDataUse from "./components/Resources-DataUse"
-import ResourcesExperimentalResources from "./components/Resources-Experimental-Resources"
-import ResourcesStudies from "./components/Resources-Studies.jsx"
-import ResourcesAcknowledgements from "./components/Resources-AcknowledgementStatements"
+import asyncComponent from "./components/AsyncComponent"
 
 // about pages
-import AboutAmpAd from "./components/About-WhatIsAmpAd"
-import AboutPeople from "./components/About-People"
+const AsyncAboutAmpAd = asyncComponent(() => import("./components/About-WhatIsAmpAd"))
+const AsyncAboutPeople = asyncComponent(() => import("./components/About-People"))
 
-// scripts
-import { setActiveNavigation, shrinkHeader } from "./view/domScripts"
+// research pages
+const AsyncProgramsM2OVE = asyncComponent(() => import("./components/Programs-M2OVE"))
+const AsyncProgramsAmpAd = asyncComponent(() => import("./components/Programs-AMP-AD"))
+const AsyncProgramsResilienceAD = asyncComponent(() => import("./components/Programs-ResilienceAD"))
+const AsyncProgramsModelAD = asyncComponent(() => import("./components/Programs-ModelAD"))
+const AsyncExternalResearchers = asyncComponent(() => import("./components/Research-ExternalResearchers"))
+const AsyncResearchPublications = asyncComponent(() => import("./components/Research-Publications"))
+const AsyncConsortiaDifferential = asyncComponent(() => import("./components/Consortia-DifferentialEx"))
+const AsyncConsortiaGenetics = asyncComponent(() => import("./components/Consortia-Genetics"))
+const AsyncConsortiaNetworks = asyncComponent(() => import("./components/Consortia-Networks"))
+
+// resources pages
+const AsyncResourcesData = asyncComponent(() => import("./components/Resources-Data"))
+const AsyncResourcesAgora = asyncComponent(() => import("./components/Resources-Agora"))
+const AsyncResourcesDataUse = asyncComponent(() => import("./components/Resources-DataUse"))
+const AsyncResourcesExperimentalResources = asyncComponent(() => import("./components/Resources-Experimental-Resources"))
+const AsyncResourcesStudies = asyncComponent(() => import("./components/Resources-Studies.jsx"))
+const AsyncResourcesAcknowledgements = asyncComponent(() => import("./components/Resources-AcknowledgementStatements"))
+
+// component js
+const AsyncHome = asyncComponent(() => import("./components/Home"))
+const AsyncHeader = asyncComponent(() => import("./components/Header"))
 
 const pageDataPoints = ["assay", "tissue", "study", "dataType", "diagnoses"]
+
+ReactGA.initialize("UA-29804340-3")
+
+const history = createHistory()
+history.listen((location) => {
+  ReactGA.set({
+    page: location.pathname + location.hash + location.search,
+  })
+  ReactGA.pageview(location.pathname + location.hash + location.search)
+})
 
 class App extends Component {
   state = {
@@ -93,19 +106,19 @@ class App extends Component {
     programsModelAd: [],
     programsResilienceAD: [],
     whatsNew: [],
+    hash: "",
   };
 
   componentDidMount() {
     this.setDiagnosesMenu(this.props, this.state)
     this.setPageDataPoints(pageDataPoints)
     this.queryAndSetBioSampleCount()
-    shrinkHeader()
-    setActiveNavigation()
+    this.setState({
+      hash: window.location.hash,
+    })
   }
 
-  componentDidUpdate() {
-    setActiveNavigation()
-  }
+  componentDidUpdate() {}
 
   getSpeciesDropdownOptions = (rawData) => {
     const speciesDropdownOptions = []
@@ -365,34 +378,36 @@ class App extends Component {
     )
   };
 
-  homeMarkup = () => (
-    <Home
-      setDiagnosesMenu={this.setDiagnosesMenu}
-      speciesSelectionOptions={this.getSpeciesDropdownOptions(
-        this.props.appData,
-      )}
-      biosamplesLoading={this.state.biosamplesLoading}
-      welcomeHeaderMarkdown={this.state.welcomeHeaderMarkdown}
-      welcomeHeaderMarkdownText={this.state.welcomeHeaderMarkdownText}
-      token={this.props.loginToken}
-      speciesDropdownSelection={this.state.speciesDropdownSelection}
-      diagnosesSelectionOptions={this.state.diagnosesSelectionOptions}
-      diagnosesDropdownSelection={this.state.diagnosesDropdownSelection}
-      toggleSeeAll={this.toggleSeeAll}
-      getSum={this.getSum}
-      getColumnCountForSpecies={this.getColumnCountForSpecies}
-      pageData={this.state.pageData}
-      handleChanges={this.handleChanges}
-      handleChangeEvent={this.handleChangeEvent}
-      handleReactDropdownEvent={this.handleReactDropdownEvent}
-      handleNestedChanges={this.handleNestedChanges}
-      whatsNewMarkdownSegs={this.state.whatsNew}
-      markdown={this.state.wikiMarkdown}
-    />
-  );
+  ReturnHome = () => {
+    return (
+      <AsyncHome
+        setDiagnosesMenu={this.setDiagnosesMenu}
+        speciesSelectionOptions={this.getSpeciesDropdownOptions(
+          this.props.appData,
+        )}
+        biosamplesLoading={this.state.biosamplesLoading}
+        welcomeHeaderMarkdown={this.state.welcomeHeaderMarkdown}
+        welcomeHeaderMarkdownText={this.state.welcomeHeaderMarkdownText}
+        token={this.props.loginToken}
+        speciesDropdownSelection={this.state.speciesDropdownSelection}
+        diagnosesSelectionOptions={this.state.diagnosesSelectionOptions}
+        diagnosesDropdownSelection={this.state.diagnosesDropdownSelection}
+        toggleSeeAll={this.toggleSeeAll}
+        getSum={this.getSum}
+        getColumnCountForSpecies={this.getColumnCountForSpecies}
+        pageData={this.state.pageData}
+        handleChanges={this.handleChanges}
+        handleChangeEvent={this.handleChangeEvent}
+        handleReactDropdownEvent={this.handleReactDropdownEvent}
+        handleNestedChanges={this.handleNestedChanges}
+        whatsNewMarkdownSegs={this.state.whatsNew}
+        markdown={this.state.wikiMarkdown}
+      />
+    )
+  };
 
   ReturnProgramsM2OVE = () => (
-    <ProgramsM2OVE
+    <AsyncProgramsM2OVE
       token={this.props.loginToken}
       handleChanges={this.handleChanges}
       handleNestedChanges={this.handleNestedChanges}
@@ -402,7 +417,7 @@ class App extends Component {
   );
 
   ReturnProgramsAmpAd = () => (
-    <ProgramsAmpAd
+    <AsyncProgramsAmpAd
       token={this.props.loginToken}
       handleChanges={this.handleChanges}
       handleNestedChanges={this.handleNestedChanges}
@@ -412,7 +427,7 @@ class App extends Component {
   );
 
   ReturnProgramsModelAD = () => (
-    <ProgramsModelAD
+    <AsyncProgramsModelAD
       token={this.props.loginToken}
       handleChanges={this.handleChanges}
       handleNestedChanges={this.handleNestedChanges}
@@ -422,7 +437,7 @@ class App extends Component {
   );
 
   ReturnProgramsResilienceAD = () => (
-    <ProgramsResilienceAD
+    <AsyncProgramsResilienceAD
       token={this.props.loginToken}
       handleChanges={this.handleChanges}
       handleNestedChanges={this.handleNestedChanges}
@@ -433,7 +448,7 @@ class App extends Component {
 
   ReturnExternalResearchers = () => {
     return (
-      <ExternalResearchers
+      <AsyncExternalResearchers
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -444,7 +459,7 @@ class App extends Component {
 
   ReturnResearchPublications = () => {
     return (
-      <ResearchPublications
+      <AsyncResearchPublications
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -455,7 +470,7 @@ class App extends Component {
 
   ReturnResourcesData = () => {
     return (
-      <ResourcesData
+      <AsyncResourcesData
         biosamplesLoading={this.state.biosamplesLoading}
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
@@ -480,7 +495,7 @@ class App extends Component {
 
   ReturnResourcesAgora = () => {
     return (
-      <ResourcesAgora
+      <AsyncResourcesAgora
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -491,7 +506,7 @@ class App extends Component {
 
   ReturnResourcesAcknowledgements = () => {
     return (
-      <ResourcesAcknowledgements
+      <AsyncResourcesAcknowledgements
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         markdown={this.state.wikiMarkdown}
@@ -501,7 +516,7 @@ class App extends Component {
 
   ReturnResourcesDataUse = () => {
     return (
-      <ResourcesDataUse
+      <AsyncResourcesDataUse
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -512,7 +527,7 @@ class App extends Component {
 
   ReturnResourcesExperimentalResources = () => {
     return (
-      <ResourcesExperimentalResources
+      <AsyncResourcesExperimentalResources
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -523,7 +538,7 @@ class App extends Component {
 
   ReturnResourcesStudies = () => {
     return (
-      <ResourcesStudies
+      <AsyncResourcesStudies
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -544,7 +559,7 @@ class App extends Component {
 
   ReturnConsortiaDifferential = () => {
     return (
-      <ConsortiaDifferential
+      <AsyncConsortiaDifferential
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -555,7 +570,7 @@ class App extends Component {
 
   ReturnConsortiaGenetics = () => {
     return (
-      <ConsortiaGenetics
+      <AsyncConsortiaGenetics
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -566,7 +581,7 @@ class App extends Component {
 
   ReturnConsortiaNetworks = () => {
     return (
-      <ConsortiaNetworks
+      <AsyncConsortiaNetworks
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -577,7 +592,7 @@ class App extends Component {
 
   ReturnAboutAmpAd = () => {
     return (
-      <AboutAmpAd
+      <AsyncAboutAmpAd
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -588,10 +603,16 @@ class App extends Component {
 
   ReturnAboutPeople = () => {
     return (
-      <AboutPeople
+      <AsyncAboutPeople
         token={this.props.loginToken}
         handleChanges={this.handleChanges}
       />
+    )
+  };
+
+  ReturnHeader = () => {
+    return (
+      <AsyncHeader handleChanges={this.handleChanges} hash={this.state.hash} />
     )
   };
 
@@ -599,9 +620,9 @@ class App extends Component {
     return (
       <Router>
         <div className="row amp-ad">
-          <Header />
+          <this.ReturnHeader />
           <div className="col-xs-12 main">
-            <Route exact path="/" component={this.homeMarkup} />
+            <Route exact path="/" component={this.ReturnHome} />
 
             <Route
               path="/Research/AMP-AD"
@@ -673,9 +694,7 @@ class App extends Component {
             <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
               Forum
             </a>
-            <a href="mailto:ampadportal@sagebionetworks.org">
-Contact
-            </a>
+            <a href="mailto:ampadportal@sagebionetworks.org">Contact</a>
             <a href="http://docs.synapse.org/articles/governance.html">
               Terms & Privacy
             </a>
