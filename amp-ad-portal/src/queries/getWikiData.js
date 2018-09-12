@@ -122,14 +122,15 @@ const getMarkdown = (props, wikiNumber, name = "wikiMarkdown") => {
 }
 
 const getMarkdownSegment = (
-  props,
-  newStateKey,
+  handleNestedChanges,
   stateKey,
+  sessionToken,
   synId = "syn12666371",
+  wikiID,
 ) => {
-  return getWikiData(newStateKey, props.token.sessionToken, synId)
+  return getWikiData(wikiID, sessionToken, synId)
     .then((data) => {
-      props.handleNestedChanges(stateKey, newStateKey, data.markdown)
+      handleNestedChanges(stateKey, wikiID, data.markdown)
     })
     .catch(handleErrors)
 }
