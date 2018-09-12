@@ -154,8 +154,13 @@ class PiesBelowHeader extends Component {
   };
 
   getCountsList = (columnName) => {
-    const countsList = this.props.pageData[columnName].facetValues
-    countsList.sort((a, b) => a.count - b.count).reverse()
+    let countsList
+    if (this.props.pageData !== undefined) {
+      countsList = this.props.pageData[columnName] !== undefined
+        ? this.props.pageData[columnName].facetValues
+        : []
+      countsList.sort((a, b) => a.count - b.count).reverse()
+    }
     return countsList
   };
 
@@ -179,11 +184,7 @@ class PiesBelowHeader extends Component {
     if (counts.length > 0) {
       counts = counts.reduce(this.props.getSum)
     }
-    return (
-      <div>
-        {counts}
-      </div>
-    )
+    return <div>{counts}</div>
   };
 
   printCountsList = (listArray, dataType) => {
@@ -218,9 +219,7 @@ class PiesBelowHeader extends Component {
     })
     return (
       <div className="row">
-        <div className="col-xs-12">
-          {list}
-        </div>
+        <div className="col-xs-12">{list}</div>
       </div>
     )
   };
@@ -295,9 +294,7 @@ class PiesBelowHeader extends Component {
                 <h1 alt="count of samples">
                   {this.props.pageData[dataType].count}
                 </h1>
-                <p>
-                  {`${label}s`}
-                </p>
+                <p>{`${label}s`}</p>
               </div>
               <PieChart
                 data={pieData}
