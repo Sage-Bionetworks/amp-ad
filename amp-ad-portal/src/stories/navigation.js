@@ -1,9 +1,7 @@
 import React from "react"
 
 import { storiesOf } from "@storybook/react"
-
-//import { action } from "@storybook/addon-actions"
-//import { linkTo } from "@storybook/addon-links"
+import { State, Store } from "@sambego/storybook-state"
 
 import { HashRouter as Router } from "react-router-dom"
 import Header from "../components/Header"
@@ -11,11 +9,20 @@ import "../style/style.css"
 
 const logoImage = require("../images/amp-ad-logo.svg")
 
+const store = new Store({
+  active: false,
+})
+
+const handleChanges = (KEY, NEWSTATE) => {
+  store.set({
+    [KEY]: NEWSTATE,
+  })
+}
+
 storiesOf("AMP-AD", module)
   .add("navigation header", () => (
-    //<Welcome showApp={linkTo("Button")} />
     <Router>
-      <Header />
+      <Header handleChanges={handleChanges} hash="#/" />
     </Router>
   ))
   .add("logoImage", () => {
