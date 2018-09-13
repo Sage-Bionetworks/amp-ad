@@ -1,46 +1,49 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 
-//import { SynapseComponents } from "synapse-react-client"
+import { SynapseComponents } from "synapse-react-client"
 import { BarLoader } from "react-spinners"
-import { getWikiMarkdownSegments } from "../queries/getWikiData"
-import { printSections } from "../model/HandleMarkdown"
 import { getParents } from "../view/domScripts"
+
+let completedJSX = ""
 
 class ExperimentalResources extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loading: true,
+      jsxLoaded: false,
+      loading: false,
       modal: false,
       modalContent: "",
     }
   }
 
   componentDidMount() {
-    getWikiMarkdownSegments(
-      "576287",
-      "experimentalResources",
-      this.props,
-      "syn12666371",
-      10,
-    ).then(() => {
-      this.setState({
-        loading: false,
+    this.LoadExperimentalResources()
+      .then((response) => {
+        completedJSX = response
       })
-    })
+      .then(() => {
+        this.setState({ jsxLoaded: true })
+      })
     this.handleModalClose()
   }
 
   componentDidUpdate() {
-    this.handleShowTable()
+    console.log("lolwat")
+    if (this.state.modalContent === "") {
+      this.handleShowTable()
+    }
   }
 
   getTable = (event) => {
     const button = event.target
-    const parents = getParents(button, ".react-markdown")
-    const table = parents[0].querySelector("table")
+    const parents = getParents(button, ".col-xs-12")
+    //console.log(parents)
+    const table = parents[1].querySelector("table")
+    //console.log(table)
     return table.outerHTML
+    //return "hello table"
   };
 
   createMarkup = (markup) => {
@@ -79,6 +82,7 @@ class ExperimentalResources extends Component {
   handleShowTable = () => {
     const buttonElements = document.querySelectorAll(".table-button")
     if (buttonElements[0] !== undefined && buttonElements[0] !== null) {
+      console.log(buttonElements)
       this.addEventListeners(buttonElements)
     }
   };
@@ -88,6 +92,32 @@ class ExperimentalResources extends Component {
     modalWindow.addEventListener("click", () => {
       this.toggleModal()
     })
+  };
+
+  LoadExperimentalResources = async () => {
+    const wikiIds = ["582124", "582125", "582123", "581965"]
+    const markdown = wikiIds.map(async (element, index) => {
+      return (
+        <div key={element + index}>
+          <SynapseComponents.Markdown
+            token={this.props.token.sessionToken}
+            ownerId="syn12666371"
+            wikiId={element}
+          />
+        </div>
+      )
+    })
+
+    return Promise.all(markdown).then((completed) => {
+      return completed
+    })
+  };
+
+  returnCompletedJSX = () => {
+    if (this.state.jsxLoaded === true && completedJSX !== "") {
+      this.handleShowTable()
+    }
+    return completedJSX
   };
 
   render() {
@@ -116,9 +146,7 @@ class ExperimentalResources extends Component {
             </div>
           </section>
           <section className="row center-xs researchers-content">
-            <div className="col-xs-12 col-sm-9">
-              {printSections(this.props.markdown)}
-            </div>
+            <div className="col-xs-12 col-sm-9">{completedJSX}</div>
           </section>
           <div className="row center-xs">
             <BarLoader color="#47357B" loading={this.state.loading} />
@@ -130,7 +158,7 @@ class ExperimentalResources extends Component {
 }
 
 ExperimentalResources.propTypes = {
-  markdown: PropTypes.array.isRequired,
+  token: PropTypes.object.isRequired,
 }
 
 export default ExperimentalResources

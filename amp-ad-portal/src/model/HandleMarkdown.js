@@ -9,14 +9,17 @@ const makeid = () => {
   return text
 }
 
-const buildSection = (index, key, markdown, token = "") => {
+const buildSection = (index, key, markdown, token = "", callback) => {
   return (
-    <SynapseComponents.Markdown
-      token={token}
-      markdown={markdown[index] !== undefined ? markdown[index][key] : ""}
-      hasSynapseResources={false}
-      errorMessageView={<div>error</div>}
-    />
+    <div key={makeid()}>
+      <SynapseComponents.Markdown
+        token={token}
+        markdown={markdown[index] !== undefined ? markdown[index][key] : ""}
+        hasSynapseResources={false}
+        errorMessageView={<div>error</div>}
+        updateLoadState={callback}
+      />
+    </div>
   )
 }
 
@@ -31,10 +34,16 @@ const returnJsxFromMarkdown = (markdown, token = undefined) => {
   )
 }
 
-const printSections = (markdownArray, token, limit = 200) => {
+const printSections = (markdownArray, token, limit = 200, callback) => {
   return markdownArray.map((section, index) => {
     if (index < limit) {
-      return buildSection(index, Object.keys(section)[0], markdownArray, token)
+      return buildSection(
+        index,
+        Object.keys(section)[0],
+        markdownArray,
+        token,
+        callback,
+      )
     }
     const keyName = `${index}index`
     return <div key={keyName} />

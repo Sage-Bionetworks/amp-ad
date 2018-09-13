@@ -12,9 +12,10 @@ class ProgramsAmpAd extends Component {
     if (this.props.markdownSegs.length === 0) {
       getWikiMarkdownSegments(
         "581895",
-        "programsAmpAd",
-        this.props,
         "syn12666371",
+        "programsAmpAd",
+        this.props.token.sessionToken,
+        this.props.handleNestedChanges,
         false,
       )
     }
@@ -40,9 +41,7 @@ class ProgramsAmpAd extends Component {
           <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
           <section className="row center-xs content-row">
             <div className="col-xs-12 col-sm-9">
-              <h2>
-Projects
-              </h2>
+              <h2>Projects</h2>
               {printShowHideSections(this.props.markdownSegs)}
             </div>
           </section>
@@ -55,6 +54,8 @@ Projects
 ProgramsAmpAd.propTypes = {
   markdown: PropTypes.string.isRequired,
   markdownSegs: PropTypes.array.isRequired,
+  token: PropTypes.object.isRequired,
+  handleNestedChanges: PropTypes.func.isRequired,
 }
 
 export default ProgramsAmpAd

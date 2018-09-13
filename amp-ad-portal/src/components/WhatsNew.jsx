@@ -12,9 +12,10 @@ class WhatsNew extends Component {
   componentDidMount() {
     getWikiMarkdownSegments(
       "582408",
-      "whatsNew",
-      this.props,
       "syn12666371",
+      "whatsNew",
+      this.props.token.sessionToken,
+      this.props.handleNestedChanges,
       131,
       50,
     )
@@ -39,6 +40,8 @@ class WhatsNew extends Component {
 
 WhatsNew.propTypes = {
   markdown: PropTypes.array.isRequired,
+  token: PropTypes.object.isRequired,
+  handleNestedChanges: PropTypes.func.isRequired,
 }
 
 export default WhatsNew

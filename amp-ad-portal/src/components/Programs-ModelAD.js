@@ -12,9 +12,10 @@ class ProgramsModelAd extends Component {
     if (this.props.markdownSegs.length === 0) {
       getWikiMarkdownSegments(
         "581896",
-        "programsModelAd",
-        this.props,
         "syn12666371",
+        "programsModelAd",
+        this.props.token.sessionToken,
+        this.props.handleNestedChanges,
         false,
       )
     }
@@ -26,9 +27,7 @@ class ProgramsModelAd extends Component {
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
-              <h2>
-Model AD Program
-              </h2>
+              <h2>Model AD Program</h2>
               <p>
                 Bridge the preclinical to clinical development gap by developing
                 AD animal models and a process for rigorous preclinical efficacy
@@ -39,9 +38,7 @@ Model AD Program
           <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
           <section className="row center-xs content-row">
             <div className="col-xs-12 col-sm-9">
-              <h2>
-Projects
-              </h2>
+              <h2>Projects</h2>
               {printShowHideSections(this.props.markdownSegs)}
             </div>
           </section>
@@ -54,6 +51,8 @@ Projects
 ProgramsModelAd.propTypes = {
   markdown: PropTypes.string.isRequired,
   markdownSegs: PropTypes.array.isRequired,
+  token: PropTypes.object.isRequired,
+  handleNestedChanges: PropTypes.func.isRequired,
 }
 
 export default ProgramsModelAd
