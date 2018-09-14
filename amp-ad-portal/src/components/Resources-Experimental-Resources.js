@@ -1,17 +1,16 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 
-import { SynapseComponents } from "synapse-react-client"
+//import { SynapseComponents } from "synapse-react-client"
 import { BarLoader } from "react-spinners"
+import { getWikiMarkdownSegments } from "../queries/getWikiData"
+import { printSectionsReactMarkdown } from "../model/HandleMarkdown"
 import { getParents } from "../view/domScripts"
-
-let completedJSX = ""
 
 class ExperimentalResources extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      jsxLoaded: false,
       loading: true,
       modal: false,
       modalContent: "",
@@ -19,26 +18,31 @@ class ExperimentalResources extends Component {
   }
 
   componentDidMount() {
-    this.LoadExperimentalResources().then((response) => {
-      completedJSX = response
+    getWikiMarkdownSegments(
+      "576287",
+      "syn12666371",
+      "experimentalResources",
+      this.props.token.sessionToken,
+      this.props.handleNestedChanges,
+      10,
+      undefined,
+    ).then(() => {
+      this.setState({
+        loading: false,
+      })
     })
     this.handleModalClose()
   }
 
   componentDidUpdate() {
-    if (this.state.modalContent === "") {
-      this.handleShowTable()
-    }
+    this.handleShowTable()
   }
 
   getTable = (event) => {
     const button = event.target
-    const parents = getParents(button, ".col-xs-12")
-    console.log(`parents: ${parents}`)
-    const table = parents[1].querySelector("table")
-    //console.log(table)
-    return "hello deary"
-    //return table.outerHTML
+    const parents = getParents(button, ".react-markdown")
+    const table = parents[0].querySelector("table")
+    return table.outerHTML
   };
 
   createMarkup = (markup) => {
@@ -68,7 +72,6 @@ class ExperimentalResources extends Component {
   addEventListeners = (elements) => {
     elements.forEach((element) => {
       element.addEventListener("click", (event) => {
-        console.log("lolwat")
         this.handleChanges("modalContent", this.getTable(event))
         this.toggleModal()
       })
@@ -78,7 +81,6 @@ class ExperimentalResources extends Component {
   handleShowTable = () => {
     const buttonElements = document.querySelectorAll(".table-button")
     if (buttonElements[0] !== undefined && buttonElements[0] !== null) {
-      console.log(buttonElements)
       this.addEventListeners(buttonElements)
     }
   };
@@ -87,30 +89,6 @@ class ExperimentalResources extends Component {
     const modalWindow = document.querySelector(".modal-x-background-circle")
     modalWindow.addEventListener("click", () => {
       this.toggleModal()
-    })
-  };
-
-  LoadExperimentalResources = async () => {
-    const wikiIds = ["582124", "582125", "582123", "581965"]
-    const markdown = wikiIds.map(async (element, index) => {
-      return (
-        <div key={element + index}>
-          <SynapseComponents.Markdown
-            token={this.props.token.sessionToken}
-            ownerId="syn12666371"
-            wikiId={element}
-            updateLoadState={
-              index === 3
-                ? () => this.setState({ jsxLoaded: true, loading: false })
-                : () => this.forceUpdate()
-            }
-          />
-        </div>
-      )
-    })
-
-    return Promise.all(markdown).then((completed) => {
-      return completed
     })
   };
 
@@ -140,7 +118,9 @@ class ExperimentalResources extends Component {
             </div>
           </section>
           <section className="row center-xs researchers-content">
-            <div className="col-xs-12 col-sm-9">{completedJSX}</div>
+            <div className="col-xs-12 col-sm-9">
+              {printSectionsReactMarkdown(this.props.markdown)}
+            </div>
           </section>
           <div className="row center-xs">
             <BarLoader color="#47357B" loading={this.state.loading} />
@@ -152,7 +132,7 @@ class ExperimentalResources extends Component {
 }
 
 ExperimentalResources.propTypes = {
-  token: PropTypes.object.isRequired,
+  markdown: PropTypes.array.isRequired,
 }
 
 export default ExperimentalResources
