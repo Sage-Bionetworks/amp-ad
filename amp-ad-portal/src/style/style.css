@@ -1213,6 +1213,9 @@ p.researcher-bio {
 .researchers-content .researcher h4, .content-section .researcher h4 {
   margin-bottom: 0px;
 }
+.researchers-content .markdown-parent li, .content-section .markdown-parent li {
+  list-style: initial;
+}
 
 .research-publications .row.publication h2 {
   font-size: 24px;
