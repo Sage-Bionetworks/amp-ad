@@ -12,25 +12,20 @@ class ExperimentalResources extends Component {
     super(props)
     this.state = {
       jsxLoaded: false,
-      loading: false,
+      loading: true,
       modal: false,
       modalContent: "",
     }
   }
 
   componentDidMount() {
-    this.LoadExperimentalResources()
-      .then((response) => {
-        completedJSX = response
-      })
-      .then(() => {
-        this.setState({ jsxLoaded: true })
-      })
+    this.LoadExperimentalResources().then((response) => {
+      completedJSX = response
+    })
     this.handleModalClose()
   }
 
   componentDidUpdate() {
-    console.log("lolwat")
     if (this.state.modalContent === "") {
       this.handleShowTable()
     }
@@ -39,11 +34,11 @@ class ExperimentalResources extends Component {
   getTable = (event) => {
     const button = event.target
     const parents = getParents(button, ".col-xs-12")
-    //console.log(parents)
+    console.log(`parents: ${parents}`)
     const table = parents[1].querySelector("table")
     //console.log(table)
-    return table.outerHTML
-    //return "hello table"
+    return "hello deary"
+    //return table.outerHTML
   };
 
   createMarkup = (markup) => {
@@ -73,6 +68,7 @@ class ExperimentalResources extends Component {
   addEventListeners = (elements) => {
     elements.forEach((element) => {
       element.addEventListener("click", (event) => {
+        console.log("lolwat")
         this.handleChanges("modalContent", this.getTable(event))
         this.toggleModal()
       })
@@ -103,6 +99,11 @@ class ExperimentalResources extends Component {
             token={this.props.token.sessionToken}
             ownerId="syn12666371"
             wikiId={element}
+            updateLoadState={
+              index === 3
+                ? () => this.setState({ jsxLoaded: true, loading: false })
+                : () => this.forceUpdate()
+            }
           />
         </div>
       )
@@ -111,13 +112,6 @@ class ExperimentalResources extends Component {
     return Promise.all(markdown).then((completed) => {
       return completed
     })
-  };
-
-  returnCompletedJSX = () => {
-    if (this.state.jsxLoaded === true && completedJSX !== "") {
-      this.handleShowTable()
-    }
-    return completedJSX
   };
 
   render() {
