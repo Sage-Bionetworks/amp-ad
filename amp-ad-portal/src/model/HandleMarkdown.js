@@ -11,12 +11,14 @@ const makeid = () => {
 
 const buildSection = (index, key, markdown, token = "") => {
   return (
-    <SynapseComponents.Markdown
-      token={token}
-      markdown={markdown[index] !== undefined ? markdown[index][key] : ""}
-      hasSynapseResources={false}
-      errorMessageView={<div>error</div>}
-    />
+    <div key={makeid()}>
+      <SynapseComponents.Markdown
+        token={token}
+        markdown={markdown[index] !== undefined ? markdown[index][key] : ""}
+        hasSynapseResources={false}
+        errorMessageView={<div>error</div>}
+      />
+    </div>
   )
 }
 
