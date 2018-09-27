@@ -1332,6 +1332,9 @@ p.researcher-bio {
     li {
       list-style: initial;
     }
+    ol li {
+      list-style-type: decimal; 
+    }
   }
 }
 

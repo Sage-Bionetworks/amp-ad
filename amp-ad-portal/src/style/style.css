@@ -1216,6 +1216,9 @@ p.researcher-bio {
 .researchers-content .markdown-parent li, .content-section .markdown-parent li {
   list-style: initial;
 }
+.researchers-content .markdown-parent ol li, .content-section .markdown-parent ol li {
+  list-style-type: decimal;
+}
 
 .research-publications .row.publication h2 {
   font-size: 24px;
