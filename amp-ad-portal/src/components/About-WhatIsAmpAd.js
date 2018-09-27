@@ -1,8 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { SynapseComponents } from "synapse-react-client"
 import { getMarkdown } from "../queries/getWikiData"
-
-const ReactMarkdown = require("react-markdown")
 
 class WhatIsAmpAD extends Component {
   componentDidMount() {
@@ -15,12 +14,19 @@ class WhatIsAmpAD extends Component {
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
-              <h2>
-AMP-AD Knowledge Portal
-              </h2>
+              <h2>AMP-AD Knowledge Portal</h2>
             </div>
           </section>
-          <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+          <section className="row around-xs">
+            <div className="col-xs-12 col-sm-9">
+              <SynapseComponents.Markdown
+                token={this.props.token.sessionToken}
+                ownerId="syn5702691"
+                wikiId="583906"
+                markdown={this.props.markdown}
+              />
+            </div>
+          </section>
         </div>
       </div>
     )
@@ -29,6 +35,7 @@ AMP-AD Knowledge Portal
 
 WhatIsAmpAD.propTypes = {
   markdown: PropTypes.string.isRequired,
+  token: PropTypes.object.isRequired,
 }
 
 export default WhatIsAmpAD
