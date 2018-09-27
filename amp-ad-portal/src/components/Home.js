@@ -43,7 +43,6 @@ const Home = props => (
       token={props.token}
       handleNestedChanges={props.handleNestedChanges}
     />
-    <ContributeYourData />
   </div>
 )
 
