@@ -8,7 +8,7 @@ import Programs from "./Programs"
 import Analyses from "./Analyses"
 import WhatsNew from "./WhatsNew.jsx"
 //import PopularDataRequests from "./PopularDataRequests"
-import ContributeYourData from "./ContributeYourData"
+//import ContributeYourData from "./ContributeYourData"
 
 const Home = props => (
   <div>
