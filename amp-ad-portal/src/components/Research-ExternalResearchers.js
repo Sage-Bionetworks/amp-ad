@@ -75,9 +75,7 @@ class ExternalResearchers extends Component {
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
-              <h2>
-Approved External Research Use
-              </h2>
+              <h2>Approved External Research Use</h2>
               <p>
                 This page lists the research statements, names, and institutions
                 of investigators approved for access to controlled data. Open
@@ -88,7 +86,10 @@ Approved External Research Use
           </section>
           <section className="row center-xs researchers-content">
             <div className="col-xs-12 col-sm-9">
-              {printShowHideSections(this.props.markdown)}
+              {printShowHideSections(
+                this.props.markdown,
+                this.props.token.sessionToken,
+              )}
             </div>
           </section>
           <div className="row center-xs">

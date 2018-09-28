@@ -23,6 +23,7 @@ const buildSection = (index, key, markdown, token = "") => {
 }
 
 const returnJsxFromMarkdown = (markdown, token = undefined) => {
+  console.log(token)
   return (
     <SynapseComponents.Markdown
       token={token}
@@ -43,11 +44,11 @@ const printSections = (markdownArray, token, limit = 200) => {
   })
 }
 
-const printShowHideSections = (markdownArray) => {
+const printShowHideSections = (markdownArray, token) => {
   return markdownArray.map((element) => {
     return (
       <ShowHideSection
-        content={returnJsxFromMarkdown(element[Object.keys(element)[0]])}
+        content={returnJsxFromMarkdown(element[Object.keys(element)[0]], token)}
         key={Object.keys(element)[0] + makeid()}
       />
     )

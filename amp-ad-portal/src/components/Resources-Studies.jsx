@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { BarLoader } from "react-spinners"
-import { SynapseComponents } from "synapse-react-client"
+//import { SynapseComponents } from "synapse-react-client"
+
 import { getTable } from "../queries/queryForData"
 import {
   getMarkdownSegment,
@@ -12,6 +13,8 @@ import {
 } from "../queries/getWikiData"
 import ShowHideSection from "./ShowHideSection"
 import { getColumnNameIndex } from "../controller/PrepRawSynapseData"
+
+const SynapseComponents = null
 
 class Studies extends Component {
   constructor(props) {
@@ -285,14 +288,16 @@ class Studies extends Component {
   };
 
   returnSynapseJSX = (markdown) => {
-    return (
-      <SynapseComponents.Markdown
-        token={this.props.token.sessionToken}
-        markdown={markdown}
-        hasSynapseResources={false}
-        errorMessageView={<div>error</div>}
-      />
-    )
+    if (SynapseComponents) {
+      return (
+        <SynapseComponents.Markdown
+          token={this.props.token.sessionToken}
+          markdown={markdown}
+          hasSynapseResources={false}
+          errorMessageView={<div>error</div>}
+        />
+      )
+    }
   };
 
   getWikiMarkdownCopy = (wikiMarkdownState, wikiId) => {
@@ -336,9 +341,7 @@ class Studies extends Component {
             <div className="col-xs-12 studies-col">
               <div className="row">
                 <div className="col-xs-12 researchers studies-section">
-                  <ShowHideSection
-                    content={this.returnSynapseJSX(wikiMarkdownCopy)}
-                  />
+                  <ShowHideSection content={this.returnSynapseJSX(wikiMarkdownCopy)} />
                 </div>
               </div>
 
