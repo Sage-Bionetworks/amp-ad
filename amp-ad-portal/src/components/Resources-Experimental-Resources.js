@@ -32,7 +32,8 @@ class ExperimentalResources extends Component {
     this.handleModalClose()
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(nextProps) {
+    console.log(this.props)
     this.handleShowTable()
   }
 
@@ -73,11 +74,13 @@ class ExperimentalResources extends Component {
         this.handleChanges("modalContent", this.getTable(event))
         this.toggleModal()
       })
+      console.log("event listener added")
     })
   };
 
   handleShowTable = () => {
     const buttonElements = document.querySelectorAll(".table-button")
+    console.log(buttonElements)
     if (buttonElements[0] !== undefined && buttonElements[0] !== null) {
       this.addEventListeners(buttonElements)
     }

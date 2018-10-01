@@ -24,7 +24,6 @@
     "write": "^1.0.3"
   },
   "devDependencies": {
-    "0": "^0.0.0",
     "@sambego/storybook-state": "^1.2.0",
     "@storybook/react": "^3.4.10",
     "babel-core": "^6.26.3",
