@@ -11,7 +11,7 @@ const makeid = () => {
   return text
 }
 
-const buildSection = (index, key, markdown, token = "", callback) => {
+const buildSection = (index, key, markdown, token = "") => {
   const synapseMarkdown = (
     <div key={makeid()}>
       <SynapseComponents.Markdown
@@ -22,7 +22,6 @@ const buildSection = (index, key, markdown, token = "", callback) => {
       />
     </div>
   )
-  callback()
   return synapseMarkdown
 }
 

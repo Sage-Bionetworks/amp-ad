@@ -737,6 +737,9 @@ section.pie-charts-welcome {
     font-size: 42px;
     margin: 20px;
   }
+  .pie-circles-container svg:hover {
+    all: unset;
+  }
   .pie-circle {
     display: inline-block;
     margin: 0px 5px;
