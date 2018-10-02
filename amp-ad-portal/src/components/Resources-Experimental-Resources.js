@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 
 import { BarLoader } from "react-spinners"
 import { getWikiMarkdownSegments } from "../queries/getWikiData"
-import { printSections } from "../model/HandleMarkdown"
+import { printSectionsReactMarkdown } from "../model/HandleMarkdown"
 import { getParents } from "../view/domScripts"
 
 class ExperimentalResources extends Component {
@@ -31,8 +31,7 @@ class ExperimentalResources extends Component {
     this.handleModalClose()
   }
 
-  componentDidUpdate(nextProps) {
-    console.log(this.props)
+  componentDidUpdate() {
     this.handleShowTable()
   }
 
@@ -73,13 +72,11 @@ class ExperimentalResources extends Component {
         this.handleChanges("modalContent", this.getTable(event))
         this.toggleModal()
       })
-      console.log("event listener added")
     })
   };
 
   handleShowTable = () => {
     const buttonElements = document.querySelectorAll(".table-button")
-    console.log(buttonElements)
     if (buttonElements[0] !== undefined && buttonElements[0] !== null) {
       this.addEventListeners(buttonElements)
     }
@@ -119,7 +116,7 @@ class ExperimentalResources extends Component {
           </section>
           <section className="row center-xs researchers-content">
             <div className="col-xs-12 col-sm-9">
-              {printSections(this.props.markdown)}
+              {printSectionsReactMarkdown(this.props.markdown)}
             </div>
           </section>
           <div className="row center-xs">

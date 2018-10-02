@@ -2,6 +2,8 @@ import React from "react"
 import { SynapseComponents } from "synapse-react-client"
 import ShowHideSection from "../components/ShowHideSection"
 
+const ReactMarkdown = require("react-markdown")
+
 const makeid = () => {
   let text = ""
   const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -9,8 +11,8 @@ const makeid = () => {
   return text
 }
 
-const buildSection = (index, key, markdown, token = "") => {
-  return (
+const buildSection = (index, key, markdown, token = "", callback) => {
+  const synapseMarkdown = (
     <div key={makeid()}>
       <SynapseComponents.Markdown
         token={token}
@@ -20,10 +22,22 @@ const buildSection = (index, key, markdown, token = "") => {
       />
     </div>
   )
+  callback()
+  return synapseMarkdown
+}
+
+const buildSectionReactMarkdown = (index, key, markdown) => {
+  return (
+    <ReactMarkdown
+      source={markdown[index] !== undefined ? markdown[index][key] : ""}
+      escapeHtml={false}
+      key={makeid()}
+      className="react-markdown"
+    />
+  )
 }
 
 const returnJsxFromMarkdown = (markdown, token = undefined) => {
-  console.log(token)
   return (
     <SynapseComponents.Markdown
       token={token}
@@ -34,10 +48,31 @@ const returnJsxFromMarkdown = (markdown, token = undefined) => {
   )
 }
 
-const printSections = (markdownArray, token, limit = 200) => {
+const printSections = (markdownArray, token, limit = 200, callback) => {
+  const content = markdownArray.map((section, index) => {
+    if (index < limit) {
+      return buildSection(
+        index,
+        Object.keys(section)[0],
+        markdownArray,
+        token,
+        callback,
+      )
+    }
+    const keyName = `${index}index`
+    return <div key={keyName} />
+  })
+  return content
+}
+
+const printSectionsReactMarkdown = (markdownArray, limit = 200) => {
   return markdownArray.map((section, index) => {
     if (index < limit) {
-      return buildSection(index, Object.keys(section)[0], markdownArray, token)
+      return buildSectionReactMarkdown(
+        index,
+        Object.keys(section)[0],
+        markdownArray,
+      )
     }
     const keyName = `${index}index`
     return <div key={keyName} />
@@ -60,4 +95,5 @@ export {
   printSections,
   returnJsxFromMarkdown,
   printShowHideSections,
+  printSectionsReactMarkdown,
 }
