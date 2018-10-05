@@ -6,7 +6,13 @@ import { printSections } from "../model/HandleMarkdown"
 
 class ResearchPublications extends Component {
   componentDidMount() {
-    getMarkdownSegment(this.props, "581933", "researchPublications")
+    getMarkdownSegment(
+      this.props.handleNestedChanges,
+      this.props.token.sessionToken,
+      "581933",
+      undefined,
+      "researchPublications",
+    )
   }
 
   render() {
@@ -41,6 +47,8 @@ class ResearchPublications extends Component {
 
 ResearchPublications.propTypes = {
   markdown: PropTypes.array.isRequired,
+  handleNestedChanges: PropTypes.func.isRequired,
+  token: PropTypes.object.isRequired,
 }
 
 export default ResearchPublications

@@ -94,5 +94,6 @@ export {
   printSections,
   returnJsxFromMarkdown,
   printShowHideSections,
+  buildSectionReactMarkdown,
   printSectionsReactMarkdown,
 }

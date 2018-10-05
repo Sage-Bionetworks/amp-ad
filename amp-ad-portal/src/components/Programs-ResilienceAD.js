@@ -12,9 +12,10 @@ class ProgramsResilienceAD extends Component {
     if (this.props.markdownSegs.length === 0) {
       getWikiMarkdownSegments(
         "581898",
-        "programsResilienceAD",
-        this.props,
         "syn12666371",
+        "programsResilienceAD",
+        this.props.token.sessionToken,
+        this.props.handleNestedChanges,
         false,
       )
     }
@@ -50,6 +51,8 @@ class ProgramsResilienceAD extends Component {
 ProgramsResilienceAD.propTypes = {
   markdown: PropTypes.string.isRequired,
   markdownSegs: PropTypes.array.isRequired,
+  token: PropTypes.object.isRequired,
+  handleNestedChanges: PropTypes.func.isRequired,
 }
 
 export default ProgramsResilienceAD

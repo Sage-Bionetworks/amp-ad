@@ -19,10 +19,12 @@ class ExperimentalResources extends Component {
   componentDidMount() {
     getWikiMarkdownSegments(
       "576287",
-      "experimentalResources",
-      this.props,
       "syn12666371",
+      "experimentalResources",
+      this.props.token.sessionToken,
+      this.props.handleNestedChanges,
       10,
+      undefined,
     ).then(() => {
       this.setState({
         loading: false,

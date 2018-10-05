@@ -1328,6 +1328,14 @@ p.researcher-bio {
       margin-bottom: 0px;
     }
   }
+  .markdown-parent {
+    li {
+      list-style: initial;
+    }
+    ol li {
+      list-style-type: decimal; 
+    }
+  }
 }
 
 ///// research-publications /////

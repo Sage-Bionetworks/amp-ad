@@ -146,10 +146,11 @@ class Studies extends Component {
       )
         .then((result) => {
           getMarkdownSegment(
-            this.props,
+            this.props.handleNestedChanges,
+            this.props.token.sessionToken,
             result.wikiPageId,
-            "studies",
             result.ownerObjectId,
+            "studies",
           )
           this.props.handleNestedChanges(
             "studiesWikiIds",

@@ -1144,6 +1144,12 @@ html, body {
 #root .researchers-content .researcher h4, #root .content-section .researcher h4 {
   margin-bottom: 0px;
 }
+#root .researchers-content .markdown-parent li, #root .content-section .markdown-parent li {
+  list-style: initial;
+}
+#root .researchers-content .markdown-parent ol li, #root .content-section .markdown-parent ol li {
+  list-style-type: decimal;
+}
 #root .research-publications .row.publication h2 {
   font-size: 24px;
 }
