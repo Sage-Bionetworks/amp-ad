@@ -4,7 +4,7 @@ import "./style/index.css"
 import "./style/style.css"
 import { BarLoader } from "react-spinners"
 import App from "./App"
-import registerServiceWorker from "./registerServiceWorker"
+//import registerServiceWorker from "./registerServiceWorker"
 import * as SynapseClient from "./synapse/SynapseClient"
 import { queryTable } from "./queries/queryForData"
 
@@ -37,4 +37,4 @@ login()
     document.getElementById("root"),
   ))
 
-registerServiceWorker()
+//registerServiceWorker()
