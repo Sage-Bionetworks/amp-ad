@@ -2,8 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 
 import { BarLoader } from "react-spinners"
-import { getWikiMarkdownSegments } from "../queries/getWikiData"
-import { printSectionsReactMarkdown } from "../model/HandleMarkdown"
+import { SynapseComponents } from "synapse-react-client"
 import { getParents } from "../view/domScripts"
 
 class ExperimentalResources extends Component {
@@ -16,25 +15,10 @@ class ExperimentalResources extends Component {
     }
   }
 
-  componentDidMount() {
-    getWikiMarkdownSegments(
-      "576287",
-      "syn12666371",
-      "experimentalResources",
-      this.props.token.sessionToken,
-      this.props.handleNestedChanges,
-      10,
-      undefined,
-    ).then(() => {
-      this.setState({
-        loading: false,
-      })
-    })
-    this.handleModalClose()
-  }
+  componentDidMount() {}
 
   componentDidUpdate() {
-    this.handleShowTable()
+    //this.handleShowTable()
   }
 
   getTable = (event) => {
@@ -118,7 +102,12 @@ class ExperimentalResources extends Component {
           </section>
           <section className="row center-xs researchers-content">
             <div className="col-xs-12 col-sm-9">
-              {printSectionsReactMarkdown(this.props.markdown)}
+              <SynapseComponents.Markdown
+                token={this.props.token.sessionToken}
+                ownerId="syn2580853"
+                wikiId="409845"
+                updateLoadState={() => this.handleChanges("loading", false)}
+              />
             </div>
           </section>
           <div className="row center-xs">
@@ -131,7 +120,12 @@ class ExperimentalResources extends Component {
 }
 
 ExperimentalResources.propTypes = {
-  markdown: PropTypes.array.isRequired,
+  markdown: PropTypes.string,
+  token: PropTypes.object.isRequired,
+}
+
+ExperimentalResources.defaultProps = {
+  markdown: "loading",
 }
 
 export default ExperimentalResources

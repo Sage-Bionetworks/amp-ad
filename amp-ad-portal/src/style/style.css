@@ -21,6 +21,10 @@ html, body {
 #root .main {
   min-height: 93%;
 }
+#root .main {
+  min-height: calc(100vh - 136px);
+  margin-top: 0px;
+}
 #root section div.row {
   margin: 0px auto;
 }
@@ -617,6 +621,9 @@ html, body {
   #root section.welcome .welcome-message {
     padding: 0px;
   }
+}
+#root section.pie-charts-welcome.height {
+  height: 100%;
 }
 #root section.pie-charts-welcome {
   background-color: #F5F5F5;

@@ -58,6 +58,11 @@ body.noScroll, html.noScroll {
     //margin-top: 0px;
   //}
 }
+.main {
+  min-height: calc(100vh - 136px);
+  margin-top: 0px;
+}
+
 
 section div.row {
     //max-width: 920px;
@@ -726,6 +731,9 @@ section.welcome {
   }
 }
 
+section.pie-charts-welcome.height {
+    height: 100%;
+  }
 section.pie-charts-welcome {
   background-color: $gray;
   padding-top: 0px;
