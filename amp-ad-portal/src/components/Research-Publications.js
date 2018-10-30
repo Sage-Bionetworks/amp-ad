@@ -9,8 +9,8 @@ class ResearchPublications extends Component {
     getMarkdownSegment(
       this.props.handleNestedChanges,
       this.props.token.sessionToken,
-      "581933",
-      undefined,
+      "409850",
+      "syn2580853",
       "researchPublications",
     )
   }

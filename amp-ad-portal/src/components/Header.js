@@ -14,7 +14,6 @@ import BetaHeader from "./Beta"
 import "react-accessible-accordion/dist/minimal-example.css"
 
 const logoImage = require("../images/amp-ad-logo.svg")
-//const logoImage = require("../images/placeholder_member.png")
 
 class Header extends Component {
   constructor(props) {
@@ -25,17 +24,31 @@ class Header extends Component {
       About: false,
       Home: false,
       Open: false,
+      activeUnderBar: "",
     }
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.handleLocalChanges("activeUnderBar", this.props.hash)
+  }
 
-  componentDidUpdate() {}
+  componentDidUpdate(prevProps) {
+    if (prevProps.hash !== this.props.hash) {
+      this.handleLocalChanges("activeUnderBar", this.props.hash)
+    }
+  }
 
   closeNavigation = (location) => {
     if (location !== undefined) {
       this.props.handleChanges("hash", location)
     }
+
+    let activeUnderBar = window.location.hash
+
+    if (this.state.Open && location === undefined) {
+      activeUnderBar = this.state.activeUnderBar
+    }
+
     this.setState(
       {
         Research: false,
@@ -43,6 +56,7 @@ class Header extends Component {
         About: false,
         Home: false,
         Open: false,
+        activeUnderBar,
       },
       () => {
         const body = document.querySelector("html")
@@ -55,6 +69,8 @@ class Header extends Component {
     const accordionItems = document.querySelectorAll(
       ".top-level-accordion-item",
     )
+
+    this.handleLocalChanges("activeUnderBar", event.target.innerHTML)
 
     accordionItems.forEach((element) => {
       if (
@@ -80,6 +96,10 @@ class Header extends Component {
   dropdownMenuAction = (event) => {
     event.preventDefault()
     this.setOpenAccordion(event)
+
+    if (this.state.Open === true) {
+      this.closeNavigation()
+    }
   };
 
   ReturnBetaHeader = () => {
@@ -89,9 +109,27 @@ class Header extends Component {
     return ""
   };
 
+  handleLocalChanges = (key, value) => {
+    this.setState({
+      [key]: value,
+    })
+  };
+
+  mouseLeaveBehavior = () => {
+    const behavior = this.state.Open === false
+      ? () => this.handleLocalChanges("activeUnderBar", this.props.hash)
+      : () => {}
+    return behavior
+  };
+
   ResearchDropdown = () => (
     <Accordion>
-      <AccordionItem className="top-level-accordion-item">
+      <AccordionItem
+        className="top-level-accordion-item"
+        onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Research")
+        }
+        onMouseLeave={this.mouseLeaveBehavior()}
+      >
         <AccordionItemTitle
           className="accordion-title top-level-accordion"
           aria-selected={this.state.Research}
@@ -110,6 +148,7 @@ class Header extends Component {
           <div
             className={
               this.props.hash.includes("Research")
+              && this.state.activeUnderBar.includes("Research")
                 ? "under-bar active"
                 : "under-bar"
             }
@@ -278,7 +317,12 @@ class Header extends Component {
 
   ResourcesDropdown = () => (
     <Accordion>
-      <AccordionItem className="top-level-accordion-item">
+      <AccordionItem
+        className="top-level-accordion-item"
+        onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Resources")
+        }
+        onMouseLeave={this.mouseLeaveBehavior()}
+      >
         <AccordionItemTitle
           className="accordion-title top-level-accordion"
           aria-selected={this.state.Resources}
@@ -297,6 +341,7 @@ class Header extends Component {
           <div
             className={
               this.props.hash.includes("Resources")
+              && this.state.activeUnderBar.includes("Resources")
                 ? "under-bar active"
                 : "under-bar"
             }
@@ -422,7 +467,11 @@ class Header extends Component {
 
   AboutMenuDropdown = () => (
     <Accordion>
-      <AccordionItem className="top-level-accordion-item">
+      <AccordionItem
+        className="top-level-accordion-item"
+        onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "About")}
+        onMouseLeave={this.mouseLeaveBehavior()}
+      >
         <AccordionItemTitle
           className="accordion-title top-level-accordion"
           aria-selected={this.state.About}
@@ -441,6 +490,7 @@ class Header extends Component {
           <div
             className={
               this.props.hash.includes("About")
+              && this.state.activeUnderBar.includes("About")
                 ? "under-bar active"
                 : "under-bar"
             }
@@ -509,7 +559,7 @@ class Header extends Component {
               className={!this.state.Open ? "menu-wall hidden" : "menu-wall"}
               type="button"
               onClick={() => {
-                this.closeNavigation(this.props.hash)
+                this.closeNavigation(window.location.hash)
               }}
             />
             <div className="col-xs-12 col-sm-3">
@@ -539,12 +589,17 @@ class Header extends Component {
                     onClick={() => {
                       this.closeNavigation("#/")
                     }}
+                    onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")
+                    }
+                    onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
+                    }
                   >
                     Home
                   </Link>
                   <div
                     className={
                       this.props.hash === "#/"
+                      && this.state.activeUnderBar.includes("#/")
                         ? "under-bar active"
                         : "under-bar"
                     }
