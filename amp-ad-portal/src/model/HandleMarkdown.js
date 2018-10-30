@@ -11,18 +11,21 @@ const makeid = () => {
   return text
 }
 
-const buildSection = (index, key, markdown, token = "", callback) => {
-  return (
-    <div key={makeid()}>
-      <SynapseComponents.Markdown
-        token={token}
-        markdown={markdown[index] !== undefined ? markdown[index][key] : ""}
-        hasSynapseResources={false}
-        errorMessageView={<div>error</div>}
-        updateLoadState={callback}
-      />
-    </div>
-  )
+const buildSection = (index, key, markdown, token = "") => {
+  if (markdown.length > 0) {
+    const synapseMarkdown = (
+      <div key={makeid()}>
+        <SynapseComponents.Markdown
+          token={token}
+          markdown={markdown[index] !== undefined ? markdown[index][key] : ""}
+          hasSynapseResources={false}
+          errorMessageView={<div>error</div>}
+        />
+      </div>
+    )
+    return synapseMarkdown
+  }
+  return ""
 }
 
 const buildSectionReactMarkdown = (index, key, markdown) => {
@@ -37,18 +40,21 @@ const buildSectionReactMarkdown = (index, key, markdown) => {
 }
 
 const returnJsxFromMarkdown = (markdown, token = undefined) => {
-  return (
-    <SynapseComponents.Markdown
-      token={token}
-      markdown={markdown !== undefined ? markdown : ""}
-      hasSynapseResources={false}
-      errorMessageView={<div>error</div>}
-    />
-  )
+  if (markdown.length > 0) {
+    return (
+      <SynapseComponents.Markdown
+        token={token}
+        markdown={markdown !== undefined ? markdown : ""}
+        hasSynapseResources={false}
+        errorMessageView={<div>error</div>}
+      />
+    )
+  }
+  return ""
 }
 
 const printSections = (markdownArray, token, limit = 200, callback) => {
-  return markdownArray.map((section, index) => {
+  const content = markdownArray.map((section, index) => {
     if (index < limit) {
       return buildSection(
         index,
@@ -61,6 +67,7 @@ const printSections = (markdownArray, token, limit = 200, callback) => {
     const keyName = `${index}index`
     return <div key={keyName} />
   })
+  return content
 }
 
 const printSectionsReactMarkdown = (markdownArray, limit = 200) => {
@@ -76,11 +83,12 @@ const printSectionsReactMarkdown = (markdownArray, limit = 200) => {
     return <div key={keyName} />
   })
 }
-const printShowHideSections = (markdownArray) => {
+
+const printShowHideSections = (markdownArray, token) => {
   return markdownArray.map((element) => {
     return (
       <ShowHideSection
-        content={returnJsxFromMarkdown(element[Object.keys(element)[0]])}
+        content={returnJsxFromMarkdown(element[Object.keys(element)[0]], token)}
         key={Object.keys(element)[0] + makeid()}
       />
     )

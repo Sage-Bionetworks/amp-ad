@@ -113,8 +113,8 @@ const getEntityHeader = (token, payload) => {
     .catch(handleErrors)
 }
 
-const getMarkdown = (props, wikiNumber, name = "wikiMarkdown") => {
-  getWikiData(wikiNumber, props.token.sessionToken)
+const getMarkdown = (props, wikiId, name = "wikiMarkdown", synId) => {
+  return getWikiData(wikiId, props.token.sessionToken, synId)
     .then((data) => {
       props.handleChanges(name, data.markdown)
     })

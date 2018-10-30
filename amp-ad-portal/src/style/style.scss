@@ -34,12 +34,9 @@ body, button, h1, h2, h3, h4, h5, li, ul, p, a {
 html, body {
   max-width: 100%;
   overflow-x: hidden;
-  //height: 100%;
 }
 
 #root {
-  //height: 100%;
-}
 
 div.row.amp-ad {
   //height: 80%;
@@ -61,6 +58,11 @@ body.noScroll, html.noScroll {
     //margin-top: 0px;
   //}
 }
+.main {
+  min-height: calc(100vh - 136px);
+  margin-top: 0px;
+}
+
 
 section div.row {
     //max-width: 920px;
@@ -729,6 +731,9 @@ section.welcome {
   }
 }
 
+section.pie-charts-welcome.height {
+    height: 100%;
+  }
 section.pie-charts-welcome {
   background-color: $gray;
   padding-top: 0px;
@@ -739,6 +744,9 @@ section.pie-charts-welcome {
     font-weight: 300;
     font-size: 42px;
     margin: 20px;
+  }
+  .pie-circles-container svg:hover {
+    all: unset;
   }
   .pie-circle {
     display: inline-block;
@@ -1709,3 +1717,4 @@ button.modal-x {
   }
 }
 
+}

@@ -1,31 +1,44 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 
-import { BarLoader } from "react-spinners"
 import { SynapseComponents } from "synapse-react-client"
+import { BarLoader } from "react-spinners"
 import { getParents } from "../view/domScripts"
+
+let completedJSX = ""
 
 class ExperimentalResources extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      jsxLoaded: false,
       loading: true,
       modal: false,
       modalContent: "",
     }
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.LoadExperimentalResources().then((response) => {
+      completedJSX = response
+    })
+    this.handleModalClose()
+  }
 
   componentDidUpdate() {
-    //this.handleShowTable()
+    if (this.state.modalContent === "") {
+      this.handleShowTable()
+    }
   }
 
   getTable = (event) => {
     const button = event.target
-    const parents = getParents(button, ".react-markdown")
-    const table = parents[0].querySelector("table")
-    return table.outerHTML
+    const parents = getParents(button, ".col-xs-12")
+    console.log(`parents: ${parents}`)
+    const table = parents[1].querySelector("table")
+    //console.log(table)
+    return "hello deary"
+    //return table.outerHTML
   };
 
   createMarkup = (markup) => {
@@ -55,6 +68,7 @@ class ExperimentalResources extends Component {
   addEventListeners = (elements) => {
     elements.forEach((element) => {
       element.addEventListener("click", (event) => {
+        console.log("lolwat")
         this.handleChanges("modalContent", this.getTable(event))
         this.toggleModal()
       })
@@ -64,6 +78,7 @@ class ExperimentalResources extends Component {
   handleShowTable = () => {
     const buttonElements = document.querySelectorAll(".table-button")
     if (buttonElements[0] !== undefined && buttonElements[0] !== null) {
+      console.log(buttonElements)
       this.addEventListeners(buttonElements)
     }
   };
@@ -72,6 +87,30 @@ class ExperimentalResources extends Component {
     const modalWindow = document.querySelector(".modal-x-background-circle")
     modalWindow.addEventListener("click", () => {
       this.toggleModal()
+    })
+  };
+
+  LoadExperimentalResources = async () => {
+    const wikiIds = ["582124", "582125", "582123", "581965"]
+    const markdown = wikiIds.map(async (element, index) => {
+      return (
+        <div key={element + index}>
+          <SynapseComponents.Markdown
+            token={this.props.token.sessionToken}
+            ownerId="syn12666371"
+            wikiId={element}
+            updateLoadState={
+              index === 3
+                ? () => this.setState({ jsxLoaded: true, loading: false })
+                : () => this.forceUpdate()
+            }
+          />
+        </div>
+      )
+    })
+
+    return Promise.all(markdown).then((completed) => {
+      return completed
     })
   };
 
@@ -101,14 +140,7 @@ class ExperimentalResources extends Component {
             </div>
           </section>
           <section className="row center-xs researchers-content">
-            <div className="col-xs-12 col-sm-9">
-              <SynapseComponents.Markdown
-                token={this.props.token.sessionToken}
-                ownerId="syn2580853"
-                wikiId="409845"
-                updateLoadState={() => this.handleChanges("loading", false)}
-              />
-            </div>
+            <div className="col-xs-12 col-sm-9">{completedJSX}</div>
           </section>
           <div className="row center-xs">
             <BarLoader color="#47357B" loading={this.state.loading} />
@@ -120,12 +152,7 @@ class ExperimentalResources extends Component {
 }
 
 ExperimentalResources.propTypes = {
-  markdown: PropTypes.string,
   token: PropTypes.object.isRequired,
-}
-
-ExperimentalResources.defaultProps = {
-  markdown: "loading",
 }
 
 export default ExperimentalResources

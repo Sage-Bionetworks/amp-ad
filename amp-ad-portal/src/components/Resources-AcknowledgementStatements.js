@@ -6,7 +6,7 @@ const ReactMarkdown = require("react-markdown")
 
 class AcknowledgementStatements extends Component {
   componentDidMount() {
-    getMarkdown(this.props, "582162")
+    getMarkdown(this.props, "584597", undefined, "syn2580853")
   }
 
   render() {

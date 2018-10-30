@@ -100,7 +100,7 @@ class App extends Component {
     studiesIndividualsIndex: 0,
     studiesSampleTypeIndex: 0,
     differentialExpressions: [],
-    experimentalResources: [],
+    experimentalResources: "",
     programsAmpAd: [],
     programsM2OVE: [],
     programsModelAd: [],

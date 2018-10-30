@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { BarLoader } from "react-spinners"
 import { SynapseComponents } from "synapse-react-client"
+
 import { getTable } from "../queries/queryForData"
 import {
   getMarkdownSegment,
@@ -286,14 +287,17 @@ class Studies extends Component {
   };
 
   returnSynapseJSX = (markdown) => {
-    return (
-      <SynapseComponents.Markdown
-        token={this.props.token.sessionToken}
-        markdown={markdown}
-        hasSynapseResources={false}
-        errorMessageView={<div>error</div>}
-      />
-    )
+    if (SynapseComponents) {
+      return (
+        <SynapseComponents.Markdown
+          token={this.props.token.sessionToken}
+          markdown={markdown}
+          hasSynapseResources={false}
+          errorMessageView={<div>error</div>}
+        />
+      )
+    }
+    return ""
   };
 
   getWikiMarkdownCopy = (wikiMarkdownState, wikiId) => {
