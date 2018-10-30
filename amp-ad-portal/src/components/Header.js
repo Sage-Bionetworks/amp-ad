@@ -42,6 +42,13 @@ class Header extends Component {
     if (location !== undefined) {
       this.props.handleChanges("hash", location)
     }
+
+    let activeUnderBar = window.location.hash
+
+    if (this.state.Open && location === undefined) {
+      activeUnderBar = this.state.activeUnderBar
+    }
+
     this.setState(
       {
         Research: false,
@@ -49,7 +56,7 @@ class Header extends Component {
         About: false,
         Home: false,
         Open: false,
-        activeUnderBar: this.props.hash,
+        activeUnderBar,
       },
       () => {
         const body = document.querySelector("html")
@@ -117,7 +124,12 @@ class Header extends Component {
 
   ResearchDropdown = () => (
     <Accordion>
-      <AccordionItem className="top-level-accordion-item">
+      <AccordionItem
+        className="top-level-accordion-item"
+        onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Research")
+        }
+        onMouseLeave={this.mouseLeaveBehavior()}
+      >
         <AccordionItemTitle
           className="accordion-title top-level-accordion"
           aria-selected={this.state.Research}
@@ -308,7 +320,12 @@ class Header extends Component {
 
   ResourcesDropdown = () => (
     <Accordion>
-      <AccordionItem className="top-level-accordion-item">
+      <AccordionItem
+        className="top-level-accordion-item"
+        onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Resources")
+        }
+        onMouseLeave={this.mouseLeaveBehavior()}
+      >
         <AccordionItemTitle
           className="accordion-title top-level-accordion"
           aria-selected={this.state.Resources}
@@ -456,7 +473,11 @@ class Header extends Component {
 
   AboutMenuDropdown = () => (
     <Accordion>
-      <AccordionItem className="top-level-accordion-item">
+      <AccordionItem
+        className="top-level-accordion-item"
+        onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "About")}
+        onMouseLeave={this.mouseLeaveBehavior()}
+      >
         <AccordionItemTitle
           className="accordion-title top-level-accordion"
           aria-selected={this.state.About}
@@ -547,7 +568,7 @@ class Header extends Component {
               className={!this.state.Open ? "menu-wall hidden" : "menu-wall"}
               type="button"
               onClick={() => {
-                this.closeNavigation(this.props.hash)
+                this.closeNavigation(window.location.hash)
               }}
             />
             <div className="col-xs-12 col-sm-3">

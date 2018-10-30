@@ -21,8 +21,6 @@ class WhatIsAmpAD extends Component {
             <div className="col-xs-12 col-sm-9">
               <SynapseComponents.Markdown
                 token={this.props.token.sessionToken}
-                ownerId="syn5702691"
-                wikiId="583906"
                 markdown={this.props.markdown}
               />
             </div>
