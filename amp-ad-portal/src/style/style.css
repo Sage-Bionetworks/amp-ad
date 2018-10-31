@@ -31,6 +31,9 @@ html, body {
 #root section {
   padding: 25px 50px;
 }
+#root section div.content, #root section form.searchbar-form {
+  max-width: 1120px;
+}
 #root section.child-page-hero {
   padding-top: 80px;
 }
@@ -261,6 +264,8 @@ html, body {
 }
 #root .nav-row {
   height: 70px;
+  max-width: 1280px;
+  margin: 0px auto;
 }
 #root .nav {
   position: relative;
@@ -577,20 +582,44 @@ html, body {
   background: linear-gradient(to right, #5A498D, #4C57A2);
   padding: 0px;
   padding-top: 105px;
+  position: relative;
+  height: 500px;
 }
 #root section.welcome .welcome-message {
-  padding: 0px 0px 0px 100px;
+  padding: 0px;
   color: white;
   text-align: left;
+  position: absolute;
+  left: 20px;
 }
 #root section.welcome .welcome-message h1 {
   margin: 0px;
 }
+@media screen and (min-width: 720px) {
+  #root section.welcome .welcome-message {
+    left: 5%;
+  }
+}
+@media screen and (min-width: 1000px) {
+  #root section.welcome .welcome-message {
+    left: 10%;
+  }
+}
+@media screen and (min-width: 1120px) {
+  #root section.welcome .welcome-message {
+    left: 15%;
+  }
+}
+@media screen and (min-width: 1400px) {
+  #root section.welcome .welcome-message {
+    left: 20%;
+  }
+}
 #root section.welcome .welcome-data {
   background-color: #5D69AB;
   padding: 60px 30px;
-  right: -120px;
-  position: relative;
+  right: 0px;
+  position: absolute;
   padding-right: 30%;
 }
 #root section.welcome .welcome-data ul {
@@ -605,15 +634,6 @@ html, body {
 #root section.welcome .btn-light {
   margin-top: 10px;
 }
-@media screen and (max-width: 1023px) {
-  #root section.welcome .welcome-message {
-    padding: 50px 0px 50px 100px;
-  }
-  #root section.welcome .welcome-data {
-    padding: 107px 30px;
-    right: -50px;
-  }
-}
 @media screen and (max-width: 914px) {
   #root section.welcome {
     padding-top: 60px;
@@ -621,9 +641,6 @@ html, body {
   #root section.welcome .welcome-message {
     padding: 0px;
   }
-}
-#root section.pie-charts-welcome.height {
-  height: 100%;
 }
 #root section.pie-charts-welcome {
   background-color: #F5F5F5;

@@ -1,7 +1,9 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { SynapseComponents } from "synapse-react-client"
+//import { SynapseComponents } from "synapse-react-client"
 import { getMarkdown } from "../queries/getWikiData"
+
+const ReactMarkdown = require("react-markdown")
 
 class WhatIsAmpAD extends Component {
   componentDidMount() {
@@ -17,13 +19,9 @@ class WhatIsAmpAD extends Component {
               <h2>AMP-AD Knowledge Portal</h2>
             </div>
           </section>
+          <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
           <section className="row around-xs">
-            <div className="col-xs-12 col-sm-9">
-              <SynapseComponents.Markdown
-                token={this.props.token.sessionToken}
-                markdown={this.props.markdown}
-              />
-            </div>
+            <div className="col-xs-12 col-sm-9" />
           </section>
         </div>
       </div>
