@@ -19,9 +19,10 @@ class WhatIsAmpAD extends Component {
               <h2>AMP-AD Knowledge Portal</h2>
             </div>
           </section>
-          <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
-          <section className="row around-xs">
-            <div className="col-xs-12 col-sm-9" />
+              <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+          <section className="row around-xs page-content">
+            <div className="col-xs-12 col-sm-9">
+            </div>
           </section>
         </div>
       </div>

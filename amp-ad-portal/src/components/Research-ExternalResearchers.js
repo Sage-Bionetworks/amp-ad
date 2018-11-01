@@ -29,7 +29,7 @@ class ExternalResearchers extends Component {
               </p>
             </div>
           </section>
-          <section className="row center-xs researchers-content">
+          <section className="row center-xs researchers-content page-content">
             <div className="col-xs-12 col-sm-9 markdown-parent">
               <SynapseComponents.Markdown
                 token={this.props.token.sessionToken}

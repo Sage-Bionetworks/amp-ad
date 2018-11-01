@@ -22,16 +22,20 @@ html, body {
   min-height: 93%;
 }
 #root .main {
-  min-height: calc(100vh - 136px);
+  min-height: calc(100vh - 135px);
   margin-top: 0px;
 }
 #root section div.row {
   margin: 0px auto;
+  max-width: 1120px;
 }
 #root section {
   padding: 25px 50px;
 }
 #root section div.content, #root section form.searchbar-form {
+  max-width: 1120px;
+}
+#root section.page-content div {
   max-width: 1120px;
 }
 #root section.child-page-hero {
@@ -642,6 +646,9 @@ html, body {
     padding: 0px;
   }
 }
+#root .data-page section.pie-charts-welcome {
+  background-color: unset;
+}
 #root section.pie-charts-welcome {
   background-color: #F5F5F5;
   padding-top: 0px;
@@ -1153,25 +1160,25 @@ html, body {
 #root p.researcher-bio {
   overflow: hidden;
 }
-#root .researchers-content .expand-section, #root .content-section .expand-section {
+#root .researchers-content .expand-section, #root .content-section .expand-section, #root .about-intro-section .expand-section {
   margin-bottom: 60px;
 }
-#root .researchers-content .expand-section.hide, #root .content-section .expand-section.hide {
+#root .researchers-content .expand-section.hide, #root .content-section .expand-section.hide, #root .about-intro-section .expand-section.hide {
   max-height: 170px;
 }
-#root .researchers-content .content.hide, #root .content-section .content.hide {
+#root .researchers-content .content.hide, #root .content-section .content.hide, #root .about-intro-section .content.hide {
   max-height: 170px;
 }
-#root .researchers-content .researcher h2, #root .content-section .researcher h2 {
+#root .researchers-content .researcher h2, #root .content-section .researcher h2, #root .about-intro-section .researcher h2 {
   margin-top: 0px;
 }
-#root .researchers-content .researcher h4, #root .content-section .researcher h4 {
+#root .researchers-content .researcher h4, #root .content-section .researcher h4, #root .about-intro-section .researcher h4 {
   margin-bottom: 0px;
 }
-#root .researchers-content .markdown-parent li, #root .content-section .markdown-parent li {
+#root .researchers-content .markdown-parent li, #root .content-section .markdown-parent li, #root .about-intro-section .markdown-parent li {
   list-style: initial;
 }
-#root .researchers-content .markdown-parent ol li, #root .content-section .markdown-parent ol li {
+#root .researchers-content .markdown-parent ol li, #root .content-section .markdown-parent ol li, #root .about-intro-section .markdown-parent ol li {
   list-style-type: decimal;
 }
 #root .research-publications .row.publication h2 {
@@ -1384,7 +1391,7 @@ html, body {
   z-index: 950;
   padding: 30px;
   padding-top: 110px;
-  width: 100vw;
+  width: 100vw !important;
   height: fit-content;
   min-height: 400px;
   margin: auto;
@@ -1402,6 +1409,9 @@ html, body {
   align-items: center;
   align-content: center;
   display: flex;
+}
+#root .profile div {
+  max-width: 100%;
 }
 #root .profile .row {
   width: 100%;

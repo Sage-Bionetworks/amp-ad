@@ -327,9 +327,6 @@ class PiesBelowHeader extends Component {
     return biosamplesCount
   };
 
-  //<div className="pie-counts-list">
-  //{this.printCountsList(this.getCountsList(dataType), dataType)}
-  //</div>
   render() {
     return (
       <section
