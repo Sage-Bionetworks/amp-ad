@@ -7,6 +7,10 @@ import { printShowHideSections } from "../model/HandleMarkdown"
 const ReactMarkdown = require("react-markdown")
 
 class ProgramsAmpAd extends Component {
+  state = {
+    loading: true,
+  };
+
   componentDidMount() {
     getMarkdown(this.props, "581895")
     if (this.props.markdownSegs.length === 0) {
@@ -17,13 +21,27 @@ class ProgramsAmpAd extends Component {
         this.props.token.sessionToken,
         this.props.handleNestedChanges,
         false,
-      )
+      ).then(() => {
+        this.setState({
+          loading: false,
+        })
+      })
     }
+  }
+
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
   }
 
   render() {
     return (
-      <div className="row about research-page program">
+      <div
+        className={
+          !this.state.loading
+            ? "row about research-page program"
+            : "row about research-page program hide-section"
+        }
+      >
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
@@ -56,6 +74,7 @@ ProgramsAmpAd.propTypes = {
   markdownSegs: PropTypes.array.isRequired,
   token: PropTypes.object.isRequired,
   handleNestedChanges: PropTypes.func.isRequired,
+  handleChanges: PropTypes.func.isRequired,
 }
 
 export default ProgramsAmpAd

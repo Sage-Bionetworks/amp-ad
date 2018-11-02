@@ -21,6 +21,10 @@ class ProgramsModelAd extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
+  }
+
   render() {
     return (
       <div className="row about research-page program">
@@ -53,6 +57,7 @@ ProgramsModelAd.propTypes = {
   markdownSegs: PropTypes.array.isRequired,
   token: PropTypes.object.isRequired,
   handleNestedChanges: PropTypes.func.isRequired,
+  handleChanges: PropTypes.func.isRequired,
 }
 
 export default ProgramsModelAd

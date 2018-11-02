@@ -15,10 +15,8 @@ class ExperimentalResources extends Component {
     }
   }
 
-  componentDidMount() {}
-
-  componentDidUpdate() {
-    //this.handleShowTable()
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
   }
 
   getTable = (event) => {
@@ -121,6 +119,7 @@ class ExperimentalResources extends Component {
 
 ExperimentalResources.propTypes = {
   token: PropTypes.object.isRequired,
+  handleChanges: PropTypes.func.isRequired,
 }
 
 ExperimentalResources.defaultProps = {

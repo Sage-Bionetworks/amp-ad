@@ -21,6 +21,10 @@ class ProgramsM2OVE extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
+  }
+
   render() {
     return (
       <div className="row about research-page">
@@ -53,6 +57,7 @@ ProgramsM2OVE.propTypes = {
   markdownSegs: PropTypes.array.isRequired,
   token: PropTypes.object.isRequired,
   handleNestedChanges: PropTypes.func.isRequired,
+  handleChanges: PropTypes.func.isRequired,
 }
 
 export default ProgramsM2OVE

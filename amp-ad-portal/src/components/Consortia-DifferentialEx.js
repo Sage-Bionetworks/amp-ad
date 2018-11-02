@@ -9,6 +9,10 @@ class ConsortiaDifferentialEx extends Component {
     getMarkdown(this.props, "581928")
   }
 
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
+  }
+
   render() {
     return (
       <div className="row about">
@@ -35,6 +39,7 @@ class ConsortiaDifferentialEx extends Component {
 
 ConsortiaDifferentialEx.propTypes = {
   markdown: PropTypes.string.isRequired,
+  handleChanges: PropTypes.func.isRequired,
 }
 
 export default ConsortiaDifferentialEx

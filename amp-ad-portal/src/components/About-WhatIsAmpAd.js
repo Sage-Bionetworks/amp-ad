@@ -10,6 +10,10 @@ class WhatIsAmpAD extends Component {
     getMarkdown(this.props, "581940")
   }
 
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
+  }
+
   render() {
     return (
       <div className="row about">
@@ -19,10 +23,9 @@ class WhatIsAmpAD extends Component {
               <h2>AMP-AD Knowledge Portal</h2>
             </div>
           </section>
-              <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+          <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
           <section className="row around-xs page-content">
-            <div className="col-xs-12 col-sm-9">
-            </div>
+            <div className="col-xs-12 col-sm-9" />
           </section>
         </div>
       </div>
@@ -32,7 +35,8 @@ class WhatIsAmpAD extends Component {
 
 WhatIsAmpAD.propTypes = {
   markdown: PropTypes.string.isRequired,
-  token: PropTypes.object.isRequired,
+  handleChanges: PropTypes.func.isRequired,
+  //token: PropTypes.object.isRequired,
 }
 
 export default WhatIsAmpAD

@@ -11,6 +11,10 @@ class Welcome extends Component {
     getMarkdown(this.props, "581936", "welcomeHeaderMarkdownText")
   }
 
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
+  }
+
   removeMarkdownDivWrapper = (markdown) => {
     let markdownString = markdown
     markdownString = markdownString.substr(10)
@@ -43,6 +47,7 @@ class Welcome extends Component {
 Welcome.propTypes = {
   markdown: PropTypes.string.isRequired,
   markdownText: PropTypes.string.isRequired,
+  handleChanges: PropTypes.func.isRequired,
 }
 
 export default Welcome

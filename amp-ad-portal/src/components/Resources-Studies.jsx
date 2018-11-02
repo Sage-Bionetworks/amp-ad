@@ -42,6 +42,10 @@ class Studies extends Component {
     return synIds
   }
 
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
+  }
+
   setStudiesRows = (synapseData = this.state.pageData) => {
     const studiesRows = []
     synapseData.queryResult.queryResults.rows.forEach(row => studiesRows.push(row))

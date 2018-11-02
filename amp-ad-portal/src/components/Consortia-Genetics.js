@@ -9,6 +9,10 @@ class ConsortiaGenetics extends Component {
     getMarkdown(this.props, "581927")
   }
 
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
+  }
+
   render() {
     return (
       <div className="row about">
@@ -35,6 +39,7 @@ class ConsortiaGenetics extends Component {
 
 ConsortiaGenetics.propTypes = {
   markdown: PropTypes.string.isRequired,
+  handleChanges: PropTypes.func.isRequired,
 }
 
 export default ConsortiaGenetics

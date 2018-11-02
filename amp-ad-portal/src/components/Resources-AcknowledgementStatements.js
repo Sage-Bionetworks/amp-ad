@@ -9,15 +9,17 @@ class AcknowledgementStatements extends Component {
     getMarkdown(this.props, "584597", undefined, "syn2580853")
   }
 
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
+  }
+
   render() {
     return (
       <div className="row about">
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
-              <h2>
-Acknowledgement Statements
-              </h2>
+              <h2>Acknowledgement Statements</h2>
               <p />
             </div>
           </section>
@@ -34,6 +36,7 @@ Acknowledgement Statements
 
 AcknowledgementStatements.propTypes = {
   markdown: PropTypes.string.isRequired,
+  handleChanges: PropTypes.func.isRequired,
 }
 
 export default AcknowledgementStatements

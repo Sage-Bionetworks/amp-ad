@@ -15,6 +15,10 @@ class ResearchPublications extends Component {
     )
   }
 
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
+  }
+
   render() {
     return (
       <div className="row about research-publications">
@@ -49,6 +53,7 @@ ResearchPublications.propTypes = {
   markdown: PropTypes.array.isRequired,
   handleNestedChanges: PropTypes.func.isRequired,
   token: PropTypes.object.isRequired,
+  handleChanges: PropTypes.func.isRequired,
 }
 
 export default ResearchPublications
