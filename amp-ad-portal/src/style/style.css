@@ -1299,6 +1299,7 @@ html, body {
   width: 80%;
 }
 #root .experimental-resources table {
+  display: none;
   width: 100%;
 }
 #root .experimental-resources .modal table {
