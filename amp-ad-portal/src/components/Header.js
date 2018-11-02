@@ -142,9 +142,6 @@ class Header extends Component {
                 : "nav-item main-nav-item"
             }
             onClick={this.dropdownMenuAction}
-            onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Research")
-            }
-            onMouseLeave={this.mouseLeaveBehavior()}
           >
             Research
           </a>
@@ -338,9 +335,6 @@ class Header extends Component {
                 : "nav-item main-nav-item"
             }
             onClick={this.dropdownMenuAction}
-            onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Resources")
-            }
-            onMouseLeave={this.mouseLeaveBehavior()}
           >
             Resources
           </a>
@@ -490,9 +484,6 @@ class Header extends Component {
                 : "nav-item main-nav-item"
             }
             onClick={this.dropdownMenuAction}
-            onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "About")
-            }
-            onMouseLeave={this.mouseLeaveBehavior()}
           >
             About
           </a>

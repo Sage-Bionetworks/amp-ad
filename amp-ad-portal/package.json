@@ -2,6 +2,7 @@
   "name": "amp-ad-portal",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "babel-eslint": "9.0.0",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
