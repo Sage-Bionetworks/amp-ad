@@ -15,16 +15,14 @@ class ConsortiaDifferentialEx extends Component {
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
-              <h2>
-Collaborative Differential Expression Projects
-              </h2>
+              <h2>Collaborative Differential Expression Projects</h2>
               <p>
                 This page provides a summary of cross-consortia RNA-seq
                 differential expression meta-analysis efforts.
               </p>
             </div>
           </section>
-          <section className="row center-xs content-section">
+          <section className="row center-xs content-section page-content">
             <div className="col-xs-12 col-sm-9">
               <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
             </div>

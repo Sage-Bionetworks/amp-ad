@@ -77,7 +77,7 @@ class ExperimentalResources extends Component {
 
   render() {
     return (
-      <div className="row about experimental-resources">
+      <div className="row about experimental-resources ">
         <div className={this.state.modal === true ? "modal show" : "modal"}>
           <div className="modal-container">
             <div className="modal-x-background-circle">
@@ -100,8 +100,8 @@ class ExperimentalResources extends Component {
               </p>
             </div>
           </section>
-          <section className="row center-xs researchers-content">
-            <div className="col-xs-12 col-sm-9">
+          <section className="row center-xs researchers-content page-content">
+            <div className="col-xs-12 col-sm-9 hide-first-child">
               <SynapseComponents.Markdown
                 token={this.props.token.sessionToken}
                 ownerId="syn2580853"
@@ -120,7 +120,6 @@ class ExperimentalResources extends Component {
 }
 
 ExperimentalResources.propTypes = {
-  markdown: PropTypes.string,
   token: PropTypes.object.isRequired,
 }
 

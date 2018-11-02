@@ -34,8 +34,8 @@ class ResearchPublications extends Component {
               </p>
             </div>
           </section>
-          <section className="row center-xs researchers-content">
-            <div className="col-xs-12 col-sm-9">
+          <section className="row center-xs researchers-content page-content">
+            <div className="col-xs-12 col-sm-9 hide-first-child-h4">
               {printSections(this.props.markdown)}
             </div>
           </section>

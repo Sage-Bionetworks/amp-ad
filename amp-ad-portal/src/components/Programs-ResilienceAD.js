@@ -25,7 +25,7 @@ class ProgramsResilienceAD extends Component {
     return (
       <div className="row about research-page program">
         <div className="col-xs-12">
-          <section className="row child-page-hero">
+          <section className="row child-page-hero page-content">
             <div className="col-xs-12 col-sm-9 content">
               <h2>Resilience-AD Program</h2>
               <p>
@@ -36,7 +36,7 @@ class ProgramsResilienceAD extends Component {
             </div>
           </section>
           <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
-          <section className="row center-xs content-row">
+          <section className="row center-xs content-row page-content">
             <div className="col-xs-12 col-sm-9">
               <h2>Projects</h2>
               {printShowHideSections(this.props.markdownSegs)}

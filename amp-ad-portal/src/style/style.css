@@ -151,6 +151,9 @@ html, body {
 #root select {
   font-size: 18px;
 }
+#root .content-row div {
+  max-width: 1120px;
+}
 @media only screen and (min-width: 48em) {
   #root .col-sm-9 {
     flex-basis: 80%;
@@ -1157,8 +1160,23 @@ html, body {
 #root .research-page .expand-icon {
   top: 12px;
 }
+#root .researchers-content .hide-first-child div span span p:first-child {
+  display: none;
+}
+#root .researchers-content .hide-first-child div span span hr:nth-child(2) {
+  display: none;
+}
+#root .researchers-content .hide-first-child-h4 .markdown span span h4 {
+  display: none;
+}
+#root .researchers-content .hide-first-child-h4 .markdown span span hr:nth-child(2) {
+  display: none;
+}
 #root p.researcher-bio {
   overflow: hidden;
+}
+#root .researchers-content div, #root .content-section div, #root .about-intro-section div {
+  max-width: 1120px;
 }
 #root .researchers-content .expand-section, #root .content-section .expand-section, #root .about-intro-section .expand-section {
   margin-bottom: 60px;
@@ -1281,7 +1299,6 @@ html, body {
   width: 80%;
 }
 #root .experimental-resources table {
-  display: none;
   width: 100%;
 }
 #root .experimental-resources .modal table {
