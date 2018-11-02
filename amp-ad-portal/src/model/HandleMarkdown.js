@@ -12,17 +12,20 @@ const makeid = () => {
 }
 
 const buildSection = (index, key, markdown, token = "") => {
-  const synapseMarkdown = (
-    <div key={makeid()}>
-      <SynapseComponents.Markdown
-        token={token}
-        markdown={markdown[index] !== undefined ? markdown[index][key] : ""}
-        hasSynapseResources={false}
-        errorMessageView={<div>error</div>}
-      />
-    </div>
-  )
-  return synapseMarkdown
+  if (markdown.length > 0) {
+    const synapseMarkdown = (
+      <div key={makeid()}>
+        <SynapseComponents.Markdown
+          token={token}
+          markdown={markdown[index] !== undefined ? markdown[index][key] : ""}
+          hasSynapseResources={false}
+          errorMessageView={<div>error</div>}
+        />
+      </div>
+    )
+    return synapseMarkdown
+  }
+  return ""
 }
 
 const buildSectionReactMarkdown = (index, key, markdown) => {
@@ -37,14 +40,17 @@ const buildSectionReactMarkdown = (index, key, markdown) => {
 }
 
 const returnJsxFromMarkdown = (markdown, token = undefined) => {
-  return (
-    <SynapseComponents.Markdown
-      token={token}
-      markdown={markdown !== undefined ? markdown : ""}
-      hasSynapseResources={false}
-      errorMessageView={<div>error</div>}
-    />
-  )
+  if (markdown.length > 0) {
+    return (
+      <SynapseComponents.Markdown
+        token={token}
+        markdown={markdown !== undefined ? markdown : ""}
+        hasSynapseResources={false}
+        errorMessageView={<div>error</div>}
+      />
+    )
+  }
+  return ""
 }
 
 const printSections = (markdownArray, token, limit = 200, callback) => {
@@ -94,5 +100,6 @@ export {
   printSections,
   returnJsxFromMarkdown,
   printShowHideSections,
+  buildSectionReactMarkdown,
   printSectionsReactMarkdown,
 }

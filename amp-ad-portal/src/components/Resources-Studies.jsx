@@ -42,6 +42,10 @@ class Studies extends Component {
     return synIds
   }
 
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
+  }
+
   setStudiesRows = (synapseData = this.state.pageData) => {
     const studiesRows = []
     synapseData.queryResult.queryResults.rows.forEach(row => studiesRows.push(row))
@@ -144,10 +148,11 @@ class Studies extends Component {
       )
         .then((result) => {
           getMarkdownSegment(
-            this.props,
+            this.props.handleNestedChanges,
+            this.props.token.sessionToken,
             result.wikiPageId,
-            "studies",
             result.ownerObjectId,
+            "studies",
           )
           this.props.handleNestedChanges(
             "studiesWikiIds",
@@ -296,6 +301,7 @@ class Studies extends Component {
         />
       )
     }
+    return ""
   };
 
   getWikiMarkdownCopy = (wikiMarkdownState, wikiId) => {

@@ -578,7 +578,12 @@ class Header extends Component {
             </div>
             <div className="nav-buttons col-xs-12 col-sm-7 col-md-8">
               <ul className="nav row end-sm center-xs">
-                <li>
+                <li
+                  onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")
+                  }
+                  onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
+                  }
+                >
                   <Link
                     to="/"
                     className={
@@ -589,10 +594,6 @@ class Header extends Component {
                     onClick={() => {
                       this.closeNavigation("#/")
                     }}
-                    onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")
-                    }
-                    onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
-                    }
                   >
                     Home
                   </Link>

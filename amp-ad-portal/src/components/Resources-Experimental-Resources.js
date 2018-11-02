@@ -2,8 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 
 import { BarLoader } from "react-spinners"
-import { getWikiMarkdownSegments } from "../queries/getWikiData"
-import { printSectionsReactMarkdown } from "../model/HandleMarkdown"
+import { SynapseComponents } from "synapse-react-client"
 import { getParents } from "../view/domScripts"
 
 class ExperimentalResources extends Component {
@@ -16,23 +15,8 @@ class ExperimentalResources extends Component {
     }
   }
 
-  componentDidMount() {
-    getWikiMarkdownSegments(
-      "576287",
-      "experimentalResources",
-      this.props,
-      "syn12666371",
-      10,
-    ).then(() => {
-      this.setState({
-        loading: false,
-      })
-    })
-    this.handleModalClose()
-  }
-
-  componentDidUpdate() {
-    this.handleShowTable()
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
   }
 
   getTable = (event) => {
@@ -91,7 +75,7 @@ class ExperimentalResources extends Component {
 
   render() {
     return (
-      <div className="row about experimental-resources">
+      <div className="row about experimental-resources ">
         <div className={this.state.modal === true ? "modal show" : "modal"}>
           <div className="modal-container">
             <div className="modal-x-background-circle">
@@ -114,9 +98,14 @@ class ExperimentalResources extends Component {
               </p>
             </div>
           </section>
-          <section className="row center-xs researchers-content">
-            <div className="col-xs-12 col-sm-9">
-              {printSectionsReactMarkdown(this.props.markdown)}
+          <section className="row center-xs researchers-content page-content">
+            <div className="col-xs-12 col-sm-9 hide-first-child">
+              <SynapseComponents.Markdown
+                token={this.props.token.sessionToken}
+                ownerId="syn2580853"
+                wikiId="409845"
+                updateLoadState={() => this.handleChanges("loading", false)}
+              />
             </div>
           </section>
           <div className="row center-xs">
@@ -129,7 +118,12 @@ class ExperimentalResources extends Component {
 }
 
 ExperimentalResources.propTypes = {
-  markdown: PropTypes.array.isRequired,
+  token: PropTypes.object.isRequired,
+  handleChanges: PropTypes.func.isRequired,
+}
+
+ExperimentalResources.defaultProps = {
+  markdown: "loading",
 }
 
 export default ExperimentalResources

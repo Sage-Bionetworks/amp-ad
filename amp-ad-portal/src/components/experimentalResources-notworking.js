@@ -140,7 +140,9 @@ class ExperimentalResources extends Component {
             </div>
           </section>
           <section className="row center-xs researchers-content">
-            <div className="col-xs-12 col-sm-9">{completedJSX}</div>
+            <div className="col-xs-12 col-sm-9 hide-first-child">
+              {completedJSX}
+            </div>
           </section>
           <div className="row center-xs">
             <BarLoader color="#47357B" loading={this.state.loading} />

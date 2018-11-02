@@ -113,8 +113,8 @@ const getEntityHeader = (token, payload) => {
     .catch(handleErrors)
 }
 
-const getMarkdown = (props, wikiNumber, name = "wikiMarkdown") => {
-  getWikiData(wikiNumber, props.token.sessionToken)
+const getMarkdown = (props, wikiId, name = "wikiMarkdown", synId) => {
+  return getWikiData(wikiId, props.token.sessionToken, synId)
     .then((data) => {
       props.handleChanges(name, data.markdown)
     })
@@ -122,28 +122,31 @@ const getMarkdown = (props, wikiNumber, name = "wikiMarkdown") => {
 }
 
 const getMarkdownSegment = (
-  props,
-  newStateKey,
-  stateKey,
+  handleNestedChanges,
+  sessionToken,
+  wikiID = "",
   synId = "syn12666371",
+  stateKey,
 ) => {
-  return getWikiData(newStateKey, props.token.sessionToken, synId)
+  return getWikiData(wikiID, sessionToken, synId)
     .then((data) => {
-      props.handleNestedChanges(stateKey, newStateKey, data.markdown)
+      handleNestedChanges(stateKey, wikiID, data.markdown)
     })
     .catch(handleErrors)
 }
 
-const getSubPageHeaders = (parentId, props, synId, paginationValue, limit) => {
-  return getWikiHeaderTree(
-    props.token.sessionToken,
-    synId,
-    paginationValue,
-    limit,
-  )
+const getSubPageHeaders = (
+  wikiId,
+  synId,
+  sessionToken,
+  handleChangesFunc,
+  paginationValue,
+  limit,
+) => {
+  return getWikiHeaderTree(sessionToken, synId, paginationValue, limit)
     .then((results) => {
       const filteredResults = results.results.filter(
-        wikiPage => wikiPage.parentId === parentId,
+        wikiPage => wikiPage.parentId === wikiId,
       )
       if (filteredResults.length > 0) {
         return filteredResults
@@ -152,9 +155,10 @@ const getSubPageHeaders = (parentId, props, synId, paginationValue, limit) => {
         return []
       }
       return getSubPageHeaders(
-        parentId,
-        props,
+        wikiId,
         synId,
+        sessionToken,
+        handleChangesFunc,
         paginationValue + 10,
         limit,
       )
@@ -172,20 +176,32 @@ const waitFor = ms => new Promise(r => setTimeout(r, ms))
 
 const getWikiMarkdownSegments = (
   wikiId,
-  stateKey,
-  props,
   synId,
+  stateKey,
+  sessionToken,
+  handleNestedChanges,
   paginationValue = 10,
-  limit,
+  limit = false,
 ) => {
-  return getSubPageHeaders(wikiId, props, synId, paginationValue, limit).then(
-    (headers) => {
-      asyncForEach(headers, async (header) => {
-        await waitFor(75)
-        getMarkdownSegment(props, header.id, stateKey)
-      })
-    },
-  )
+  return getSubPageHeaders(
+    wikiId,
+    synId,
+    sessionToken,
+    handleNestedChanges,
+    paginationValue,
+    limit,
+  ).then((headers) => {
+    asyncForEach(headers, async (header) => {
+      await waitFor(75)
+      getMarkdownSegment(
+        handleNestedChanges,
+        sessionToken,
+        header.id,
+        undefined,
+        stateKey,
+      )
+    })
+  })
 }
 
 const removeMarkdownDivWrapper = (markdown) => {

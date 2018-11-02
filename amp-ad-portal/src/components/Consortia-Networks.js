@@ -9,22 +9,24 @@ class ConsortiaNetworks extends Component {
     getMarkdown(this.props, "581929")
   }
 
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
+  }
+
   render() {
     return (
       <div className="row about">
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
-              <h2>
-Collaborative Network Analysis Projects
-              </h2>
+              <h2>Collaborative Network Analysis Projects</h2>
               <p>
                 This page provides a summary of cross-consortia network
                 analyses.
               </p>
             </div>
           </section>
-          <section className="row center-xs content-section">
+          <section className="row center-xs content-section page-content">
             <div className="col-xs-12 col-sm-9">
               <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
             </div>
@@ -37,6 +39,7 @@ Collaborative Network Analysis Projects
 
 ConsortiaNetworks.propTypes = {
   markdown: PropTypes.string.isRequired,
+  handleChanges: PropTypes.func.isRequired,
 }
 
 export default ConsortiaNetworks

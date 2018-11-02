@@ -11,6 +11,10 @@ class Welcome extends Component {
     getMarkdown(this.props, "581936", "welcomeHeaderMarkdownText")
   }
 
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
+  }
+
   removeMarkdownDivWrapper = (markdown) => {
     let markdownString = markdown
     markdownString = markdownString.substr(10)
@@ -26,10 +30,8 @@ class Welcome extends Component {
   render() {
     return (
       <section className="row welcome center-xs middle-xs">
-        <div className="col-xs-12 col-sm-8 col-md-6 welcome-message">
-          <h1>
-Welcome to the AMP-AD Knowledge Portal
-          </h1>
+        <div className="col-xs-12 col-sm-7 col-md-6 col-lg-5 welcome-message">
+          <h1>Welcome to the AMP-AD Knowledge Portal</h1>
           <ReactMarkdown source={this.props.markdownText} escapeHtml={false} />
         </div>
         <ReactMarkdown
@@ -45,6 +47,7 @@ Welcome to the AMP-AD Knowledge Portal
 Welcome.propTypes = {
   markdown: PropTypes.string.isRequired,
   markdownText: PropTypes.string.isRequired,
+  handleChanges: PropTypes.func.isRequired,
 }
 
 export default Welcome

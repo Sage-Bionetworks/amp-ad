@@ -12,19 +12,24 @@ class ProgramsResilienceAD extends Component {
     if (this.props.markdownSegs.length === 0) {
       getWikiMarkdownSegments(
         "581898",
-        "programsResilienceAD",
-        this.props,
         "syn12666371",
+        "programsResilienceAD",
+        this.props.token.sessionToken,
+        this.props.handleNestedChanges,
         false,
       )
     }
+  }
+
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
   }
 
   render() {
     return (
       <div className="row about research-page program">
         <div className="col-xs-12">
-          <section className="row child-page-hero">
+          <section className="row child-page-hero page-content">
             <div className="col-xs-12 col-sm-9 content">
               <h2>Resilience-AD Program</h2>
               <p>
@@ -35,7 +40,7 @@ class ProgramsResilienceAD extends Component {
             </div>
           </section>
           <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
-          <section className="row center-xs content-row">
+          <section className="row center-xs content-row page-content">
             <div className="col-xs-12 col-sm-9">
               <h2>Projects</h2>
               {printShowHideSections(this.props.markdownSegs)}
@@ -50,6 +55,9 @@ class ProgramsResilienceAD extends Component {
 ProgramsResilienceAD.propTypes = {
   markdown: PropTypes.string.isRequired,
   markdownSegs: PropTypes.array.isRequired,
+  token: PropTypes.object.isRequired,
+  handleNestedChanges: PropTypes.func.isRequired,
+  handleChanges: PropTypes.func.isRequired,
 }
 
 export default ProgramsResilienceAD

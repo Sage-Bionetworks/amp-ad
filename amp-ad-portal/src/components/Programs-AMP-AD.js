@@ -7,22 +7,41 @@ import { printShowHideSections } from "../model/HandleMarkdown"
 const ReactMarkdown = require("react-markdown")
 
 class ProgramsAmpAd extends Component {
+  state = {
+    loading: true,
+  };
+
   componentDidMount() {
     getMarkdown(this.props, "581895")
     if (this.props.markdownSegs.length === 0) {
       getWikiMarkdownSegments(
         "581895",
-        "programsAmpAd",
-        this.props,
         "syn12666371",
+        "programsAmpAd",
+        this.props.token.sessionToken,
+        this.props.handleNestedChanges,
         false,
-      )
+      ).then(() => {
+        this.setState({
+          loading: false,
+        })
+      })
     }
+  }
+
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
   }
 
   render() {
     return (
-      <div className="row about research-page program">
+      <div
+        className={
+          !this.state.loading
+            ? "row about research-page program"
+            : "row about research-page program hide-section"
+        }
+      >
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
@@ -40,9 +59,7 @@ class ProgramsAmpAd extends Component {
           <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
           <section className="row center-xs content-row">
             <div className="col-xs-12 col-sm-9">
-              <h2>
-Projects
-              </h2>
+              <h2>Projects</h2>
               {printShowHideSections(this.props.markdownSegs)}
             </div>
           </section>
@@ -55,6 +72,9 @@ Projects
 ProgramsAmpAd.propTypes = {
   markdown: PropTypes.string.isRequired,
   markdownSegs: PropTypes.array.isRequired,
+  token: PropTypes.object.isRequired,
+  handleNestedChanges: PropTypes.func.isRequired,
+  handleChanges: PropTypes.func.isRequired,
 }
 
 export default ProgramsAmpAd

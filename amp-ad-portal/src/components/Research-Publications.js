@@ -6,7 +6,17 @@ import { printSections } from "../model/HandleMarkdown"
 
 class ResearchPublications extends Component {
   componentDidMount() {
-    getMarkdownSegment(this.props, "581933", "researchPublications")
+    getMarkdownSegment(
+      this.props.handleNestedChanges,
+      this.props.token.sessionToken,
+      "409850",
+      "syn2580853",
+      "researchPublications",
+    )
+  }
+
+  componentWillUnmount() {
+    this.props.handleChanges("wikiMarkdown", "")
   }
 
   render() {
@@ -28,8 +38,8 @@ class ResearchPublications extends Component {
               </p>
             </div>
           </section>
-          <section className="row center-xs researchers-content">
-            <div className="col-xs-12 col-sm-9">
+          <section className="row center-xs researchers-content page-content">
+            <div className="col-xs-12 col-sm-9 hide-first-child-h4 hide-first-child">
               {printSections(this.props.markdown)}
             </div>
           </section>
@@ -41,6 +51,9 @@ class ResearchPublications extends Component {
 
 ResearchPublications.propTypes = {
   markdown: PropTypes.array.isRequired,
+  handleNestedChanges: PropTypes.func.isRequired,
+  token: PropTypes.object.isRequired,
+  handleChanges: PropTypes.func.isRequired,
 }
 
 export default ResearchPublications

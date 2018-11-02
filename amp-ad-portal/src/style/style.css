@@ -21,11 +21,22 @@ html, body {
 #root .main {
   min-height: 93%;
 }
+#root .main {
+  min-height: calc(100vh - 135px);
+  margin-top: 0px;
+}
 #root section div.row {
   margin: 0px auto;
+  max-width: 1120px;
 }
 #root section {
   padding: 25px 50px;
+}
+#root section div.content, #root section form.searchbar-form {
+  max-width: 1120px;
+}
+#root section.page-content div {
+  max-width: 1120px;
 }
 #root section.child-page-hero {
   padding-top: 80px;
@@ -139,6 +150,9 @@ html, body {
 }
 #root select {
   font-size: 18px;
+}
+#root .content-row div {
+  max-width: 1120px;
 }
 @media only screen and (min-width: 48em) {
   #root .col-sm-9 {
@@ -257,6 +271,8 @@ html, body {
 }
 #root .nav-row {
   height: 70px;
+  max-width: 1280px;
+  margin: 0px auto;
 }
 #root .nav {
   position: relative;
@@ -573,20 +589,44 @@ html, body {
   background: linear-gradient(to right, #5A498D, #4C57A2);
   padding: 0px;
   padding-top: 105px;
+  position: relative;
+  height: 500px;
 }
 #root section.welcome .welcome-message {
-  padding: 0px 0px 0px 100px;
+  padding: 0px;
   color: white;
   text-align: left;
+  position: absolute;
+  left: 20px;
 }
 #root section.welcome .welcome-message h1 {
   margin: 0px;
 }
+@media screen and (min-width: 720px) {
+  #root section.welcome .welcome-message {
+    left: 5%;
+  }
+}
+@media screen and (min-width: 1000px) {
+  #root section.welcome .welcome-message {
+    left: 10%;
+  }
+}
+@media screen and (min-width: 1120px) {
+  #root section.welcome .welcome-message {
+    left: 15%;
+  }
+}
+@media screen and (min-width: 1400px) {
+  #root section.welcome .welcome-message {
+    left: 20%;
+  }
+}
 #root section.welcome .welcome-data {
   background-color: #5D69AB;
   padding: 60px 30px;
-  right: -120px;
-  position: relative;
+  right: 0px;
+  position: absolute;
   padding-right: 30%;
 }
 #root section.welcome .welcome-data ul {
@@ -601,15 +641,6 @@ html, body {
 #root section.welcome .btn-light {
   margin-top: 10px;
 }
-@media screen and (max-width: 1023px) {
-  #root section.welcome .welcome-message {
-    padding: 50px 0px 50px 100px;
-  }
-  #root section.welcome .welcome-data {
-    padding: 107px 30px;
-    right: -50px;
-  }
-}
 @media screen and (max-width: 914px) {
   #root section.welcome {
     padding-top: 60px;
@@ -617,6 +648,9 @@ html, body {
   #root section.welcome .welcome-message {
     padding: 0px;
   }
+}
+#root .data-page section.pie-charts-welcome {
+  background-color: unset;
 }
 #root section.pie-charts-welcome {
   background-color: #F5F5F5;
@@ -1126,23 +1160,44 @@ html, body {
 #root .research-page .expand-icon {
   top: 12px;
 }
+#root .researchers-content .hide-first-child div span span p:first-child {
+  display: none;
+}
+#root .researchers-content .hide-first-child div span span hr:nth-child(2) {
+  display: none;
+}
+#root .researchers-content .hide-first-child-h4 .markdown span span h4 {
+  display: none;
+}
+#root .researchers-content .hide-first-child-h4 .markdown span span hr:nth-child(2) {
+  display: none;
+}
 #root p.researcher-bio {
   overflow: hidden;
 }
-#root .researchers-content .expand-section, #root .content-section .expand-section {
+#root .researchers-content div, #root .content-section div, #root .about-intro-section div {
+  max-width: 1120px;
+}
+#root .researchers-content .expand-section, #root .content-section .expand-section, #root .about-intro-section .expand-section {
   margin-bottom: 60px;
 }
-#root .researchers-content .expand-section.hide, #root .content-section .expand-section.hide {
+#root .researchers-content .expand-section.hide, #root .content-section .expand-section.hide, #root .about-intro-section .expand-section.hide {
   max-height: 170px;
 }
-#root .researchers-content .content.hide, #root .content-section .content.hide {
+#root .researchers-content .content.hide, #root .content-section .content.hide, #root .about-intro-section .content.hide {
   max-height: 170px;
 }
-#root .researchers-content .researcher h2, #root .content-section .researcher h2 {
+#root .researchers-content .researcher h2, #root .content-section .researcher h2, #root .about-intro-section .researcher h2 {
   margin-top: 0px;
 }
-#root .researchers-content .researcher h4, #root .content-section .researcher h4 {
+#root .researchers-content .researcher h4, #root .content-section .researcher h4, #root .about-intro-section .researcher h4 {
   margin-bottom: 0px;
+}
+#root .researchers-content .markdown-parent li, #root .content-section .markdown-parent li, #root .about-intro-section .markdown-parent li {
+  list-style: initial;
+}
+#root .researchers-content .markdown-parent ol li, #root .content-section .markdown-parent ol li, #root .about-intro-section .markdown-parent ol li {
+  list-style-type: decimal;
 }
 #root .research-publications .row.publication h2 {
   font-size: 24px;
@@ -1354,7 +1409,7 @@ html, body {
   z-index: 950;
   padding: 30px;
   padding-top: 110px;
-  width: 100vw;
+  width: 100vw !important;
   height: fit-content;
   min-height: 400px;
   margin: auto;
@@ -1372,6 +1427,9 @@ html, body {
   align-items: center;
   align-content: center;
   display: flex;
+}
+#root .profile div {
+  max-width: 100%;
 }
 #root .profile .row {
   width: 100%;

@@ -327,12 +327,15 @@ class PiesBelowHeader extends Component {
     return biosamplesCount
   };
 
-  //<div className="pie-counts-list">
-  //{this.printCountsList(this.getCountsList(dataType), dataType)}
-  //</div>
   render() {
     return (
-      <section className="pie-charts-welcome row center-xs">
+      <section
+        className={
+          window.location.hash.includes("/Resources/Data")
+            ? "pie-charts-welcome row center-xs height"
+            : "pie-charts-welcome row center-xs"
+        }
+      >
         <div className="col-xs-12 col-sm-8">
           <div className="row around-xs center-xs">
             <div className="col-xs-12" />
