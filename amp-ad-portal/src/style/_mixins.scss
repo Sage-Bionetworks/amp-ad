@@ -1,0 +1,38 @@
+@mixin hoverFade($color){
+  background-color: $color;
+  &:hover {
+    box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+  }
+  &.active{
+    box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+  }
+  &.active::after {
+    height: 0px;
+    width: 0px;
+    position: absolute;
+    bottom: -12px;
+    z-index: 100;
+    display: block;
+    content: "";
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-top: 12px solid $color;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    transition: all 400ms;
+  }
+  &.active:hover:after {
+    transition: all 400ms;
+    //border-top: 12px solid darken($color, 20%);
+  }
+}
+
+@mixin hoverFadeNoCheck($color){
+  &:hover {
+    background: $color;
+    box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+  }
+}
+
+

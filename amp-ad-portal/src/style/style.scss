@@ -1,10 +1,13 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css);
 @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700');
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+@import './_mixins.scss';
 
 $green: #89C889;
 $green2: #8ED1D4;
 $pink: #F683B9;
 $pink2: #E369A1;
+$magenta: #C94281;
 $blue: #77AFD4;
 $bluePlum: #5D69AB;
 $bluePurple: #4C57A2;
@@ -262,6 +265,40 @@ html, body {
 
   button:focus, input:focus, select:focus, div:focus { outline:none; }
   button:hover, select:hover { cursor: pointer }
+
+  button {
+    border-width: 0px;
+  }
+
+  button.btn-explore {
+    background-color: $magenta;
+    height: 41px;
+    min-width: 257px;
+    border-radius: 24px;
+    margin-right: 10px;
+    h5 { 
+      color: white; 
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+    @include hoverFadeNoCheck($magenta);
+  }
+
+    button.btn-control {
+    h5 { 
+      font-size: 15px;
+      color: white; 
+      font-weight: 700; 
+      letter-spacing: 0.5px;
+    }
+    border-radius: 10px;
+    border-width: 0px;
+    min-height: 40px;
+    padding: 7px 25px;
+    margin: 10px 23px;
+    min-width: 125px;
+  }
+
 
   .btn {
     color: #1A1C29;
@@ -736,13 +773,14 @@ html, body {
     }
     .welcome-data {
       background-color: $bluePlum;
-      padding: 60px 30px;
+      height: -webkit-fill-available;
       right: 0px;
       position: absolute;
       padding-right: 30%;
       ul {
         text-align: left;
         width: 300px;
+        margin-top: 60px;
       }
       li {
         color: white;
@@ -767,6 +805,96 @@ html, body {
      .welcome-message {
        padding: 0px; 
       }
+    }
+  }
+
+  ///// explore section /////
+  section.explore-content, div.explore-content {
+    .col-xs-2 {
+      margin-top: 18px;
+    }
+    .container .container-fluid {
+      padding: 0px;
+      .col-xs-12 { 
+        padding: 0px;
+      }
+    }
+
+    .selectors-container {
+      max-width: fit-content;
+    }
+    .selectors {
+      display: flex;
+      justify-content: space-around;
+			flex-direction: row;
+			@media screen and (max-width: 720px){
+				flex-direction: column;
+			}
+      button {
+        position: relative;
+      }
+      button.active {
+        
+      }
+      margin: 20px 0px;
+      button:first-child  {
+        @include hoverFade($blue);
+      }
+      //button:nth-child(2) {
+        //@include hoverFade($datasets);
+      //}
+      //button:nth-child(3) {
+        //@include hoverFade($files);
+      //}
+      //button:nth-child(4) {
+        //@include hoverFade($studies);
+      //}
+      //button:nth-child(5) {
+        //display: none;
+        //@include hoverFade($analysis);
+      //}
+      //button:nth-child(6) {
+        //@include hoverFade($publications);
+      //}
+    }
+
+    .bar-chart {
+      position: relative;
+      height: 220px;
+      @media screen and (max-width: 720px){
+        height: 450px;
+      }
+      @media screen and (max-width: 520px){
+        height: 480px;
+      }
+      .explore-button-row {
+        position: absolute;
+        bottom: -59px;
+        right: 0;
+      }
+      .synapse-chart {
+        position: absolute;
+        top: 100px;
+        right: 0px;
+        width: 100%;
+        .btn {
+          font-size: initial;
+          background-color: initial;
+          width: initial;
+          height: initial;
+          display: inherit;
+        }
+        .row.SRC-center-text {
+          display: block;
+          box-sizing: initial;
+        }
+        .SRC-bar-border-bottom {
+          padding-bottom: 20px;
+        }
+      }
+    }
+    .SRC-grayBackground {
+      background: unset; 
     }
   }
 
@@ -1784,6 +1912,10 @@ html, body {
         max-width: unset;
       }
     }
+  }
+  
+  .SRC-bar-border > div:first-child {
+    width: 100%;
   }
 
 }

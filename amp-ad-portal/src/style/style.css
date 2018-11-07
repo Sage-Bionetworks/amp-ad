@@ -1,5 +1,6 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css);
 @import url("https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700");
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
 body, button, h1, h2, h3, h4, h5, li, ul, p, a {
   font-family: "Lato", sans-serif;
 }
@@ -210,6 +211,39 @@ html, body {
 }
 #root button:hover, #root select:hover {
   cursor: pointer;
+}
+#root button {
+  border-width: 0px;
+}
+#root button.btn-explore {
+  background-color: #C94281;
+  height: 41px;
+  min-width: 257px;
+  border-radius: 24px;
+  margin-right: 10px;
+}
+#root button.btn-explore h5 {
+  color: white;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+#root button.btn-explore:hover {
+  background: #C94281;
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+#root button.btn-control {
+  border-radius: 10px;
+  border-width: 0px;
+  min-height: 40px;
+  padding: 7px 25px;
+  margin: 10px 23px;
+  min-width: 125px;
+}
+#root button.btn-control h5 {
+  font-size: 15px;
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 #root .btn {
   color: #1A1C29;
@@ -624,7 +658,7 @@ html, body {
 }
 #root section.welcome .welcome-data {
   background-color: #5D69AB;
-  padding: 60px 30px;
+  height: -webkit-fill-available;
   right: 0px;
   position: absolute;
   padding-right: 30%;
@@ -632,6 +666,7 @@ html, body {
 #root section.welcome .welcome-data ul {
   text-align: left;
   width: 300px;
+  margin-top: 60px;
 }
 #root section.welcome .welcome-data li {
   color: white;
@@ -648,6 +683,102 @@ html, body {
   #root section.welcome .welcome-message {
     padding: 0px;
   }
+}
+#root section.explore-content .col-xs-2, #root div.explore-content .col-xs-2 {
+  margin-top: 18px;
+}
+#root section.explore-content .container .container-fluid, #root div.explore-content .container .container-fluid {
+  padding: 0px;
+}
+#root section.explore-content .container .container-fluid .col-xs-12, #root div.explore-content .container .container-fluid .col-xs-12 {
+  padding: 0px;
+}
+#root section.explore-content .selectors-container, #root div.explore-content .selectors-container {
+  max-width: fit-content;
+}
+#root section.explore-content .selectors, #root div.explore-content .selectors {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  margin: 20px 0px;
+}
+@media screen and (max-width: 720px) {
+  #root section.explore-content .selectors, #root div.explore-content .selectors {
+    flex-direction: column;
+  }
+}
+#root section.explore-content .selectors button, #root div.explore-content .selectors button {
+  position: relative;
+}
+#root section.explore-content .selectors button:first-child, #root div.explore-content .selectors button:first-child {
+  background-color: #77AFD4;
+}
+#root section.explore-content .selectors button:first-child:hover, #root div.explore-content .selectors button:first-child:hover {
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+#root section.explore-content .selectors button:first-child.active, #root div.explore-content .selectors button:first-child.active {
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+#root section.explore-content .selectors button:first-child.active::after, #root div.explore-content .selectors button:first-child.active::after {
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  bottom: -12px;
+  z-index: 100;
+  display: block;
+  content: "";
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-top: 12px solid #77AFD4;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  transition: all 400ms;
+}
+#root section.explore-content .selectors button:first-child.active:hover:after, #root div.explore-content .selectors button:first-child.active:hover:after {
+  transition: all 400ms;
+}
+#root section.explore-content .bar-chart, #root div.explore-content .bar-chart {
+  position: relative;
+  height: 220px;
+}
+@media screen and (max-width: 720px) {
+  #root section.explore-content .bar-chart, #root div.explore-content .bar-chart {
+    height: 450px;
+  }
+}
+@media screen and (max-width: 520px) {
+  #root section.explore-content .bar-chart, #root div.explore-content .bar-chart {
+    height: 480px;
+  }
+}
+#root section.explore-content .bar-chart .explore-button-row, #root div.explore-content .bar-chart .explore-button-row {
+  position: absolute;
+  bottom: -59px;
+  right: 0;
+}
+#root section.explore-content .bar-chart .synapse-chart, #root div.explore-content .bar-chart .synapse-chart {
+  position: absolute;
+  top: 100px;
+  right: 0px;
+  width: 100%;
+}
+#root section.explore-content .bar-chart .synapse-chart .btn, #root div.explore-content .bar-chart .synapse-chart .btn {
+  font-size: initial;
+  background-color: initial;
+  width: initial;
+  height: initial;
+  display: inherit;
+}
+#root section.explore-content .bar-chart .synapse-chart .row.SRC-center-text, #root div.explore-content .bar-chart .synapse-chart .row.SRC-center-text {
+  display: block;
+  box-sizing: initial;
+}
+#root section.explore-content .bar-chart .synapse-chart .SRC-bar-border-bottom, #root div.explore-content .bar-chart .synapse-chart .SRC-bar-border-bottom {
+  padding-bottom: 20px;
+}
+#root section.explore-content .SRC-grayBackground, #root div.explore-content .SRC-grayBackground {
+  background: unset;
 }
 #root .data-page section.pie-charts-welcome {
   background-color: unset;
@@ -1554,6 +1685,9 @@ html, body {
     margin-bottom: 10px;
     max-width: unset;
   }
+}
+#root .SRC-bar-border > div:first-child {
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */

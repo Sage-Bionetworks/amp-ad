@@ -2,10 +2,10 @@ import { configure } from "@storybook/react";
 import { SynapseClient, SynapseConstants } from "synapse-react-client";
 
 function loadStories(token) {
-  require("../src/stories");
+  require("../src/stories/");
 
-  let publications = require("../src/stories/publications.js");
-  publications.token = token;
+  const BarChart = require("../src/stories/barChart.js");
+  BarChart.token = token;
 }
 
 const login = async () =>

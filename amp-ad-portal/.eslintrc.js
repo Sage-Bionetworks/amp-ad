@@ -21,7 +21,8 @@ module.exports = {
     "react/destructuring-assignment": [0, "always"],
     "react/no-render-return-value": 0,
     "import/no-extraneous-dependencies": 0,
-    "global-require": 0
+    "global-require": 0,
+    "no-extend-native": 0
   },
   env: {
     browser: true,
