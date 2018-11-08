@@ -3,7 +3,7 @@ import React from "react"
 const BetaHeader = () => {
   return (
     <section className="row beta-banner">
-      <div className="col-xs-12 col-sm-10 content">
+      <div className="center-block col-sm-7 col-centered">
         <button className="btn-light-small" type="button">
           BETA
         </button>

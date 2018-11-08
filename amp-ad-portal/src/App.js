@@ -614,89 +614,92 @@ class App extends Component {
     )
   };
 
+  main = () => {
+    return (
+      <div>
+        <Route exact path="/" component={this.ReturnHome} />
+
+        <Route path="/Research/AMP-AD" component={this.ReturnProgramsAmpAd} />
+        <Route path="/Research/M2OVE" component={this.ReturnProgramsM2OVE} />
+        <Route
+          path="/Research/Model-AD"
+          component={this.ReturnProgramsModelAD}
+        />
+        <Route
+          path="/Research/Resilience-AD"
+          component={this.ReturnProgramsResilienceAD}
+        />
+        <Route
+          path="/Research/ExternalResearchers"
+          component={this.ReturnExternalResearchers}
+        />
+        <Route
+          path="/Research/Publications"
+          component={this.ReturnResearchPublications}
+        />
+        <Route
+          path="/Research/DifferentialExpression"
+          component={this.ReturnConsortiaDifferential}
+        />
+        <Route
+          path="/Research/Genetics"
+          component={this.ReturnConsortiaGenetics}
+        />
+        <Route
+          path="/Research/Networks"
+          component={this.ReturnConsortiaNetworks}
+        />
+
+        <Route path="/Resources/Data" component={this.ReturnResourcesData} />
+        <Route path="/Resources/Agora" component={this.ReturnResourcesAgora} />
+        <Route
+          path="/Resources/DataUseRequirements"
+          component={this.ReturnResourcesDataUse}
+        />
+        <Route
+          path="/Resources/AcknowledgementStatements"
+          component={this.ReturnResourcesAcknowledgements}
+        />
+        <Route
+          path="/Resources/ExperimentalResources"
+          component={this.ReturnResourcesExperimentalResources}
+        />
+        <Route
+          path="/Resources/Studies"
+          component={this.ReturnResourcesStudies}
+        />
+
+        <Route path="/About/AMP-AD" component={this.ReturnAboutAmpAd} />
+        <Route path="/About/People" component={this.ReturnAboutPeople} />
+      </div>
+    )
+  };
+
   render() {
     return (
       <Router>
-        <div className="row amp-ad">
-          <this.ReturnHeader />
-          <div className="col-xs-12 main">
-            <Route exact path="/" component={this.ReturnHome} />
+        <div className="container">
+          <div className="row amp-ad">
+            <this.ReturnHeader />
 
-            <Route
-              path="/Research/AMP-AD"
-              component={this.ReturnProgramsAmpAd}
-            />
-            <Route
-              path="/Research/M2OVE"
-              component={this.ReturnProgramsM2OVE}
-            />
-            <Route
-              path="/Research/Model-AD"
-              component={this.ReturnProgramsModelAD}
-            />
-            <Route
-              path="/Research/Resilience-AD"
-              component={this.ReturnProgramsResilienceAD}
-            />
-            <Route
-              path="/Research/ExternalResearchers"
-              component={this.ReturnExternalResearchers}
-            />
-            <Route
-              path="/Research/Publications"
-              component={this.ReturnResearchPublications}
-            />
-            <Route
-              path="/Research/DifferentialExpression"
-              component={this.ReturnConsortiaDifferential}
-            />
-            <Route
-              path="/Research/Genetics"
-              component={this.ReturnConsortiaGenetics}
-            />
-            <Route
-              path="/Research/Networks"
-              component={this.ReturnConsortiaNetworks}
-            />
+            <div className="main">
+              <h2>main content</h2>
+            </div>
 
-            <Route
-              path="/Resources/Data"
-              component={this.ReturnResourcesData}
-            />
-            <Route
-              path="/Resources/Agora"
-              component={this.ReturnResourcesAgora}
-            />
-            <Route
-              path="/Resources/DataUseRequirements"
-              component={this.ReturnResourcesDataUse}
-            />
-            <Route
-              path="/Resources/AcknowledgementStatements"
-              component={this.ReturnResourcesAcknowledgements}
-            />
-            <Route
-              path="/Resources/ExperimentalResources"
-              component={this.ReturnResourcesExperimentalResources}
-            />
-            <Route
-              path="/Resources/Studies"
-              component={this.ReturnResourcesStudies}
-            />
-
-            <Route path="/About/AMP-AD" component={this.ReturnAboutAmpAd} />
-            <Route path="/About/People" component={this.ReturnAboutPeople} />
+            <footer>
+              <div className="container">
+                <div className="row">
+                  <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
+                    Forum
+                  </a>
+                  <a href="mailto:ampadportal@sagebionetworks.org">Contact</a>
+                  <a href="http://docs.synapse.org/articles/governance.html">
+                    Terms & Privacy
+                  </a>
+                </div>
+              </div>
+            </footer>
           </div>
-
-          <footer className="row center-xs middle-xs">
-            <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
-              Forum
-            </a>
-            <a href="mailto:ampadportal@sagebionetworks.org">Contact</a>
-            <a href="http://docs.synapse.org/articles/governance.html">
-              Terms & Privacy
-            </a>
-          </footer>
         </div>
       </Router>
     )

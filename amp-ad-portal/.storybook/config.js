@@ -6,6 +6,12 @@ function loadStories(token) {
 
   const BarChart = require("../src/stories/barChart.js");
   BarChart.token = token;
+
+  const ExploreBarChart = require("../src/stories/ExploreBarChart.js");
+  ExploreBarChart.token = token;
+
+  const ExploreSection = require("../src/stories/ExploreSection.js");
+  ExploreSection.token = token;
 }
 
 const login = async () =>

@@ -26,6 +26,9 @@
   },
   "devDependencies": {
     "@sambego/storybook-state": "^1.2.0",
+    "@storybook/addon-actions": "^4.0.4",
+    "@storybook/addon-links": "^4.0.4",
+    "@storybook/addons": "^4.0.4",
     "@storybook/react": "^3.4.10",
     "@storybook/storybook-deployer": "^2.3.0",
     "babel-core": "^6.26.3",

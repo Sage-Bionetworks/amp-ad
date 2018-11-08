@@ -548,13 +548,10 @@ class Header extends Component {
 
   render() {
     return (
-      <header className="row between-xs header center-xs middle-xs">
-        <div className="col-xs-12">
-          <div className="row center-xs">{this.ReturnBetaHeader()}</div>
-          <div
-            className="nav-row row between-xs center-xs middle-xs"
-            style={{ backgroundColor: "#fff" }}
-          >
+      <header className="header">
+        <div className="container">
+          {this.ReturnBetaHeader()}
+          <div className="nav-row nav row" style={{ backgroundColor: "#fff" }}>
             <button
               className={!this.state.Open ? "menu-wall hidden" : "menu-wall"}
               type="button"
@@ -562,7 +559,7 @@ class Header extends Component {
                 this.closeNavigation(window.location.hash)
               }}
             />
-            <div className="col-xs-12 col-sm-3">
+            <div className="logo col-md-3 col-sm-3 col-xs-12">
               <Link
                 to="/"
                 onClick={() => {
@@ -576,7 +573,7 @@ class Header extends Component {
                 />
               </Link>
             </div>
-            <div className="nav-buttons col-xs-12 col-sm-7 col-md-8">
+            <div className="nav-buttons col-md-10 col-sm-9 flex justify-end">
               <ul className="nav row end-sm center-xs">
                 <li
                   onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")
