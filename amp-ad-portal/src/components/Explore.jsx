@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { SynapseComponents } from "synapse-react-client"
 import SynapseChart from "./SynapseBarChart.jsx"
 
 import {
@@ -83,21 +84,27 @@ class Explore extends Component {
     const columns = returnSynapseValue(loadedObjects, key, value, "columns")
     const type = returnSynapseValue(loadedObjects, key, value, "type")
     const name = returnSynapseValue(loadedObjects, key, value, "name")
-    const hideLink = returnSynapseValue(loadedObjects, key, value, "hidLink")
+    const hideLink = returnSynapseValue(loadedObjects, key, value, "hideLink")
+    const hash = returnSynapseValue(loadedObjects, key, value, "hash")
 
     console.log(color, limit, table, columns, type, name, hideLink)
 
-    this.setState({
-      activeButton: value,
-      activeFilter,
-      color,
-      limit,
-      table,
-      columns,
-      type,
-      name,
-      hideLink: hideLink !== undefined ? hideLink : false,
-    })
+    this.setState(
+      {
+        activeButton: value,
+        activeFilter,
+        color,
+        limit,
+        table,
+        columns,
+        type,
+        name,
+        hideLink: hideLink !== undefined ? hideLink : false,
+      },
+      () => {
+        window.location.hash = `#${hash}`
+      },
+    )
     return ""
   };
 
@@ -128,6 +135,40 @@ class Explore extends Component {
       return ""
     }
     return ""
+  };
+
+  returnSynapseChart = (hash = window.location.hash) => {
+    if (hash === "#/Explore/Publications") {
+      return (
+        <div>
+          <h1>Publications</h1>
+          <SynapseComponents.Markdown
+            token={this.props.token}
+            ownerId="syn2580853"
+            wikiId="409850"
+          />
+        </div>
+      )
+    }
+    return (
+      <div className="synapse-chart">
+        <SynapseChart
+          token={this.props.token}
+          synId={this.state.activeButton}
+          filter={this.state.activeFilter}
+          rgbIndex={this.state.color}
+          showMenu
+          facets
+          barChart
+          table={this.state.table}
+          columns={this.state.columns}
+          json={this.props[this.state.activeButton]}
+          limit={this.state.limit}
+          type={this.state.type}
+          hideOrganizationlink={this.state.hideLink}
+        />
+      </div>
+    )
   };
 
   render() {
@@ -176,7 +217,7 @@ class Explore extends Component {
                 <button
                   className={this.returnButtonClass("syn2580853")}
                   type="button"
-                  onClick={() => console.log("syn2580853", "409850")}
+                  onClick={() => this.handleButtonPress("syn2580853")}
                 >
                   <h5>PUBLICATIONS</h5>
                 </button>
@@ -189,21 +230,7 @@ class Explore extends Component {
                 </button>
               </div>
             </div>
-            <SynapseChart
-              token={this.props.token}
-              synId={this.state.activeButton}
-              filter={this.state.activeFilter}
-              rgbIndex={this.state.color}
-              showMenu
-              facets
-              barChart
-              table={this.state.table}
-              columns={this.state.columns}
-              json={this.props[this.state.activeButton]}
-              limit={this.state.limit}
-              type={this.state.type}
-              hideOrganizationlink={this.state.hideLink}
-            />
+            {this.returnSynapseChart()}
           </div>
         </div>
       </section>

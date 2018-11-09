@@ -46,6 +46,27 @@ class ExploreContent extends Component {
     return `btn-control ${this.state.activeId === id ? "active" : ""}`
   };
 
+  returnSynapseChart = (hash = window.location.hash) => {
+    if (hash === "#/Explore/Publications") {
+      return (
+        <div>
+          <h2>Publications Cards</h2>
+        </div>
+      )
+    }
+    return (
+      <div className="synapse-chart">
+        <SynapseChart
+          token={this.props.token}
+          synId={this.state.activeId}
+          filter={this.state.activeFilter}
+          rgbIndex={this.state.color}
+          barChart
+        />
+      </div>
+    )
+  };
+
   render() {
     return (
       <section className="row explore-content">
@@ -85,13 +106,6 @@ class ExploreContent extends Component {
                   <h5>DATA</h5>
                 </button>
                 <button
-                  className={this.returnButtonClass("syn2580853")}
-                  type="button"
-                  onClick={() => console.log("syn2580853", "409850")}
-                >
-                  <h5>PUBLICATIONS</h5>
-                </button>
-                <button
                   className={this.returnButtonClass("syn13897207")}
                   type="button"
                   onClick={() => this.handleButtonPress("syn13897207")}
@@ -100,15 +114,7 @@ class ExploreContent extends Component {
                 </button>
               </div>
             </div>
-            <div className="synapse-chart">
-              <SynapseChart
-                token={this.props.token}
-                synId={this.state.activeId}
-                filter={this.state.activeFilter}
-                rgbIndex={this.state.color}
-                barChart
-              />
-            </div>
+            {this.returnSynapseChart()}
             <div className="row explore-button-row">
               <div className="col-xs-12">
                 <ButtonExplore url={this.state.hash} label={this.state.name} />
