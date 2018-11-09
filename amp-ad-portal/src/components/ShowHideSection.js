@@ -24,15 +24,15 @@ class ShowHideSection extends Component {
       <div
         className={
           this.state.isChecked === true
-            ? "row expand-section"
-            : "row expand-section hide"
+            ? "flex-row expand-section"
+            : "flex-row expand-section hide-expand"
         }
       >
         <div
           className={
             this.state.isChecked === true
               ? "col-xs-8 col-sm-10 col-md-11 content show"
-              : "col-xs-8 col-sm-10 col-md-11 content hide"
+              : "col-xs-8 col-sm-10 col-md-11 content hide-expand"
           }
         >
           {this.props.content}

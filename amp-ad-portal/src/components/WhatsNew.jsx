@@ -23,10 +23,10 @@ class WhatsNew extends Component {
 
   render() {
     return (
-      <section className="what-new row">
-        <div className="content col-xs-12 col-sm-10">
-          <div className="row title-row">
-            <div className="col-xs-12">
+      <section className="what-new flex-row">
+        <div className="content-row-width flex-col-full">
+          <div className="title-row between-xs">
+            <div className="">
               <h2>What&apos;s New</h2>
             </div>
           </div>

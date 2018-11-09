@@ -28,9 +28,9 @@ class ProgramsModelAd extends Component {
   render() {
     return (
       <div className="row about research-page program">
-        <div className="col-xs-12">
-          <section className="row child-page-hero">
-            <div className="col-xs-12 col-sm-9 content">
+        <div className="flex-row">
+          <section className="flex-row center-xs child-page-hero">
+            <div className="flex-col-9 between-xs content-row-width">
               <h2>Model AD Program</h2>
               <p>
                 Bridge the preclinical to clinical development gap by developing

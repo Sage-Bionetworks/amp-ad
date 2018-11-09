@@ -614,7 +614,7 @@ class App extends Component {
     )
   };
 
-  main = () => {
+  Main = () => {
     return (
       <div>
         <Route exact path="/" component={this.ReturnHome} />
@@ -678,17 +678,16 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="container">
           <div className="row amp-ad">
             <this.ReturnHeader />
 
             <div className="main">
-              <h2>main content</h2>
+              <this.Main />
             </div>
 
             <footer>
               <div className="container">
-                <div className="row">
+                <div className="row center-block col-centered">
                   <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
                     Forum
                   </a>
@@ -700,7 +699,6 @@ class App extends Component {
               </div>
             </footer>
           </div>
-        </div>
       </Router>
     )
   }

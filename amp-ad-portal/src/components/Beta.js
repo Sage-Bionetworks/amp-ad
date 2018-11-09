@@ -3,11 +3,13 @@ import React from "react"
 const BetaHeader = () => {
   return (
     <section className="row beta-banner">
-      <div className="center-block col-sm-7 col-centered">
-        <button className="btn-light-small" type="button">
+      <div className="banner-message">
+        <button className="btn-light-small col-sm-2" type="button">
           BETA
         </button>
-        <h2>
+      </div>
+      <div className="banner-message">
+        <h2 className="">
           This updated AMP-AD Knowledge Portal is under development through the
           end of 2018. During this time, you can still use the
           {" "}

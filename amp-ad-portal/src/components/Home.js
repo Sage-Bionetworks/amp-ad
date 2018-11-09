@@ -20,24 +20,6 @@ const Home = props => (
       token={props.token}
       handleChanges={props.handleChanges}
     />
-    <SearchBar
-      setDiagnosisMenu={props.setDiagnosesMenu}
-      speciesSelection={props.speciesDropdownSelection}
-      speciesSelectionOptions={props.speciesSelectionOptions}
-      diagnosesSelection={props.diagnosesDropdownSelection}
-      diagnosesSelectionOptions={props.diagnosesSelectionOptions}
-      handleChange={props.handleChangeEvent}
-      handleReactDropdownEvent={props.handleReactDropdownEvent}
-    />
-    <PiesBelowHeader
-      biosamplesLoading={props.biosamplesLoading}
-      toggleSeeAll={props.toggleSeeAll}
-      diagnosesSelection={props.diagnosesDropdownSelection}
-      speciesSelection={props.speciesDropdownSelection}
-      getSum={props.getSum}
-      getColumnCountForSpecies={props.getColumnCountForSpecies}
-      pageData={props.pageData}
-    />
     <Analyses />
     <Programs />
     <WhatsNew

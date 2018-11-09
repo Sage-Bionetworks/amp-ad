@@ -29,7 +29,7 @@ class ProgramsResilienceAD extends Component {
     return (
       <div className="row about research-page program">
         <div className="col-xs-12">
-          <section className="row child-page-hero page-content">
+          <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
               <h2>Resilience-AD Program</h2>
               <p>

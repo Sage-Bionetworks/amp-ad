@@ -223,67 +223,15 @@ class Header extends Component {
                 </ul>
               </AccordionItemBody>
             </AccordionItem>
-            <AccordionItem className="accordion-row row">
-              <AccordionItemTitle>
-                <div className="accordion-sub-row row between-xs">
-                  <div className="col-xs-10 accordion-sub-title">
-                    Collaborative Research
-                  </div>
-                  <div className="col-xs-1 carrot-icon">&gt;</div>
-                </div>
-              </AccordionItemTitle>
-              <AccordionItemBody>
-                <ul>
-                  <li>
-                    <Link
-                      name="Genetics"
-                      to="/Research/Genetics"
-                      className="nav-item dropdown"
-                      onClick={() => {
-                        this.closeNavigation("#/Research/Genetics")
-                      }}
-                    >
-                      Genetics
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      name="Differential Expression"
-                      to="/Research/DifferentialExpression"
-                      className="nav-item dropdown"
-                      onClick={() => {
-                        this.closeNavigation(
-                          "#/Research/DifferentialExpression",
-                        )
-                      }}
-                    >
-                      Differential Expression
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      name="Networks"
-                      to="/Research/Networks"
-                      className="nav-item dropdown"
-                      onClick={() => {
-                        this.closeNavigation("#/Research/Networks")
-                      }}
-                    >
-                      Networks
-                    </Link>
-                  </li>
-                </ul>
-              </AccordionItemBody>
-            </AccordionItem>
             <AccordionItem>
               <AccordionItemTitle className="accordion__title link">
                 <div className="row between-xs">
                   <div className="col-xs-12 accordion-sub-title">
                     <Link
                       name="external researchers"
-                      to="/Research/Publications"
+                      to="/Explore/Publications"
                       onClick={() => {
-                        this.closeNavigation("#/Research/Publications")
+                        this.closeNavigation("#/Explore/Publications")
                       }}
                     >
                       Publications
@@ -573,8 +521,8 @@ class Header extends Component {
                 />
               </Link>
             </div>
-            <div className="nav-buttons col-md-10 col-sm-9 flex justify-end">
-              <ul className="nav row end-sm center-xs">
+            <div className="nav-buttons col-md-10 col-sm-9 flex end-xs clear-floats">
+              <ul className="nav row end-xs">
                 <li
                   onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")
                   }
@@ -606,7 +554,13 @@ class Header extends Component {
                 <li>{this.ResearchDropdown()}</li>
                 <li>{this.ResourcesDropdown()}</li>
                 <li className="about-dropdown">{this.AboutMenuDropdown()}</li>
-                <li className="agora-nav-link">
+                <li
+                  className="agora-nav-link"
+                  onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")
+                  }
+                  onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
+                  }
+                >
                   <div className="agora-border" />
                   <img
                     className="agora-logo"
