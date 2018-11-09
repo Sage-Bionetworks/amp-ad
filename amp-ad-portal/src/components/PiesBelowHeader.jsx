@@ -332,14 +332,13 @@ class PiesBelowHeader extends Component {
       <section
         className={
           window.location.hash.includes("/Resources/Data")
-            ? "pie-charts-welcome row center-xs height"
-            : "pie-charts-welcome row center-xs"
+            ? "pie-charts-welcome flex-row center-xs height"
+            : "pie-charts-welcome flex-row center-xs"
         }
       >
-        <div className="col-xs-12 col-sm-8">
-          <div className="row around-xs center-xs">
-            <div className="col-xs-12" />
-            <div className="col-xs-12 col-sm-6">
+        <div className="">
+          <div className="flex-row around-xs center-xs">
+            <div className="">
               <div className="row center-xs loading-bar">
                 <BarLoader
                   color="#47357B"

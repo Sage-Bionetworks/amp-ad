@@ -48,6 +48,9 @@ const AsyncResourcesAcknowledgements = asyncComponent(() => import("./components
 const AsyncHome = asyncComponent(() => import("./components/Home"))
 const AsyncHeader = asyncComponent(() => import("./components/Header"))
 
+// explore
+const AsyncExplore = asyncComponent(() => import("./components/Explore.jsx"))
+
 const pageDataPoints = ["assay", "tissue", "study", "dataType", "diagnoses"]
 
 ReactGA.initialize("UA-29804340-3")
@@ -614,6 +617,10 @@ class App extends Component {
     )
   };
 
+  ReturnExplore = () => {
+    return <AsyncExplore token={this.props.loginToken.sessionToken} />
+  };
+
   Main = () => {
     return (
       <div>
@@ -668,6 +675,7 @@ class App extends Component {
           path="/Resources/Studies"
           component={this.ReturnResourcesStudies}
         />
+        <Route path="/Explore" component={this.ReturnExplore} />
 
         <Route path="/About/AMP-AD" component={this.ReturnAboutAmpAd} />
         <Route path="/About/People" component={this.ReturnAboutPeople} />
@@ -678,27 +686,27 @@ class App extends Component {
   render() {
     return (
       <Router>
-          <div className="row amp-ad">
-            <this.ReturnHeader />
+        <div className="row amp-ad">
+          <this.ReturnHeader />
 
-            <div className="main">
-              <this.Main />
-            </div>
-
-            <footer>
-              <div className="container">
-                <div className="row center-block col-centered">
-                  <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
-                    Forum
-                  </a>
-                  <a href="mailto:ampadportal@sagebionetworks.org">Contact</a>
-                  <a href="http://docs.synapse.org/articles/governance.html">
-                    Terms & Privacy
-                  </a>
-                </div>
-              </div>
-            </footer>
+          <div className="main">
+            <this.Main />
           </div>
+
+          <footer>
+            <div className="container">
+              <div className="row center-block col-centered">
+                <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
+                  Forum
+                </a>
+                <a href="mailto:ampadportal@sagebionetworks.org">Contact</a>
+                <a href="http://docs.synapse.org/articles/governance.html">
+                  Terms & Privacy
+                </a>
+              </div>
+            </div>
+          </footer>
+        </div>
       </Router>
     )
   }

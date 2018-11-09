@@ -243,7 +243,7 @@ class Header extends Component {
             <AccordionItem>
               <AccordionItemTitle className="accordion__title link">
                 <div className="row between-xs">
-                  <div className="col-xs-11 accordion-sub-title">
+                  <div className="col-xs-12 accordion-sub-title">
                     <Link
                       name="external researchers"
                       to="/Research/ExternalResearchers"

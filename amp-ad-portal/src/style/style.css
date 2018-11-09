@@ -22,6 +22,9 @@
   margin-right: -0.5rem;
   margin-left: -0.5rem;
 }
+.flex-row .container * {
+  float: none;
+}
 
 .flex-col {
   display: flex;
@@ -44,7 +47,6 @@
 .flex-col-9 {
   display: flex;
   flex-direction: column;
-  padding: 0px 15px;
   width: 75%;
 }
 
@@ -96,8 +98,10 @@
   width: 8.33%;
 }
 
-.content-row-width, .content-row {
-  max-width: 1120px;
+@media screen and (max-width: 1020px) {
+  .flex-col-md-12 {
+    width: 100%;
+  }
 }
 
 .between-xs {
@@ -121,8 +125,25 @@
   margin: 0px auto;
 }
 
+.around-xs {
+  justify-content: space-around;
+}
+
 .title-row {
   width: 100%;
+}
+
+.content-row-width, .content-row {
+  max-width: 1120px;
+}
+
+.flex-row .content {
+  padding-left: 0px;
+}
+
+.old-markdown.container * {
+  width: unset;
+  float: none;
 }
 
 @media (max-width: 960px) {
@@ -259,7 +280,7 @@ header.header .logo a {
 }
 header.header img {
   transition: all 200ms ease;
-  max-height: 70px;
+  max-height: 80px;
 }
 @media screen and (min-width: 1220px) {
   header.header img {
@@ -1094,8 +1115,12 @@ section.welcome .btn-light {
   }
 }
 
+section.page.explore {
+  margin-top: 50px;
+}
+
 section.explore-content, div.explore-content {
-  padding: 71px 50px;
+  margin-bottom: 80px;
 }
 section.explore-content .col-xs-2, div.explore-content .col-xs-2 {
   margin-top: 18px;
@@ -1192,6 +1217,18 @@ section.explore-content .bar-chart .synapse-chart .SRC-bar-border-bottom, div.ex
 }
 section.explore-content .SRC-grayBackground, div.explore-content .SRC-grayBackground {
   background: unset;
+}
+
+.SRC-center-text button.btn {
+  color: #1A1C29;
+  height: initial;
+  width: initial;
+  background-color: initial;
+  border-radius: initial;
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s ease-in-out;
 }
 
 .data-page section.pie-charts-welcome {
@@ -1597,7 +1634,7 @@ section.about-intro-section h3, section.content-section h3 {
   font-weight: 500;
 }
 section.about-intro-section ul, section.content-section ul {
-  margin-left: 20px;
+  margin-left: 50px;
 }
 section.about-intro-section li, section.content-section li {
   list-style: disc;
@@ -1756,7 +1793,7 @@ section.about-resilience-intro-section {
   font-weight: 300;
 }
 .research-page .content-row .content.hide-expand {
-  max-height: 70px;
+  max-height: 80px;
   overflow: hidden;
 }
 .research-page .expand-icon {
@@ -1780,6 +1817,14 @@ p.researcher-bio {
   overflow: hidden;
 }
 
+.research-page .markdown h3, .data-page .markdown h3 {
+  font-size: 19px;
+  padding: 10px 0px 10px 0px;
+}
+
+.researchers-content *, .content-section *, .about-intro-section * {
+  padding-left: 0px;
+}
 .researchers-content div, .content-section div, .about-intro-section div {
   max-width: 1120px;
 }
@@ -1788,6 +1833,7 @@ p.researcher-bio {
 }
 .researchers-content .expand-section.hide-expand, .content-section .expand-section.hide-expand, .about-intro-section .expand-section.hide-expand {
   max-height: 170px;
+  padding-left: 0px;
 }
 .researchers-content .content.hide-expand, .content-section .content.hide-expand, .about-intro-section .content.hide-expand {
   max-height: 170px;
@@ -1841,6 +1887,7 @@ p.researcher-bio {
 
 .modal-container {
   width: 80%;
+  max-width: 100% !important;
   position: relative;
   margin: 0px auto;
   top: 10%;
@@ -2033,6 +2080,7 @@ button.modal-x {
   padding: 30px;
   padding-top: 110px;
   width: 100vw !important;
+  max-width: 100% !important;
   height: fit-content;
   min-height: 400px;
   margin: auto;
@@ -2061,10 +2109,6 @@ button.modal-x {
 .profile h3 {
   min-width: 380px;
 }
-.profile p.profile-summary {
-  max-height: 300px;
-  overflow-y: scroll;
-}
 .profile .scrollbar {
   width: 0px;
   background: transparent;
@@ -2092,7 +2136,7 @@ button.modal-x {
   position: relative;
   z-index: 400;
   margin: auto;
-  top: -142px;
+  top: -122px;
   right: 0;
   left: 0;
   bottom: 0;
@@ -2109,7 +2153,7 @@ button.modal-x {
   position: relative;
   z-index: 400;
   margin: auto;
-  top: -142px;
+  top: -122px;
   right: 0;
   left: 0;
   bottom: 0;

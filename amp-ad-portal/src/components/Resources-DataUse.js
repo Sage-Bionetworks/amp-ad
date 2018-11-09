@@ -18,7 +18,7 @@ class DataUse extends Component {
     return (
       <div className="row about">
         <div className="col-xs-12">
-          <section className="row child-page-hero">
+          <section className="flex-row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
               <h2>Data Access and Use Requirements</h2>
               <p>
@@ -28,7 +28,9 @@ class DataUse extends Component {
               </p>
             </div>
           </section>
-          <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+          <div className="old-markdown container">
+            <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+          </div>
         </div>
       </div>
     )

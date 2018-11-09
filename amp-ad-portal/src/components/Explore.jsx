@@ -30,16 +30,18 @@ class Explore extends Component {
     // publications
     setSynapseValue(loadedObjects, "syn16857542", "filter", "id")
 
-    //if (window.location.hash !== "#/Explore") {
-    ////this.setActiveValues(window.location.hash)
-    //this.setActiveValues("syn16859580", "id")
-    //} else this.handleButtonPress("syn16859580", undefined)
-    this.handleButtonPress("syn16859580", undefined)
+    if (window.location.hash !== "#/Explore") {
+      this.setActiveValues(window.location.hash, "id")
+      //this.setActiveValues("syn17024112", "id")
+    } else this.handleButtonPress("syn17024112", undefined)
   }
 
   setActiveValues = (hash) => {
     let id
     switch (hash) {
+    case "#/Explore/Data":
+      id = "syn17024112"
+      break
     case "#/Explore/Studies":
       id = "syn16787123"
       break
@@ -83,6 +85,8 @@ class Explore extends Component {
     const name = returnSynapseValue(loadedObjects, key, value, "name")
     const hideLink = returnSynapseValue(loadedObjects, key, value, "hidLink")
 
+    console.log(color, limit, table, columns, type, name, hideLink)
+
     this.setState({
       activeButton: value,
       activeFilter,
@@ -120,7 +124,8 @@ class Explore extends Component {
       return ""
     }
     if (hash !== "#/") {
-      return "hide"
+      //return "hide"
+      return ""
     }
     return ""
   };
@@ -145,42 +150,42 @@ class Explore extends Component {
                   type="button"
                   onClick={() => this.handleButtonPress("syn16858699")}
                 >
-                  <h5>FUNDERS</h5>
+                  <h5>CONSORTIA</h5>
                 </button>
                 <button
                   className={this.returnButtonClass("syn16859580")}
                   type="button"
                   onClick={() => this.handleButtonPress("syn16859580")}
                 >
-                  <h5>DATASETS</h5>
+                  <h5>PROJECTS</h5>
                 </button>
                 <button
                   className={this.returnButtonClass("syn16858331")}
                   type="button"
                   onClick={() => this.handleButtonPress("syn16858331")}
                 >
-                  <h5>FILES</h5>
+                  <h5>STUDIES</h5>
                 </button>
                 <button
-                  className={this.returnButtonClass("syn16787123")}
+                  className={this.returnButtonClass("syn17024112")}
                   type="button"
-                  onClick={() => this.handleButtonPress("syn16787123")}
+                  onClick={() => this.handleButtonPress("syn17024112")}
                 >
-                  <h5>STUDIES</h5>
+                  <h5>DATA</h5>
                 </button>
                 <button
                   className={this.returnButtonClass("")}
                   type="button"
                   onClick={() => this.handleButtonPress("")}
                 >
-                  <h5>ANALYSIS</h5>
+                  <h5>PUBLICATIONS</h5>
                 </button>
                 <button
                   className={this.returnButtonClass("syn16857542")}
                   type="button"
                   onClick={() => this.handleButtonPress("syn16857542")}
                 >
-                  <h5>PUBLICATIONS</h5>
+                  <h5>PEOPLE</h5>
                 </button>
               </div>
             </div>

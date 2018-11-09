@@ -87,7 +87,7 @@ class ExperimentalResources extends Component {
           </div>
         </div>
         <div className="col-xs-12">
-          <section className="row child-page-hero">
+          <section className="flex-row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
               <h2>Experimental Resources</h2>
               <p>

@@ -67,6 +67,10 @@
   width: 100%;
   margin-right: -.5rem;
   margin-left: -.5rem;
+  .container * {
+    //width: unset;
+    float: none;
+  }
 }
 
 .flex-col {
@@ -89,7 +93,7 @@
 .flex-col-9 {
   display: flex;
   flex-direction: column;
-  padding: 0px 15px;
+  //padding: 0px 15px;
   width: 75%;
 }
 .flex-col-8 {
@@ -133,10 +137,10 @@
   width: 8.33%;
 }
 
-
-// grid system modifiers //
-.content-row-width, .content-row {
-  max-width: 1120px;
+.flex-col-md-12 {
+  @media screen and (max-width: 1020px){
+    width: 100%;
+  }
 }
 
 .between-xs {
@@ -157,8 +161,26 @@
   margin: 0px auto;
 }
 
+.around-xs {
+  justify-content: space-around;
+}
+
 .title-row {
   width: 100%;
+}
+
+// grid system modifiers //
+.content-row-width, .content-row {
+  max-width: 1120px;
+}
+
+.flex-row .content {
+  padding-left: 0px;
+}
+
+.old-markdown.container * {
+  width: unset;
+  float: none;
 }
 
 @media (max-width: 960px) {

@@ -15,15 +15,14 @@ class AcknowledgementStatements extends Component {
 
   render() {
     return (
-      <div className="row about">
-        <div className="col-xs-12">
-          <section className="row child-page-hero">
-            <div className="col-xs-12 col-sm-9 content">
+      <div className="flex-row about research-page">
+        <div className="flex-row">
+          <section className="container flex-row center-xs child-page-hero">
+            <div className="flex-col-9 between-xs content-row-width">
               <h2>Acknowledgement Statements</h2>
-              <p />
             </div>
           </section>
-          <section className="row center-xs content-section">
+          <section className="flex-row center-xs content-section">
             <div className="col-xs-12 col-sm-9">
               <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
             </div>

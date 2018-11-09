@@ -16,17 +16,16 @@ class WhatIsAmpAD extends Component {
 
   render() {
     return (
-      <div className="row about">
-        <div className="col-xs-12">
-          <section className="row child-page-hero">
-            <div className="col-xs-12 col-sm-9 content">
+      <div className="flex-row about research-page">
+        <div className="flex-row">
+          <section className="container flex-row center-xs child-page-hero">
+            <div className="flex-col-9 between-xs content-row-width">
               <h2>AMP-AD Knowledge Portal</h2>
             </div>
           </section>
-          <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
-          <section className="row around-xs page-content">
-            <div className="col-xs-12 col-sm-9" />
-          </section>
+          <div className="container old-markdown">
+            <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+          </div>
         </div>
       </div>
     )

@@ -9,13 +9,11 @@ class DataResources extends Component {
 
   render() {
     return (
-      <div className="row about data-page">
-        <div className="col-xs-12">
-          <section className="row child-page-hero">
-            <div className="col-xs-12 col-sm-9 content">
-              <h2>
-Data
-              </h2>
+      <div className="flex-row about data-page">
+        <div className="title-row">
+          <section className="container flex-row center-xs child-page-hero">
+            <div className="flex-col-9 between-xs content-row-width">
+              <h2>Data</h2>
               <p>
                 This page shows a summary of the available data and provides
                 links to access the data, organized by study, assay, and tissue.

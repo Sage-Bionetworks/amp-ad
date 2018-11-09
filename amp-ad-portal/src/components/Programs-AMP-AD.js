@@ -43,7 +43,7 @@ class ProgramsAmpAd extends Component {
         }
       >
         <div className="flex-row">
-          <section className="flex-row center-xs child-page-hero">
+          <section className="container flex-row center-xs child-page-hero">
             <div className="flex-col-9 between-xs content-row-width">
               <h2>
                 AMP-AD Target Discovery and Preclinical Validation Program
@@ -56,18 +56,16 @@ class ProgramsAmpAd extends Component {
               </p>
             </div>
           </section>
-          <div className="container">
+          <div className="old-markdown container">
             <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
           </div>
-          <section className="about-sectionflex-row">
+          <section className="about-section flex-row">
             <div className="flex-col-full content-row">
               <div className="between-xs title-row">
-                <div className="">
-                  <h2>Projects</h2>
-                </div>
-                <div className="container flex-col-9">
-                  {printShowHideSections(this.props.markdownSegs)}
-                </div>
+                <h2>Projects</h2>
+              </div>
+              <div className="flex-col-9">
+                {printShowHideSections(this.props.markdownSegs)}
               </div>
             </div>
           </section>

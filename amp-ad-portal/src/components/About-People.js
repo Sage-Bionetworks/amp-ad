@@ -100,9 +100,7 @@ class People extends Component {
                       {" "}
                       {activeProfile.lastName}
                     </h2>
-                    <h3>
-                      {activeProfile.institution}
-                    </h3>
+                    <h3>{activeProfile.institution}</h3>
                     <p className="profile-summary">
                       {activeProfile.profile !== undefined
                         ? activeProfile.profile.summary
@@ -112,20 +110,12 @@ class People extends Component {
                 </div>
                 <div className="row">
                   <div className="col-xs-6">
-                    <h4>
-Consortia
-                    </h4>
-                    <p>
-                      {activeProfile.consortia}
-                    </p>
+                    <h4>Consortia</h4>
+                    <p>{activeProfile.consortia}</p>
                   </div>
                   <div className="col-xs-6">
-                    <h4>
-Grant
-                    </h4>
-                    <p>
-                      {activeProfile.grant}
-                    </p>
+                    <h4>Grant</h4>
+                    <p>{activeProfile.grant}</p>
                   </div>
                 </div>
               </div>
@@ -292,13 +282,11 @@ Grant
         <div className="col-xs-12">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
-              <h2>
-People
-              </h2>
+              <h2>People</h2>
               <p />
             </div>
           </section>
-          <section className="row center-xs researchers-content people middle-xs">
+          <section className="flex-row center-xs researchers-content people middle-xs">
             {this.modalWindow(this.state.modal, this.state.activeProfile)}
             {this.buildUserThumbs(this.state.users)}
             <div className="col-xs-12">

@@ -1,14 +1,14 @@
 export const synapseObjects = [
   {
-    name: "funder",
-    id: "syn16858699",
-    filter: "",
+    name: "Data",
+    id: "syn17024112",
+    filter: "study",
     color: 0,
-    limit: 3,
+    limit: 50,
     columns: 0,
     table: false,
-    type: "FUNDER",
-    hash: "/Explore/Funder",
+    type: "DATASET",
+    hash: "/Explore/Data",
   },
   {
     name: "datasets",

@@ -27,10 +27,10 @@ class ProgramsResilienceAD extends Component {
 
   render() {
     return (
-      <div className="row about research-page program">
-        <div className="col-xs-12">
-          <section className="row child-page-hero">
-            <div className="col-xs-12 col-sm-9 content">
+      <div className="flex-row about research-page">
+        <div className="flex-row">
+          <section className="container flex-row center-xs child-page-hero">
+            <div className="flex-col-9 between-xs content-row-width">
               <h2>Resilience-AD Program</h2>
               <p>
                 Understand the mechanisms by which gene-environment interactions
@@ -39,11 +39,17 @@ class ProgramsResilienceAD extends Component {
               </p>
             </div>
           </section>
-          <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
-          <section className="row center-xs content-row page-content">
-            <div className="col-xs-12 col-sm-9">
-              <h2>Projects</h2>
-              {printShowHideSections(this.props.markdownSegs)}
+          <div className="container old-markdown">
+            <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+          </div>
+          <section className="about-section flex-row">
+            <div className="flex-col-full content-row">
+              <div className="between-xs title-row">
+                <h2>Projects</h2>
+              </div>
+              <div className="flex-col-9">
+                {printShowHideSections(this.props.markdownSegs)}
+              </div>
             </div>
           </section>
         </div>
