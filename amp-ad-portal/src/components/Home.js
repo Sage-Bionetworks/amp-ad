@@ -7,7 +7,7 @@ import Welcome from "./Welcome"
 import Programs from "./Programs"
 import Analyses from "./Analyses"
 import WhatsNew from "./WhatsNew.jsx"
-import Explore from "./HomeExplore.js"
+import Explore from "./HomeExplore-Syn.js"
 //import PopularDataRequests from "./PopularDataRequests"
 //import ContributeYourData from "./ContributeYourData"
 //
