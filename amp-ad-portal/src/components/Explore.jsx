@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { SynapseComponents } from "synapse-react-client"
+import { withRouter } from "react-router-dom"
 import SynapseChart from "./SynapseBarChart.jsx"
 
 import {
@@ -58,8 +59,11 @@ class Explore extends Component {
     case "#/Explore/People":
       id = "syn13897207"
       break
+    case hash.includes("Studies") && hash.length > 8:
+      id = "studyPage"
+      break
     default:
-      id = ""
+      id = "syn17024112"
     }
 
     this.handleButtonPress(id, undefined)
@@ -69,6 +73,10 @@ class Explore extends Component {
     this.setState({
       [KEY]: NEWSTATE,
     })
+  };
+
+  changeRoute = (url) => {
+    this.props.history.push(url)
   };
 
   handleButtonPress = (value, key = "id") => {
@@ -87,7 +95,7 @@ class Explore extends Component {
     const hideLink = returnSynapseValue(loadedObjects, key, value, "hideLink")
     const hash = returnSynapseValue(loadedObjects, key, value, "hash")
 
-    console.log(color, limit, table, columns, type, name, hideLink)
+    console.log("Hash", hash)
 
     this.setState(
       {
@@ -102,7 +110,7 @@ class Explore extends Component {
         hideLink: hideLink !== undefined ? hideLink : false,
       },
       () => {
-        window.location.hash = `#${hash}`
+        this.changeRoute(hash)
       },
     )
     return ""

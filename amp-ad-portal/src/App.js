@@ -51,6 +51,9 @@ const AsyncHeader = asyncComponent(() => import("./components/Header"))
 // explore
 const AsyncExplore = asyncComponent(() => import("./components/Explore.jsx"))
 
+// study page
+const AsyncStudyPage = asyncComponent(() => import("./components/Page-Study.js"))
+
 const pageDataPoints = ["assay", "tissue", "study", "dataType", "diagnoses"]
 
 ReactGA.initialize("UA-29804340-3")
@@ -617,8 +620,23 @@ class App extends Component {
     )
   };
 
-  ReturnExplore = () => {
-    return <AsyncExplore token={this.props.loginToken.sessionToken} />
+  ReturnExplore = (props) => {
+    return (
+      <AsyncExplore
+        token={this.props.loginToken.sessionToken}
+        history={props.history}
+      />
+    )
+  };
+
+  ReturnStudyPage = (props) => {
+    return (
+      <AsyncStudyPage
+        token={this.props.loginToken.sessionToken}
+        hash={window.location.hash}
+        match={props.match}
+      />
+    )
   };
 
   Main = () => {
@@ -676,6 +694,10 @@ class App extends Component {
           component={this.ReturnResourcesStudies}
         />
         <Route path="/Explore" component={this.ReturnExplore} />
+        <Route
+          path="/Explore/Studies/:handle"
+          component={this.ReturnStudyPage}
+        />
 
         <Route path="/About/AMP-AD" component={this.ReturnAboutAmpAd} />
         <Route path="/About/People" component={this.ReturnAboutPeople} />
@@ -714,7 +736,6 @@ class App extends Component {
 
 App.propTypes = {
   loginToken: PropTypes.object.isRequired,
-  appData: PropTypes.object.isRequired,
 }
 
 export default App

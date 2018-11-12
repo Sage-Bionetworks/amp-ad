@@ -28,7 +28,7 @@ export const synapseObjects = [
     color: 1,
     limit: 100,
     columns: 0,
-    table: false,
+    table: true,
     type: "STUDY",
     hash: "/Explore/Studies",
   },
@@ -65,6 +65,17 @@ export const synapseObjects = [
     table: true,
     type: "PUBLICATION",
     hash: "/Explore/People",
+  },
+  {
+    name: "",
+    id: "studyPage",
+    filter: "",
+    color: 0,
+    limit: 0,
+    columns: 0,
+    table: false,
+    type: "",
+    hash: "/Studies/",
   },
 ]
 
@@ -140,7 +151,7 @@ export const returnSynapseValue = (
   searchKey,
 ) => {
   const matchedObject = objectArray.filter(object => object[key] === keyValue)
-  console.log(key, keyValue, matchedObject)
+  //console.log(key, keyValue, matchedObject)
   return matchedObject[0][searchKey]
 }
 
