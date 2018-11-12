@@ -18,8 +18,8 @@ const login = async () => SynapseClient.login("mikeybkats", "guinness").then((ke
   return keys
 })
 
-const table = "syn12532774"
-const speciesQuery = `SELECT species, assay, tissue, diagnosis, specimenID, COUNT(*) FROM ${table} GROUP BY assay, tissue, species, diagnosis`
+//const table = "syn12532774"
+//const speciesQuery = `SELECT species, assay, tissue, diagnosis, specimenID, COUNT(*) FROM ${table} GROUP BY assay, tissue, species, diagnosis`
 
 login()
   .then((token) => {
@@ -29,11 +29,11 @@ login()
       </div>,
       document.getElementById("root"),
     )
-    return queryTable(table, speciesQuery, token)
+    //return queryTable(table, speciesQuery, token)
   })
-  .then((response) => {
-    rawSynapseData = JSON.parse(response)
-  })
+  //.then((response) => {
+  //rawSynapseData = JSON.parse(response)
+  //})
   .then(() => ReactDOM.render(
     <App loginToken={loginKey} appData={rawSynapseData} />,
     document.getElementById("root"),
