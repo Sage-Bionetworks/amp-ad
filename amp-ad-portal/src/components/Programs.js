@@ -30,7 +30,7 @@ const Programs = (props) => {
               </p>
             </div>
             <button
-              className="btn"
+              className="btn-amp"
               type="button"
               onClick={event => openUrl(event, "/#/Research/AMP-AD")}
             >
@@ -53,7 +53,7 @@ const Programs = (props) => {
               </p>
             </div>
             <button
-              className="btn"
+              className="btn-amp"
               type="button"
               onClick={event => openUrl(event, "/#/Research/M2OVE")}
             >
@@ -76,7 +76,7 @@ const Programs = (props) => {
               </p>
             </div>
             <button
-              className="btn"
+              className="btn-amp"
               type="button"
               onClick={event => openUrl(event, "/#/Research/Model-AD")}
             >
@@ -99,7 +99,7 @@ const Programs = (props) => {
               </p>
             </div>
             <button
-              className="btn"
+              className="btn-amp"
               type="button"
               onClick={event => openUrl(event, "/#/Research/Resilience-AD")}
             >

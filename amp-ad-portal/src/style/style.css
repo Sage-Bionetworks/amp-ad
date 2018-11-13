@@ -691,7 +691,7 @@ button.btn-control h5 {
   letter-spacing: 0.5px;
 }
 
-.btn {
+.btn-amp {
   color: #1A1C29;
   font-size: 20px;
   font-weight: 600;
@@ -703,7 +703,7 @@ button.btn-control h5 {
   transition: all 0.3s ease-in-out;
 }
 
-.btn:hover {
+.btn-amp:hover {
   background-color: #C7D6FF;
 }
 
@@ -1148,16 +1148,16 @@ section.explore-content .selectors, div.explore-content .selectors {
 section.explore-content .selectors button, div.explore-content .selectors button {
   position: relative;
 }
-section.explore-content .selectors button, div.explore-content .selectors button {
-  background-color: #77AFD4;
+section.explore-content .selectors button:first-child, div.explore-content .selectors button:first-child {
+  background-color: #6C5C97;
 }
-section.explore-content .selectors button:hover, div.explore-content .selectors button:hover {
+section.explore-content .selectors button:first-child:hover, div.explore-content .selectors button:first-child:hover {
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
-section.explore-content .selectors button.active, div.explore-content .selectors button.active {
+section.explore-content .selectors button:first-child.active, div.explore-content .selectors button:first-child.active {
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
-section.explore-content .selectors button.active::after, div.explore-content .selectors button.active::after {
+section.explore-content .selectors button:first-child.active::after, div.explore-content .selectors button:first-child.active::after {
   height: 0px;
   width: 0px;
   position: absolute;
@@ -1167,18 +1167,154 @@ section.explore-content .selectors button.active::after, div.explore-content .se
   content: "";
   border-left: 13px solid transparent;
   border-right: 13px solid transparent;
-  border-top: 12px solid #77AFD4;
+  border-top: 12px solid #6C5C97;
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   transition: all 400ms;
 }
-section.explore-content .selectors button.active:hover:after, div.explore-content .selectors button.active:hover:after {
+section.explore-content .selectors button:first-child.active:hover:after, div.explore-content .selectors button:first-child.active:hover:after {
   transition: all 400ms;
 }
-section.explore-content .bar-chart, div.explore-content .bar-chart {
-  position: relative;
-  height: 220px;
+section.explore-content .selectors button:nth-child(2), div.explore-content .selectors button:nth-child(2) {
+  background-color: #E5AE4C;
+}
+section.explore-content .selectors button:nth-child(2):hover, div.explore-content .selectors button:nth-child(2):hover {
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+section.explore-content .selectors button:nth-child(2).active, div.explore-content .selectors button:nth-child(2).active {
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+section.explore-content .selectors button:nth-child(2).active::after, div.explore-content .selectors button:nth-child(2).active::after {
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  bottom: -12px;
+  z-index: 100;
+  display: block;
+  content: "";
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-top: 12px solid #E5AE4C;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  transition: all 400ms;
+}
+section.explore-content .selectors button:nth-child(2).active:hover:after, div.explore-content .selectors button:nth-child(2).active:hover:after {
+  transition: all 400ms;
+}
+section.explore-content .selectors button:nth-child(3), div.explore-content .selectors button:nth-child(3) {
+  background-color: #5BB0B5;
+}
+section.explore-content .selectors button:nth-child(3):hover, div.explore-content .selectors button:nth-child(3):hover {
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+section.explore-content .selectors button:nth-child(3).active, div.explore-content .selectors button:nth-child(3).active {
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+section.explore-content .selectors button:nth-child(3).active::after, div.explore-content .selectors button:nth-child(3).active::after {
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  bottom: -12px;
+  z-index: 100;
+  display: block;
+  content: "";
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-top: 12px solid #5BB0B5;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  transition: all 400ms;
+}
+section.explore-content .selectors button:nth-child(3).active:hover:after, div.explore-content .selectors button:nth-child(3).active:hover:after {
+  transition: all 400ms;
+}
+section.explore-content .selectors button:nth-child(4), div.explore-content .selectors button:nth-child(4) {
+  background-color: #5171C0;
+}
+section.explore-content .selectors button:nth-child(4):hover, div.explore-content .selectors button:nth-child(4):hover {
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+section.explore-content .selectors button:nth-child(4).active, div.explore-content .selectors button:nth-child(4).active {
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+section.explore-content .selectors button:nth-child(4).active::after, div.explore-content .selectors button:nth-child(4).active::after {
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  bottom: -12px;
+  z-index: 100;
+  display: block;
+  content: "";
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-top: 12px solid #5171C0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  transition: all 400ms;
+}
+section.explore-content .selectors button:nth-child(4).active:hover:after, div.explore-content .selectors button:nth-child(4).active:hover:after {
+  transition: all 400ms;
+}
+section.explore-content .selectors button:nth-child(5), div.explore-content .selectors button:nth-child(5) {
+  background-color: #0F9488;
+}
+section.explore-content .selectors button:nth-child(5):hover, div.explore-content .selectors button:nth-child(5):hover {
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+section.explore-content .selectors button:nth-child(5).active, div.explore-content .selectors button:nth-child(5).active {
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+section.explore-content .selectors button:nth-child(5).active::after, div.explore-content .selectors button:nth-child(5).active::after {
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  bottom: -12px;
+  z-index: 100;
+  display: block;
+  content: "";
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-top: 12px solid #0F9488;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  transition: all 400ms;
+}
+section.explore-content .selectors button:nth-child(5).active:hover:after, div.explore-content .selectors button:nth-child(5).active:hover:after {
+  transition: all 400ms;
+}
+section.explore-content .selectors button:nth-child(6), div.explore-content .selectors button:nth-child(6) {
+  background-color: #D4689A;
+}
+section.explore-content .selectors button:nth-child(6):hover, div.explore-content .selectors button:nth-child(6):hover {
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+section.explore-content .selectors button:nth-child(6).active, div.explore-content .selectors button:nth-child(6).active {
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+section.explore-content .selectors button:nth-child(6).active::after, div.explore-content .selectors button:nth-child(6).active::after {
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  bottom: -12px;
+  z-index: 100;
+  display: block;
+  content: "";
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-top: 12px solid #D4689A;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  transition: all 400ms;
+}
+section.explore-content .selectors button:nth-child(6).active:hover:after, div.explore-content .selectors button:nth-child(6).active:hover:after {
+  transition: all 400ms;
 }
 @media screen and (max-width: 720px) {
   section.explore-content .bar-chart, div.explore-content .bar-chart {

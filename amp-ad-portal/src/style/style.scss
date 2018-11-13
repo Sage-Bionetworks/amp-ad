@@ -22,6 +22,13 @@ $textGray: #BCC0CA;
 $navigationText: #404B63;
 $navigation: RGBA(254, 254, 254, .90);
 
+$selector1: #6C5C97;
+$selector2: #E5AE4C;
+$selector3: #5BB0B5;
+$selector4: #5171C0;
+$selector5: #0F9488;
+$selector6: #D4689A;
+
 body, button, h1, h2, h3, h4, h5, li, ul, p, a {
 	font-family: 'Lato', sans-serif; 
 }
@@ -534,7 +541,7 @@ select {
   }
 
 
-  .btn {
+  .btn-amp {
     color: #1A1C29;
     font-size: 20px;
     font-weight: 600;
@@ -546,7 +553,7 @@ select {
     transition: all .3s ease-in-out;
   }
 
-  .btn:hover {
+  .btn-amp:hover {
     background-color: #C7D6FF;
   }
   .btn-lg {
@@ -1006,7 +1013,7 @@ select {
     }
     .selectors {
       display: flex;
-      justify-content: space-around;
+     justify-content: space-around;
       flex-direction: row;
       @media screen and (max-width: 720px){
         flex-direction: column;
@@ -1018,30 +1025,29 @@ select {
         
       }
       margin: 20px 0px;
-      button {
-        @include hoverFade($blue);
+      button:first-child {
+        @include hoverFade($selector1);
       }
-      //button:nth-child(2) {
-        //@include hoverFade($datasets);
-      //}
-      //button:nth-child(3) {
-        //@include hoverFade($files);
-      //}
-      //button:nth-child(4) {
-        //@include hoverFade($studies);
-      //}
-      //button:nth-child(5) {
-        //display: none;
-        //@include hoverFade($analysis);
-      //}
-      //button:nth-child(6) {
-        //@include hoverFade($publications);
-      //}
+      button:nth-child(2) {
+        @include hoverFade($selector2);
+      }
+      button:nth-child(3) {
+        @include hoverFade($selector3);
+      }
+      button:nth-child(4) {
+        @include hoverFade($selector4);
+      }
+      button:nth-child(5) {
+        @include hoverFade($selector5);
+      }
+      button:nth-child(6) {
+        @include hoverFade($selector6);
+      }
     }
 
     .bar-chart {
-      position: relative;
-      height: 220px;
+      //position: relative;
+      //height: 220px;
       @media screen and (max-width: 720px){
         height: 450px;
       }

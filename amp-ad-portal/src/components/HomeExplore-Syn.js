@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { SynapseComponents } from "synapse-react-client"
 import SynapseChart from "./SynapseBarChart.jsx"
 import { synapseObjects, returnSynapseValue } from "../library/synapseObjects"
 import ButtonExplore from "./Button-Explore"
@@ -47,10 +48,14 @@ class ExploreContent extends Component {
   };
 
   returnSynapseChart = (hash = window.location.hash) => {
-    if (hash === "#/Explore/Publications") {
+    if (this.state.activeId === "syn2580853") {
       return (
         <div>
-          <h2>Publications Cards</h2>
+          <SynapseComponents.Markdown
+            token={this.props.token}
+            ownerId="syn2580853"
+            wikiId="409850"
+          />
         </div>
       )
     }
@@ -67,6 +72,13 @@ class ExploreContent extends Component {
     )
   };
 
+  barChartStyle = () => {
+    return {
+      height: this.state.activeId === "syn2580853" ? "100%" : "220px",
+      position: "relative",
+    }
+  };
+
   render() {
     return (
       <section className="row explore-content">
@@ -74,7 +86,7 @@ class ExploreContent extends Component {
           <div className="row">
             <h2 className="header">Explore Content</h2>
           </div>
-          <div className="row bar-chart">
+          <div className="row bar-chart" style={this.barChartStyle()}>
             <div className="center-block selectors-container">
               <div className="selectors">
                 <button
@@ -104,6 +116,13 @@ class ExploreContent extends Component {
                   onClick={() => this.handleButtonPress("syn17024112")}
                 >
                   <h5>DATA</h5>
+                </button>
+                <button
+                  className={this.returnButtonClass("syn2580853")}
+                  type="button"
+                  onClick={() => this.handleButtonPress("syn2580853")}
+                >
+                  <h5>PUBLICATIONS</h5>
                 </button>
                 <button
                   className={this.returnButtonClass("syn13897207")}
