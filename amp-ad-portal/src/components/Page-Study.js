@@ -4,6 +4,7 @@ import PropTypes from "prop-types"
 class StudyPage extends Component {
   state = {
     params: {},
+    name: "",
   };
 
   componentDidMount() {
@@ -14,9 +15,12 @@ class StudyPage extends Component {
 
   render() {
     return (
-      <div>
-        {this.props.hash}
-        {this.props.token}
+      <div className="container">
+        <div className="row center-xs">
+          <div className="col-xs-12 col-sm-10">
+            <h1>{this.state.params.handle}</h1>
+          </div>
+        </div>
       </div>
     )
   }

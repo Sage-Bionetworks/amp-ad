@@ -11,6 +11,9 @@ import {
 } from "../library/synapseObjects"
 
 let loadedObjects
+let history
+let location
+let unlisten
 
 class Explore extends Component {
   state = {
@@ -26,16 +29,39 @@ class Explore extends Component {
   };
 
   componentDidMount() {
-    loadedObjects = synapseObjects.clone()
-    // studies
-    setSynapseValue(loadedObjects, "syn16787123", "filter", "projectStatus")
-    // publications
-    setSynapseValue(loadedObjects, "syn16857542", "filter", "id")
+    history = this.props.history
+    location = history.location
 
-    if (window.location.hash !== "#/Explore") {
-      this.setActiveValues(window.location.hash, "id")
-      //this.setActiveValues("syn17024112", "id")
-    } else this.handleButtonPress("syn17024112", undefined)
+    if (this.setActiveValues(window.location.hash) !== "studyPage") {
+      loadedObjects = synapseObjects.clone()
+      // studies
+      setSynapseValue(loadedObjects, "syn16787123", "filter", "projectStatus")
+      // publications
+      setSynapseValue(loadedObjects, "syn16857542", "filter", "id")
+
+      if (window.location.hash !== "#/Explore") {
+        this.setActiveValues(window.location.hash, "id")
+      } else this.handleButtonPress("syn17024112", undefined)
+    }
+  }
+
+  componentDidUpdate() {
+    unlisten = history.listen((location, action) => {
+      const pathHash = location.pathname.substring(
+        location.pathname.lastIndexOf("/") + 1,
+        location.pathname.length,
+      )
+      if (this.state.name !== pathHash) {
+        this.setState({
+          name: pathHash,
+        })
+      }
+      return true
+    })
+  }
+
+  componentWillUnmount() {
+    unlisten()
   }
 
   setActiveValues = (hash) => {
@@ -59,7 +85,7 @@ class Explore extends Component {
     case "#/Explore/People":
       id = "syn13897207"
       break
-    case hash.includes("Studies") && hash.length > 8:
+    case hash.includes("/Studies/"):
       id = "studyPage"
       break
     default:
@@ -94,8 +120,6 @@ class Explore extends Component {
     const name = returnSynapseValue(loadedObjects, key, value, "name")
     const hideLink = returnSynapseValue(loadedObjects, key, value, "hideLink")
     const hash = returnSynapseValue(loadedObjects, key, value, "hash")
-
-    console.log("Hash", hash)
 
     this.setState(
       {
@@ -179,6 +203,69 @@ class Explore extends Component {
     )
   };
 
+  SelectorsAndCharts = () => {
+    if (
+      !window.location.hash.includes("/Studies/")
+      && !window.location.hash.includes("/Projects/")
+      && !window.location.hash.includes("/Consortia/")
+    ) {
+      return (
+        <div>
+          <div
+            className={`center-block selectors-container ${this.hideBarSection()}`}
+          >
+            <div className="selectors">
+              <button
+                className={this.returnButtonClass("syn17024173")}
+                type="button"
+                onClick={() => this.handleButtonPress("syn17024173")}
+              >
+                <h5>CONSORTIA</h5>
+              </button>
+              <button
+                className={this.returnButtonClass("syn17024229")}
+                type="button"
+                onClick={() => this.handleButtonPress("syn17024229")}
+              >
+                <h5>PROJECTS</h5>
+              </button>
+              <button
+                className={this.returnButtonClass("syn9886254")}
+                type="button"
+                onClick={() => this.handleButtonPress("syn9886254")}
+              >
+                <h5>STUDIES</h5>
+              </button>
+              <button
+                className={this.returnButtonClass("syn17024112")}
+                type="button"
+                onClick={() => this.handleButtonPress("syn17024112")}
+              >
+                <h5>DATA</h5>
+              </button>
+              <button
+                className={this.returnButtonClass("syn2580853")}
+                type="button"
+                onClick={() => this.handleButtonPress("syn2580853")}
+              >
+                <h5>PUBLICATIONS</h5>
+              </button>
+              <button
+                className={this.returnButtonClass("syn13897207")}
+                type="button"
+                onClick={() => this.handleButtonPress("syn13897207")}
+              >
+                <h5>PEOPLE</h5>
+              </button>
+            </div>
+          </div>
+          {this.returnSynapseChart()}
+        </div>
+      )
+    }
+    return <div />
+  };
+
   render() {
     return (
       <section className="page explore">
@@ -190,55 +277,7 @@ class Explore extends Component {
             </h1>
           </div>
           <div className="row explore-content">
-            <div
-              className={`center-block selectors-container ${this.hideBarSection()}`}
-            >
-              <div className="selectors">
-                <button
-                  className={this.returnButtonClass("syn17024173")}
-                  type="button"
-                  onClick={() => this.handleButtonPress("syn17024173")}
-                >
-                  <h5>CONSORTIA</h5>
-                </button>
-                <button
-                  className={this.returnButtonClass("syn17024229")}
-                  type="button"
-                  onClick={() => this.handleButtonPress("syn17024229")}
-                >
-                  <h5>PROJECTS</h5>
-                </button>
-                <button
-                  className={this.returnButtonClass("syn9886254")}
-                  type="button"
-                  onClick={() => this.handleButtonPress("syn9886254")}
-                >
-                  <h5>STUDIES</h5>
-                </button>
-                <button
-                  className={this.returnButtonClass("syn17024112")}
-                  type="button"
-                  onClick={() => this.handleButtonPress("syn17024112")}
-                >
-                  <h5>DATA</h5>
-                </button>
-                <button
-                  className={this.returnButtonClass("syn2580853")}
-                  type="button"
-                  onClick={() => this.handleButtonPress("syn2580853")}
-                >
-                  <h5>PUBLICATIONS</h5>
-                </button>
-                <button
-                  className={this.returnButtonClass("syn13897207")}
-                  type="button"
-                  onClick={() => this.handleButtonPress("syn13897207")}
-                >
-                  <h5>PEOPLE</h5>
-                </button>
-              </div>
-            </div>
-            {this.returnSynapseChart()}
+            <this.SelectorsAndCharts />
           </div>
         </div>
       </section>

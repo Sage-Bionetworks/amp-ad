@@ -635,6 +635,7 @@ class App extends Component {
         token={this.props.loginToken.sessionToken}
         hash={window.location.hash}
         match={props.match}
+        history={props.history}
       />
     )
   };
