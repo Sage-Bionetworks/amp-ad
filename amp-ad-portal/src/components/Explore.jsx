@@ -52,6 +52,7 @@ class Explore extends Component {
         location.pathname.length,
       )
       if (this.state.name !== pathHash) {
+        this.setActiveValues(window.location.hash)
         this.setState({
           name: pathHash,
         })
@@ -76,7 +77,7 @@ class Explore extends Component {
     case "#/Explore/Publications":
       id = "syn2580853"
       break
-    case "#/Explore/Consortia":
+    case "#/Explore/Programs":
       id = "syn17024173"
       break
     case "#/Explore/Projects":
@@ -207,7 +208,7 @@ class Explore extends Component {
     if (
       !window.location.hash.includes("/Studies/")
       && !window.location.hash.includes("/Projects/")
-      && !window.location.hash.includes("/Consortia/")
+      && !window.location.hash.includes("/Programs/")
     ) {
       return (
         <div>
@@ -220,7 +221,7 @@ class Explore extends Component {
                 type="button"
                 onClick={() => this.handleButtonPress("syn17024173")}
               >
-                <h5>CONSORTIA</h5>
+                <h5>PROGRAMS</h5>
               </button>
               <button
                 className={this.returnButtonClass("syn17024229")}

@@ -5,6 +5,8 @@ import SynapseChart from "./SynapseBarChart.jsx"
 import { synapseObjects, returnSynapseValue } from "../library/synapseObjects"
 import ButtonExplore from "./Button-Explore"
 
+import Selectors from "./SelectorRow"
+
 let loadedObject
 
 class ExploreContent extends Component {
@@ -21,10 +23,8 @@ class ExploreContent extends Component {
     this.handleButtonPress("syn17024112", "id")
   }
 
-  handleChanges = (KEY, NEWSTATE) => {
-    this.setState({
-      [KEY]: NEWSTATE,
-    })
+  handleChanges = (stateObject) => {
+    this.setState(stateObject)
   };
 
   handleButtonPress = (value, key = "id") => {
@@ -33,7 +33,7 @@ class ExploreContent extends Component {
     const hash = returnSynapseValue(loadedObject, key, value, "hash")
     const name = returnSynapseValue(loadedObject, key, value, "name")
 
-    this.setState({
+    this.handleChanges({
       activeId: value,
       activeFilter,
       color,
@@ -88,50 +88,11 @@ class ExploreContent extends Component {
           </div>
           <div className="row bar-chart" style={this.barChartStyle()}>
             <div className="center-block selectors-container">
-              <div className="selectors">
-                <button
-                  className={this.returnButtonClass("syn17024173")}
-                  type="button"
-                  onClick={() => this.handleButtonPress("syn17024173")}
-                >
-                  <h5>CONSORTIA</h5>
-                </button>
-                <button
-                  className={this.returnButtonClass("syn17024229")}
-                  type="button"
-                  onClick={() => this.handleButtonPress("syn17024229")}
-                >
-                  <h5>PROJECTS</h5>
-                </button>
-                <button
-                  className={this.returnButtonClass("syn9886254")}
-                  type="button"
-                  onClick={() => this.handleButtonPress("syn9886254")}
-                >
-                  <h5>STUDIES</h5>
-                </button>
-                <button
-                  className={this.returnButtonClass("syn17024112")}
-                  type="button"
-                  onClick={() => this.handleButtonPress("syn17024112")}
-                >
-                  <h5>DATA</h5>
-                </button>
-                <button
-                  className={this.returnButtonClass("syn2580853")}
-                  type="button"
-                  onClick={() => this.handleButtonPress("syn2580853")}
-                >
-                  <h5>PUBLICATIONS</h5>
-                </button>
-                <button
-                  className={this.returnButtonClass("syn13897207")}
-                  type="button"
-                  onClick={() => this.handleButtonPress("syn13897207")}
-                >
-                  <h5>PEOPLE</h5>
-                </button>
-              </div>
+              <Selectors
+                synapseObject={loadedObject}
+                returnButtonClass={this.returnButtonClass}
+                handleChanges={this.handleChanges}
+              />
             </div>
             {this.returnSynapseChart()}
             <div className="row explore-button-row">

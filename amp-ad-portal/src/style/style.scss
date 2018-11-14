@@ -2,6 +2,9 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700');
 @import './_mixins.scss';
 
+$primaryHighlight: #5BB0B5;
+$navigation: RGBA(254, 254, 254, .90);
+
 $green: #89C889;
 $green2: #8ED1D4;
 $pink: #F683B9;
@@ -20,7 +23,6 @@ $gold: #FCCB71;
 $gray: #F5F5F5;
 $textGray: #BCC0CA;
 $navigationText: #404B63;
-$navigation: RGBA(254, 254, 254, .90);
 
 $selector1: #6C5C97;
 $selector2: #E5AE4C;
@@ -848,16 +850,13 @@ select {
       padding: 14px 20px; 
     }
     .accordion__title {
-      background-color: #e3e3e3;
-    }
-    .accordion-title {
-      //transition: all 300ms ease;
+      background-color: $navigation;
     }
     .accordion-title[aria-selected="true"] a{
-      background: #e3e3e3;
+      background: $navigation;
     }
     .accordion-title.top-level-accordion[aria-selected="true"]{
-      background: #e3e3e3;
+      background: $navigation;
       .under-bar {
         opacity: 0;
       }
@@ -875,7 +874,7 @@ select {
       display: none;
     }
     .accordion__title:hover {
-      background-color: darken(#e3e3e3, 10%);
+      background-color: $primaryHighlight;
     }
     .agora-border {
       position: absolute;

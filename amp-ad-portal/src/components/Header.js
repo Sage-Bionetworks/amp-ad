@@ -19,8 +19,8 @@ class Header extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      Research: false,
-      Resources: false,
+      DataAccess: false,
+      Explore: false,
       About: false,
       Home: false,
       Open: false,
@@ -52,10 +52,11 @@ class Header extends Component {
     this.setState(
       {
         Research: false,
-        Resources: false,
+        DataAccess: false,
         About: false,
         Home: false,
         Open: false,
+        Explore: false,
         activeUnderBar,
       },
       () => {
@@ -65,37 +66,18 @@ class Header extends Component {
     )
   };
 
-  setOpenAccordion = (event) => {
-    const accordionItems = document.querySelectorAll(
-      ".top-level-accordion-item",
-    )
-
+  setOpenAccordion = (event, name) => {
     this.handleLocalChanges("activeUnderBar", event.target.innerHTML)
-
-    accordionItems.forEach((element) => {
-      if (
-        event.target.innerHTML
-        !== element.querySelector(".main-nav-item").innerHTML
-      ) {
-        this.setState({
-          [element.querySelector(".main-nav-item").innerHTML]: false,
-          Open: true,
-        })
-      } else {
-        const newState = this.state[element.querySelector(".main-nav-item").innerHTML]
-          !== true
-        this.setState(prevState => ({
-          ...prevState,
-          [element.querySelector(".main-nav-item").innerHTML]: newState,
-          Open: true,
-        }))
-      }
+    this.closeNavigation()
+    this.setState({
+      [name]: true,
+      Open: true,
     })
   };
 
-  dropdownMenuAction = (event) => {
+  dropdownMenuAction = (event, name) => {
     event.preventDefault()
-    this.setOpenAccordion(event)
+    this.setOpenAccordion(event, name)
 
     if (this.state.Open === true) {
       this.closeNavigation()
@@ -122,183 +104,42 @@ class Header extends Component {
     return behavior
   };
 
-  ResearchDropdown = () => (
+  ExploreDropdown = () => (
     <Accordion>
       <AccordionItem
         className="top-level-accordion-item"
-        onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Research")
+        onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Explore")
         }
         onMouseLeave={this.mouseLeaveBehavior()}
       >
         <AccordionItemTitle
           className="accordion-title top-level-accordion"
-          aria-selected={this.state.Research}
+          aria-selected={this.state.Explore}
         >
           <a
             href="/"
             className={
-              this.props.hash.includes("Research")
+              this.props.hash.includes("Explore")
                 ? "nav-item main-nav-item active"
                 : "nav-item main-nav-item"
             }
-            onClick={this.dropdownMenuAction}
+            onClick={event => this.dropdownMenuAction(event, "Explore")}
           >
-            Research
+            Explore
           </a>
           <div
             className={
-              this.props.hash.includes("Research")
-              && this.state.activeUnderBar.includes("Research")
+              this.props.hash.includes("Explore")
+              && this.state.activeUnderBar.includes("Explore")
                 ? "under-bar active"
                 : "under-bar"
             }
           />
         </AccordionItemTitle>
         <AccordionItemBody
-          aria-hidden={this.state.Research !== true}
+          aria-hidden={this.state.Explore !== true}
           className={
-            this.state.Research === true
-              ? "accordion-body top-level-accordion"
-              : "accordion-body top-level-accordion accordion__body--hidden"
-          }
-        >
-          <Accordion>
-            <AccordionItem className="accordion-row row">
-              <AccordionItemTitle>
-                <div className="accordion-sub-row row between-xs">
-                  <div className="col-xs-10 accordion-sub-title">Programs</div>
-                  <div className="col-xs-1 carrot-icon">&gt;</div>
-                </div>
-              </AccordionItemTitle>
-              <AccordionItemBody>
-                <ul>
-                  <li>
-                    <Link
-                      name="AMP-AD"
-                      to="/Research/AMP-AD"
-                      className="nav-item dropdown"
-                      onClick={() => {
-                        this.closeNavigation("#/Research/AMP-AD")
-                      }}
-                    >
-                      AMP-AD Target Discovery and Preclinical Validation
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      name="M2OVE"
-                      to="/Research/M2OVE"
-                      className="nav-item dropdown"
-                      onClick={() => {
-                        this.closeNavigation("#/Research/M2OVE")
-                      }}
-                    >
-                      M2OVE-AD Consortium
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      name="MODEL-AD"
-                      to="/Research/Model-AD"
-                      className="nav-item dropdown"
-                      onClick={() => {
-                        this.closeNavigation("#/Research/Model-AD")
-                      }}
-                    >
-                      Model AD Program
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      name="Resilience-AD"
-                      to="/Research/Resilience-AD"
-                      className="nav-item dropdown"
-                      onClick={() => {
-                        this.closeNavigation("#/Research/Resilience-AD")
-                      }}
-                    >
-                      Resilience-AD Program
-                    </Link>
-                  </li>
-                </ul>
-              </AccordionItemBody>
-            </AccordionItem>
-            <AccordionItem>
-              <AccordionItemTitle className="accordion__title link">
-                <div className="row between-xs">
-                  <div className="col-xs-12 accordion-sub-title">
-                    <Link
-                      name="external researchers"
-                      to="/Explore/Publications"
-                      onClick={() => {
-                        this.closeNavigation("#/Explore/Publications")
-                      }}
-                    >
-                      Publications
-                    </Link>
-                  </div>
-                </div>
-              </AccordionItemTitle>
-            </AccordionItem>
-            <AccordionItem>
-              <AccordionItemTitle className="accordion__title link">
-                <div className="row between-xs">
-                  <div className="col-xs-12 accordion-sub-title">
-                    <Link
-                      name="external researchers"
-                      to="/Research/ExternalResearchers"
-                      onClick={() => {
-                        this.closeNavigation("#/Research/ExternalResearchers")
-                      }}
-                    >
-                      Approved External Research
-                    </Link>
-                  </div>
-                </div>
-              </AccordionItemTitle>
-            </AccordionItem>
-          </Accordion>
-        </AccordionItemBody>
-      </AccordionItem>
-    </Accordion>
-  );
-
-  ResourcesDropdown = () => (
-    <Accordion>
-      <AccordionItem
-        className="top-level-accordion-item"
-        onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Resources")
-        }
-        onMouseLeave={this.mouseLeaveBehavior()}
-      >
-        <AccordionItemTitle
-          className="accordion-title top-level-accordion"
-          aria-selected={this.state.Resources}
-        >
-          <a
-            href="/"
-            className={
-              this.props.hash.includes("Resources")
-                ? "nav-item main-nav-item active"
-                : "nav-item main-nav-item"
-            }
-            onClick={this.dropdownMenuAction}
-          >
-            Resources
-          </a>
-          <div
-            className={
-              this.props.hash.includes("Resources")
-              && this.state.activeUnderBar.includes("Resources")
-                ? "under-bar active"
-                : "under-bar"
-            }
-          />
-        </AccordionItemTitle>
-        <AccordionItemBody
-          aria-hidden={this.state.Resources !== true}
-          className={
-            this.state.Resources === true
+            this.state.Explore === true
               ? "accordion-body top-level-accordion"
               : "accordion-body top-level-accordion accordion__body--hidden"
           }
@@ -310,12 +151,12 @@ class Header extends Component {
                   <div className="col-xs-12 accordion-sub-title">
                     <Link
                       name="external researchers"
-                      to="/Resources/Data"
+                      to="/Explore/Programs"
                       onClick={() => {
-                        this.closeNavigation("#/Resources/Data")
+                        this.closeNavigation("#/Explore/Programs")
                       }}
                     >
-                      Data
+                      Programs
                     </Link>
                   </div>
                 </div>
@@ -328,9 +169,27 @@ class Header extends Component {
                   <div className="col-xs-12 accordion-sub-title">
                     <Link
                       name="external researchers"
-                      to="/Resources/Studies"
+                      to="/Explore/Projects"
                       onClick={() => {
-                        this.closeNavigation("#/Resources/Studies")
+                        this.closeNavigation("#/Explore/Projects")
+                      }}
+                    >
+                      Projects
+                    </Link>
+                  </div>
+                </div>
+              </AccordionItemTitle>
+            </AccordionItem>
+
+            <AccordionItem>
+              <AccordionItemTitle className="accordion__title link">
+                <div className="row between-xs">
+                  <div className="col-xs-12 accordion-sub-title">
+                    <Link
+                      name="external researchers"
+                      to="/Explore/Studies"
+                      onClick={() => {
+                        this.closeNavigation("#/Explore/Studies")
                       }}
                     >
                       Studies
@@ -346,42 +205,12 @@ class Header extends Component {
                   <div className="col-xs-12 accordion-sub-title">
                     <Link
                       name="external researchers"
-                      to="/Resources/ExperimentalResources"
+                      to="/Explore/Data"
                       onClick={() => {
-                        this.closeNavigation(
-                          "#/Resources/ExperimentalResources",
-                        )
+                        this.closeNavigation("#/Explore/Data")
                       }}
                     >
-                      Experimental Resources
-                    </Link>
-                  </div>
-                </div>
-              </AccordionItemTitle>
-            </AccordionItem>
-
-            <AccordionItem>
-              <AccordionItemTitle className="accordion__title link">
-                <div className="row between-xs">
-                  <div className="col-xs-12 accordion-sub-title">
-                    <a href="http://agora.ampadportal.org/">Agora</a>
-                  </div>
-                </div>
-              </AccordionItemTitle>
-            </AccordionItem>
-
-            <AccordionItem>
-              <AccordionItemTitle className="accordion__title link">
-                <div className="row between-xs">
-                  <div className="col-xs-12 accordion-sub-title">
-                    <Link
-                      name="external researchers"
-                      to="/Resources/DataUseRequirements"
-                      onClick={() => {
-                        this.closeNavigation("#/Resources/DataUseRequirements")
-                      }}
-                    >
-                      Data Use Requirements
+                      Data Files
                     </Link>
                   </div>
                 </div>
@@ -394,14 +223,30 @@ class Header extends Component {
                   <div className="col-xs-12 accordion-sub-title">
                     <Link
                       name="Acknowledgement Statements"
-                      to="/Resources/AcknowledgementStatements"
+                      to="/Explore/Publications"
                       onClick={() => {
-                        this.closeNavigation(
-                          "#/Resources/AcknowledgementStatements",
-                        )
+                        this.closeNavigation("#/Explore/Publications")
                       }}
                     >
-                      Acknowledgement Statements
+                      Publications
+                    </Link>
+                  </div>
+                </div>
+              </AccordionItemTitle>
+            </AccordionItem>
+
+            <AccordionItem>
+              <AccordionItemTitle className="accordion__title link">
+                <div className="row between-xs">
+                  <div className="col-xs-12 accordion-sub-title">
+                    <Link
+                      name="Acknowledgement Statements"
+                      to="/Explore/People"
+                      onClick={() => {
+                        this.closeNavigation("#/Explore/People")
+                      }}
+                    >
+                      People
                     </Link>
                   </div>
                 </div>
@@ -413,85 +258,152 @@ class Header extends Component {
     </Accordion>
   );
 
-  AboutMenuDropdown = () => (
+  ResearchTools = () => (
+    <li
+      onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")}
+      onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
+      }
+    >
+      <Link
+        name="Research-Tools"
+        to="/Resources/ExperimentalResources"
+        className={
+          this.props.hash.includes("#/Resources/")
+            ? "home nav-item main-nav-item active"
+            : "home nav-item main-nav-item"
+        }
+        onClick={() => {
+          this.closeNavigation("#/Resources/ExperimentalResources")
+        }}
+      >
+        Research Tools
+      </Link>
+      <div
+        className={
+          this.props.hash.includes("#/Resources/")
+          && this.state.activeUnderBar.includes("#/")
+            ? "under-bar active"
+            : "under-bar"
+        }
+      />
+    </li>
+  );
+
+  DataAccessDropdown = () => (
     <Accordion>
       <AccordionItem
         className="top-level-accordion-item"
-        onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "About")}
+        onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "DataAccess")
+        }
         onMouseLeave={this.mouseLeaveBehavior()}
       >
         <AccordionItemTitle
           className="accordion-title top-level-accordion"
-          aria-selected={this.state.About}
+          aria-selected={this.state.DataAccess}
         >
           <a
             href="/"
             className={
-              this.props.hash.includes("About")
+              this.props.hash.includes("/DataAccess")
                 ? "nav-item main-nav-item active"
                 : "nav-item main-nav-item"
             }
-            onClick={this.dropdownMenuAction}
+            onClick={event => this.dropdownMenuAction(event, "DataAccess")}
           >
-            About
+            Data Access
           </a>
           <div
             className={
-              this.props.hash.includes("About")
-              && this.state.activeUnderBar.includes("About")
+              this.props.hash.includes("DataAccess")
+              && this.state.activeUnderBar.includes("DataAccess")
                 ? "under-bar active"
                 : "under-bar"
             }
           />
         </AccordionItemTitle>
         <AccordionItemBody
-          aria-hidden={this.state.About !== true}
+          aria-hidden={this.state.DataAccess !== true}
           className={
-            this.state.About === true
+            this.state.DataAccess === true
               ? "accordion-body top-level-accordion"
               : "accordion-body top-level-accordion accordion__body--hidden"
           }
         >
-          <AccordionItem>
-            <AccordionItemTitle className="accordion__title link">
-              <div className="row between-xs">
-                <div className="col-xs-12 accordion-sub-title">
-                  <Link
-                    name="AMP-AD"
-                    to="/About/AMP-AD"
-                    className="nav-item dropdown"
-                    onClick={() => {
-                      this.closeNavigation("#/About/AMP-AD")
-                    }}
-                  >
-                    What is the AMP-AD portal
-                  </Link>
+          <Accordion>
+            <AccordionItem className="accordion-row row">
+              <AccordionItemTitle className="accordion__title link">
+                <div className="row between-xs">
+                  <div className="col-xs-12 accordion-sub-title">
+                    <Link
+                      name="external researchers"
+                      to="/DataAccess/DataUseRequirements"
+                      onClick={() => {
+                        this.closeNavigation(
+                          "#/DataAccess/DataUseRequirements",
+                        )
+                      }}
+                    >
+                      Getting Access to Data
+                    </Link>
+                  </div>
                 </div>
-                <div className="col-xs-1" />
-              </div>
-            </AccordionItemTitle>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionItemTitle className="accordion__title link">
-              <div className="row between-xs">
-                <div className="col-xs-12 accordion-sub-title">
-                  <Link
-                    name="About people"
-                    to="/About/People"
-                    className="nav-item dropdown"
-                    onClick={() => {
-                      this.closeNavigation("#/About/People")
-                    }}
-                  >
-                    People
-                  </Link>
+              </AccordionItemTitle>
+            </AccordionItem>
+
+            <AccordionItem>
+              <AccordionItemTitle className="accordion__title link">
+                <div className="row between-xs">
+                  <div className="col-xs-12 accordion-sub-title">
+                    <Link
+                      name="external researchers"
+                      to="/DataAccess/AcknowledgementStatements"
+                      onClick={() => {
+                        this.closeNavigation(
+                          "#/DataAccess/AcknowledgementStatements",
+                        )
+                      }}
+                    >
+                      Acknowledging Data Use
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </AccordionItemTitle>
-          </AccordionItem>
+              </AccordionItemTitle>
+            </AccordionItem>
+          </Accordion>
         </AccordionItemBody>
       </AccordionItem>
     </Accordion>
+  );
+
+  AboutMenu = () => (
+    <li
+      onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")}
+      onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
+      }
+    >
+      <Link
+        name="About"
+        to="/About/AMP-AD"
+        className={
+          this.props.hash.includes("#/About")
+            ? "home nav-item main-nav-item active"
+            : "home nav-item main-nav-item"
+        }
+        onClick={() => {
+          this.closeNavigation("#/About/AMP-AD")
+        }}
+      >
+        About
+      </Link>
+      <div
+        className={
+          this.props.hash.includes("#/About/")
+          && this.state.activeUnderBar.includes("#/")
+            ? "under-bar active"
+            : "under-bar"
+        }
+      />
+    </li>
   );
 
   render() {
@@ -551,9 +463,10 @@ class Header extends Component {
                     }
                   />
                 </li>
-                <li>{this.ResearchDropdown()}</li>
-                <li>{this.ResourcesDropdown()}</li>
-                <li className="about-dropdown">{this.AboutMenuDropdown()}</li>
+                <li>{this.ExploreDropdown()}</li>
+                <li>{this.ResearchTools()}</li>
+                <li>{this.DataAccessDropdown()}</li>
+                <li className="about-dropdown">{this.AboutMenu()}</li>
                 <li
                   className="agora-nav-link"
                   onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")

@@ -1,6 +1,6 @@
 export const synapseObjects = [
   {
-    name: "consortia",
+    name: "programs",
     id: "syn17024173",
     filter: "",
     color: 3,
@@ -8,7 +8,7 @@ export const synapseObjects = [
     columns: 0,
     table: false,
     type: "STUDY",
-    hash: "/Explore/Consortia",
+    hash: "/Explore/Programs",
   },
   {
     name: "projects",

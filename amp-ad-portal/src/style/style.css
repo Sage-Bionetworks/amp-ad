@@ -985,13 +985,13 @@ header a.nav-item {
   padding: 14px 20px;
 }
 header .accordion__title {
-  background-color: #e3e3e3;
+  background-color: RGBA(254, 254, 254, 0.9);
 }
 header .accordion-title[aria-selected=true] a {
-  background: #e3e3e3;
+  background: RGBA(254, 254, 254, 0.9);
 }
 header .accordion-title.top-level-accordion[aria-selected=true] {
-  background: #e3e3e3;
+  background: RGBA(254, 254, 254, 0.9);
 }
 header .accordion-title.top-level-accordion[aria-selected=true] .under-bar {
   opacity: 0;
@@ -1009,7 +1009,7 @@ header .accordion-body[aria-hidden=true] {
   display: none;
 }
 header .accordion__title:hover {
-  background-color: #cacaca;
+  background-color: #5BB0B5;
 }
 header .agora-border {
   position: absolute;
