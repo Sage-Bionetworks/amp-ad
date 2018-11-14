@@ -8,7 +8,6 @@ import { BarLoader } from "react-spinners"
 import App from "./App"
 //import registerServiceWorker from "./registerServiceWorker"
 import * as SynapseClient from "./synapse/SynapseClient"
-import { queryTable } from "./queries/queryForData"
 
 let rawSynapseData
 let loginKey
@@ -18,22 +17,15 @@ const login = async () => SynapseClient.login("mikeybkats", "guinness").then((ke
   return keys
 })
 
-//const table = "syn12532774"
-//const speciesQuery = `SELECT species, assay, tissue, diagnosis, specimenID, COUNT(*) FROM ${table} GROUP BY assay, tissue, species, diagnosis`
-
 login()
-  .then((token) => {
+  .then(() => {
     ReactDOM.render(
       <div className="front-page-bar">
         <BarLoader color="#47357B" loading />
       </div>,
       document.getElementById("root"),
     )
-    //return queryTable(table, speciesQuery, token)
   })
-  //.then((response) => {
-  //rawSynapseData = JSON.parse(response)
-  //})
   .then(() => ReactDOM.render(
     <App loginToken={loginKey} appData={rawSynapseData} />,
     document.getElementById("root"),

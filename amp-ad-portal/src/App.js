@@ -678,14 +678,16 @@ class App extends Component {
 
         <Route path="/Resources/Data" component={this.ReturnResourcesData} />
         <Route path="/Resources/Agora" component={this.ReturnResourcesAgora} />
+
         <Route
-          path="/Resources/DataUseRequirements"
+          path="/DataAccess/DataUseRequirements"
           component={this.ReturnResourcesDataUse}
         />
         <Route
-          path="/Resources/AcknowledgementStatements"
+          path="/DataAccess/AcknowledgementStatements"
           component={this.ReturnResourcesAcknowledgements}
         />
+
         <Route
           path="/Resources/ExperimentalResources"
           component={this.ReturnResourcesExperimentalResources}

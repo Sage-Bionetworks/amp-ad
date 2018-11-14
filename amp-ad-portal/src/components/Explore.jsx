@@ -51,8 +51,11 @@ class Explore extends Component {
         location.pathname.lastIndexOf("/") + 1,
         location.pathname.length,
       )
+
       if (this.state.name !== pathHash) {
-        this.setActiveValues(window.location.hash)
+        if (!window.location.hash.includes("/Studies/")) {
+          this.setActiveValues(window.location.hash)
+        }
         this.setState({
           name: pathHash,
         })

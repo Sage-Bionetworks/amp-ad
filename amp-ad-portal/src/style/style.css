@@ -681,8 +681,8 @@ button.btn-control {
   border-width: 0px;
   min-height: 40px;
   padding: 7px 25px;
-  margin: 10px 23px;
-  min-width: 125px;
+  margin: 10px 5px;
+  min-width: 155px;
 }
 button.btn-control h5 {
   font-size: 15px;
@@ -765,7 +765,6 @@ button.btn-control h5 {
 .nav {
   position: relative;
   z-index: 1000;
-  height: 100%;
   padding: 0px;
   display: flex;
   justify-content: space-between;
