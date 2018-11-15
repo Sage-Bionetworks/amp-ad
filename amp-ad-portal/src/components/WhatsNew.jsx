@@ -30,7 +30,6 @@ class WhatsNew extends Component {
               <h2>What&apos;s New</h2>
             </div>
           </div>
-
           {printSections(this.props.markdown, undefined, 3)}
         </div>
       </section>
@@ -39,9 +38,13 @@ class WhatsNew extends Component {
 }
 
 WhatsNew.propTypes = {
-  markdown: PropTypes.array.isRequired,
+  markdown: PropTypes.array,
   token: PropTypes.object.isRequired,
   handleNestedChanges: PropTypes.func.isRequired,
+}
+
+WhatsNew.defaultProps = {
+  markdown: ["The data has failed to load"],
 }
 
 export default WhatsNew

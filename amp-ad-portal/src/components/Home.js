@@ -2,15 +2,9 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import Welcome from "./Welcome"
-//import SearchBar from "./SearchBar"
-//import PiesBelowHeader from "./PiesBelowHeader.jsx"
 import Programs from "./Programs"
-import Analyses from "./Analyses"
 import WhatsNew from "./WhatsNew.jsx"
 import Explore from "./HomeExplore-Syn.js"
-//import PopularDataRequests from "./PopularDataRequests"
-//import ContributeYourData from "./ContributeYourData"
-//
 
 const Home = props => (
   <div>

@@ -18,8 +18,8 @@ class DataUse extends Component {
     return (
       <div className="row about">
         <div className="col-xs-12">
-          <section className="flex-row child-page-hero">
-            <div className="col-xs-12 col-sm-9 content">
+          <section className="flex-row child-page-hero center-xs">
+            <div className="content">
               <h2>Data Access and Use Requirements</h2>
               <p>
                 AMP-AD Knowledge Portal data and analyses are stored in Synapse,
@@ -29,7 +29,14 @@ class DataUse extends Component {
             </div>
           </section>
           <div className="old-markdown container">
-            <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+            <div className="flex-row">
+              <div className="">
+                <ReactMarkdown
+                  source={this.props.markdown}
+                  escapeHtml={false}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

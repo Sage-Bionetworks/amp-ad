@@ -58,6 +58,10 @@
 }
 
 // grid system blocks //
+.flex {
+  display: flex;
+}
+
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -178,7 +182,7 @@
   padding-left: 0px;
 }
 
-.old-markdown.container * {
+.old-markdown.container .row * {
   width: unset;
   float: none;
 }

@@ -75,7 +75,7 @@ const Selectors = (props) => {
 Selectors.propTypes = {
   handleChanges: PropTypes.func.isRequired,
   returnButtonClass: PropTypes.func.isRequired,
-  synapseObject: PropTypes.object.isRequired,
+  synapseObject: PropTypes.array.isRequired,
 }
 
 export default Selectors

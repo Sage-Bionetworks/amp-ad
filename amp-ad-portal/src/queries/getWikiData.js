@@ -15,13 +15,14 @@ function getWikiData(wikiId, token, synId = "syn12666371") {
       },
     },
   )
+    .then(handleErrors)
     .then((data) => {
       return data.json()
     })
     .then((processedData) => {
       return processedData
     })
-    .catch(handleErrors)
+    .catch(error => console.log(error))
 }
 
 const getWikiKey = (token, synId) => {
@@ -192,7 +193,8 @@ const getWikiMarkdownSegments = (
     limit,
   ).then((headers) => {
     asyncForEach(headers, async (header) => {
-      await waitFor(75)
+      await waitFor(100)
+      console.log(header)
       getMarkdownSegment(
         handleNestedChanges,
         sessionToken,

@@ -12,6 +12,10 @@
   padding-right: 87%;
 }
 
+.flex {
+  display: flex;
+}
+
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -141,7 +145,7 @@
   padding-left: 0px;
 }
 
-.old-markdown.container * {
+.old-markdown.container .row * {
   width: unset;
   float: none;
 }
@@ -804,7 +808,7 @@ button.btn-control h5 {
 }
 .nav div.under-bar {
   position: absolute;
-  background-color: #E369A1;
+  background-color: #5BB0B5;
   height: 5px;
   width: 100%;
   left: 0;
@@ -1047,71 +1051,64 @@ footer .row {
   width: 300px;
 }
 
-section.welcome {
+section.hero {
+  position: relative;
+  height: 481px;
   background: linear-gradient(to right, #5A498D, #4C57A2);
   padding: 0px;
-  padding-top: 105px;
-  position: relative;
-  height: 500px;
 }
-section.welcome .welcome-message {
-  padding: 0px;
+section.hero p, section.hero h1 {
   color: white;
-  text-align: left;
+}
+section.hero h1 {
+  font-weight: 700;
+}
+section.hero p {
+  font-size: 16px;
+  line-height: 130%;
+}
+section.hero a {
+  color: white;
+  text-decoration: underline;
+}
+section.hero a:hover {
+  color: white;
+}
+section.hero .container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   position: absolute;
-  left: 20px;
-  top: 47%;
+  z-index: 100;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  bottom: 20px;
 }
-section.welcome .welcome-message h1 {
-  margin: 0px;
-}
-@media screen and (min-width: 720px) {
-  section.welcome .welcome-message {
+@media screen and (max-width: 1265px) {
+  section.hero .container {
     left: 5%;
   }
 }
-@media screen and (min-width: 1000px) {
-  section.welcome .welcome-message {
-    left: 10%;
-  }
+section.hero .hero-message div {
+  background-color: #ffffff10;
+  margin-bottom: 30px;
+  padding: 10px 21px;
 }
-@media screen and (min-width: 1120px) {
-  section.welcome .welcome-message {
-    left: 15%;
-  }
-}
-@media screen and (min-width: 1400px) {
-  section.welcome .welcome-message {
-    left: 20%;
-  }
-}
-section.welcome .welcome-data {
-  background-color: #5D69AB;
-  height: -webkit-fill-available;
-  right: 0px;
+section.hero .hero-background {
+  background-image: url("../images/molecule-lattice.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  padding-right: 30%;
+  z-index: 50;
+  bottom: 0;
 }
-section.welcome .welcome-data ul {
-  text-align: left;
-  width: 300px;
-  margin-top: 60px;
-}
-section.welcome .welcome-data li {
-  color: white;
-  font-size: 18px;
-  margin: 15px 0px;
-}
-section.welcome .btn-light {
-  margin-top: 10px;
-}
-@media screen and (max-width: 914px) {
-  section.welcome {
-    padding-top: 60px;
-  }
-  section.welcome .welcome-message {
-    padding: 0px;
-  }
+section.hero .hero-background:before {
+  filter: blur(5px);
 }
 
 section.page.explore {
@@ -1708,6 +1705,12 @@ section.what-new .what-new-data h5 {
   color: #D3D5DB;
   font-weight: 400;
   margin-bottom: 10px;
+}
+section.what-new .what-new-data h2 {
+  padding: 0px;
+}
+section.what-new .what-new-data h4 {
+  padding: 0px;
 }
 section.what-new .what-new-data p {
   font-size: 18px;
