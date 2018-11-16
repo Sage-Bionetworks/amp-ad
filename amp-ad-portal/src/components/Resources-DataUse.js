@@ -6,6 +6,10 @@ import { getMarkdown } from "../queries/getWikiData"
 const ReactMarkdown = require("react-markdown")
 
 class DataUse extends Component {
+  state = {
+    addedEventListeners: false,
+  };
+
   componentDidMount() {
     getMarkdown(this.props, "576286")
   }
@@ -13,6 +17,38 @@ class DataUse extends Component {
   componentWillUnmount() {
     this.props.handleChanges("wikiMarkdown", "")
   }
+
+  componentDidUpdate() {
+    if (!this.state.addedEventListeners) {
+      this.addDetailsFunctionality()
+    }
+  }
+
+  addDetailsFunctionality = () => {
+    const details = document.querySelectorAll("details")
+
+    if (details.length > 1) {
+      details.forEach((dropdown) => {
+        dropdown.addEventListener(
+          "toggle",
+          (event) => {
+            console.log(dropdown)
+            if (dropdown.open) {
+              /* the element was toggled open */
+              dropdown.open = "true"
+            } else {
+              /* the element was toggled closed */
+              dropdown.open = "false"
+            }
+          },
+          false,
+        )
+      })
+      this.setState({
+        addedEventListeners: true,
+      })
+    }
+  };
 
   render() {
     return (
