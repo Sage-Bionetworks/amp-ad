@@ -17,25 +17,17 @@ const login = async () => SynapseClient.login("mikeybkats", "guinness").then((ke
 
 // about pages
 const AsyncAboutAmpAd = asyncComponent(() => import("./components/About-WhatIsAmpAd"))
-const AsyncAboutPeople = asyncComponent(() => import("./components/About-People"))
-
 // research pages
 const AsyncResearchPublications = asyncComponent(() => import("./components/Research-Publications"))
-
 // resources pages
-const AsyncResourcesAgora = asyncComponent(() => import("./components/Resources-Agora"))
 const AsyncResourcesDataUse = asyncComponent(() => import("./components/Resources-DataUse"))
-
 // component js
 const AsyncHome = asyncComponent(() => import("./components/Home"))
 const AsyncHeader = asyncComponent(() => import("./components/Header"))
-
 // explore
 const AsyncExplore = asyncComponent(() => import("./components/Explore.jsx"))
-
 // study page
 const AsyncStudyPage = asyncComponent(() => import("./components/Page-Study.js"))
-
 // Data access pages
 const AsyncDataUseCertificates = asyncComponent(() => import("./components/DataAccess-DataUseCertificates.js"))
 const AsyncResourcesExperimentalResources = asyncComponent(() => import("./components/Resources-Experimental-Resources"))
@@ -144,17 +136,6 @@ class App extends Component {
     )
   };
 
-  ReturnResourcesAgora = () => {
-    return (
-      <AsyncResourcesAgora
-        token={this.state.loginToken}
-        handleChanges={this.handleChanges}
-        handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.researchPublications}
-      />
-    )
-  };
-
   ReturnResourcesAcknowledgements = () => {
     return (
       <AsyncResourcesAcknowledgements
@@ -202,15 +183,6 @@ class App extends Component {
     )
   };
 
-  ReturnAboutPeople = () => {
-    return (
-      <AsyncAboutPeople
-        token={this.state.loginToken}
-        handleChanges={this.handleChanges}
-      />
-    )
-  };
-
   ReturnHeader = () => {
     return (
       <AsyncHeader handleChanges={this.handleChanges} hash={this.state.hash} />
@@ -243,7 +215,6 @@ class App extends Component {
         <Route exact path="/" component={this.ReturnHome} />
 
         <Route path="/Resources/Data" component={this.ReturnResourcesData} />
-        <Route path="/Resources/Agora" component={this.ReturnResourcesAgora} />
 
         <Route
           path="/DataAccess/DataUseRequirements"
@@ -273,7 +244,6 @@ class App extends Component {
         />
 
         <Route path="/About/AMP-AD" component={this.ReturnAboutAmpAd} />
-        <Route path="/About/People" component={this.ReturnAboutPeople} />
       </div>
     )
   };
