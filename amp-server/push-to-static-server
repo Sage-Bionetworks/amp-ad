@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "pushing static server"
+aws s3 sync --delete --cache-control max-age=0 ./dist/public/ s3://static.ampadportal.org

@@ -1938,16 +1938,16 @@ section.about-resilience-intro-section {
   top: 12px;
 }
 
-.researchers-content .hide-first-child div span span p:first-child {
+.researchers-content .hide-first-child div span span p:first-child, .experimental-resources .hide-first-child div span span p:first-child {
   display: none;
 }
-.researchers-content .hide-first-child div span span hr:nth-child(2) {
+.researchers-content .hide-first-child div span span hr:nth-child(2), .experimental-resources .hide-first-child div span span hr:nth-child(2) {
   display: none;
 }
-.researchers-content .hide-first-child-h4 .markdown span span h4 {
+.researchers-content .hide-first-child-h4 .markdown span span h4, .experimental-resources .hide-first-child-h4 .markdown span span h4 {
   display: none;
 }
-.researchers-content .hide-first-child-h4 .markdown span span hr:nth-child(2) {
+.researchers-content .hide-first-child-h4 .markdown span span hr:nth-child(2), .experimental-resources .hide-first-child-h4 .markdown span span hr:nth-child(2) {
   display: none;
 }
 

@@ -21,8 +21,6 @@ class Header extends Component {
     this.state = {
       DataAccess: false,
       Explore: false,
-      About: false,
-      Home: false,
       Open: false,
       activeUnderBar: "",
     }
@@ -51,10 +49,7 @@ class Header extends Component {
 
     this.setState(
       {
-        Research: false,
         DataAccess: false,
-        About: false,
-        Home: false,
         Open: false,
         Explore: false,
         activeUnderBar,
@@ -266,21 +261,21 @@ class Header extends Component {
     >
       <Link
         name="Research-Tools"
-        to="/ResearchTools/ExperimentalResources"
+        to="/ResearchTools"
         className={
-          this.props.hash.includes("#/ResearchTools/")
+          this.props.hash.includes("#/ResearchTools")
             ? "home nav-item main-nav-item active"
             : "home nav-item main-nav-item"
         }
         onClick={() => {
-          this.closeNavigation("#/ResearchTools/ExperimentalResources")
+          this.closeNavigation("#/ResearchTools")
         }}
       >
         Research Tools
       </Link>
       <div
         className={
-          this.props.hash.includes("#/ResearchTools/")
+          this.props.hash.includes("#/ResearchTools")
           && this.state.activeUnderBar.includes("#/")
             ? "under-bar active"
             : "under-bar"

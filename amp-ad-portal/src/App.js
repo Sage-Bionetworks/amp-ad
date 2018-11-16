@@ -21,11 +21,10 @@ const AsyncAboutPeople = asyncComponent(() => import("./components/About-People"
 
 // research pages
 const AsyncResearchPublications = asyncComponent(() => import("./components/Research-Publications"))
+
 // resources pages
 const AsyncResourcesAgora = asyncComponent(() => import("./components/Resources-Agora"))
 const AsyncResourcesDataUse = asyncComponent(() => import("./components/Resources-DataUse"))
-const AsyncResourcesExperimentalResources = asyncComponent(() => import("./components/Resources-Experimental-Resources"))
-const AsyncResourcesAcknowledgements = asyncComponent(() => import("./components/Resources-AcknowledgementStatements"))
 
 // component js
 const AsyncHome = asyncComponent(() => import("./components/Home"))
@@ -36,6 +35,11 @@ const AsyncExplore = asyncComponent(() => import("./components/Explore.jsx"))
 
 // study page
 const AsyncStudyPage = asyncComponent(() => import("./components/Page-Study.js"))
+
+// Data access pages
+const AsyncDataUseCertificates = asyncComponent(() => import("./components/DataAccess-DataUseCertificates.js"))
+const AsyncResourcesExperimentalResources = asyncComponent(() => import("./components/Resources-Experimental-Resources"))
+const AsyncResourcesAcknowledgements = asyncComponent(() => import("./components/Resources-AcknowledgementStatements"))
 
 ReactGA.initialize("UA-29804340-3")
 
@@ -161,6 +165,10 @@ class App extends Component {
     )
   };
 
+  ReturnDataUseCertificates = () => {
+    return <AsyncDataUseCertificates token={this.state.loginToken} />
+  };
+
   ReturnResourcesDataUse = () => {
     return (
       <AsyncResourcesDataUse
@@ -245,9 +253,13 @@ class App extends Component {
           path="/DataAccess/AcknowledgementStatements"
           component={this.ReturnResourcesAcknowledgements}
         />
+        <Route
+          path="/DataAccess/DataUseCertificates"
+          component={this.ReturnDataUseCertificates}
+        />
 
         <Route
-          path="/ResearchTools/ExperimentalResources"
+          path="/ResearchTools"
           component={this.ReturnResourcesExperimentalResources}
         />
         <Route

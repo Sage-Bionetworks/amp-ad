@@ -1,0 +1,22 @@
+{
+  "name": "amp-ad-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mikeybkats/amp-ad-server.git",
+  "author": "michael barakat",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.0.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1"
+  },
+  "dependencies": {
+    "btoa": "^1.2.1",
+    "express": "^4.16.3",
+    "file-system": "^2.2.2",
+    "lodash": "^4.17.10",
+    "node-fetch": "^2.1.2"
+  }
+}
