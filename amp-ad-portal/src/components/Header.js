@@ -331,11 +331,9 @@ class Header extends Component {
                   <div className="col-xs-12 accordion-sub-title">
                     <Link
                       name="external researchers"
-                      to="/DataAccess/DataUseRequirements"
+                      to="/DataAccess/Instructions"
                       onClick={() => {
-                        this.closeNavigation(
-                          "#/DataAccess/DataUseRequirements",
-                        )
+                        this.closeNavigation("#/DataAccess/Instructions")
                       }}
                     >
                       Getting Access to Data

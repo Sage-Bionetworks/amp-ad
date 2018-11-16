@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 
 import { getMarkdown } from "../queries/getWikiData"
 
-const ReactMarkdown = require("react-markdown")
+//const ReactMarkdown = require("react-markdown")
 
 class Welcome extends Component {
   componentDidMount() {

@@ -4,7 +4,7 @@ import { SynapseComponents } from "synapse-react-client"
 import { getWikiMarkdownSegments } from "../queries/getWikiData"
 import { printSections } from "../model/HandleMarkdown"
 
-const newsIds = ["582438", "582442", "582439"]
+//const newsIds = ["582438", "582442", "582439"]
 
 class WhatsNew extends Component {
   constructor(props) {
@@ -13,15 +13,42 @@ class WhatsNew extends Component {
   }
 
   componentDidMount() {
-    getWikiMarkdownSegments(
-      "582408",
-      "syn12666371",
-      "whatsNew",
-      this.props.token.sessionToken,
-      this.props.handleNestedChanges,
-      131,
-      50,
-    )
+    if (this.props.token) {
+      getWikiMarkdownSegments(
+        "582408",
+        "syn12666371",
+        "whatsNew",
+        this.props.token.sessionToken,
+        this.props.handleNestedChanges,
+        131,
+        50,
+      )
+    }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (this.props.token !== nextProps.token) {
+      return true
+    }
+    if (this.props.markdown.length !== nextProps.markdown.length) {
+      return true
+    }
+    return true
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.token !== this.props.token) {
+      getWikiMarkdownSegments(
+        "582408",
+        "syn12666371",
+        "whatsNew",
+        this.props.token.sessionToken,
+        this.props.handleNestedChanges,
+        131,
+        50,
+      )
+    }
+    return true
   }
 
   printMarkdown = (synId, wikiIds) => {

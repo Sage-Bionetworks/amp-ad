@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { SynapseComponents } from "synapse-react-client"
-import { withRouter } from "react-router-dom"
+//import { withRouter } from "react-router-dom"
 import SynapseChart from "./SynapseBarChart.jsx"
 
 import {

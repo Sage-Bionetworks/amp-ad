@@ -1644,6 +1644,8 @@ section.what-new .title-row {
   margin-bottom: 0px;
   margin-top: 0px;
   padding: 0px;
+  display: flex;
+  flex-direction: column;
 }
 section.what-new .type-of-release {
   font-size: 18px;

@@ -29,8 +29,6 @@ Home.propTypes = {
   handleChanges: PropTypes.func.isRequired,
   whatsNewMarkdownSegs: PropTypes.array.isRequired,
   handleNestedChanges: PropTypes.func.isRequired,
-  welcomeHeaderMarkdown: PropTypes.string.isRequired,
-  welcomeHeaderMarkdownText: PropTypes.string.isRequired,
 }
 
 export default Home

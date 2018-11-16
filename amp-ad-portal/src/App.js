@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import PropTypes from "prop-types"
 import { HashRouter as Router, Route } from "react-router-dom"
 import ReactGA from "react-ga"
 import createHistory from "history/createBrowserHistory"
@@ -217,7 +216,7 @@ class App extends Component {
         <Route path="/Resources/Data" component={this.ReturnResourcesData} />
 
         <Route
-          path="/DataAccess/DataUseRequirements"
+          path="/DataAccess/Instructions"
           component={this.ReturnResourcesDataUse}
         />
         <Route

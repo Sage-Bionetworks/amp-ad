@@ -23,7 +23,7 @@ module.exports = {
     "import/no-extraneous-dependencies": 0,
     "import/extensions": 0,
     "global-require": 0,
-    "no-extend-native": 0
+    "no-extend-native": ["error", { exceptions: ["Array"] }]
   },
   env: {
     browser: true,
