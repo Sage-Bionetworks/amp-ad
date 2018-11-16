@@ -7,21 +7,24 @@ class SynapseBarChart extends Component {
   state = {};
 
   buildQuery = () => {
-    const sql = `SELECT * FROM ${this.props.synId}`
+    if (this.props.synId !== undefined) {
+      const sql = `SELECT * FROM ${this.props.synId}`
 
-    return {
-      concreteType: "org.sagebionetworks.repo.model.table.QueryBundleRequest",
-      partMask:
-        SynapseConstants.BUNDLE_MASK_QUERY_COLUMN_MODELS
-        | SynapseConstants.BUNDLE_MASK_QUERY_FACETS
-        | SynapseConstants.BUNDLE_MASK_QUERY_RESULTS,
-      query: {
-        isConsistent: false,
-        sql,
-        limit: 25,
-        offset: 0,
-      },
+      return {
+        concreteType: "org.sagebionetworks.repo.model.table.QueryBundleRequest",
+        partMask:
+          SynapseConstants.BUNDLE_MASK_QUERY_COLUMN_MODELS
+          | SynapseConstants.BUNDLE_MASK_QUERY_FACETS
+          | SynapseConstants.BUNDLE_MASK_QUERY_RESULTS,
+        query: {
+          isConsistent: false,
+          sql,
+          limit: 25,
+          offset: 0,
+        },
+      }
     }
+    return ""
   };
 
   returnFacets = (bool = this.props.facets) => {
@@ -87,6 +90,27 @@ class SynapseBarChart extends Component {
     return "bar-section"
   };
 
+  returnChart = (query) => {
+    if (query) {
+      return (
+        <SynapseComponents.QueryWrapper
+          initQueryRequest={query}
+          token={this.props.token}
+          filter={this.props.filter}
+          rgbIndex={
+            this.props.rgbIndex !== undefined ? this.props.rgbIndex : ""
+          }
+          showMenu={this.props.facets}
+        >
+          {this.returnBarChart()}
+          {this.returnFacets()}
+          {this.returnTable()}
+        </SynapseComponents.QueryWrapper>
+      )
+    }
+    return <div />
+  };
+
   render() {
     const query = this.buildQuery()
 
@@ -94,19 +118,7 @@ class SynapseBarChart extends Component {
       return (
         <div>
           <div className={`${this.hideBarSection()}`}>
-            <SynapseComponents.QueryWrapper
-              initQueryRequest={query}
-              token={this.props.token}
-              filter={this.props.filter}
-              rgbIndex={
-                this.props.rgbIndex !== undefined ? this.props.rgbIndex : ""
-              }
-              showMenu={this.props.facets}
-            >
-              {this.returnBarChart()}
-              {this.returnFacets()}
-              {this.returnTable()}
-            </SynapseComponents.QueryWrapper>
+            {this.returnChart(query)}
           </div>
           {this.returnCardView(
             undefined,

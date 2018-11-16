@@ -32,12 +32,10 @@ class SearchBar extends Component {
   render() {
     return (
       <section className="row searchbar">
-        <form className="searchbar-form col-sm-10 col-md-10">
-          <div className="row around-xs">
+        <form className="searchbar-form">
+          <div className="flex-row around-xs">
             <div className="col-xs-12 col-sm-3">
-              <h2 className="dropdown-description">
-View data by
-              </h2>
+              <h2 className="dropdown-description">View data by</h2>
             </div>
             <div className="col-xs-12 col-sm-4">
               {this.generateSelectionDropdown(

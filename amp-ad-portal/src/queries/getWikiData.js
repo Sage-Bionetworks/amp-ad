@@ -5,25 +5,6 @@ function handleErrors(response) {
   return response
 }
 
-function getWikiData(wikiId, token, synId = "syn12666371") {
-  return fetch(
-    `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wiki/${wikiId}`,
-    {
-      method: "GET",
-      headers: {
-        sessionToken: token,
-      },
-    },
-  )
-    .then((data) => {
-      return data.json()
-    })
-    .then((processedData) => {
-      return processedData
-    })
-    .catch(handleErrors)
-}
-
 const getWikiKey = (token, synId) => {
   return fetch(
     `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikikey`,
@@ -75,6 +56,31 @@ const getUserProfile = (profileId, token) => {
     .catch(handleErrors)
 }
 
+function getWikiData(wikiId, token, synId = "syn12666371") {
+  return fetch(
+    `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wiki/${wikiId}`,
+    {
+      method: "GET",
+      headers: {
+        sessionToken: token,
+      },
+    },
+  )
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      }
+      return handleErrors(response)
+    })
+    .then((processedData) => {
+      return processedData
+    })
+    .catch((error) => {
+      console.log(error)
+      return ""
+    })
+}
+
 const getWikiHeaderTree = (token, synId, offsetVal = 0, limit = 10) => {
   let fetchReq = `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikiheadertree?offset=${offsetVal}&limit=${limit}`
   if (offsetVal === false || limit === false) {
@@ -86,8 +92,11 @@ const getWikiHeaderTree = (token, synId, offsetVal = 0, limit = 10) => {
       sessionToken: token,
     },
   })
-    .then((data) => {
-      return data.json()
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      }
+      return handleErrors(response)
     })
     .then((processedData) => {
       return processedData
@@ -116,7 +125,11 @@ const getEntityHeader = (token, payload) => {
 const getMarkdown = (props, wikiId, name = "wikiMarkdown", synId) => {
   return getWikiData(wikiId, props.token.sessionToken, synId)
     .then((data) => {
-      props.handleChanges(name, data.markdown)
+      let markdownObj = { markdown: "" }
+      if (data !== undefined) {
+        markdownObj = data
+      }
+      props.handleChanges(name, markdownObj.markdown)
     })
     .catch(handleErrors)
 }
@@ -192,7 +205,7 @@ const getWikiMarkdownSegments = (
     limit,
   ).then((headers) => {
     asyncForEach(headers, async (header) => {
-      await waitFor(75)
+      await waitFor(100)
       getMarkdownSegment(
         handleNestedChanges,
         sessionToken,

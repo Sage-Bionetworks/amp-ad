@@ -4,16 +4,16 @@ import openUrl from "../model/OpenUrl"
 
 const Programs = (props) => {
   return (
-    <section className="programs row">
-      <div className="content col-xs-12 col-sm-10">
-        <div className="row between-xs middle-xs title-row">
-          <div className="col-xs-6 col-sm-6">
+    <section className="programs flex-row">
+      <div className="flex-col-full content-row-width">
+        <div className="title-row between-xs">
+          <div className="">
             <h2>Programs</h2>
           </div>
-          <div className="col-xs-3 col-sm-2 content-width" />
+          <div className="" />
         </div>
 
-        <div className="row between-xs center-xs middle-xs">
+        <div className="flex-row between-xs">
           <div className="programs box col-xs-12 col-sm-3">
             <div className="box-text-image">
               <img
@@ -30,7 +30,7 @@ const Programs = (props) => {
               </p>
             </div>
             <button
-              className="btn"
+              className="btn-amp"
               type="button"
               onClick={event => openUrl(event, "/#/Research/AMP-AD")}
             >
@@ -38,7 +38,7 @@ const Programs = (props) => {
             </button>
           </div>
 
-          <div className="programs box col-xs-12 col-sm-3">
+          <div className="programs box flex-col">
             <div className="box-text-image">
               <img
                 src={require("../images/brain-heart.svg")}
@@ -53,7 +53,7 @@ const Programs = (props) => {
               </p>
             </div>
             <button
-              className="btn"
+              className="btn-amp"
               type="button"
               onClick={event => openUrl(event, "/#/Research/M2OVE")}
             >
@@ -61,7 +61,7 @@ const Programs = (props) => {
             </button>
           </div>
 
-          <div className="programs box col-xs-12 col-sm-3">
+          <div className="programs box flex-col">
             <div className="box-text-image">
               <img
                 src={require("../images/mouse.svg")}
@@ -76,7 +76,7 @@ const Programs = (props) => {
               </p>
             </div>
             <button
-              className="btn"
+              className="btn-amp"
               type="button"
               onClick={event => openUrl(event, "/#/Research/Model-AD")}
             >
@@ -84,7 +84,7 @@ const Programs = (props) => {
             </button>
           </div>
 
-          <div className="programs box col-xs-12 col-sm-3">
+          <div className="programs box flex-col">
             <div className="box-text-image">
               <img
                 src={require("../images/dna.svg")}
@@ -99,7 +99,7 @@ const Programs = (props) => {
               </p>
             </div>
             <button
-              className="btn"
+              className="btn-amp"
               type="button"
               onClick={event => openUrl(event, "/#/Research/Resilience-AD")}
             >

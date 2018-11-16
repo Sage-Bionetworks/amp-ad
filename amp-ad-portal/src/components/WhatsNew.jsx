@@ -23,14 +23,13 @@ class WhatsNew extends Component {
 
   render() {
     return (
-      <section className="what-new row">
-        <div className="content col-xs-12 col-sm-10">
-          <div className="row title-row">
-            <div className="col-xs-12">
+      <section className="what-new flex-row">
+        <div className="content-row-width flex-col-full">
+          <div className="title-row between-xs">
+            <div className="">
               <h2>What&apos;s New</h2>
             </div>
           </div>
-
           {printSections(this.props.markdown, undefined, 3)}
         </div>
       </section>
@@ -39,9 +38,13 @@ class WhatsNew extends Component {
 }
 
 WhatsNew.propTypes = {
-  markdown: PropTypes.array.isRequired,
+  markdown: PropTypes.array,
   token: PropTypes.object.isRequired,
   handleNestedChanges: PropTypes.func.isRequired,
+}
+
+WhatsNew.defaultProps = {
+  markdown: ["The data has failed to load"],
 }
 
 export default WhatsNew

@@ -27,18 +27,26 @@ class Welcome extends Component {
     window.open(link, "_self")
   };
 
+  //<ReactMarkdown
+  //source={this.props.markdownText}
+  //escapeHtml={false}
+  ///>
   render() {
     return (
-      <section className="row welcome center-xs middle-xs">
-        <div className="col-xs-12 col-sm-7 col-md-6 col-lg-5 welcome-message">
-          <h1>Welcome to the AMP-AD Knowledge Portal</h1>
-          <ReactMarkdown source={this.props.markdownText} escapeHtml={false} />
+      <section className="row hero">
+        <div className="container flex">
+          <div className="row hero-message">
+            <div className="col-sm-9">
+              <h1>Welcome to the AMP-AD Knowledge Portal</h1>
+              <p>
+                Discover and download data, analyses, and tools for the study of
+                Alzheimer's disease generated through the National Institute on
+                Aging-led AD Translational Research Program.
+              </p>
+            </div>
+          </div>
         </div>
-        <ReactMarkdown
-          source={this.props.markdown}
-          className="col-xs-12 col-sm-3 welcome-data markdown-div"
-          escapeHtml={false}
-        />
+        <div className="hero-background" />
       </section>
     )
   }

@@ -1,5 +1,0 @@
-#!/bin/bash
-echo "pushing local to production"
-
-aws s3 sync --delete --cache-control max-age=14400 ./build s3://ampadportal.org 
-

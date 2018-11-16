@@ -16,10 +16,10 @@ class ExternalResearchers extends Component {
 
   render() {
     return (
-      <div className="row about">
-        <div className="col-xs-12">
-          <section className="row child-page-hero">
-            <div className="col-xs-12 col-sm-9 content">
+      <div className="row about research-page">
+        <div className="flex-row">
+          <section className="flex-row center-xs child-page-hero">
+            <div className="flex-col-9 between-xs content-row-width">
               <h2>Approved External Research Use</h2>
               <p>
                 This page lists the research statements, names, and institutions
@@ -29,8 +29,8 @@ class ExternalResearchers extends Component {
               </p>
             </div>
           </section>
-          <section className="row center-xs researchers-content page-content">
-            <div className="col-xs-12 col-sm-9 markdown-parent">
+          <section className="flex-row center-xs researchers-content page-content">
+            <div className="flex-col-9 markdown-parent">
               <SynapseComponents.Markdown
                 token={this.props.token.sessionToken}
                 ownerId="syn2580853"

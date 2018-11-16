@@ -1,14 +1,17 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import SynapseChart from "./SynapseBarChart.jsx"
-import { synapseObjects, returnSynapseValue } from "../library/synapseObjects"
-import ButtonExplore from "./Button-Explore.js"
+import {
+  synapseClinicalTable,
+  returnSynapseValue,
+} from "../library/synapseObjects"
+import ButtonExplore from "./Button-Explore"
 
 let loadedObject
 
 class ExploreContent extends Component {
   state = {
-    activeButton: "syn12532774",
+    activeId: "syn17024112",
     activeFilter: "diagnosis",
     color: 0,
     hash: "/Explore/Datasets",
@@ -16,8 +19,8 @@ class ExploreContent extends Component {
   };
 
   componentDidMount() {
-    this.handleButtonPress("syn12532774")
-    loadedObject = synapseObjects.clone()
+    loadedObject = synapseClinicalTable.clone()
+    this.handleButtonPress("filter", "diagnosis")
   }
 
   handleChanges = (KEY, NEWSTATE) => {
@@ -26,15 +29,15 @@ class ExploreContent extends Component {
     })
   };
 
-  handleButtonPress = (id) => {
-    const activeFilter = returnSynapseValue(loadedObject, id, "filter")
-    const color = returnSynapseValue(loadedObject, id, "color")
-    const hash = returnSynapseValue(loadedObject, id, "hash")
-    const name = returnSynapseValue(loadedObject, id, "name")
+  handleButtonPress = (key, value) => {
+    //const activeFilter = returnSynapseValue(loadedObject, key, value, "filter")
+    console.log(key, value, loadedObject)
+    const color = returnSynapseValue(loadedObject, key, value, "color")
+    const hash = returnSynapseValue(loadedObject, key, value, "hash")
+    const name = returnSynapseValue(loadedObject, key, value, "name")
 
     this.setState({
-      activeButton: id,
-      activeFilter,
+      activeFilter: value,
       color,
       hash,
       name,
@@ -42,8 +45,8 @@ class ExploreContent extends Component {
     return ""
   };
 
-  returnButtonClass = (id) => {
-    return `btn-control ${this.state.activeButton === id ? "active" : ""}`
+  returnButtonClass = (filter) => {
+    return `btn-control ${this.state.activeFilter === filter ? "active" : ""}`
   };
 
   render() {
@@ -57,19 +60,46 @@ class ExploreContent extends Component {
             <div className="center-block selectors-container">
               <div className="selectors">
                 <button
-                  className={this.returnButtonClass("syn12532774")}
+                  className={this.returnButtonClass("diagnosis")}
                   type="button"
-                  onClick={() => this.handleButtonPress("syn12532774", this.props.token)
-                  }
+                  onClick={() => this.handleButtonPress("filter", "diagnosis")}
                 >
-                  <h5>Data</h5>
+                  <h5>Diagnosis</h5>
+                </button>
+                <button
+                  className={this.returnButtonClass("species")}
+                  type="button"
+                  onClick={() => this.handleButtonPress("filter", "species")}
+                >
+                  <h5>Organism</h5>
+                </button>
+                <button
+                  className={this.returnButtonClass("dataType")}
+                  type="button"
+                  onClick={() => this.handleButtonPress("filter", "dataType")}
+                >
+                  <h5>Data Type</h5>
+                </button>
+                <button
+                  className={this.returnButtonClass("assay")}
+                  type="button"
+                  onClick={() => this.handleButtonPress("filter", "assay")}
+                >
+                  <h5>Assay</h5>
+                </button>
+                <button
+                  className={this.returnButtonClass("tissue")}
+                  type="button"
+                  onClick={() => this.handleButtonPress("filter", "tissue")}
+                >
+                  <h5>Tissue</h5>
                 </button>
               </div>
             </div>
             <div className="synapse-chart">
               <SynapseChart
                 token={this.props.token}
-                synId={this.state.activeButton}
+                synId={this.state.activeId}
                 filter={this.state.activeFilter}
                 rgbIndex={this.state.color}
                 barChart

@@ -373,9 +373,9 @@ class Studies extends Component {
 
   render() {
     return (
-      <div className="row about">
-        <div className="col-xs-12">
-          <section className="row child-page-hero">
+      <div className="flex-row about">
+        <div className="flex-row">
+          <section className="container flex-row child-page-hero">
             <div className="col-xs-12 col-sm-9 content">
               <h2>Studies</h2>
               <p>
@@ -395,7 +395,7 @@ class Studies extends Component {
               )}
             </div>
           </section>
-          <div className="row center-xs loading-bar">
+          <div className="flex-row center-xs loading-bar">
             <BarLoader color="#47357B" loading={this.state.loading} />
           </div>
         </div>
