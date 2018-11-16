@@ -7,7 +7,7 @@ const ReactMarkdown = require("react-markdown")
 
 class WhatIsAmpAD extends Component {
   componentDidMount() {
-    getMarkdown(this.props, "581940")
+    getMarkdown(this.props, "581939")
   }
 
   componentWillUnmount() {
@@ -16,16 +16,18 @@ class WhatIsAmpAD extends Component {
 
   render() {
     return (
-      <div className="flex-row about research-page">
-        <div className="flex-row">
-          <section className="container flex-row center-xs child-page-hero">
-            <div className="flex-col-9 between-xs content-row-width">
+      <div className="container about research-page">
+        <div className="">
+          <section className="row child-page-hero">
+            <div className="col-xs-12 col-sm-8 col-centered content-row-width">
               <h2>AMP-AD Knowledge Portal</h2>
             </div>
           </section>
-          <div className="container old-markdown">
-            <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
-          </div>
+          <section className="row">
+            <div className="col-xs-12 col-sm-8 col-centered">
+              <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+            </div>
+          </section>
         </div>
       </div>
     )

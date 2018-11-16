@@ -1779,7 +1779,7 @@ select {
 
 
   //////// hiding hide content publications research-publications experimental-resources ///////////
-  .researchers-content {
+  .researchers-content, .experimental-resources {
     .hide-first-child {
       div span span{
         p:first-child {
