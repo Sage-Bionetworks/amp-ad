@@ -254,7 +254,11 @@ class Header extends Component {
   );
 
   ResearchTools = () => (
-    <div>
+    <div
+      onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")}
+      onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
+      }
+    >
       <Link
         name="Research-Tools"
         to="/ResearchTools"
@@ -262,9 +266,6 @@ class Header extends Component {
           this.props.hash.includes("#/ResearchTools")
             ? "home nav-item main-nav-item active"
             : "home nav-item main-nav-item"
-        }
-        onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")}
-        onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
         }
         onClick={() => {
           this.closeNavigation("#/ResearchTools")
