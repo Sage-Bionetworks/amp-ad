@@ -76,13 +76,11 @@ function getWikiData(wikiId, token, synId = "syn12666371") {
       return processedData
     })
     .catch((error) => {
-      console.log(error)
       return ""
     })
 }
 
 const getWikiHeaderTree = (token, synId, offsetVal = 0, limit = 10) => {
-  console.log(token, synId)
   let fetchReq = `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikiheadertree?offset=${offsetVal}&limit=${limit}`
   if (offsetVal === false || limit === false) {
     fetchReq = `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wikiheadertree`
@@ -95,7 +93,6 @@ const getWikiHeaderTree = (token, synId, offsetVal = 0, limit = 10) => {
   })
     .then((response) => {
       if (response.ok) {
-        console.log(response)
         return response.json()
       }
       return handleErrors(response)
@@ -160,7 +157,6 @@ const getSubPageHeaders = (
 ) => {
   return getWikiHeaderTree(sessionToken, synId, paginationValue, limit)
     .then((results) => {
-      console.log(results)
       const filteredResults = results.results.filter(
         wikiPage => wikiPage.parentId === wikiId,
       )
@@ -207,7 +203,6 @@ const getWikiMarkdownSegments = (
     paginationValue,
     limit,
   ).then((headers) => {
-    console.log(headers)
     asyncForEach(headers, async (header) => {
       await waitFor(100)
       getMarkdownSegment(

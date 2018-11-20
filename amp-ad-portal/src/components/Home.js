@@ -18,7 +18,7 @@ const Home = props => (
     <Programs />
     <WhatsNew
       markdown={props.whatsNewMarkdownSegs}
-      token={props.token}
+      token={props.token.sessionToken}
       handleNestedChanges={props.handleNestedChanges}
     />
   </div>

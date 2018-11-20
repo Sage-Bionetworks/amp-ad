@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import SynapseChart from "./SynapseBarChart.jsx"
 import {
+  clone,
   synapseClinicalTable,
   returnSynapseValue,
 } from "../library/synapseObjects"
@@ -19,7 +20,7 @@ class ExploreContent extends Component {
   };
 
   componentDidMount() {
-    loadedObject = synapseClinicalTable.clone()
+    loadedObject = clone(synapseClinicalTable)
     this.handleButtonPress("filter", "diagnosis")
   }
 
@@ -31,7 +32,7 @@ class ExploreContent extends Component {
 
   handleButtonPress = (key, value) => {
     //const activeFilter = returnSynapseValue(loadedObject, key, value, "filter")
-    console.log(key, value, loadedObject)
+    //console.log(key, value, loadedObject)
     const color = returnSynapseValue(loadedObject, key, value, "color")
     const hash = returnSynapseValue(loadedObject, key, value, "hash")
     const name = returnSynapseValue(loadedObject, key, value, "name")

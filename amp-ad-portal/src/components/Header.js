@@ -254,11 +254,7 @@ class Header extends Component {
   );
 
   ResearchTools = () => (
-    <li
-      onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")}
-      onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
-      }
-    >
+    <div>
       <Link
         name="Research-Tools"
         to="/ResearchTools"
@@ -266,6 +262,9 @@ class Header extends Component {
           this.props.hash.includes("#/ResearchTools")
             ? "home nav-item main-nav-item active"
             : "home nav-item main-nav-item"
+        }
+        onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")}
+        onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
         }
         onClick={() => {
           this.closeNavigation("#/ResearchTools")
@@ -281,7 +280,7 @@ class Header extends Component {
             : "under-bar"
         }
       />
-    </li>
+    </div>
   );
 
   DataAccessDropdown = () => (
@@ -369,7 +368,7 @@ class Header extends Component {
   );
 
   AboutMenu = () => (
-    <li
+    <div
       onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")}
       onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
       }
@@ -396,7 +395,7 @@ class Header extends Component {
             : "under-bar"
         }
       />
-    </li>
+    </div>
   );
 
   render() {

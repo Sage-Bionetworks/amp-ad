@@ -5,6 +5,7 @@ import { SynapseComponents } from "synapse-react-client"
 import SynapseChart from "./SynapseBarChart.jsx"
 
 import {
+  clone,
   synapseObjects,
   returnSynapseValue,
   setSynapseValue,
@@ -33,7 +34,7 @@ class Explore extends Component {
     location = history.location
 
     if (this.setActiveValues(window.location.hash) !== "studyPage") {
-      loadedObjects = synapseObjects.clone()
+      loadedObjects = clone(synapseObjects)
       // studies
       setSynapseValue(loadedObjects, "syn16787123", "filter", "projectStatus")
       // publications

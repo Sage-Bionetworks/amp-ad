@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { SynapseComponents } from "synapse-react-client"
 
 import { getMarkdown } from "../queries/getWikiData"
 
@@ -7,47 +8,33 @@ const ReactMarkdown = require("react-markdown")
 
 class DataUse extends Component {
   state = {
-    addedEventListeners: false,
+    loaded: false,
   };
 
-  componentDidMount() {
-    getMarkdown(this.props, "585317")
-  }
+  componentDidMount() {}
 
-  componentWillUnmount() {
-    this.props.handleChanges("wikiMarkdown", "")
-  }
+  componentWillUnmount() {}
 
-  componentDidUpdate() {
-    if (!this.state.addedEventListeners) {
-      this.addDetailsFunctionality()
+  shouldComponentUpdate() {}
+
+  componentDidUpdate() {}
+
+  handleChange = (newState) => {
+    this.setState(newState)
+  };
+
+  returnMarkdown = (token = this.props.token.sessionToken) => {
+    if (token) {
+      return (
+        <SynapseComponents.Markdown
+          token={token}
+          ownerId="syn12666371"
+          wikiId="585318"
+          updateLoadState={() => this.handleChange({ loaded: true })}
+        />
+      )
     }
-  }
-
-  addDetailsFunctionality = () => {
-    const details = document.querySelectorAll("details")
-
-    if (details.length > 1) {
-      details.forEach((dropdown) => {
-        dropdown.addEventListener(
-          "toggle",
-          (event) => {
-            console.log(dropdown)
-            if (dropdown.open) {
-              /* the element was toggled open */
-              dropdown.open = "true"
-            } else {
-              /* the element was toggled closed */
-              dropdown.open = "false"
-            }
-          },
-          false,
-        )
-      })
-      this.setState({
-        addedEventListeners: true,
-      })
-    }
+    return <div />
   };
 
   render() {

@@ -19,7 +19,7 @@ const AsyncAboutAmpAd = asyncComponent(() => import("./components/About-WhatIsAm
 // research pages
 const AsyncResearchPublications = asyncComponent(() => import("./components/Research-Publications"))
 // resources pages
-const AsyncResourcesDataUse = asyncComponent(() => import("./components/Resources-DataUse"))
+const AsyncInstructions = asyncComponent(() => import("./components/DataAccess-Instructions"))
 // component js
 const AsyncHome = asyncComponent(() => import("./components/Home"))
 const AsyncHeader = asyncComponent(() => import("./components/Header"))
@@ -29,7 +29,7 @@ const AsyncExplore = asyncComponent(() => import("./components/Explore.jsx"))
 const AsyncStudyPage = asyncComponent(() => import("./components/Page-Study.js"))
 // Data access pages
 const AsyncDataUseCertificates = asyncComponent(() => import("./components/DataAccess-DataUseCertificates.js"))
-const AsyncResourcesExperimentalResources = asyncComponent(() => import("./components/Resources-Experimental-Resources"))
+const AsyncResearchTools = asyncComponent(() => import("./components/ResearchTools"))
 const AsyncResourcesAcknowledgements = asyncComponent(() => import("./components/Resources-AcknowledgementStatements"))
 
 ReactGA.initialize("UA-29804340-3")
@@ -44,7 +44,7 @@ history.listen((location) => {
 
 class App extends Component {
   state = {
-    loginToken: "",
+    loginToken: {},
     pageData: study,
     wikiMarkdown: "",
     welcomeHeaderMarkdown: "",
@@ -136,22 +136,16 @@ class App extends Component {
   };
 
   ReturnResourcesAcknowledgements = () => {
-    return (
-      <AsyncResourcesAcknowledgements
-        token={this.state.loginToken}
-        handleChanges={this.handleChanges}
-        markdown={this.state.wikiMarkdown}
-      />
-    )
+    return <AsyncResourcesAcknowledgements token={this.state.loginToken} />
   };
 
   ReturnDataUseCertificates = () => {
     return <AsyncDataUseCertificates token={this.state.loginToken} />
   };
 
-  ReturnResourcesDataUse = () => {
+  ReturnInstructions = () => {
     return (
-      <AsyncResourcesDataUse
+      <AsyncInstructions
         token={this.state.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -160,9 +154,9 @@ class App extends Component {
     )
   };
 
-  ReturnResourcesExperimentalResources = () => {
+  ReturnResearchTools = () => {
     return (
-      <AsyncResourcesExperimentalResources
+      <AsyncResearchTools
         token={this.state.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -176,8 +170,8 @@ class App extends Component {
       <AsyncAboutAmpAd
         token={this.state.loginToken}
         handleChanges={this.handleChanges}
-        handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.wikiMarkdown}
+        //handleNestedChanges={this.handleNestedChanges}
+        //markdown={this.state.wikiMarkdown}
       />
     )
   };
@@ -217,7 +211,7 @@ class App extends Component {
 
         <Route
           path="/DataAccess/Instructions"
-          component={this.ReturnResourcesDataUse}
+          component={this.ReturnInstructions}
         />
         <Route
           path="/DataAccess/AcknowledgementStatements"
@@ -228,10 +222,8 @@ class App extends Component {
           component={this.ReturnDataUseCertificates}
         />
 
-        <Route
-          path="/ResearchTools"
-          component={this.ReturnResourcesExperimentalResources}
-        />
+        <Route path="/ResearchTools" component={this.ReturnResearchTools} />
+
         <Route
           path="/Resources/Studies"
           component={this.ReturnResourcesStudies}

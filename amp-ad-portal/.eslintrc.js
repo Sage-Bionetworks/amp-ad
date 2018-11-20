@@ -22,8 +22,7 @@ module.exports = {
     "react/no-render-return-value": 0,
     "import/no-extraneous-dependencies": 0,
     "import/extensions": 0,
-    "global-require": 0,
-    "no-extend-native": ["error", { exceptions: ["Array"] }]
+    "global-require": 0
   },
   env: {
     browser: true,

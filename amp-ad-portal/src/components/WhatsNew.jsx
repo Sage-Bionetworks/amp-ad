@@ -18,7 +18,7 @@ class WhatsNew extends Component {
         "582408",
         "syn12666371",
         "whatsNew",
-        this.props.token.sessionToken,
+        this.props.token,
         this.props.handleNestedChanges,
         131,
         50,
@@ -42,7 +42,7 @@ class WhatsNew extends Component {
         "582408",
         "syn12666371",
         "whatsNew",
-        this.props.token.sessionToken,
+        this.props.token,
         this.props.handleNestedChanges,
         131,
         50,
@@ -55,7 +55,7 @@ class WhatsNew extends Component {
     return wikiIds.map((id) => {
       return (
         <SynapseComponents.Markdown
-          token={this.props.token.sessionToken}
+          token={this.props.token}
           wikiId={id}
           ownerId={synId}
         />
@@ -82,7 +82,7 @@ class WhatsNew extends Component {
 
 WhatsNew.propTypes = {
   markdown: PropTypes.array,
-  token: PropTypes.object.isRequired,
+  token: PropTypes.string.isRequired,
   handleNestedChanges: PropTypes.func.isRequired,
 }
 
