@@ -61,7 +61,7 @@ ol { li { list-style: decimal; }}
 
 html, body {
   max-width: 100%;
-  overflow-x: hidden;
+  //overflow-x: hidden;
 }
 
 .about-page, .page {
@@ -661,6 +661,42 @@ select {
     background: white;
     z-index: 1000;
     box-shadow: 0 1px 5px 0 #808080;
+
+    .burger-menu {
+      background: #666666;
+      a{
+        color: white;
+      }
+    }
+		.bm-burger-button {
+        display: none;
+      @media screen and (max-width: 600px){
+        display: block;
+        top: 100px;
+      }
+      @media screen and (max-width: 721px){
+        display: block;
+        top: 90px;
+      }
+		}
+		.bm-item-list {
+			display: flex;
+			flex-direction: column;
+			a {
+				padding: 10px 0px;
+				font-size: 20px;
+				font-weight: 300;
+			}
+			.inset {
+				padding-left: 25px;
+			} 
+			h4 {
+				color: white;
+				font-size: 20px;
+				font-weight: 300;
+			}
+		}
+
     img {
       transition: all 200ms ease;
       max-height: 49px;
@@ -1981,7 +2017,7 @@ select {
       max-height: 50px;
     }
     .main {
-      margin-top: 305px;
+      margin-top: 50px;
     }
     ul.nav {
       flex-direction: column;

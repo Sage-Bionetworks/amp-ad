@@ -209,7 +209,6 @@ ol li {
 
 html, body {
   max-width: 100%;
-  overflow-x: hidden;
 }
 
 .about-page, .page {
@@ -815,6 +814,44 @@ header.header {
   header.header {
     max-height: fit-content;
   }
+}
+header.header .burger-menu {
+  background: #666666;
+}
+header.header .burger-menu a {
+  color: white;
+}
+header.header .bm-burger-button {
+  display: none;
+}
+@media screen and (max-width: 600px) {
+  header.header .bm-burger-button {
+    display: block;
+    top: 100px;
+  }
+}
+@media screen and (max-width: 721px) {
+  header.header .bm-burger-button {
+    display: block;
+    top: 90px;
+  }
+}
+header.header .bm-item-list {
+  display: flex;
+  flex-direction: column;
+}
+header.header .bm-item-list a {
+  padding: 10px 0px;
+  font-size: 20px;
+  font-weight: 300;
+}
+header.header .bm-item-list .inset {
+  padding-left: 25px;
+}
+header.header .bm-item-list h4 {
+  color: white;
+  font-size: 20px;
+  font-weight: 300;
 }
 header.header img {
   transition: all 200ms ease;
@@ -2157,7 +2194,7 @@ button.modal-x {
   }
 
   .main {
-    margin-top: 305px;
+    margin-top: 50px;
   }
 
   ul.nav {

@@ -111,8 +111,6 @@ class App extends Component {
   ReturnHome = () => {
     return (
       <AsyncHome
-        welcomeHeaderMarkdown={this.state.welcomeHeaderMarkdown}
-        welcomeHeaderMarkdownText={this.state.welcomeHeaderMarkdownText}
         token={this.state.loginToken}
         toggleSeeAll={this.toggleSeeAll}
         handleChanges={this.handleChanges}

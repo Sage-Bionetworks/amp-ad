@@ -13,7 +13,53 @@ import BetaHeader from "./Beta"
 
 import "react-accessible-accordion/dist/minimal-example.css"
 
+import { slide as Menu } from "react-burger-menu"
+
 const logoImage = require("../images/amp-ad-logo.svg")
+
+const styles = {
+  bmBurgerButton: {
+    zIndex: "1100",
+    position: "fixed",
+    width: "36px",
+    height: "30px",
+    left: "36px",
+    top: "36px",
+  },
+  bmBurgerBars: {
+    background: "#373a47",
+  },
+  bmCrossButton: {
+    height: "24px",
+    width: "24px",
+  },
+  bmCross: {
+    background: "#bdc3c7",
+  },
+  bmMenu: {
+    background: "#373a47",
+    padding: "2.5em 1.5em 0",
+    fontSize: "1.15em",
+  },
+  bmMorphShape: {
+    fill: "#373a47",
+  },
+  bmItemList: {
+    color: "#b8b7ad",
+    padding: "0.8em",
+  },
+  bmItem: {
+    display: "inline-block",
+  },
+  bmOverlay: {
+    background: "rgba(0, 0, 0, 0.3)",
+    zIndex: "1200",
+  },
+  bmMenuWrap: {
+    zIndex: "1300",
+    overflowY: "scroll",
+  },
+}
 
 class Header extends Component {
   constructor(props) {
@@ -23,18 +69,42 @@ class Header extends Component {
       Explore: false,
       Open: false,
       activeUnderBar: "",
+      isOpen: false,
+      menuOpen: false,
     }
   }
 
   componentDidMount() {
     this.handleLocalChanges("activeUnderBar", this.props.hash)
+
+    if (window.location.hash === "#/") {
+      styles.bmBurgerButton.top = "90px"
+    } else styles.bmBurgerButton.top = "36px"
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.hash !== this.props.hash) {
       this.handleLocalChanges("activeUnderBar", this.props.hash)
     }
+    if (window.location.hash === "#/") {
+      styles.bmBurgerButton.top = "90px"
+    } else styles.bmBurgerButton.top = "36px"
+
+    this.lockwindowScroll(this.state.menuOpen)
   }
+
+  lockwindowScroll = (isOpen) => {
+    const body = document.querySelector("body")
+    if (isOpen) {
+      body.style.overflow = "hidden"
+      //body.style.overflow = "hidden"
+      body.style.height = "100%"
+    } else {
+      body.style.overflowY = "scroll"
+      body.style.overflowX = "hidden"
+      body.style.height = "unset"
+    }
+  };
 
   closeNavigation = (location) => {
     if (location !== undefined) {
@@ -97,6 +167,14 @@ class Header extends Component {
       ? () => this.handleLocalChanges("activeUnderBar", this.props.hash)
       : () => {}
     return behavior
+  };
+
+  closeHamburger = () => {
+    this.setState({ menuOpen: false })
+  };
+
+  handleStateChange = (state) => {
+    this.setState({ menuOpen: state.isOpen })
   };
 
   ExploreDropdown = () => (
@@ -394,6 +472,49 @@ class Header extends Component {
   render() {
     return (
       <header className="header">
+        <Menu
+          className="burger-menu"
+          isOpen={this.state.menuOpen}
+          styles={styles}
+          onStateChange={state => this.handleStateChange(state)}
+        >
+          <Link to="/" onClick={() => this.closeHamburger()}>
+            Home
+          </Link>
+          <h4>Explore</h4>
+          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+            Programs
+          </Link>
+          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+            Projects
+          </Link>
+          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+            Studies
+          </Link>
+          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+            Data Files
+          </Link>
+          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+            Publications
+          </Link>
+          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+            People
+          </Link>
+          <Link to="/" onClick={() => this.closeHamburger()}>
+            Research Tools
+          </Link>
+          <h4>Data Access</h4>
+          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+            Getting Access to Data
+          </Link>
+          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+            Acknowledging Data Use
+          </Link>
+          <Link to="/" onClick={() => this.closeHamburger()}>
+            About
+          </Link>
+        </Menu>
+
         <div className="container">
           {this.ReturnBetaHeader()}
           <div className="nav-row nav row" style={{ backgroundColor: "#fff" }}>
