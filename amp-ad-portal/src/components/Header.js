@@ -254,11 +254,7 @@ class Header extends Component {
   );
 
   ResearchTools = () => (
-    <div
-      onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")}
-      onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
-      }
-    >
+    <div>
       <Link
         name="Research-Tools"
         to="/ResearchTools"
@@ -369,11 +365,7 @@ class Header extends Component {
   );
 
   AboutMenu = () => (
-    <div
-      onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")}
-      onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
-      }
-    >
+    <div>
       <Link
         name="About"
         to="/About/AMP-AD"
@@ -457,9 +449,24 @@ class Header extends Component {
                   />
                 </li>
                 <li>{this.ExploreDropdown()}</li>
-                <li>{this.ResearchTools()}</li>
+                <li
+                  onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "ResearchTools")
+                  }
+                  onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
+                  }
+                >
+                  {this.ResearchTools()}
+                </li>
                 <li>{this.DataAccessDropdown()}</li>
-                <li className="about-dropdown">{this.AboutMenu()}</li>
+                <li
+                  className="about-dropdown"
+                  onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "About")
+                  }
+                  onMouseLeave={() => this.handleLocalChanges("activeUnderBar", this.props.hash)
+                  }
+                >
+                  {this.AboutMenu()}
+                </li>
                 <li
                   className="agora-nav-link"
                   onMouseEnter={() => this.handleLocalChanges("activeUnderBar", "Home")

@@ -32,6 +32,10 @@ $textGray: #BCC0CA;
 $navigationText: #404B63;
 
 
+*:focus {
+    outline: none;
+  }
+
 body, button, h1, h2, h3, h4, h5, li, ul, p, a {
 	font-family: 'Lato', sans-serif; 
 }
@@ -51,6 +55,9 @@ ul.jumbo-list {
     position: relative;
   }
 }
+
+ul { li { list-style: disc; }}
+ol { li { list-style: decimal; }}
 
 html, body {
   max-width: 100%;
@@ -189,99 +196,11 @@ button.btn-explore {
   max-width: 1120px;
 }
 
-  header.header {
-    @media screen and (max-width: 1023px){
-      max-height: fit-content;
-    }
-    .bm-burger-button {
-      @media screen and (min-width: 720px){
-        display: none;
-      }
-    }
-    .bm-item-list {
-      display: flex;
-      flex-direction: column;
-      a {
-        padding: 10px 0px;
-        font-size: 20px;
-        font-weight: 300;
-      }
-      .inset {
-        padding-left: 25px;
-      } 
-      h4 {
-        color: white;
-        font-size: 20px;
-        font-weight: 300;
-      }
-    }
-
-    .nav li, .nav li a  {
-      //text-transform: uppercase;
-      //font-weight: bold;
-      color: $navigationText;
-    }
-    .nav > li > a:hover, .nav > li > a:focus, a:hover {
-      background-color: unset;
-      text-decoration: none;
-      color: $navigationText;
-    }
-    .logo a {
-      font-size: 18px;
-      line-height: 22px;
-      text-align: left;
-      letter-spacing: 2px;
-      font-weight: bolder;
-    }
-    .logo {
-      @media screen and (max-width: 720px) {
-        padding: 30px 0px;
-      }
-    }
-    
-    max-width: 100vw;
-    width: 100%;
-    margin: 0 auto;
-    position: fixed;
-    left: 0px;
-    background-color: $navigation;
-    z-index: 1000;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
-    img {
-      transition: all 200ms ease;
-      max-height: 80px;
-      @media screen and (min-width: 1220px){
-        //margin-left: -40px;
-      }
-    }
-    .Dropdown-control {
-      height: 37px;
-      padding-top: 0px;
-      padding-right: 44px;
-      text-align: left;
-      border: none;
-      padding-left: 0px;
-    }
-    .Dropdown-control {
-      box-shadow: none;
-    }
-    .Dropdown-control:hover {
-      box-shadow: none;
-    }
-    .Dropdown-menu {
-      width: 250px;
-      right: 10px;
-    }
-    .Dropdown-arrow {
-      top: 7px;
-    }
-    li .Dropdown-root .Dropdown-control div.Dropdown-placeholder {
-      cursor: pointer;
-    }
-    .Dropdown-arrow {
-      cursor: pointer;
-    }
+details {
+  &:hover {
+    cursor: pointer;
   }
+}
 
   header { 
     .nav-buttons {
@@ -643,6 +562,12 @@ select {
     }
     .nav-item{
       font-size: 20px;
+      @media screen and (max-width: 960px){
+        font-size: 18px;
+      }
+      @media screen and (max-width: 900px){
+        font-size: 17px;
+      }
     }
     .nav-item.dropdown {
       display: inline-block;
@@ -650,6 +575,13 @@ select {
     }
     .Dropdown-control {
       font-size: 20px;
+    }
+    .nav>li>a:hover {
+       
+    }
+    a.nav-item:hover, a.nav-item:focus {
+      background-color: unset;
+      color: black;
     }
     a.nav-item.active {
       font-weight: bold;
@@ -733,6 +665,12 @@ select {
       transition: all 200ms ease;
       max-height: 49px;
       margin-top: 5px;
+      @media screen and (max-width: 1180px) {
+        max-height: 40px;
+      }
+      @media screen and (max-width: 900px) {
+        max-height: 40px;
+      }
     }
     .Dropdown-control {
       height: 37px;
@@ -762,12 +700,6 @@ select {
       cursor: pointer;
     }
   }
-  //header.header.squish {
-    ////padding: 0px 50px;
-    ////img {
-      ////max-height: 35px;
-    ////}
-  //}
 
   .hidden {
     display: none !important;
@@ -859,12 +791,18 @@ select {
       text-align: left;
     }
     a.nav-item {
-      padding: 14px 20px; 
+      padding: 14px 10px; 
+      margin: 0px 10px;
       float: left;
     }
-    @media screen and (max-width: 1170px){
+    @media screen and (max-width: 1200px){
       a.nav-item {
         padding: 0px 5px;
+      }
+    }
+    @media screen and (max-width: 1100px){
+      a.nav-item {
+        padding: 0px 0px;
       }
     }
     .accordion__title {
@@ -897,7 +835,7 @@ select {
     .agora-border {
       position: absolute;
       border-left: 1px solid #86D1D5;
-      left: -55px;
+      left: -21%;
       height: 26px;
       top: 50%;
       margin-top: -13px;
@@ -1087,10 +1025,11 @@ select {
     }
     .selectors {
       display: flex;
-     justify-content: space-around;
+      justify-content: space-around;
       flex-direction: row;
+      flex-wrap: wrap;
       @media screen and (max-width: 720px){
-        flex-direction: column;
+        flex-direction: unset;
       }
       button {
         position: relative;
@@ -1120,8 +1059,6 @@ select {
     }
 
     .bar-chart {
-      //position: relative;
-      //height: 220px;
       @media screen and (max-width: 720px){
         height: 450px;
       }
@@ -1132,12 +1069,18 @@ select {
         position: absolute;
         bottom: -59px;
         right: 0;
+        @media screen and (max-width: 1115px){
+          bottom: -130px;
+        }
       }
       .synapse-chart {
         position: absolute;
         top: 100px;
         right: 0px;
         width: 100%;
+        @media screen and (max-width: 1115px){
+          top: 160px;
+        }
         .btn {
           font-size: initial;
           background-color: initial;
@@ -1170,180 +1113,6 @@ select {
       font-weight: 600;
       border: none;
       transition: all .3s ease-in-out;
-    }
-  }
-
-  .data-page section.pie-charts-welcome {
-    background-color: unset;
-  }
-  section.pie-charts-welcome.height {
-      //height: 100%;
-    }
-  section.pie-charts-welcome {
-    background-color: $gray;
-    padding-top: 0px;
-    .wide-row {
-      width: 100%;
-    }
-    h1{
-      font-weight: 300;
-      font-size: 42px;
-      margin: 20px;
-    }
-    .pie-circles-container svg:hover {
-      all: unset;
-    }
-    .pie-circle {
-      display: inline-block;
-      margin: 0px 5px;
-      @include circle(13px);
-      max-width: 13px;
-      padding: 5px;
-    }
-
-    .pie-chart-welcome {
-      position: relative;
-      max-width: 310px;
-    }
-    .pie-container {
-      position: relative;
-      margin-bottom: 20px;
-      h1.count {
-        margin: 10px;
-      }
-    }
-    .pie-counts-list {
-      height: 130px;
-      //overflow: hidden;
-      padding: 0px 10px;
-      //transition: all 1s ease;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-    .pie-counts-list[data-value="true"]{
-      overflow: visible;
-      height: fit-content;
-      max-height: 2000px;
-      transition: all 1s ease;
-    }
-    p.pie-list-item {
-      text-align: left;
-      margin: 5px 0px;
-      //text-overflow: ellipsis;
-      //white-space: nowrap;
-      //max-width: 200px;
-    }
-    .pie-circles-container{
-      position: relative;
-    }
-    .chart-center-stat {
-      max-height: 190px;
-      max-width: 190px;
-      background: white;
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      align-items: center;
-      align-content: center; 
-      justify-content: center;
-      width: 15vw;
-      height: 15vw;
-      left: 0;
-      right: 0;
-      margin: auto;
-      top: 0;
-      bottom: 0;
-      p, h1 {
-        display: block;
-        text-align: center;
-        width: 100%;
-        margin: 0px;
-      }
-      p {
-        font-size: 18px;
-      }
-    }
-    .pie-counts-button {
-      width: fit-content;
-      padding: 0px 20px;
-      line-height: 18px;
-      margin-top: 20px;
-    }
-  }
-
-  section.searchbar {
-    .Dropdown-arrow {
-      right: 20px;
-      top: 23px;
-      border-width: 8px 8px 0;
-    }
-    .Dropdown-control {
-      cursor: pointer;
-      line-height: 40px;
-      padding-left: 20px;
-      font-size: 18px;
-    }
-    .search-icon-box {
-      display: none;
-    }
-    background-color: $gray;
-    h2 {
-      margin: 0px;
-      line-height: 56px;
-      text-align: right;
-    }
-    padding: 20px;
-    form { 
-      margin: 0px auto;
-      width: 100%;
-      p {
-        display: inline-block;
-      }
-    }
-    .search-icon-box {
-      justify-content: flex-end;
-      align-items: center;
-      display: flex;
-      img {
-        margin: 0px 10px;
-      }
-    }
-  }
-
-  section.popular-data-requests {
-    .pop-assay {
-      //max-width: 170px; 
-      margin: 0px auto;
-      text-align: left;
-    }
-    .pop-assay-title {
-      h5 {
-        font-size: 20px;
-        font-weight: bold;
-        text-align: center;
-        width: 100%;
-      }
-    }
-    .pop-circle {
-      display: inline-block;
-      margin: 0px 5px;
-      @include circle(10px);
-      max-width: 5px;
-      padding: 5px;
-      &:nth-child(1){
-        background-color: $blue;
-      }
-    }
-    .popular-col {
-      padding: 0px;
-      img {
-        height: 100px;
-      }
-      h5 {
-        //margin: 0px;
-      }
     }
   }
 
