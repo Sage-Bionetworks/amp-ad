@@ -178,7 +178,6 @@ class Explore extends Component {
     if (hash === "#/Explore/Publications") {
       return (
         <div>
-          <h1>Publications</h1>
           <SynapseComponents.Markdown
             token={this.props.token}
             ownerId="syn2580853"

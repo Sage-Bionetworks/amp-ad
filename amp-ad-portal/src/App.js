@@ -7,8 +7,8 @@ import * as SynapseClient from "./synapse/SynapseClient"
 
 // non component js
 import study from "./defaultData/Study"
-
 import asyncComponent from "./components/AsyncComponent"
+import ScrollToTop from "./components/ScrollToTop"
 
 const login = async () => SynapseClient.login("mikeybkats", "guinness").then((keys) => {
   return keys
@@ -16,8 +16,6 @@ const login = async () => SynapseClient.login("mikeybkats", "guinness").then((ke
 
 // about pages
 const AsyncAboutAmpAd = asyncComponent(() => import("./components/About-WhatIsAmpAd"))
-// research pages
-const AsyncResearchPublications = asyncComponent(() => import("./components/Research-Publications"))
 // resources pages
 const AsyncInstructions = asyncComponent(() => import("./components/DataAccess-Instructions"))
 // component js
@@ -50,7 +48,6 @@ class App extends Component {
     welcomeHeaderMarkdown: "",
     welcomeHeaderMarkdownText: "",
     externalResearchers: [],
-    researchPublications: [],
     studies: [],
     studiesWikiIds: [],
     studiesRows: [],
@@ -118,17 +115,6 @@ class App extends Component {
         handleNestedChanges={this.handleNestedChanges}
         whatsNewMarkdownSegs={this.state.whatsNew}
         markdown={this.state.wikiMarkdown}
-      />
-    )
-  };
-
-  ReturnResearchPublications = () => {
-    return (
-      <AsyncResearchPublications
-        token={this.state.loginToken}
-        handleChanges={this.handleChanges}
-        handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.researchPublications}
       />
     )
   };
@@ -240,27 +226,27 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="row amp-ad">
-          <this.ReturnHeader />
-
-          <div className="main">
-            <this.Main />
-          </div>
-
-          <footer>
-            <div className="container">
-              <div className="row center-block col-centered">
-                <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
-                  Forum
-                </a>
-                <a href="mailto:ampadportal@sagebionetworks.org">Contact</a>
-                <a href="http://docs.synapse.org/articles/governance.html">
-                  Terms & Privacy
-                </a>
-              </div>
+        <ScrollToTop>
+          <div className="row amp-ad">
+            <this.ReturnHeader />
+            <div className="main">
+              <this.Main />
             </div>
-          </footer>
-        </div>
+            <footer>
+              <div className="container">
+                <div className="row center-block col-centered">
+                  <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
+                    Forum
+                  </a>
+                  <a href="mailto:ampadportal@sagebionetworks.org">Contact</a>
+                  <a href="http://docs.synapse.org/articles/governance.html">
+                    Terms & Privacy
+                  </a>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </ScrollToTop>
       </Router>
     )
   }
