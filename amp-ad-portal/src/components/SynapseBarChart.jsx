@@ -33,12 +33,11 @@ class SynapseBarChart extends Component {
   returnQueryBarChart = () => {
     if (this.props.sql && this.props.barChart) {
       const query = this.buildQuery()
-      console.log(this.props.token, this.props.filter)
       return (
         <SynapseComponents.QueryWrapper
           initQueryRequest={query}
           token={this.props.token}
-          filter={this.props.filter}
+          facetName={this.props.filter}
           rgbIndex={this.props.rgbindex}
           showMenu={false}
         >

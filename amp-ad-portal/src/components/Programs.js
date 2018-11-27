@@ -1,31 +1,71 @@
-import React from "react"
-//import {
-//StaticQueryWrapper,
-//SynapseTableCardView,
-//SynapseConstants,
-//} from "synapse-react-client"
+import React, { Component } from "react"
+import { SynapseComponents, SynapseConstants } from "synapse-react-client"
 import openUrl from "../model/OpenUrl"
 
-//const queryWrapper = (props) => {
-//return (
-//<StaticQueryWrapper token={props.token} sql="SELECT * FROM syn17024173">
-//<SynapseTableCardView type={SynapseConstants.AMP_CONSORTIUM} />
-//</StaticQueryWrapper>
-//)
-//}
+import { getTable } from "../queries/queryForData"
 
-const Programs = (props) => {
-  return (
-    <section className="programs flex-row">
-      <div className="flex-col-full content-row-width">
-        <div className="title-row between-xs">
-          <div className="">
-            <h2>Programs</h2>
+let synJSON = ""
+
+const QueryWrapper = (props) => {
+  if (props.synJSON) {
+    return (
+      <SynapseComponents.StaticQueryWrapper json={props.synJSON}>
+        <SynapseComponents.SynapseTableCardView
+          type={SynapseConstants.AMP_CONSORTIUM}
+        />
+      </SynapseComponents.StaticQueryWrapper>
+    )
+  }
+  return <div />
+}
+
+class Programs extends Component {
+  state = {
+    json: "",
+  };
+
+  componentDidMount() {
+    if (this.props.token) {
+      getTable(
+        "syn17024173",
+        this.props.token,
+        "SELECT * FROM syn17024173",
+      ).then((json) => {
+        synJSON = json
+      })
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.json === "") {
+      getTable(
+        "syn17024173",
+        this.props.token,
+        "SELECT * FROM syn17024173",
+      ).then((json) => {
+        console.log(json)
+        this.setState({
+          json,
+        })
+      })
+      return false
+    }
+  }
+
+  render() {
+    return (
+      <section className="programs flex-row">
+        <div className="flex-col-full content-row-width">
+          <div className="title-row between-xs">
+            <div className="">
+              <h2>Programs</h2>
+            </div>
           </div>
+          <QueryWrapper token={this.props.token} json={synJSON} />
         </div>
-      </div>
-    </section>
-  )
+      </section>
+    )
+  }
 }
 
 export const OldPrograms = (props) => {
