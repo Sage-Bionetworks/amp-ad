@@ -1,31 +1,30 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-//import { SynapseComponents } from "synapse-react-client"
-import { getMarkdown } from "../queries/getWikiData"
-
-const ReactMarkdown = require("react-markdown")
+import { SynapseComponents } from "synapse-react-client"
+//import { getMarkdown } from "../queries/getWikiData"
+//const ReactMarkdown = require("react-markdown")
 
 class WhatIsAmpAD extends Component {
   componentDidMount() {
-    getMarkdown(this.props, "581939")
+    //getMarkdown(this.props, "581939")
   }
 
   componentWillUnmount() {
-    this.props.handleChanges("wikiMarkdown", "")
+    //this.props.handleChanges("wikiMarkdown", "")
   }
 
   render() {
     return (
-      <div className="container about research-page">
+      <div className="container about-page">
         <div className="">
-          <section className="row child-page-hero">
-            <div className="col-xs-12 col-sm-8 col-centered content-row-width">
-              <h2>AMP-AD Knowledge Portal</h2>
-            </div>
-          </section>
           <section className="row">
-            <div className="col-xs-12 col-sm-8 col-centered">
-              <ReactMarkdown source={this.props.markdown} escapeHtml={false} />
+            <div className="col-xs-12 col-sm-11  col-lg-9 col-centered">
+              <h1>About</h1>
+              <SynapseComponents.Markdown
+                wikiId="581939"
+                token={this.props.token.sessionToken}
+                ownerId="syn12666371"
+              />
             </div>
           </section>
         </div>
@@ -35,9 +34,9 @@ class WhatIsAmpAD extends Component {
 }
 
 WhatIsAmpAD.propTypes = {
-  markdown: PropTypes.string.isRequired,
-  handleChanges: PropTypes.func.isRequired,
-  //token: PropTypes.object.isRequired,
+  //markdown: PropTypes.string.isRequired,
+  //handleChanges: PropTypes.func.isRequired,
+  token: PropTypes.object.isRequired,
 }
 
 export default WhatIsAmpAD

@@ -137,8 +137,8 @@ export const synapseClinicalTable = [
   },
 ]
 
-Array.prototype.clone = function () {
-  return JSON.parse(JSON.stringify(this))
+export const clone = (obj) => {
+  return JSON.parse(JSON.stringify(obj))
 }
 
 // given a key balue pair this function

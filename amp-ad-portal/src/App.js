@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import PropTypes from "prop-types"
 import { HashRouter as Router, Route } from "react-router-dom"
 import ReactGA from "react-ga"
 import createHistory from "history/createBrowserHistory"
@@ -8,8 +7,8 @@ import * as SynapseClient from "./synapse/SynapseClient"
 
 // non component js
 import study from "./defaultData/Study"
-
 import asyncComponent from "./components/AsyncComponent"
+import ScrollToTop from "./components/ScrollToTop"
 
 const login = async () => SynapseClient.login("mikeybkats", "guinness").then((keys) => {
   return keys
@@ -17,28 +16,18 @@ const login = async () => SynapseClient.login("mikeybkats", "guinness").then((ke
 
 // about pages
 const AsyncAboutAmpAd = asyncComponent(() => import("./components/About-WhatIsAmpAd"))
-const AsyncAboutPeople = asyncComponent(() => import("./components/About-People"))
-
-// research pages
-const AsyncResearchPublications = asyncComponent(() => import("./components/Research-Publications"))
-
 // resources pages
-const AsyncResourcesAgora = asyncComponent(() => import("./components/Resources-Agora"))
-const AsyncResourcesDataUse = asyncComponent(() => import("./components/Resources-DataUse"))
-
+const AsyncInstructions = asyncComponent(() => import("./components/DataAccess-Instructions"))
 // component js
 const AsyncHome = asyncComponent(() => import("./components/Home"))
 const AsyncHeader = asyncComponent(() => import("./components/Header"))
-
 // explore
 const AsyncExplore = asyncComponent(() => import("./components/Explore.jsx"))
-
 // study page
 const AsyncStudyPage = asyncComponent(() => import("./components/Page-Study.js"))
-
 // Data access pages
 const AsyncDataUseCertificates = asyncComponent(() => import("./components/DataAccess-DataUseCertificates.js"))
-const AsyncResourcesExperimentalResources = asyncComponent(() => import("./components/Resources-Experimental-Resources"))
+const AsyncResearchTools = asyncComponent(() => import("./components/ResearchTools"))
 const AsyncResourcesAcknowledgements = asyncComponent(() => import("./components/Resources-AcknowledgementStatements"))
 
 ReactGA.initialize("UA-29804340-3")
@@ -53,13 +42,12 @@ history.listen((location) => {
 
 class App extends Component {
   state = {
-    loginToken: "",
+    loginToken: {},
     pageData: study,
     wikiMarkdown: "",
     welcomeHeaderMarkdown: "",
     welcomeHeaderMarkdownText: "",
     externalResearchers: [],
-    researchPublications: [],
     studies: [],
     studiesWikiIds: [],
     studiesRows: [],
@@ -120,8 +108,6 @@ class App extends Component {
   ReturnHome = () => {
     return (
       <AsyncHome
-        welcomeHeaderMarkdown={this.state.welcomeHeaderMarkdown}
-        welcomeHeaderMarkdownText={this.state.welcomeHeaderMarkdownText}
         token={this.state.loginToken}
         toggleSeeAll={this.toggleSeeAll}
         handleChanges={this.handleChanges}
@@ -133,45 +119,17 @@ class App extends Component {
     )
   };
 
-  ReturnResearchPublications = () => {
-    return (
-      <AsyncResearchPublications
-        token={this.state.loginToken}
-        handleChanges={this.handleChanges}
-        handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.researchPublications}
-      />
-    )
-  };
-
-  ReturnResourcesAgora = () => {
-    return (
-      <AsyncResourcesAgora
-        token={this.state.loginToken}
-        handleChanges={this.handleChanges}
-        handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.researchPublications}
-      />
-    )
-  };
-
   ReturnResourcesAcknowledgements = () => {
-    return (
-      <AsyncResourcesAcknowledgements
-        token={this.state.loginToken}
-        handleChanges={this.handleChanges}
-        markdown={this.state.wikiMarkdown}
-      />
-    )
+    return <AsyncResourcesAcknowledgements token={this.state.loginToken} />
   };
 
   ReturnDataUseCertificates = () => {
     return <AsyncDataUseCertificates token={this.state.loginToken} />
   };
 
-  ReturnResourcesDataUse = () => {
+  ReturnInstructions = () => {
     return (
-      <AsyncResourcesDataUse
+      <AsyncInstructions
         token={this.state.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -180,9 +138,9 @@ class App extends Component {
     )
   };
 
-  ReturnResourcesExperimentalResources = () => {
+  ReturnResearchTools = () => {
     return (
-      <AsyncResourcesExperimentalResources
+      <AsyncResearchTools
         token={this.state.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
@@ -196,17 +154,8 @@ class App extends Component {
       <AsyncAboutAmpAd
         token={this.state.loginToken}
         handleChanges={this.handleChanges}
-        handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.wikiMarkdown}
-      />
-    )
-  };
-
-  ReturnAboutPeople = () => {
-    return (
-      <AsyncAboutPeople
-        token={this.state.loginToken}
-        handleChanges={this.handleChanges}
+        //handleNestedChanges={this.handleNestedChanges}
+        //markdown={this.state.wikiMarkdown}
       />
     )
   };
@@ -243,11 +192,10 @@ class App extends Component {
         <Route exact path="/" component={this.ReturnHome} />
 
         <Route path="/Resources/Data" component={this.ReturnResourcesData} />
-        <Route path="/Resources/Agora" component={this.ReturnResourcesAgora} />
 
         <Route
-          path="/DataAccess/DataUseRequirements"
-          component={this.ReturnResourcesDataUse}
+          path="/DataAccess/Instructions"
+          component={this.ReturnInstructions}
         />
         <Route
           path="/DataAccess/AcknowledgementStatements"
@@ -258,10 +206,8 @@ class App extends Component {
           component={this.ReturnDataUseCertificates}
         />
 
-        <Route
-          path="/ResearchTools"
-          component={this.ReturnResourcesExperimentalResources}
-        />
+        <Route path="/ResearchTools" component={this.ReturnResearchTools} />
+
         <Route
           path="/Resources/Studies"
           component={this.ReturnResourcesStudies}
@@ -273,7 +219,6 @@ class App extends Component {
         />
 
         <Route path="/About/AMP-AD" component={this.ReturnAboutAmpAd} />
-        <Route path="/About/People" component={this.ReturnAboutPeople} />
       </div>
     )
   };
@@ -281,27 +226,27 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="row amp-ad">
-          <this.ReturnHeader />
-
-          <div className="main">
-            <this.Main />
-          </div>
-
-          <footer>
-            <div className="container">
-              <div className="row center-block col-centered">
-                <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
-                  Forum
-                </a>
-                <a href="mailto:ampadportal@sagebionetworks.org">Contact</a>
-                <a href="http://docs.synapse.org/articles/governance.html">
-                  Terms & Privacy
-                </a>
-              </div>
+        <ScrollToTop>
+          <div className="row amp-ad">
+            <this.ReturnHeader />
+            <div className="main">
+              <this.Main />
             </div>
-          </footer>
-        </div>
+            <footer>
+              <div className="container">
+                <div className="row center-block col-centered">
+                  <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
+                    Forum
+                  </a>
+                  <a href="mailto:ampadportal@sagebionetworks.org">Contact</a>
+                  <a href="http://docs.synapse.org/articles/governance.html">
+                    Terms & Privacy
+                  </a>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </ScrollToTop>
       </Router>
     )
   }

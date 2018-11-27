@@ -18,7 +18,7 @@ const Home = props => (
     <Programs />
     <WhatsNew
       markdown={props.whatsNewMarkdownSegs}
-      token={props.token}
+      token={props.token.sessionToken}
       handleNestedChanges={props.handleNestedChanges}
     />
   </div>
@@ -29,8 +29,6 @@ Home.propTypes = {
   handleChanges: PropTypes.func.isRequired,
   whatsNewMarkdownSegs: PropTypes.array.isRequired,
   handleNestedChanges: PropTypes.func.isRequired,
-  welcomeHeaderMarkdown: PropTypes.string.isRequired,
-  welcomeHeaderMarkdownText: PropTypes.string.isRequired,
 }
 
 export default Home

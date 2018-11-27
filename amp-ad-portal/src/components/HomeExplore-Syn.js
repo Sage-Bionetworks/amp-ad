@@ -2,12 +2,16 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { SynapseComponents } from "synapse-react-client"
 import SynapseChart from "./SynapseBarChart.jsx"
-import { synapseObjects, returnSynapseValue } from "../library/synapseObjects"
+import {
+  clone,
+  synapseObjects,
+  returnSynapseValue,
+} from "../library/synapseObjects"
 import ButtonExplore from "./Button-Explore"
 
 import Selectors from "./SelectorRow"
 
-let loadedObject
+let loadedObject = []
 
 class ExploreContent extends Component {
   state = {
@@ -19,7 +23,7 @@ class ExploreContent extends Component {
   };
 
   componentDidMount() {
-    loadedObject = synapseObjects.clone()
+    loadedObject = clone(synapseObjects)
     this.handleButtonPress("syn17024112", "id")
   }
 

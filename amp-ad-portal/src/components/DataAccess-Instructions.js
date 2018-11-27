@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { SynapseComponents } from "synapse-react-client"
 
-class DataUseCertificates extends Component {
+class Instructions extends Component {
   state = {
     addedEventListeners: false,
     loaded: false,
@@ -59,7 +59,7 @@ class DataUseCertificates extends Component {
         <SynapseComponents.Markdown
           token={token}
           ownerId="syn12666371"
-          wikiId="585318"
+          wikiId="585317"
           updateLoadState={() => this.handleChange({ loaded: true })}
         />
       )
@@ -70,15 +70,10 @@ class DataUseCertificates extends Component {
   render() {
     return (
       <div className="container">
-        <div className="">
-          <section className="row child-page-hero">
-            <div className="col-xs-12 col-sm-8 col-centered">
-              <h2>Data Use Certificates</h2>
-              <p />
-            </div>
-          </section>
+        <div className="page">
           <section className="row">
-            <div className="col-xs-12 col-sm-8 col-centered">
+            <div className="col-xs-12 col-sm-11 col-lg-9 col-centered">
+              <h1>Getting Access to Data</h1>
               {this.returnMarkdown()}
             </div>
           </section>
@@ -87,8 +82,8 @@ class DataUseCertificates extends Component {
     )
   }
 }
-DataUseCertificates.propTypes = {
+Instructions.propTypes = {
   token: PropTypes.object.isRequired,
 }
 
-export default DataUseCertificates
+export default Instructions

@@ -1,10 +1,11 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { SynapseComponents } from "synapse-react-client"
-import { withRouter } from "react-router-dom"
+//import { withRouter } from "react-router-dom"
 import SynapseChart from "./SynapseBarChart.jsx"
 
 import {
+  clone,
   synapseObjects,
   returnSynapseValue,
   setSynapseValue,
@@ -33,7 +34,7 @@ class Explore extends Component {
     location = history.location
 
     if (this.setActiveValues(window.location.hash) !== "studyPage") {
-      loadedObjects = synapseObjects.clone()
+      loadedObjects = clone(synapseObjects)
       // studies
       setSynapseValue(loadedObjects, "syn16787123", "filter", "projectStatus")
       // publications
@@ -177,7 +178,6 @@ class Explore extends Component {
     if (hash === "#/Explore/Publications") {
       return (
         <div>
-          <h1>Publications</h1>
           <SynapseComponents.Markdown
             token={this.props.token}
             ownerId="syn2580853"

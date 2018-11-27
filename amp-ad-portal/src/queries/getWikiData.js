@@ -76,7 +76,6 @@ function getWikiData(wikiId, token, synId = "syn12666371") {
       return processedData
     })
     .catch((error) => {
-      console.log(error)
       return ""
     })
 }

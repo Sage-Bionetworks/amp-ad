@@ -1,18 +1,41 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { SynapseComponents } from "synapse-react-client"
 
 import { getMarkdown } from "../queries/getWikiData"
 
 const ReactMarkdown = require("react-markdown")
 
 class DataUse extends Component {
-  componentDidMount() {
-    getMarkdown(this.props, "576286")
-  }
+  state = {
+    loaded: false,
+  };
 
-  componentWillUnmount() {
-    this.props.handleChanges("wikiMarkdown", "")
-  }
+  componentDidMount() {}
+
+  componentWillUnmount() {}
+
+  shouldComponentUpdate() {}
+
+  componentDidUpdate() {}
+
+  handleChange = (newState) => {
+    this.setState(newState)
+  };
+
+  returnMarkdown = (token = this.props.token.sessionToken) => {
+    if (token) {
+      return (
+        <SynapseComponents.Markdown
+          token={token}
+          ownerId="syn12666371"
+          wikiId="585318"
+          updateLoadState={() => this.handleChange({ loaded: true })}
+        />
+      )
+    }
+    return <div />
+  };
 
   render() {
     return (
