@@ -4,37 +4,12 @@ import openUrl from "../model/OpenUrl"
 
 import { getTable } from "../queries/queryForData"
 
-let synJSON = ""
-
-const QueryWrapper = (props) => {
-  if (props.synJSON) {
-    return (
-      <SynapseComponents.StaticQueryWrapper json={props.synJSON}>
-        <SynapseComponents.SynapseTableCardView
-          type={SynapseConstants.AMP_CONSORTIUM}
-        />
-      </SynapseComponents.StaticQueryWrapper>
-    )
-  }
-  return <div />
-}
-
 class Programs extends Component {
   state = {
     json: "",
   };
 
-  componentDidMount() {
-    if (this.props.token) {
-      getTable(
-        "syn17024173",
-        this.props.token,
-        "SELECT * FROM syn17024173",
-      ).then((json) => {
-        synJSON = json
-      })
-    }
-  }
+  componentDidMount() {}
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.json === "") {
@@ -52,6 +27,19 @@ class Programs extends Component {
     }
   }
 
+  QueryWrapper = () => {
+    if (this.state.json) {
+      return (
+        <SynapseComponents.StaticQueryWrapper json={this.state.json}>
+          <SynapseComponents.SynapseTableCardView
+            type={SynapseConstants.AMP_CONSORTIUM}
+          />
+        </SynapseComponents.StaticQueryWrapper>
+      )
+    }
+    return <div />
+  };
+
   render() {
     return (
       <section className="programs flex-row">
@@ -61,7 +49,7 @@ class Programs extends Component {
               <h2>Programs</h2>
             </div>
           </div>
-          <QueryWrapper token={this.props.token} json={synJSON} />
+          <this.QueryWrapper />
         </div>
       </section>
     )
