@@ -1,6 +1,7 @@
 export const synapseObjects = [
   {
     name: "programs",
+    description: "",
     id: "syn17024173",
     filter: "",
     color: 3,
@@ -9,20 +10,24 @@ export const synapseObjects = [
     table: false,
     type: "STUDY",
     hash: "/Explore/Programs",
+    sql: "SELECT * FROM syn17024173",
   },
   {
     name: "projects",
+    description: "",
     id: "syn17024229",
-    filter: "Consortium",
+    filter: "",
     color: 4,
     limit: 0,
     columns: 9,
     table: false,
     type: "STUDY",
     hash: "/Explore/Projects",
+    sql: "SELECT * FROM syn17024229",
   },
   {
     name: "studies",
+    description: "",
     id: "syn9886254",
     filter: "Study_Type",
     color: 0,
@@ -31,9 +36,11 @@ export const synapseObjects = [
     table: true,
     type: "STUDY",
     hash: "/Explore/Studies",
+    sql: "SELECT * FROM syn9886254",
   },
   {
     name: "data",
+    description: "",
     id: "syn17024112",
     filter: "study",
     color: 1,
@@ -42,9 +49,11 @@ export const synapseObjects = [
     table: true,
     type: "DATASET",
     hash: "/Explore/Data",
+    sql: "SELECT * FROM syn17024112",
   },
   {
     name: "publications",
+    description: "",
     id: "syn2580853",
     wikiId: "409850",
     filter: "",
@@ -54,9 +63,11 @@ export const synapseObjects = [
     table: false,
     type: "PUBLICATION",
     hash: "/Explore/Publications",
+    sql: "SELECT * FROM syn2580853",
   },
   {
     name: "people",
+    description: "",
     id: "syn13897207",
     filter: "institution",
     color: 2,
@@ -65,9 +76,11 @@ export const synapseObjects = [
     table: true,
     type: "PUBLICATION",
     hash: "/Explore/People",
+    sql: "SELECT * FROM syn13897207",
   },
   {
     name: "",
+    description: "",
     id: "studyPage",
     filter: "",
     color: 0,
@@ -76,64 +89,7 @@ export const synapseObjects = [
     table: false,
     type: "",
     hash: "/Studies/",
-  },
-]
-
-export const synapseClinicalTable = [
-  {
-    name: "Diagnosis",
-    id: "syn17024112",
-    filter: "diagnosis",
-    color: 1,
-    limit: 0,
-    columns: 0,
-    table: true,
-    type: "",
-    hash: "/Explore/Data",
-  },
-  {
-    name: "Organism",
-    id: "syn17024112",
-    filter: "species",
-    color: 1,
-    limit: 0,
-    columns: 0,
-    table: true,
-    type: "",
-    hash: "/Explore/Data",
-  },
-  {
-    name: "Data Type",
-    id: "syn17024112",
-    filter: "dataType",
-    color: 1,
-    limit: 0,
-    columns: 0,
-    table: true,
-    type: "",
-    hash: "/Explore/Data",
-  },
-  {
-    name: "Assay",
-    id: "syn17024112",
-    filter: "assay",
-    color: 1,
-    limit: 0,
-    columns: 0,
-    table: true,
-    type: "",
-    hash: "/Explore/Data",
-  },
-  {
-    name: "Tissue",
-    id: "syn17024112",
-    filter: "tissue",
-    color: 1,
-    limit: 0,
-    columns: 0,
-    table: true,
-    type: "",
-    hash: "/Explore/Data",
+    sql: "SELECT * FROM syn13897207",
   },
 ]
 
@@ -141,7 +97,7 @@ export const clone = (obj) => {
   return JSON.parse(JSON.stringify(obj))
 }
 
-// given a key balue pair this function
+// given a key value pair this function
 // returns the searchKey value from the object with the
 // matching the key value pair
 export const returnSynapseValue = (
@@ -151,7 +107,6 @@ export const returnSynapseValue = (
   searchKey,
 ) => {
   const matchedObject = objectArray.filter(object => object[key] === keyValue)
-  //console.log(key, keyValue, matchedObject)
   return matchedObject[0][searchKey]
 }
 

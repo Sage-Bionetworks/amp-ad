@@ -2,8 +2,6 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { SynapseComponents } from "synapse-react-client"
 
-const ReactMarkdown = require("react-markdown")
-
 class AcknowledgementStatements extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.token !== nextProps.token) {

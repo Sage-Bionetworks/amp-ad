@@ -20,29 +20,42 @@ class ExploreContent extends Component {
     color: 0,
     hash: "",
     name: "",
+    sql: "",
   };
 
   componentDidMount() {
     loadedObject = clone(synapseObjects)
-    this.handleButtonPress("syn17024112", "id")
+    this.handleButtonPress(
+      "syn17024112",
+      "id",
+      loadedObject,
+      this.handleChanges,
+    )
   }
 
   handleChanges = (stateObject) => {
     this.setState(stateObject)
   };
 
-  handleButtonPress = (value, key = "id") => {
-    const activeFilter = returnSynapseValue(loadedObject, key, value, "filter")
-    const color = returnSynapseValue(loadedObject, key, value, "color")
-    const hash = returnSynapseValue(loadedObject, key, value, "hash")
-    const name = returnSynapseValue(loadedObject, key, value, "name")
+  handleButtonPress = (value, key = "id", synObjectArray, handleChanges) => {
+    const activeFilter = returnSynapseValue(
+      synObjectArray,
+      key,
+      value,
+      "filter",
+    )
+    const color = returnSynapseValue(synObjectArray, key, value, "color")
+    const hash = returnSynapseValue(synObjectArray, key, value, "hash")
+    const name = returnSynapseValue(synObjectArray, key, value, "name")
+    const sql = returnSynapseValue(synObjectArray, key, value, "sql")
 
-    this.handleChanges({
+    handleChanges({
       activeId: value,
       activeFilter,
       color,
       hash,
       name,
+      sql,
     })
     return ""
   };
@@ -59,6 +72,7 @@ class ExploreContent extends Component {
             token={this.props.token}
             ownerId="syn2580853"
             wikiId="409850"
+            sql={this.state.sql}
           />
         </div>
       )
@@ -69,7 +83,9 @@ class ExploreContent extends Component {
           token={this.props.token}
           synId={this.state.activeId}
           filter={this.state.activeFilter}
-          rgbIndex={this.state.color}
+          name={this.state.name}
+          rgbindex={this.state.color}
+          sql={this.state.sql}
           barChart
         />
       </div>
@@ -96,6 +112,7 @@ class ExploreContent extends Component {
                 synapseObject={loadedObject}
                 returnButtonClass={this.returnButtonClass}
                 handleChanges={this.handleChanges}
+                handleButtonPress={this.handleButtonPress}
               />
             </div>
             {this.returnSynapseChart()}

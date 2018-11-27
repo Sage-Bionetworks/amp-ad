@@ -125,6 +125,7 @@ class Explore extends Component {
     const name = returnSynapseValue(loadedObjects, key, value, "name")
     const hideLink = returnSynapseValue(loadedObjects, key, value, "hideLink")
     const hash = returnSynapseValue(loadedObjects, key, value, "hash")
+    const sql = returnSynapseValue(loadedObjects, key, value, "sql")
 
     this.setState(
       {
@@ -136,6 +137,7 @@ class Explore extends Component {
         columns,
         type,
         name,
+        sql,
         hideLink: hideLink !== undefined ? hideLink : false,
       },
       () => {
@@ -186,22 +188,23 @@ class Explore extends Component {
         </div>
       )
     }
+
     return (
       <div className="synapse-chart">
         <SynapseChart
           token={this.props.token}
           synId={this.state.activeButton}
           filter={this.state.activeFilter}
-          rgbIndex={this.state.color}
+          rgbindex={this.state.color}
           showMenu
           facets
-          barChart
           table={this.state.table}
           columns={this.state.columns}
           json={this.props[this.state.activeButton]}
           limit={this.state.limit}
           type={this.state.type}
           hideOrganizationlink={this.state.hideLink}
+          sql={this.state.sql}
         />
       </div>
     )

@@ -1,6 +1,18 @@
 import React from "react"
-
+//import {
+//StaticQueryWrapper,
+//SynapseTableCardView,
+//SynapseConstants,
+//} from "synapse-react-client"
 import openUrl from "../model/OpenUrl"
+
+//const queryWrapper = (props) => {
+//return (
+//<StaticQueryWrapper token={props.token} sql="SELECT * FROM syn17024173">
+//<SynapseTableCardView type={SynapseConstants.AMP_CONSORTIUM} />
+//</StaticQueryWrapper>
+//)
+//}
 
 const Programs = (props) => {
   return (
@@ -10,7 +22,20 @@ const Programs = (props) => {
           <div className="">
             <h2>Programs</h2>
           </div>
-          <div className="" />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export const OldPrograms = (props) => {
+  return (
+    <section className="programs flex-row">
+      <div className="flex-col-full content-row-width">
+        <div className="title-row between-xs">
+          <div className="">
+            <h2>Programs</h2>
+          </div>
         </div>
 
         <div className="flex-row between-xs">

@@ -2,11 +2,9 @@ import React, { Component } from "react"
 import { HashRouter as Router, Route } from "react-router-dom"
 import ReactGA from "react-ga"
 import createHistory from "history/createBrowserHistory"
-
 import * as SynapseClient from "./synapse/SynapseClient"
 
 // non component js
-import study from "./defaultData/Study"
 import asyncComponent from "./components/AsyncComponent"
 import ScrollToTop from "./components/ScrollToTop"
 
@@ -43,28 +41,7 @@ history.listen((location) => {
 class App extends Component {
   state = {
     loginToken: {},
-    pageData: study,
     wikiMarkdown: "",
-    welcomeHeaderMarkdown: "",
-    welcomeHeaderMarkdownText: "",
-    externalResearchers: [],
-    studies: [],
-    studiesWikiIds: [],
-    studiesRows: [],
-    studiesUniqueRows: [],
-    studiesNames: [],
-    studiesNamesPayload: {},
-    studiesDataTypesPayload: {},
-    studiesAssayIndex: 0,
-    studiesStudyIndex: 0,
-    studiesIndividualsIndex: 0,
-    studiesSampleTypeIndex: 0,
-    differentialExpressions: [],
-    experimentalResources: "",
-    programsAmpAd: [],
-    programsM2OVE: [],
-    programsModelAd: [],
-    programsResilienceAD: [],
     whatsNew: [],
     hash: "",
   };

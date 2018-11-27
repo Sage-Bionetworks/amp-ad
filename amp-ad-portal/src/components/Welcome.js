@@ -3,8 +3,6 @@ import PropTypes from "prop-types"
 
 import { getMarkdown } from "../queries/getWikiData"
 
-//const ReactMarkdown = require("react-markdown")
-
 class Welcome extends Component {
   componentDidMount() {
     getMarkdown(this.props, "581935", "welcomeHeaderMarkdown")
@@ -53,8 +51,6 @@ class Welcome extends Component {
 }
 
 Welcome.propTypes = {
-  markdown: PropTypes.string.isRequired,
-  markdownText: PropTypes.string.isRequired,
   handleChanges: PropTypes.func.isRequired,
 }
 

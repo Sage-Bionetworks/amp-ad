@@ -15,7 +15,7 @@ const Home = props => (
       handleChanges={props.handleChanges}
     />
     <Explore token={props.token.sessionToken} />
-    <Programs />
+    <Programs token={props.token.sessionToken} />
     <WhatsNew
       markdown={props.whatsNewMarkdownSegs}
       token={props.token.sessionToken}
