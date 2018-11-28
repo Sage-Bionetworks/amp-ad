@@ -16,16 +16,18 @@ class SynapseBarChart extends Component {
   buildQuery = (sql = this.props.activeObject.sql) => {
     return {
       concreteType: "org.sagebionetworks.repo.model.table.QueryBundleRequest",
+      query: {
+        isConsistent: false,
+        includeEntityEtag: true,
+        sql,
+        limit: 100,
+        offset: 0,
+      },
+
       partMask:
         SynapseConstants.BUNDLE_MASK_QUERY_COLUMN_MODELS
         | SynapseConstants.BUNDLE_MASK_QUERY_FACETS
         | SynapseConstants.BUNDLE_MASK_QUERY_RESULTS,
-      query: {
-        isConsistent: false,
-        sql,
-        limit: 25,
-        offset: 0,
-      },
     }
   };
 

@@ -184,7 +184,7 @@ export const synapseObjects = [
         unitdescription: "institutions",
       },
       {
-        sql: "SELECT * FROM syn13897207",
+        sql: "select * from syn13897207",
         title: "Program",
         synapseid: "syn13897207",
         facetname: "Program",
