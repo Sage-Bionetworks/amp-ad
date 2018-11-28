@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import Welcome from "./Welcome"
-import Programs from "./Programs"
+import Programs from "./Programs.jsx"
 import WhatsNew from "./WhatsNew.jsx"
 import Explore from "./HomeExplore-Syn.js"
 

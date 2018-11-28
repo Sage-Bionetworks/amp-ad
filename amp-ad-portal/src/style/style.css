@@ -133,6 +133,11 @@
   justify-content: space-around;
 }
 
+.middle-xs {
+  align-items: center;
+  align-content: center;
+}
+
 .title-row {
   width: 100%;
 }
@@ -1048,21 +1053,41 @@ header .agora-nav-link div.under-bar {
 }
 
 footer {
+  position: relative;
   background-color: #5A498D;
   color: white;
-  height: 56px;
+  min-height: 55px;
+}
+footer .links {
+  position: relative;
+  z-index: 1000;
+  justify-content: center;
+}
+footer .footer-row {
+  max-width: 1280px;
+}
+footer .footer-background {
+  background-image: url("../images/molecule-lattice.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100%;
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-  margin-top: 50px;
-  padding-bottom: 56px;
-  padding-top: 30px;
+  height: 100%;
+  position: absolute;
+  z-index: 50;
+  bottom: 0;
+}
+footer .logo-header {
+  max-width: 265px;
+  margin-left: 15px;
 }
 footer a {
   color: white;
   margin: 10px;
   display: inline-block;
   margin: 0px 15px;
+}
+footer a:hover {
+  color: white;
 }
 footer .row {
   width: 300px;

@@ -7,6 +7,7 @@ import * as SynapseClient from "./synapse/SynapseClient"
 // non component js
 import asyncComponent from "./components/AsyncComponent"
 import ScrollToTop from "./components/ScrollToTop"
+import Footer from "./components/Footer"
 
 const login = async () => SynapseClient.login("mikeybkats", "guinness").then((keys) => {
   return keys
@@ -195,7 +196,7 @@ class App extends Component {
           component={this.ReturnStudyPage}
         />
 
-        <Route path="/About/AMP-AD" component={this.ReturnAboutAmpAd} />
+        <Route path="/About" component={this.ReturnAboutAmpAd} />
       </div>
     )
   };
@@ -209,19 +210,7 @@ class App extends Component {
             <div className="main">
               <this.Main />
             </div>
-            <footer>
-              <div className="container">
-                <div className="row center-block col-centered">
-                  <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
-                    Forum
-                  </a>
-                  <a href="mailto:ampadportal@sagebionetworks.org">Contact</a>
-                  <a href="http://docs.synapse.org/articles/governance.html">
-                    Terms & Privacy
-                  </a>
-                </div>
-              </div>
-            </footer>
+            <Footer />
           </div>
         </ScrollToTop>
       </Router>

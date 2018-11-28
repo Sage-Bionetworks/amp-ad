@@ -64,9 +64,14 @@ class SynapseBarChart extends Component {
   returnSynapseCards = () => {
     if (this.props.activeObject.cards && !this.props.activeObject.homescreen) {
       return (
-        <SynapseComponents.SynapseTableCardView
-          type={SynapseConstants[this.props.activeObject.type]}
-        />
+        <SynapseComponents.StaticQueryWrapper
+          sql={this.props.activeObject.sql}
+          token={this.props.token}
+        >
+          <SynapseComponents.SynapseTableCardView
+            type={SynapseConstants[this.props.activeObject.type]}
+          />
+        </SynapseComponents.StaticQueryWrapper>
       )
     }
     return <div />
@@ -99,9 +104,9 @@ class SynapseBarChart extends Component {
               rgbIndex={this.props.activeObject.color}
             >
               {this.returnStackedRow()}
-              {this.returnSynapseCards()}
             </SynapseComponents.QueryWrapper>
             {this.returnQueryWrapperMenu()}
+            {this.returnSynapseCards()}
           </div>
         </div>
       )

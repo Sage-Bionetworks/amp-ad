@@ -446,21 +446,21 @@ class Header extends Component {
     <div>
       <Link
         name="About"
-        to="/About/AMP-AD"
+        to="/About"
         className={
           this.props.hash.includes("#/About")
             ? "home nav-item main-nav-item active"
             : "home nav-item main-nav-item"
         }
         onClick={() => {
-          this.closeNavigation("#/About/AMP-AD")
+          this.closeNavigation("#/About")
         }}
       >
         About
       </Link>
       <div
         className={
-          this.props.hash.includes("#/About/")
+          this.props.hash.includes("#/About")
           && this.state.activeUnderBar.includes("#/")
             ? "under-bar active"
             : "under-bar"
