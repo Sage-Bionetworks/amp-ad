@@ -98,10 +98,10 @@ class SynapseBarChart extends Component {
               facetName={this.props.activeObject.filter}
               rgbIndex={this.props.activeObject.color}
             >
-              {this.returnQueryWrapperMenu()}
               {this.returnStackedRow()}
               {this.returnSynapseCards()}
             </SynapseComponents.QueryWrapper>
+            {this.returnQueryWrapperMenu()}
           </div>
         </div>
       )
