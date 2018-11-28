@@ -19,10 +19,10 @@ const buildRequest = (table, query, offset = 0, limit = 250) => {
   }
 }
 
-const escapeString = (string) => {
-  const newString = string.replace(/'/i, "''")
-  return newString
-}
+//const escapeString = (string) => {
+//const newString = string.replace(/'/i, "''")
+//return newString
+//}
 
 const json = (response) => {
   return JSON.stringify(response)

@@ -5,7 +5,7 @@ import SynapseChart from "./SynapseBarChart.jsx"
 import {
   clone,
   synapseObjects,
-  returnSynapseValue,
+  returnSynapseObject,
 } from "../library/synapseObjects"
 import ButtonExplore from "./Button-Explore"
 
@@ -16,46 +16,29 @@ let loadedObject = []
 class ExploreContent extends Component {
   state = {
     activeId: "",
-    activeFilter: "",
-    color: 0,
-    hash: "",
-    name: "",
-    sql: "",
+    synObject: {},
   };
 
   componentDidMount() {
     loadedObject = clone(synapseObjects)
-    this.handleButtonPress(
-      "syn17024112",
-      "id",
-      loadedObject,
-      this.handleChanges,
-    )
+    this.handleButtonPress("syn17024112", this.handleChanges)
   }
 
   handleChanges = (stateObject) => {
     this.setState(stateObject)
   };
 
-  handleButtonPress = (value, key = "id", synObjectArray, handleChanges) => {
-    const activeFilter = returnSynapseValue(
-      synObjectArray,
-      key,
-      value,
-      "filter",
-    )
-    const color = returnSynapseValue(synObjectArray, key, value, "color")
-    const hash = returnSynapseValue(synObjectArray, key, value, "hash")
-    const name = returnSynapseValue(synObjectArray, key, value, "name")
-    const sql = returnSynapseValue(synObjectArray, key, value, "sql")
+  handleButtonPress = (value, handleChanges) => {
+    const synObject = returnSynapseObject(loadedObject, value)
+
+    synObject.table = false
+    synObject.cards = false
+    synObject.barChart = true
+    synObject.homescreen = true
 
     handleChanges({
       activeId: value,
-      activeFilter,
-      color,
-      hash,
-      name,
-      sql,
+      synObject,
     })
     return ""
   };
@@ -64,7 +47,7 @@ class ExploreContent extends Component {
     return `btn-control ${this.state.activeId === id ? "active" : ""}`
   };
 
-  returnSynapseChart = (hash = window.location.hash) => {
+  returnSynapseChart = () => {
     if (this.state.activeId === "syn2580853") {
       return (
         <div>
@@ -77,19 +60,18 @@ class ExploreContent extends Component {
         </div>
       )
     }
-    return (
-      <div className="synapse-chart">
-        <SynapseChart
-          token={this.props.token}
-          synId={this.state.activeId}
-          filter={this.state.activeFilter}
-          name={this.state.name}
-          rgbindex={this.state.color}
-          sql={this.state.sql}
-          barChart
-        />
-      </div>
-    )
+    if (this.state.synObject) {
+      return (
+        <div className="synapse-chart">
+          <SynapseChart
+            token={this.props.token}
+            filter={this.state.synObject.filter}
+            activeObject={this.state.synObject}
+          />
+        </div>
+      )
+    }
+    return <div />
   };
 
   barChartStyle = () => {
@@ -109,7 +91,6 @@ class ExploreContent extends Component {
           <div className="row bar-chart" style={this.barChartStyle()}>
             <div className="center-block selectors-container">
               <Selectors
-                synapseObject={loadedObject}
                 returnButtonClass={this.returnButtonClass}
                 handleChanges={this.handleChanges}
                 handleButtonPress={this.handleButtonPress}
@@ -118,7 +99,10 @@ class ExploreContent extends Component {
             {this.returnSynapseChart()}
             <div className="row explore-button-row">
               <div className="col-xs-12">
-                <ButtonExplore url={this.state.hash} label={this.state.name} />
+                <ButtonExplore
+                  url={this.state.synObject.hash}
+                  label={this.state.name}
+                />
               </div>
             </div>
           </div>
@@ -129,7 +113,11 @@ class ExploreContent extends Component {
 }
 
 ExploreContent.propTypes = {
-  token: PropTypes.string.isRequired,
+  token: PropTypes.string,
+}
+
+ExploreContent.defaultProps = {
+  token: "",
 }
 
 export default ExploreContent
