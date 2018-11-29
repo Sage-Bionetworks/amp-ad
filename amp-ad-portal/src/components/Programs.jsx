@@ -1,9 +1,8 @@
 import React, { Component } from "react"
 import { SynapseComponents, SynapseConstants } from "synapse-react-client"
 import PropTypes from "prop-types"
-import { BarLoader } from "react-spinners"
-
-import { getTable } from "../queries/queryForData"
+//import { BarLoader } from "react-spinners"
+//import { getTable } from "../queries/queryForData"
 
 class Programs extends Component {
   QueryWrapper = () => {

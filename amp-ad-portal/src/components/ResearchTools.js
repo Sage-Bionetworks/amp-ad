@@ -27,7 +27,7 @@ class ExperimentalResources extends Component {
       <div className="container about experimental-resources">
         <div className="page">
           <section className="row">
-            <div className="col-xs-12 col-sm-11 col-lg-9 col-centered hide-first-child table-container">
+            <div className="col-xs-12 col-sm-11 col-lg-9 col-centered table-container">
               <h1>Research Tools</h1>
               <SynapseComponents.Markdown
                 token={this.props.token.sessionToken}

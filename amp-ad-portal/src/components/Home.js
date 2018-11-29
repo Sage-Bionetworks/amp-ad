@@ -1,10 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
+import asyncComponent from "./AsyncComponent"
 
-import Welcome from "./Welcome"
-import Programs from "./Programs.jsx"
-import WhatsNew from "./WhatsNew.jsx"
-import Explore from "./HomeExplore-Syn.js"
+const Welcome = asyncComponent(() => import("./Welcome"))
+const Explore = asyncComponent(() => import("./HomeExplore-Syn.js"))
+const Programs = asyncComponent(() => import("./Programs.jsx"))
+const WhatsNew = asyncComponent(() => import("./WhatsNew.jsx"))
 
 const Home = props => (
   <div>

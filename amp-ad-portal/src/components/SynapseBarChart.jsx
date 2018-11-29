@@ -42,13 +42,20 @@ class SynapseBarChart extends Component {
   returnStackedRow = () => {
     if (this.props.activeObject.barChart) {
       return (
-        <SynapseComponents.StackedRowHomebrew
-          loadingScreen={(
-            <div className="bar-loader" style={{ paddingLeft: "33%" }}>
-              <BarLoader color="#4DB7AD" loading />
-            </div>
-          )}
-        />
+        <SynapseComponents.QueryWrapper
+          initQueryRequest={this.buildQuery()}
+          token={this.props.token}
+          facetName={this.props.activeObject.filter}
+          rgbIndex={this.props.activeObject.color}
+        >
+          <SynapseComponents.StackedRowHomebrew
+            loadingScreen={(
+              <div className="bar-loader" style={{ paddingLeft: "33%" }}>
+                <BarLoader color="#4DB7AD" loading />
+              </div>
+            )}
+          />
+        </SynapseComponents.QueryWrapper>
       )
     }
     return <div />
@@ -97,14 +104,7 @@ class SynapseBarChart extends Component {
       return (
         <div>
           <div className={`${this.hideBarSection()}`}>
-            <SynapseComponents.QueryWrapper
-              initQueryRequest={this.buildQuery()}
-              token={this.props.token}
-              facetName={this.props.activeObject.filter}
-              rgbIndex={this.props.activeObject.color}
-            >
-              {this.returnStackedRow()}
-            </SynapseComponents.QueryWrapper>
+            {this.returnStackedRow()}
             {this.returnQueryWrapperMenu()}
             {this.returnSynapseCards()}
           </div>

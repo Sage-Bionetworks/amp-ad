@@ -7,7 +7,6 @@ import * as SynapseClient from "./synapse/SynapseClient"
 // non component js
 import asyncComponent from "./components/AsyncComponent"
 import ScrollToTop from "./components/ScrollToTop"
-import Footer from "./components/Footer"
 
 const login = async () => SynapseClient.login("mikeybkats", "guinness").then((keys) => {
   return keys
@@ -20,6 +19,7 @@ const AsyncInstructions = asyncComponent(() => import("./components/DataAccess-I
 // component js
 const AsyncHome = asyncComponent(() => import("./components/Home"))
 const AsyncHeader = asyncComponent(() => import("./components/Header"))
+const Footer = asyncComponent(() => import("./components/Footer"))
 // explore
 const AsyncExplore = asyncComponent(() => import("./components/Explore.jsx"))
 // study page
@@ -62,24 +62,11 @@ class App extends Component {
   };
 
   handleNestedChanges = (KEY, newStateKey, newState) => {
-    //console.log(KEY, newStateKey, newState)
     const property = this.state[KEY]
     property.push({ [newStateKey]: newState })
     this.setState(prevState => ({
       ...prevState,
       property,
-    }))
-  };
-
-  toggleSeeAll = (event) => {
-    const key = event.target.name
-    const value = event.target.dataset.value === "false"
-    this.setState(prevState => ({
-      ...prevState,
-      buttonState: {
-        ...prevState.buttonState,
-        [key]: value,
-      },
     }))
   };
 
@@ -132,8 +119,6 @@ class App extends Component {
       <AsyncAboutAmpAd
         token={this.state.loginToken}
         handleChanges={this.handleChanges}
-        //handleNestedChanges={this.handleNestedChanges}
-        //markdown={this.state.wikiMarkdown}
       />
     )
   };

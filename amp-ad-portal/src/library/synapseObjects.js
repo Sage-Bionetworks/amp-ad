@@ -73,67 +73,52 @@ export const synapseObjects = [
     menu: true,
     menuConfig: [
       {
-        sql: "SELECT * FROM syn17024112",
-        title: "study",
+        sql:
+          "SELECT diagnosis, sex, dataType as \"data type\", assay, count(distinct anonymized_individualID) AS individuals, count(id) AS files FROM syn17024112 GROUP BY diagnosis,2,3,4 ORDER BY diagnosis, 2, 3, 4",
+        title: "Diagnosis",
         synapseId: "syn17024112",
-        facetName: "study",
-        unitDescription: "studies",
+        facetName: "diagnosis",
+        unitDescription: "diagnoses",
       },
       {
-        sql: "SELECT * FROM syn17024112",
-        title: "data type",
-        synapseId: "syn17024112",
-        facetName: "dataType",
-        unitDescription: "data types",
-      },
-      {
-        sql: "SELECT * FROM syn17024112",
-        title: "assay",
-        synapseId: "syn17024112",
-        facetName: "assay",
-        unitDescription: "assays",
-      },
-      {
-        sql: "SELECT * FROM syn17024112",
+        sql:
+          "SELECT species, isModelSystem, dataType, count(distinct anonymized_individualID) AS individuals, count(id) AS files FROM syn17024112 GROUP BY 1,2,3 ORDER BY 1,2,3",
         title: "species",
         synapseId: "syn17024112",
         facetName: "species",
         unitDescription: "species",
       },
       {
-        sql: "SELECT * FROM syn17024112",
-        title: "consortium",
+        sql:
+          "SELECT study, dataType, assay, count(distinct anonymized_individualID) AS individuals, count(id) AS files FROM syn17024112 group by 1,2,3 order by 1,2,3",
+        title: "study",
         synapseId: "syn17024112",
-        facetName: "consortium",
-        unitDescription: "consortiums",
+        facetName: "study",
+        unitDescription: "studies",
       },
       {
-        sql: "SELECT * FROM syn17024112",
+        sql:
+          "SELECT dataType as \"Data Type\", assay, study, count(distinct anonymized_individualID) AS individuals, count(id) AS files FROM syn17024112 GROUP BY 1,2,3 ORDER BY 1,2,3",
+        title: "data type",
+        synapseId: "syn17024112",
+        facetName: "dataType",
+        unitDescription: "data types",
+      },
+      {
+        sql:
+          "SELECT assay, fileFormat, count(distinct anonymized_individualID) AS individuals, count(id) AS files FROM syn17024112  group by 1,2 order by 1,2",
+        title: "assay",
+        synapseId: "syn17024112",
+        facetName: "assay",
+        unitDescription: "assays",
+      },
+      {
+        sql:
+          "SELECT organ, tissue, dataType, assay, count(distinct anonymized_individualID) AS individuals, count(id) AS files FROM syn17024112 group by 1,2,3,4 order by 1,2,3,4",
         title: "organ",
         synapseId: "syn17024112",
         facetName: "organ",
         unitDescription: "organs",
-      },
-      {
-        sql: "SELECT * FROM syn17024112",
-        title: "grant",
-        synapseId: "syn17024112",
-        facetName: "grant",
-        unitDescription: "grants",
-      },
-      {
-        sql: "SELECT * FROM syn17024112",
-        title: "file format",
-        synapseId: "syn17024112",
-        facetName: "fileFormat",
-        unitDescription: "formats",
-      },
-      {
-        sql: "SELECT * FROM syn17024112",
-        title: "diagnosis",
-        synapseId: "syn17024112",
-        facetName: "diagnosis",
-        unitDescription: "diagnoses",
       },
     ],
     color: 1,
@@ -177,18 +162,28 @@ export const synapseObjects = [
     menu: true,
     menuConfig: [
       {
-        sql: "SELECT * FROM syn13897207",
-        title: "institution",
-        synapseId: "syn13897207",
-        facetName: "institution",
-        unitDescription: "institutions",
-      },
-      {
-        sql: "select * from syn13897207",
+        sql:
+          "select firstName as \"First Name\", lastName as \"Last Name\", institution as Institution, Program, 'Grant Number', 'Grant Title' from syn13897207",
         title: "Program",
         synapseId: "syn13897207",
         facetName: "Program",
         unitDescription: "programs",
+      },
+      {
+        sql:
+          "select firstName as First, lastName as Last, institution as Institution, Program, 'Grant Number', 'Grant Title' from syn13897207",
+        title: "Grant Number",
+        synapseId: "syn13897207",
+        facetName: "Grant Number",
+        unitDescription: "grants",
+      },
+      {
+        sql:
+          "select firstName as First, lastName as Last, institution as Institution, Program, 'Grant Number', 'Grant Title' from syn13897207",
+        title: "institution",
+        synapseId: "syn13897207",
+        facetName: "institution",
+        unitDescription: "institutions",
       },
     ],
   },
