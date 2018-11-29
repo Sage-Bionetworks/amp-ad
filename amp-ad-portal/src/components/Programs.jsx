@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import { SynapseComponents, SynapseConstants } from "synapse-react-client"
 import PropTypes from "prop-types"
 //import { BarLoader } from "react-spinners"
 //import { getTable } from "../queries/queryForData"
@@ -7,14 +6,16 @@ import PropTypes from "prop-types"
 class Programs extends Component {
   QueryWrapper = () => {
     return (
-      <SynapseComponents.StaticQueryWrapper
-        sql="SELECT * FROM syn17024173"
-        token={this.props.token}
-      >
-        <SynapseComponents.SynapseTableCardView
-          type={SynapseConstants.AMP_CONSORTIUM}
-        />
-      </SynapseComponents.StaticQueryWrapper>
+      <div className="query-wrapper">
+        <this.props.SynapseComponents.StaticQueryWrapper
+          sql="SELECT * FROM syn17024173"
+          token={this.props.token}
+        >
+          <this.props.SynapseComponents.SynapseTableCardView
+            type={this.props.SynapseConstants.AMP_CONSORTIUM}
+          />
+        </this.props.SynapseComponents.StaticQueryWrapper>
+      </div>
     )
   };
 
@@ -36,6 +37,8 @@ class Programs extends Component {
 
 Programs.propTypes = {
   token: PropTypes.string,
+  SynapseConstants: PropTypes.object.isRequired,
+  SynapseComponents: PropTypes.object.isRequired,
 }
 Programs.defaultProps = {
   token: "",

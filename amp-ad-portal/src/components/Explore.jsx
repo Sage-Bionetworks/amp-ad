@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { SynapseComponents } from "synapse-react-client"
 //import { withRouter } from "react-router-dom"
 import SynapseChart from "./SynapseBarChart.jsx"
 import Selectors from "./SelectorRow"
@@ -100,6 +99,10 @@ class Explore extends Component {
     this.props.history.push(url)
   };
 
+  handleChanges = (newState) => {
+    this.setState(newState)
+  };
+
   handleButtonPress = (value) => {
     const activeObject = returnSynapseObject(loadedObjects, value)
 
@@ -134,7 +137,7 @@ class Explore extends Component {
     if (hash === "#/Explore/Publications") {
       return (
         <div>
-          <SynapseComponents.Markdown
+          <this.props.SynapseComponents.Markdown
             token={this.props.token}
             ownerId="syn2580853"
             wikiId="409850"
@@ -148,6 +151,8 @@ class Explore extends Component {
         <SynapseChart
           token={this.props.token}
           activeObject={this.state.activeObject}
+          SynapseConstants={this.props.SynapseConstants}
+          SynapseComponents={this.props.SynapseComponents}
         />
       </div>
     )
@@ -200,6 +205,8 @@ class Explore extends Component {
 
 Explore.propTypes = {
   token: PropTypes.string,
+  SynapseConstants: PropTypes.object.isRequired,
+  SynapseComponents: PropTypes.object.isRequired,
 }
 Explore.defaultProps = {
   token: "",

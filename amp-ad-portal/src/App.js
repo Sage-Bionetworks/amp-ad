@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { HashRouter as Router, Route } from "react-router-dom"
 import ReactGA from "react-ga"
 import createHistory from "history/createBrowserHistory"
+import { SynapseComponents, SynapseConstants } from "synapse-react-client"
 import * as SynapseClient from "./synapse/SynapseClient"
 
 // non component js
@@ -80,6 +81,8 @@ class App extends Component {
         handleNestedChanges={this.handleNestedChanges}
         whatsNewMarkdownSegs={this.state.whatsNew}
         markdown={this.state.wikiMarkdown}
+        SynapseConstants={SynapseConstants}
+        SynapseComponents={SynapseComponents}
       />
     )
   };
@@ -89,7 +92,13 @@ class App extends Component {
   };
 
   ReturnDataUseCertificates = () => {
-    return <AsyncDataUseCertificates token={this.state.loginToken} />
+    return (
+      <AsyncDataUseCertificates
+        token={this.state.loginToken}
+        SynapseConstants={SynapseConstants}
+        SynapseComponents={SynapseComponents}
+      />
+    )
   };
 
   ReturnInstructions = () => {
@@ -99,6 +108,8 @@ class App extends Component {
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
         markdown={this.state.wikiMarkdown}
+        SynapseConstants={SynapseConstants}
+        SynapseComponents={SynapseComponents}
       />
     )
   };
@@ -109,7 +120,8 @@ class App extends Component {
         token={this.state.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.experimentalResources}
+        SynapseConstants={SynapseConstants}
+        SynapseComponents={SynapseComponents}
       />
     )
   };
@@ -119,6 +131,7 @@ class App extends Component {
       <AsyncAboutAmpAd
         token={this.state.loginToken}
         handleChanges={this.handleChanges}
+        SynapseComponents={SynapseComponents}
       />
     )
   };
@@ -134,6 +147,8 @@ class App extends Component {
       <AsyncExplore
         token={this.state.loginToken.sessionToken}
         history={props.history}
+        SynapseConstants={SynapseConstants}
+        SynapseComponents={SynapseComponents}
       />
     )
   };

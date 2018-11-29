@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { SynapseComponents, SynapseConstants } from "synapse-react-client"
 import { BarLoader } from "react-spinners"
 
 class SynapseBarChart extends Component {
@@ -25,9 +24,9 @@ class SynapseBarChart extends Component {
       },
 
       partMask:
-        SynapseConstants.BUNDLE_MASK_QUERY_COLUMN_MODELS
-        | SynapseConstants.BUNDLE_MASK_QUERY_FACETS
-        | SynapseConstants.BUNDLE_MASK_QUERY_RESULTS,
+        this.props.SynapseConstants.BUNDLE_MASK_QUERY_COLUMN_MODELS
+        | this.props.SynapseConstants.BUNDLE_MASK_QUERY_FACETS
+        | this.props.SynapseConstants.BUNDLE_MASK_QUERY_RESULTS,
     }
   };
 
@@ -40,22 +39,34 @@ class SynapseBarChart extends Component {
   };
 
   returnStackedRow = () => {
-    if (this.props.activeObject.barChart) {
+    if (
+      this.props.activeObject.homescreen
+      || this.props.activeObject.barChart
+    ) {
       return (
-        <SynapseComponents.QueryWrapper
+        <this.props.SynapseComponents.QueryWrapper
           initQueryRequest={this.buildQuery()}
           token={this.props.token}
           facetName={this.props.activeObject.filter}
           rgbIndex={this.props.activeObject.color}
         >
-          <SynapseComponents.StackedRowHomebrew
+          <this.props.SynapseComponents.StackedRowHomebrew
             loadingScreen={(
-              <div className="bar-loader" style={{ paddingLeft: "33%" }}>
+              <div
+                className="bar-loader"
+                style={{
+                  textAlign: "center",
+                  width: "100px",
+                  margin: "0px auto",
+                }}
+              >
                 <BarLoader color="#4DB7AD" loading />
               </div>
             )}
+            unitDescription={this.props.activeObject.description}
           />
-        </SynapseComponents.QueryWrapper>
+          {this.returnFacets()}
+        </this.props.SynapseComponents.QueryWrapper>
       )
     }
     return <div />
@@ -63,7 +74,7 @@ class SynapseBarChart extends Component {
 
   returnFacets = () => {
     if (this.props.activeObject.facets && !this.props.activeObject.homescreen) {
-      return <SynapseComponents.Facets />
+      return <this.props.SynapseComponents.Facets />
     }
     return <div />
   };
@@ -71,27 +82,35 @@ class SynapseBarChart extends Component {
   returnSynapseCards = () => {
     if (this.props.activeObject.cards && !this.props.activeObject.homescreen) {
       return (
-        <SynapseComponents.StaticQueryWrapper
+        <this.props.SynapseComponents.StaticQueryWrapper
           sql={this.props.activeObject.sql}
           token={this.props.token}
         >
-          <SynapseComponents.SynapseTableCardView
-            type={SynapseConstants[this.props.activeObject.type]}
+          <this.props.SynapseComponents.SynapseTableCardView
+            type={this.props.SynapseConstants[this.props.activeObject.type]}
           />
-        </SynapseComponents.StaticQueryWrapper>
+        </this.props.SynapseComponents.StaticQueryWrapper>
       )
     }
     return <div />
+  };
+
+  returnType = () => {
+    const typeString = this.props.SynapseConstants[
+      this.props.activeObject.type
+    ]
+    return typeString
   };
 
   returnQueryWrapperMenu = () => {
     if (!this.props.activeObject.homescreen && this.props.activeObject.menu) {
       return (
         <div>
-          <SynapseComponents.QueryWrapperMenu
+          <this.props.SynapseComponents.QueryWrapperMenu
             token={this.props.token}
             menuConfig={this.props.activeObject.menuConfig}
             rgbIndex={this.props.activeObject.color}
+            type={this.returnType()}
           />
         </div>
       )
@@ -118,6 +137,8 @@ class SynapseBarChart extends Component {
 SynapseBarChart.propTypes = {
   token: PropTypes.string,
   activeObject: PropTypes.object.isRequired,
+  SynapseComponents: PropTypes.object.isRequired,
+  SynapseConstants: PropTypes.object.isRequired,
 }
 
 SynapseBarChart.defaultProps = {

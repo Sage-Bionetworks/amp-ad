@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { SynapseComponents } from "synapse-react-client"
 
 class Instructions extends Component {
   state = {
@@ -56,7 +55,7 @@ class Instructions extends Component {
   returnMarkdown = (token = this.props.token.sessionToken) => {
     if (token) {
       return (
-        <SynapseComponents.Markdown
+        <this.props.SynapseComponents.Markdown
           token={token}
           ownerId="syn12666371"
           wikiId="585317"
@@ -84,6 +83,7 @@ class Instructions extends Component {
 }
 Instructions.propTypes = {
   token: PropTypes.object.isRequired,
+  SynapseComponents: PropTypes.object.isRequired,
 }
 
 export default Instructions

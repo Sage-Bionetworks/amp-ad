@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 
 import { BarLoader } from "react-spinners"
-import { SynapseComponents } from "synapse-react-client"
 
 class ExperimentalResources extends Component {
   constructor(props) {
@@ -29,7 +28,7 @@ class ExperimentalResources extends Component {
           <section className="row">
             <div className="col-xs-12 col-sm-11 col-lg-9 col-centered table-container">
               <h1>Research Tools</h1>
-              <SynapseComponents.Markdown
+              <this.props.SynapseComponents.Markdown
                 token={this.props.token.sessionToken}
                 ownerId="syn2580853"
                 wikiId="409845"
@@ -49,6 +48,7 @@ class ExperimentalResources extends Component {
 ExperimentalResources.propTypes = {
   token: PropTypes.object.isRequired,
   handleChanges: PropTypes.func.isRequired,
+  SynapseComponents: PropTypes.object.isRequired,
 }
 
 ExperimentalResources.defaultProps = {}

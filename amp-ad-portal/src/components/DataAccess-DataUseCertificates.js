@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { SynapseComponents } from "synapse-react-client"
 
 class DataUseCertificates extends Component {
   state = {
@@ -56,7 +55,7 @@ class DataUseCertificates extends Component {
   returnMarkdown = (token = this.props.token.sessionToken) => {
     if (token) {
       return (
-        <SynapseComponents.Markdown
+        <this.props.SynapseComponents.Markdown
           token={token}
           ownerId="syn12666371"
           wikiId="585318"
@@ -89,6 +88,7 @@ class DataUseCertificates extends Component {
 }
 DataUseCertificates.propTypes = {
   token: PropTypes.object.isRequired,
+  SynapseComponents: PropTypes.object.isRequired,
 }
 
 export default DataUseCertificates

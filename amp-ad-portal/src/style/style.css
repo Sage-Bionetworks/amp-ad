@@ -337,7 +337,7 @@ button.btn-control h5 {
 }
 
 .main {
-  min-height: calc(100vh - 135px);
+  min-height: calc(100vh - 55px);
   margin-top: 0px;
 }
 
@@ -1488,6 +1488,10 @@ section.analyses button {
   justify-content: flex-end;
 }
 
+section.programs .query-wrapper {
+  margin-left: -30px;
+  margin-right: -30px;
+}
 section.programs .box {
   height: 470px;
   position: relative;

@@ -15,12 +15,21 @@ const Home = props => (
       token={props.token}
       handleChanges={props.handleChanges}
     />
-    <Explore token={props.token.sessionToken} />
-    <Programs token={props.token.sessionToken} />
+    <Explore
+      token={props.token.sessionToken}
+      SynapseConstants={props.SynapseConstants}
+      SynapseComponents={props.SynapseComponents}
+    />
+    <Programs
+      token={props.token.sessionToken}
+      SynapseConstants={props.SynapseConstants}
+      SynapseComponents={props.SynapseComponents}
+    />
     <WhatsNew
       markdown={props.whatsNewMarkdownSegs}
       token={props.token.sessionToken}
       handleNestedChanges={props.handleNestedChanges}
+      SynapseComponents={props.SynapseComponents}
     />
   </div>
 )
@@ -30,6 +39,8 @@ Home.propTypes = {
   handleChanges: PropTypes.func.isRequired,
   whatsNewMarkdownSegs: PropTypes.array.isRequired,
   handleNestedChanges: PropTypes.func.isRequired,
+  SynapseConstants: PropTypes.object.isRequired,
+  SynapseComponents: PropTypes.object.isRequired,
 }
 
 export default Home

@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { SynapseComponents } from "synapse-react-client"
 import SynapseChart from "./SynapseBarChart.jsx"
 import {
   clone,
@@ -51,7 +50,7 @@ class ExploreContent extends Component {
     if (this.state.activeId === "syn2580853") {
       return (
         <div>
-          <SynapseComponents.Markdown
+          <this.props.SynapseComponents.Markdown
             token={this.props.token}
             ownerId="syn2580853"
             wikiId="409850"
@@ -67,6 +66,8 @@ class ExploreContent extends Component {
             token={this.props.token}
             filter={this.state.synObject.filter}
             activeObject={this.state.synObject}
+            SynapseConstants={this.props.SynapseConstants}
+            SynapseComponents={this.props.SynapseComponents}
           />
         </div>
       )
@@ -114,6 +115,8 @@ class ExploreContent extends Component {
 
 ExploreContent.propTypes = {
   token: PropTypes.string,
+  SynapseComponents: PropTypes.object.isRequired,
+  SynapseConstants: PropTypes.object.isRequired,
 }
 
 ExploreContent.defaultProps = {
