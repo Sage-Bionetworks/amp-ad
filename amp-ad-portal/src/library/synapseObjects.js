@@ -63,31 +63,6 @@ export const synapseObjects = [
         facetName: "Organism",
         unitDescription: "studies",
       },
-      //{
-      //sql: "SELECT * FROM syn9886254",
-      //synapseId: "syn9886254",
-      //facetName: "DataType_Name",
-      //},
-      //{
-      //sql: "SELECT * FROM syn9886254",
-      //synapseId: "syn9886254",
-      //facetName: "Assay",
-      //},
-      //{
-      //sql: "SELECT * FROM syn9886254",
-      //synapseId: "syn9886254",
-      //facetName: "Sample_Type",
-      //},
-      //{
-      //sql: "SELECT * FROM syn9886254",
-      //synapseId: "syn9886254",
-      //facetName: "Data_Contributor",
-      //},
-      //{
-      //sql: "SELECT * FROM syn9886254",
-      //synapseId: "syn9886254",
-      //facetName: "Grant",
-      //},
     ],
     limit: 100,
     columns: 0,

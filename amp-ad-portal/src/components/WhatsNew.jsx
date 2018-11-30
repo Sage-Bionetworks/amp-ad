@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { BarLoader } from "react-spinners"
 
 class WhatsNew extends Component {
   constructor(props) {
@@ -44,6 +45,7 @@ class WhatsNew extends Component {
               <h2>What&apos;s New</h2>
             </div>
             <div className="content">{this.returnMarkdown()}</div>
+            <BarLoader color="#5BB0B5" loading={this.state.loading} />
           </div>
         </div>
       </section>

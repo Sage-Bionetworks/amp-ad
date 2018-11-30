@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-
 import { BarLoader } from "react-spinners"
 
 class ExperimentalResources extends Component {
@@ -11,14 +10,24 @@ class ExperimentalResources extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.props.handleChanges("wikiMarkdown", "")
-  }
-
   handleChanges = (stateKey, updatedState) => {
     this.setState({
       [stateKey]: updatedState,
     })
+  };
+
+  returnMarkdown = () => {
+    if (this.props.token) {
+      return (
+        <this.props.SynapseComponents.Markdown
+          token={this.props.token.sessionToken}
+          ownerId="syn2580853"
+          wikiId="409845"
+          updateLoadState={() => this.handleChanges("loading", false)}
+        />
+      )
+    }
+    return <div />
   };
 
   render() {
@@ -28,17 +37,10 @@ class ExperimentalResources extends Component {
           <section className="row">
             <div className="col-xs-12 col-sm-11 col-lg-9 col-centered table-container">
               <h1>Research Tools</h1>
-              <this.props.SynapseComponents.Markdown
-                token={this.props.token.sessionToken}
-                ownerId="syn2580853"
-                wikiId="409845"
-                updateLoadState={() => this.handleChanges("loading", false)}
-              />
+              {this.returnMarkdown()}
+              <BarLoader color="#5BB0B5" loading={this.state.loading} />
             </div>
           </section>
-          <div className="row center-xs">
-            <BarLoader color="#47357B" loading={this.state.loading} />
-          </div>
         </div>
       </div>
     )

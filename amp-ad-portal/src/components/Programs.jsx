@@ -4,21 +4,39 @@ import PropTypes from "prop-types"
 //import { getTable } from "../queries/queryForData"
 
 class Programs extends Component {
-  QueryWrapper = () => {
-    return (
-      <div className="query-wrapper">
-        <this.props.SynapseComponents.StaticQueryWrapper
-          sql="SELECT * FROM syn17024173"
-          token={this.props.token}
-        >
-          <this.props.SynapseComponents.SynapseTableCardView
-            type={this.props.SynapseConstants.AMP_CONSORTIUM}
-          />
-        </this.props.SynapseComponents.StaticQueryWrapper>
-      </div>
-    )
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: true,
+    }
+  }
+
+  handleChanges = (stateKey, updatedState) => {
+    this.setState({
+      [stateKey]: updatedState,
+    })
   };
 
+  //updateLoadState={() => this.handleChanges("loading", false)}
+  QueryWrapper = () => {
+    if (this.props.token) {
+      return (
+        <div className="query-wrapper">
+          <this.props.SynapseComponents.StaticQueryWrapper
+            sql="SELECT * FROM syn17024173"
+            token={this.props.token}
+          >
+            <this.props.SynapseComponents.SynapseTableCardView
+              type={this.props.SynapseConstants.AMP_CONSORTIUM}
+            />
+          </this.props.SynapseComponents.StaticQueryWrapper>
+        </div>
+      )
+    }
+    return <div />
+  };
+
+  //<BarLoader color="#5BB0B5" loading={this.state.loading} />
   render() {
     return (
       <section className="programs flex-row">

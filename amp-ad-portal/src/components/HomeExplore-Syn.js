@@ -59,7 +59,7 @@ class ExploreContent extends Component {
         </div>
       )
     }
-    if (this.state.synObject) {
+    if (this.state.synObject && this.props.token) {
       return (
         <div className="synapse-chart">
           <SynapseChart
