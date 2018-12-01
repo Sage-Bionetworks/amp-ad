@@ -43,7 +43,7 @@ class Programs extends Component {
         <div className="flex-col-full content-row-width">
           <div className="title-row between-xs">
             <div className="">
-              <h2>Programs</h2>
+              <h2 className="header">Programs</h2>
             </div>
           </div>
           <this.QueryWrapper />

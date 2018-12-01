@@ -15,8 +15,6 @@ const login = async () => SynapseClient.login("mikeybkats", "guinness").then((ke
 
 // about pages
 const AsyncAboutAmpAd = asyncComponent(() => import("./components/About-WhatIsAmpAd"))
-// resources pages
-const AsyncInstructions = asyncComponent(() => import("./components/DataAccess-Instructions"))
 // component js
 const AsyncHome = asyncComponent(() => import("./components/Home"))
 const AsyncHeader = asyncComponent(() => import("./components/Header"))
@@ -26,6 +24,7 @@ const AsyncExplore = asyncComponent(() => import("./components/Explore.jsx"))
 // study page
 const AsyncStudyPage = asyncComponent(() => import("./components/Page-Study.js"))
 // Data access pages
+const AsyncInstructions = asyncComponent(() => import("./components/DataAccess-Instructions"))
 const AsyncDataUseCertificates = asyncComponent(() => import("./components/DataAccess-DataUseCertificates.js"))
 const AsyncResearchTools = asyncComponent(() => import("./components/ResearchTools"))
 const AsyncResourcesAcknowledgements = asyncComponent(() => import("./components/Resources-AcknowledgementStatements"))
@@ -88,7 +87,13 @@ class App extends Component {
   };
 
   ReturnResourcesAcknowledgements = () => {
-    return <AsyncResourcesAcknowledgements token={this.state.loginToken} />
+    return (
+      <AsyncResourcesAcknowledgements
+        token={this.state.loginToken}
+        SynapseConstants={SynapseConstants}
+        SynapseComponents={SynapseComponents}
+      />
+    )
   };
 
   ReturnDataUseCertificates = () => {

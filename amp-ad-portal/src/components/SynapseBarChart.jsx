@@ -44,29 +44,31 @@ class SynapseBarChart extends Component {
       || this.props.activeObject.barChart
     ) {
       return (
-        <this.props.SynapseComponents.QueryWrapper
-          initQueryRequest={this.buildQuery()}
-          token={this.props.token}
-          facetName={this.props.activeObject.filter}
-          rgbIndex={this.props.activeObject.color}
-        >
-          <this.props.SynapseComponents.StackedRowHomebrew
-            loadingScreen={(
-              <div
-                className="bar-loader"
-                style={{
-                  textAlign: "center",
-                  width: "100px",
-                  margin: "0px auto",
-                }}
-              >
-                <BarLoader color="#4DB7AD" loading />
-              </div>
-            )}
-            unitDescription={this.props.activeObject.description}
-          />
-          {this.returnFacets()}
-        </this.props.SynapseComponents.QueryWrapper>
+        <div className={this.props.activeObject.name}>
+          <this.props.SynapseComponents.QueryWrapper
+            initQueryRequest={this.buildQuery()}
+            token={this.props.token}
+            facetName={this.props.activeObject.filter}
+            rgbIndex={this.props.activeObject.color}
+          >
+            <this.props.SynapseComponents.StackedRowHomebrew
+              loadingScreen={(
+                <div
+                  className="bar-loader"
+                  style={{
+                    textAlign: "center",
+                    width: "100px",
+                    margin: "0px auto",
+                  }}
+                >
+                  <BarLoader color="#4DB7AD" loading />
+                </div>
+              )}
+              unitDescription={this.props.activeObject.description}
+            />
+            {this.returnFacets()}
+          </this.props.SynapseComponents.QueryWrapper>
+        </div>
       )
     }
     return <div />

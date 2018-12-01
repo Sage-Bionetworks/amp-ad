@@ -8,16 +8,8 @@ const ReactMarkdown = require("react-markdown")
 
 class DataUse extends Component {
   state = {
-    loaded: false,
+    loading: false,
   };
-
-  componentDidMount() {}
-
-  componentWillUnmount() {}
-
-  shouldComponentUpdate() {}
-
-  componentDidUpdate() {}
 
   handleChange = (newState) => {
     this.setState(newState)

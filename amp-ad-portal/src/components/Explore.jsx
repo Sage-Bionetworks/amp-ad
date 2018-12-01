@@ -68,7 +68,7 @@ class Explore extends Component {
     let id
     switch (hash) {
     case "#/Explore/Data":
-      id = "syn17024112"
+      id = "syn11346063"
       break
     case "#/Explore/Studies":
       id = "syn9886254"
@@ -136,7 +136,7 @@ class Explore extends Component {
   returnSynapseChart = (hash = window.location.hash) => {
     if (hash === "#/Explore/Publications") {
       return (
-        <div>
+        <div className="explore-publications">
           <this.props.SynapseComponents.Markdown
             token={this.props.token}
             ownerId="syn2580853"
@@ -169,13 +169,11 @@ class Explore extends Component {
           <div
             className={`center-block selectors-container ${this.hideBarSection()}`}
           >
-            <div className="selectors">
-              <Selectors
-                returnButtonClass={this.returnButtonClass}
-                handleChanges={this.handleChanges}
-                handleButtonPress={this.handleButtonPress}
-              />
-            </div>
+            <Selectors
+              returnButtonClass={this.returnButtonClass}
+              handleChanges={this.handleChanges}
+              handleButtonPress={this.handleButtonPress}
+            />
           </div>
           {this.returnSynapseChart()}
         </div>
@@ -189,10 +187,10 @@ class Explore extends Component {
       <section className="page explore">
         <div className="container">
           <div className="row">
-            <h1 className="header">
+            <h2 className="header">
               Explore
               {` ${this.state.activeObject.name}`}
-            </h1>
+            </h2>
           </div>
           <div className="row explore-content">
             <this.SelectorsAndCharts />

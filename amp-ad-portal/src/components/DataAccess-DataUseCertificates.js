@@ -1,10 +1,11 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { BarLoader } from "react-spinners"
 
 class DataUseCertificates extends Component {
   state = {
     addedEventListeners: false,
-    loaded: false,
+    loading: true,
   };
 
   componentDidMount() {
@@ -59,7 +60,7 @@ class DataUseCertificates extends Component {
           token={token}
           ownerId="syn12666371"
           wikiId="585318"
-          updateLoadState={() => this.handleChange({ loaded: true })}
+          updateLoadState={() => this.handleChange({ loading: false })}
         />
       )
     }
@@ -72,13 +73,9 @@ class DataUseCertificates extends Component {
         <div className="">
           <section className="row child-page-hero">
             <div className="col-xs-12 col-sm-8 col-centered">
-              <h2>Data Use Certificates</h2>
-              <p />
-            </div>
-          </section>
-          <section className="row">
-            <div className="col-xs-12 col-sm-8 col-centered">
+              <h1 className="header">Data Use Certificates</h1>
               {this.returnMarkdown()}
+              <BarLoader color="#5BB0B5" loading={this.state.loading} />
             </div>
           </section>
         </div>

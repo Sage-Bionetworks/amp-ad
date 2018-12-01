@@ -5,6 +5,7 @@ import {
   clone,
   synapseObjects,
   returnSynapseObject,
+  returnSynapseValue,
 } from "../library/synapseObjects"
 import ButtonExplore from "./Button-Explore"
 
@@ -16,11 +17,12 @@ class ExploreContent extends Component {
   state = {
     activeId: "",
     synObject: {},
+    name: "",
   };
 
   componentDidMount() {
     loadedObject = clone(synapseObjects)
-    this.handleButtonPress("syn17024112", this.handleChanges)
+    this.handleButtonPress("syn11346063", this.handleChanges)
   }
 
   handleChanges = (stateObject) => {
@@ -29,6 +31,7 @@ class ExploreContent extends Component {
 
   handleButtonPress = (value, handleChanges) => {
     const synObject = returnSynapseObject(loadedObject, value)
+    const name = synObject.name
 
     synObject.table = false
     synObject.cards = false
@@ -38,6 +41,7 @@ class ExploreContent extends Component {
     handleChanges({
       activeId: value,
       synObject,
+      name,
     })
     return ""
   };

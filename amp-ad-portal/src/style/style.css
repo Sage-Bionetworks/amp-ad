@@ -166,6 +166,7 @@
 
 body, button, h1, h2, h3, h4, h5, li, ul, p, a {
   font-family: "Lato", sans-serif;
+  font-size: 15px;
 }
 
 h1 {
@@ -177,12 +178,18 @@ h2 {
   margin: 10px 0px;
 }
 
+h2.header {
+  text-transform: uppercase;
+  font-size: 21px;
+  font-weight: 900;
+}
+
 h3 {
   font-weight: 300;
 }
 
 p {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 a {
@@ -1058,6 +1065,10 @@ footer {
   color: white;
   min-height: 55px;
 }
+footer.flex-row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
 footer .links {
   position: relative;
   z-index: 1000;
@@ -1160,6 +1171,10 @@ section.page.explore {
 section.explore-content, div.explore-content {
   margin-bottom: 80px;
 }
+section.explore-content .explore-publications, div.explore-content .explore-publications {
+  max-width: 1033px;
+  margin: 0px auto;
+}
 section.explore-content .col-xs-2, div.explore-content .col-xs-2 {
   margin-top: 18px;
 }
@@ -1170,7 +1185,7 @@ section.explore-content .container .container-fluid .col-xs-12, div.explore-cont
   padding: 0px;
 }
 section.explore-content .selectors-container, div.explore-content .selectors-container {
-  max-width: fit-content;
+  max-width: 1033px;
 }
 section.explore-content .selectors, div.explore-content .selectors {
   display: flex;
@@ -1355,6 +1370,18 @@ section.explore-content .selectors button:nth-child(6).active::after, div.explor
 section.explore-content .selectors button:nth-child(6).active:hover:after, div.explore-content .selectors button:nth-child(6).active:hover:after {
   transition: all 400ms;
 }
+section.explore-content .synapse-chart, div.explore-content .synapse-chart {
+  max-width: 1033px;
+  margin: 0px auto;
+}
+section.explore-content .synapse-chart .bar-section .SRC-portalCard, div.explore-content .synapse-chart .bar-section .SRC-portalCard {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+section.explore-content .Projects .container-fluid, div.explore-content .Projects .container-fluid {
+  margin-right: -22px;
+  margin-left: -22px;
+}
 @media screen and (max-width: 720px) {
   section.explore-content .bar-chart, div.explore-content .bar-chart {
     height: 450px;
@@ -1375,11 +1402,16 @@ section.explore-content .bar-chart .explore-button-row, div.explore-content .bar
     bottom: -130px;
   }
 }
+section.explore-content .bar-chart .selectors-container, div.explore-content .bar-chart .selectors-container {
+  max-width: 700px;
+}
 section.explore-content .bar-chart .synapse-chart, div.explore-content .bar-chart .synapse-chart {
   position: absolute;
   top: 100px;
   right: 0px;
   width: 100%;
+  max-width: unset;
+  margin: 0px auto;
 }
 @media screen and (max-width: 1115px) {
   section.explore-content .bar-chart .synapse-chart, div.explore-content .bar-chart .synapse-chart {
@@ -1529,6 +1561,20 @@ section.programs .box-text-image img {
   height: 80px;
 }
 
+section.what-new .markdown h4 {
+  padding: 0px;
+  font-size: 18px;
+  font-weight: 700;
+}
+section.what-new .markdown h5 {
+  padding: 0px;
+  font-size: 14px;
+  color: #767676;
+}
+section.what-new p {
+  font-size: 14px;
+  line-height: 21px;
+}
 section.what-new .title-row {
   line-height: 10px;
   margin-bottom: 0px;
@@ -1631,18 +1677,6 @@ section.contribute-your-data .content-block {
   margin-top: -50px;
 }
 
-section.child-page-hero {
-  background: linear-gradient(to right, #5A498D, #4C57A2);
-}
-section.child-page-hero p {
-  font-size: 18px;
-  color: white;
-}
-section.child-page-hero h2 {
-  font-size: 30px;
-  color: white;
-}
-
 section.about-intro-section, section.content-section {
   text-align: left;
 }
@@ -1695,9 +1729,6 @@ section.about-intro-section button.btn, section.content-section button.btn {
 
 .about section {
   text-align: left;
-}
-.about p {
-  font-size: 16px;
 }
 
 .select-publications {

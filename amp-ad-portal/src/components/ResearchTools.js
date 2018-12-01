@@ -3,12 +3,9 @@ import PropTypes from "prop-types"
 import { BarLoader } from "react-spinners"
 
 class ExperimentalResources extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      loading: true,
-    }
-  }
+  state = {
+    loading: true,
+  };
 
   handleChanges = (stateKey, updatedState) => {
     this.setState({
@@ -36,7 +33,7 @@ class ExperimentalResources extends Component {
         <div className="page">
           <section className="row">
             <div className="col-xs-12 col-sm-11 col-lg-9 col-centered table-container">
-              <h1>Research Tools</h1>
+              <h2 className="header">Research Tools</h2>
               {this.returnMarkdown()}
               <BarLoader color="#5BB0B5" loading={this.state.loading} />
             </div>
@@ -52,7 +49,5 @@ ExperimentalResources.propTypes = {
   handleChanges: PropTypes.func.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
 }
-
-ExperimentalResources.defaultProps = {}
 
 export default ExperimentalResources

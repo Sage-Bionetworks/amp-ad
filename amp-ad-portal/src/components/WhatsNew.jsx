@@ -42,7 +42,7 @@ class WhatsNew extends Component {
         <div className="content-row-width flex-col-full">
           <div className="title-row between-xs">
             <div className="">
-              <h2>What&apos;s New</h2>
+              <h2 className="header">What&apos;s New</h2>
             </div>
             <div className="content">{this.returnMarkdown()}</div>
             <BarLoader color="#5BB0B5" loading={this.state.loading} />
