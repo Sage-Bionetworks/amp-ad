@@ -113,6 +113,18 @@ class SynapseBarChart extends Component {
             menuConfig={this.props.activeObject.menuConfig}
             rgbIndex={this.props.activeObject.color}
             type={this.returnType()}
+            loadingScreen={(
+              <div
+                className="bar-loader"
+                style={{
+                  textAlign: "center",
+                  width: "100px",
+                  margin: "0px auto",
+                }}
+              >
+                <BarLoader color="#4DB7AD" loading />
+              </div>
+            )}
           />
         </div>
       )

@@ -89,7 +89,7 @@ class Explore extends Component {
       id = "studyPage"
       break
     default:
-      id = "syn17024112"
+      id = "syn11346063"
     }
 
     this.handleButtonPress(id)

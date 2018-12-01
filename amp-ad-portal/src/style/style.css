@@ -188,11 +188,11 @@ h3 {
   font-weight: 300;
 }
 
-p {
+p, .markdown p {
   font-size: 15px;
 }
 
-a {
+a, .markdown a {
   color: #5A478F;
   text-decoration: none;
 }
