@@ -1572,7 +1572,7 @@ section.what-new .markdown h5 {
   color: #767676;
 }
 section.what-new p {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 21px;
 }
 section.what-new .title-row {
@@ -2250,7 +2250,7 @@ button.modal-x {
 
 @media screen and (max-width: 480px) {
   header.header img {
-    max-height: 50px;
+    max-height: 35px;
   }
 
   .main {

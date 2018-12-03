@@ -8,9 +8,9 @@ const Welcome = () => {
           <div className="col-sm-9">
             <h1>Welcome to the AMP-AD Knowledge Portal</h1>
             <p>
-              Discover and download data, analyses, and tools for the study of
-              Alzheimer's disease generated through the National Institute on
-              Aging-led AD Translational Research Program.
+              Discover and download Alzheimer's Disease data, analyses, and
+              tools from the National Institute on Aging's Alzheimer's Disease
+              Translational Research Program.
             </p>
           </div>
         </div>

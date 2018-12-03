@@ -1337,7 +1337,7 @@ select {
 			color: #767676;
     }
 		p {
-			font-size: 14px;
+			font-size: 15px;
       line-height: 21px;
 		}
     .title-row {
@@ -2059,7 +2059,7 @@ select {
   /////// media queries //////////
   @media screen and (max-width: 480px) {
     header.header img{
-      max-height: 50px;
+      max-height: 35px;
     }
     .main {
       margin-top: 50px;
