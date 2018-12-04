@@ -132,12 +132,12 @@ class SynapseBarChart extends Component {
     return <div className="no-bar-chart" />
   };
 
-  //{this.returnStackedRow()}
   render() {
     if (this.props.activeObject.id !== undefined) {
       return (
         <div>
           <div className={`${this.hideBarSection()}`}>
+            {this.returnStackedRow()}
             {this.returnQueryWrapperMenu()}
             {this.returnSynapseCards()}
           </div>

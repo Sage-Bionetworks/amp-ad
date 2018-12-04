@@ -69,11 +69,11 @@ class DataUseCertificates extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="">
-          <section className="row child-page-hero">
-            <div className="col-xs-12 col-sm-8 col-centered">
-              <h1 className="header">Data Use Certificates</h1>
+      <div className="container about experimental-resources">
+        <div className="page">
+          <section className="row">
+            <div className="col-xs-12 col-sm-11 col-lg-9 col-centered table-container">
+              <h2 className="header">Data Use Certificates</h2>
               {this.returnMarkdown()}
               <BarLoader color="#5BB0B5" loading={this.state.loading} />
             </div>

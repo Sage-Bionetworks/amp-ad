@@ -24,7 +24,7 @@ export const synapseObjects = [
     columns: 9,
     cards: false,
     menu: true,
-    barChart: true,
+    barChart: false,
     facets: false,
     type: "AMP_PROJECT",
     hash: "/Explore/Projects",
