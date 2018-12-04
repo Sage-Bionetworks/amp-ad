@@ -27,9 +27,9 @@ const Selectors = (props) => {
         <h5>PROJECTS</h5>
       </button>
       <button
-        className={props.returnButtonClass("syn9886254")}
+        className={props.returnButtonClass("syn17083367")}
         type="button"
-        onClick={() => props.handleButtonPress("syn9886254", props.handleChanges)
+        onClick={() => props.handleButtonPress("syn17083367", props.handleChanges)
         }
       >
         <h5>STUDIES</h5>

@@ -31,9 +31,9 @@ class Explore extends Component {
       loadedObjects = clone(synapseObjects)
 
       // studies
-      setSynapseValue(loadedObjects, "syn16787123", "filter", "projectStatus")
+      setSynapseValue(loadedObjects, "syn17083367", "filter", "projectStatus")
       // publications
-      setSynapseValue(loadedObjects, "syn16857542", "filter", "id")
+      setSynapseValue(loadedObjects, "syn2580853", "filter", "id")
 
       if (window.location.hash !== "#/Explore") {
         this.setActiveValues(window.location.hash, "id")
@@ -71,7 +71,8 @@ class Explore extends Component {
       id = "syn11346063"
       break
     case "#/Explore/Studies":
-      id = "syn9886254"
+      //syn9886254
+      id = "syn17083367"
       break
     case "#/Explore/Publications":
       id = "syn2580853"

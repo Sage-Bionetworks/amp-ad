@@ -192,9 +192,18 @@ p, .markdown p {
   font-size: 15px;
 }
 
-a, .markdown a {
+.SRC-portalCard .SRC-cardContent a.SRC-primary-text-color {
+  color: #5A478F;
+}
+
+a, .content .markdown a, .markdown a, .SRC-portalCard .SRC-cardContent h3 a {
+  font-weight: 700;
   color: #5A478F;
   text-decoration: none;
+}
+
+a:hover, .markdown a:hover, .SRC-portalCard .SRC-cardContent h3 a:hover {
+  text-decoration: underline;
 }
 
 li {
@@ -398,6 +407,7 @@ header .accordion {
   cursor: pointer;
   border: none;
   height: 100%;
+  font-weight: 400;
 }
 @media screen and (max-width: 720px) {
   header .accordion {
@@ -451,11 +461,13 @@ header .nav .accordion__body li {
   margin: 0px;
   padding: 10px;
   padding-left: 0px;
+  font-weight: 400;
 }
 header .nav .accordion__body li a.nav-item.dropdown {
   padding: 10px 20px;
   width: 100%;
   font-size: 15px;
+  font-weight: 400;
 }
 header .accordion-body.top-level-accordion {
   position: absolute;
@@ -480,6 +492,7 @@ header .accordion__body {
 }
 header a.nav-item {
   padding: 14px 40px;
+  font-weight: 400;
 }
 header .accordion__title {
   background-color: RGBA(254, 254, 254, 0.9);
@@ -505,6 +518,10 @@ header .accordion__title:hover {
 header .accordion__title:hover .row .accordion-sub-title a {
   transition: all ease 400ms;
   color: white;
+  font-weight: 400;
+}
+header .row .accordion-sub-title a {
+  font-weight: 400;
 }
 
 section.beta-banner {

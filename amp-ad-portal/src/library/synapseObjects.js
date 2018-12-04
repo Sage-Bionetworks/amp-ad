@@ -41,34 +41,36 @@ export const synapseObjects = [
   {
     name: "studies",
     description: "Studies",
-    id: "syn9886254",
+    id: "syn17083367",
     barChart: false,
     cards: false,
     menu: true,
     type: "AMP_STUDY",
     sql:
-      "SELECT distinct Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Organism, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn9886254",
+      "SELECT Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Organism, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn17083367",
     filter: "Organism",
     menuConfig: [
       {
         sql:
-          "SELECT distinct Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Organism, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn9886254",
-        synapseId: "syn9886254",
+          "SELECT Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Organism, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn17083367",
+        synapseId: "syn17083367",
         facetName: "Organism",
+        facetDisplayValue: "Species",
         unitDescription: "studies",
       },
       {
         sql:
-          "SELECT distinct Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Organism, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn9886254",
-        synapseId: "syn9886254",
+          "SELECT Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Organism, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn17083367",
+        synapseId: "syn17083367",
         facetName: "Grant",
         unitDescription: "studies",
       },
       {
         sql:
-          "SELECT distinct Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Organism, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn9886254",
-        synapseId: "syn9886254",
+          "SELECT Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Organism, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn17083367",
+        synapseId: "syn17083367",
         facetName: "Consortium",
+        facetDisplayValue: "Program",
         unitDescription: "studies",
       },
     ],
@@ -93,21 +95,23 @@ export const synapseObjects = [
     menuConfig: [
       {
         sql:
-          "SELECT organ, tissue, dataType, assay, id AS file_id, consortium as program, grant, study, species, cellType, specimenID FROM syn11346063",
-        title: "Data",
-        synapseId: "syn11346063",
-        facetName: "organ",
-        unitDescription: "data files",
-        visibleColumnCount: 5,
-      },
-      {
-        sql:
           "SELECT species, dataType, id as file_id, consortium as program, grant, study, organ, tissue, cellType, assay, fileFormat, specimenID FROM syn11346063",
         title: "Data",
         synapseId: "syn11346063",
         facetName: "species",
+        facetDisplayValue: "Species",
         unitDescription: "data files",
         visibleColumnCount: 3,
+      },
+      {
+        sql:
+          "SELECT organ, tissue, dataType, assay, id AS file_id, consortium as program, grant, study, species, cellType, specimenID FROM syn11346063",
+        title: "Data",
+        synapseId: "syn11346063",
+        facetName: "organ",
+        facetDisplayValue: "Organ",
+        unitDescription: "data files",
+        visibleColumnCount: 5,
       },
       {
         sql:
@@ -115,6 +119,7 @@ export const synapseObjects = [
         title: "Data",
         synapseId: "syn11346063",
         facetName: "study",
+        facetDisplayValue: "Study",
         unitDescription: "data files",
         visibleColumnCount: 4,
       },
@@ -124,6 +129,7 @@ export const synapseObjects = [
         title: "Data",
         synapseId: "syn11346063",
         facetName: "dataType",
+        facetDisplayValue: "Data Type",
         unitDescription: "data files",
         visibleColumnCount: 4,
       },
@@ -133,6 +139,7 @@ export const synapseObjects = [
         title: "Data",
         synapseId: "syn11346063",
         facetName: "assay",
+        facetDisplayValue: "Assay",
         unitDescription: "data files",
         visibleColumnCount: 4,
       },
@@ -142,6 +149,7 @@ export const synapseObjects = [
         title: "Data",
         synapseId: "syn17024112",
         facetName: "diagnosis",
+        facetDisplayValue: "Diagnosis",
         unitDescription: "data files",
         visibleColumnCount: 5,
       },
@@ -198,6 +206,7 @@ export const synapseObjects = [
         title: "Institution",
         synapseId: "syn13897207",
         facetName: "institution",
+        facetDisplayValue: "Institution",
         unitDescription: "people",
       },
     ],
