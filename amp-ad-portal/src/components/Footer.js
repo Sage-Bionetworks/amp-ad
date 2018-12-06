@@ -7,10 +7,10 @@ const Footer = () => {
     <footer className="flex-row middle-xs">
       <div className="footer-background" />
       <div className="flex-row between-xs footer-row">
-        <div className="flex-col-3 logo">
+        <div className="flex-col-3 flex-col-xs-12 logo">
           <img className="logo-header" src={logoImage} alt="amp_ad_logo" />
         </div>
-        <div className="flex-col-3 links">
+        <div className="flex-col-3 flex-col-xs-12 links">
           <div className="flex-row">
             <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
               Forum

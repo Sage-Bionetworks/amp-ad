@@ -118,6 +118,9 @@ button.btn-explore {
   padding: 7px 25px;
   margin: 10px 5px;
   min-width: 155px;
+	@media screen and (max-width: 600px){
+		min-width: 140px;
+	}
 }
 
 
@@ -1090,6 +1093,9 @@ select {
 		}
 
     margin-bottom: 80px;
+		@media screen and (max-width: 600px){
+			margin-bottom: 220px;
+		}
     .col-xs-2 {
       margin-top: 18px;
     }
@@ -1168,6 +1174,9 @@ select {
         @media screen and (max-width: 1115px){
           bottom: -130px;
         }
+				@media screen and (max-width: 600px){
+					bottom: -200px;
+				}
       }
       .selectors-container {
 				max-width: 700px;
@@ -1338,7 +1347,7 @@ select {
     }
   }
 
-  section.what-new {
+  section.what-new, section.programs {
     .markdown h4 {
       padding: 0px;
 			font-size: 18px;
@@ -1372,47 +1381,6 @@ select {
       margin: 5px 0px;
       color: #D3D5DB;
       font-style: italic;
-    }
-    .bell-icon {
-      background-image: url(../images/plus-bell-icon.svg);
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      height: 16px;
-      width: 14px;
-      position: absolute;
-      left: -7px;
-      top: -25px;
-    }
-    .lightbulb-icon {
-      background-image: url(../images/lightbulb-on.svg);
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      height: 16px;
-      width: 14px;
-      position: absolute;
-      left: -7px;
-      top: -25px;
-    }
-
-    .what-new-data-icon {
-      &.vertical-line {
-        border-left: 2px dotted #D3D5DB;
-        height: 127px;
-        max-width: 25px;
-        margin-left: 30px;
-        margin-top: 35px;
-        position: relative;
-      }
-      img {
-        margin-left: -20px;
-        background: white;
-        padding: 5px;
-        &.lightbulb {
-          margin-left: -24px;
-        }
-      }
     }
     .what-new-data { 
       padding-top: 6px;
@@ -2071,11 +2039,24 @@ select {
 
   /////// media queries //////////
   @media screen and (max-width: 480px) {
+		html, body {
+			overflow-x: hidden;
+		}
     header.header img{
       max-height: 35px;
     }
+		footer {
+			img.logo-header {
+				max-width: 60%;
+				margin: 10px auto;	
+			}
+			.links {
+				margin: 10px 0px;
+			}
+		}
     .main {
-      margin-top: 50px;
+      //margin-top: 50px;
+			min-height: calc(100vh - 155px);
     }
     ul.nav {
       flex-direction: column;
@@ -2084,28 +2065,16 @@ select {
         margin: 10px;
       }
     }
-    section.welcome .welcome-message {
-      padding: 20px;
-    }
-    section.welcome .welcome-data {
-      right: 0px;
-    }
-    section.welcome .welcome-data {
-      padding: 30px 0px;
-      right: 0px;
-    }
-    section.pie-charts-welcome .chart-center-stat {
-      width: unset;
-      height: unset; 
-    }
-    section.analyses, section.programs {
-      padding: unset;
+    section.analyses, section.programs, section.what-new, section.explore-content {
+			padding: 10px;
       .box {
         margin: unset;
         margin-bottom: 10px;
         max-width: unset;
       }
     }
+		section.programs {
+		}
   }
   
   .SRC-bar-border > div:first-child {

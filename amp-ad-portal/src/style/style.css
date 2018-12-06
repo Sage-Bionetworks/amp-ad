@@ -102,6 +102,18 @@
   width: 8.33%;
 }
 
+@media screen and (max-width: 480px) {
+  .flex-col-xs-6 {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .flex-col-xs-12 {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 1020px) {
   .flex-col-md-12 {
     width: 100%;
@@ -285,6 +297,11 @@ button.btn-control h5 {
   color: white;
   font-weight: 700;
   letter-spacing: 0.5px;
+}
+@media screen and (max-width: 600px) {
+  button.btn-control {
+    min-width: 140px;
+  }
 }
 
 .btn-amp {
@@ -1192,6 +1209,11 @@ section.explore-content .explore-publications, div.explore-content .explore-publ
   max-width: 1033px;
   margin: 0px auto;
 }
+@media screen and (max-width: 600px) {
+  section.explore-content, div.explore-content {
+    margin-bottom: 220px;
+  }
+}
 section.explore-content .col-xs-2, div.explore-content .col-xs-2 {
   margin-top: 18px;
 }
@@ -1419,6 +1441,11 @@ section.explore-content .bar-chart .explore-button-row, div.explore-content .bar
     bottom: -130px;
   }
 }
+@media screen and (max-width: 600px) {
+  section.explore-content .bar-chart .explore-button-row, div.explore-content .bar-chart .explore-button-row {
+    bottom: -200px;
+  }
+}
 section.explore-content .bar-chart .selectors-container, div.explore-content .bar-chart .selectors-container {
   max-width: 700px;
 }
@@ -1578,21 +1605,21 @@ section.programs .box-text-image img {
   height: 80px;
 }
 
-section.what-new .markdown h4 {
+section.what-new .markdown h4, section.programs .markdown h4 {
   padding: 0px;
   font-size: 18px;
   font-weight: 700;
 }
-section.what-new .markdown h5 {
+section.what-new .markdown h5, section.programs .markdown h5 {
   padding: 0px;
   font-size: 14px;
   color: #767676;
 }
-section.what-new p {
+section.what-new p, section.programs p {
   font-size: 15px;
   line-height: 21px;
 }
-section.what-new .title-row {
+section.what-new .title-row, section.programs .title-row {
   line-height: 10px;
   margin-bottom: 0px;
   margin-top: 0px;
@@ -1600,60 +1627,22 @@ section.what-new .title-row {
   display: flex;
   flex-direction: column;
 }
-section.what-new .type-of-release {
+section.what-new .type-of-release, section.programs .type-of-release {
   font-size: 18px;
   margin: 0px;
   padding: 0px;
 }
-section.what-new .sub-title {
+section.what-new .sub-title, section.programs .sub-title {
   font-size: 18px;
   font-weight: 300;
   margin: 5px 0px;
   color: #D3D5DB;
   font-style: italic;
 }
-section.what-new .bell-icon {
-  background-image: url(../images/plus-bell-icon.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 16px;
-  width: 14px;
-  position: absolute;
-  left: -7px;
-  top: -25px;
-}
-section.what-new .lightbulb-icon {
-  background-image: url(../images/lightbulb-on.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 16px;
-  width: 14px;
-  position: absolute;
-  left: -7px;
-  top: -25px;
-}
-section.what-new .what-new-data-icon.vertical-line {
-  border-left: 2px dotted #D3D5DB;
-  height: 127px;
-  max-width: 25px;
-  margin-left: 30px;
-  margin-top: 35px;
-  position: relative;
-}
-section.what-new .what-new-data-icon img {
-  margin-left: -20px;
-  background: white;
-  padding: 5px;
-}
-section.what-new .what-new-data-icon img.lightbulb {
-  margin-left: -24px;
-}
-section.what-new .what-new-data {
+section.what-new .what-new-data, section.programs .what-new-data {
   padding-top: 6px;
 }
-section.what-new .what-new-data h5 {
+section.what-new .what-new-data h5, section.programs .what-new-data h5 {
   font-size: 18px;
   padding-top: 0px;
   margin-top: 0px;
@@ -1661,19 +1650,19 @@ section.what-new .what-new-data h5 {
   font-weight: 400;
   margin-bottom: 10px;
 }
-section.what-new .what-new-data h2 {
+section.what-new .what-new-data h2, section.programs .what-new-data h2 {
   padding: 0px;
 }
-section.what-new .what-new-data h4 {
+section.what-new .what-new-data h4, section.programs .what-new-data h4 {
   padding: 0px;
 }
-section.what-new .what-new-data p {
+section.what-new .what-new-data p, section.programs .what-new-data p {
   font-size: 18px;
 }
-section.what-new .description {
+section.what-new .description, section.programs .description {
   margin: 0px;
 }
-section.what-new a.read-more {
+section.what-new a.read-more, section.programs a.read-more {
   margin: 20px 0px;
   display: block;
   text-decoration: underline;
@@ -2266,12 +2255,24 @@ button.modal-x {
 }
 
 @media screen and (max-width: 480px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
   header.header img {
     max-height: 35px;
   }
 
+  footer img.logo-header {
+    max-width: 60%;
+    margin: 10px auto;
+  }
+  footer .links {
+    margin: 10px 0px;
+  }
+
   .main {
-    margin-top: 50px;
+    min-height: calc(100vh - 155px);
   }
 
   ul.nav {
@@ -2282,28 +2283,10 @@ button.modal-x {
     margin: 10px;
   }
 
-  section.welcome .welcome-message {
-    padding: 20px;
+  section.analyses, section.programs, section.what-new, section.explore-content {
+    padding: 10px;
   }
-
-  section.welcome .welcome-data {
-    right: 0px;
-  }
-
-  section.welcome .welcome-data {
-    padding: 30px 0px;
-    right: 0px;
-  }
-
-  section.pie-charts-welcome .chart-center-stat {
-    width: unset;
-    height: unset;
-  }
-
-  section.analyses, section.programs {
-    padding: unset;
-  }
-  section.analyses .box, section.programs .box {
+  section.analyses .box, section.programs .box, section.what-new .box, section.explore-content .box {
     margin: unset;
     margin-bottom: 10px;
     max-width: unset;
