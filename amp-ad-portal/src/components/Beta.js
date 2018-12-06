@@ -10,12 +10,13 @@ const BetaHeader = () => {
       </div>
       <div className="banner-message">
         <h2 className="">
-          This updated AMP-AD Knowledge Portal is under development through the
-          end of 2018. During this time, you can still use the
+          The updated AMP-AD Knowledge Portal is currently under development.
+          During this time, you can still use
           {" "}
           <a href="https://www.synapse.org/#!Synapse:syn2580853/wiki/409840">
-            original site.
+            the original site
           </a>
+          .
         </h2>
       </div>
     </section>

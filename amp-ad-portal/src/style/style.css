@@ -102,6 +102,18 @@
   width: 8.33%;
 }
 
+@media screen and (max-width: 480px) {
+  .flex-col-xs-6 {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .flex-col-xs-12 {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 1020px) {
   .flex-col-md-12 {
     width: 100%;
@@ -133,6 +145,11 @@
   justify-content: space-around;
 }
 
+.middle-xs {
+  align-items: center;
+  align-content: center;
+}
+
 .title-row {
   width: 100%;
 }
@@ -161,6 +178,7 @@
 
 body, button, h1, h2, h3, h4, h5, li, ul, p, a {
   font-family: "Lato", sans-serif;
+  font-size: 15px;
 }
 
 h1 {
@@ -172,17 +190,32 @@ h2 {
   margin: 10px 0px;
 }
 
+h2.header {
+  text-transform: uppercase;
+  font-size: 21px;
+  font-weight: 900;
+}
+
 h3 {
   font-weight: 300;
 }
 
-p {
-  font-size: 14px;
+p, .markdown p {
+  font-size: 15px;
 }
 
-a {
+.SRC-portalCard .SRC-cardContent a.SRC-primary-text-color {
+  color: #5A478F;
+}
+
+a, .content .markdown a, .markdown a, .SRC-portalCard .SRC-cardContent h3 a {
+  font-weight: 700;
   color: #5A478F;
   text-decoration: none;
+}
+
+a:hover, .markdown a:hover, .SRC-portalCard .SRC-cardContent h3 a:hover {
+  text-decoration: underline;
 }
 
 li {
@@ -265,6 +298,11 @@ button.btn-control h5 {
   font-weight: 700;
   letter-spacing: 0.5px;
 }
+@media screen and (max-width: 600px) {
+  button.btn-control {
+    min-width: 140px;
+  }
+}
 
 .btn-amp {
   color: #1A1C29;
@@ -332,7 +370,7 @@ button.btn-control h5 {
 }
 
 .main {
-  min-height: calc(100vh - 135px);
+  min-height: calc(100vh - 55px);
   margin-top: 0px;
 }
 
@@ -386,6 +424,7 @@ header .accordion {
   cursor: pointer;
   border: none;
   height: 100%;
+  font-weight: 400;
 }
 @media screen and (max-width: 720px) {
   header .accordion {
@@ -439,11 +478,13 @@ header .nav .accordion__body li {
   margin: 0px;
   padding: 10px;
   padding-left: 0px;
+  font-weight: 400;
 }
 header .nav .accordion__body li a.nav-item.dropdown {
   padding: 10px 20px;
   width: 100%;
   font-size: 15px;
+  font-weight: 400;
 }
 header .accordion-body.top-level-accordion {
   position: absolute;
@@ -468,6 +509,7 @@ header .accordion__body {
 }
 header a.nav-item {
   padding: 14px 40px;
+  font-weight: 400;
 }
 header .accordion__title {
   background-color: RGBA(254, 254, 254, 0.9);
@@ -493,6 +535,10 @@ header .accordion__title:hover {
 header .accordion__title:hover .row .accordion-sub-title a {
   transition: all ease 400ms;
   color: white;
+  font-weight: 400;
+}
+header .row .accordion-sub-title a {
+  font-weight: 400;
 }
 
 section.beta-banner {
@@ -1048,21 +1094,45 @@ header .agora-nav-link div.under-bar {
 }
 
 footer {
+  position: relative;
   background-color: #5A498D;
   color: white;
-  height: 56px;
+  min-height: 55px;
+}
+footer.flex-row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+footer .links {
+  position: relative;
+  z-index: 1000;
+  justify-content: center;
+}
+footer .footer-row {
+  max-width: 1280px;
+}
+footer .footer-background {
+  background-image: url("../images/molecule-lattice.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100%;
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-  margin-top: 50px;
-  padding-bottom: 56px;
-  padding-top: 30px;
+  height: 100%;
+  position: absolute;
+  z-index: 50;
+  bottom: 0;
+}
+footer .logo-header {
+  max-width: 265px;
+  margin-left: 15px;
 }
 footer a {
   color: white;
   margin: 10px;
   display: inline-block;
   margin: 0px 15px;
+}
+footer a:hover {
+  color: white;
 }
 footer .row {
   width: 300px;
@@ -1135,6 +1205,15 @@ section.page.explore {
 section.explore-content, div.explore-content {
   margin-bottom: 80px;
 }
+section.explore-content .explore-publications, div.explore-content .explore-publications {
+  max-width: 1033px;
+  margin: 0px auto;
+}
+@media screen and (max-width: 600px) {
+  section.explore-content, div.explore-content {
+    margin-bottom: 220px;
+  }
+}
 section.explore-content .col-xs-2, div.explore-content .col-xs-2 {
   margin-top: 18px;
 }
@@ -1145,7 +1224,7 @@ section.explore-content .container .container-fluid .col-xs-12, div.explore-cont
   padding: 0px;
 }
 section.explore-content .selectors-container, div.explore-content .selectors-container {
-  max-width: fit-content;
+  max-width: 1033px;
 }
 section.explore-content .selectors, div.explore-content .selectors {
   display: flex;
@@ -1330,6 +1409,18 @@ section.explore-content .selectors button:nth-child(6).active::after, div.explor
 section.explore-content .selectors button:nth-child(6).active:hover:after, div.explore-content .selectors button:nth-child(6).active:hover:after {
   transition: all 400ms;
 }
+section.explore-content .synapse-chart, div.explore-content .synapse-chart {
+  max-width: 1033px;
+  margin: 0px auto;
+}
+section.explore-content .synapse-chart .bar-section .SRC-portalCard, div.explore-content .synapse-chart .bar-section .SRC-portalCard {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+section.explore-content .Projects .container-fluid, div.explore-content .Projects .container-fluid {
+  margin-right: -22px;
+  margin-left: -22px;
+}
 @media screen and (max-width: 720px) {
   section.explore-content .bar-chart, div.explore-content .bar-chart {
     height: 450px;
@@ -1350,11 +1441,21 @@ section.explore-content .bar-chart .explore-button-row, div.explore-content .bar
     bottom: -130px;
   }
 }
+@media screen and (max-width: 600px) {
+  section.explore-content .bar-chart .explore-button-row, div.explore-content .bar-chart .explore-button-row {
+    bottom: -200px;
+  }
+}
+section.explore-content .bar-chart .selectors-container, div.explore-content .bar-chart .selectors-container {
+  max-width: 700px;
+}
 section.explore-content .bar-chart .synapse-chart, div.explore-content .bar-chart .synapse-chart {
   position: absolute;
   top: 100px;
   right: 0px;
   width: 100%;
+  max-width: unset;
+  margin: 0px auto;
 }
 @media screen and (max-width: 1115px) {
   section.explore-content .bar-chart .synapse-chart, div.explore-content .bar-chart .synapse-chart {
@@ -1463,6 +1564,10 @@ section.analyses button {
   justify-content: flex-end;
 }
 
+section.programs .query-wrapper {
+  margin-left: -30px;
+  margin-right: -30px;
+}
 section.programs .box {
   height: 470px;
   position: relative;
@@ -1500,7 +1605,21 @@ section.programs .box-text-image img {
   height: 80px;
 }
 
-section.what-new .title-row {
+section.what-new .markdown h4, section.programs .markdown h4 {
+  padding: 0px;
+  font-size: 18px;
+  font-weight: 700;
+}
+section.what-new .markdown h5, section.programs .markdown h5 {
+  padding: 0px;
+  font-size: 14px;
+  color: #767676;
+}
+section.what-new p, section.programs p {
+  font-size: 15px;
+  line-height: 21px;
+}
+section.what-new .title-row, section.programs .title-row {
   line-height: 10px;
   margin-bottom: 0px;
   margin-top: 0px;
@@ -1508,60 +1627,22 @@ section.what-new .title-row {
   display: flex;
   flex-direction: column;
 }
-section.what-new .type-of-release {
+section.what-new .type-of-release, section.programs .type-of-release {
   font-size: 18px;
   margin: 0px;
   padding: 0px;
 }
-section.what-new .sub-title {
+section.what-new .sub-title, section.programs .sub-title {
   font-size: 18px;
   font-weight: 300;
   margin: 5px 0px;
   color: #D3D5DB;
   font-style: italic;
 }
-section.what-new .bell-icon {
-  background-image: url(../images/plus-bell-icon.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 16px;
-  width: 14px;
-  position: absolute;
-  left: -7px;
-  top: -25px;
-}
-section.what-new .lightbulb-icon {
-  background-image: url(../images/lightbulb-on.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 16px;
-  width: 14px;
-  position: absolute;
-  left: -7px;
-  top: -25px;
-}
-section.what-new .what-new-data-icon.vertical-line {
-  border-left: 2px dotted #D3D5DB;
-  height: 127px;
-  max-width: 25px;
-  margin-left: 30px;
-  margin-top: 35px;
-  position: relative;
-}
-section.what-new .what-new-data-icon img {
-  margin-left: -20px;
-  background: white;
-  padding: 5px;
-}
-section.what-new .what-new-data-icon img.lightbulb {
-  margin-left: -24px;
-}
-section.what-new .what-new-data {
+section.what-new .what-new-data, section.programs .what-new-data {
   padding-top: 6px;
 }
-section.what-new .what-new-data h5 {
+section.what-new .what-new-data h5, section.programs .what-new-data h5 {
   font-size: 18px;
   padding-top: 0px;
   margin-top: 0px;
@@ -1569,19 +1650,19 @@ section.what-new .what-new-data h5 {
   font-weight: 400;
   margin-bottom: 10px;
 }
-section.what-new .what-new-data h2 {
+section.what-new .what-new-data h2, section.programs .what-new-data h2 {
   padding: 0px;
 }
-section.what-new .what-new-data h4 {
+section.what-new .what-new-data h4, section.programs .what-new-data h4 {
   padding: 0px;
 }
-section.what-new .what-new-data p {
+section.what-new .what-new-data p, section.programs .what-new-data p {
   font-size: 18px;
 }
-section.what-new .description {
+section.what-new .description, section.programs .description {
   margin: 0px;
 }
-section.what-new a.read-more {
+section.what-new a.read-more, section.programs a.read-more {
   margin: 20px 0px;
   display: block;
   text-decoration: underline;
@@ -1600,18 +1681,6 @@ section.contribute-your-data .content-block {
 
 .program .content-row {
   margin-top: -50px;
-}
-
-section.child-page-hero {
-  background: linear-gradient(to right, #5A498D, #4C57A2);
-}
-section.child-page-hero p {
-  font-size: 18px;
-  color: white;
-}
-section.child-page-hero h2 {
-  font-size: 30px;
-  color: white;
 }
 
 section.about-intro-section, section.content-section {
@@ -1666,9 +1735,6 @@ section.about-intro-section button.btn, section.content-section button.btn {
 
 .about section {
   text-align: left;
-}
-.about p {
-  font-size: 16px;
 }
 
 .select-publications {
@@ -2189,12 +2255,24 @@ button.modal-x {
 }
 
 @media screen and (max-width: 480px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
   header.header img {
-    max-height: 50px;
+    max-height: 35px;
+  }
+
+  footer img.logo-header {
+    max-width: 60%;
+    margin: 10px auto;
+  }
+  footer .links {
+    margin: 10px 0px;
   }
 
   .main {
-    margin-top: 50px;
+    min-height: calc(100vh - 155px);
   }
 
   ul.nav {
@@ -2205,28 +2283,10 @@ button.modal-x {
     margin: 10px;
   }
 
-  section.welcome .welcome-message {
-    padding: 20px;
+  section.analyses, section.programs, section.what-new, section.explore-content {
+    padding: 10px;
   }
-
-  section.welcome .welcome-data {
-    right: 0px;
-  }
-
-  section.welcome .welcome-data {
-    padding: 30px 0px;
-    right: 0px;
-  }
-
-  section.pie-charts-welcome .chart-center-stat {
-    width: unset;
-    height: unset;
-  }
-
-  section.analyses, section.programs {
-    padding: unset;
-  }
-  section.analyses .box, section.programs .box {
+  section.analyses .box, section.programs .box, section.what-new .box, section.explore-content .box {
     margin: unset;
     margin-bottom: 10px;
     max-width: unset;

@@ -1,10 +1,10 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { SynapseComponents } from "synapse-react-client"
 import SynapseChart from "./SynapseBarChart.jsx"
 import {
   clone,
   synapseObjects,
+  returnSynapseObject,
   returnSynapseValue,
 } from "../library/synapseObjects"
 import ButtonExplore from "./Button-Explore"
@@ -16,32 +16,31 @@ let loadedObject = []
 class ExploreContent extends Component {
   state = {
     activeId: "",
-    activeFilter: "",
-    color: 0,
-    hash: "",
+    synObject: {},
     name: "",
   };
 
   componentDidMount() {
     loadedObject = clone(synapseObjects)
-    this.handleButtonPress("syn17024112", "id")
+    this.handleButtonPress("syn11346063", this.handleChanges)
   }
 
   handleChanges = (stateObject) => {
     this.setState(stateObject)
   };
 
-  handleButtonPress = (value, key = "id") => {
-    const activeFilter = returnSynapseValue(loadedObject, key, value, "filter")
-    const color = returnSynapseValue(loadedObject, key, value, "color")
-    const hash = returnSynapseValue(loadedObject, key, value, "hash")
-    const name = returnSynapseValue(loadedObject, key, value, "name")
+  handleButtonPress = (value, handleChanges) => {
+    const synObject = returnSynapseObject(loadedObject, value)
+    const name = synObject.name
 
-    this.handleChanges({
+    synObject.table = false
+    synObject.cards = false
+    synObject.barChart = true
+    synObject.homescreen = true
+
+    handleChanges({
       activeId: value,
-      activeFilter,
-      color,
-      hash,
+      synObject,
       name,
     })
     return ""
@@ -51,29 +50,33 @@ class ExploreContent extends Component {
     return `btn-control ${this.state.activeId === id ? "active" : ""}`
   };
 
-  returnSynapseChart = (hash = window.location.hash) => {
+  returnSynapseChart = () => {
     if (this.state.activeId === "syn2580853") {
       return (
         <div>
-          <SynapseComponents.Markdown
+          <this.props.SynapseComponents.Markdown
             token={this.props.token}
             ownerId="syn2580853"
             wikiId="409850"
+            sql={this.state.sql}
           />
         </div>
       )
     }
-    return (
-      <div className="synapse-chart">
-        <SynapseChart
-          token={this.props.token}
-          synId={this.state.activeId}
-          filter={this.state.activeFilter}
-          rgbIndex={this.state.color}
-          barChart
-        />
-      </div>
-    )
+    if (this.state.synObject && this.props.token) {
+      return (
+        <div className="synapse-chart">
+          <SynapseChart
+            token={this.props.token}
+            filter={this.state.synObject.filter}
+            activeObject={this.state.synObject}
+            SynapseConstants={this.props.SynapseConstants}
+            SynapseComponents={this.props.SynapseComponents}
+          />
+        </div>
+      )
+    }
+    return <div />
   };
 
   barChartStyle = () => {
@@ -93,15 +96,18 @@ class ExploreContent extends Component {
           <div className="row bar-chart" style={this.barChartStyle()}>
             <div className="center-block selectors-container">
               <Selectors
-                synapseObject={loadedObject}
                 returnButtonClass={this.returnButtonClass}
                 handleChanges={this.handleChanges}
+                handleButtonPress={this.handleButtonPress}
               />
             </div>
             {this.returnSynapseChart()}
             <div className="row explore-button-row">
               <div className="col-xs-12">
-                <ButtonExplore url={this.state.hash} label={this.state.name} />
+                <ButtonExplore
+                  url={this.state.synObject.hash}
+                  label={this.state.name}
+                />
               </div>
             </div>
           </div>
@@ -112,7 +118,13 @@ class ExploreContent extends Component {
 }
 
 ExploreContent.propTypes = {
-  token: PropTypes.string.isRequired,
+  token: PropTypes.string,
+  SynapseComponents: PropTypes.object.isRequired,
+  SynapseConstants: PropTypes.object.isRequired,
+}
+
+ExploreContent.defaultProps = {
+  token: "",
 }
 
 export default ExploreContent

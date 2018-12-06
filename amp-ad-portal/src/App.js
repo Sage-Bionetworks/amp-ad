@@ -2,11 +2,10 @@ import React, { Component } from "react"
 import { HashRouter as Router, Route } from "react-router-dom"
 import ReactGA from "react-ga"
 import createHistory from "history/createBrowserHistory"
-
+import { SynapseComponents, SynapseConstants } from "synapse-react-client"
 import * as SynapseClient from "./synapse/SynapseClient"
 
 // non component js
-import study from "./defaultData/Study"
 import asyncComponent from "./components/AsyncComponent"
 import ScrollToTop from "./components/ScrollToTop"
 
@@ -16,16 +15,16 @@ const login = async () => SynapseClient.login("mikeybkats", "guinness").then((ke
 
 // about pages
 const AsyncAboutAmpAd = asyncComponent(() => import("./components/About-WhatIsAmpAd"))
-// resources pages
-const AsyncInstructions = asyncComponent(() => import("./components/DataAccess-Instructions"))
 // component js
 const AsyncHome = asyncComponent(() => import("./components/Home"))
 const AsyncHeader = asyncComponent(() => import("./components/Header"))
+const Footer = asyncComponent(() => import("./components/Footer"))
 // explore
 const AsyncExplore = asyncComponent(() => import("./components/Explore.jsx"))
 // study page
 const AsyncStudyPage = asyncComponent(() => import("./components/Page-Study.js"))
 // Data access pages
+const AsyncInstructions = asyncComponent(() => import("./components/DataAccess-Instructions"))
 const AsyncDataUseCertificates = asyncComponent(() => import("./components/DataAccess-DataUseCertificates.js"))
 const AsyncResearchTools = asyncComponent(() => import("./components/ResearchTools"))
 const AsyncResourcesAcknowledgements = asyncComponent(() => import("./components/Resources-AcknowledgementStatements"))
@@ -43,28 +42,7 @@ history.listen((location) => {
 class App extends Component {
   state = {
     loginToken: {},
-    pageData: study,
     wikiMarkdown: "",
-    welcomeHeaderMarkdown: "",
-    welcomeHeaderMarkdownText: "",
-    externalResearchers: [],
-    studies: [],
-    studiesWikiIds: [],
-    studiesRows: [],
-    studiesUniqueRows: [],
-    studiesNames: [],
-    studiesNamesPayload: {},
-    studiesDataTypesPayload: {},
-    studiesAssayIndex: 0,
-    studiesStudyIndex: 0,
-    studiesIndividualsIndex: 0,
-    studiesSampleTypeIndex: 0,
-    differentialExpressions: [],
-    experimentalResources: "",
-    programsAmpAd: [],
-    programsM2OVE: [],
-    programsModelAd: [],
-    programsResilienceAD: [],
     whatsNew: [],
     hash: "",
   };
@@ -84,24 +62,11 @@ class App extends Component {
   };
 
   handleNestedChanges = (KEY, newStateKey, newState) => {
-    //console.log(KEY, newStateKey, newState)
     const property = this.state[KEY]
     property.push({ [newStateKey]: newState })
     this.setState(prevState => ({
       ...prevState,
       property,
-    }))
-  };
-
-  toggleSeeAll = (event) => {
-    const key = event.target.name
-    const value = event.target.dataset.value === "false"
-    this.setState(prevState => ({
-      ...prevState,
-      buttonState: {
-        ...prevState.buttonState,
-        [key]: value,
-      },
     }))
   };
 
@@ -115,16 +80,30 @@ class App extends Component {
         handleNestedChanges={this.handleNestedChanges}
         whatsNewMarkdownSegs={this.state.whatsNew}
         markdown={this.state.wikiMarkdown}
+        SynapseConstants={SynapseConstants}
+        SynapseComponents={SynapseComponents}
       />
     )
   };
 
   ReturnResourcesAcknowledgements = () => {
-    return <AsyncResourcesAcknowledgements token={this.state.loginToken} />
+    return (
+      <AsyncResourcesAcknowledgements
+        token={this.state.loginToken}
+        SynapseConstants={SynapseConstants}
+        SynapseComponents={SynapseComponents}
+      />
+    )
   };
 
   ReturnDataUseCertificates = () => {
-    return <AsyncDataUseCertificates token={this.state.loginToken} />
+    return (
+      <AsyncDataUseCertificates
+        token={this.state.loginToken}
+        SynapseConstants={SynapseConstants}
+        SynapseComponents={SynapseComponents}
+      />
+    )
   };
 
   ReturnInstructions = () => {
@@ -134,6 +113,8 @@ class App extends Component {
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
         markdown={this.state.wikiMarkdown}
+        SynapseConstants={SynapseConstants}
+        SynapseComponents={SynapseComponents}
       />
     )
   };
@@ -144,7 +125,8 @@ class App extends Component {
         token={this.state.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
-        markdown={this.state.experimentalResources}
+        SynapseConstants={SynapseConstants}
+        SynapseComponents={SynapseComponents}
       />
     )
   };
@@ -154,8 +136,7 @@ class App extends Component {
       <AsyncAboutAmpAd
         token={this.state.loginToken}
         handleChanges={this.handleChanges}
-        //handleNestedChanges={this.handleNestedChanges}
-        //markdown={this.state.wikiMarkdown}
+        SynapseComponents={SynapseComponents}
       />
     )
   };
@@ -171,6 +152,8 @@ class App extends Component {
       <AsyncExplore
         token={this.state.loginToken.sessionToken}
         history={props.history}
+        SynapseConstants={SynapseConstants}
+        SynapseComponents={SynapseComponents}
       />
     )
   };
@@ -218,7 +201,7 @@ class App extends Component {
           component={this.ReturnStudyPage}
         />
 
-        <Route path="/About/AMP-AD" component={this.ReturnAboutAmpAd} />
+        <Route path="/About" component={this.ReturnAboutAmpAd} />
       </div>
     )
   };
@@ -232,19 +215,7 @@ class App extends Component {
             <div className="main">
               <this.Main />
             </div>
-            <footer>
-              <div className="container">
-                <div className="row center-block col-centered">
-                  <a href="https://www.synapse.org/#!Synapse:syn2580853/discussion/default">
-                    Forum
-                  </a>
-                  <a href="mailto:ampadportal@sagebionetworks.org">Contact</a>
-                  <a href="http://docs.synapse.org/articles/governance.html">
-                    Terms & Privacy
-                  </a>
-                </div>
-              </div>
-            </footer>
+            <Footer />
           </div>
         </ScrollToTop>
       </Router>

@@ -141,6 +141,13 @@
   width: 8.33%;
 }
 
+.flex-col-xs-6 {
+  @media screen and (max-width: 480px){ width: 50%; }
+}
+.flex-col-xs-12 {
+  @media screen and (max-width: 480px){ width: 100%; }
+}
+
 .flex-col-md-12 {
   @media screen and (max-width: 1020px){
     width: 100%;
@@ -167,6 +174,11 @@
 
 .around-xs {
   justify-content: space-around;
+}
+
+.middle-xs {
+  align-items: center;
+  align-content: center;
 }
 
 .title-row {

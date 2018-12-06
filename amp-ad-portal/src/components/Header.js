@@ -78,8 +78,8 @@ class Header extends Component {
     this.handleLocalChanges("activeUnderBar", this.props.hash)
 
     if (window.location.hash === "#/") {
-      styles.bmBurgerButton.top = "90px"
-    } else styles.bmBurgerButton.top = "36px"
+      styles.bmBurgerButton.top = "100px"
+    } else styles.bmBurgerButton.top = "21px"
   }
 
   componentDidUpdate(prevProps) {
@@ -87,8 +87,8 @@ class Header extends Component {
       this.handleLocalChanges("activeUnderBar", this.props.hash)
     }
     if (window.location.hash === "#/") {
-      styles.bmBurgerButton.top = "90px"
-    } else styles.bmBurgerButton.top = "36px"
+      styles.bmBurgerButton.top = "100px"
+    } else styles.bmBurgerButton.top = "21px"
 
     this.lockwindowScroll(this.state.menuOpen)
   }
@@ -446,21 +446,21 @@ class Header extends Component {
     <div>
       <Link
         name="About"
-        to="/About/AMP-AD"
+        to="/About"
         className={
           this.props.hash.includes("#/About")
             ? "home nav-item main-nav-item active"
             : "home nav-item main-nav-item"
         }
         onClick={() => {
-          this.closeNavigation("#/About/AMP-AD")
+          this.closeNavigation("#/About")
         }}
       >
         About
       </Link>
       <div
         className={
-          this.props.hash.includes("#/About/")
+          this.props.hash.includes("#/About")
           && this.state.activeUnderBar.includes("#/")
             ? "under-bar active"
             : "under-bar"
@@ -482,35 +482,67 @@ class Header extends Component {
             Home
           </Link>
           <h4>Explore</h4>
-          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+          <Link
+            className="inset"
+            to="/Explore/Programs"
+            onClick={() => this.closeHamburger()}
+          >
             Programs
           </Link>
-          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+          <Link
+            className="inset"
+            to="/Explore/Projects"
+            onClick={() => this.closeHamburger()}
+          >
             Projects
           </Link>
-          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+          <Link
+            className="inset"
+            to="/Explore/Studies"
+            onClick={() => this.closeHamburger()}
+          >
             Studies
           </Link>
-          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+          <Link
+            className="inset"
+            to="/Explore/Data"
+            onClick={() => this.closeHamburger()}
+          >
             Data Files
           </Link>
-          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+          <Link
+            className="inset"
+            to="/Explore/Publications"
+            onClick={() => this.closeHamburger()}
+          >
             Publications
           </Link>
-          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+          <Link
+            className="inset"
+            to="/Explore/People"
+            onClick={() => this.closeHamburger()}
+          >
             People
           </Link>
-          <Link to="/" onClick={() => this.closeHamburger()}>
+          <Link to="/ResearchTools" onClick={() => this.closeHamburger()}>
             Research Tools
           </Link>
           <h4>Data Access</h4>
-          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+          <Link
+            className="inset"
+            to="/DataAccess/Instructions"
+            onClick={() => this.closeHamburger()}
+          >
             Getting Access to Data
           </Link>
-          <Link className="inset" to="/" onClick={() => this.closeHamburger()}>
+          <Link
+            className="inset"
+            to="/DataAccess/AcknowledgementStatements"
+            onClick={() => this.closeHamburger()}
+          >
             Acknowledging Data Use
           </Link>
-          <Link to="/" onClick={() => this.closeHamburger()}>
+          <Link to="/About" onClick={() => this.closeHamburger()}>
             About
           </Link>
         </Menu>

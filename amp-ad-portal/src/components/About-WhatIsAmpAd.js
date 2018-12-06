@@ -1,17 +1,36 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { SynapseComponents } from "synapse-react-client"
-//import { getMarkdown } from "../queries/getWikiData"
-//const ReactMarkdown = require("react-markdown")
+import { BarLoader } from "react-spinners"
 
 class WhatIsAmpAD extends Component {
-  componentDidMount() {
-    //getMarkdown(this.props, "581939")
+  state = {
+    loading: true,
+  };
+
+  shouldComponentUpdate(nextProps) {
+    if (this.props.token !== nextProps.token) {
+      return true
+    }
+    return true
   }
 
-  componentWillUnmount() {
-    //this.props.handleChanges("wikiMarkdown", "")
-  }
+  handleChange = (newState) => {
+    this.setState(newState)
+  };
+
+  returnMarkdown = (token = this.props.token.sessionToken) => {
+    if (token) {
+      return (
+        <this.props.SynapseComponents.Markdown
+          wikiId="581939"
+          token={this.props.token.sessionToken}
+          ownerId="syn12666371"
+          updateLoadState={() => this.handleChange({ loading: false })}
+        />
+      )
+    }
+    return <div />
+  };
 
   render() {
     return (
@@ -19,12 +38,9 @@ class WhatIsAmpAD extends Component {
         <div className="">
           <section className="row">
             <div className="col-xs-12 col-sm-11  col-lg-9 col-centered">
-              <h1>About</h1>
-              <SynapseComponents.Markdown
-                wikiId="581939"
-                token={this.props.token.sessionToken}
-                ownerId="syn12666371"
-              />
+              <h2 className="header">About</h2>
+              {this.returnMarkdown()}
+              <BarLoader color="#5BB0B5" loading={this.state.loading} />
             </div>
           </section>
         </div>
@@ -34,9 +50,8 @@ class WhatIsAmpAD extends Component {
 }
 
 WhatIsAmpAD.propTypes = {
-  //markdown: PropTypes.string.isRequired,
-  //handleChanges: PropTypes.func.isRequired,
   token: PropTypes.object.isRequired,
+  SynapseComponents: PropTypes.object.isRequired,
 }
 
 export default WhatIsAmpAD

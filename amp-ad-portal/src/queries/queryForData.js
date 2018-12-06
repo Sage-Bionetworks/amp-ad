@@ -19,44 +19,9 @@ const buildRequest = (table, query, offset = 0, limit = 250) => {
   }
 }
 
-const escapeString = (string) => {
-  const newString = string.replace(/'/i, "''")
-  return newString
-}
-
-const getBioSampleCount = (species, diagnosis = "", table, tokenResponse) => {
-  //SELECT count(DISTINCT "specimenID") FROM syn12532774 where ("species" = 'Human')
-  //SELECT count(DISTINCT "specimenID") FROM syn12532774
-  //where ( ("species" = 'Human') and ("diagnosis" = 'Alzheimer''s Disease') )
-  let query
-  if (diagnosis !== "All diagnoses") {
-    query = `SELECT count(DISTINCT "specimenID") FROM ${table} where ( ("species" = '${species}') and ("diagnosis" = '${escapeString(
-      diagnosis,
-    )}') )`
-  }
-  if (diagnosis !== "All diagnoses" && species === "All species") {
-    query = `SELECT count(DISTINCT "specimenID") FROM ${table} where ( ("diagnosis" = '${escapeString(
-      diagnosis,
-    )}') )`
-  }
-  if (diagnosis === "All diagnoses" && species === "All species") {
-    query = `SELECT count(DISTINCT "specimenID") FROM ${table}`
-  }
-  if (species !== "All species" && diagnosis === "All diagnoses") {
-    query = `SELECT count(DISTINCT "specimenID") FROM ${table} WHERE ( ( "species" = '${species}') )`
-  }
-  return SynapseClient.getQueryTableResults(
-    buildRequest(table, query),
-    tokenResponse.sessionToken,
-  )
-    .then((response) => {
-      return response.queryResult.queryResults.rows[0].values[0]
-    })
-    .catch(error => console.log(error))
-}
-
-//const login = (username, password) => {
-//return SynapseClient.login(username, password)
+//const escapeString = (string) => {
+//const newString = string.replace(/'/i, "''")
+//return newString
 //}
 
 const json = (response) => {
@@ -67,18 +32,17 @@ const processError = (error) => {
   console.log(`Request has failed: ${error}`)
 }
 
-const getTable = (table, tokenResponse, query, offset, limit) => {
+const getTable = (table, sessionToken, query, offset = 0, limit = 50) => {
   const request = buildRequest(table, query, offset, limit)
-  return SynapseClient.getQueryTableResults(
-    request,
-    tokenResponse.sessionToken,
-  ).catch(error => console.log(error))
+  return SynapseClient.getQueryTableResults(request, sessionToken).catch(
+    error => console.log(error),
+  )
 }
 
 const queryTable = (table, query, token) => {
-  return getTable(table, token, query)
+  return getTable(table, token.sessionToken, query)
     .then(json)
     .catch(processError)
 }
 
-export { getBioSampleCount, queryTable, getTable }
+export { queryTable, getTable }

@@ -1,131 +1,146 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { SynapseComponents, SynapseConstants } from "synapse-react-client"
 import { BarLoader } from "react-spinners"
 
 class SynapseBarChart extends Component {
   state = {};
 
-  buildQuery = () => {
-    if (this.props.synId !== undefined) {
-      const sql = `SELECT * FROM ${this.props.synId}`
-
-      return {
-        concreteType: "org.sagebionetworks.repo.model.table.QueryBundleRequest",
-        partMask:
-          SynapseConstants.BUNDLE_MASK_QUERY_COLUMN_MODELS
-          | SynapseConstants.BUNDLE_MASK_QUERY_FACETS
-          | SynapseConstants.BUNDLE_MASK_QUERY_RESULTS,
-        query: {
-          isConsistent: false,
-          sql,
-          limit: 25,
-          offset: 0,
-        },
-      }
+  shouldComponentUpdate(nextProps) {
+    if (this.props.activeObject.id !== nextProps.activeObject.id) {
+      return true
     }
-    return ""
-  };
+    return true
+  }
 
-  returnFacets = (bool = this.props.facets) => {
-    return bool ? <SynapseComponents.Facets /> : <div />
-  };
+  buildQuery = (sql = this.props.activeObject.sql) => {
+    return {
+      concreteType: "org.sagebionetworks.repo.model.table.QueryBundleRequest",
+      query: {
+        isConsistent: false,
+        includeEntityEtag: true,
+        sql,
+        limit: 100,
+        offset: 0,
+      },
 
-  returnBarChart = (bool = this.props.barChart) => {
-    return bool ? (
-      <SynapseComponents.StackedRowHomebrew
-        loadingScreen={(
-          <div className="bar-loader">
-            <BarLoader color="#4DB7AD" loading />
-          </div>
-        )}
-      />
-    ) : (
-      <div />
-    )
-  };
-
-  returnTable = (bool = this.props.table) => {
-    return bool ? (
-      <SynapseComponents.SynapseTable
-        synapseId={this.props.synId}
-        visibleColumnCount={this.props.columns}
-      />
-    ) : (
-      <div />
-    )
-  };
-
-  returnCardView = (
-    limit = this.props.limit,
-    json = "",
-    type = this.props.type,
-    hideLink = false,
-  ) => {
-    return limit >= 1 ? (
-      <div
-        className={
-          window.location.hash !== "#/Explore" ? "" : "synapse-card-view"
-        }
-      >
-        <SynapseComponents.StaticQueryWrapper json={json}>
-          <SynapseComponents.SynapseTableCardView
-            type={SynapseConstants[type]}
-            limit={limit}
-            hideOrganizationLink={hideLink}
-          />
-        </SynapseComponents.StaticQueryWrapper>
-      </div>
-    ) : (
-      <div />
-    )
+      partMask:
+        this.props.SynapseConstants.BUNDLE_MASK_QUERY_COLUMN_MODELS
+        | this.props.SynapseConstants.BUNDLE_MASK_QUERY_FACETS
+        | this.props.SynapseConstants.BUNDLE_MASK_QUERY_RESULTS,
+    }
   };
 
   hideBarSection = () => {
     const hash = window.location.hash
-
     if (hash === "#/Explore" || hash === "#/") {
       return "bar-section"
     }
     return "bar-section"
   };
 
-  returnChart = (query) => {
-    if (query) {
+  returnStackedRow = () => {
+    if (
+      this.props.activeObject.homescreen
+      || this.props.activeObject.barChart
+    ) {
       return (
-        <SynapseComponents.QueryWrapper
-          initQueryRequest={query}
-          token={this.props.token}
-          filter={this.props.filter}
-          rgbIndex={
-            this.props.rgbIndex !== undefined ? this.props.rgbIndex : ""
-          }
-          showMenu={this.props.facets}
-        >
-          {this.returnBarChart()}
-          {this.returnFacets()}
-          {this.returnTable()}
-        </SynapseComponents.QueryWrapper>
+        <div className={this.props.activeObject.name}>
+          <this.props.SynapseComponents.QueryWrapper
+            initQueryRequest={this.buildQuery()}
+            token={this.props.token}
+            facetName={this.props.activeObject.filter}
+            rgbIndex={this.props.activeObject.color}
+          >
+            <this.props.SynapseComponents.StackedRowHomebrew
+              loadingScreen={(
+                <div
+                  className="bar-loader"
+                  style={{
+                    textAlign: "center",
+                    width: "100px",
+                    margin: "0px auto",
+                  }}
+                >
+                  <BarLoader color="#4DB7AD" loading />
+                </div>
+              )}
+              unitDescription={this.props.activeObject.description}
+            />
+            {this.returnFacets()}
+          </this.props.SynapseComponents.QueryWrapper>
+        </div>
       )
     }
     return <div />
   };
 
-  render() {
-    const query = this.buildQuery()
+  returnFacets = () => {
+    if (this.props.activeObject.facets && !this.props.activeObject.homescreen) {
+      return <this.props.SynapseComponents.Facets />
+    }
+    return <div />
+  };
 
-    if (this.props.synId !== undefined) {
+  returnSynapseCards = () => {
+    if (this.props.activeObject.cards && !this.props.activeObject.homescreen) {
+      return (
+        <this.props.SynapseComponents.StaticQueryWrapper
+          sql={this.props.activeObject.sql}
+          token={this.props.token}
+        >
+          <this.props.SynapseComponents.SynapseTableCardView
+            type={this.props.SynapseConstants[this.props.activeObject.type]}
+          />
+        </this.props.SynapseComponents.StaticQueryWrapper>
+      )
+    }
+    return <div />
+  };
+
+  returnType = () => {
+    const typeString = this.props.SynapseConstants[
+      this.props.activeObject.type
+    ]
+    return typeString
+  };
+
+  returnQueryWrapperMenu = () => {
+    if (!this.props.activeObject.homescreen && this.props.activeObject.menu) {
+      return (
+        <div>
+          <this.props.SynapseComponents.QueryWrapperMenu
+            token={this.props.token}
+            menuConfig={this.props.activeObject.menuConfig}
+            rgbIndex={this.props.activeObject.color}
+            type={this.returnType()}
+            loadingScreen={(
+              <div
+                className="bar-loader"
+                style={{
+                  textAlign: "center",
+                  width: "100px",
+                  margin: "0px auto",
+                }}
+              >
+                <BarLoader color="#4DB7AD" loading />
+              </div>
+            )}
+          />
+        </div>
+      )
+    }
+    return <div className="no-bar-chart" />
+  };
+
+  render() {
+    if (this.props.activeObject.id !== undefined) {
       return (
         <div>
           <div className={`${this.hideBarSection()}`}>
-            {this.returnChart(query)}
+            {this.returnStackedRow()}
+            {this.returnQueryWrapperMenu()}
+            {this.returnSynapseCards()}
           </div>
-          {this.returnCardView(
-            undefined,
-            this.props.json,
-            undefined,
-            this.props.hideOrganizationLink,
-          )}
         </div>
       )
     }
@@ -134,29 +149,14 @@ class SynapseBarChart extends Component {
 }
 
 SynapseBarChart.propTypes = {
-  token: PropTypes.string.isRequired,
-  filter: PropTypes.string.isRequired,
-  rgbIndex: PropTypes.number.isRequired,
-  synId: PropTypes.string.isRequired,
-  barChart: PropTypes.bool,
-  facets: PropTypes.bool,
-  table: PropTypes.bool,
-  columns: PropTypes.number,
-  limit: PropTypes.number,
-  json: PropTypes.object,
-  type: PropTypes.string,
-  hideOrganizationLink: PropTypes.bool,
+  token: PropTypes.string,
+  activeObject: PropTypes.object.isRequired,
+  SynapseComponents: PropTypes.object.isRequired,
+  SynapseConstants: PropTypes.object.isRequired,
 }
 
 SynapseBarChart.defaultProps = {
-  barChart: false,
-  facets: false,
-  table: false,
-  columns: 1,
-  limit: 0,
-  json: {},
-  type: "STUDY",
-  hideOrganizationLink: false,
+  token: "",
 }
 
 export default SynapseBarChart

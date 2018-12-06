@@ -95,7 +95,7 @@ class People extends Component {
               <div className="col-xs-12 col-sm-6">
                 <div className="row">
                   <div className="col-xs-12">
-                    <h2>
+                    <h2 className="header">
                       {activeProfile.firstName}
                       {" "}
                       {activeProfile.lastName}

@@ -1,139 +1,215 @@
 export const synapseObjects = [
   {
-    name: "programs",
+    name: "Programs",
+    description: "Programs",
     id: "syn17024173",
     filter: "",
     color: 3,
-    limit: 40,
+    limit: 0,
     columns: 0,
-    table: false,
-    type: "STUDY",
+    barChart: false,
+    cards: true,
+    menu: false,
+    type: "AMP_CONSORTIUM",
     hash: "/Explore/Programs",
+    sql: "SELECT * FROM syn17024173",
   },
   {
-    name: "projects",
+    name: "Projects",
+    description: "Projects",
     id: "syn17024229",
-    filter: "Consortium",
+    filter: "Program",
     color: 4,
     limit: 0,
     columns: 9,
-    table: false,
-    type: "STUDY",
+    cards: false,
+    menu: true,
+    barChart: false,
+    facets: false,
+    type: "AMP_PROJECT",
     hash: "/Explore/Projects",
+    sql: "SELECT * FROM syn17024229",
+    menuConfig: [
+      {
+        sql: "SELECT * FROM syn17024229",
+        synapseId: "syn17024229",
+        unitDescription: "files",
+        facetName: "Program",
+      },
+    ],
   },
   {
     name: "studies",
-    id: "syn9886254",
-    filter: "Study_Type",
-    color: 0,
+    description: "Studies",
+    id: "syn17083367",
+    barChart: false,
+    cards: false,
+    menu: true,
+    type: "AMP_STUDY",
+    sql:
+      "SELECT Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Organism, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn17083367",
+    filter: "Organism",
+    menuConfig: [
+      {
+        sql:
+          "SELECT Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Organism, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn17083367",
+        synapseId: "syn17083367",
+        facetName: "Organism",
+        facetDisplayValue: "Species",
+        unitDescription: "studies",
+      },
+      {
+        sql:
+          "SELECT Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Organism, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn17083367",
+        synapseId: "syn17083367",
+        facetName: "Grant",
+        unitDescription: "studies",
+      },
+      {
+        sql:
+          "SELECT Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Organism, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn17083367",
+        synapseId: "syn17083367",
+        facetName: "Consortium",
+        facetDisplayValue: "Program",
+        unitDescription: "studies",
+      },
+    ],
     limit: 100,
     columns: 0,
-    table: true,
-    type: "STUDY",
+    color: 0,
     hash: "/Explore/Studies",
   },
   {
     name: "data",
-    id: "syn17024112",
+    description: "Data Files",
+    id: "syn11346063",
     filter: "study",
     color: 1,
     limit: 50,
     columns: 0,
-    table: true,
-    type: "DATASET",
+    cards: false,
+    type: "",
     hash: "/Explore/Data",
+    sql: "SELECT * FROM syn11346063",
+    menu: true,
+    menuConfig: [
+      {
+        sql:
+          "SELECT species, dataType, id as file_id, consortium as program, grant, study, organ, tissue, cellType, assay, fileFormat, specimenID FROM syn11346063",
+        title: "Data",
+        synapseId: "syn11346063",
+        facetName: "species",
+        facetDisplayValue: "Species",
+        unitDescription: "data files",
+        visibleColumnCount: 3,
+      },
+      {
+        sql:
+          "SELECT organ, tissue, dataType, assay, id AS file_id, consortium as program, grant, study, species, cellType, specimenID FROM syn11346063",
+        title: "Data",
+        synapseId: "syn11346063",
+        facetName: "organ",
+        facetDisplayValue: "Organ",
+        unitDescription: "data files",
+        visibleColumnCount: 5,
+      },
+      {
+        sql:
+          "SELECT study, dataType, assay, id AS file_id, consortium as program, grant, species, organ, tissue, cellType, fileFormat, specimenID FROM syn11346063",
+        title: "Data",
+        synapseId: "syn11346063",
+        facetName: "study",
+        facetDisplayValue: "Study",
+        unitDescription: "data files",
+        visibleColumnCount: 4,
+      },
+      {
+        sql:
+          "SELECT dataType, assay, study, id AS file_id, consortium as program, grant, species, organ, tissue, cellType, fileFormat, specimenID FROM syn11346063",
+        title: "Data",
+        synapseId: "syn11346063",
+        facetName: "dataType",
+        facetDisplayValue: "Data Type",
+        unitDescription: "data files",
+        visibleColumnCount: 4,
+      },
+      {
+        sql:
+          "SELECT assay, fileFormat, id AS file_id, consortium as program, grant, study, species, organ, tissue, cellType, dataType, specimenID FROM syn11346063",
+        title: "Data",
+        synapseId: "syn11346063",
+        facetName: "assay",
+        facetDisplayValue: "Assay",
+        unitDescription: "data files",
+        visibleColumnCount: 4,
+      },
+      {
+        sql:
+          "SELECT diagnosis, sex, dataType, assay, id as file_id, consortium as program, grant, study, species, organ, tissue, cellType, fileFormat, specimenID, anonymized_individualID FROM syn17024112",
+        title: "Data",
+        synapseId: "syn17024112",
+        facetName: "diagnosis",
+        facetDisplayValue: "Diagnosis",
+        unitDescription: "data files",
+        visibleColumnCount: 5,
+      },
+    ],
   },
   {
     name: "publications",
+    description: "Publications",
     id: "syn2580853",
     wikiId: "409850",
     filter: "",
     color: 5,
     limit: 40,
     columns: 0,
-    table: false,
+    cards: false,
     type: "PUBLICATION",
     hash: "/Explore/Publications",
+    sql: "SELECT * FROM syn2580853",
   },
   {
     name: "people",
+    description: "people",
     id: "syn13897207",
     filter: "institution",
     color: 2,
-    limit: 40,
-    columns: 0,
-    table: true,
-    type: "PUBLICATION",
+    limit: 100,
+    columns: 10,
+    barChart: false,
+    cards: false,
+    type: "",
     hash: "/Explore/People",
-  },
-  {
-    name: "",
-    id: "studyPage",
-    filter: "",
-    color: 0,
-    limit: 0,
-    columns: 0,
-    table: false,
-    type: "",
-    hash: "/Studies/",
-  },
-]
-
-export const synapseClinicalTable = [
-  {
-    name: "Diagnosis",
-    id: "syn17024112",
-    filter: "diagnosis",
-    color: 1,
-    limit: 0,
-    columns: 0,
-    table: true,
-    type: "",
-    hash: "/Explore/Data",
-  },
-  {
-    name: "Organism",
-    id: "syn17024112",
-    filter: "species",
-    color: 1,
-    limit: 0,
-    columns: 0,
-    table: true,
-    type: "",
-    hash: "/Explore/Data",
-  },
-  {
-    name: "Data Type",
-    id: "syn17024112",
-    filter: "dataType",
-    color: 1,
-    limit: 0,
-    columns: 0,
-    table: true,
-    type: "",
-    hash: "/Explore/Data",
-  },
-  {
-    name: "Assay",
-    id: "syn17024112",
-    filter: "assay",
-    color: 1,
-    limit: 0,
-    columns: 0,
-    table: true,
-    type: "",
-    hash: "/Explore/Data",
-  },
-  {
-    name: "Tissue",
-    id: "syn17024112",
-    filter: "tissue",
-    color: 1,
-    limit: 0,
-    columns: 0,
-    table: true,
-    type: "",
-    hash: "/Explore/Data",
+    sql: "SELECT * FROM syn13897207",
+    menu: true,
+    menuConfig: [
+      {
+        sql:
+          "select firstName as \"First Name\", lastName as \"Last Name\", institution as Institution, Program, 'Grant Number', 'Grant Title' from syn13897207",
+        title: "People",
+        synapseId: "syn13897207",
+        facetName: "Program",
+        unitDescription: "people",
+      },
+      {
+        sql:
+          "select firstName as First, lastName as Last, institution as Institution, Program, 'Grant Number', 'Grant Title' from syn13897207",
+        title: "People",
+        synapseId: "syn13897207",
+        facetName: "Grant Number",
+        unitDescription: "people",
+      },
+      {
+        sql:
+          "select firstName as First, lastName as Last, institution as Institution, Program, 'Grant Number', 'Grant Title' from syn13897207",
+        title: "Institution",
+        synapseId: "syn13897207",
+        facetName: "institution",
+        facetDisplayValue: "Institution",
+        unitDescription: "people",
+      },
+    ],
   },
 ]
 
@@ -141,7 +217,7 @@ export const clone = (obj) => {
   return JSON.parse(JSON.stringify(obj))
 }
 
-// given a key balue pair this function
+// given a key value pair this function
 // returns the searchKey value from the object with the
 // matching the key value pair
 export const returnSynapseValue = (
@@ -151,8 +227,12 @@ export const returnSynapseValue = (
   searchKey,
 ) => {
   const matchedObject = objectArray.filter(object => object[key] === keyValue)
-  //console.log(key, keyValue, matchedObject)
   return matchedObject[0][searchKey]
+}
+
+export const returnSynapseObject = (synObjects = synapseObjects, idVal) => {
+  const matchedObject = synObjects.filter(object => object.id === idVal)
+  return matchedObject[0]
 }
 
 export const setSynapseValue = (
