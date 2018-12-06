@@ -183,9 +183,16 @@ class Explore extends Component {
     return <div />
   };
 
+  style = () => {
+    if (window.location.hash.includes("/Programs/")) {
+      return { display: "none" }
+    }
+    return { display: "block" }
+  };
+
   render() {
     return (
-      <section className="page explore">
+      <section className="page explore" style={this.style()}>
         <div className="container">
           <div className="row">
             <h2 className="header">

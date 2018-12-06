@@ -23,6 +23,8 @@ const Footer = asyncComponent(() => import("./components/Footer"))
 const AsyncExplore = asyncComponent(() => import("./components/Explore.jsx"))
 // study page
 const AsyncStudyPage = asyncComponent(() => import("./components/Page-Study.js"))
+// program page
+const AsyncProgramPage = asyncComponent(() => import("./components/Page-Program.js"))
 // Data access pages
 const AsyncInstructions = asyncComponent(() => import("./components/DataAccess-Instructions"))
 const AsyncDataUseCertificates = asyncComponent(() => import("./components/DataAccess-DataUseCertificates.js"))
@@ -165,6 +167,21 @@ class App extends Component {
         hash={window.location.hash}
         match={props.match}
         history={props.history}
+        SynapseConstants={SynapseConstants}
+        SynapseComponents={SynapseComponents}
+      />
+    )
+  };
+
+  ReturnProgramPage = (props) => {
+    return (
+      <AsyncProgramPage
+        token={this.state.loginToken.sessionToken}
+        hash={window.location.hash}
+        match={props.match}
+        history={props.history}
+        SynapseConstants={SynapseConstants}
+        SynapseComponents={SynapseComponents}
       />
     )
   };
@@ -199,6 +216,10 @@ class App extends Component {
         <Route
           path="/Explore/Studies/:handle"
           component={this.ReturnStudyPage}
+        />
+        <Route
+          path="/Explore/Programs/:handle"
+          component={this.ReturnProgramPage}
         />
 
         <Route path="/About" component={this.ReturnAboutAmpAd} />
