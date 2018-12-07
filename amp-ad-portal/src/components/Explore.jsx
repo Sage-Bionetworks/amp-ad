@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 //import { withRouter } from "react-router-dom"
+import { Link } from "react-router-dom"
+//import { browserHistory } from "react-router"
 import SynapseChart from "./SynapseBarChart.jsx"
 import Selectors from "./SelectorRow"
 
@@ -12,22 +14,67 @@ import {
 } from "../library/synapseObjects"
 
 let loadedObjects
-let history
-let location
-let unlisten
+//let history
+//let location
+//let unlisten
 
 class Explore extends Component {
   state = {
-    name: "",
     activeButton: "",
     activeObject: {},
   };
 
   componentDidMount() {
-    history = this.props.history
-    location = history.location
+    //history = this.props.history
+    //location = history.location
+    if (!this.props.hash.includes("/Explore/Programs/")) {
+      this.loadDefaultComponent()
+    }
+    //this.unlistenGlob()
+  }
 
-    if (this.setActiveValues(window.location.hash) !== "studyPage") {
+  componentDidUpdate() {
+    if (!this.props.hash.includes("/Explore/Programs/")) {
+      if (
+        Object.keys(this.state.activeObject).length === 0
+        && this.state.activeObject.constructor === Object
+      ) {
+        this.loadDefaultComponent()
+      }
+      //this.unlistenGlob()
+    }
+    return true
+  }
+
+  componentWillUnmount() {
+    //unlisten()
+  }
+
+  //unlistenGlob = () => {
+  //unlisten = history.listen((historyLocation = location) => {
+  //const pathHash = historyLocation.pathname.substring(
+  //location.pathname.lastIndexOf("/") + 1,
+  //location.pathname.length,
+  //)
+  //if (this.state.name !== pathHash) {
+  //console.log(pathHash, location)
+  //if (
+  //!window.location.hash.includes("/Studies/")
+  //|| !this.props.hash.includes("/Programs/")
+  //) {
+  //this.setActiveValues(window.location.hash)
+  //}
+  //this.setState({
+  //name: pathHash,
+  //})
+  //}
+  //return true
+  //})
+  //};
+
+  loadDefaultComponent = () => {
+    if (!this.props.hash.includes("/Explore/Programs/")) {
+      console.log(window.location.hash)
       loadedObjects = clone(synapseObjects)
 
       // studies
@@ -39,34 +86,14 @@ class Explore extends Component {
         this.setActiveValues(window.location.hash, "id")
       } else this.handleButtonPress("syn17024112")
     }
-  }
-
-  componentDidUpdate() {
-    unlisten = history.listen((historyLocation = location) => {
-      const pathHash = historyLocation.pathname.substring(
-        location.pathname.lastIndexOf("/") + 1,
-        location.pathname.length,
-      )
-
-      if (this.state.name !== pathHash) {
-        if (!window.location.hash.includes("/Studies/")) {
-          this.setActiveValues(window.location.hash)
-        }
-        this.setState({
-          name: pathHash,
-        })
-      }
-      return true
-    })
-  }
-
-  componentWillUnmount() {
-    unlisten()
-  }
+  };
 
   setActiveValues = (hash) => {
     let id
     switch (hash) {
+    case "#/Explore":
+      id = "syn11346063"
+      break
     case "#/Explore/Data":
       id = "syn11346063"
       break
@@ -87,17 +114,27 @@ class Explore extends Component {
       id = "syn13897207"
       break
     case hash.includes("/Studies/"):
-      id = "studyPage"
+      id = "lowerPage"
+      break
+    case hash.includes("/Programs/"):
+      id = "lowerPage"
       break
     default:
       id = "syn11346063"
     }
 
-    this.handleButtonPress(id)
+    if (!this.props.hash.includes("/Programs/")) {
+      this.handleButtonPress(id)
+    }
+    return id
   };
 
   changeRoute = (url) => {
     this.props.history.push(url)
+  };
+
+  replaceRoute = (url) => {
+    this.props.history.replace(url)
   };
 
   handleChanges = (newState) => {
@@ -113,7 +150,7 @@ class Explore extends Component {
         activeObject,
       },
       () => {
-        this.changeRoute(activeObject.hash)
+        this.replaceRoute(activeObject.hash)
       },
     )
     return ""
@@ -135,28 +172,31 @@ class Explore extends Component {
   };
 
   returnSynapseChart = (hash = window.location.hash) => {
-    if (hash === "#/Explore/Publications") {
+    if (!window.location.hash.includes("/Explore/Programs/")) {
+      if (hash === "#/Explore/Publications") {
+        return (
+          <div className="explore-publications">
+            <this.props.SynapseComponents.Markdown
+              token={this.props.token}
+              ownerId="syn2580853"
+              wikiId="409850"
+            />
+          </div>
+        )
+      }
+
       return (
-        <div className="explore-publications">
-          <this.props.SynapseComponents.Markdown
+        <div className="synapse-chart">
+          <SynapseChart
             token={this.props.token}
-            ownerId="syn2580853"
-            wikiId="409850"
+            activeObject={this.state.activeObject}
+            SynapseConstants={this.props.SynapseConstants}
+            SynapseComponents={this.props.SynapseComponents}
           />
         </div>
       )
     }
-
-    return (
-      <div className="synapse-chart">
-        <SynapseChart
-          token={this.props.token}
-          activeObject={this.state.activeObject}
-          SynapseConstants={this.props.SynapseConstants}
-          SynapseComponents={this.props.SynapseComponents}
-        />
-      </div>
-    )
+    return <div />
   };
 
   SelectorsAndCharts = () => {
@@ -190,6 +230,22 @@ class Explore extends Component {
     return { display: "block" }
   };
 
+  testingNavButtons = () => {
+    return (
+      <div>
+        <Link name="AMP-AD" to="/Explore/Programs/AMP-AD">
+          To programs
+        </Link>
+        <button
+          type="button"
+          onClick={() => this.replaceRoute("/Explore/Programs/AMP-AD")}
+        >
+          TO PROGRAMS
+        </button>
+      </div>
+    )
+  };
+
   render() {
     return (
       <section className="page explore" style={this.style()}>
@@ -213,6 +269,8 @@ Explore.propTypes = {
   token: PropTypes.string,
   SynapseConstants: PropTypes.object.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
+  hash: PropTypes.string.isRequired,
+  history: PropTypes.object.isRequired,
 }
 Explore.defaultProps = {
   token: "",

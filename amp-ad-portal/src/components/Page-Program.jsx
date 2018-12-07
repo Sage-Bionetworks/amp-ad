@@ -9,6 +9,7 @@ class ProgramPage extends Component {
   };
 
   componentDidMount() {
+    console.log("Program Page Mounting")
     this.setState(
       {
         params: this.props.match.params,

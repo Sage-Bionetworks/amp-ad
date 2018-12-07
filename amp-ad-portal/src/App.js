@@ -24,7 +24,7 @@ const AsyncExplore = asyncComponent(() => import("./components/Explore.jsx"))
 // study page
 const AsyncStudyPage = asyncComponent(() => import("./components/Page-Study.js"))
 // program page
-const AsyncProgramPage = asyncComponent(() => import("./components/Page-Program.js"))
+const AsyncProgramPage = asyncComponent(() => import("./components/Page-Program.jsx"))
 // Data access pages
 const AsyncInstructions = asyncComponent(() => import("./components/DataAccess-Instructions"))
 const AsyncDataUseCertificates = asyncComponent(() => import("./components/DataAccess-DataUseCertificates.js"))
@@ -154,6 +154,8 @@ class App extends Component {
       <AsyncExplore
         token={this.state.loginToken.sessionToken}
         history={props.history}
+        hash={window.location.hash}
+        match={props.match}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
       />
@@ -212,7 +214,8 @@ class App extends Component {
           path="/Resources/Studies"
           component={this.ReturnResourcesStudies}
         />
-        <Route path="/Explore" component={this.ReturnExplore} />
+
+        <Route path="/Explore/:handle" component={this.ReturnExplore} />
         <Route
           path="/Explore/Studies/:handle"
           component={this.ReturnStudyPage}
