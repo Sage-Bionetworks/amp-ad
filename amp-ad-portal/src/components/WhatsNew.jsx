@@ -21,6 +21,7 @@ class WhatsNew extends Component {
       this.props.defaultData.whatsNew
       && this.props.defaultData.whatsNew.markdown
       && !this.props.token
+      && this.state.loading
     ) {
       this.handleChanges("loading", false)
     }
@@ -32,6 +33,8 @@ class WhatsNew extends Component {
     }
     return true
   }
+
+  componentWillUpdate(nextProps) {}
 
   returnMarkdown = () => {
     if (this.props.token) {

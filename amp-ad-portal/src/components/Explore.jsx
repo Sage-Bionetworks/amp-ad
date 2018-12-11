@@ -148,7 +148,6 @@ class Explore extends Component {
       )
     }
     if (this.props.defaultData.explorePublications) {
-      console.log(this.props.defaultData.explorePublications.markdown)
       return (
         <div className="explore-publications">
           <this.props.SynapseComponents.Markdown
@@ -180,7 +179,11 @@ class Explore extends Component {
         )
       }
     }
-    return <div />
+    return (
+      <div className="synapse-chart">
+        <p>Synapse is offline right now</p>
+      </div>
+    )
   };
 
   SelectorsAndCharts = () => {

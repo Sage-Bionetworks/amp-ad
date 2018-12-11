@@ -51,15 +51,18 @@ class App extends Component {
     whatsNew: [],
     hash: "",
     defaultData: {},
+    synapseLoaded: true,
   };
 
   componentDidMount() {
     this.login()
       .then((token) => {
         if (!token) {
+          this.handleChanges("synapseLoaded", false)
           return false
         }
         this.handleChanges("loginToken", token)
+        this.handleChanges("synapseLoaded", true)
         return true
       })
       .then((response) => {
@@ -98,7 +101,7 @@ class App extends Component {
       return key
     })
     .catch(() => {
-      return ""
+      return false
     });
 
   handleChanges = (KEY, NEWSTATE) => {
