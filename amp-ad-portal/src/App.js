@@ -2,16 +2,19 @@ import React, { Component } from "react"
 import { HashRouter as Router, Route } from "react-router-dom"
 import ReactGA from "react-ga"
 import createHistory from "history/createBrowserHistory"
-import { SynapseComponents, SynapseConstants } from "synapse-react-client"
-import * as SynapseClient from "./synapse/SynapseClient"
+import {
+  SynapseComponents,
+  SynapseConstants,
+  SynapseClient,
+} from "synapse-react-client"
+//import SynapseClient from "sy"
 
 // non component js
 import asyncComponent from "./components/AsyncComponent"
 import ScrollToTop from "./components/ScrollToTop"
 
-const login = async () => SynapseClient.login("mikeybkats", "guinness").then((keys) => {
-  return keys
-})
+// to load default json
+import { getStaticJSON } from "./queries/queryForData"
 
 // about pages
 const AsyncAboutAmpAd = asyncComponent(() => import("./components/About-WhatIsAmpAd"))
@@ -47,15 +50,56 @@ class App extends Component {
     wikiMarkdown: "",
     whatsNew: [],
     hash: "",
+    defaultData: {},
   };
 
   componentDidMount() {
-    login().then(token => this.handleChanges("loginToken", token))
+    this.login()
+      .then((token) => {
+        if (!token) {
+          return false
+        }
+        this.handleChanges("loginToken", token)
+        return true
+      })
+      .then((response) => {
+        if (!response) {
+          console.log("getting backup data")
+          getStaticJSON(
+            "syn17024173",
+            "defaultData",
+            this.handleNestedChangesObj,
+          )
+          getStaticJSON(
+            "syn17024229",
+            "defaultData",
+            this.handleNestedChangesObj,
+          )
+          getStaticJSON("whatsNew", "defaultData", this.handleNestedChangesObj)
+          getStaticJSON(
+            "explorePublications",
+            "defaultData",
+            this.handleNestedChangesObj,
+          )
+        }
+      })
 
     this.setState({
       hash: window.location.hash,
     })
   }
+
+  login = async () => SynapseClient.login("mikeybkats", "guinness")
+    .then((response) => {
+      let key = {}
+      if (response.sessionToken) {
+        key = response
+      }
+      return key
+    })
+    .catch(() => {
+      return ""
+    });
 
   handleChanges = (KEY, NEWSTATE) => {
     this.setState({
@@ -63,7 +107,18 @@ class App extends Component {
     })
   };
 
+  handleNestedChangesObj = (KEY, newStateKey, newState) => {
+    // this function lets you declare new object keys within a state object
+    const property = this.state[KEY]
+    property[newStateKey] = newState
+    this.setState(prevState => ({
+      ...prevState,
+      property,
+    }))
+  };
+
   handleNestedChanges = (KEY, newStateKey, newState) => {
+    // this function lets you push objects to an array within a state object
     const property = this.state[KEY]
     property.push({ [newStateKey]: newState })
     this.setState(prevState => ({
@@ -84,6 +139,7 @@ class App extends Component {
         markdown={this.state.wikiMarkdown}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
+        defaultData={this.state.defaultData}
       />
     )
   };
@@ -150,22 +206,31 @@ class App extends Component {
   };
 
   ReturnExplore = (props) => {
+    let token = ""
+    if (this.state.loginToken) {
+      token = this.state.loginToken.sessionToken
+    }
     return (
       <AsyncExplore
-        token={this.state.loginToken.sessionToken}
+        token={token}
         history={props.history}
         hash={window.location.hash}
         match={props.match}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
+        defaultData={this.state.defaultData}
       />
     )
   };
 
   ReturnStudyPage = (props) => {
+    let token = ""
+    if (this.state.loginToken.sessionToken) {
+      token = this.state.loginToken.sessionToken
+    }
     return (
       <AsyncStudyPage
-        token={this.state.loginToken.sessionToken}
+        token={token}
         hash={window.location.hash}
         match={props.match}
         history={props.history}
@@ -176,9 +241,13 @@ class App extends Component {
   };
 
   ReturnProgramPage = (props) => {
+    let token = ""
+    if (this.state.loginToken.sessionToken) {
+      token = this.state.loginToken.sessionToken
+    }
     return (
       <AsyncProgramPage
-        token={this.state.loginToken.sessionToken}
+        token={token}
         hash={window.location.hash}
         match={props.match}
         history={props.history}

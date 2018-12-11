@@ -5,11 +5,11 @@ class ProgramPage extends Component {
   state = {
     params: {},
     query: "",
+    cardQuery: "",
     name: "",
   };
 
   componentDidMount() {
-    console.log("Program Page Mounting")
     this.setState(
       {
         params: this.props.match.params,
@@ -26,24 +26,28 @@ class ProgramPage extends Component {
 
   contentRouter = (handle = this.state.params.handle) => {
     let query
-    console.log(handle)
+    let cardQuery
     switch (handle) {
     case "AMP-AD":
       query = "SELECT * FROM syn17024229 WHERE ( ( \"Program\" = 'AMP-AD' ) )"
+      cardQuery = "SELECT * FROM syn17024173 where ( ( \"Program\" = 'AMP-AD' ) )"
       break
     case "M2OVE-AD":
       query = "SELECT * FROM syn17024229 WHERE ( ( \"Program\" = 'M2OVE-AD' ) )"
+      cardQuery = "SELECT * FROM syn17024173 WHERE ( ( \"Program\" = 'M2OVE-AD' ) )"
       break
     case "MODEL-AD":
       query = "SELECT * FROM syn17024229 WHERE ( ( \"Program\" = 'MODEL-AD' ) )"
+      cardQuery = "SELECT * FROM syn17024173 WHERE ( ( \"Program\" = 'MODEL-AD' ) )"
       break
     case "Resilience-AD":
       query = "SELECT * FROM syn17024229 WHERE ( ( \"Program\" = 'Resilience-AD' ) )"
+      cardQuery = "SELECT * FROM syn17024173 WHERE ( ( \"Program\" = 'Resilience-AD' ) )"
       break
     default:
       query = "SELECT * FROM syn17024229"
     }
-    this.handleChanges({ query, name: handle })
+    this.handleChanges({ query, cardQuery, name: handle })
     return query
   };
 
@@ -70,19 +74,37 @@ class ProgramPage extends Component {
     return {}
   };
 
-  //<div className="col-xs-12 col-sm-10">
-  //<h1>{this.state.params.handle}</h1>
-  //</div>
+  returnTitleCard = () => {
+    return (
+      <div className="hero-card">
+        <div className="card-container">
+          <this.props.SynapseComponents.StaticQueryWrapper
+            sql={this.state.cardQuery}
+            token={this.props.token}
+          >
+            <this.props.SynapseComponents.SynapseTableCardView
+              type={this.props.SynapseConstants.AMP_CONSORTIUM}
+            />
+          </this.props.SynapseComponents.StaticQueryWrapper>
+        </div>
+      </div>
+    )
+  };
+
   render() {
     return (
-      <section className="page explore" style={this.style()}>
+      <section className="page program-page" style={this.style()}>
+        <this.returnTitleCard />
         <div className="container">
           <div className="row">
-            <h2 className="header">
-              Explore
-              {` ${this.state.name}`}
-            </h2>
-            <div className="col-xs-12 col-sm-12">
+            <div className="col-xs-12 col-sm-12" />
+          </div>
+          <div className="row">
+            <div className="col-xs-12 col-sm-10 col-centered">
+              <h2 className="header">
+                Explore
+                {` ${this.state.name}`}
+              </h2>
               <this.returnSynapseChart />
             </div>
           </div>

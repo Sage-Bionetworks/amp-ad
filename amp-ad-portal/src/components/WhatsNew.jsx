@@ -16,10 +16,21 @@ class WhatsNew extends Component {
     })
   };
 
+  componentDidMount() {
+    if (
+      this.props.defaultData.whatsNew
+      && this.props.defaultData.whatsNew.markdown
+      && !this.props.token
+    ) {
+      this.handleChanges("loading", false)
+    }
+  }
+
   componentShouldUpdate(nextProps) {
     if (nextProps.token !== this.props.token) {
       return true
     }
+    return true
   }
 
   returnMarkdown = () => {
@@ -30,6 +41,15 @@ class WhatsNew extends Component {
           ownerId="syn12666371"
           wikiId="582408"
           updateLoadState={() => this.handleChanges("loading", false)}
+        />
+      )
+    }
+    if (this.props.defaultData.whatsNew) {
+      return (
+        <this.props.SynapseComponents.Markdown
+          ownerId="syn12666371"
+          wikiId="582408"
+          markdown={this.props.defaultData.whatsNew.markdown}
         />
       )
     }
@@ -56,6 +76,11 @@ class WhatsNew extends Component {
 WhatsNew.propTypes = {
   token: PropTypes.string.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
+  whatsNew: PropTypes.object,
+}
+
+WhatsNew.defaultProps = {
+  whatsNew: {},
 }
 
 export default WhatsNew

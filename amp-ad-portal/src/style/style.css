@@ -1605,6 +1605,49 @@ section.programs .box-text-image img {
   height: 80px;
 }
 
+section.program-page .SRC-portalCard {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+section.program-page .hero-card {
+  width: 100vw;
+  margin: 0px -50px 10px -50px;
+  background: #5960A5;
+  padding: 5px;
+}
+section.program-page .hero-card .card-container {
+  width: 100%;
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+section.program-page .hero-card .SRC-portalCard {
+  border: 0px;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  width: 83.3%;
+}
+section.program-page .hero-card .SRC-portalCard .SRC-type {
+  color: white;
+  font-weight: 700;
+}
+section.program-page .hero-card .SRC-portalCard .SRC-cardContent {
+  margin: 0px auto;
+  max-width: 900px;
+  float: none;
+  display: block;
+  width: 90%;
+}
+section.program-page .hero-card .SRC-portalCard .SRC-cardThumbnail {
+  position: absolute;
+  left: 0;
+}
+section.program-page .hero-card .SRC-portalCard .SRC-cardContent h3 a {
+  color: white;
+}
+
 section.what-new .markdown h4, section.programs .markdown h4 {
   padding: 0px;
   font-size: 18px;

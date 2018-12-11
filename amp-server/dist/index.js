@@ -10,8 +10,6 @@ var _fs2 = _interopRequireDefault(_fs);
 
 var _queryForData = require("./queryForData");
 
-var _queryForData2 = _interopRequireDefault(_queryForData);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
@@ -20,19 +18,29 @@ var runQueries = function runQueries(tableArray, query) {
   var appendToName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
 
   tableArray.map(function (table) {
-    //console.log(query(table))
-    (0, _queryForData2.default)(table, query(table)).then(function (data) {
+    (0, _queryForData.queryTable)(table, query(table)).then(function (data) {
       _fs2.default.writeFile("public/" + table + (appendToName !== "" ? "_" : "") + appendToName + ".json", data, function (err) {
         if (err) throw err;
         console.log("" + table + (appendToName !== "" ? "_" : "") + appendToName + " has been saved!");
-        //process.exit()
       });
     });
+  });
+
+  (0, _queryForData.login)("mikeybkats", "guinness").then(function (token) {
+    Promise.all([(0, _queryForData.getWikiData)("582408", token.sessionToken, "syn12666371").then(function (wikiData) {
+      _fs2.default.writeFile("public/whatsNew.json", JSON.stringify(wikiData), function (err) {
+        console.log("whatsNew.json has been saved");
+      });
+    }), (0, _queryForData.getWikiData)("409850", token.sessionToken, "syn2580853").then(function (wikiData) {
+      _fs2.default.writeFile("public/explorePublications.json", JSON.stringify(wikiData), function (err) {
+        console.log("explorePublications.json has been saved");
+      });
+    })]);
   });
 };
 
 var writeAllDataFile = function writeAllDataFile() {
-  var tables = ["syn17024173"];
+  var tables = ["syn17024173", "syn17024229"];
 
   var query = function query(table) {
     return "SELECT * FROM " + table;

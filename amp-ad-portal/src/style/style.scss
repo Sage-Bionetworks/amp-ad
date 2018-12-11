@@ -3,6 +3,7 @@
 
 $primaryHighlight: #5BB0B5;
 $primaryPurple: #4D5491;
+$headerPurple: #5960A5;
 $navigation: RGBA(254, 254, 254, .90);
 $selector1: #6C5C97;
 $selector2: #E5AE4C;
@@ -1346,6 +1347,51 @@ select {
       }
     }
   }
+
+	section.program-page {
+		.SRC-portalCard {
+			margin-left: 0px;
+			margin-right: 0px;
+		}
+		.hero-card {
+			width: 100vw;
+			margin: 0px -50px 10px -50px;
+			background: $headerPurple;
+			padding: 5px;
+			.card-container {
+				width: 100%;
+				padding-right: 0px;
+				padding-left: 0px;
+				margin-right: auto;
+				margin-left: auto;
+			}
+			.SRC-portalCard {
+				border: 0px;
+				color: white;
+				margin-left: auto;
+				margin-right: auto;
+				width: 83.3%;
+				.SRC-type {
+					color: white;
+					font-weight: 700;
+				}
+				.SRC-cardContent {
+					margin: 0px auto;
+					max-width: 900px;
+					float: none;
+					display: block;
+					width: 90%;
+				}
+				.SRC-cardThumbnail {
+					position: absolute;
+					left: 0;
+				}
+				.SRC-cardContent h3 a {
+					color: white;
+				}
+			}
+		}
+	}
 
   section.what-new, section.programs {
     .markdown h4 {

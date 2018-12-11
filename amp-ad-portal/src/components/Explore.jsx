@@ -1,8 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-//import { withRouter } from "react-router-dom"
 import { Link } from "react-router-dom"
-//import { browserHistory } from "react-router"
 import SynapseChart from "./SynapseBarChart.jsx"
 import Selectors from "./SelectorRow"
 
@@ -14,9 +12,6 @@ import {
 } from "../library/synapseObjects"
 
 let loadedObjects
-//let history
-//let location
-//let unlisten
 
 class Explore extends Component {
   state = {
@@ -25,12 +20,9 @@ class Explore extends Component {
   };
 
   componentDidMount() {
-    //history = this.props.history
-    //location = history.location
     if (!this.props.hash.includes("/Explore/Programs/")) {
       this.loadDefaultComponent()
     }
-    //this.unlistenGlob()
   }
 
   componentDidUpdate() {
@@ -41,42 +33,14 @@ class Explore extends Component {
       ) {
         this.loadDefaultComponent()
       }
-      //this.unlistenGlob()
     }
     return true
   }
-
-  componentWillUnmount() {
-    //unlisten()
-  }
-
-  //unlistenGlob = () => {
-  //unlisten = history.listen((historyLocation = location) => {
-  //const pathHash = historyLocation.pathname.substring(
-  //location.pathname.lastIndexOf("/") + 1,
-  //location.pathname.length,
-  //)
-  //if (this.state.name !== pathHash) {
-  //console.log(pathHash, location)
-  //if (
-  //!window.location.hash.includes("/Studies/")
-  //|| !this.props.hash.includes("/Programs/")
-  //) {
-  //this.setActiveValues(window.location.hash)
-  //}
-  //this.setState({
-  //name: pathHash,
-  //})
-  //}
-  //return true
-  //})
-  //};
 
   loadDefaultComponent = () => {
     if (!this.props.hash.includes("/Explore/Programs/")) {
       console.log(window.location.hash)
       loadedObjects = clone(synapseObjects)
-
       // studies
       setSynapseValue(loadedObjects, "syn17083367", "filter", "projectStatus")
       // publications
@@ -171,30 +135,50 @@ class Explore extends Component {
     return ""
   };
 
+  returnPublications = () => {
+    if (this.props.token) {
+      return (
+        <div className="explore-publications">
+          <this.props.SynapseComponents.Markdown
+            token={this.props.token}
+            ownerId="syn2580853"
+            wikiId="409850"
+          />
+        </div>
+      )
+    }
+    if (this.props.defaultData.explorePublications) {
+      console.log(this.props.defaultData.explorePublications.markdown)
+      return (
+        <div className="explore-publications">
+          <this.props.SynapseComponents.Markdown
+            ownerId="syn2580853"
+            wikiId="409850"
+            markdown={this.props.defaultData.explorePublications.markdown}
+          />
+        </div>
+      )
+    }
+    return <div />
+  };
+
   returnSynapseChart = (hash = window.location.hash) => {
     if (!window.location.hash.includes("/Explore/Programs/")) {
       if (hash === "#/Explore/Publications") {
+        return this.returnPublications()
+      }
+      if (this.props.token) {
         return (
-          <div className="explore-publications">
-            <this.props.SynapseComponents.Markdown
+          <div className="synapse-chart">
+            <SynapseChart
               token={this.props.token}
-              ownerId="syn2580853"
-              wikiId="409850"
+              activeObject={this.state.activeObject}
+              SynapseConstants={this.props.SynapseConstants}
+              SynapseComponents={this.props.SynapseComponents}
             />
           </div>
         )
       }
-
-      return (
-        <div className="synapse-chart">
-          <SynapseChart
-            token={this.props.token}
-            activeObject={this.state.activeObject}
-            SynapseConstants={this.props.SynapseConstants}
-            SynapseComponents={this.props.SynapseComponents}
-          />
-        </div>
-      )
     }
     return <div />
   };

@@ -1,6 +1,6 @@
 import express from "express"
 import fs from "fs"
-import queryTable from "./queryForData" 
+import { queryTable, getWikiData, login } from "./queryForData" 
 
 const app = express()
 
@@ -13,10 +13,25 @@ const runQueries = (tableArray, query, appendToName = "") => {
       })
     })
   })
+
+  login("mikeybkats", "guinness").then(token => {
+    Promise.all([
+      getWikiData("582408", token.sessionToken, "syn12666371").then((wikiData) => {
+        fs.writeFile(`public/whatsNew.json`, JSON.stringify(wikiData), err => {
+          console.log("whatsNew.json has been saved")
+        })
+      }),
+      getWikiData("409850", token.sessionToken, "syn2580853").then((wikiData) => {
+        fs.writeFile(`public/explorePublications.json`, JSON.stringify(wikiData), err => {
+          console.log("explorePublications.json has been saved")
+        })
+      }),
+    ])}
+  )
 }
 
 const writeAllDataFile = () => {  
-  let tables = ["syn17024173"]
+  let tables = ["syn17024173", "syn17024229"]
 
   let query = (table) => { return `SELECT * FROM ${table}` }
   runQueries(tables, query)
