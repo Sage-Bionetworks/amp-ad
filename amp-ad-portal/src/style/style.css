@@ -1608,6 +1608,7 @@ section.programs .box-text-image img {
 section.program-page .SRC-portalCard {
   margin-left: 0px;
   margin-right: 0px;
+  position: relative;
 }
 section.program-page .hero-card {
   width: 100vw;
@@ -1635,7 +1636,7 @@ section.program-page .hero-card .SRC-portalCard .SRC-type {
 }
 section.program-page .hero-card .SRC-portalCard .SRC-cardContent {
   margin: 0px auto;
-  max-width: 900px;
+  max-width: 915px;
   float: none;
   display: block;
   width: 90%;
@@ -1643,6 +1644,11 @@ section.program-page .hero-card .SRC-portalCard .SRC-cardContent {
 section.program-page .hero-card .SRC-portalCard .SRC-cardThumbnail {
   position: absolute;
   left: 0;
+}
+@media screen and (max-width: 1440px) {
+  section.program-page .hero-card .SRC-portalCard .SRC-cardThumbnail {
+    left: -8%;
+  }
 }
 section.program-page .hero-card .SRC-portalCard .SRC-cardContent h3 a {
   color: white;

@@ -1352,6 +1352,7 @@ select {
 		.SRC-portalCard {
 			margin-left: 0px;
 			margin-right: 0px;
+      position: relative;
 		}
 		.hero-card {
 			width: 100vw;
@@ -1377,7 +1378,7 @@ select {
 				}
 				.SRC-cardContent {
 					margin: 0px auto;
-					max-width: 900px;
+					max-width: 915px;
 					float: none;
 					display: block;
 					width: 90%;
@@ -1385,6 +1386,9 @@ select {
 				.SRC-cardThumbnail {
 					position: absolute;
 					left: 0;
+          @media screen and (max-width: 1440px){
+            left: -8%;
+          }
 				}
 				.SRC-cardContent h3 a {
 					color: white;
