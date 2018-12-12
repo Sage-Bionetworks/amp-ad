@@ -135,14 +135,14 @@ class Explore extends Component {
     return ""
   };
 
-  returnPublications = () => {
+  returnWikiData = (synId, wikiId) => {
     if (this.props.token) {
       return (
         <div className="explore-publications">
           <this.props.SynapseComponents.Markdown
             token={this.props.token}
-            ownerId="syn2580853"
-            wikiId="409850"
+            ownerId={synId}
+            wikiId={wikiId}
           />
         </div>
       )
@@ -151,8 +151,8 @@ class Explore extends Component {
       return (
         <div className="explore-publications">
           <this.props.SynapseComponents.Markdown
-            ownerId="syn2580853"
-            wikiId="409850"
+            ownerId={synId}
+            wikiId={wikiId}
             markdown={this.props.defaultData.explorePublications.markdown}
           />
         </div>
@@ -164,9 +164,12 @@ class Explore extends Component {
   returnSynapseChart = (hash = window.location.hash) => {
     if (!window.location.hash.includes("/Explore/Programs/")) {
       if (hash === "#/Explore/Publications") {
-        return this.returnPublications()
+        return this.returnWikiData("syn2580853", "409850")
       }
-      if (this.props.token) {
+      if (
+        this.props.synapseLoaded
+        || window.location.hash === "#/Explore/Programs"
+      ) {
         return (
           <div className="synapse-chart">
             <SynapseChart
@@ -174,16 +177,21 @@ class Explore extends Component {
               activeObject={this.state.activeObject}
               SynapseConstants={this.props.SynapseConstants}
               SynapseComponents={this.props.SynapseComponents}
+              synapseLoaded={this.props.synapseLoaded}
+              defaultData={this.props.defaultData}
             />
           </div>
         )
       }
+      if (!this.props.synapseLoaded) {
+        return (
+          <div className="synapse-chart">
+            <p>Synapse is offline right now</p>
+          </div>
+        )
+      }
     }
-    return (
-      <div className="synapse-chart">
-        <p>Synapse is offline right now</p>
-      </div>
-    )
+    return <div />
   };
 
   SelectorsAndCharts = () => {
@@ -258,6 +266,7 @@ Explore.propTypes = {
   SynapseComponents: PropTypes.object.isRequired,
   hash: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired,
+  synapseLoaded: PropTypes.bool.isRequired,
 }
 Explore.defaultProps = {
   token: "",

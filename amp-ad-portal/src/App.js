@@ -143,6 +143,7 @@ class App extends Component {
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
         defaultData={this.state.defaultData}
+        synapseLoaded={this.state.synapseLoaded}
       />
     )
   };
@@ -222,6 +223,7 @@ class App extends Component {
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
         defaultData={this.state.defaultData}
+        synapseLoaded={this.state.synapseLoaded}
       />
     )
   };

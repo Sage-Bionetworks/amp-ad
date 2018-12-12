@@ -19,6 +19,7 @@ const Home = props => (
       token={props.token.sessionToken}
       SynapseConstants={props.SynapseConstants}
       SynapseComponents={props.SynapseComponents}
+      synapseLoaded={props.synapseLoaded}
     />
     <Programs
       token={props.token.sessionToken}
@@ -43,6 +44,7 @@ Home.propTypes = {
   SynapseConstants: PropTypes.object.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
   defaultData: PropTypes.object.isRequired,
+  synapseLoaded: PropTypes.bool.isRequired,
 }
 
 Home.defaultProps = {

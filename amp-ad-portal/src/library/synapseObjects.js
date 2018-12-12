@@ -4,6 +4,7 @@ export const synapseObjects = [
     description: "Programs",
     id: "syn17024173",
     filter: "",
+    offlineKey: "syn17024173",
     color: 3,
     limit: 0,
     columns: 0,
