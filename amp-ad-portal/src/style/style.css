@@ -172,6 +172,43 @@
     justify-content: space-around;
   }
 }
+.SRC-primary-text-color {
+  color: #4D5491 !important;
+}
+
+.SRC-primary-background-color {
+  background-color: #4D5491 !important;
+}
+
+.SRC-primary-background-color-hover:hover {
+  background-color: #4D5491 !important;
+}
+.SRC-primary-background-color-hover:hover > svg {
+  color: white !important;
+}
+.SRC-primary-background-color-hover:hover.SRC-nested-color * {
+  background-color: #4D5491 !important;
+  color: white !important;
+}
+
+.SRC-primary-background-hover:hover {
+  background-color: #4D5491 !important;
+  color: white !important;
+  box-shadow: 4px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+section.page.explore .SRC-portalCard .SRC-primary-background-hover:hover {
+  background-color: #4D5491 !important;
+  color: #fff !important;
+}
+
+.btn-group.SRC-tableHead .SRC-primary-background-color-hover:hover, .SRC-tableHead.SRC-hand-cursor.SRC-sortPadding.SRC-primary-background-color-hover:hover,
+.SRC-primary-background-color-hover.SRC-extraPadding.SRC-hand-cursor:hover,
+.svg-inline--fa.fa-sort-amount-down.fa-w-16.SRC-primary-background-color-hover.SRC-primary-text-color:hover {
+  background-color: #4D5491 !important;
+  color: #fff !important;
+}
+
 *:focus {
   outline: none;
 }
@@ -1610,6 +1647,23 @@ section.program-page .SRC-portalCard {
   margin-right: 0px;
   position: relative;
 }
+section.program-page .SRC-portalCard h3 {
+  font-size: 24px;
+  font-weight: 700;
+}
+section.program-page .wiki-markdown {
+  padding-bottom: 30px;
+  margin-top: -40px;
+}
+section.program-page .wiki-markdown p, section.program-page .wiki-markdown a, section.program-page .wiki-markdown li, section.program-page .wiki-markdown ul {
+  color: white;
+}
+section.program-page .wiki-markdown a:hover {
+  text-decoration: underline;
+}
+section.program-page .wiki-markdown .col-centered {
+  padding: 0px 10px;
+}
 section.program-page .hero-card {
   width: 100vw;
   margin: 0px -50px 10px -50px;
@@ -2141,153 +2195,6 @@ p.researcher-bio {
 }
 .study-overview th.individuals, .study-overview td.individuals {
   width: 15%;
-}
-
-section.researchers-content.people {
-  min-height: 800px;
-}
-
-button.headshot-col {
-  background: transparent;
-  border: none;
-}
-
-button.modal-lightbox {
-  position: fixed;
-  color: white;
-  opacity: 0.75;
-  z-index: 800;
-  width: 100vw;
-  height: 100vh;
-  top: 400px;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-button.modal-x {
-  background-size: cover;
-  position: fixed;
-  z-index: 1000;
-  top: 141px;
-  left: 25px;
-  width: 40px;
-  height: 40px;
-  border: none;
-}
-
-.profile {
-  position: fixed;
-  z-index: 950;
-  padding: 30px;
-  padding-top: 110px;
-  width: 100vw !important;
-  max-width: 100% !important;
-  height: fit-content;
-  min-height: 400px;
-  margin: auto;
-  top: 45px;
-  left: 0;
-  background-color: white;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-}
-.profile .profile-image-container {
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  display: flex;
-}
-.profile div {
-  max-width: 100%;
-}
-.profile .row {
-  width: 100%;
-  margin: 0px auto;
-}
-.profile h3 {
-  min-width: 380px;
-}
-.profile .scrollbar {
-  width: 0px;
-  background: transparent;
-}
-.profile .profile-image-large {
-  width: 150px;
-  height: 150px;
-  position: relative;
-  -webkit-border-radius: 75px;
-  -moz-border-radius: 75px;
-  border-radius: 75px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.headshot-col .background-highlight {
-  width: 94px;
-  height: 94px;
-  position: relative;
-  -webkit-border-radius: 47px;
-  -moz-border-radius: 47px;
-  border-radius: 47px;
-  background-color: white;
-  position: relative;
-  z-index: 400;
-  margin: auto;
-  top: -122px;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  transition: background-color 0.3s;
-}
-
-.headshot-col:hover {
-  cursor: pointer;
-}
-.headshot-col:hover .background-highlight {
-  background-color: #5A498D;
-  opacity: 0.5;
-  transition: background-color 0.3s;
-  position: relative;
-  z-index: 400;
-  margin: auto;
-  top: -122px;
-  right: 0;
-  left: 0;
-  bottom: 0;
-}
-
-.headshot-col {
-  justify-content: center;
-  align-content: center;
-  postion: relative;
-  display: inline-block;
-  min-width: 181px;
-  max-height: 170px;
-  z-index: 900;
-}
-.headshot-col div {
-  position: relative;
-  z-index: 500;
-}
-.headshot-col div .headshot {
-  width: 86px;
-  height: 86px;
-  position: relative;
-  -webkit-border-radius: 43px;
-  -moz-border-radius: 43px;
-  border-radius: 43px;
-  margin: 0px auto;
-  display: block;
-  position: relative;
-  z-index: 500;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 @media screen and (max-width: 480px) {
