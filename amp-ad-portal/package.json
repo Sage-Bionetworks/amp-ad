@@ -17,7 +17,7 @@
     "react-router-dom": "^4.3.1",
     "react-spinners": "^0.3.2",
     "source-map-explorer": "^1.6.0",
-    "synapse-react-client": "^1.10.3",
+    "synapse-react-client": "^1.10.5",
     "write": "^1.0.3"
   },
   "devDependencies": {
@@ -28,6 +28,7 @@
     "@storybook/react": "^4.0.7",
     "@storybook/storybook-deployer": "^2.3.0",
     "babel-core": "^6.26.3",
+    "babel-jest": "^23.6.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",

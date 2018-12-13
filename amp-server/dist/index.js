@@ -35,6 +35,22 @@ var runQueries = function runQueries(tableArray, query) {
       _fs2.default.writeFile("public/explorePublications.json", JSON.stringify(wikiData), function (err) {
         console.log("explorePublications.json has been saved");
       });
+    }), (0, _queryForData.getWikiData)("581895", token.sessionToken, "syn12666371").then(function (wikiData) {
+      _fs2.default.writeFile("public/programAMPAD_wiki.json", JSON.stringify(wikiData), function (err) {
+        console.log("programAMPAD_wiki.json has been saved");
+      });
+    }), (0, _queryForData.getWikiData)("581898", token.sessionToken, "syn12666371").then(function (wikiData) {
+      _fs2.default.writeFile("public/programResilienceAD_wiki.json", JSON.stringify(wikiData), function (err) {
+        console.log("programResilienceAD_wiki.json has been saved");
+      });
+    }), (0, _queryForData.getWikiData)("581896", token.sessionToken, "syn12666371").then(function (wikiData) {
+      _fs2.default.writeFile("public/programModelAD_wiki.json", JSON.stringify(wikiData), function (err) {
+        console.log("programModelAD_wiki.json has been saved");
+      });
+    }), (0, _queryForData.getWikiData)("581894", token.sessionToken, "syn12666371").then(function (wikiData) {
+      _fs2.default.writeFile("public/programM2OVEAD_wiki.json", JSON.stringify(wikiData), function (err) {
+        console.log("programM2OVEAD_wiki.json has been saved");
+      });
     })]);
   });
 };
@@ -46,18 +62,22 @@ var writeAllDataFile = function writeAllDataFile() {
     return "SELECT * FROM " + table;
   };
   runQueries(tables, query);
-
-  //let query2 = (table) => { return `SELECT * FROM ${table} WHERE ( ( "fundingAgency" = 'CTF' ) )` }
-  //runQueries(tables, query2, "fundingAgency_CTF")
-
-  //let query3 = (table) => { return `SELECT * FROM ${table} WHERE ( ( "fundingAgency" = 'NTAP' ) )` }
-  //runQueries(tables, query3, "fundingAgency_NTAP")
-
-  //let query4 = (table) => { return `SELECT * FROM ${table} WHERE ( ( "fundingAgency" = 'NIH-NCI' ) )` }
-  //runQueries(tables, query4, "fundingAgency_NIHNCI")
-
-  //let query5 = (table) => { return `SELECT * FROM ${table} WHERE (  (  "resourceType" = 'experimentalData' ) )` }
-  //runQueries(["syn16858331"], query5, "files")
+  var query2 = function query2(table) {
+    return "SELECT * FROM syn17024229 where ( ( \"Program\" = 'AMP-AD' ) )";
+  };
+  runQueries([tables[1]], query2, "programAMPAD");
+  var query3 = function query3(table) {
+    return "SELECT * FROM syn17024229 where ( ( \"Program\" = 'MODEL-AD' ) )";
+  };
+  runQueries([tables[1]], query3, "programMODELAD");
+  var query4 = function query4(table) {
+    return "SELECT * FROM syn17024229 where ( ( \"Program\" = 'M2OVE-AD' ) )";
+  };
+  runQueries([tables[1]], query4, "programM2OVEAD");
+  var query5 = function query5(table) {
+    return "SELECT * FROM syn17024229 where ( ( \"Program\" = 'Resilience-AD' ) )";
+  };
+  runQueries([tables[1]], query5, "programResilienceAD");
 };
 
 //app.all("/", function(req, res, next) {

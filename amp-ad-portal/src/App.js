@@ -67,12 +67,16 @@ class App extends Component {
       })
       .then((response) => {
         if (!response) {
+          // if synapse fails to load
+          // get backup data
           console.log("getting backup data")
+          // consortia / programs
           getStaticJSON(
             "syn17024173",
             "defaultData",
             this.handleNestedChangesObj,
           )
+          // projects
           getStaticJSON(
             "syn17024229",
             "defaultData",
@@ -81,6 +85,46 @@ class App extends Component {
           getStaticJSON("whatsNew", "defaultData", this.handleNestedChangesObj)
           getStaticJSON(
             "explorePublications",
+            "defaultData",
+            this.handleNestedChangesObj,
+          )
+          getStaticJSON(
+            "syn17024229_programAMPAD",
+            "defaultData",
+            this.handleNestedChangesObj,
+          )
+          getStaticJSON(
+            "programAMPAD_wiki",
+            "defaultData",
+            this.handleNestedChangesObj,
+          )
+          getStaticJSON(
+            "syn17024229_programResilienceAD",
+            "defaultData",
+            this.handleNestedChangesObj,
+          )
+          getStaticJSON(
+            "programResilienceAD_wiki",
+            "defaultData",
+            this.handleNestedChangesObj,
+          )
+          getStaticJSON(
+            "syn17024229_programMODELAD",
+            "defaultData",
+            this.handleNestedChangesObj,
+          )
+          getStaticJSON(
+            "programMODELAD_wiki",
+            "defaultData",
+            this.handleNestedChangesObj,
+          )
+          getStaticJSON(
+            "syn17024229_programM2OVEAD",
+            "defaultData",
+            this.handleNestedChangesObj,
+          )
+          getStaticJSON(
+            "programM2OVEAD_wiki",
             "defaultData",
             this.handleNestedChangesObj,
           )
@@ -258,6 +302,8 @@ class App extends Component {
         history={props.history}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
+        defaultData={this.state.defaultData}
+        synapseLoaded={this.state.synapseLoaded}
       />
     )
   };
