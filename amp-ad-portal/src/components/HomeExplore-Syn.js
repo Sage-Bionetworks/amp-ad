@@ -76,7 +76,11 @@ class ExploreContent extends Component {
         </div>
       )
     }
-    return <div />
+    return (
+      <div className="synapse-chart">
+        <p>Synapse is offline right now</p>
+      </div>
+    )
   };
 
   barChartStyle = () => {

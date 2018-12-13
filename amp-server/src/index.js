@@ -1,6 +1,6 @@
 import express from "express"
 import fs from "fs"
-import queryTable from "./queryForData" 
+import { queryTable, getWikiData, login } from "./queryForData" 
 
 const app = express()
 
@@ -13,26 +13,56 @@ const runQueries = (tableArray, query, appendToName = "") => {
       })
     })
   })
+
+  login("mikeybkats", "guinness").then(token => {
+    Promise.all([
+      getWikiData("582408", token.sessionToken, "syn12666371").then((wikiData) => {
+        fs.writeFile(`public/whatsNew.json`, JSON.stringify(wikiData), err => {
+          console.log("whatsNew.json has been saved")
+        })
+      }),
+      getWikiData("409850", token.sessionToken, "syn2580853").then((wikiData) => {
+        fs.writeFile(`public/explorePublications.json`, JSON.stringify(wikiData), err => {
+          console.log("explorePublications.json has been saved")
+        })
+      }),
+      getWikiData("581895", token.sessionToken, "syn12666371").then((wikiData) => {
+        fs.writeFile(`public/programAMPAD_wiki.json`, JSON.stringify(wikiData), err => {
+          console.log("programAMPAD_wiki.json has been saved")
+        })
+      }),
+      getWikiData("581898", token.sessionToken, "syn12666371").then((wikiData) => {
+        fs.writeFile(`public/programResilienceAD_wiki.json`, JSON.stringify(wikiData), err => {
+          console.log("programResilienceAD_wiki.json has been saved")
+        })
+      }),
+      getWikiData("581896", token.sessionToken, "syn12666371").then((wikiData) => {
+        fs.writeFile(`public/programModelAD_wiki.json`, JSON.stringify(wikiData), err => {
+          console.log("programModelAD_wiki.json has been saved")
+        })
+      }),
+      getWikiData("581894", token.sessionToken, "syn12666371").then((wikiData) => {
+        fs.writeFile(`public/programM2OVEAD_wiki.json`, JSON.stringify(wikiData), err => {
+          console.log("programM2OVEAD_wiki.json has been saved")
+        })
+      }),
+    ])}
+  )
 }
 
 const writeAllDataFile = () => {  
-  let tables = ["syn17024173"]
+  let tables = ["syn17024173", "syn17024229"]
 
   let query = (table) => { return `SELECT * FROM ${table}` }
   runQueries(tables, query)
-
-  //let query2 = (table) => { return `SELECT * FROM ${table} WHERE ( ( "fundingAgency" = 'CTF' ) )` }
-  //runQueries(tables, query2, "fundingAgency_CTF")
-
-  //let query3 = (table) => { return `SELECT * FROM ${table} WHERE ( ( "fundingAgency" = 'NTAP' ) )` }
-  //runQueries(tables, query3, "fundingAgency_NTAP")
-
-  //let query4 = (table) => { return `SELECT * FROM ${table} WHERE ( ( "fundingAgency" = 'NIH-NCI' ) )` }
-  //runQueries(tables, query4, "fundingAgency_NIHNCI")
-
-  //let query5 = (table) => { return `SELECT * FROM ${table} WHERE (  (  "resourceType" = 'experimentalData' ) )` }
-  //runQueries(["syn16858331"], query5, "files")
-
+  let query2 = (table) => { return `SELECT * FROM syn17024229 where ( ( \"Program\" = 'AMP-AD' ) )` }
+  runQueries([tables[1]], query2, "programAMPAD")
+  let query3 = (table) => { return `SELECT * FROM syn17024229 where ( ( \"Program\" = 'MODEL-AD' ) )` }
+  runQueries([tables[1]], query3, "programMODELAD")
+  let query4 = (table) => { return `SELECT * FROM syn17024229 where ( ( \"Program\" = 'M2OVE-AD' ) )` }
+  runQueries([tables[1]], query4, "programM2OVEAD")
+  let query5 = (table) => { return `SELECT * FROM syn17024229 where ( ( \"Program\" = 'Resilience-AD' ) )` }
+  runQueries([tables[1]], query5, "programResilienceAD")
 }
 
 //app.all("/", function(req, res, next) {

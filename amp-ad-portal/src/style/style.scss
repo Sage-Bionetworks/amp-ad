@@ -3,6 +3,7 @@
 
 $primaryHighlight: #5BB0B5;
 $primaryPurple: #4D5491;
+$headerPurple: #5960A5;
 $navigation: RGBA(254, 254, 254, .90);
 $selector1: #6C5C97;
 $selector2: #E5AE4C;
@@ -30,6 +31,48 @@ $gray: #F5F5F5;
 $textGray: #BCC0CA;
 $navigationText: #404B63;
 
+///////////// overides ////////////
+.SRC-primary-text-color {
+   color: $primaryPurple !important; // REPLACE ME
+ }
+ .SRC-primary-background-color {
+   background-color: $primaryPurple !important;  // REPLACE ME
+ }
+
+
+ .SRC-primary-background-color-hover:hover {
+  background-color: $primaryPurple !important;  // REPLACE ME
+  > svg {
+    color: white!important;
+  }
+  &.SRC-nested-color {
+    * {
+      background-color: $primaryPurple !important; 
+      color: white!important;
+    }
+  }
+}
+
+ .SRC-primary-background-hover {
+  &:hover {
+    background-color: $primaryPurple !important;   // REPLACE ME
+    color: white!important;
+    box-shadow: 4px 2px 2px rgba(0, 0, 0, 0.5);
+  }
+}
+ section.page.explore .SRC-portalCard .SRC-primary-background-hover:hover {
+    background-color: $primaryPurple !important;
+    color: #fff!important;
+  }
+
+ .btn-group.SRC-tableHead .SRC-primary-background-color-hover:hover, .SRC-tableHead.SRC-hand-cursor.SRC-sortPadding.SRC-primary-background-color-hover:hover,
+ .SRC-primary-background-color-hover.SRC-extraPadding.SRC-hand-cursor:hover,
+ .svg-inline--fa.fa-sort-amount-down.fa-w-16.SRC-primary-background-color-hover.SRC-primary-text-color:hover
+ {
+    background-color: $primaryPurple !important;
+    color: #fff!important;
+  }
+//////////////// end overides //////////// 
 
 *:focus {
     outline: none;
@@ -501,13 +544,6 @@ select {
   .content-row {
     div { max-width: 1120px; }
   }
-
-  //@media only screen and (min-width: 48em){
-    //.col-sm-9 {
-      //flex-basis: 80%;
-      //max-width: 80%;
-    //}
-  //}
 
   .child-page-hero a, .welcome a {
     color: white;
@@ -1347,6 +1383,72 @@ select {
     }
   }
 
+	section.program-page {
+		.SRC-portalCard {
+			margin-left: 0px;
+			margin-right: 0px;
+      position: relative;
+      h3 {
+        font-size: 24px;
+        font-weight: 700;
+      }
+		}
+    .wiki-markdown {
+      padding-bottom: 30px;
+      margin-top: -40px;
+      p, a, li, ul {
+        color: white;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .col-centered {
+        padding: 0px 10px;
+      }
+    }
+		.hero-card {
+			width: 100vw;
+			margin: 0px -50px 10px -50px;
+			background: $headerPurple;
+			padding: 5px;
+			.card-container {
+				width: 100%;
+				padding-right: 0px;
+				padding-left: 0px;
+				margin-right: auto;
+				margin-left: auto;
+			}
+			.SRC-portalCard {
+				border: 0px;
+				color: white;
+				margin-left: auto;
+				margin-right: auto;
+				width: 83.3%;
+				.SRC-type {
+					color: white;
+					font-weight: 700;
+				}
+				.SRC-cardContent {
+					margin: 0px auto;
+					max-width: 915px;
+					float: none;
+					display: block;
+					width: 90%;
+				}
+				.SRC-cardThumbnail {
+					position: absolute;
+					left: 0;
+          @media screen and (max-width: 1440px){
+            left: -8%;
+          }
+				}
+				.SRC-cardContent h3 a {
+					color: white;
+				}
+			}
+		}
+	}
+
   section.what-new, section.programs {
     .markdown h4 {
       padding: 0px;
@@ -1632,26 +1734,6 @@ select {
   }
 
 
-  //////// hiding hide content publications research-publications experimental-resources ///////////
-  .researchers-content, .experimental-resources {
-    .hide-first-child {
-      div span span{
-        p:first-child {
-          display: none;
-        }
-        hr:nth-child(2){
-          display: none;
-        }
-      }
-    }
-    .hide-first-child-h4 {
-      .markdown span span{
-        h4 { display: none; }
-        hr:nth-child(2){ display: none; }
-      }
-    }
-  }
-  
   ///// External Researchers ////////
   p.researcher-bio {
     overflow: hidden;
@@ -1900,140 +1982,6 @@ select {
     }
     th.individuals, td.individuals {
       width: 15%;
-    }
-  }
-
-  ////// people ////// 
-  section.researchers-content.people {
-    min-height: 800px;
-  }
-
-  button.headshot-col {
-    background: transparent;
-    border: none;
-  }
-  button.modal-lightbox {
-    position: fixed;
-    color: white;
-    opacity: .75;
-    z-index: 800;
-    width: 100vw;
-    height: 100vh;
-    top: 400px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-  button.modal-x {
-    background-size: cover;
-    position: fixed;
-    z-index: 1000;
-    top: 141px;
-    left: 25px;
-    width: 40px;
-    height: 40px;
-    border: none;
-  }
-  .profile {
-    position: fixed;
-    z-index: 950;
-    padding: 30px;
-    padding-top: 110px;
-    width: 100vw !important;
-    max-width: 100% !important;
-    height: fit-content;
-    min-height: 400px;
-    margin: auto;
-    top: 45px;
-    left: 0;
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    .profile-image-container {
-      justify-content: center;
-      align-items: center;
-      align-content: center;
-      display: flex;
-    }
-    div {
-      max-width: 100%;
-    }
-    .row {
-      //margin-top: 100px;
-      width: 100%;
-      margin: 0px auto;
-    }
-    h3 {
-      min-width: 380px;
-    }
-    p.profile-summary {
-      //max-height: 300px;
-      //overflow-y: scroll;
-    }
-    .scrollbar {
-      width: 0px;
-      background: transparent; 
-    }
-    .profile-image-large {
-      @include circle(150px);
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-  }
-  .headshot-col .background-highlight {
-    @include circle(94px);
-    background-color: white;
-    position: relative;
-    z-index: 400;
-    margin: auto;
-    top: -122px;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    transition: background-color .3s;
-  }
-  .headshot-col:hover {
-    cursor: pointer;
-    .background-highlight {
-      background-color: $darkPurple;
-      opacity: .5;
-      transition: background-color .3s;
-      position: relative;
-      z-index: 400;
-      margin: auto;
-      top: -122px;
-      right: 0;
-      left: 0;
-      bottom: 0;
-    }
-  }
-  .headshot-col:active {
-  }
-  .headshot-col{
-    justify-content: center;
-    align-content: center;
-    postion: relative;
-    display: inline-block;
-    min-width: 181px;
-    max-height: 170px;
-    z-index: 900;
-    div {
-      position: relative;
-      z-index: 500;
-      .headshot {
-        @include circle(86px);
-        margin: 0px auto;
-        display: block;
-        position: relative;
-        z-index: 500;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-      }
     }
   }
 

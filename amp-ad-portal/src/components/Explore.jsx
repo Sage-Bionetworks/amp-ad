@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-//import { withRouter } from "react-router-dom"
+import { Link } from "react-router-dom"
 import SynapseChart from "./SynapseBarChart.jsx"
 import Selectors from "./SelectorRow"
 
@@ -12,24 +12,35 @@ import {
 } from "../library/synapseObjects"
 
 let loadedObjects
-let history
-let location
-let unlisten
 
 class Explore extends Component {
   state = {
-    name: "",
     activeButton: "",
     activeObject: {},
   };
 
   componentDidMount() {
-    history = this.props.history
-    location = history.location
+    if (!this.props.hash.includes("/Explore/Programs/")) {
+      this.loadDefaultComponent()
+    }
+  }
 
-    if (this.setActiveValues(window.location.hash) !== "studyPage") {
+  componentDidUpdate() {
+    if (!this.props.hash.includes("/Explore/Programs/")) {
+      if (
+        Object.keys(this.state.activeObject).length === 0
+        && this.state.activeObject.constructor === Object
+      ) {
+        this.loadDefaultComponent()
+      }
+    }
+    return true
+  }
+
+  loadDefaultComponent = () => {
+    if (!this.props.hash.includes("/Explore/Programs/")) {
+      console.log(window.location.hash)
       loadedObjects = clone(synapseObjects)
-
       // studies
       setSynapseValue(loadedObjects, "syn17083367", "filter", "projectStatus")
       // publications
@@ -39,34 +50,14 @@ class Explore extends Component {
         this.setActiveValues(window.location.hash, "id")
       } else this.handleButtonPress("syn17024112")
     }
-  }
-
-  componentDidUpdate() {
-    unlisten = history.listen((historyLocation = location) => {
-      const pathHash = historyLocation.pathname.substring(
-        location.pathname.lastIndexOf("/") + 1,
-        location.pathname.length,
-      )
-
-      if (this.state.name !== pathHash) {
-        if (!window.location.hash.includes("/Studies/")) {
-          this.setActiveValues(window.location.hash)
-        }
-        this.setState({
-          name: pathHash,
-        })
-      }
-      return true
-    })
-  }
-
-  componentWillUnmount() {
-    unlisten()
-  }
+  };
 
   setActiveValues = (hash) => {
     let id
     switch (hash) {
+    case "#/Explore":
+      id = "syn11346063"
+      break
     case "#/Explore/Data":
       id = "syn11346063"
       break
@@ -87,17 +78,27 @@ class Explore extends Component {
       id = "syn13897207"
       break
     case hash.includes("/Studies/"):
-      id = "studyPage"
+      id = "lowerPage"
+      break
+    case hash.includes("/Programs/"):
+      id = "lowerPage"
       break
     default:
       id = "syn11346063"
     }
 
-    this.handleButtonPress(id)
+    if (!this.props.hash.includes("/Programs/")) {
+      this.handleButtonPress(id)
+    }
+    return id
   };
 
   changeRoute = (url) => {
     this.props.history.push(url)
+  };
+
+  replaceRoute = (url) => {
+    this.props.history.replace(url)
   };
 
   handleChanges = (newState) => {
@@ -113,7 +114,7 @@ class Explore extends Component {
         activeObject,
       },
       () => {
-        this.changeRoute(activeObject.hash)
+        this.replaceRoute(activeObject.hash)
       },
     )
     return ""
@@ -134,29 +135,63 @@ class Explore extends Component {
     return ""
   };
 
-  returnSynapseChart = (hash = window.location.hash) => {
-    if (hash === "#/Explore/Publications") {
+  returnWikiData = (synId, wikiId) => {
+    if (this.props.token) {
       return (
         <div className="explore-publications">
           <this.props.SynapseComponents.Markdown
             token={this.props.token}
-            ownerId="syn2580853"
-            wikiId="409850"
+            ownerId={synId}
+            wikiId={wikiId}
           />
         </div>
       )
     }
+    if (this.props.defaultData.explorePublications) {
+      return (
+        <div className="explore-publications">
+          <this.props.SynapseComponents.Markdown
+            ownerId={synId}
+            wikiId={wikiId}
+            markdown={this.props.defaultData.explorePublications.markdown}
+          />
+        </div>
+      )
+    }
+    return <div />
+  };
 
-    return (
-      <div className="synapse-chart">
-        <SynapseChart
-          token={this.props.token}
-          activeObject={this.state.activeObject}
-          SynapseConstants={this.props.SynapseConstants}
-          SynapseComponents={this.props.SynapseComponents}
-        />
-      </div>
-    )
+  returnSynapseChart = (hash = window.location.hash) => {
+    if (!window.location.hash.includes("/Explore/Programs/")) {
+      if (hash === "#/Explore/Publications") {
+        return this.returnWikiData("syn2580853", "409850")
+      }
+      if (
+        this.props.synapseLoaded
+        || window.location.hash === "#/Explore/Programs"
+      ) {
+        return (
+          <div className="synapse-chart">
+            <SynapseChart
+              token={this.props.token}
+              activeObject={this.state.activeObject}
+              SynapseConstants={this.props.SynapseConstants}
+              SynapseComponents={this.props.SynapseComponents}
+              synapseLoaded={this.props.synapseLoaded}
+              defaultData={this.props.defaultData}
+            />
+          </div>
+        )
+      }
+      if (!this.props.synapseLoaded) {
+        return (
+          <div className="synapse-chart">
+            <p>Synapse is offline right now</p>
+          </div>
+        )
+      }
+    }
+    return <div />
   };
 
   SelectorsAndCharts = () => {
@@ -183,9 +218,32 @@ class Explore extends Component {
     return <div />
   };
 
+  style = () => {
+    if (window.location.hash.includes("/Programs/")) {
+      return { display: "none" }
+    }
+    return { display: "block" }
+  };
+
+  testingNavButtons = () => {
+    return (
+      <div>
+        <Link name="AMP-AD" to="/Explore/Programs/AMP-AD">
+          To programs
+        </Link>
+        <button
+          type="button"
+          onClick={() => this.replaceRoute("/Explore/Programs/AMP-AD")}
+        >
+          TO PROGRAMS
+        </button>
+      </div>
+    )
+  };
+
   render() {
     return (
-      <section className="page explore">
+      <section className="page explore" style={this.style()}>
         <div className="container">
           <div className="row">
             <h2 className="header">
@@ -206,6 +264,9 @@ Explore.propTypes = {
   token: PropTypes.string,
   SynapseConstants: PropTypes.object.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
+  hash: PropTypes.string.isRequired,
+  history: PropTypes.object.isRequired,
+  synapseLoaded: PropTypes.bool.isRequired,
 }
 Explore.defaultProps = {
   token: "",

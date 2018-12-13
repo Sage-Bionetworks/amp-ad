@@ -19,14 +19,16 @@ const Home = props => (
       token={props.token.sessionToken}
       SynapseConstants={props.SynapseConstants}
       SynapseComponents={props.SynapseComponents}
+      synapseLoaded={props.synapseLoaded}
     />
     <Programs
       token={props.token.sessionToken}
       SynapseConstants={props.SynapseConstants}
       SynapseComponents={props.SynapseComponents}
+      defaultData={props.defaultData}
     />
     <WhatsNew
-      markdown={props.whatsNewMarkdownSegs}
+      defaultData={props.defaultData}
       token={props.token.sessionToken}
       handleNestedChanges={props.handleNestedChanges}
       SynapseComponents={props.SynapseComponents}
@@ -35,12 +37,18 @@ const Home = props => (
 )
 
 Home.propTypes = {
-  token: PropTypes.object.isRequired,
+  token: PropTypes.object,
   handleChanges: PropTypes.func.isRequired,
   whatsNewMarkdownSegs: PropTypes.array.isRequired,
   handleNestedChanges: PropTypes.func.isRequired,
   SynapseConstants: PropTypes.object.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
+  defaultData: PropTypes.object.isRequired,
+  synapseLoaded: PropTypes.bool.isRequired,
+}
+
+Home.defaultProps = {
+  token: { sessionToken: "" },
 }
 
 export default Home

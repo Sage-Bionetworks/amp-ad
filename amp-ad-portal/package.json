@@ -2,7 +2,6 @@
   "name": "amp-ad-portal",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
   "dependencies": {
     "babel-eslint": "9.0.0",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
@@ -18,8 +17,7 @@
     "react-router-dom": "^4.3.1",
     "react-spinners": "^0.3.2",
     "source-map-explorer": "^1.6.0",
-    "synapse-react-client": "^1.10.2",
-    "webpack": "^4.12.0",
+    "synapse-react-client": "^1.10.5",
     "write": "^1.0.3"
   },
   "devDependencies": {
@@ -30,20 +28,22 @@
     "@storybook/react": "^4.0.7",
     "@storybook/storybook-deployer": "^2.3.0",
     "babel-core": "^6.26.3",
-    "eslint": "^5.0.1",
+    "babel-jest": "^23.6.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "3.0.0",
     "eslint-plugin-react": "^7.10.0",
-    "increase-memory-limit": "^1.0.6",
+    "npm-run-all": "^4.1.5",
     "prettier": "^1.13.2",
-    "react-scripts": "1.1.4",
+    "react-scripts": "2.1.1",
     "regenerator-runtime": "^0.11.1",
     "sass": "^1.5.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "watch-css": "sass --watch src/style/style.scss:src/style/style.css",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "analyze": "source-map-explorer build/static/js/main.*",
@@ -54,5 +54,11 @@
     "test": "react-scripts test --env=jsdom",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

@@ -83,10 +83,21 @@ class SynapseBarChart extends Component {
 
   returnSynapseCards = () => {
     if (this.props.activeObject.cards && !this.props.activeObject.homescreen) {
+      if (this.props.synapseLoaded) {
+        return (
+          <this.props.SynapseComponents.StaticQueryWrapper
+            sql={this.props.activeObject.sql}
+            token={this.props.token}
+          >
+            <this.props.SynapseComponents.SynapseTableCardView
+              type={this.props.SynapseConstants[this.props.activeObject.type]}
+            />
+          </this.props.SynapseComponents.StaticQueryWrapper>
+        )
+      }
       return (
         <this.props.SynapseComponents.StaticQueryWrapper
-          sql={this.props.activeObject.sql}
-          token={this.props.token}
+          json={this.props.defaultData[this.props.activeObject.offlineKey]}
         >
           <this.props.SynapseComponents.SynapseTableCardView
             type={this.props.SynapseConstants[this.props.activeObject.type]}

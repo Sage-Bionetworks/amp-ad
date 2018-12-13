@@ -19,12 +19,36 @@ class Programs extends Component {
 
   //updateLoadState={() => this.handleChanges("loading", false)}
   QueryWrapper = () => {
+    let json
+    let sql
+    let token
     if (this.props.token) {
+      token = this.props.token
+      sql = "SELECT * FROM syn17024173"
+      json = false
       return (
         <div className="query-wrapper">
           <this.props.SynapseComponents.StaticQueryWrapper
-            sql="SELECT * FROM syn17024173"
-            token={this.props.token}
+            sql={sql}
+            token={token}
+          >
+            <this.props.SynapseComponents.SynapseTableCardView
+              type={this.props.SynapseConstants.AMP_CONSORTIUM}
+            />
+          </this.props.SynapseComponents.StaticQueryWrapper>
+        </div>
+      )
+    }
+    if (!this.props.token) {
+      token = false
+      sql = false
+      json = this.props.defaultData.syn17024173
+      return (
+        <div className="query-wrapper">
+          <this.props.SynapseComponents.StaticQueryWrapper
+            sql={sql}
+            token={token}
+            json={json}
           >
             <this.props.SynapseComponents.SynapseTableCardView
               type={this.props.SynapseConstants.AMP_CONSORTIUM}

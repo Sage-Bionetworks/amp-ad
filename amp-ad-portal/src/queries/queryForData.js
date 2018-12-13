@@ -45,4 +45,24 @@ const queryTable = (table, query, token) => {
     .catch(processError)
 }
 
-export { queryTable, getTable }
+const host = "https://static.ampadportal.org/"
+//const host = "http://localhost:3030/"
+
+const getStaticJSON = async (id, key, handleNestedChanges) => {
+  return fetch(`${host}${id}.json`, {
+    method: "GET",
+    "cache-control": "no-cache",
+  })
+    .then((response) => {
+      return response.json()
+    })
+    .then((data) => {
+      if (handleNestedChanges !== undefined) {
+        handleNestedChanges(key, id, data)
+      }
+      return data
+    })
+    .catch(processError)
+}
+
+export { getStaticJSON, queryTable, getTable }

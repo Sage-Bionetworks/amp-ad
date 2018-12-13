@@ -1,6 +1,8 @@
 import * as SynapseClient from "./synapse/SynapseClient"
 import * as SynapseConstants from "./synapse/SynapseConstants"
 
+const fetch = require('node-fetch');
+
 const buildRequest = (table, query) => {
   return {
     entityId: table,
@@ -46,19 +48,30 @@ const queryTable = (table, query) => {
     .catch(processError)
 }
 
-//const runQueries = () => {
-//return SynapseClient.login("mikeybkats", "guinness")
-//.then(tokenResponse => {
-//return getTable("syn12532774", tokenResponse)
-//})
-//.then( response => {
-//return JSON.stringify(response)
-//})
-//.catch(function(error) {
-//console.log(error)
-//process.exit()
-//})
-//}
+function getWikiData(wikiId, token, synId = "syn12666371") {
+  return fetch(
+    `https://repo-prod.prod.sagebase.org/repo/v1/entity/${synId}/wiki/${wikiId}`,
+    {
+      method: "GET",
+      headers: {
+        sessionToken: token,
+      },
+    },
+  )
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      }
+      return handleErrors(response)
+    })
+    .then((processedData) => {
+      return processedData
+    })
+    .catch((error) => {
+      return ""
+    })
+}
 
-
-export default queryTable
+export {
+  login, queryTable, getWikiData 
+}
