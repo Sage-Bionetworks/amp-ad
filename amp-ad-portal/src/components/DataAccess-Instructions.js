@@ -1,6 +1,6 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { BarLoader } from "react-spinners"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { BarLoader } from 'react-spinners'
 
 class Instructions extends Component {
   state = {
@@ -12,27 +12,23 @@ class Instructions extends Component {
     this.addDetailsFunctionality()
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state !== nextState) {
-      return true
-    }
-    if (this.props.token !== nextProps.token) {
-      return true
-    }
-    return true
-  }
-
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     this.addDetailsFunctionality()
+    if (
+      Object.keys(prevProps.defaultData).length
+      !== Object.keys(this.props.defaultData).length
+    ) {
+      console.log('updating')
+    }
   }
 
   addDetailsFunctionality = () => {
-    const details = document.querySelectorAll("details")
+    const details = document.querySelectorAll('details')
 
     if (details.length > 0) {
       details.forEach((carrot) => {
         carrot.addEventListener(
-          "click",
+          'click',
           (e) => {
             const detailsNode = e.target.parentNode
             const state = !e.target.parentNode.open
@@ -64,7 +60,21 @@ class Instructions extends Component {
         />
       )
     }
+    if (!this.props.synapseLoaded && this.props.defaultData.dataInstructions) {
+      return (
+        <this.props.SynapseComponents.Markdown
+          markdown={this.props.defaultData.dataInstructions.markdown}
+        />
+      )
+    }
     return <div />
+  };
+
+  returnBarLoader = () => {
+    if (!this.props.synapseLoaded && this.props.defaultData.dataInstructions) {
+      return <div />
+    }
+    return <BarLoader color="#5BB0B5" loading={this.state.loading} />
   };
 
   render() {
@@ -75,7 +85,7 @@ class Instructions extends Component {
             <div className="col-xs-12 col-sm-11 col-lg-9 col-centered">
               <h2 className="header">Getting Access to Data</h2>
               {this.returnMarkdown()}
-              <BarLoader color="#5BB0B5" loading={this.state.loading} />
+              {this.returnBarLoader()}
             </div>
           </section>
         </div>

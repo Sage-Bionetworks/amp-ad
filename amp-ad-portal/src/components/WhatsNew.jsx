@@ -1,6 +1,6 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { BarLoader } from "react-spinners"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { BarLoader } from 'react-spinners'
 
 class WhatsNew extends Component {
   constructor(props) {
@@ -23,18 +23,9 @@ class WhatsNew extends Component {
       && !this.props.token
       && this.state.loading
     ) {
-      this.handleChanges("loading", false)
+      this.handleChanges('loading', false)
     }
   }
-
-  componentShouldUpdate(nextProps) {
-    if (nextProps.token !== this.props.token) {
-      return true
-    }
-    return true
-  }
-
-  componentWillUpdate(nextProps) {}
 
   returnMarkdown = () => {
     if (this.props.token) {
@@ -43,7 +34,7 @@ class WhatsNew extends Component {
           token={this.props.token}
           ownerId="syn12666371"
           wikiId="582408"
-          updateLoadState={() => this.handleChanges("loading", false)}
+          updateLoadState={() => this.handleChanges('loading', false)}
         />
       )
     }

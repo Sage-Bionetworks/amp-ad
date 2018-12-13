@@ -1,10 +1,10 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { SynapseComponents } from "synapse-react-client"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { SynapseComponents } from 'synapse-react-client'
 
-import { getMarkdown } from "../queries/getWikiData"
+import { getMarkdown } from '../queries/getWikiData'
 
-const ReactMarkdown = require("react-markdown")
+const ReactMarkdown = require('react-markdown')
 
 class DataUse extends Component {
   state = {
@@ -22,6 +22,14 @@ class DataUse extends Component {
           token={token}
           ownerId="syn12666371"
           wikiId="585318"
+          updateLoadState={() => this.handleChange({ loaded: true })}
+        />
+      )
+    }
+    if (!this.props.synapseLoaded && this.props.defaultData.dataInstructions) {
+      return (
+        <SynapseComponents.Markdown
+          markdown={this.props.defaultData.dataInstructions.markdown}
           updateLoadState={() => this.handleChange({ loaded: true })}
         />
       )

@@ -1,6 +1,6 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { BarLoader } from "react-spinners"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { BarLoader } from 'react-spinners'
 
 class DataUseCertificates extends Component {
   state = {
@@ -12,27 +12,17 @@ class DataUseCertificates extends Component {
     this.addDetailsFunctionality()
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state !== nextState) {
-      return true
-    }
-    if (this.props.token !== nextProps.token) {
-      return true
-    }
-    return false
-  }
-
   componentDidUpdate() {
     this.addDetailsFunctionality()
   }
 
   addDetailsFunctionality = () => {
-    const details = document.querySelectorAll("details")
+    const details = document.querySelectorAll('details')
 
     if (details.length > 0) {
       details.forEach((carrot) => {
         carrot.addEventListener(
-          "click",
+          'click',
           (e) => {
             const detailsNode = e.target.parentNode
             const state = !e.target.parentNode.open
@@ -64,7 +54,27 @@ class DataUseCertificates extends Component {
         />
       )
     }
+    if (
+      !this.props.synapseLoaded
+      && this.props.defaultData.dataUseCertificates
+    ) {
+      return (
+        <this.props.SynapseComponents.Markdown
+          markdown={this.props.defaultData.dataUseCertificates.markdown}
+        />
+      )
+    }
     return <div />
+  };
+
+  returnBarLoader = () => {
+    if (
+      !this.props.synapseLoaded
+      && this.props.defaultData.dataUseCertificates
+    ) {
+      return <div />
+    }
+    return <BarLoader color="#5BB0B5" loading={this.state.loading} />
   };
 
   render() {
@@ -75,7 +85,7 @@ class DataUseCertificates extends Component {
             <div className="col-xs-12 col-sm-11 col-lg-9 col-centered table-container">
               <h2 className="header">Data Use Certificates</h2>
               {this.returnMarkdown()}
-              <BarLoader color="#5BB0B5" loading={this.state.loading} />
+              {this.returnBarLoader()}
             </div>
           </section>
         </div>

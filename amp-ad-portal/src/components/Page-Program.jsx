@@ -1,17 +1,16 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class ProgramPage extends Component {
   state = {
     params: {},
-    query: "",
-    cardQuery: "",
-    name: "",
-    wikiId: "",
-    synId: "",
-    jsonKey: "",
-    wikiSubHero: "",
-    defaultDataLength: 0,
+    query: '',
+    cardQuery: '',
+    name: '',
+    wikiId: '',
+    synId: '',
+    jsonKey: '',
+    wikiSubHero: '',
   };
 
   componentDidMount() {
@@ -25,83 +24,68 @@ class ProgramPage extends Component {
     )
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log(this.props.defaultData[this.state.wikiSubHero])
-    if (
-      Object.keys(this.props.defaultData).length !== prevState.defaultDataLength
-    ) {
-      console.log(
-        Object.keys(this.props.defaultData).length,
-        this.state.defaultDataLength,
-      )
-      this.handleChanges({
-        defaultDataLength: Object.keys(this.props.defaultData).length,
-      })
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.defaultDataLength !== this.state.defaultDataLength) {
-      return true
-    }
-    return true
-  }
-
   handleChanges = (stateObj) => {
     this.setState(stateObj)
   };
 
+  parameters = {
+    'AMP-AD': {
+      query: "SELECT * FROM syn17024229 WHERE ( ( \"Program\" = 'AMP-AD' ) )",
+      cardQuery:
+        "SELECT * FROM syn17024173 where ( ( \"Program\" = 'AMP-AD' ) )",
+      wikiId: '581895',
+      wikiSubHero: 'programAMPAD_wiki',
+      offlineJSON: 'syn17024229_programAMPAD',
+    },
+    'M2OVE-AD': {
+      query: "SELECT * FROM syn17024229 WHERE ( ( \"Program\" = 'M2OVE-AD' ) )",
+      cardQuery:
+        "SELECT * FROM syn17024173 WHERE ( ( \"Program\" = 'M2OVE-AD' ) )",
+      wikiId: '581894',
+      wikiSubHero: 'programM2OVEAD_wiki',
+      offlineJSON: 'syn17024229_programM2OVEAD',
+    },
+    'Resilience-AD': {
+      query:
+        "SELECT * FROM syn17024229 WHERE ( ( \"Program\" = 'Resilience-AD' ) )",
+      cardQuery:
+        "SELECT * FROM syn17024173 WHERE ( ( \"Program\" = 'Resilience-AD' ) )",
+      wikiId: '581898',
+      wikiSubHero: 'programResilienceAD_wiki',
+      offlineJSON: 'syn17024229_programResilienceAD',
+    },
+    'MODEL-AD': {
+      query: "SELECT * FROM syn17024229 WHERE ( ( \"Program\" = 'MODEL-AD' ) )",
+      cardQuery:
+        "SELECT * FROM syn17024173 WHERE ( ( \"Program\" = 'MODEL-AD' ) )",
+      wikiId: '581896',
+      wikiSubHero: 'programMODELAD_wiki',
+      offlineJSON: 'syn17024229_programMODELAD',
+    },
+  };
+
   contentRouter = (handle = this.state.params.handle) => {
-    let query
-    let cardQuery
-    let wikiId
-    let jsonKey
-    let wikiSubHero
-    let offlineJSON
-    const synId = "syn12666371"
-    switch (handle) {
-    case "AMP-AD":
-      query = "SELECT * FROM syn17024229 WHERE ( ( \"Program\" = 'AMP-AD' ) )"
-      cardQuery = "SELECT * FROM syn17024173 where ( ( \"Program\" = 'AMP-AD' ) )"
-      wikiId = "581895"
-      wikiSubHero = "programAMPAD_wiki"
-      offlineJSON = "syn17024229_programAMPAD"
-      break
-    case "M2OVE-AD":
-      query = "SELECT * FROM syn17024229 WHERE ( ( \"Program\" = 'M2OVE-AD' ) )"
-      cardQuery = "SELECT * FROM syn17024173 WHERE ( ( \"Program\" = 'M2OVE-AD' ) )"
-      wikiId = "581894"
-      wikiSubHero = "programM2OVEAD_wiki"
-      offlineJSON = "syn17024229_programM2OVEAD"
-      break
-    case "MODEL-AD":
-      query = "SELECT * FROM syn17024229 WHERE ( ( \"Program\" = 'MODEL-AD' ) )"
-      cardQuery = "SELECT * FROM syn17024173 WHERE ( ( \"Program\" = 'MODEL-AD' ) )"
-      wikiId = "581896"
-      wikiSubHero = "programMODELAD_wiki"
-      offlineJSON = "syn17024229_programMODELAD"
-      break
-    case "Resilience-AD":
-      query = "SELECT * FROM syn17024229 WHERE ( ( \"Program\" = 'Resilience-AD' ) )"
-      cardQuery = "SELECT * FROM syn17024173 WHERE ( ( \"Program\" = 'Resilience-AD' ) )"
-      wikiId = "581898"
-      wikiSubHero = "programResilienceAD_wiki"
-      offlineJSON = "syn17024229_programResilienceAD"
-      break
-    default:
-      query = "SELECT * FROM syn17024229"
+    if (handle !== undefined) {
+      const query = this.parameters[handle].query
+      const cardQuery = this.parameters[handle].cardQuery
+      const wikiId = this.parameters[handle].wikiId
+      const jsonKey = this.parameters[handle].jsonKey
+      const wikiSubHero = this.parameters[handle].wikiSubHero
+      const offlineJSON = this.parameters[handle].offlineJSON
+      const synId = 'syn12666371'
+
+      this.handleChanges({
+        query,
+        cardQuery,
+        name: handle,
+        wikiId,
+        synId,
+        jsonKey,
+        wikiSubHero,
+        offlineJSON,
+      })
+      return query
     }
-    this.handleChanges({
-      query,
-      cardQuery,
-      name: handle,
-      wikiId,
-      synId,
-      jsonKey,
-      wikiSubHero,
-      offlineJSON,
-    })
-    return query
   };
 
   returnSynapseChart = () => {
@@ -135,7 +119,7 @@ class ProgramPage extends Component {
   };
 
   style = () => {
-    if (window.location.hash.includes("/Programs/")) {
+    if (window.location.hash.includes('/Programs/')) {
       return {}
     }
     return {}

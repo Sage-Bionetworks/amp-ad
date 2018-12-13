@@ -1,6 +1,6 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { BarLoader } from "react-spinners"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { BarLoader } from 'react-spinners'
 
 class ExperimentalResources extends Component {
   state = {
@@ -20,7 +20,15 @@ class ExperimentalResources extends Component {
           token={this.props.token.sessionToken}
           ownerId="syn2580853"
           wikiId="409845"
-          updateLoadState={() => this.handleChanges("loading", false)}
+          updateLoadState={() => this.handleChanges('loading', false)}
+        />
+      )
+    }
+    if (!this.props.synapseLoaded && this.props.defaultData.tools) {
+      return (
+        <this.props.SynapseComponents.Markdown
+          markdown={this.props.defaultData.tools.markdown}
+          updateLoadState={() => this.handleChanges('loading', false)}
         />
       )
     }
