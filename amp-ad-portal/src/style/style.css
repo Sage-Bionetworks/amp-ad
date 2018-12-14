@@ -1601,6 +1601,10 @@ section.analyses button {
   justify-content: flex-end;
 }
 
+section.programs .container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
+}
 section.programs .box {
   height: 470px;
   position: relative;

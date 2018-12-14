@@ -34,7 +34,7 @@ export const synapseObjects = [
       {
         sql: 'SELECT * FROM syn17024229',
         synapseId: 'syn17024229',
-        unitDescription: 'files',
+        unitDescription: 'projects',
         facetName: 'Program',
       },
     ],
@@ -47,28 +47,24 @@ export const synapseObjects = [
     cards: false,
     menu: true,
     type: 'AMP_STUDY',
-    sql:
-      'SELECT Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Species, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn17083367',
+    sql: 'SELECT * FROM syn17083367',
     filter: 'Species',
     menuConfig: [
       {
-        sql:
-          'SELECT Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Species, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn17083367',
+        sql: 'SELECT * FROM syn17083367',
         synapseId: 'syn17083367',
         facetName: 'Species',
         facetDisplayValue: 'Species',
         unitDescription: 'studies',
       },
       {
-        sql:
-          'SELECT Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Species, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn17083367',
+        sql: 'SELECT * FROM syn17083367',
         synapseId: 'syn17083367',
         facetName: 'Grant',
         unitDescription: 'studies',
       },
       {
-        sql:
-          'SELECT Study_Name, Study, Study_Type, Consortium, Model_System, Access_Type, Species, Study, Study_Description, Sample_Type, Diagnosis_or_Model_System, Number_of_Individuals, Notes, Data_Contributor, Grant, DataType_All FROM syn17083367',
+        sql: 'SELECT * FROM syn17083367',
         synapseId: 'syn17083367',
         facetName: 'Consortium',
         facetDisplayValue: 'Program',

@@ -1,32 +1,32 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { Link } from "react-router-dom"
-import SynapseChart from "./SynapseBarChart.jsx"
-import Selectors from "./SelectorRow"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import SynapseChart from './SynapseChartAndCards.jsx'
+import Selectors from './SelectorRow'
 
 import {
   clone,
   synapseObjects,
   returnSynapseObject,
   setSynapseValue,
-} from "../library/synapseObjects"
+} from '../library/synapseObjects'
 
 let loadedObjects
 
 class Explore extends Component {
   state = {
-    activeButton: "",
+    activeButton: '',
     activeObject: {},
   };
 
   componentDidMount() {
-    if (!this.props.hash.includes("/Explore/Programs/")) {
+    if (!this.props.hash.includes('/Explore/Programs/')) {
       this.loadDefaultComponent()
     }
   }
 
   componentDidUpdate() {
-    if (!this.props.hash.includes("/Explore/Programs/")) {
+    if (!this.props.hash.includes('/Explore/Programs/')) {
       if (
         Object.keys(this.state.activeObject).length === 0
         && this.state.activeObject.constructor === Object
@@ -38,56 +38,56 @@ class Explore extends Component {
   }
 
   loadDefaultComponent = () => {
-    if (!this.props.hash.includes("/Explore/Programs/")) {
+    if (!this.props.hash.includes('/Explore/Programs/')) {
       console.log(window.location.hash)
       loadedObjects = clone(synapseObjects)
       // studies
-      setSynapseValue(loadedObjects, "syn17083367", "filter", "projectStatus")
+      setSynapseValue(loadedObjects, 'syn17083367', 'filter', 'projectStatus')
       // publications
-      setSynapseValue(loadedObjects, "syn2580853", "filter", "id")
+      setSynapseValue(loadedObjects, 'syn2580853', 'filter', 'id')
 
-      if (window.location.hash !== "#/Explore") {
-        this.setActiveValues(window.location.hash, "id")
-      } else this.handleButtonPress("syn17024112")
+      if (window.location.hash !== '#/Explore') {
+        this.setActiveValues(window.location.hash, 'id')
+      } else this.handleButtonPress('syn17024112')
     }
   };
 
   setActiveValues = (hash) => {
     let id
     switch (hash) {
-    case "#/Explore":
-      id = "syn11346063"
+    case '#/Explore':
+      id = 'syn11346063'
       break
-    case "#/Explore/Data":
-      id = "syn11346063"
+    case '#/Explore/Data':
+      id = 'syn11346063'
       break
-    case "#/Explore/Studies":
+    case '#/Explore/Studies':
       //syn9886254
-      id = "syn17083367"
+      id = 'syn17083367'
       break
-    case "#/Explore/Publications":
-      id = "syn2580853"
+    case '#/Explore/Publications':
+      id = 'syn2580853'
       break
-    case "#/Explore/Programs":
-      id = "syn17024173"
+    case '#/Explore/Programs':
+      id = 'syn17024173'
       break
-    case "#/Explore/Projects":
-      id = "syn17024229"
+    case '#/Explore/Projects':
+      id = 'syn17024229'
       break
-    case "#/Explore/People":
-      id = "syn13897207"
+    case '#/Explore/People':
+      id = 'syn13897207'
       break
-    case hash.includes("/Studies/"):
-      id = "lowerPage"
+    case hash.includes('/Studies/'):
+      id = 'lowerPage'
       break
-    case hash.includes("/Programs/"):
-      id = "lowerPage"
+    case hash.includes('/Programs/'):
+      id = 'lowerPage'
       break
     default:
-      id = "syn11346063"
+      id = 'syn11346063'
     }
 
-    if (!this.props.hash.includes("/Programs/")) {
+    if (!this.props.hash.includes('/Programs/')) {
       this.handleButtonPress(id)
     }
     return id
@@ -117,22 +117,22 @@ class Explore extends Component {
         this.replaceRoute(activeObject.hash)
       },
     )
-    return ""
+    return ''
   };
 
   returnButtonClass = (id) => {
-    return `btn-control ${this.state.activeButton === id ? "active" : ""}`
+    return `btn-control ${this.state.activeButton === id ? 'active' : ''}`
   };
 
   hideBarSection = () => {
     const hash = window.location.hash
-    if (hash === "#/Explore") {
-      return ""
+    if (hash === '#/Explore') {
+      return ''
     }
-    if (hash !== "#/") {
-      return ""
+    if (hash !== '#/') {
+      return ''
     }
-    return ""
+    return ''
   };
 
   returnWikiData = (synId, wikiId) => {
@@ -162,13 +162,13 @@ class Explore extends Component {
   };
 
   returnSynapseChart = (hash = window.location.hash) => {
-    if (!window.location.hash.includes("/Explore/Programs/")) {
-      if (hash === "#/Explore/Publications") {
-        return this.returnWikiData("syn2580853", "409850")
+    if (!window.location.hash.includes('/Explore/Programs/')) {
+      if (hash === '#/Explore/Publications') {
+        return this.returnWikiData('syn2580853', '409850')
       }
       if (
         this.props.synapseLoaded
-        || window.location.hash === "#/Explore/Programs"
+        || window.location.hash === '#/Explore/Programs'
       ) {
         return (
           <div className="synapse-chart">
@@ -196,9 +196,9 @@ class Explore extends Component {
 
   SelectorsAndCharts = () => {
     if (
-      !window.location.hash.includes("/Studies/")
-      && !window.location.hash.includes("/Projects/")
-      && !window.location.hash.includes("/Programs/")
+      !window.location.hash.includes('/Studies/')
+      && !window.location.hash.includes('/Projects/')
+      && !window.location.hash.includes('/Programs/')
     ) {
       return (
         <div>
@@ -219,10 +219,10 @@ class Explore extends Component {
   };
 
   style = () => {
-    if (window.location.hash.includes("/Programs/")) {
-      return { display: "none" }
+    if (window.location.hash.includes('/Programs/')) {
+      return { display: 'none' }
     }
-    return { display: "block" }
+    return { display: 'block' }
   };
 
   testingNavButtons = () => {
@@ -233,7 +233,7 @@ class Explore extends Component {
         </Link>
         <button
           type="button"
-          onClick={() => this.replaceRoute("/Explore/Programs/AMP-AD")}
+          onClick={() => this.replaceRoute('/Explore/Programs/AMP-AD')}
         >
           TO PROGRAMS
         </button>
@@ -269,7 +269,7 @@ Explore.propTypes = {
   synapseLoaded: PropTypes.bool.isRequired,
 }
 Explore.defaultProps = {
-  token: "",
+  token: '',
 }
 
 export default Explore

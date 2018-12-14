@@ -1,8 +1,8 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { BarLoader } from "react-spinners"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { BarLoader } from 'react-spinners'
 
-class SynapseBarChart extends Component {
+class SynapseChartAndCards extends Component {
   state = {};
 
   shouldComponentUpdate(nextProps) {
@@ -14,7 +14,7 @@ class SynapseBarChart extends Component {
 
   buildQuery = (sql = this.props.activeObject.sql) => {
     return {
-      concreteType: "org.sagebionetworks.repo.model.table.QueryBundleRequest",
+      concreteType: 'org.sagebionetworks.repo.model.table.QueryBundleRequest',
       query: {
         isConsistent: false,
         includeEntityEtag: true,
@@ -32,10 +32,10 @@ class SynapseBarChart extends Component {
 
   hideBarSection = () => {
     const hash = window.location.hash
-    if (hash === "#/Explore" || hash === "#/") {
-      return "bar-section"
+    if (hash === '#/Explore' || hash === '#/') {
+      return 'bar-section'
     }
-    return "bar-section"
+    return 'bar-section'
   };
 
   returnStackedRow = () => {
@@ -56,9 +56,9 @@ class SynapseBarChart extends Component {
                 <div
                   className="bar-loader"
                   style={{
-                    textAlign: "center",
-                    width: "100px",
-                    margin: "0px auto",
+                    textAlign: 'center',
+                    width: '100px',
+                    margin: '0px auto',
                   }}
                 >
                   <BarLoader color="#4DB7AD" loading />
@@ -91,6 +91,7 @@ class SynapseBarChart extends Component {
           >
             <this.props.SynapseComponents.SynapseTableCardView
               type={this.props.SynapseConstants[this.props.activeObject.type]}
+              unitDescription="programs"
             />
           </this.props.SynapseComponents.StaticQueryWrapper>
         )
@@ -128,9 +129,9 @@ class SynapseBarChart extends Component {
               <div
                 className="bar-loader"
                 style={{
-                  textAlign: "center",
-                  width: "100px",
-                  margin: "0px auto",
+                  textAlign: 'center',
+                  width: '100px',
+                  margin: '0px auto',
                 }}
               >
                 <BarLoader color="#4DB7AD" loading />
@@ -159,15 +160,15 @@ class SynapseBarChart extends Component {
   }
 }
 
-SynapseBarChart.propTypes = {
+SynapseChartAndCards.propTypes = {
   token: PropTypes.string,
   activeObject: PropTypes.object.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
   SynapseConstants: PropTypes.object.isRequired,
 }
 
-SynapseBarChart.defaultProps = {
-  token: "",
+SynapseChartAndCards.defaultProps = {
+  token: '',
 }
 
-export default SynapseBarChart
+export default SynapseChartAndCards

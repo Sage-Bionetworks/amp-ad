@@ -1340,6 +1340,10 @@ select {
   }
 
   section.programs {
+    .container-fluid {
+      padding-right: 0px;
+      padding-left: 0px;
+    }
     .query-wrapper {
       //margin-left: -30px;
       //margin-right: -30px;

@@ -45,8 +45,8 @@ const queryTable = (table, query, token) => {
     .catch(processError)
 }
 
-//const host = "https://static.ampadportal.org/"
-const host = 'http://localhost:3030/'
+const host = 'https://static.ampadportal.org/'
+//const host = 'http://localhost:3030/'
 
 const getStaticJSON = async (id, key, handleNestedChanges) => {
   return fetch(`${host}${id}.json`, {
