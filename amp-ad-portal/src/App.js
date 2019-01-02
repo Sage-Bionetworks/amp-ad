@@ -7,7 +7,6 @@ import {
   SynapseConstants,
   SynapseClient,
 } from 'synapse-react-client'
-//import SynapseClient from "sy"
 
 // non component js
 import asyncComponent from './components/AsyncComponent'
