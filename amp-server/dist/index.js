@@ -100,20 +100,4 @@ var writeAllDataFile = function writeAllDataFile() {
   runQueries([tables[1]], query5, "programResilienceAD");
 };
 
-//app.all("/", function(req, res, next) {
-//res.header("Access-Control-Allow-Origin", "*")
-//res.header("Access-Control-Allow-Headers", "X-Requested-With")
-//next()
-//})
-
-//app.use(function(req, res, next) {
-//res.header("Access-Control-Allow-Origin", "*")
-//res.header("Access-Control-Allow-Headers", "X-Requested-With")
-//next()
-//})
-
 writeAllDataFile();
-
-//app.use(express.static( __dirname + "/public"))
-
-//app.listen(3030, () => console.log("Example app listening on port 3030!"))

@@ -33,8 +33,10 @@ const AsyncDataUseCertificates = asyncComponent(() => import('./components/DataA
 const AsyncResearchTools = asyncComponent(() => import('./components/ResearchTools'))
 const AsyncResourcesAcknowledgements = asyncComponent(() => import('./components/Resources-AcknowledgementStatements'))
 
+// ReactGA is a google analytics node package
 ReactGA.initialize('UA-29804340-3')
 
+// tracking the location path with Google analytics
 const history = createHistory()
 history.listen((location) => {
   ReactGA.set({

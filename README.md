@@ -39,3 +39,68 @@
         │   └── ./amp-ad-portal/src/components/unused
         └── ./amp-ad-portal/src/queries
  
+```
+
+## ./amp-server 
+contains node scripts which are used to update amp-ad static server. **note:** js files are written in es6 syntax and then compiled for node compatibility
+
+#### how compile with gulp
+`example scenario:` changes are made to ./amp-server/src/index.js
+
+```  
+$ gulp 
+[11:56:01] Working directory changed to ~/sites/amp-ad/amp-server  
+[11:56:01] Using gulpfile ~/sites/amp-ad/amp-server/gulpfile.js  
+[11:56:01] Starting 'default'...  
+[11:56:02] Finished 'default' after 259 ms  
+```
+
+#### how to update static server with new files  
+go to gulp output directory and run index.js. 
+
+``` 
+$ cd amp-ad/amp-server/dist
+$ node index.js  
+SELECT * FROM syn17024173
+SELECT * FROM syn17024229
+SELECT * FROM syn17024229 where ( ( "Program" = 'AMP-AD' ) )
+SELECT * FROM syn17024229 where ( ( "Program" = 'MODEL-AD' ) )
+SELECT * FROM syn17024229 where ( ( "Program" = 'M2OVE-AD' ) )
+SELECT * FROM syn17024229 where ( ( "Program" = 'Resilience-AD' ) )
+tools.json has been saved
+whatsNew.json has been saved
+programResilienceAD_wiki.json has been saved
+programModelAD_wiki.json has been saved
+programModelAD_wiki.json has been saved
+about.json has been saved
+programM2OVEAD_wiki.json has been saved
+...
+```
+
+## ./amp-ad-portal  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
