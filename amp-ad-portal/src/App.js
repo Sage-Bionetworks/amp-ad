@@ -154,7 +154,7 @@ class App extends Component {
     })
   }
 
-  login = async () => SynapseClient.login('mikeybkatssss', 'guinness')
+  login = async () => SynapseClient.login('mikeybkats', 'guinness')
     .then((response) => {
       let key = {}
       if (response.sessionToken) {
