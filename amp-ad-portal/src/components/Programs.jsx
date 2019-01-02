@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 //import { BarLoader } from "react-spinners"
 //import { getTable } from "../queries/queryForData"
 
@@ -24,7 +24,7 @@ class Programs extends Component {
     let token
     if (this.props.token) {
       token = this.props.token
-      sql = "SELECT * FROM syn17024173"
+      sql = 'SELECT * FROM syn17024173'
       json = false
       return (
         <div className="query-wrapper">
@@ -34,6 +34,7 @@ class Programs extends Component {
           >
             <this.props.SynapseComponents.SynapseTableCardView
               type={this.props.SynapseConstants.AMP_CONSORTIUM}
+              unitDescription="programs"
             />
           </this.props.SynapseComponents.StaticQueryWrapper>
         </div>
@@ -83,7 +84,7 @@ Programs.propTypes = {
   SynapseComponents: PropTypes.object.isRequired,
 }
 Programs.defaultProps = {
-  token: "",
+  token: '',
 }
 
 export default Programs

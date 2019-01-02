@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#File: tree-print
+
+tree=$(tree -tfd --noreport -L 5 -I 'node_modules' )
+
+printf "# Project tree\n\n${tree}"

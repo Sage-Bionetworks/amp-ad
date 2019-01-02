@@ -18,5 +18,8 @@
     "file-system": "^2.2.2",
     "lodash": "^4.17.10",
     "node-fetch": "^2.1.2"
+  },
+  "scripts": {
+    "start": "http-server -p 3030 --cors='*' ./dist/public"
   }
 }

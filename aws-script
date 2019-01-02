@@ -1,5 +1,0 @@
-#!/bin/bash
-echo "pushing local to staging"
-
-aws s3 sync --delete ./amp-ad-portal/build s3://ampad-test.sagebase.org
-

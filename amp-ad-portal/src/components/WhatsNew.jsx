@@ -1,6 +1,6 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { BarLoader } from "react-spinners"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { BarLoader } from 'react-spinners'
 
 class WhatsNew extends Component {
   constructor(props) {
@@ -23,18 +23,9 @@ class WhatsNew extends Component {
       && !this.props.token
       && this.state.loading
     ) {
-      this.handleChanges("loading", false)
+      this.handleChanges('loading', false)
     }
   }
-
-  componentShouldUpdate(nextProps) {
-    if (nextProps.token !== this.props.token) {
-      return true
-    }
-    return true
-  }
-
-  componentWillUpdate(nextProps) {}
 
   returnMarkdown = () => {
     if (this.props.token) {
@@ -43,7 +34,7 @@ class WhatsNew extends Component {
           token={this.props.token}
           ownerId="syn12666371"
           wikiId="582408"
-          updateLoadState={() => this.handleChanges("loading", false)}
+          updateLoadState={() => this.handleChanges('loading', false)}
         />
       )
     }
@@ -59,6 +50,13 @@ class WhatsNew extends Component {
     return <div />
   };
 
+  returnBarLoader = () => {
+    if (!this.props.synapseLoaded && this.props.defaultData.whatsNew) {
+      return <div />
+    }
+    return <BarLoader color="#5BB0B5" loading={this.state.loading} />
+  };
+
   render() {
     return (
       <section className="what-new flex-row">
@@ -68,7 +66,7 @@ class WhatsNew extends Component {
               <h2 className="header">What&apos;s New</h2>
             </div>
             <div className="content">{this.returnMarkdown()}</div>
-            <BarLoader color="#5BB0B5" loading={this.state.loading} />
+            {this.returnBarLoader()}
           </div>
         </div>
       </section>

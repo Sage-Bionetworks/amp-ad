@@ -1,17 +1,14 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { BarLoader } from "react-spinners"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { BarLoader } from 'react-spinners'
 
 class WhatIsAmpAD extends Component {
   state = {
     loading: true,
   };
 
-  shouldComponentUpdate(nextProps) {
-    if (this.props.token !== nextProps.token) {
-      return true
-    }
-    return true
+  componentDidUpdate() {
+    console.log('updated')
   }
 
   handleChange = (newState) => {
@@ -29,7 +26,24 @@ class WhatIsAmpAD extends Component {
         />
       )
     }
+    if (!this.props.synapseLoaded && this.props.defaultData.about) {
+      return (
+        <this.props.SynapseComponents.Markdown
+          markdown={this.props.defaultData.about.markdown}
+        />
+      )
+    }
     return <div />
+  };
+
+  returnBarLoader = () => {
+    if (
+      !this.props.synapseLoaded
+      && this.props.defaultData.acknowledgementStatements
+    ) {
+      return <div />
+    }
+    return <BarLoader color="#5BB0B5" loading={this.state.loading} />
   };
 
   render() {
@@ -40,7 +54,7 @@ class WhatIsAmpAD extends Component {
             <div className="col-xs-12 col-sm-11  col-lg-9 col-centered">
               <h2 className="header">About</h2>
               {this.returnMarkdown()}
-              <BarLoader color="#5BB0B5" loading={this.state.loading} />
+              {this.returnBarLoader()}
             </div>
           </section>
         </div>

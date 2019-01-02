@@ -1,40 +1,40 @@
-import React, { Component } from "react"
-import { HashRouter as Router, Route } from "react-router-dom"
-import ReactGA from "react-ga"
-import createHistory from "history/createBrowserHistory"
+import React, { Component } from 'react'
+import { HashRouter as Router, Route } from 'react-router-dom'
+import ReactGA from 'react-ga'
+import createHistory from 'history/createBrowserHistory'
 import {
   SynapseComponents,
   SynapseConstants,
   SynapseClient,
-} from "synapse-react-client"
+} from 'synapse-react-client'
 //import SynapseClient from "sy"
 
 // non component js
-import asyncComponent from "./components/AsyncComponent"
-import ScrollToTop from "./components/ScrollToTop"
+import asyncComponent from './components/AsyncComponent'
+import ScrollToTop from './components/ScrollToTop'
 
 // to load default json
-import { getStaticJSON } from "./queries/queryForData"
+import { getStaticJSON } from './queries/queryForData'
 
 // about pages
-const AsyncAboutAmpAd = asyncComponent(() => import("./components/About-WhatIsAmpAd"))
+const AsyncAboutAmpAd = asyncComponent(() => import('./components/About-WhatIsAmpAd'))
 // component js
-const AsyncHome = asyncComponent(() => import("./components/Home"))
-const AsyncHeader = asyncComponent(() => import("./components/Header"))
-const Footer = asyncComponent(() => import("./components/Footer"))
+const AsyncHome = asyncComponent(() => import('./components/Home'))
+const AsyncHeader = asyncComponent(() => import('./components/Header'))
+const Footer = asyncComponent(() => import('./components/Footer'))
 // explore
-const AsyncExplore = asyncComponent(() => import("./components/Explore.jsx"))
+const AsyncExplore = asyncComponent(() => import('./components/Explore.jsx'))
 // study page
-const AsyncStudyPage = asyncComponent(() => import("./components/Page-Study.js"))
+const AsyncStudyPage = asyncComponent(() => import('./components/Page-Study.js'))
 // program page
-const AsyncProgramPage = asyncComponent(() => import("./components/Page-Program.jsx"))
+const AsyncProgramPage = asyncComponent(() => import('./components/Page-Program.jsx'))
 // Data access pages
-const AsyncInstructions = asyncComponent(() => import("./components/DataAccess-Instructions"))
-const AsyncDataUseCertificates = asyncComponent(() => import("./components/DataAccess-DataUseCertificates.js"))
-const AsyncResearchTools = asyncComponent(() => import("./components/ResearchTools"))
-const AsyncResourcesAcknowledgements = asyncComponent(() => import("./components/Resources-AcknowledgementStatements"))
+const AsyncInstructions = asyncComponent(() => import('./components/DataAccess-Instructions'))
+const AsyncDataUseCertificates = asyncComponent(() => import('./components/DataAccess-DataUseCertificates.js'))
+const AsyncResearchTools = asyncComponent(() => import('./components/ResearchTools'))
+const AsyncResourcesAcknowledgements = asyncComponent(() => import('./components/Resources-AcknowledgementStatements'))
 
-ReactGA.initialize("UA-29804340-3")
+ReactGA.initialize('UA-29804340-3')
 
 const history = createHistory()
 history.listen((location) => {
@@ -47,87 +47,105 @@ history.listen((location) => {
 class App extends Component {
   state = {
     loginToken: {},
-    wikiMarkdown: "",
+    wikiMarkdown: '',
     whatsNew: [],
-    hash: "",
+    hash: '',
     defaultData: {},
     synapseLoaded: true,
+    loading: true,
   };
 
   componentDidMount() {
     this.login()
       .then((token) => {
         if (!token) {
-          this.handleChanges("synapseLoaded", false)
+          this.handleChanges('synapseLoaded', false)
           return false
         }
-        this.handleChanges("loginToken", token)
-        this.handleChanges("synapseLoaded", true)
+        this.handleChanges('loginToken', token)
+        this.handleChanges('synapseLoaded', true)
         return true
       })
       .then((response) => {
         if (!response) {
           // if synapse fails to load
           // get backup data
-          console.log("getting backup data")
+          console.log('getting backup data')
           // consortia / programs
           getStaticJSON(
-            "syn17024173",
-            "defaultData",
+            'syn17024173',
+            'defaultData',
             this.handleNestedChangesObj,
           )
           // projects
           getStaticJSON(
-            "syn17024229",
-            "defaultData",
+            'syn17024229',
+            'defaultData',
             this.handleNestedChangesObj,
           )
-          getStaticJSON("whatsNew", "defaultData", this.handleNestedChangesObj)
+          getStaticJSON('whatsNew', 'defaultData', this.handleNestedChangesObj)
           getStaticJSON(
-            "explorePublications",
-            "defaultData",
-            this.handleNestedChangesObj,
-          )
-          getStaticJSON(
-            "syn17024229_programAMPAD",
-            "defaultData",
+            'explorePublications',
+            'defaultData',
             this.handleNestedChangesObj,
           )
           getStaticJSON(
-            "programAMPAD_wiki",
-            "defaultData",
+            'syn17024229_programAMPAD',
+            'defaultData',
             this.handleNestedChangesObj,
           )
           getStaticJSON(
-            "syn17024229_programResilienceAD",
-            "defaultData",
+            'programAMPAD_wiki',
+            'defaultData',
             this.handleNestedChangesObj,
           )
           getStaticJSON(
-            "programResilienceAD_wiki",
-            "defaultData",
+            'syn17024229_programResilienceAD',
+            'defaultData',
             this.handleNestedChangesObj,
           )
           getStaticJSON(
-            "syn17024229_programMODELAD",
-            "defaultData",
+            'programResilienceAD_wiki',
+            'defaultData',
             this.handleNestedChangesObj,
           )
           getStaticJSON(
-            "programMODELAD_wiki",
-            "defaultData",
+            'syn17024229_programMODELAD',
+            'defaultData',
             this.handleNestedChangesObj,
           )
           getStaticJSON(
-            "syn17024229_programM2OVEAD",
-            "defaultData",
+            'programMODELAD_wiki',
+            'defaultData',
             this.handleNestedChangesObj,
           )
           getStaticJSON(
-            "programM2OVEAD_wiki",
-            "defaultData",
+            'syn17024229_programM2OVEAD',
+            'defaultData',
             this.handleNestedChangesObj,
           )
+          getStaticJSON(
+            'programM2OVEAD_wiki',
+            'defaultData',
+            this.handleNestedChangesObj,
+          )
+          getStaticJSON(
+            'acknowledgementStatements',
+            'defaultData',
+            this.handleNestedChangesObj,
+          )
+          getStaticJSON(
+            'dataInstructions',
+            'defaultData',
+            this.handleNestedChangesObj,
+          )
+          getStaticJSON(
+            'dataUseCertificates',
+            'defaultData',
+            this.handleNestedChangesObj,
+          )
+          getStaticJSON('about', 'defaultData', this.handleNestedChangesObj)
+          getStaticJSON('tools', 'defaultData', this.handleNestedChangesObj)
         }
       })
 
@@ -136,7 +154,7 @@ class App extends Component {
     })
   }
 
-  login = async () => SynapseClient.login("mikeybkats", "guinness")
+  login = async () => SynapseClient.login('mikeybkats', 'guinness')
     .then((response) => {
       let key = {}
       if (response.sessionToken) {
@@ -198,6 +216,8 @@ class App extends Component {
         token={this.state.loginToken}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
+        defaultData={this.state.defaultData}
+        synapseLoaded={this.state.synapseLoaded}
       />
     )
   };
@@ -208,6 +228,8 @@ class App extends Component {
         token={this.state.loginToken}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
+        defaultData={this.state.defaultData}
+        synapseLoaded={this.state.synapseLoaded}
       />
     )
   };
@@ -221,6 +243,8 @@ class App extends Component {
         markdown={this.state.wikiMarkdown}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
+        defaultData={this.state.defaultData}
+        synapseLoaded={this.state.synapseLoaded}
       />
     )
   };
@@ -233,6 +257,8 @@ class App extends Component {
         handleNestedChanges={this.handleNestedChanges}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
+        defaultData={this.state.defaultData}
+        synapseLoaded={this.state.synapseLoaded}
       />
     )
   };
@@ -243,6 +269,8 @@ class App extends Component {
         token={this.state.loginToken}
         handleChanges={this.handleChanges}
         SynapseComponents={SynapseComponents}
+        defaultData={this.state.defaultData}
+        synapseLoaded={this.state.synapseLoaded}
       />
     )
   };
@@ -254,7 +282,7 @@ class App extends Component {
   };
 
   ReturnExplore = (props) => {
-    let token = ""
+    let token = ''
     if (this.state.loginToken) {
       token = this.state.loginToken.sessionToken
     }
@@ -273,7 +301,7 @@ class App extends Component {
   };
 
   ReturnStudyPage = (props) => {
-    let token = ""
+    let token = ''
     if (this.state.loginToken.sessionToken) {
       token = this.state.loginToken.sessionToken
     }
@@ -290,7 +318,7 @@ class App extends Component {
   };
 
   ReturnProgramPage = (props) => {
-    let token = ""
+    let token = ''
     if (this.state.loginToken.sessionToken) {
       token = this.state.loginToken.sessionToken
     }

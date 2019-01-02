@@ -46,6 +46,31 @@ const runQueries = (tableArray, query, appendToName = "") => {
           console.log("programM2OVEAD_wiki.json has been saved")
         })
       }),
+      getWikiData("409845", token.sessionToken, "syn2580853").then((wikiData) => {
+        fs.writeFile(`public/tools.json`, JSON.stringify(wikiData), err => {
+          console.log("tools.json has been saved")
+        })
+      }),
+      getWikiData("581939", token.sessionToken, "syn12666371").then((wikiData) => {
+        fs.writeFile(`public/about.json`, JSON.stringify(wikiData), err => {
+          console.log("about.json has been saved")
+        })
+      }),
+      getWikiData("585318", token.sessionToken, "syn12666371").then((wikiData) => {
+        fs.writeFile(`public/dataUseCertificates.json`, JSON.stringify(wikiData), err => {
+          console.log("dataUseCertificates.json has been saved")
+        })
+      }),
+      getWikiData("585317", token.sessionToken, "syn12666371").then((wikiData) => {
+        fs.writeFile(`public/dataInstructions.json`, JSON.stringify(wikiData), err => {
+          console.log("dataInstructions.json has been saved")
+        })
+      }),
+      getWikiData("584597", token.sessionToken, "syn2580853").then((wikiData) => {
+        fs.writeFile(`public/acknowledgementStatements.json`, JSON.stringify(wikiData), err => {
+          console.log("acknowledgementStatements.json has been saved")
+        })
+      }),
     ])}
   )
 }
@@ -65,21 +90,5 @@ const writeAllDataFile = () => {
   runQueries([tables[1]], query5, "programResilienceAD")
 }
 
-//app.all("/", function(req, res, next) {
-  //res.header("Access-Control-Allow-Origin", "*")
-  //res.header("Access-Control-Allow-Headers", "X-Requested-With")
-  //next()
-//})
-
-//app.use(function(req, res, next) {
-  //res.header("Access-Control-Allow-Origin", "*")
-  //res.header("Access-Control-Allow-Headers", "X-Requested-With")
-  //next()
-//})
-
 writeAllDataFile()
-
-//app.use(express.static( __dirname + "/public"))
-
-//app.listen(3030, () => console.log("Example app listening on port 3030!"))
 

@@ -51,6 +51,26 @@ var runQueries = function runQueries(tableArray, query) {
       _fs2.default.writeFile("public/programM2OVEAD_wiki.json", JSON.stringify(wikiData), function (err) {
         console.log("programM2OVEAD_wiki.json has been saved");
       });
+    }), (0, _queryForData.getWikiData)("409845", token.sessionToken, "syn2580853").then(function (wikiData) {
+      _fs2.default.writeFile("public/tools.json", JSON.stringify(wikiData), function (err) {
+        console.log("tools.json has been saved");
+      });
+    }), (0, _queryForData.getWikiData)("581939", token.sessionToken, "syn12666371").then(function (wikiData) {
+      _fs2.default.writeFile("public/about.json", JSON.stringify(wikiData), function (err) {
+        console.log("about.json has been saved");
+      });
+    }), (0, _queryForData.getWikiData)("585318", token.sessionToken, "syn12666371").then(function (wikiData) {
+      _fs2.default.writeFile("public/dataUseCertificates.json", JSON.stringify(wikiData), function (err) {
+        console.log("dataUseCertificates.json has been saved");
+      });
+    }), (0, _queryForData.getWikiData)("585317", token.sessionToken, "syn12666371").then(function (wikiData) {
+      _fs2.default.writeFile("public/dataInstructions.json", JSON.stringify(wikiData), function (err) {
+        console.log("dataInstructions.json has been saved");
+      });
+    }), (0, _queryForData.getWikiData)("584597", token.sessionToken, "syn2580853").then(function (wikiData) {
+      _fs2.default.writeFile("public/acknowledgementStatements.json", JSON.stringify(wikiData), function (err) {
+        console.log("acknowledgementStatements.json has been saved");
+      });
     })]);
   });
 };

@@ -1,8 +1,8 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { BarLoader } from "react-spinners"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { BarLoader } from 'react-spinners'
 
-class ExperimentalResources extends Component {
+class Tools extends Component {
   state = {
     loading: true,
   };
@@ -14,17 +14,31 @@ class ExperimentalResources extends Component {
   };
 
   returnMarkdown = () => {
-    if (this.props.token) {
+    if (this.props.token.sessionToken) {
       return (
         <this.props.SynapseComponents.Markdown
           token={this.props.token.sessionToken}
           ownerId="syn2580853"
           wikiId="409845"
-          updateLoadState={() => this.handleChanges("loading", false)}
+          updateLoadState={() => this.handleChanges('loading', false)}
+        />
+      )
+    }
+    if (!this.props.synapseLoaded && this.props.defaultData.tools) {
+      return (
+        <this.props.SynapseComponents.Markdown
+          markdown={this.props.defaultData.tools.markdown}
         />
       )
     }
     return <div />
+  };
+
+  returnBarLoader = () => {
+    if (!this.props.synapseLoaded && this.props.defaultData.tools) {
+      return <div />
+    }
+    return <BarLoader color="#5BB0B5" loading={this.state.loading} />
   };
 
   render() {
@@ -35,7 +49,7 @@ class ExperimentalResources extends Component {
             <div className="col-xs-12 col-sm-11 col-lg-9 col-centered table-container">
               <h2 className="header">Research Tools</h2>
               {this.returnMarkdown()}
-              <BarLoader color="#5BB0B5" loading={this.state.loading} />
+              {this.returnBarLoader()}
             </div>
           </section>
         </div>
@@ -44,10 +58,10 @@ class ExperimentalResources extends Component {
   }
 }
 
-ExperimentalResources.propTypes = {
+Tools.propTypes = {
   token: PropTypes.object.isRequired,
   handleChanges: PropTypes.func.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
 }
 
-export default ExperimentalResources
+export default Tools

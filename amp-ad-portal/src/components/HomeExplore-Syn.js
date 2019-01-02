@@ -1,28 +1,28 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import SynapseChart from "./SynapseBarChart.jsx"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import SynapseChart from './SynapseChartAndCards.jsx'
 import {
   clone,
   synapseObjects,
   returnSynapseObject,
   returnSynapseValue,
-} from "../library/synapseObjects"
-import ButtonExplore from "./Button-Explore"
+} from '../library/synapseObjects'
+import ButtonExplore from './Button-Explore'
 
-import Selectors from "./SelectorRow"
+import Selectors from './SelectorRow'
 
 let loadedObject = []
 
 class ExploreContent extends Component {
   state = {
-    activeId: "",
+    activeId: '',
     synObject: {},
-    name: "",
+    name: '',
   };
 
   componentDidMount() {
     loadedObject = clone(synapseObjects)
-    this.handleButtonPress("syn11346063", this.handleChanges)
+    this.handleButtonPress('syn11346063', this.handleChanges)
   }
 
   handleChanges = (stateObject) => {
@@ -43,15 +43,15 @@ class ExploreContent extends Component {
       synObject,
       name,
     })
-    return ""
+    return ''
   };
 
   returnButtonClass = (id) => {
-    return `btn-control ${this.state.activeId === id ? "active" : ""}`
+    return `btn-control ${this.state.activeId === id ? 'active' : ''}`
   };
 
   returnSynapseChart = () => {
-    if (this.state.activeId === "syn2580853") {
+    if (this.state.activeId === 'syn2580853') {
       return (
         <div>
           <this.props.SynapseComponents.Markdown
@@ -85,8 +85,8 @@ class ExploreContent extends Component {
 
   barChartStyle = () => {
     return {
-      height: this.state.activeId === "syn2580853" ? "100%" : "220px",
-      position: "relative",
+      height: this.state.activeId === 'syn2580853' ? '100%' : '220px',
+      position: 'relative',
     }
   };
 
@@ -128,7 +128,7 @@ ExploreContent.propTypes = {
 }
 
 ExploreContent.defaultProps = {
-  token: "",
+  token: '',
 }
 
 export default ExploreContent
