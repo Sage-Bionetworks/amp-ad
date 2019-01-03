@@ -341,9 +341,7 @@ class App extends Component {
     return (
       <div>
         <Route exact path="/" component={this.ReturnHome} />
-
         <Route path="/Resources/Data" component={this.ReturnResourcesData} />
-
         <Route
           path="/DataAccess/Instructions"
           component={this.ReturnInstructions}
@@ -356,14 +354,11 @@ class App extends Component {
           path="/DataAccess/DataUseCertificates"
           component={this.ReturnDataUseCertificates}
         />
-
         <Route path="/ResearchTools" component={this.ReturnResearchTools} />
-
         <Route
           path="/Resources/Studies"
           component={this.ReturnResourcesStudies}
         />
-
         <Route path="/Explore/:handle" component={this.ReturnExplore} />
         <Route
           path="/Explore/Studies/:handle"
@@ -373,7 +368,6 @@ class App extends Component {
           path="/Explore/Programs/:handle"
           component={this.ReturnProgramPage}
         />
-
         <Route path="/About" component={this.ReturnAboutAmpAd} />
       </div>
     )
