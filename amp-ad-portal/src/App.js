@@ -7,7 +7,6 @@ import {
   SynapseConstants,
   SynapseClient,
 } from 'synapse-react-client'
-//import SynapseClient from "sy"
 
 // non component js
 import asyncComponent from './components/AsyncComponent'
@@ -34,8 +33,10 @@ const AsyncDataUseCertificates = asyncComponent(() => import('./components/DataA
 const AsyncResearchTools = asyncComponent(() => import('./components/ResearchTools'))
 const AsyncResourcesAcknowledgements = asyncComponent(() => import('./components/Resources-AcknowledgementStatements'))
 
+// ReactGA is a google analytics node package
 ReactGA.initialize('UA-29804340-3')
 
+// tracking the location path with Google analytics
 const history = createHistory()
 history.listen((location) => {
   ReactGA.set({
@@ -340,9 +341,7 @@ class App extends Component {
     return (
       <div>
         <Route exact path="/" component={this.ReturnHome} />
-
         <Route path="/Resources/Data" component={this.ReturnResourcesData} />
-
         <Route
           path="/DataAccess/Instructions"
           component={this.ReturnInstructions}
@@ -355,14 +354,11 @@ class App extends Component {
           path="/DataAccess/DataUseCertificates"
           component={this.ReturnDataUseCertificates}
         />
-
         <Route path="/ResearchTools" component={this.ReturnResearchTools} />
-
         <Route
           path="/Resources/Studies"
           component={this.ReturnResourcesStudies}
         />
-
         <Route path="/Explore/:handle" component={this.ReturnExplore} />
         <Route
           path="/Explore/Studies/:handle"
@@ -372,7 +368,6 @@ class App extends Component {
           path="/Explore/Programs/:handle"
           component={this.ReturnProgramPage}
         />
-
         <Route path="/About" component={this.ReturnAboutAmpAd} />
       </div>
     )
