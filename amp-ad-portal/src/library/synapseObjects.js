@@ -1,7 +1,7 @@
 export const synapseObjects = [
   {
     name: 'Programs',
-    description: 'Programs',
+    description: 'programs',
     id: 'syn17024173',
     filter: '',
     offlineKey: 'syn17024173',
@@ -17,7 +17,7 @@ export const synapseObjects = [
   },
   {
     name: 'Projects',
-    description: 'Projects',
+    description: 'projects',
     id: 'syn17024229',
     filter: 'Program',
     color: 4,
@@ -41,7 +41,7 @@ export const synapseObjects = [
   },
   {
     name: 'studies',
-    description: 'Studies',
+    description: 'studies',
     id: 'syn17083367',
     barChart: false,
     cards: false,
@@ -78,7 +78,7 @@ export const synapseObjects = [
   },
   {
     name: 'data',
-    description: 'Data Files',
+    description: 'data files',
     id: 'syn11346063',
     filter: 'study',
     color: 1,
@@ -154,7 +154,7 @@ export const synapseObjects = [
   },
   {
     name: 'publications',
-    description: 'Publications',
+    description: 'publications',
     id: 'syn2580853',
     wikiId: '409850',
     filter: '',

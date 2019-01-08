@@ -42,7 +42,7 @@ class SynapseChartAndCards extends Component {
     if (
       this.props.activeObject.homescreen
       || this.props.activeObject.barChart
-    ) {
+      ) {
       return (
         <div className={this.props.activeObject.name}>
           <this.props.SynapseComponents.QueryWrapper
@@ -50,6 +50,7 @@ class SynapseChartAndCards extends Component {
             token={this.props.token}
             facetName={this.props.activeObject.filter}
             rgbIndex={this.props.activeObject.color}
+            unitDescription={this.props.activeObject.description}
           >
             <this.props.SynapseComponents.StackedRowHomebrew
               loadingScreen={(
@@ -64,7 +65,6 @@ class SynapseChartAndCards extends Component {
                   <BarLoader color="#4DB7AD" loading />
                 </div>
               )}
-              unitDescription={this.props.activeObject.description}
             />
             {this.returnFacets()}
           </this.props.SynapseComponents.QueryWrapper>
