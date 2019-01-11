@@ -16220,9 +16220,9 @@ symbol.prototype.description@^1.0.0:
   dependencies:
     has-symbols "^1.0.0"
 
-synapse-react-client@^1.10.9:
-  version "1.10.9"
-  resolved "https://registry.yarnpkg.com/synapse-react-client/-/synapse-react-client-1.10.9.tgz#1fd88c5b8faa260b9c277c0a73a3c5ff09920a2e"
+synapse-react-client@1.10.10:
+  version "1.10.10"
+  resolved "https://registry.yarnpkg.com/synapse-react-client/-/synapse-react-client-1.10.10.tgz#8f7ac62a7d1b817507080ff03a8277be9ad3328c"
   dependencies:
     "@babel/runtime" "^7.1.5"
     "@fortawesome/fontawesome-svg-core" "^1.2.4"
