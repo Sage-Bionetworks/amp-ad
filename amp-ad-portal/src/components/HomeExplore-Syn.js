@@ -5,7 +5,6 @@ import {
   clone,
   synapseObjects,
   returnSynapseObject,
-  returnSynapseValue,
 } from '../library/synapseObjects'
 import ButtonExplore from './Button-Explore'
 

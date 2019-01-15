@@ -225,22 +225,6 @@ class Explore extends Component {
     return { display: 'block' }
   };
 
-  testingNavButtons = () => {
-    return (
-      <div>
-        <Link name="AMP-AD" to="/Explore/Programs/AMP-AD">
-          To programs
-        </Link>
-        <button
-          type="button"
-          onClick={() => this.replaceRoute('/Explore/Programs/AMP-AD')}
-        >
-          TO PROGRAMS
-        </button>
-      </div>
-    )
-  };
-
   render() {
     return (
       <section className="page explore" style={this.style()}>
