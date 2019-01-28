@@ -52,7 +52,7 @@ class SynapseChartAndCards extends Component {
             rgbIndex={this.props.activeObject.color}
             unitDescription={this.props.activeObject.description}
           >
-            <this.props.SynapseComponents.StackedRowHomebrew
+            <this.props.SynapseComponents.StackedBarChart
               loadingScreen={(
                 <div
                   className="bar-loader"
