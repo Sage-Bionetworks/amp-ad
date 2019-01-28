@@ -67,8 +67,10 @@ export const synapseObjects = [
         sql: 'SELECT * FROM syn17083367',
         synapseId: 'syn17083367',
         facetName: 'Consortium',
-        facetDisplayValue: 'Program',
-        unitDescription: 'Program',
+        unitDescription: 'programs',
+        facetAliases: {
+          Consortium: 'Program',
+        },
       },
     ],
     limit: 100,
