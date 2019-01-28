@@ -68,7 +68,7 @@ export const synapseObjects = [
         synapseId: 'syn17083367',
         facetName: 'Consortium',
         facetDisplayValue: 'Program',
-        unitDescription: 'studies',
+        unitDescription: 'Program',
       },
     ],
     limit: 100,
