@@ -39,7 +39,6 @@ class Explore extends Component {
 
   loadDefaultComponent = () => {
     if (!this.props.hash.includes('/Explore/Programs/')) {
-      console.log(window.location.hash)
       loadedObjects = clone(synapseObjects)
       // studies
       setSynapseValue(loadedObjects, 'syn17083367', 'filter', 'projectStatus')
@@ -136,29 +135,14 @@ class Explore extends Component {
   };
 
   returnWikiData = (synId, wikiId) => {
-    if (this.props.token) {
-      return (
-        <div className="explore-publications">
-          <this.props.SynapseComponents.Markdown
-            token={this.props.token}
-            ownerId={synId}
-            wikiId={wikiId}
-          />
-        </div>
-      )
-    }
-    if (this.props.defaultData.explorePublications) {
-      return (
-        <div className="explore-publications">
-          <this.props.SynapseComponents.Markdown
-            ownerId={synId}
-            wikiId={wikiId}
-            markdown={this.props.defaultData.explorePublications.markdown}
-          />
-        </div>
-      )
-    }
-    return <div />
+    return (
+      <div className="explore-publications">
+        <this.props.SynapseComponents.Markdown
+          ownerId={synId}
+          wikiId={wikiId}
+        />
+      </div>
+    )
   };
 
   returnSynapseChart = (hash = window.location.hash) => {

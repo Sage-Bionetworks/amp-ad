@@ -1494,7 +1494,7 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react-tooltip@^3.3.6":
+"@types/react-tooltip@^3.9.0":
   version "3.9.0"
   resolved "https://registry.yarnpkg.com/@types/react-tooltip/-/react-tooltip-3.9.0.tgz#99246c208df53194db1fc96bb5345f0f66e63e52"
   dependencies:
@@ -13527,7 +13527,7 @@ react-textarea-autosize@^7.0.4:
     "@babel/runtime" "^7.1.2"
     prop-types "^15.6.0"
 
-react-tooltip@^3.9.0:
+react-tooltip@^3.9.2:
   version "3.9.2"
   resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-3.9.2.tgz#df74e6f5fd454bb15132d5d2d506895cf505cb5e"
   dependencies:
@@ -15595,9 +15595,9 @@ symbol.prototype.description@^1.0.0:
   dependencies:
     has-symbols "^1.0.0"
 
-synapse-react-client@1.10.17:
-  version "1.10.17"
-  resolved "https://registry.yarnpkg.com/synapse-react-client/-/synapse-react-client-1.10.17.tgz#9c087ef07e13fed0c1eaba996b2c0a1ebd922b53"
+synapse-react-client@1.10.18:
+  version "1.10.18"
+  resolved "https://registry.yarnpkg.com/synapse-react-client/-/synapse-react-client-1.10.18.tgz#f335317a7f20abf43fd584c4a33430793823da22"
   dependencies:
     "@babel/runtime" "^7.1.5"
     "@fortawesome/fontawesome-svg-core" "^1.2.4"
@@ -15611,7 +15611,7 @@ synapse-react-client@1.10.17:
     "@types/react-measure" "^2.0.4"
     "@types/react-plotly.js" "^2.2.2"
     "@types/react-router-dom" "^4.3.1"
-    "@types/react-tooltip" "^3.3.6"
+    "@types/react-tooltip" "^3.9.0"
     "@types/sinon" "^7.0.2"
     es6-promise "^4.2.5"
     gh-pages "^2.0.0"
@@ -15643,7 +15643,7 @@ synapse-react-client@1.10.17:
     react-router-dom "^4.3.1"
     react-scripts-ts "^3.1.0"
     react-test-renderer "^16.4.2"
-    react-tooltip "^3.9.0"
+    react-tooltip "^3.9.2"
     sanitize-html "^1.18.4"
     uuid "^3.3.2"
 

@@ -5,13 +5,6 @@ import { BarLoader } from 'react-spinners'
 class SynapseChartAndCards extends Component {
   state = {};
 
-  shouldComponentUpdate(nextProps) {
-    if (this.props.activeObject.id !== nextProps.activeObject.id) {
-      return true
-    }
-    return true
-  }
-
   buildQuery = (sql = this.props.activeObject.sql) => {
     return {
       concreteType: 'org.sagebionetworks.repo.model.table.QueryBundleRequest',

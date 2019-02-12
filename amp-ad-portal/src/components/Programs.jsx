@@ -20,7 +20,6 @@ class Programs extends Component {
   //updateLoadState={() => this.handleChanges("loading", false)}
   QueryWrapper = () => {
     const sql = 'SELECT * FROM syn17024173'
-    console.log('syn comp = ', this.props.SynapseComponents)
     return (
       <div className="query-wrapper">
         <this.props.SynapseComponents.StaticQueryWrapper

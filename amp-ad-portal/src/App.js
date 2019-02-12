@@ -32,7 +32,7 @@ const AsyncInstructions = asyncComponent(() => import('./components/DataAccess-I
 const AsyncDataUseCertificates = asyncComponent(() => import('./components/DataAccess-DataUseCertificates.js'))
 const AsyncResearchTools = asyncComponent(() => import('./components/ResearchTools'))
 const AsyncResourcesAcknowledgements = asyncComponent(() => import('./components/Resources-AcknowledgementStatements'))
-const AsyncVersions = asyncComponent(() => import("./components/Versions"))
+const AsyncVersions = asyncComponent(() => import('./components/Versions'))
 
 // ReactGA is a google analytics node package
 ReactGA.initialize('UA-29804340-3')
@@ -284,10 +284,7 @@ class App extends Component {
   };
 
   ReturnExplore = (props) => {
-    let token = ''
-    if (this.state.loginToken) {
-      token = this.state.loginToken.sessionToken
-    }
+    const token = ''
     return (
       <AsyncExplore
         token={token}
@@ -337,7 +334,7 @@ class App extends Component {
       />
     )
   };
-  
+
   ReturnVersions = () => {
     return (
       <AsyncVersions hash={this.state.hash} />
