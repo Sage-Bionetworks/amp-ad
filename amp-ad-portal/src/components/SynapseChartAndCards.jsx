@@ -5,13 +5,6 @@ import { BarLoader } from 'react-spinners'
 class SynapseChartAndCards extends Component {
   state = {};
 
-  shouldComponentUpdate(nextProps) {
-    if (this.props.activeObject.id !== nextProps.activeObject.id) {
-      return true
-    }
-    return true
-  }
-
   buildQuery = (sql = this.props.activeObject.sql) => {
     return {
       concreteType: 'org.sagebionetworks.repo.model.table.QueryBundleRequest',
@@ -89,7 +82,7 @@ class SynapseChartAndCards extends Component {
             sql={this.props.activeObject.sql}
             token={this.props.token}
           >
-            <this.props.SynapseComponents.SynapseTableCardView
+            <this.props.SynapseComponents.CardContainer
               type={this.props.SynapseConstants[this.props.activeObject.type]}
               unitDescription="programs"
             />
@@ -100,7 +93,7 @@ class SynapseChartAndCards extends Component {
         <this.props.SynapseComponents.StaticQueryWrapper
           json={this.props.defaultData[this.props.activeObject.offlineKey]}
         >
-          <this.props.SynapseComponents.SynapseTableCardView
+          <this.props.SynapseComponents.CardContainer
             type={this.props.SynapseConstants[this.props.activeObject.type]}
           />
         </this.props.SynapseComponents.StaticQueryWrapper>

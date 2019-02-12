@@ -96,7 +96,7 @@ class ProgramPage extends Component {
             sql={this.state.query}
             token={this.props.token}
           >
-            <this.props.SynapseComponents.SynapseTableCardView
+            <this.props.SynapseComponents.CardContainer
               type={this.props.SynapseConstants.AMP_PROJECT}
               limit={50}
             />
@@ -109,7 +109,7 @@ class ProgramPage extends Component {
         <this.props.SynapseComponents.StaticQueryWrapper
           json={this.props.defaultData[this.state.offlineJSON]}
         >
-          <this.props.SynapseComponents.SynapseTableCardView
+          <this.props.SynapseComponents.CardContainer
             type={this.props.SynapseConstants.AMP_PROJECT}
             limit={50}
           />
@@ -133,7 +133,7 @@ class ProgramPage extends Component {
             sql={this.state.cardQuery}
             token={this.props.token}
           >
-            <this.props.SynapseComponents.SynapseTableCardView
+            <this.props.SynapseComponents.CardContainer
               type={this.props.SynapseConstants.AMP_CONSORTIUM}
             />
           </this.props.SynapseComponents.StaticQueryWrapper>
