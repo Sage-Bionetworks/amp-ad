@@ -23,6 +23,9 @@ class Instructions extends Component {
   }
 
   addDetailsFunctionality = () => {
+    if (this.state.addedEventListeners) {
+      return
+    }
     const details = document.querySelectorAll('details')
 
     if (details.length > 0) {
@@ -31,8 +34,8 @@ class Instructions extends Component {
           'click',
           (e) => {
             const detailsNode = e.target.parentNode
-            const state = !e.target.parentNode.open
-            detailsNode.open = state
+            const state = e.target.parentNode.open
+            detailsNode.open = !state
           },
           false,
         )
