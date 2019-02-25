@@ -96,7 +96,6 @@ class ExperimentalResources extends Component {
       return (
         <div key={element + index}>
           <SynapseComponents.Markdown
-            token={this.props.token.sessionToken}
             ownerId="syn12666371"
             wikiId={element}
             updateLoadState={

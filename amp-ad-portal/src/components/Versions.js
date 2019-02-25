@@ -1,15 +1,14 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import packageJson from '../.package.json'
 
 const getAllDependencyNames = ({ dependencies, devDependencies }) => [
   ...Object.entries(dependencies),
-  ...Object.entries(devDependencies)
-];
-const myDependencies = getAllDependencyNames(packageJson);
+  ...Object.entries(devDependencies),
+]
+const myDependencies = getAllDependencyNames(packageJson)
 
 class Versions extends Component {
-  
   state = {
   };
 
@@ -25,13 +24,25 @@ class Versions extends Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-12">
-              <h1 className="header">Version {packageJson.version}</h1>
+              <h1 className="header">
+                Version
+                {' '}
+                {` ${packageJson.version}`}
+              </h1>
               &nbsp;
               <h5 className="header">Dependencies</h5>
               <div>
                 <ul>
-                  {myDependencies.map(function(entry){
-                    return <li>{entry[0]} : {entry[1]}</li>;
+                  {myDependencies.map((entry) => {
+                    return (
+                      <li>
+                        {entry[0]}
+                        {' '}
+                          :
+                        {' '}
+                        {entry[1]}
+                      </li>
+                    )
                   })}
                 </ul>
               </div>
@@ -48,7 +59,7 @@ Versions.propTypes = {
 }
 
 Versions.defaultProps = {
-  token: "",
+  token: '',
 }
 
 export default Versions

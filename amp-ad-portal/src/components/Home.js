@@ -12,24 +12,20 @@ const Home = props => (
     <Welcome
       markdown={props.welcomeHeaderMarkdown}
       markdownText={props.welcomeHeaderMarkdownText}
-      token={props.token}
       handleChanges={props.handleChanges}
     />
     <Explore
-      token={props.token.sessionToken}
       SynapseConstants={props.SynapseConstants}
       SynapseComponents={props.SynapseComponents}
       synapseLoaded={props.synapseLoaded}
     />
     <Programs
-      token={props.token.sessionToken}
       SynapseConstants={props.SynapseConstants}
       SynapseComponents={props.SynapseComponents}
       defaultData={props.defaultData}
     />
     <WhatsNew
       defaultData={props.defaultData}
-      token={props.token.sessionToken}
       handleNestedChanges={props.handleNestedChanges}
       SynapseComponents={props.SynapseComponents}
     />

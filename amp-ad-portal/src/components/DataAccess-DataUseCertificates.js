@@ -43,38 +43,18 @@ class DataUseCertificates extends Component {
     this.setState(newState)
   };
 
-  returnMarkdown = (token = this.props.token.sessionToken) => {
-    if (token) {
-      return (
-        <this.props.SynapseComponents.Markdown
-          token={token}
-          ownerId="syn12666371"
-          wikiId="585318"
-          updateLoadState={() => this.handleChange({ loading: false })}
-        />
-      )
-    }
-    if (
-      !this.props.synapseLoaded
-      && this.props.defaultData.dataUseCertificates
-    ) {
-      return (
-        <this.props.SynapseComponents.Markdown
-          markdown={this.props.defaultData.dataUseCertificates.markdown}
-        />
-      )
-    }
-    return <div />
+  returnMarkdown = () => {
+    return (
+      <this.props.SynapseComponents.Markdown
+        ownerId="syn12666371"
+        wikiId="585318"
+        updateLoadState={() => this.handleChange({ loading: false })}
+      />
+    )
   };
 
   returnBarLoader = () => {
-    if (
-      !this.props.synapseLoaded
-      && this.props.defaultData.dataUseCertificates
-    ) {
-      return <div />
-    }
-    return <BarLoader color="#5BB0B5" loading={this.state.loading} />
+    return (<BarLoader color="#5BB0B5" loading={this.state.loading} />)
   };
 
   render() {

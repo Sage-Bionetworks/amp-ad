@@ -32,15 +32,11 @@ class SynapseChartAndCards extends Component {
   };
 
   returnStackedRow = () => {
-    if (
-      this.props.activeObject.homescreen
-      || this.props.activeObject.barChart
-      ) {
+    if (this.props.activeObject.homescreen || this.props.activeObject.barChart) {
       return (
         <div className={this.props.activeObject.name}>
           <this.props.SynapseComponents.QueryWrapper
             initQueryRequest={this.buildQuery()}
-            token={this.props.token}
             facetName={this.props.activeObject.filter}
             rgbIndex={this.props.activeObject.color}
             unitDescription={this.props.activeObject.description}
@@ -59,7 +55,7 @@ class SynapseChartAndCards extends Component {
                 </div>
               )}
             />
-            {this.returnFacets()}
+            <this.props.SynapseComponents.Facets />
           </this.props.SynapseComponents.QueryWrapper>
         </div>
       )
@@ -67,40 +63,21 @@ class SynapseChartAndCards extends Component {
     return <div />
   };
 
-  returnFacets = () => {
-    if (this.props.activeObject.facets && !this.props.activeObject.homescreen) {
-      return <this.props.SynapseComponents.Facets />
-    }
-    return <div />
-  };
-
   returnSynapseCards = () => {
-    if (this.props.activeObject.cards && !this.props.activeObject.homescreen) {
-      if (this.props.synapseLoaded) {
-        return (
-          <this.props.SynapseComponents.StaticQueryWrapper
-            sql={this.props.activeObject.sql}
-            token={this.props.token}
-          >
-            <this.props.SynapseComponents.CardContainer
-              type={this.props.SynapseConstants[this.props.activeObject.type]}
-              unitDescription="programs"
-            />
-          </this.props.SynapseComponents.StaticQueryWrapper>
-        )
-      }
-      return (
+    return (
+      this.props.activeObject.cards && !this.props.activeObject.homescreen
+      && (
         <this.props.SynapseComponents.StaticQueryWrapper
-          json={this.props.defaultData[this.props.activeObject.offlineKey]}
+          sql={this.props.activeObject.sql}
         >
           <this.props.SynapseComponents.CardContainer
             type={this.props.SynapseConstants[this.props.activeObject.type]}
+            unitDescription="programs"
           />
         </this.props.SynapseComponents.StaticQueryWrapper>
       )
-    }
-    return <div />
-  };
+    )
+  }
 
   returnType = () => {
     const typeString = this.props.SynapseConstants[
@@ -114,7 +91,6 @@ class SynapseChartAndCards extends Component {
       return (
         <div>
           <this.props.SynapseComponents.QueryWrapperMenu
-            token={this.props.token}
             menuConfig={this.props.activeObject.menuConfig}
             rgbIndex={this.props.activeObject.color}
             type={this.returnType()}

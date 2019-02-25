@@ -15,26 +15,14 @@ class DataUse extends Component {
     this.setState(newState)
   };
 
-  returnMarkdown = (token = this.props.token.sessionToken) => {
-    if (token) {
-      return (
-        <SynapseComponents.Markdown
-          token={token}
-          ownerId="syn12666371"
-          wikiId="585318"
-          updateLoadState={() => this.handleChange({ loaded: true })}
-        />
-      )
-    }
-    if (!this.props.synapseLoaded && this.props.defaultData.dataInstructions) {
-      return (
-        <SynapseComponents.Markdown
-          markdown={this.props.defaultData.dataInstructions.markdown}
-          updateLoadState={() => this.handleChange({ loaded: true })}
-        />
-      )
-    }
-    return <div />
+  returnMarkdown = () => {
+    return (
+      <SynapseComponents.Markdown
+        ownerId="syn12666371"
+        wikiId="585318"
+        updateLoadState={() => this.handleChange({ loaded: true })}
+      />
+    )
   };
 
   render() {

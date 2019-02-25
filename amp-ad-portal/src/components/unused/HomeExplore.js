@@ -99,7 +99,6 @@ class ExploreContent extends Component {
             </div>
             <div className="synapse-chart">
               <SynapseChart
-                token={this.props.token}
                 synId={this.state.activeId}
                 filter={this.state.activeFilter}
                 rgbIndex={this.state.color}

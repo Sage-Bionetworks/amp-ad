@@ -4,8 +4,7 @@ import SynapseChart from './SynapseChartAndCards.jsx'
 import {
   clone,
   synapseObjects,
-  returnSynapseObject,
-  returnSynapseValue,
+  returnSynapseObject
 } from '../library/synapseObjects'
 import ButtonExplore from './Button-Explore'
 
@@ -55,7 +54,6 @@ class ExploreContent extends Component {
       return (
         <div>
           <this.props.SynapseComponents.Markdown
-            token={this.props.token}
             ownerId="syn2580853"
             wikiId="409850"
             sql={this.state.sql}
@@ -63,11 +61,10 @@ class ExploreContent extends Component {
         </div>
       )
     }
-    if (this.state.synObject && this.props.token) {
+    if (this.state.synObject) {
       return (
         <div className="synapse-chart">
           <SynapseChart
-            token={this.props.token}
             filter={this.state.synObject.filter}
             activeObject={this.state.synObject}
             SynapseConstants={this.props.SynapseConstants}

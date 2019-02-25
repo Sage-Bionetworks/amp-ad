@@ -11,7 +11,7 @@ import Explore from "../components/HomeExplore"
 storiesOf("AMP-AD", module).add("HomeExplore", () => (
   <div>
     <Router>
-      <Explore token={this.token.sessionToken} />
+      <Explore  />
     </Router>
   </div>
 ))

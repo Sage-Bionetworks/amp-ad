@@ -9,23 +9,6 @@ class ProgramPage extends Component {
     name: '',
     wikiId: '',
     synId: '',
-    jsonKey: '',
-    wikiSubHero: '',
-  };
-
-  componentDidMount() {
-    this.setState(
-      {
-        params: this.props.match.params,
-      },
-      () => {
-        this.contentRouter()
-      },
-    )
-  }
-
-  handleChanges = (stateObj) => {
-    this.setState(stateObj)
   };
 
   parameters = {
@@ -64,6 +47,22 @@ class ProgramPage extends Component {
     },
   };
 
+  componentDidMount() {
+    this.setState(
+      {
+        params: this.props.match.params,
+      },
+      () => {
+        this.contentRouter()
+      },
+    )
+  }
+
+  handleChanges = (stateObj) => {
+    this.setState(stateObj)
+  };
+
+
   contentRouter = (handle = this.state.params.handle) => {
     if (handle !== undefined) {
       const query = this.parameters[handle].query
@@ -89,25 +88,10 @@ class ProgramPage extends Component {
   };
 
   returnSynapseChart = () => {
-    if (this.props.synapseLoaded && this.props.token) {
-      return (
-        <div className="explore-publications">
-          <this.props.SynapseComponents.StaticQueryWrapper
-            sql={this.state.query}
-            token={this.props.token}
-          >
-            <this.props.SynapseComponents.CardContainer
-              type={this.props.SynapseConstants.AMP_PROJECT}
-              limit={50}
-            />
-          </this.props.SynapseComponents.StaticQueryWrapper>
-        </div>
-      )
-    }
     return (
       <div className="explore-publications">
         <this.props.SynapseComponents.StaticQueryWrapper
-          json={this.props.defaultData[this.state.offlineJSON]}
+          sql={this.state.query}
         >
           <this.props.SynapseComponents.CardContainer
             type={this.props.SynapseConstants.AMP_PROJECT}
@@ -118,20 +102,12 @@ class ProgramPage extends Component {
     )
   };
 
-  style = () => {
-    if (window.location.hash.includes('/Programs/')) {
-      return {}
-    }
-    return {}
-  };
-
   returnTitleCard = () => {
     return (
       <div className="hero-card">
         <div className="card-container">
           <this.props.SynapseComponents.StaticQueryWrapper
             sql={this.state.cardQuery}
-            token={this.props.token}
           >
             <this.props.SynapseComponents.CardContainer
               type={this.props.SynapseConstants.AMP_CONSORTIUM}
@@ -144,42 +120,23 @@ class ProgramPage extends Component {
   };
 
   returnWikiData = () => {
-    if (this.props.synapseLoaded && this.props.token) {
-      return (
-        <div className="container wiki-markdown">
-          <div className="row">
-            <div className="col-xs-12 col-sm-10 col-centered">
-              <this.props.SynapseComponents.Markdown
-                token={this.props.token}
-                ownerId={this.state.synId}
-                wikiId={this.state.wikiId}
-              />
-            </div>
+    return (
+      <div className="container wiki-markdown">
+        <div className="row">
+          <div className="col-xs-12 col-sm-10 col-centered">
+            <this.props.SynapseComponents.Markdown
+              ownerId={this.state.synId}
+              wikiId={this.state.wikiId}
+            />
           </div>
         </div>
-      )
-    }
-    if (this.props.defaultData[this.state.wikiSubHero]) {
-      return (
-        <div className="container wiki-markdown">
-          <div className="row">
-            <div className="col-xs-12 col-sm-10 col-centered">
-              <this.props.SynapseComponents.Markdown
-                markdown={
-                  this.props.defaultData[this.state.wikiSubHero].markdown
-                }
-              />
-            </div>
-          </div>
-        </div>
-      )
-    }
-    return <div />
+      </div>
+    )
   };
 
   render() {
     return (
-      <section className="page program-page" style={this.style()}>
+      <section className="page program-page">
         <this.returnTitleCard />
         <div className="container">
           <div className="row">

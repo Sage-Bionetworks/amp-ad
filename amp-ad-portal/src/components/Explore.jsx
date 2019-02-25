@@ -151,31 +151,20 @@ class Explore extends Component {
         return this.returnWikiData('syn2580853', '409850')
       }
       if (
-        this.props.synapseLoaded
-        || window.location.hash === '#/Explore/Programs'
+        window.location.hash === '#/Explore/Programs'
       ) {
         return (
           <div className="synapse-chart">
             <SynapseChart
-              token={this.props.token}
               activeObject={this.state.activeObject}
               SynapseConstants={this.props.SynapseConstants}
               SynapseComponents={this.props.SynapseComponents}
               synapseLoaded={this.props.synapseLoaded}
-              defaultData={this.props.defaultData}
             />
           </div>
         )
       }
-      if (!this.props.synapseLoaded) {
-        return (
-          <div className="synapse-chart">
-            <p>Synapse is offline right now</p>
-          </div>
-        )
-      }
     }
-    return <div />
   };
 
   SelectorsAndCharts = () => {

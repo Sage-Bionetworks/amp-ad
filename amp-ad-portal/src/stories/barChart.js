@@ -7,7 +7,6 @@ import "../style/style.css"
 storiesOf("AMP-AD", module).add("BarChart", () => (
   <div>
     <BarChart
-      token={this.token.sessionToken}
       synId="syn12532774"
       filter="species"
       rgbIndex={1}

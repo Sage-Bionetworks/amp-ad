@@ -5,15 +5,11 @@ import createHistory from 'history/createBrowserHistory'
 import {
   SynapseComponents,
   SynapseConstants,
-  SynapseClient,
 } from 'synapse-react-client'
 
 // non component js
 import asyncComponent from './components/AsyncComponent'
 import ScrollToTop from './components/ScrollToTop'
-
-// to load default json
-import { getStaticJSON } from './queries/queryForData'
 
 // about pages
 const AsyncAboutAmpAd = asyncComponent(() => import('./components/About-WhatIsAmpAd'))
@@ -48,7 +44,6 @@ history.listen((location) => {
 
 class App extends Component {
   state = {
-    loginToken: {},
     wikiMarkdown: '',
     whatsNew: [],
     hash: '',
@@ -57,131 +52,10 @@ class App extends Component {
     loading: true,
   };
 
-  componentDidMount() {
-    this.login()
-      .then((token) => {
-        if (!token) {
-          this.handleChanges('synapseLoaded', false)
-          return false
-        }
-        this.handleChanges('loginToken', token)
-        this.handleChanges('synapseLoaded', true)
-        return true
-      })
-      .then((response) => {
-        if (!response) {
-          // if synapse fails to load
-          // get backup data
-          console.log('getting backup data')
-          // consortia / programs
-          getStaticJSON(
-            'syn17024173',
-            'defaultData',
-            this.handleNestedChangesObj,
-          )
-          // projects
-          getStaticJSON(
-            'syn17024229',
-            'defaultData',
-            this.handleNestedChangesObj,
-          )
-          getStaticJSON('whatsNew', 'defaultData', this.handleNestedChangesObj)
-          getStaticJSON(
-            'explorePublications',
-            'defaultData',
-            this.handleNestedChangesObj,
-          )
-          getStaticJSON(
-            'syn17024229_programAMPAD',
-            'defaultData',
-            this.handleNestedChangesObj,
-          )
-          getStaticJSON(
-            'programAMPAD_wiki',
-            'defaultData',
-            this.handleNestedChangesObj,
-          )
-          getStaticJSON(
-            'syn17024229_programResilienceAD',
-            'defaultData',
-            this.handleNestedChangesObj,
-          )
-          getStaticJSON(
-            'programResilienceAD_wiki',
-            'defaultData',
-            this.handleNestedChangesObj,
-          )
-          getStaticJSON(
-            'syn17024229_programMODELAD',
-            'defaultData',
-            this.handleNestedChangesObj,
-          )
-          getStaticJSON(
-            'programMODELAD_wiki',
-            'defaultData',
-            this.handleNestedChangesObj,
-          )
-          getStaticJSON(
-            'syn17024229_programM2OVEAD',
-            'defaultData',
-            this.handleNestedChangesObj,
-          )
-          getStaticJSON(
-            'programM2OVEAD_wiki',
-            'defaultData',
-            this.handleNestedChangesObj,
-          )
-          getStaticJSON(
-            'acknowledgementStatements',
-            'defaultData',
-            this.handleNestedChangesObj,
-          )
-          getStaticJSON(
-            'dataInstructions',
-            'defaultData',
-            this.handleNestedChangesObj,
-          )
-          getStaticJSON(
-            'dataUseCertificates',
-            'defaultData',
-            this.handleNestedChangesObj,
-          )
-          getStaticJSON('about', 'defaultData', this.handleNestedChangesObj)
-          getStaticJSON('tools', 'defaultData', this.handleNestedChangesObj)
-        }
-      })
-
-    this.setState({
-      hash: window.location.hash,
-    })
-  }
-
-  login = async () => SynapseClient.login('mikeybkats', 'guinness')
-    .then((response) => {
-      let key = {}
-      if (response.sessionToken) {
-        key = response
-      }
-      return key
-    })
-    .catch(() => {
-      return false
-    });
-
   handleChanges = (KEY, NEWSTATE) => {
     this.setState({
       [KEY]: NEWSTATE,
     })
-  };
-
-  handleNestedChangesObj = (KEY, newStateKey, newState) => {
-    // this function lets you declare new object keys within a state object
-    const property = this.state[KEY]
-    property[newStateKey] = newState
-    this.setState(prevState => ({
-      ...prevState,
-      property,
-    }))
   };
 
   handleNestedChanges = (KEY, newStateKey, newState) => {
@@ -197,7 +71,6 @@ class App extends Component {
   ReturnHome = () => {
     return (
       <AsyncHome
-        token={this.state.loginToken}
         toggleSeeAll={this.toggleSeeAll}
         handleChanges={this.handleChanges}
         handleChangeEvent={this.handleChangeEvent}
@@ -215,7 +88,6 @@ class App extends Component {
   ReturnResourcesAcknowledgements = () => {
     return (
       <AsyncResourcesAcknowledgements
-        token={this.state.loginToken}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
         defaultData={this.state.defaultData}
@@ -227,7 +99,6 @@ class App extends Component {
   ReturnDataUseCertificates = () => {
     return (
       <AsyncDataUseCertificates
-        token={this.state.loginToken}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
         defaultData={this.state.defaultData}
@@ -239,7 +110,6 @@ class App extends Component {
   ReturnInstructions = () => {
     return (
       <AsyncInstructions
-        token={this.state.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
         markdown={this.state.wikiMarkdown}
@@ -254,7 +124,6 @@ class App extends Component {
   ReturnResearchTools = () => {
     return (
       <AsyncResearchTools
-        token={this.state.loginToken}
         handleChanges={this.handleChanges}
         handleNestedChanges={this.handleNestedChanges}
         SynapseConstants={SynapseConstants}
@@ -268,7 +137,6 @@ class App extends Component {
   ReturnAboutAmpAd = () => {
     return (
       <AsyncAboutAmpAd
-        token={this.state.loginToken}
         handleChanges={this.handleChanges}
         SynapseComponents={SynapseComponents}
         defaultData={this.state.defaultData}
@@ -284,10 +152,8 @@ class App extends Component {
   };
 
   ReturnExplore = (props) => {
-    const token = ''
     return (
       <AsyncExplore
-        token={token}
         history={props.history}
         hash={window.location.hash}
         match={props.match}
@@ -300,13 +166,8 @@ class App extends Component {
   };
 
   ReturnStudyPage = (props) => {
-    let token = ''
-    if (this.state.loginToken.sessionToken) {
-      token = this.state.loginToken.sessionToken
-    }
     return (
       <AsyncStudyPage
-        token={token}
         hash={window.location.hash}
         match={props.match}
         history={props.history}
@@ -317,13 +178,8 @@ class App extends Component {
   };
 
   ReturnProgramPage = (props) => {
-    let token = ''
-    if (this.state.loginToken.sessionToken) {
-      token = this.state.loginToken.sessionToken
-    }
     return (
       <AsyncProgramPage
-        token={token}
         hash={window.location.hash}
         match={props.match}
         history={props.history}

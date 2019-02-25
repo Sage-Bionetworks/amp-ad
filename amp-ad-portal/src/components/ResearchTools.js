@@ -14,30 +14,16 @@ class Tools extends Component {
   };
 
   returnMarkdown = () => {
-    if (this.props.token.sessionToken) {
-      return (
-        <this.props.SynapseComponents.Markdown
-          token={this.props.token.sessionToken}
-          ownerId="syn2580853"
-          wikiId="409845"
-          updateLoadState={() => this.handleChanges('loading', false)}
-        />
-      )
-    }
-    if (!this.props.synapseLoaded && this.props.defaultData.tools) {
-      return (
-        <this.props.SynapseComponents.Markdown
-          markdown={this.props.defaultData.tools.markdown}
-        />
-      )
-    }
-    return <div />
+    return (
+      <this.props.SynapseComponents.Markdown
+        ownerId="syn2580853"
+        wikiId="409845"
+        updateLoadState={() => this.handleChanges('loading', false)}
+      />
+    )
   };
 
   returnBarLoader = () => {
-    if (!this.props.synapseLoaded && this.props.defaultData.tools) {
-      return <div />
-    }
     return <BarLoader color="#5BB0B5" loading={this.state.loading} />
   };
 

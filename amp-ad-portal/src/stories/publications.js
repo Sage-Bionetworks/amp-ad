@@ -28,7 +28,6 @@ storiesOf("AMP-AD", module).add("publications", () => (
   <div>
     <Publications
       handleChanges={handleChanges}
-      token={this.token.sessionToken}
       markdown={[markdown]}
     />
   </div>

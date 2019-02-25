@@ -11,12 +11,11 @@ const makeid = () => {
   return text
 }
 
-const buildSection = (index, key, markdown, token = "") => {
+const buildSection = (index, key, markdown) => {
   if (markdown.length > 0) {
     const synapseMarkdown = (
       <div key={makeid()}>
         <SynapseComponents.Markdown
-          token={token}
           markdown={markdown[index] !== undefined ? markdown[index][key] : ""}
           hasSynapseResources={false}
           errorMessageView={<div>error</div>}
@@ -39,11 +38,10 @@ const buildSectionReactMarkdown = (index, key, markdown) => {
   )
 }
 
-const returnJsxFromMarkdown = (markdown, token = undefined) => {
+const returnJsxFromMarkdown = (markdown) => {
   if (markdown.length > 0) {
     return (
       <SynapseComponents.Markdown
-        token={token}
         markdown={markdown !== undefined ? markdown : ""}
         hasSynapseResources={false}
         errorMessageView={<div>error</div>}

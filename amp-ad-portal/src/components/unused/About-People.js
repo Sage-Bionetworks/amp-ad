@@ -30,12 +30,10 @@ class People extends Component {
     this.getData()
   }
 
-  componentDidUpdate() {}
-
   getData = async () => {
     return getTable(
       "syn13897207",
-      this.props.token,
+      '',
       "SELECT * FROM syn13897207",
     )
       .then((response) => {

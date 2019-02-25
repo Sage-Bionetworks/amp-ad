@@ -7,42 +7,21 @@ class WhatIsAmpAD extends Component {
     loading: true,
   };
 
-  componentDidUpdate() {
-    console.log('updated')
-  }
-
   handleChange = (newState) => {
     this.setState(newState)
   };
 
-  returnMarkdown = (token = this.props.token.sessionToken) => {
-    if (token) {
-      return (
-        <this.props.SynapseComponents.Markdown
-          wikiId="581939"
-          token={this.props.token.sessionToken}
-          ownerId="syn12666371"
-          updateLoadState={() => this.handleChange({ loading: false })}
-        />
-      )
-    }
-    if (!this.props.synapseLoaded && this.props.defaultData.about) {
-      return (
-        <this.props.SynapseComponents.Markdown
-          markdown={this.props.defaultData.about.markdown}
-        />
-      )
-    }
-    return <div />
+  returnMarkdown = () => {
+    return (
+      <this.props.SynapseComponents.Markdown
+        wikiId="581939"
+        ownerId="syn12666371"
+        updateLoadState={() => this.handleChange({ loading: false })}
+      />
+    )
   };
 
   returnBarLoader = () => {
-    if (
-      !this.props.synapseLoaded
-      && this.props.defaultData.acknowledgementStatements
-    ) {
-      return <div />
-    }
     return <BarLoader color="#5BB0B5" loading={this.state.loading} />
   };
 
