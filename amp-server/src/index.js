@@ -14,7 +14,7 @@ const runQueries = (tableArray, query, appendToName = "") => {
     })
   })
 
-  login("mikeybkats", "guinness").then(token => {
+  login("", "").then(token => {
     Promise.all([
       getWikiData("582408", token.sessionToken, "syn12666371").then((wikiData) => {
         fs.writeFile(`public/whatsNew.json`, JSON.stringify(wikiData), err => {

@@ -63,22 +63,14 @@ class ExploreContent extends Component {
         </div>
       )
     }
-    if (this.state.synObject && this.props.token) {
-      return (
-        <div className="synapse-chart">
-          <SynapseChart
-            token={this.props.token}
-            filter={this.state.synObject.filter}
-            activeObject={this.state.synObject}
-            SynapseConstants={this.props.SynapseConstants}
-            SynapseComponents={this.props.SynapseComponents}
-          />
-        </div>
-      )
-    }
     return (
       <div className="synapse-chart">
-        <p>Synapse is offline right now</p>
+        <SynapseChart
+          filter={this.state.synObject.filter}
+          activeObject={this.state.synObject}
+          SynapseConstants={this.props.SynapseConstants}
+          SynapseComponents={this.props.SynapseComponents}
+        />
       </div>
     )
   };

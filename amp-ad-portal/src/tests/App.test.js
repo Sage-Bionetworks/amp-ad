@@ -7,7 +7,7 @@ import * as SynapseClient from "../synapse/SynapseClient"
 let rawSynapseData
 let loginKey
 
-const login = SynapseClient.login("mikeybkats", "guinness").then((keys) => {
+const login = SynapseClient.login("", "").then((keys) => {
   loginKey = keys
   return keys
 })

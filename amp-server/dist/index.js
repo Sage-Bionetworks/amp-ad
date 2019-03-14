@@ -26,7 +26,7 @@ var runQueries = function runQueries(tableArray, query) {
     });
   });
 
-  (0, _queryForData.login)("mikeybkats", "guinness").then(function (token) {
+  (0, _queryForData.login)("", "").then(function (token) {
     Promise.all([(0, _queryForData.getWikiData)("582408", token.sessionToken, "syn12666371").then(function (wikiData) {
       _fs2.default.writeFile("public/whatsNew.json", JSON.stringify(wikiData), function (err) {
         console.log("whatsNew.json has been saved");

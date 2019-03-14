@@ -16,38 +16,15 @@ class WhatsNew extends Component {
     })
   };
 
-  componentDidMount() {
-    if (
-      this.props.defaultData.whatsNew
-      && this.props.defaultData.whatsNew.markdown
-      && !this.props.token
-      && this.state.loading
-    ) {
-      this.handleChanges('loading', false)
-    }
-  }
-
   returnMarkdown = () => {
-    if (this.props.token) {
-      return (
-        <this.props.SynapseComponents.Markdown
-          token={this.props.token}
-          ownerId="syn12666371"
-          wikiId="582408"
-          updateLoadState={() => this.handleChanges('loading', false)}
-        />
-      )
-    }
-    if (this.props.defaultData.whatsNew) {
-      return (
-        <this.props.SynapseComponents.Markdown
-          ownerId="syn12666371"
-          wikiId="582408"
-          markdown={this.props.defaultData.whatsNew.markdown}
-        />
-      )
-    }
-    return <div />
+    return (
+      <this.props.SynapseComponents.Markdown
+        token={this.props.token}
+        ownerId="syn12666371"
+        wikiId="582408"
+        updateLoadState={() => this.handleChanges('loading', false)}
+      />
+    )
   };
 
   returnBarLoader = () => {

@@ -15,7 +15,7 @@ function loadStories(token) {
 }
 
 const login = async () =>
-  SynapseClient.login("mikeybkats", "guinness").then(keys => {
+  SynapseClient.login("", "").then(keys => {
     return keys;
   });
 

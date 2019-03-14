@@ -50,7 +50,7 @@ var processError = function processError(error) {
 
 var queryTable = function queryTable(table, query) {
   console.log(query);
-  return login("mikeybkats", "guinness").then(function (token) {
+  return login("", "").then(function (token) {
     return getTable(table, token, query);
   }).then(json).catch(processError);
 };
