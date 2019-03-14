@@ -53,24 +53,13 @@ class Instructions extends Component {
   };
 
   returnMarkdown = (token = this.props.token.sessionToken) => {
-    if (token) {
-      return (
-        <this.props.SynapseComponents.Markdown
-          token={token}
-          ownerId="syn12666371"
-          wikiId="585317"
-          updateLoadState={() => this.handleChange({ loading: false })}
-        />
-      )
-    }
-    if (!this.props.synapseLoaded && this.props.defaultData.dataInstructions) {
-      return (
-        <this.props.SynapseComponents.Markdown
-          markdown={this.props.defaultData.dataInstructions.markdown}
-        />
-      )
-    }
-    return <div />
+    return (
+      <this.props.SynapseComponents.Markdown
+        ownerId="syn12666371"
+        wikiId="585317"
+        updateLoadState={() => this.handleChange({ loading: false })}
+      />
+    )
   };
 
   returnBarLoader = () => {

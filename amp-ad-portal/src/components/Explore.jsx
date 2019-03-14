@@ -167,13 +167,6 @@ class Explore extends Component {
           </div>
         )
       }
-      if (!this.props.synapseLoaded) {
-        return (
-          <div className="synapse-chart">
-            <p>Synapse is offline right now</p>
-          </div>
-        )
-      }
     }
     return <div />
   };

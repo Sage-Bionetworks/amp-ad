@@ -12,27 +12,14 @@ class AcknowledgementStatements extends Component {
   };
 
   returnMarkdown = (token = this.props.token.sessionToken) => {
-    if (token) {
-      return (
-        <this.props.SynapseComponents.Markdown
-          token={this.props.token.sessionToken}
-          ownerId="syn2580853"
-          wikiId="584597"
-          updateLoadState={() => this.handleChange({ loading: false })}
-        />
-      )
-    }
-    if (
-      !this.props.synapseLoaded
-      && this.props.defaultData.acknowledgementStatements
-    ) {
-      return (
-        <this.props.SynapseComponents.Markdown
-          markdown={this.props.defaultData.acknowledgementStatements.markdown}
-        />
-      )
-    }
-    return <div />
+    return (
+      <this.props.SynapseComponents.Markdown
+        token={this.props.token.sessionToken}
+        ownerId="syn2580853"
+        wikiId="584597"
+        updateLoadState={() => this.handleChange({ loading: false })}
+      />
+    )
   };
 
   returnBarLoader = () => {
