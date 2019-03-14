@@ -44,27 +44,14 @@ class DataUseCertificates extends Component {
   };
 
   returnMarkdown = (token = this.props.token.sessionToken) => {
-    if (token) {
-      return (
-        <this.props.SynapseComponents.Markdown
-          token={token}
-          ownerId="syn12666371"
-          wikiId="585318"
-          updateLoadState={() => this.handleChange({ loading: false })}
-        />
-      )
-    }
-    if (
-      !this.props.synapseLoaded
-      && this.props.defaultData.dataUseCertificates
-    ) {
-      return (
-        <this.props.SynapseComponents.Markdown
-          markdown={this.props.defaultData.dataUseCertificates.markdown}
-        />
-      )
-    }
-    return <div />
+    return (
+      <this.props.SynapseComponents.Markdown
+        token={token}
+        ownerId="syn12666371"
+        wikiId="585318"
+        updateLoadState={() => this.handleChange({ loading: false })}
+      />
+    )
   };
 
   returnBarLoader = () => {
