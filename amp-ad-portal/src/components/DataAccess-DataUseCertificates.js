@@ -17,6 +17,9 @@ class DataUseCertificates extends Component {
   }
 
   addDetailsFunctionality = () => {
+    if (this.state.addedEventListeners) {
+      return
+    }
     const details = document.querySelectorAll('details')
 
     if (details.length > 0) {
