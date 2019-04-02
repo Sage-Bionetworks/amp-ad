@@ -17,7 +17,7 @@
     "react-router-dom": "^4.3.1",
     "react-spinners": "^0.3.2",
     "source-map-explorer": "^1.6.0",
-    "synapse-react-client": "1.10.21",
+    "synapse-react-client": "1.11.14",
     "write": "^1.0.3"
   },
   "devDependencies": {
