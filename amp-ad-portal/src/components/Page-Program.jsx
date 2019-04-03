@@ -89,25 +89,10 @@ class ProgramPage extends Component {
   };
 
   returnSynapseChart = () => {
-    if (this.props.synapseLoaded && this.props.token) {
-      return (
-        <div className="explore-publications">
-          <this.props.SynapseComponents.StaticQueryWrapper
-            sql={this.state.query}
-            token={this.props.token}
-          >
-            <this.props.SynapseComponents.CardContainer
-              type={this.props.SynapseConstants.AMP_PROJECT}
-              limit={50}
-            />
-          </this.props.SynapseComponents.StaticQueryWrapper>
-        </div>
-      )
-    }
     return (
       <div className="explore-publications">
         <this.props.SynapseComponents.StaticQueryWrapper
-          json={this.props.defaultData[this.state.offlineJSON]}
+          sql={this.state.query}
         >
           <this.props.SynapseComponents.CardContainer
             type={this.props.SynapseConstants.AMP_PROJECT}
@@ -144,37 +129,19 @@ class ProgramPage extends Component {
   };
 
   returnWikiData = () => {
-    if (this.props.synapseLoaded && this.props.token) {
-      return (
-        <div className="container wiki-markdown">
-          <div className="row">
-            <div className="col-xs-12 col-sm-10 col-centered">
-              <this.props.SynapseComponents.Markdown
-                token={this.props.token}
-                ownerId={this.state.synId}
-                wikiId={this.state.wikiId}
-              />
-            </div>
+    return (
+      <div className="container wiki-markdown">
+        <div className="row">
+          <div className="col-xs-12 col-sm-10 col-centered">
+            <this.props.SynapseComponents.Markdown
+              token={this.props.token}
+              ownerId={this.state.synId}
+              wikiId={this.state.wikiId}
+            />
           </div>
         </div>
-      )
-    }
-    if (this.props.defaultData[this.state.wikiSubHero]) {
-      return (
-        <div className="container wiki-markdown">
-          <div className="row">
-            <div className="col-xs-12 col-sm-10 col-centered">
-              <this.props.SynapseComponents.Markdown
-                markdown={
-                  this.props.defaultData[this.state.wikiSubHero].markdown
-                }
-              />
-            </div>
-          </div>
-        </div>
-      )
-    }
-    return <div />
+      </div>
+    )
   };
 
   render() {
