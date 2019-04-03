@@ -76,25 +76,13 @@ class SynapseChartAndCards extends Component {
 
   returnSynapseCards = () => {
     if (this.props.activeObject.cards && !this.props.activeObject.homescreen) {
-      if (this.props.synapseLoaded) {
-        return (
-          <this.props.SynapseComponents.StaticQueryWrapper
-            sql={this.props.activeObject.sql}
-            token={this.props.token}
-          >
-            <this.props.SynapseComponents.CardContainer
-              type={this.props.SynapseConstants[this.props.activeObject.type]}
-              unitDescription="programs"
-            />
-          </this.props.SynapseComponents.StaticQueryWrapper>
-        )
-      }
       return (
         <this.props.SynapseComponents.StaticQueryWrapper
-          json={this.props.defaultData[this.props.activeObject.offlineKey]}
+          sql={this.props.activeObject.sql}
         >
           <this.props.SynapseComponents.CardContainer
             type={this.props.SynapseConstants[this.props.activeObject.type]}
+            unitDescription="programs"
           />
         </this.props.SynapseComponents.StaticQueryWrapper>
       )
