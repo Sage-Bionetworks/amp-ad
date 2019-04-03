@@ -113,7 +113,7 @@ class ProgramPage extends Component {
   returnTitleCard = () => {
     return (
       <div className="hero-card">
-        <div className="card-container">
+        <div className="card-container program-markdown-header">
           <this.props.SynapseComponents.StaticQueryWrapper
             sql={this.state.cardQuery}
             token={this.props.token}
@@ -134,7 +134,6 @@ class ProgramPage extends Component {
         <div className="row">
           <div className="col-xs-12 col-sm-10 col-centered">
             <this.props.SynapseComponents.Markdown
-              token={this.props.token}
               ownerId={this.state.synId}
               wikiId={this.state.wikiId}
             />
