@@ -2038,5 +2038,8 @@ select {
 .program-markdown-header {
    div.SRC-cardContent {
      padding: 0px !important;
+     .SRC-title h3 {
+      font-size: 24px !important;
+     }
    }
 }
