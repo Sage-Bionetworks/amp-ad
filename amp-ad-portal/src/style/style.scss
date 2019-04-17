@@ -243,9 +243,6 @@ button.btn-explore {
 .justify-start {
   justify-content: flex-start;
 }
-.container {
-  width: 100%;
-}
 .content {
   max-width: 1120px;
 }
@@ -524,7 +521,6 @@ select {
   }
 
   section {
-    padding: 25px 50px;
     div.content, form.searchbar-form {
       max-width: 1120px;
     }
@@ -630,9 +626,6 @@ select {
     }
     .Dropdown-control {
       font-size: 20px;
-    }
-    .nav>li>a:hover {
-       
     }
     a.nav-item:hover, a.nav-item:focus {
       background-color: unset;
@@ -989,71 +982,6 @@ select {
       width: 300px;
     }
   }
-
-  //section.hero {
-    //background: linear-gradient(to right, $darkPurple, $bluePurple);
-    //padding: 0px;
-    //padding-top: 105px;
-    //position: relative;
-    //height: 500px;
-    //.hero-message {
-      //padding: 0px;
-      //color: white;
-      //text-align: left;
-      //position: absolute;
-      //left: 20px;
-      //top: 47%;
-      //h1 {
-        //margin: 0px;
-      //}
-    //}
-    //@media screen and (min-width: 720px){
-      //.welcome-message {
-        //left: 5%;
-      //} 
-    //}
-    //@media screen and (min-width: 1000px){
-      //.welcome-message {
-        //left: 10%;
-      //} 
-    //}
-    //@media screen and (min-width: 1120px){
-      //.welcome-message {
-        //left: 15%;
-      //} 
-    //}
-    //@media screen and (min-width: 1400px){
-      //.welcome-message {
-        //left: 20%;
-      //} 
-    //}
-    //.welcome-data {
-      //background-color: $bluePlum;
-      //height: -webkit-fill-available;
-      //right: 0px;
-      //position: absolute;
-      //padding-right: 30%;
-      //ul {
-        //text-align: left;
-        //width: 300px;
-        //margin-top: 60px;
-      //}
-      //li {
-        //color: white;
-        //font-size: 18px;
-        //margin: 15px 0px;
-      //}
-    //}
-    //.btn-light {
-      //margin-top: 10px;
-    //}
-    //@media screen and (max-width: 914px){
-      //padding-top: 60px;
-     //.welcome-message {
-       //padding: 0px; 
-      //}
-    //}
-  //}
     /////////// home screen //////////////
   section.hero {
     position: relative;
@@ -1156,9 +1084,7 @@ select {
       button {
         position: relative;
       }
-      button.active {
-        
-      }
+      
       margin: 20px 0px;
       button:first-child {
         @include hoverFade($selector1);
@@ -1344,10 +1270,7 @@ select {
       padding-right: 0px;
       padding-left: 0px;
     }
-    .query-wrapper {
-      //margin-left: -30px;
-      //margin-right: -30px;
-    }
+
     .box {
       height: 470px;
       position: relative;
