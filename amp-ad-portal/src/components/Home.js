@@ -8,7 +8,7 @@ const Programs = asyncComponent(() => import("./Programs.jsx"))
 const WhatsNew = asyncComponent(() => import("./WhatsNew.jsx"))
 
 const Home = props => (
-  <div className="row home">
+  <div className="home">
     <div className="spacer" />
     <Welcome
       markdown={props.welcomeHeaderMarkdown}
@@ -16,24 +16,30 @@ const Home = props => (
       token={props.token}
       handleChanges={props.handleChanges}
     />
-    <Explore
-      token={props.token.sessionToken}
-      SynapseConstants={props.SynapseConstants}
-      SynapseComponents={props.SynapseComponents}
-      synapseLoaded={props.synapseLoaded}
-    />
-    <Programs
-      token={props.token.sessionToken}
-      SynapseConstants={props.SynapseConstants}
-      SynapseComponents={props.SynapseComponents}
-      defaultData={props.defaultData}
-    />
-    <WhatsNew
-      defaultData={props.defaultData}
-      token={props.token.sessionToken}
-      handleNestedChanges={props.handleNestedChanges}
-      SynapseComponents={props.SynapseComponents}
-    />
+    <div className="container">
+      <div className="row">
+        <div className="col-xs-12">
+          <Explore
+            token={props.token.sessionToken}
+            SynapseConstants={props.SynapseConstants}
+            SynapseComponents={props.SynapseComponents}
+            synapseLoaded={props.synapseLoaded}
+          />
+          <Programs
+            token={props.token.sessionToken}
+            SynapseConstants={props.SynapseConstants}
+            SynapseComponents={props.SynapseComponents}
+            defaultData={props.defaultData}
+          />
+          <WhatsNew
+            defaultData={props.defaultData}
+            token={props.token.sessionToken}
+            handleNestedChanges={props.handleNestedChanges}
+            SynapseComponents={props.SynapseComponents}
+          />
+        </div>
+      </div>
+    </div>
   </div>
 )
 

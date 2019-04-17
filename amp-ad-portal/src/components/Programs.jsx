@@ -21,31 +21,19 @@ class Programs extends Component {
   QueryWrapper = () => {
     const sql = 'SELECT * FROM syn17024173'
     return (
-      <div className="query-wrapper">
-        <this.props.SynapseComponents.StaticQueryWrapper
-          sql={sql}
-        >
-          <this.props.SynapseComponents.CardContainer
-            type={this.props.SynapseConstants.AMP_CONSORTIUM}
-            // unitDescription="programs"
-          />
-        </this.props.SynapseComponents.StaticQueryWrapper>
-      </div>
+      <this.props.SynapseComponents.CardContainerLogic
+        sql={sql}
+        type={this.props.SynapseConstants.AMP_CONSORTIUM}
+      />
     )
   };
 
   //<BarLoader color="#5BB0B5" loading={this.state.loading} />
   render() {
     return (
-      <section className="programs flex-row">
-        <div className="flex-col-full content-row-width">
-          <div className="title-row between-xs">
-            <div className="">
-              <h2 className="header">Programs</h2>
-            </div>
-          </div>
-          <this.QueryWrapper />
-        </div>
+      <section className="programs">
+        <h2 className="header">Programs</h2>
+        <this.QueryWrapper />
       </section>
     )
   }

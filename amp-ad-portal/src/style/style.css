@@ -706,11 +706,6 @@ body.noScroll, html.noScroll {
   height: 100%;
 }
 
-section div.row {
-  margin: 0px auto;
-  max-width: 1120px;
-}
-
 section div.content, section form.searchbar-form {
   max-width: 1120px;
 }
@@ -1193,11 +1188,6 @@ footer .row {
 }
 .hero-background a:hover {
   color: white;
-}
-@media screen and (max-width: 1265px) {
-  .hero-background .container {
-    left: 5%;
-  }
 }
 .hero-background .hero-message {
   padding: 30px;

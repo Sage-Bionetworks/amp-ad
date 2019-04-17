@@ -238,7 +238,7 @@ class App extends Component {
 
   Main = () => {
     return (
-      <div className="container-fluid main-content">
+      <div className="main-content">
         <div className="spacer" />
         <Route exact path="/" component={this.ReturnHome} />
         <Route path="/Resources/Data" component={this.ReturnResourcesData} />

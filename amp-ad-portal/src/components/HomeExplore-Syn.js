@@ -77,23 +77,19 @@ class ExploreContent extends Component {
 
   render() {
     return (
-      <section className="row explore-content">
-        <div className="container">
-          <div className="row">
-            <h2 className="header">Explore Content</h2>
-          </div>
-          <div className="row bar-chart">
-            <Selectors
-              returnButtonClass={this.returnButtonClass}
-              handleChanges={this.handleChanges}
-              handleButtonPress={this.handleButtonPress}
-            />
-            {this.returnSynapseChart()}
-            <ButtonExplore
-              url={this.state.synObject.hash}
-              label={this.state.name}
-            />
-          </div>
+      <section>
+        <h2 className="header">Explore Content</h2>
+        <div className="bar-chart">
+          <Selectors
+            returnButtonClass={this.returnButtonClass}
+            handleChanges={this.handleChanges}
+            handleButtonPress={this.handleButtonPress}
+          />
+          {this.returnSynapseChart()}
+          <ButtonExplore
+            url={this.state.synObject.hash}
+            label={this.state.name}
+          />
         </div>
       </section>
     )

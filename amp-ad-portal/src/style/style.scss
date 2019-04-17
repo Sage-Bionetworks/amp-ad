@@ -514,12 +514,6 @@ select {
     height: 100%
   }
 
-
-  section div.row {
-    margin: 0px auto;
-    max-width: 1120px;
-  }
-
   section {
     div.content, form.searchbar-form {
       max-width: 1120px;
@@ -1006,11 +1000,6 @@ select {
       text-decoration: underline;
       &:hover {
         color: white;
-      }
-    }
-    @media screen and (max-width: 1265px){
-      .container {
-        left: 5%;
       }
     }
     .hero-message {
