@@ -1476,7 +1476,7 @@ section.analyses button {
 }
 
 section.programs {
-  margin-top: 120px;
+  margin-top: 50px;
 }
 section.programs .box {
   height: 470px;
@@ -2148,6 +2148,10 @@ p.researcher-bio {
 button.SRC-chart-btn {
   border: none;
   border-width: 0px !important;
+}
+
+.explore-content {
+  padding-top: 25px;
 }
 
 /*# sourceMappingURL=style.css.map */

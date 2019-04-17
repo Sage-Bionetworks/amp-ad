@@ -1148,7 +1148,7 @@ select {
   }
 
   section.programs {
-    margin-top: 120px; 
+    margin-top: 50px; 
     .box {
       height: 470px;
       position: relative;
@@ -1872,4 +1872,8 @@ select {
 button.SRC-chart-btn {
   border: none;
   border-width: 0px !important;
+}
+
+.explore-content {
+  padding-top: 25px;
 }
