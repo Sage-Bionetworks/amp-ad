@@ -983,11 +983,14 @@ select {
     }
   }
     /////////// home screen //////////////
-  section.hero {
+  .hero-background {
     position: relative;
-    height: 481px;
-    background: linear-gradient(to right, $darkPurple, $bluePurple);
-    padding: 0px;
+    padding: 50px;
+    background-image: url('../images/molecule-lattice.svg');
+    background-color: $primaryPurple;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: fit-content;
     p, h1 {
       color: white;
     }
@@ -1005,172 +1008,51 @@ select {
         color: white;
       }
     }
-    .container {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      position: absolute;
-      z-index: 100;
-      margin-left: auto;
-      margin-right: auto;
-      left: 0;
-      right: 0;
-      bottom: 20px;
-    }
     @media screen and (max-width: 1265px){
       .container {
         left: 5%;
       }
     }
     .hero-message {
-      div {
-        background-color: unquote('#ffffff10');
-        margin-bottom: 30px;
-        padding: 10px 21px;
-      }
-    }
-    .hero-background {
-      background-image: url('../images/molecule-lattice.svg');
-      background-repeat: no-repeat;
-      background-size: cover;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      z-index: 50;
-      bottom: 0;
-    }
-    .hero-background:before {
-      filter: blur(5px);
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
     }
   }
 
 
-  ///// explore section /////
-  section.page.explore {
-    margin-top: 50px;
-  }
-  section.explore-content, div.explore-content {
-		.explore-publications {
-			max-width: 1033px;
-			margin: 0px auto;
-		}
-
-    margin-bottom: 80px;
-		@media screen and (max-width: 600px){
-			margin-bottom: 220px;
-		}
-    .col-xs-2 {
-      margin-top: 18px;
+  .selectors {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    @media screen and (max-width: 720px){
+      flex-direction: unset;
     }
-    .container .container-fluid {
-      padding: 0px;
-      .col-xs-12 { 
-        padding: 0px;
-      }
+    button {
+      position: relative;
+      flex-basis: 16%;
+      margin: 0px 15px;
     }
-
-    .selectors-container {
-      max-width: 1033px;
+    
+    margin: 20px 0px;
+    button:first-child {
+      margin-left: 0px;
+      @include hoverFade($selector1);
     }
-    .selectors {
-      display: flex;
-      justify-content: space-around;
-      flex-direction: row;
-      flex-wrap: wrap;
-      @media screen and (max-width: 720px){
-        flex-direction: unset;
-      }
-      button {
-        position: relative;
-      }
-      
-      margin: 20px 0px;
-      button:first-child {
-        @include hoverFade($selector1);
-      }
-      button:nth-child(2) {
-        @include hoverFade($selector2);
-      }
-      button:nth-child(3) {
-        @include hoverFade($selector3);
-      }
-      button:nth-child(4) {
-        @include hoverFade($selector4);
-      }
-      button:nth-child(5) {
-        @include hoverFade($selector5);
-      }
-      button:nth-child(6) {
-        @include hoverFade($selector6);
-      }
+    button:nth-child(2) {
+      @include hoverFade($selector2);
     }
-
-    .synapse-chart {
-      max-width: 1033px;
-      margin: 0px auto;
-      .bar-section .SRC-portalCard {
-        margin-left: 0px;
-        margin-right: 0px;
-      }
+    button:nth-child(3) {
+      @include hoverFade($selector3);
     }
-
-		.Projects {
-			.container-fluid {
-				margin-right: -22px;
-				margin-left: -22px;
-			}
-		}
-
-    .bar-chart {
-      @media screen and (max-width: 720px){
-        height: 450px;
-      }
-      @media screen and (max-width: 520px){
-        height: 480px;
-      }
-      .explore-button-row {
-        position: absolute;
-        bottom: -59px;
-        right: 0;
-        @media screen and (max-width: 768px){
-          bottom: -130px;
-        }
-				@media screen and (max-width: 600px){
-					bottom: -200px;
-				}
-      }
-      .selectors-container {
-				max-width: 700px;
-			}
-      .synapse-chart {
-        position: absolute;
-        top: 100px;
-        right: 5px;
-        width: 100%;
-        max-width: unset;
-        margin: 0px auto;
-        @media screen and (max-width: 768px){
-          top: 160px;
-        }
-        .btn {
-          font-size: initial;
-          background-color: initial;
-          width: initial;
-          height: initial;
-          display: inherit;
-        }
-        .row.SRC-center-text {
-          display: block;
-          box-sizing: initial;
-        }
-        .SRC-bar-border-bottom {
-          padding-bottom: 20px;
-        }
-      }
+    button:nth-child(4) {
+      @include hoverFade($selector4);
     }
-    .SRC-grayBackground {
-      background: unset; 
+    button:nth-child(5) {
+      @include hoverFade($selector5);
+    }
+    button:nth-child(6) {
+      @include hoverFade($selector6);
     }
   }
 
@@ -1266,11 +1148,7 @@ select {
   }
 
   section.programs {
-    .container-fluid {
-      padding-right: 0px;
-      padding-left: 0px;
-    }
-
+    margin-top: 120px; 
     .box {
       height: 470px;
       position: relative;
@@ -1377,6 +1255,7 @@ select {
 	}
 
   section.what-new, section.programs {
+    margin-bottom: 25px;
     .markdown h4 {
       padding: 0px;
 			font-size: 18px;
@@ -1948,8 +1827,6 @@ select {
         max-width: unset;
       }
     }
-		section.programs {
-		}
   }
   
   .SRC-bar-border > div:first-child {
@@ -1965,4 +1842,34 @@ select {
       font-size: 24px !important;
      }
    }
+}
+
+.main-content {
+  min-height: 100vh;
+}
+
+.wrapper {
+  .spacer {
+    min-height: 58px;
+  }
+  div.main-content.spacer {
+    min-height: 30px;
+  }
+}
+
+.explore-button {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+}
+
+.bar-chart {
+  position: relative;
+  min-height: 220px;
+  height: fit-content;
+}
+
+button.SRC-chart-btn {
+  border: none;
+  border-width: 0px !important;
 }

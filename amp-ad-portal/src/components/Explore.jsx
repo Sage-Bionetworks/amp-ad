@@ -123,20 +123,9 @@ class Explore extends Component {
     return `btn-control ${this.state.activeButton === id ? 'active' : ''}`
   };
 
-  hideBarSection = () => {
-    const hash = window.location.hash
-    if (hash === '#/Explore') {
-      return ''
-    }
-    if (hash !== '#/') {
-      return ''
-    }
-    return ''
-  };
-
   returnWikiData = (synId, wikiId) => {
     return (
-      <div className="explore-publications">
+      <div className="col-xs-12 explore-publications">
         <this.props.SynapseComponents.Markdown
           ownerId={synId}
           wikiId={wikiId}
@@ -155,16 +144,14 @@ class Explore extends Component {
         || window.location.hash === '#/Explore/Programs'
       ) {
         return (
-          <div className="synapse-chart">
-            <SynapseChart
-              token={this.props.token}
-              activeObject={this.state.activeObject}
-              SynapseConstants={this.props.SynapseConstants}
-              SynapseComponents={this.props.SynapseComponents}
-              synapseLoaded={this.props.synapseLoaded}
-              defaultData={this.props.defaultData}
-            />
-          </div>
+          <SynapseChart
+            token={this.props.token}
+            activeObject={this.state.activeObject}
+            SynapseConstants={this.props.SynapseConstants}
+            SynapseComponents={this.props.SynapseComponents}
+            synapseLoaded={this.props.synapseLoaded}
+            defaultData={this.props.defaultData}
+          />
         )
       }
     }
@@ -178,10 +165,8 @@ class Explore extends Component {
       && !window.location.hash.includes('/Programs/')
     ) {
       return (
-        <div>
-          <div
-            className={`center-block selectors-container ${this.hideBarSection()}`}
-          >
+        <React.Fragment>
+          <div className="col-xs-12">
             <Selectors
               returnButtonClass={this.returnButtonClass}
               handleChanges={this.handleChanges}
@@ -189,7 +174,7 @@ class Explore extends Component {
             />
           </div>
           {this.returnSynapseChart()}
-        </div>
+        </React.Fragment>
       )
     }
     return <div />
@@ -202,34 +187,20 @@ class Explore extends Component {
     return { display: 'block' }
   };
 
-  testingNavButtons = () => {
-    return (
-      <div>
-        <Link name="AMP-AD" to="/Explore/Programs/AMP-AD">
-          To programs
-        </Link>
-        <button
-          type="button"
-          onClick={() => this.replaceRoute('/Explore/Programs/AMP-AD')}
-        >
-          TO PROGRAMS
-        </button>
-      </div>
-    )
-  };
-
   render() {
     return (
       <section className="page explore" style={this.style()}>
         <div className="container">
           <div className="row">
-            <h2 className="header">
-              Explore
-              {` ${this.state.activeObject.name}`}
-            </h2>
-          </div>
-          <div className="row explore-content">
-            <this.SelectorsAndCharts />
+            <div className="col-xs-12">
+              <h2 className="header">
+                Explore
+                {` ${this.state.activeObject.name}`}
+              </h2>
+            </div>
+            <div className="row">
+              {this.SelectorsAndCharts()}
+            </div>
           </div>
         </div>
       </section>

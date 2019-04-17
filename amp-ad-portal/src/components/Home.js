@@ -8,7 +8,8 @@ const Programs = asyncComponent(() => import("./Programs.jsx"))
 const WhatsNew = asyncComponent(() => import("./WhatsNew.jsx"))
 
 const Home = props => (
-  <div className="row">
+  <div className="row home">
+    <div className="spacer" />
     <Welcome
       markdown={props.welcomeHeaderMarkdown}
       markdownText={props.welcomeHeaderMarkdownText}

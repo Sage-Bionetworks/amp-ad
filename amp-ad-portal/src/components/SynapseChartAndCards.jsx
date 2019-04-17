@@ -23,14 +23,6 @@ class SynapseChartAndCards extends Component {
     }
   };
 
-  hideBarSection = () => {
-    const hash = window.location.hash
-    if (hash === '#/Explore' || hash === '#/') {
-      return 'bar-section'
-    }
-    return 'bar-section'
-  };
-
   returnStackedRow = () => {
     if (
       this.props.activeObject.homescreen
@@ -77,14 +69,13 @@ class SynapseChartAndCards extends Component {
   returnSynapseCards = () => {
     if (this.props.activeObject.cards && !this.props.activeObject.homescreen) {
       return (
-        <this.props.SynapseComponents.StaticQueryWrapper
-          sql={this.props.activeObject.sql}
-        >
-          <this.props.SynapseComponents.CardContainer
+        <div className="col-xs-12">
+          <this.props.SynapseComponents.CardContainerLogic
+            sql={this.props.activeObject.sql}
             type={this.props.SynapseConstants[this.props.activeObject.type]}
             unitDescription="programs"
           />
-        </this.props.SynapseComponents.StaticQueryWrapper>
+        </div>
       )
     }
     return <div />
@@ -129,7 +120,7 @@ class SynapseChartAndCards extends Component {
     if (this.props.activeObject.id !== undefined) {
       return (
         <div>
-          <div className={`${this.hideBarSection()}`}>
+          <div className="bar-section">
             {this.returnStackedRow()}
             {this.returnQueryWrapperMenu()}
             {this.returnSynapseCards()}

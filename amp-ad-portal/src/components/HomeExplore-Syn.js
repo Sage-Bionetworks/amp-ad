@@ -75,13 +75,6 @@ class ExploreContent extends Component {
     )
   };
 
-  barChartStyle = () => {
-    return {
-      height: this.state.activeId === 'syn2580853' ? '100%' : '220px',
-      position: 'relative',
-    }
-  };
-
   render() {
     return (
       <section className="row explore-content">
@@ -89,23 +82,17 @@ class ExploreContent extends Component {
           <div className="row">
             <h2 className="header">Explore Content</h2>
           </div>
-          <div className="row bar-chart" style={this.barChartStyle()}>
-            <div className="center-block selectors-container">
-              <Selectors
-                returnButtonClass={this.returnButtonClass}
-                handleChanges={this.handleChanges}
-                handleButtonPress={this.handleButtonPress}
-              />
-            </div>
+          <div className="row bar-chart">
+            <Selectors
+              returnButtonClass={this.returnButtonClass}
+              handleChanges={this.handleChanges}
+              handleButtonPress={this.handleButtonPress}
+            />
             {this.returnSynapseChart()}
-            <div className="row explore-button-row">
-              <div className="col-xs-12">
-                <ButtonExplore
-                  url={this.state.synObject.hash}
-                  label={this.state.name}
-                />
-              </div>
-            </div>
+            <ButtonExplore
+              url={this.state.synObject.hash}
+              label={this.state.name}
+            />
           </div>
         </div>
       </section>

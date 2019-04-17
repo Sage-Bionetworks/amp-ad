@@ -238,7 +238,8 @@ class App extends Component {
 
   Main = () => {
     return (
-      <div className="container-fluid">
+      <div className="container-fluid main-content">
+        <div className="spacer" />
         <Route exact path="/" component={this.ReturnHome} />
         <Route path="/Resources/Data" component={this.ReturnResourcesData} />
         <Route
@@ -279,7 +280,9 @@ class App extends Component {
         <ScrollToTop>
           <div className="amp-ad">
             {this.ReturnHeader()}
-            {this.Main()}
+            <div className="wrapper">
+              {this.Main()}
+            </div>
             <Footer />
           </div>
         </ScrollToTop>
