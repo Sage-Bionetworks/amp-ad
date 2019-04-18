@@ -2149,4 +2149,8 @@ button.SRC-chart-btn {
   color: white;
 }
 
+.synapse-chart {
+  min-height: 189px;
+}
+
 /*# sourceMappingURL=style.css.map */
