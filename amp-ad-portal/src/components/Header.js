@@ -547,7 +547,7 @@ class Header extends Component {
           </Link>
         </Menu>
 
-        <div className="container">
+        <div className="container-fluid">
           {this.ReturnBetaHeader()}
           <div className="nav-row nav row" style={{ backgroundColor: "#fff" }}>
             <button

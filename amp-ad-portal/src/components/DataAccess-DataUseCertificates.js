@@ -46,10 +46,9 @@ class DataUseCertificates extends Component {
     this.setState(newState)
   };
 
-  returnMarkdown = (token = this.props.token.sessionToken) => {
+  returnMarkdown = () => {
     return (
       <this.props.SynapseComponents.Markdown
-        token={token}
         ownerId="syn12666371"
         wikiId="585318"
         updateLoadState={() => this.handleChange({ loading: false })}
@@ -58,12 +57,6 @@ class DataUseCertificates extends Component {
   };
 
   returnBarLoader = () => {
-    if (
-      !this.props.synapseLoaded
-      && this.props.defaultData.dataUseCertificates
-    ) {
-      return <div />
-    }
     return <BarLoader color="#5BB0B5" loading={this.state.loading} />
   };
 
@@ -84,7 +77,6 @@ class DataUseCertificates extends Component {
   }
 }
 DataUseCertificates.propTypes = {
-  token: PropTypes.object.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
 }
 

@@ -281,9 +281,6 @@ html, body {
   max-width: 100%;
 }
 
-.about-page, .page {
-  padding-top: 60px;
-}
 .about-page h1, .page h1 {
   font-weight: 900;
 }
@@ -325,9 +322,8 @@ button.btn-control {
   border-radius: 10px;
   border-width: 0px;
   min-height: 40px;
-  padding: 7px 25px;
+  padding: 10px;
   margin: 10px 5px;
-  min-width: 155px;
 }
 button.btn-control h5 {
   font-size: 15px;
@@ -421,10 +417,6 @@ button.btn-control h5 {
 
 .justify-start {
   justify-content: flex-start;
-}
-
-.container {
-  width: 100%;
 }
 
 .content {
@@ -710,14 +702,6 @@ body.noScroll, html.noScroll {
   height: 100%;
 }
 
-section div.row {
-  margin: 0px auto;
-  max-width: 1120px;
-}
-
-section {
-  padding: 25px 50px;
-}
 section div.content, section form.searchbar-form {
   max-width: 1120px;
 }
@@ -1175,119 +1159,65 @@ footer .row {
   width: 300px;
 }
 
-section.hero {
+.hero-background {
   position: relative;
-  height: 481px;
-  background: linear-gradient(to right, #5A498D, #4C57A2);
-  padding: 0px;
+  padding: 50px;
+  background-image: url("../images/molecule-lattice.svg");
+  background-color: #4D5491;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: fit-content;
 }
-section.hero p, section.hero h1 {
+.hero-background p, .hero-background h1 {
   color: white;
 }
-section.hero h1 {
+.hero-background h1 {
   font-weight: 700;
 }
-section.hero p {
+.hero-background p {
   font-size: 16px;
   line-height: 130%;
 }
-section.hero a {
+.hero-background a {
   color: white;
   text-decoration: underline;
 }
-section.hero a:hover {
+.hero-background a:hover {
   color: white;
 }
-section.hero .container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  position: absolute;
-  z-index: 100;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  bottom: 20px;
-}
-@media screen and (max-width: 1265px) {
-  section.hero .container {
-    left: 5%;
-  }
-}
-section.hero .hero-message div {
-  background-color: #ffffff10;
-  margin-bottom: 30px;
-  padding: 10px 21px;
-}
-section.hero .hero-background {
-  background-image: url("../images/molecule-lattice.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: 50;
-  bottom: 0;
-}
-section.hero .hero-background:before {
-  filter: blur(5px);
+.hero-background .hero-message {
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
 }
 
-section.page.explore {
-  margin-top: 50px;
-}
-
-section.explore-content, div.explore-content {
-  margin-bottom: 80px;
-}
-section.explore-content .explore-publications, div.explore-content .explore-publications {
-  max-width: 1033px;
-  margin: 0px auto;
-}
-@media screen and (max-width: 600px) {
-  section.explore-content, div.explore-content {
-    margin-bottom: 220px;
-  }
-}
-section.explore-content .col-xs-2, div.explore-content .col-xs-2 {
-  margin-top: 18px;
-}
-section.explore-content .container .container-fluid, div.explore-content .container .container-fluid {
-  padding: 0px;
-}
-section.explore-content .container .container-fluid .col-xs-12, div.explore-content .container .container-fluid .col-xs-12 {
-  padding: 0px;
-}
-section.explore-content .selectors-container, div.explore-content .selectors-container {
-  max-width: 1033px;
-}
-section.explore-content .selectors, div.explore-content .selectors {
+.selectors {
   display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
   margin: 20px 0px;
 }
 @media screen and (max-width: 720px) {
-  section.explore-content .selectors, div.explore-content .selectors {
+  .selectors {
     flex-direction: unset;
   }
 }
-section.explore-content .selectors button, div.explore-content .selectors button {
+.selectors button {
   position: relative;
+  flex-basis: 17%;
+  margin: 0px 15px;
 }
-section.explore-content .selectors button:first-child, div.explore-content .selectors button:first-child {
+.selectors button:first-child {
+  margin-left: 0px;
   background-color: #6C5C97;
 }
-section.explore-content .selectors button:first-child:hover, div.explore-content .selectors button:first-child:hover {
+.selectors button:first-child:hover {
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
-section.explore-content .selectors button:first-child.active, div.explore-content .selectors button:first-child.active {
+.selectors button:first-child.active {
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
-section.explore-content .selectors button:first-child.active::after, div.explore-content .selectors button:first-child.active::after {
+.selectors button:first-child.active::after {
   height: 0px;
   width: 0px;
   position: absolute;
@@ -1303,19 +1233,19 @@ section.explore-content .selectors button:first-child.active::after, div.explore
   transform: translateX(-50%);
   transition: all 400ms;
 }
-section.explore-content .selectors button:first-child.active:hover:after, div.explore-content .selectors button:first-child.active:hover:after {
+.selectors button:first-child.active:hover:after {
   transition: all 400ms;
 }
-section.explore-content .selectors button:nth-child(2), div.explore-content .selectors button:nth-child(2) {
+.selectors button:nth-child(2) {
   background-color: #E5AE4C;
 }
-section.explore-content .selectors button:nth-child(2):hover, div.explore-content .selectors button:nth-child(2):hover {
+.selectors button:nth-child(2):hover {
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
-section.explore-content .selectors button:nth-child(2).active, div.explore-content .selectors button:nth-child(2).active {
+.selectors button:nth-child(2).active {
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
-section.explore-content .selectors button:nth-child(2).active::after, div.explore-content .selectors button:nth-child(2).active::after {
+.selectors button:nth-child(2).active::after {
   height: 0px;
   width: 0px;
   position: absolute;
@@ -1331,19 +1261,19 @@ section.explore-content .selectors button:nth-child(2).active::after, div.explor
   transform: translateX(-50%);
   transition: all 400ms;
 }
-section.explore-content .selectors button:nth-child(2).active:hover:after, div.explore-content .selectors button:nth-child(2).active:hover:after {
+.selectors button:nth-child(2).active:hover:after {
   transition: all 400ms;
 }
-section.explore-content .selectors button:nth-child(3), div.explore-content .selectors button:nth-child(3) {
+.selectors button:nth-child(3) {
   background-color: #5BB0B5;
 }
-section.explore-content .selectors button:nth-child(3):hover, div.explore-content .selectors button:nth-child(3):hover {
+.selectors button:nth-child(3):hover {
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
-section.explore-content .selectors button:nth-child(3).active, div.explore-content .selectors button:nth-child(3).active {
+.selectors button:nth-child(3).active {
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
-section.explore-content .selectors button:nth-child(3).active::after, div.explore-content .selectors button:nth-child(3).active::after {
+.selectors button:nth-child(3).active::after {
   height: 0px;
   width: 0px;
   position: absolute;
@@ -1359,19 +1289,19 @@ section.explore-content .selectors button:nth-child(3).active::after, div.explor
   transform: translateX(-50%);
   transition: all 400ms;
 }
-section.explore-content .selectors button:nth-child(3).active:hover:after, div.explore-content .selectors button:nth-child(3).active:hover:after {
+.selectors button:nth-child(3).active:hover:after {
   transition: all 400ms;
 }
-section.explore-content .selectors button:nth-child(4), div.explore-content .selectors button:nth-child(4) {
+.selectors button:nth-child(4) {
   background-color: #5171C0;
 }
-section.explore-content .selectors button:nth-child(4):hover, div.explore-content .selectors button:nth-child(4):hover {
+.selectors button:nth-child(4):hover {
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
-section.explore-content .selectors button:nth-child(4).active, div.explore-content .selectors button:nth-child(4).active {
+.selectors button:nth-child(4).active {
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
-section.explore-content .selectors button:nth-child(4).active::after, div.explore-content .selectors button:nth-child(4).active::after {
+.selectors button:nth-child(4).active::after {
   height: 0px;
   width: 0px;
   position: absolute;
@@ -1387,19 +1317,19 @@ section.explore-content .selectors button:nth-child(4).active::after, div.explor
   transform: translateX(-50%);
   transition: all 400ms;
 }
-section.explore-content .selectors button:nth-child(4).active:hover:after, div.explore-content .selectors button:nth-child(4).active:hover:after {
+.selectors button:nth-child(4).active:hover:after {
   transition: all 400ms;
 }
-section.explore-content .selectors button:nth-child(5), div.explore-content .selectors button:nth-child(5) {
+.selectors button:nth-child(5) {
   background-color: #0F9488;
 }
-section.explore-content .selectors button:nth-child(5):hover, div.explore-content .selectors button:nth-child(5):hover {
+.selectors button:nth-child(5):hover {
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
-section.explore-content .selectors button:nth-child(5).active, div.explore-content .selectors button:nth-child(5).active {
+.selectors button:nth-child(5).active {
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
-section.explore-content .selectors button:nth-child(5).active::after, div.explore-content .selectors button:nth-child(5).active::after {
+.selectors button:nth-child(5).active::after {
   height: 0px;
   width: 0px;
   position: absolute;
@@ -1415,19 +1345,20 @@ section.explore-content .selectors button:nth-child(5).active::after, div.explor
   transform: translateX(-50%);
   transition: all 400ms;
 }
-section.explore-content .selectors button:nth-child(5).active:hover:after, div.explore-content .selectors button:nth-child(5).active:hover:after {
+.selectors button:nth-child(5).active:hover:after {
   transition: all 400ms;
 }
-section.explore-content .selectors button:nth-child(6), div.explore-content .selectors button:nth-child(6) {
+.selectors button:nth-child(6) {
+  margin-right: 0px;
   background-color: #D4689A;
 }
-section.explore-content .selectors button:nth-child(6):hover, div.explore-content .selectors button:nth-child(6):hover {
+.selectors button:nth-child(6):hover {
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
-section.explore-content .selectors button:nth-child(6).active, div.explore-content .selectors button:nth-child(6).active {
+.selectors button:nth-child(6).active {
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
-section.explore-content .selectors button:nth-child(6).active::after, div.explore-content .selectors button:nth-child(6).active::after {
+.selectors button:nth-child(6).active::after {
   height: 0px;
   width: 0px;
   position: absolute;
@@ -1443,78 +1374,8 @@ section.explore-content .selectors button:nth-child(6).active::after, div.explor
   transform: translateX(-50%);
   transition: all 400ms;
 }
-section.explore-content .selectors button:nth-child(6).active:hover:after, div.explore-content .selectors button:nth-child(6).active:hover:after {
+.selectors button:nth-child(6).active:hover:after {
   transition: all 400ms;
-}
-section.explore-content .synapse-chart, div.explore-content .synapse-chart {
-  max-width: 1033px;
-  margin: 0px auto;
-}
-section.explore-content .synapse-chart .bar-section .SRC-portalCard, div.explore-content .synapse-chart .bar-section .SRC-portalCard {
-  margin-left: 0px;
-  margin-right: 0px;
-}
-section.explore-content .Projects .container-fluid, div.explore-content .Projects .container-fluid {
-  margin-right: -22px;
-  margin-left: -22px;
-}
-@media screen and (max-width: 720px) {
-  section.explore-content .bar-chart, div.explore-content .bar-chart {
-    height: 450px;
-  }
-}
-@media screen and (max-width: 520px) {
-  section.explore-content .bar-chart, div.explore-content .bar-chart {
-    height: 480px;
-  }
-}
-section.explore-content .bar-chart .explore-button-row, div.explore-content .bar-chart .explore-button-row {
-  position: absolute;
-  bottom: -59px;
-  right: 0;
-}
-@media screen and (max-width: 768px) {
-  section.explore-content .bar-chart .explore-button-row, div.explore-content .bar-chart .explore-button-row {
-    bottom: -130px;
-  }
-}
-@media screen and (max-width: 600px) {
-  section.explore-content .bar-chart .explore-button-row, div.explore-content .bar-chart .explore-button-row {
-    bottom: -200px;
-  }
-}
-section.explore-content .bar-chart .selectors-container, div.explore-content .bar-chart .selectors-container {
-  max-width: 700px;
-}
-section.explore-content .bar-chart .synapse-chart, div.explore-content .bar-chart .synapse-chart {
-  position: absolute;
-  top: 100px;
-  right: 5px;
-  width: 100%;
-  max-width: unset;
-  margin: 0px auto;
-}
-@media screen and (max-width: 768px) {
-  section.explore-content .bar-chart .synapse-chart, div.explore-content .bar-chart .synapse-chart {
-    top: 160px;
-  }
-}
-section.explore-content .bar-chart .synapse-chart .btn, div.explore-content .bar-chart .synapse-chart .btn {
-  font-size: initial;
-  background-color: initial;
-  width: initial;
-  height: initial;
-  display: inherit;
-}
-section.explore-content .bar-chart .synapse-chart .row.SRC-center-text, div.explore-content .bar-chart .synapse-chart .row.SRC-center-text {
-  display: block;
-  box-sizing: initial;
-}
-section.explore-content .bar-chart .synapse-chart .SRC-bar-border-bottom, div.explore-content .bar-chart .synapse-chart .SRC-bar-border-bottom {
-  padding-bottom: 20px;
-}
-section.explore-content .SRC-grayBackground, div.explore-content .SRC-grayBackground {
-  background: unset;
 }
 
 .SRC-center-text button.btn {
@@ -1601,9 +1462,8 @@ section.analyses button {
   justify-content: flex-end;
 }
 
-section.programs .container-fluid {
-  padding-right: 0px;
-  padding-left: 0px;
+section.programs {
+  margin-top: 50px;
 }
 section.programs .box {
   height: 470px;
@@ -1708,6 +1568,9 @@ section.program-page .hero-card .SRC-portalCard .SRC-cardContent h3 a {
   color: white;
 }
 
+section.what-new, section.programs {
+  margin-bottom: 25px;
+}
 section.what-new .markdown h4, section.programs .markdown h4 {
   padding: 0px;
   font-size: 18px;
@@ -2244,6 +2107,46 @@ p.researcher-bio {
 }
 .program-markdown-header div.SRC-cardContent .SRC-title h3 {
   font-size: 24px !important;
+}
+
+.main-content {
+  min-height: 100vh;
+}
+
+.wrapper .spacer {
+  min-height: 105px;
+}
+.wrapper .home-spacer {
+  min-height: 12px;
+}
+
+.explore-button {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+}
+
+.bar-chart {
+  position: relative;
+  min-height: 220px;
+  height: fit-content;
+}
+
+button.SRC-chart-btn {
+  border: none;
+  border-width: 0px !important;
+}
+
+.explore-content {
+  padding-top: 25px;
+}
+
+.program-card-container {
+  margin-top: 20px;
+}
+
+.SRC-primary-background-color-hover:hover {
+  color: white;
 }
 
 /*# sourceMappingURL=style.css.map */

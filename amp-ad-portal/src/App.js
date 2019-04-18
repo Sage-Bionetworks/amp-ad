@@ -5,15 +5,11 @@ import createHistory from 'history/createBrowserHistory'
 import {
   SynapseComponents,
   SynapseConstants,
-  SynapseClient,
 } from 'synapse-react-client'
 
 // non component js
 import asyncComponent from './components/AsyncComponent'
 import ScrollToTop from './components/ScrollToTop'
-
-// to load default json
-import { getStaticJSON } from './queries/queryForData'
 
 // about pages
 const AsyncAboutAmpAd = asyncComponent(() => import('./components/About-WhatIsAmpAd'))
@@ -23,10 +19,6 @@ const AsyncHeader = asyncComponent(() => import('./components/Header'))
 const Footer = asyncComponent(() => import('./components/Footer'))
 // explore
 const AsyncExplore = asyncComponent(() => import('./components/Explore.jsx'))
-// study page
-const AsyncStudyPage = asyncComponent(() => import('./components/Page-Study.js'))
-// program page
-const AsyncProgramPage = asyncComponent(() => import('./components/Page-Program.jsx'))
 // Data access pages
 const AsyncInstructions = asyncComponent(() => import('./components/DataAccess-Instructions'))
 const AsyncDataUseCertificates = asyncComponent(() => import('./components/DataAccess-DataUseCertificates.js'))
@@ -52,7 +44,6 @@ class App extends Component {
     wikiMarkdown: '',
     whatsNew: [],
     hash: '',
-    defaultData: {},
     synapseLoaded: true,
     loading: true,
   };
@@ -101,7 +92,6 @@ class App extends Component {
         markdown={this.state.wikiMarkdown}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
         synapseLoaded={this.state.synapseLoaded}
       />
     )
@@ -113,7 +103,6 @@ class App extends Component {
         token={this.state.loginToken}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
         synapseLoaded={this.state.synapseLoaded}
       />
     )
@@ -125,7 +114,6 @@ class App extends Component {
         token={this.state.loginToken}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
         synapseLoaded={this.state.synapseLoaded}
       />
     )
@@ -140,7 +128,6 @@ class App extends Component {
         markdown={this.state.wikiMarkdown}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
         synapseLoaded={this.state.synapseLoaded}
       />
     )
@@ -154,7 +141,6 @@ class App extends Component {
         handleNestedChanges={this.handleNestedChanges}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
         synapseLoaded={this.state.synapseLoaded}
       />
     )
@@ -166,7 +152,6 @@ class App extends Component {
         token={this.state.loginToken}
         handleChanges={this.handleChanges}
         SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
         synapseLoaded={this.state.synapseLoaded}
       />
     )
@@ -188,43 +173,6 @@ class App extends Component {
         match={props.match}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
-        synapseLoaded={this.state.synapseLoaded}
-      />
-    )
-  };
-
-  ReturnStudyPage = (props) => {
-    let token = ''
-    if (this.state.loginToken.sessionToken) {
-      token = this.state.loginToken.sessionToken
-    }
-    return (
-      <AsyncStudyPage
-        token={token}
-        hash={window.location.hash}
-        match={props.match}
-        history={props.history}
-        SynapseConstants={SynapseConstants}
-        SynapseComponents={SynapseComponents}
-      />
-    )
-  };
-
-  ReturnProgramPage = (props) => {
-    let token = ''
-    if (this.state.loginToken.sessionToken) {
-      token = this.state.loginToken.sessionToken
-    }
-    return (
-      <AsyncProgramPage
-        token={token}
-        hash={window.location.hash}
-        match={props.match}
-        history={props.history}
-        SynapseConstants={SynapseConstants}
-        SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
         synapseLoaded={this.state.synapseLoaded}
       />
     )
@@ -238,7 +186,8 @@ class App extends Component {
 
   Main = () => {
     return (
-      <div>
+      <div className="main-content">
+        <div className="spacer" />
         <Route exact path="/" component={this.ReturnHome} />
         <Route path="/Resources/Data" component={this.ReturnResourcesData} />
         <Route
@@ -259,14 +208,6 @@ class App extends Component {
           component={this.ReturnResourcesStudies}
         />
         <Route path="/Explore/:handle" component={this.ReturnExplore} />
-        <Route
-          path="/Explore/Studies/:handle"
-          component={this.ReturnStudyPage}
-        />
-        <Route
-          path="/Explore/Programs/:handle"
-          component={this.ReturnProgramPage}
-        />
         <Route path="/About" component={this.ReturnAboutAmpAd} />
         <Route path="/Versions" component={this.ReturnVersions} />
       </div>
@@ -277,10 +218,10 @@ class App extends Component {
     return (
       <Router>
         <ScrollToTop>
-          <div className="row amp-ad">
-            <this.ReturnHeader />
-            <div className="main">
-              <this.Main />
+          <div className="amp-ad">
+            {this.ReturnHeader()}
+            <div className="wrapper">
+              {this.Main()}
             </div>
             <Footer />
           </div>

@@ -25,9 +25,6 @@ class Tools extends Component {
   };
 
   returnBarLoader = () => {
-    if (!this.props.synapseLoaded && this.props.defaultData.tools) {
-      return <div />
-    }
     return <BarLoader color="#5BB0B5" loading={this.state.loading} />
   };
 
@@ -50,7 +47,6 @@ class Tools extends Component {
 
 Tools.propTypes = {
   token: PropTypes.object.isRequired,
-  handleChanges: PropTypes.func.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
 }
 
