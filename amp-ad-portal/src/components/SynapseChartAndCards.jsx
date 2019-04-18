@@ -69,7 +69,7 @@ class SynapseChartAndCards extends Component {
   returnSynapseCards = () => {
     if (this.props.activeObject.cards && !this.props.activeObject.homescreen) {
       return (
-        <div className="col-xs-12">
+        <div className="program-card-container col-xs-12">
           <this.props.SynapseComponents.CardContainerLogic
             sql={this.props.activeObject.sql}
             type={this.props.SynapseConstants[this.props.activeObject.type]}

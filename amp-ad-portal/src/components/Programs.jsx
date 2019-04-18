@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-//import { BarLoader } from "react-spinners"
-//import { getTable } from "../queries/queryForData"
 
 class Programs extends Component {
   constructor(props) {
@@ -17,7 +15,6 @@ class Programs extends Component {
     })
   };
 
-  //updateLoadState={() => this.handleChanges("loading", false)}
   QueryWrapper = () => {
     const sql = 'SELECT * FROM syn17024173'
     return (
@@ -28,7 +25,6 @@ class Programs extends Component {
     )
   };
 
-  //<BarLoader color="#5BB0B5" loading={this.state.loading} />
   render() {
     return (
       <section className="programs">

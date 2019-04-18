@@ -158,9 +158,8 @@ button.btn-explore {
   border-radius: 10px;
   border-width: 0px;
   min-height: 40px;
-  padding: 7px 25px;
+  padding: 10px;
   margin: 10px 5px;
-  min-width: 155px;
 	@media screen and (max-width: 600px){
 		min-width: 140px;
 	}
@@ -1019,7 +1018,7 @@ select {
     }
     button {
       position: relative;
-      flex-basis: 16%;
+      flex-basis: 17%;
       margin: 0px 15px;
     }
     
@@ -1041,6 +1040,7 @@ select {
       @include hoverFade($selector5);
     }
     button:nth-child(6) {
+      margin-right: 0px;
       @include hoverFade($selector6);
     }
   }
@@ -1839,10 +1839,10 @@ select {
 
 .wrapper {
   .spacer {
-    min-height: 58px;
+    min-height: 105px;
   }
-  div.main-content.spacer {
-    min-height: 30px;
+  .home-spacer {
+    min-height: 12px;
   }
 }
 
@@ -1865,4 +1865,8 @@ button.SRC-chart-btn {
 
 .explore-content {
   padding-top: 25px;
+}
+
+.program-card-container {
+  margin-top: 20px;
 }

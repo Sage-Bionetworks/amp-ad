@@ -9,7 +9,7 @@ const WhatsNew = asyncComponent(() => import("./WhatsNew.jsx"))
 
 const Home = props => (
   <div className="home">
-    <div className="spacer" />
+    <div className="home-spacer" />
     <Welcome
       markdown={props.welcomeHeaderMarkdown}
       markdownText={props.welcomeHeaderMarkdownText}

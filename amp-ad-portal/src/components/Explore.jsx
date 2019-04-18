@@ -124,6 +124,7 @@ class Explore extends Component {
   };
 
   returnWikiData = (synId, wikiId) => {
+    console.log('returning wiki data')
     return (
       <div className="col-xs-12 explore-publications">
         <this.props.SynapseComponents.Markdown
@@ -180,24 +181,15 @@ class Explore extends Component {
     return <div />
   };
 
-  style = () => {
-    if (window.location.hash.includes('/Programs/')) {
-      return { display: 'none' }
-    }
-    return { display: 'block' }
-  };
-
   render() {
     return (
-      <section className="page explore" style={this.style()}>
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12">
-              <h2 className="header">
-                Explore
-                {` ${this.state.activeObject.name}`}
-              </h2>
-            </div>
+      <section className="container">
+        <div className="row">
+          <div className="col-xs-12">
+            <h2 className="header">
+              Explore
+              {` ${this.state.activeObject.name}`}
+            </h2>
             <div className="row">
               {this.SelectorsAndCharts()}
             </div>

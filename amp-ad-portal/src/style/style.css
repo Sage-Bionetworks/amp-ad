@@ -325,9 +325,8 @@ button.btn-control {
   border-radius: 10px;
   border-width: 0px;
   min-height: 40px;
-  padding: 7px 25px;
+  padding: 10px;
   margin: 10px 5px;
-  min-width: 155px;
 }
 button.btn-control h5 {
   font-size: 15px;
@@ -1208,7 +1207,7 @@ footer .row {
 }
 .selectors button {
   position: relative;
-  flex-basis: 16%;
+  flex-basis: 17%;
   margin: 0px 15px;
 }
 .selectors button:first-child {
@@ -1353,6 +1352,7 @@ footer .row {
   transition: all 400ms;
 }
 .selectors button:nth-child(6) {
+  margin-right: 0px;
   background-color: #D4689A;
 }
 .selectors button:nth-child(6):hover {
@@ -2117,10 +2117,10 @@ p.researcher-bio {
 }
 
 .wrapper .spacer {
-  min-height: 58px;
+  min-height: 105px;
 }
-.wrapper div.main-content.spacer {
-  min-height: 30px;
+.wrapper .home-spacer {
+  min-height: 12px;
 }
 
 .explore-button {
@@ -2142,6 +2142,10 @@ button.SRC-chart-btn {
 
 .explore-content {
   padding-top: 25px;
+}
+
+.program-card-container {
+  margin-top: 20px;
 }
 
 /*# sourceMappingURL=style.css.map */

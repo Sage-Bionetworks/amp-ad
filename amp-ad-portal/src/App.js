@@ -264,10 +264,6 @@ class App extends Component {
           path="/Explore/Studies/:handle"
           component={this.ReturnStudyPage}
         />
-        <Route
-          path="/Explore/Programs/:handle"
-          component={this.ReturnProgramPage}
-        />
         <Route path="/About" component={this.ReturnAboutAmpAd} />
         <Route path="/Versions" component={this.ReturnVersions} />
       </div>
