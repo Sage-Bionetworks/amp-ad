@@ -116,7 +116,6 @@ html, body {
 }
 
 .about-page, .page {
-  padding-top: 60px;
   h1 {
     font-weight: 900;
   }
@@ -1869,4 +1868,8 @@ button.SRC-chart-btn {
 
 .program-card-container {
   margin-top: 20px;
+}
+
+.SRC-primary-background-color-hover:hover {
+  color: white;
 }
