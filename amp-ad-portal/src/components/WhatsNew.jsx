@@ -28,9 +28,6 @@ class WhatsNew extends Component {
   };
 
   returnBarLoader = () => {
-    if (!this.props.synapseLoaded && this.props.defaultData.whatsNew) {
-      return <div />
-    }
     return <BarLoader color="#5BB0B5" loading={this.state.loading} />
   };
 
@@ -54,11 +51,6 @@ class WhatsNew extends Component {
 WhatsNew.propTypes = {
   token: PropTypes.string.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
-  whatsNew: PropTypes.object,
-}
-
-WhatsNew.defaultProps = {
-  whatsNew: {},
 }
 
 export default WhatsNew

@@ -11,7 +11,7 @@ class AcknowledgementStatements extends Component {
     this.setState(newState)
   };
 
-  returnMarkdown = (token = this.props.token.sessionToken) => {
+  returnMarkdown = () => {
     return (
       <this.props.SynapseComponents.Markdown
         token={this.props.token.sessionToken}
@@ -23,12 +23,6 @@ class AcknowledgementStatements extends Component {
   };
 
   returnBarLoader = () => {
-    if (
-      !this.props.synapseLoaded
-      && this.props.defaultData.acknowledgementStatements
-    ) {
-      return <div />
-    }
     return <BarLoader color="#5BB0B5" loading={this.state.loading} />
   };
 

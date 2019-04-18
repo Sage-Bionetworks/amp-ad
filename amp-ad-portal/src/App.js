@@ -44,7 +44,6 @@ class App extends Component {
     wikiMarkdown: '',
     whatsNew: [],
     hash: '',
-    defaultData: {},
     synapseLoaded: true,
     loading: true,
   };
@@ -93,7 +92,6 @@ class App extends Component {
         markdown={this.state.wikiMarkdown}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
         synapseLoaded={this.state.synapseLoaded}
       />
     )
@@ -105,7 +103,6 @@ class App extends Component {
         token={this.state.loginToken}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
         synapseLoaded={this.state.synapseLoaded}
       />
     )
@@ -117,7 +114,6 @@ class App extends Component {
         token={this.state.loginToken}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
         synapseLoaded={this.state.synapseLoaded}
       />
     )
@@ -132,7 +128,6 @@ class App extends Component {
         markdown={this.state.wikiMarkdown}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
         synapseLoaded={this.state.synapseLoaded}
       />
     )
@@ -146,7 +141,6 @@ class App extends Component {
         handleNestedChanges={this.handleNestedChanges}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
         synapseLoaded={this.state.synapseLoaded}
       />
     )
@@ -158,7 +152,6 @@ class App extends Component {
         token={this.state.loginToken}
         handleChanges={this.handleChanges}
         SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
         synapseLoaded={this.state.synapseLoaded}
       />
     )
@@ -180,7 +173,6 @@ class App extends Component {
         match={props.match}
         SynapseConstants={SynapseConstants}
         SynapseComponents={SynapseComponents}
-        defaultData={this.state.defaultData}
         synapseLoaded={this.state.synapseLoaded}
       />
     )

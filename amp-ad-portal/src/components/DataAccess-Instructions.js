@@ -12,14 +12,8 @@ class Instructions extends Component {
     this.addDetailsFunctionality()
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate() {
     this.addDetailsFunctionality()
-    if (
-      Object.keys(prevProps.defaultData).length
-      !== Object.keys(this.props.defaultData).length
-    ) {
-      console.log('updating')
-    }
   }
 
   addDetailsFunctionality = () => {
@@ -52,7 +46,7 @@ class Instructions extends Component {
     this.setState(newState)
   };
 
-  returnMarkdown = (token = this.props.token.sessionToken) => {
+  returnMarkdown = () => {
     return (
       <this.props.SynapseComponents.Markdown
         ownerId="syn12666371"
@@ -63,9 +57,6 @@ class Instructions extends Component {
   };
 
   returnBarLoader = () => {
-    if (!this.props.synapseLoaded && this.props.defaultData.dataInstructions) {
-      return <div />
-    }
     return <BarLoader color="#5BB0B5" loading={this.state.loading} />
   };
 
@@ -86,7 +77,6 @@ class Instructions extends Component {
   }
 }
 Instructions.propTypes = {
-  token: PropTypes.object.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
 }
 

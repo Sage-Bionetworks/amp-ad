@@ -11,11 +11,10 @@ class WhatIsAmpAD extends Component {
     this.setState(newState)
   };
 
-  returnMarkdown = (token = this.props.token.sessionToken) => {
+  returnMarkdown = () => {
     return (
       <this.props.SynapseComponents.Markdown
         wikiId="581939"
-        token={this.props.token.sessionToken}
         ownerId="syn12666371"
         updateLoadState={() => this.handleChange({ loading: false })}
       />
@@ -23,12 +22,6 @@ class WhatIsAmpAD extends Component {
   };
 
   returnBarLoader = () => {
-    if (
-      !this.props.synapseLoaded
-      && this.props.defaultData.acknowledgementStatements
-    ) {
-      return <div />
-    }
     return <BarLoader color="#5BB0B5" loading={this.state.loading} />
   };
 
@@ -50,7 +43,6 @@ class WhatIsAmpAD extends Component {
 }
 
 WhatIsAmpAD.propTypes = {
-  token: PropTypes.object.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
 }
 

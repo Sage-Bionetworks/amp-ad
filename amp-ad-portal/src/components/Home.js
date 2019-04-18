@@ -1,11 +1,11 @@
-import React from "react"
-import PropTypes from "prop-types"
-import asyncComponent from "./AsyncComponent"
+import React from 'react'
+import PropTypes from 'prop-types'
+import asyncComponent from './AsyncComponent'
 
-const Welcome = asyncComponent(() => import("./Welcome"))
-const Explore = asyncComponent(() => import("./HomeExplore-Syn.js"))
-const Programs = asyncComponent(() => import("./Programs.jsx"))
-const WhatsNew = asyncComponent(() => import("./WhatsNew.jsx"))
+const Welcome = asyncComponent(() => import('./Welcome'))
+const Explore = asyncComponent(() => import('./HomeExplore-Syn.js'))
+const Programs = asyncComponent(() => import('./Programs.jsx'))
+const WhatsNew = asyncComponent(() => import('./WhatsNew.jsx'))
 
 const Home = props => (
   <div className="home">
@@ -29,10 +29,8 @@ const Home = props => (
             token={props.token.sessionToken}
             SynapseConstants={props.SynapseConstants}
             SynapseComponents={props.SynapseComponents}
-            defaultData={props.defaultData}
           />
           <WhatsNew
-            defaultData={props.defaultData}
             token={props.token.sessionToken}
             handleNestedChanges={props.handleNestedChanges}
             SynapseComponents={props.SynapseComponents}
@@ -50,7 +48,6 @@ Home.propTypes = {
   handleNestedChanges: PropTypes.func.isRequired,
   SynapseConstants: PropTypes.object.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
-  defaultData: PropTypes.object.isRequired,
   synapseLoaded: PropTypes.bool.isRequired,
 }
 

@@ -137,7 +137,6 @@ SynapseChartAndCards.propTypes = {
   activeObject: PropTypes.object.isRequired,
   SynapseComponents: PropTypes.object.isRequired,
   SynapseConstants: PropTypes.object.isRequired,
-  defaultData: PropTypes.object.isRequired,
 }
 
 SynapseChartAndCards.defaultProps = {

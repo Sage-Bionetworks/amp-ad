@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import SynapseChart from './SynapseChartAndCards.jsx'
 import Selectors from './SelectorRow'
 
@@ -151,7 +150,6 @@ class Explore extends Component {
             SynapseConstants={this.props.SynapseConstants}
             SynapseComponents={this.props.SynapseComponents}
             synapseLoaded={this.props.synapseLoaded}
-            defaultData={this.props.defaultData}
           />
         )
       }
