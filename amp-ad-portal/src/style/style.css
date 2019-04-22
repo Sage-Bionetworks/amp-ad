@@ -1502,6 +1502,13 @@ section.programs .box-text-image img {
   height: 80px;
 }
 
+section.program-page {
+  margin-top: -35px;
+  width: 100%;
+}
+section.program-page .container .row .col-centered {
+  padding-top: 10px;
+}
 section.program-page .SRC-portalCard {
   margin-left: 0px;
   margin-right: 0px;
@@ -1522,11 +1529,10 @@ section.program-page .wiki-markdown a:hover {
   text-decoration: underline;
 }
 section.program-page .wiki-markdown .col-centered {
-  padding: 0px 10px;
+  padding: 0px 30px;
 }
 section.program-page .hero-card {
   width: 100vw;
-  margin: 0px -50px 10px -50px;
   background: #5960A5;
   padding: 5px;
 }
