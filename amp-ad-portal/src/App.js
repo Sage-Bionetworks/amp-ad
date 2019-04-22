@@ -25,6 +25,8 @@ const AsyncDataUseCertificates = asyncComponent(() => import('./components/DataA
 const AsyncResearchTools = asyncComponent(() => import('./components/ResearchTools'))
 const AsyncResourcesAcknowledgements = asyncComponent(() => import('./components/Resources-AcknowledgementStatements'))
 const AsyncVersions = asyncComponent(() => import('./components/Versions'))
+const AsyncProgramPage = asyncComponent(() => import('./components/Page-Program.jsx'))
+
 
 // ReactGA is a google analytics node package
 ReactGA.initialize('UA-29804340-3')
@@ -184,6 +186,15 @@ class App extends Component {
     )
   };
 
+  ReturnAsyncProgramPage = () => {
+    return (
+      <AsyncProgramPage
+        SynapseComponents={SynapseComponents}
+        SynapseConstants={SynapseConstants}
+      />
+    )
+  };
+
   Main = () => {
     return (
       <div className="main-content">
@@ -207,12 +218,17 @@ class App extends Component {
           path="/Resources/Studies"
           component={this.ReturnResourcesStudies}
         />
-        <Route path="/Explore/:handle" component={this.ReturnExplore} />
+        <Route
+          exact
+          path="/Explore/Programs/:handle"
+          component={this.ReturnAsyncProgramPage}
+        />
+        <Route exact path="/Explore/:handle" component={this.ReturnExplore} />
         <Route path="/About" component={this.ReturnAboutAmpAd} />
         <Route path="/Versions" component={this.ReturnVersions} />
       </div>
     )
-  };
+  }
 
   render() {
     return (

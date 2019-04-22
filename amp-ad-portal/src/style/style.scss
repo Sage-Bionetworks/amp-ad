@@ -1177,6 +1177,16 @@ select {
   }
 
 	section.program-page {
+    // hack to get alignment right
+    margin-top: -35px;
+    width: 100%;
+    .container {
+      .row {
+        .col-centered {
+          padding-top: 10px;
+        }
+      }
+    }
 		.SRC-portalCard {
 			margin-left: 0px;
 			margin-right: 0px;
@@ -1196,12 +1206,12 @@ select {
         text-decoration: underline;
       }
       .col-centered {
-        padding: 0px 10px;
+        padding: 0px 30px;
       }
     }
 		.hero-card {
 			width: 100vw;
-			margin: 0px -50px 10px -50px;
+			// margin: 0px -50px 10px -50px;
 			background: $headerPurple;
 			padding: 5px;
 			.card-container {

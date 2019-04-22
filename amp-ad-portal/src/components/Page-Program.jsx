@@ -3,29 +3,7 @@ import PropTypes from 'prop-types'
 
 class ProgramPage extends Component {
   state = {
-    params: {},
-    query: '',
-    cardQuery: '',
     name: '',
-    wikiId: '',
-    synId: '',
-    jsonKey: '',
-    wikiSubHero: '',
-  };
-
-  componentDidMount() {
-    this.setState(
-      {
-        params: this.props.match.params,
-      },
-      () => {
-        this.contentRouter()
-      },
-    )
-  }
-
-  handleChanges = (stateObj) => {
-    this.setState(stateObj)
   };
 
   parameters = {
@@ -64,78 +42,40 @@ class ProgramPage extends Component {
     },
   };
 
-  contentRouter = (handle = this.state.params.handle) => {
-    if (handle !== undefined) {
-      const query = this.parameters[handle].query
-      const cardQuery = this.parameters[handle].cardQuery
-      const wikiId = this.parameters[handle].wikiId
-      const jsonKey = this.parameters[handle].jsonKey
-      const wikiSubHero = this.parameters[handle].wikiSubHero
-      const offlineJSON = this.parameters[handle].offlineJSON
-      const synId = 'syn12666371'
-
-      this.handleChanges({
-        query,
-        cardQuery,
-        name: handle,
-        wikiId,
-        synId,
-        jsonKey,
-        wikiSubHero,
-        offlineJSON,
-      })
-      return query
-    }
-  };
-
-  returnSynapseChart = () => {
+  returnCards = (query) => {
     return (
       <div className="explore-publications">
-        <this.props.SynapseComponents.StaticQueryWrapper
-          sql={this.state.query}
-        >
-          <this.props.SynapseComponents.CardContainer
-            type={this.props.SynapseConstants.AMP_PROJECT}
-            limit={50}
-          />
-        </this.props.SynapseComponents.StaticQueryWrapper>
+        <this.props.SynapseComponents.CardContainerLogic
+          type={this.props.SynapseConstants.AMP_PROJECT}
+          sql={query}
+          limit={50}
+        />
       </div>
     )
   };
 
-  style = () => {
-    if (window.location.hash.includes('/Programs/')) {
-      return {}
-    }
-    return {}
-  };
-
-  returnTitleCard = () => {
+  returnTitleCard = (cardQuery, synId, wikiId) => {
     return (
       <div className="hero-card">
         <div className="card-container program-markdown-header">
-          <this.props.SynapseComponents.StaticQueryWrapper
-            sql={this.state.cardQuery}
-            token={this.props.token}
-          >
-            <this.props.SynapseComponents.CardContainer
-              type={this.props.SynapseConstants.AMP_CONSORTIUM}
-            />
-          </this.props.SynapseComponents.StaticQueryWrapper>
-          {this.returnWikiData()}
+          <this.props.SynapseComponents.CardContainerLogic
+            sql={cardQuery}
+            type={this.props.SynapseConstants.AMP_CONSORTIUM}
+          />
+          {this.returnWikiData(synId, wikiId)}
         </div>
       </div>
     )
   };
 
-  returnWikiData = () => {
+  returnWikiData = (synId, wikiId) => {
     return (
       <div className="container wiki-markdown">
         <div className="row">
           <div className="col-xs-12 col-sm-10 col-centered">
             <this.props.SynapseComponents.Markdown
-              ownerId={this.state.synId}
-              wikiId={this.state.wikiId}
+              ownerId={synId}
+              wikiId={wikiId}
             />
           </div>
         </div>
@@ -144,20 +84,26 @@ class ProgramPage extends Component {
   };
 
   render() {
+    const handle = window.location.hash.substring('#/Explore/Programs/'.length)
+    const query = this.parameters[handle].query
+    const cardQuery = this.parameters[handle].cardQuery
+    const wikiId = this.parameters[handle].wikiId
+    const synId = 'syn12666371'
+
     return (
-      <section className="page program-page" style={this.style()}>
-        <this.returnTitleCard />
+      <section className="page program-page">
+        {this.returnTitleCard(cardQuery, synId, wikiId)}
         <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-sm-12" />
-          </div>
           <div className="row">
             <div className="col-xs-12 col-sm-10 col-centered">
               <h2 className="header">
                 Explore
-                {` ${this.state.name}`}
+                {' '}
+                {handle}
               </h2>
-              <this.returnSynapseChart />
+              <div className="row">
+                {this.returnCards(query)}
+              </div>
             </div>
           </div>
         </div>
@@ -167,10 +113,7 @@ class ProgramPage extends Component {
 }
 
 ProgramPage.propTypes = {
-  token: PropTypes.string.isRequired,
-  hash: PropTypes.string.isRequired,
   SynapseConstants: PropTypes.object.isRequired,
-  SynapseComponents: PropTypes.object.isRequired,
 }
 
 export default ProgramPage
