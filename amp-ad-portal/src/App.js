@@ -25,7 +25,6 @@ const AsyncDataUseCertificates = asyncComponent(() => import('./components/DataA
 const AsyncResearchTools = asyncComponent(() => import('./components/ResearchTools'))
 const AsyncResourcesAcknowledgements = asyncComponent(() => import('./components/Resources-AcknowledgementStatements'))
 const AsyncVersions = asyncComponent(() => import('./components/Versions'))
-const AsyncStudyPage = asyncComponent(() => import('./components/Page-Study.js'))
 const AsyncProgramPage = asyncComponent(() => import('./components/Page-Program.jsx'))
 
 
@@ -223,10 +222,6 @@ class App extends Component {
           exact
           path="/Explore/Programs/:handle"
           component={this.ReturnAsyncProgramPage}
-        />
-        <Route
-          path="/Explore/Studies/:handle"
-          component={<AsyncStudyPage SynapseConstants={SynapseConstants} />}
         />
         <Route exact path="/Explore/:handle" component={this.ReturnExplore} />
         <Route path="/About" component={this.ReturnAboutAmpAd} />
